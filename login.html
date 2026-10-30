@@ -5,196 +5,311 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Đăng nhập — NVU Academy</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0f1117;
-      --surface: #1a1d27;
-      --surface2: #22263a;
-      --accent: #6c63ff;
-      --accent2: #ff6584;
-      --green: #22c55e;
-      --text: #e8eaf0;
-      --muted: #8b8fa8;
-      --border: #2a2d3a;
-    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      background: #f5f0eb;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 24px;
+      position: relative;
+      overflow-x: hidden;
     }
-    .logo {
-      font-size: 22px;
-      font-weight: 800;
-      margin-bottom: 8px;
-      letter-spacing: -0.5px;
+
+    /* Decorative background pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(200,180,160,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(180,160,200,0.15) 0%, transparent 50%);
+      pointer-events: none;
     }
-    .logo span { color: var(--accent); }
-    .subtitle {
-      color: var(--muted);
-      font-size: 14px;
+
+    /* Floral pattern overlay */
+    .pattern {
+      position: fixed;
+      inset: 0;
+      opacity: 0.06;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='%238B7355' fill-opacity='1'%3E%3Ccircle cx='30' cy='10' r='3'/%3E%3Ccircle cx='30' cy='50' r='3'/%3E%3Ccircle cx='10' cy='30' r='3'/%3E%3Ccircle cx='50' cy='30' r='3'/%3E%3Ccircle cx='17' cy='17' r='2'/%3E%3Ccircle cx='43' cy='43' r='2'/%3E%3Ccircle cx='43' cy='17' r='2'/%3E%3Ccircle cx='17' cy='43' r='2'/%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    /* Logo / header */
+    .brand {
+      text-align: center;
       margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
     }
-    .tabs {
-      display: flex;
-      gap: 8px;
-      background: var(--surface);
-      padding: 6px;
-      border-radius: 14px;
-      margin-bottom: 28px;
-      border: 1px solid var(--border);
-    }
-    .tab {
-      padding: 10px 28px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--muted);
-      transition: all 0.2s;
-      border: none;
-      background: transparent;
-    }
-    .tab.active {
-      background: var(--accent);
-      color: white;
-    }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 36px;
-      width: 100%;
-      max-width: 420px;
-    }
-    .card-title {
-      font-size: 20px;
+    .crown { font-size: 28px; margin-bottom: 8px; display: block; }
+    .brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      letter-spacing: 0.15em;
+      color: #2c2416;
       font-weight: 700;
-      margin-bottom: 6px;
     }
-    .card-sub {
-      color: var(--muted);
+    .brand-name em {
+      font-style: italic;
+      font-weight: 400;
+      color: #8B6914;
+    }
+    .brand-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      letter-spacing: 0.25em;
+      color: #8B7355;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* Gate chooser (first screen) */
+    .gates {
+      display: flex;
+      gap: 20px;
+      max-width: 780px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .gate-card {
+      flex: 1;
+      border-radius: 200px 200px 20px 20px;
+      padding: 48px 32px 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid rgba(139,115,85,0.2);
+      position: relative;
+    }
+    .gate-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    }
+
+    .gate-student {
+      background: linear-gradient(160deg, #e8f0e8 0%, #d4e8d4 100%);
+    }
+    .gate-teacher {
+      background: linear-gradient(160deg, #f0e8e8 0%, #e8d4d4 100%);
+    }
+
+    .gate-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    .gate-student .gate-icon { background: rgba(100,160,100,0.3); }
+    .gate-teacher .gate-icon { background: rgba(180,100,100,0.3); }
+
+    .gate-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: #2c2416;
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+    .gate-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(139,115,85,0.4);
+      margin: 12px auto 20px;
+    }
+    .gate-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-style: italic;
+      color: #2c2416;
+      margin-bottom: 16px;
+    }
+    .gate-features {
+      list-style: none;
+      text-align: left;
       font-size: 14px;
-      margin-bottom: 28px;
-      line-height: 1.5;
+      color: #5a4a38;
+      line-height: 2;
     }
-    .field {
-      margin-bottom: 18px;
-    }
-    label {
-      display: block;
+    .gate-features li::before { content: '✦ '; color: #8B6914; }
+
+    .gate-btn {
+      margin-top: 28px;
+      padding: 13px 32px;
+      border-radius: 50px;
+      border: none;
       font-size: 13px;
       font-weight: 600;
-      color: var(--muted);
-      margin-bottom: 8px;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 100%;
+    }
+    .gate-student .gate-btn {
+      background: #5a8a5a;
+      color: white;
+    }
+    .gate-student .gate-btn:hover { background: #4a7a4a; }
+    .gate-teacher .gate-btn {
+      background: #2c2416;
+      color: white;
+    }
+    .gate-teacher .gate-btn:hover { background: #1a150e; }
+
+    /* Login form panels */
+    .login-panel {
+      display: none;
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+    .login-panel.active { display: block; }
+
+    .login-card {
+      background: rgba(255,252,248,0.95);
+      border-radius: 200px 200px 24px 24px;
+      padding: 56px 44px 44px;
+      border: 1px solid rgba(139,115,85,0.15);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    }
+
+    .login-card .gate-icon {
+      width: 64px;
+      height: 64px;
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+    .login-card .gate-title { font-size: 26px; margin-bottom: 4px; }
+    .login-card .gate-sub {
+      font-size: 14px;
+      color: #8B7355;
+      margin-bottom: 32px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 16px;
+    }
+
+    .field { margin-bottom: 20px; }
+    label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #8B7355;
+      margin-bottom: 8px;
     }
     input, select {
       width: 100%;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 13px 16px;
-      color: var(--text);
-      font-size: 15px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    input:focus, select:focus { border-color: var(--accent); }
-    input::placeholder { color: var(--muted); }
-    select option { background: var(--surface2); }
-    .btn {
-      width: 100%;
-      padding: 14px;
-      background: var(--accent);
-      color: white;
-      border: none;
+      background: #f5f0eb;
+      border: 1px solid rgba(139,115,85,0.25);
       border-radius: 12px;
+      padding: 14px 18px;
+      color: #2c2416;
       font-size: 15px;
-      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    input:focus, select:focus {
+      border-color: #8B6914;
+      background: white;
+    }
+    input::placeholder { color: #b8a898; }
+    select option { background: white; }
+
+    /* Avatar picker */
+    .avatar-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .avatar-opt {
+      font-size: 26px;
       cursor: pointer;
-      transition: opacity 0.2s, transform 0.1s;
+      padding: 6px 8px;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      transition: all 0.15s;
+      background: #f5f0eb;
+    }
+    .avatar-opt:hover { background: #ede5db; }
+    .avatar-opt.selected {
+      border-color: #8B6914;
+      background: rgba(139,105,20,0.1);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      border-radius: 50px;
+      border: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
       margin-top: 8px;
     }
-    .btn:hover { opacity: 0.9; transform: translateY(-1px); }
-    .btn:active { transform: translateY(0); }
-    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    .btn.teacher-btn { background: var(--accent2); }
-    .error-msg {
-      color: #f87171;
-      font-size: 13px;
-      margin-top: 12px;
-      padding: 10px 14px;
-      background: rgba(248,113,113,0.1);
-      border-radius: 8px;
-      display: none;
-    }
-    .success-msg {
-      color: var(--green);
-      font-size: 13px;
-      margin-top: 12px;
-      padding: 10px 14px;
-      background: rgba(34,197,94,0.1);
-      border-radius: 8px;
-      display: none;
-    }
-    .panel { display: none; }
-    .panel.active { display: block; }
-    .divider {
-      text-align: center;
-      color: var(--muted);
-      font-size: 12px;
-      margin: 20px 0;
-      position: relative;
-    }
-    .divider::before, .divider::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: 40%;
-      height: 1px;
-      background: var(--border);
-    }
-    .divider::before { left: 0; }
-    .divider::after { right: 0; }
+    .submit-btn.student { background: #5a8a5a; color: white; }
+    .submit-btn.student:hover { background: #4a7a4a; }
+    .submit-btn.teacher { background: #2c2416; color: white; }
+    .submit-btn.teacher:hover { background: #1a150e; }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
     .back-link {
       text-align: center;
       margin-top: 20px;
       font-size: 13px;
-      color: var(--muted);
+      color: #8B7355;
     }
     .back-link a {
-      color: var(--accent);
+      color: #8B6914;
       text-decoration: none;
-      font-weight: 600;
-    }
-    .avatar-row {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-    }
-    .avatar-opt {
-      font-size: 28px;
+      font-weight: 500;
       cursor: pointer;
-      padding: 6px;
-      border-radius: 8px;
-      border: 2px solid transparent;
-      transition: border-color 0.2s;
     }
-    .avatar-opt.selected { border-color: var(--accent); background: rgba(108,99,255,0.15); }
+    .back-link a:hover { text-decoration: underline; }
+
+    .error-msg {
+      color: #c0392b;
+      font-size: 13px;
+      margin-top: 14px;
+      padding: 10px 16px;
+      background: rgba(192,57,43,0.08);
+      border-radius: 10px;
+      display: none;
+      border: 1px solid rgba(192,57,43,0.15);
+    }
+    .success-msg {
+      color: #27ae60;
+      font-size: 13px;
+      margin-top: 14px;
+      padding: 10px 16px;
+      background: rgba(39,174,96,0.08);
+      border-radius: 10px;
+      display: none;
+    }
+
     .spinner {
       display: inline-block;
-      width: 16px;
-      height: 16px;
-      border: 2px solid rgba(255,255,255,0.3);
+      width: 14px; height: 14px;
+      border: 2px solid rgba(255,255,255,0.4);
       border-top-color: white;
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
@@ -202,87 +317,149 @@
       margin-right: 6px;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    .home-link {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 12px;
+      color: #8B7355;
+      position: relative;
+      z-index: 1;
+    }
+    .home-link a { color: #8B6914; text-decoration: none; }
+
+    @media (max-width: 640px) {
+      .gates { flex-direction: column; max-width: 380px; }
+      .gate-card { border-radius: 100px 100px 20px 20px; padding: 40px 24px 32px; }
+      .login-card { border-radius: 120px 120px 20px 20px; padding: 48px 28px 36px; }
+    }
   </style>
 </head>
 <body>
+  <div class="pattern"></div>
 
-  <div class="logo">NVU <span>Academy</span></div>
-  <div class="subtitle">IELTS Learning Platform · Mr. Nam</div>
-
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('student')">🎓 Học sinh</button>
-    <button class="tab" onclick="switchTab('teacher')">👨‍🏫 Giáo viên</button>
+  <!-- Brand header -->
+  <div class="brand">
+    <span class="crown">👑</span>
+    <div class="brand-name">NVU <em>Academy</em></div>
+    <div class="brand-sub">IELTS Learning Platform · Choose Your Gate</div>
   </div>
 
-  <!-- STUDENT PANEL -->
-  <div id="student-panel" class="card panel active">
-    <div class="card-title">Chào mừng, học viên!</div>
-    <div class="card-sub">Nhập tên và chọn lớp để bắt đầu học</div>
-
-    <div class="field">
-      <label>Họ và tên</label>
-      <input type="text" id="student-name" placeholder="Ví dụ: Nguyễn Văn An" autocomplete="name">
+  <!-- Gate chooser -->
+  <div class="gates" id="gate-chooser">
+    <div class="gate-card gate-student" onclick="showPanel('student')">
+      <div class="gate-icon">🎓</div>
+      <div class="gate-title">Student gate</div>
+      <div class="gate-divider"></div>
+      <div class="gate-headline">Student view</div>
+      <ul class="gate-features">
+        <li>Luyện tập hàng ngày</li>
+        <li>Theo dõi điểm số</li>
+        <li>Bảng xếp hạng lớp</li>
+        <li>AI Writing & Speaking</li>
+      </ul>
+      <button class="gate-btn">Enter Student Gate</button>
     </div>
 
-    <div class="field">
-      <label>Lớp học</label>
-      <select id="student-class">
-        <option value="">— Chọn lớp —</option>
-        <option value="FOUNDATION11">Foundation 11</option>
-        <option value="FOUNDATION12">Foundation 12</option>
-        <option value="PREIELTS12">Pre-IELTS 12</option>
-        <option value="IELTS13">IELTS 13</option>
-        <option value="LYTHUYET3">Lý thuyết 3</option>
-      </select>
+    <div class="gate-card gate-teacher" onclick="showPanel('teacher')">
+      <div class="gate-icon">👨‍🏫</div>
+      <div class="gate-title">Teacher gate</div>
+      <div class="gate-divider"></div>
+      <div class="gate-headline">Hi, teacher</div>
+      <ul class="gate-features">
+        <li>Quản lý lớp học</li>
+        <li>Xem error log học sinh</li>
+        <li>Theo dõi tiến độ</li>
+        <li>Cập nhật nội dung</li>
+      </ul>
+      <button class="gate-btn">Enter Teacher Gate</button>
     </div>
+  </div>
 
-    <div class="field">
-      <label>Chọn avatar</label>
-      <div class="avatar-row">
-        <span class="avatar-opt selected" data-emoji="🦁" onclick="selectAvatar(this)">🦁</span>
-        <span class="avatar-opt" data-emoji="🐯" onclick="selectAvatar(this)">🐯</span>
-        <span class="avatar-opt" data-emoji="🦊" onclick="selectAvatar(this)">🦊</span>
-        <span class="avatar-opt" data-emoji="🐺" onclick="selectAvatar(this)">🐺</span>
-        <span class="avatar-opt" data-emoji="🦅" onclick="selectAvatar(this)">🦅</span>
-        <span class="avatar-opt" data-emoji="🐉" onclick="selectAvatar(this)">🐉</span>
-        <span class="avatar-opt" data-emoji="⚡" onclick="selectAvatar(this)">⚡</span>
-        <span class="avatar-opt" data-emoji="🔥" onclick="selectAvatar(this)">🔥</span>
+  <!-- Student login panel -->
+  <div class="login-panel" id="student-panel">
+    <div class="login-card gate-student" style="background: linear-gradient(160deg, rgba(232,240,232,0.95) 0%, rgba(248,252,248,0.98) 40%);">
+      <div class="gate-icon" style="background: rgba(100,160,100,0.3);">🎓</div>
+      <div class="gate-title">Student gate</div>
+      <div class="gate-divider"></div>
+      <div class="gate-sub">Nhập tên và chọn lớp để bắt đầu học</div>
+
+      <div class="field">
+        <label>Họ và tên</label>
+        <input type="text" id="student-name" placeholder="Ví dụ: Nguyễn Văn An" autocomplete="name">
       </div>
-    </div>
 
-    <button class="btn" id="student-login-btn" onclick="studentLogin()">Vào học ngay →</button>
-    <div class="error-msg" id="student-error"></div>
-    <div class="success-msg" id="student-success"></div>
+      <div class="field">
+        <label>Lớp học</label>
+        <select id="student-class">
+          <option value="">— Chọn lớp —</option>
+          <option value="FOUNDATION11">Foundation 11</option>
+          <option value="FOUNDATION12">Foundation 12</option>
+          <option value="PREIELTS12">Pre-IELTS 12</option>
+          <option value="IELTS13">IELTS 13</option>
+          <option value="LYTHUYET3">Lý thuyết 3</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Chọn avatar</label>
+        <div class="avatar-row">
+          <span class="avatar-opt selected" data-emoji="🦁" onclick="selectAvatar(this)">🦁</span>
+          <span class="avatar-opt" data-emoji="🐯" onclick="selectAvatar(this)">🐯</span>
+          <span class="avatar-opt" data-emoji="🦊" onclick="selectAvatar(this)">🦊</span>
+          <span class="avatar-opt" data-emoji="🐺" onclick="selectAvatar(this)">🐺</span>
+          <span class="avatar-opt" data-emoji="🦅" onclick="selectAvatar(this)">🦅</span>
+          <span class="avatar-opt" data-emoji="🐉" onclick="selectAvatar(this)">🐉</span>
+          <span class="avatar-opt" data-emoji="⚡" onclick="selectAvatar(this)">⚡</span>
+          <span class="avatar-opt" data-emoji="🔥" onclick="selectAvatar(this)">🔥</span>
+        </div>
+      </div>
+
+      <button class="submit-btn student" id="student-btn" onclick="studentLogin()">Vào học ngay →</button>
+      <div class="error-msg" id="student-error"></div>
+      <div class="success-msg" id="student-success"></div>
+    </div>
+    <div class="back-link">
+      <a onclick="showGates()">← Quay lại</a>
+      &nbsp;·&nbsp;
+      <a href="index.html">Trang chủ</a>
+    </div>
   </div>
 
-  <!-- TEACHER PANEL -->
-  <div id="teacher-panel" class="card panel">
-    <div class="card-title">Cổng giáo viên</div>
-    <div class="card-sub">Đăng nhập bằng email để quản lý lớp học</div>
+  <!-- Teacher login panel -->
+  <div class="login-panel" id="teacher-panel">
+    <div class="login-card gate-teacher" style="background: linear-gradient(160deg, rgba(240,232,232,0.95) 0%, rgba(252,248,248,0.98) 40%);">
+      <div class="gate-icon" style="background: rgba(180,100,100,0.3);">👨‍🏫</div>
+      <div class="gate-title">Teacher gate</div>
+      <div class="gate-divider"></div>
+      <div class="gate-sub">Đăng nhập bằng email để quản lý lớp</div>
 
-    <div class="field">
-      <label>Email</label>
-      <input type="email" id="teacher-email" placeholder="teacher@nvuacademy.edu.vn" autocomplete="email">
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="teacher-email" placeholder="leviethoainam287@gmail.com" autocomplete="email">
+      </div>
+
+      <div class="field">
+        <label>Mật khẩu</label>
+        <input type="password" id="teacher-password" placeholder="••••••••" autocomplete="current-password">
+      </div>
+
+      <button class="submit-btn teacher" id="teacher-btn" onclick="teacherLogin()">Sign in</button>
+      <div class="error-msg" id="teacher-error"></div>
+      <div class="success-msg" id="teacher-success"></div>
     </div>
-
-    <div class="field">
-      <label>Mật khẩu</label>
-      <input type="password" id="teacher-password" placeholder="••••••••" autocomplete="current-password">
+    <div class="back-link">
+      <a onclick="showGates()">← Quay lại</a>
+      &nbsp;·&nbsp;
+      <a href="index.html">Trang chủ</a>
     </div>
-
-    <button class="btn teacher-btn" id="teacher-login-btn" onclick="teacherLogin()">Đăng nhập</button>
-    <div class="error-msg" id="teacher-error"></div>
-    <div class="success-msg" id="teacher-success"></div>
   </div>
 
-  <div class="back-link">
-    <a href="index.html">← Về trang chủ</a>
+  <div class="home-link" id="home-lnk">
+    <a href="index.html">← Về trang chủ NVU Academy</a>
   </div>
 
   <script>
-    // =============================================
-    // Supabase Setup
-    // =============================================
     const SUPABASE_URL = 'https://sxnxbbosfyapmmkrhcdj.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_OMyiSjOVcKOfRdZO9JwSZg_8XogOYkZ';
     const { createClient } = supabase;
@@ -290,15 +467,19 @@
 
     let selectedAvatar = '🦁';
 
-    // =============================================
-    // Tab switching
-    // =============================================
-    function switchTab(tab) {
-      document.querySelectorAll('.tab').forEach((t, i) => {
-        t.classList.toggle('active', (tab === 'student' && i === 0) || (tab === 'teacher' && i === 1));
-      });
-      document.getElementById('student-panel').classList.toggle('active', tab === 'student');
-      document.getElementById('teacher-panel').classList.toggle('active', tab === 'teacher');
+    function showPanel(type) {
+      document.getElementById('gate-chooser').style.display = 'none';
+      document.getElementById('home-lnk').style.display = 'none';
+      document.getElementById('student-panel').classList.remove('active');
+      document.getElementById('teacher-panel').classList.remove('active');
+      document.getElementById(type + '-panel').classList.add('active');
+    }
+
+    function showGates() {
+      document.getElementById('gate-chooser').style.display = 'flex';
+      document.getElementById('home-lnk').style.display = 'block';
+      document.getElementById('student-panel').classList.remove('active');
+      document.getElementById('teacher-panel').classList.remove('active');
     }
 
     function selectAvatar(el) {
@@ -307,27 +488,23 @@
       selectedAvatar = el.dataset.emoji;
     }
 
-    // =============================================
-    // Student Login (name + class code)
-    // =============================================
     async function studentLogin() {
       const name = document.getElementById('student-name').value.trim();
       const classCode = document.getElementById('student-class').value;
-      const btn = document.getElementById('student-login-btn');
+      const btn = document.getElementById('student-btn');
       const errEl = document.getElementById('student-error');
       const succEl = document.getElementById('student-success');
 
       errEl.style.display = 'none';
       succEl.style.display = 'none';
 
-      if (!name) { showError('student', 'Vui lòng nhập họ và tên!'); return; }
-      if (!classCode) { showError('student', 'Vui lòng chọn lớp học!'); return; }
+      if (!name) { showErr('student', 'Vui lòng nhập họ và tên!'); return; }
+      if (!classCode) { showErr('student', 'Vui lòng chọn lớp học!'); return; }
 
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner"></span>Đang xử lý...';
 
       try {
-        // Check if student exists
         let { data: existing } = await db
           .from('students')
           .select('*')
@@ -336,17 +513,14 @@
           .single();
 
         if (!existing) {
-          // Create new student
           const { data: newStudent, error } = await db
             .from('students')
             .insert({ full_name: name, class_code: classCode, avatar_emoji: selectedAvatar })
-            .select()
-            .single();
+            .select().single();
           if (error) throw error;
           existing = newStudent;
         }
 
-        // Save session to localStorage
         localStorage.setItem('nvu_student', JSON.stringify({
           id: existing.id,
           name: existing.full_name,
@@ -354,32 +528,28 @@
           avatar: existing.avatar_emoji || selectedAvatar
         }));
 
-        succEl.textContent = `Chào ${name}! Đang vào học...`;
+        succEl.textContent = `Chào mừng ${name}! Đang vào lớp học...`;
         succEl.style.display = 'block';
-
-        setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+        setTimeout(() => { window.location.href = 'index.html'; }, 1200);
 
       } catch (err) {
-        showError('student', 'Có lỗi xảy ra: ' + err.message);
+        showErr('student', 'Có lỗi xảy ra: ' + err.message);
       } finally {
         btn.disabled = false;
         btn.innerHTML = 'Vào học ngay →';
       }
     }
 
-    // =============================================
-    // Teacher Login (email + password via Supabase Auth)
-    // =============================================
     async function teacherLogin() {
       const email = document.getElementById('teacher-email').value.trim();
       const password = document.getElementById('teacher-password').value;
-      const btn = document.getElementById('teacher-login-btn');
+      const btn = document.getElementById('teacher-btn');
 
       document.getElementById('teacher-error').style.display = 'none';
       document.getElementById('teacher-success').style.display = 'none';
 
-      if (!email) { showError('teacher', 'Vui lòng nhập email!'); return; }
-      if (!password) { showError('teacher', 'Vui lòng nhập mật khẩu!'); return; }
+      if (!email) { showErr('teacher', 'Vui lòng nhập email!'); return; }
+      if (!password) { showErr('teacher', 'Vui lòng nhập mật khẩu!'); return; }
 
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner"></span>Đang đăng nhập...';
@@ -388,46 +558,40 @@
         const { data, error } = await db.auth.signInWithPassword({ email, password });
         if (error) throw error;
 
-        localStorage.setItem('nvu_teacher', JSON.stringify({
-          id: data.user.id,
-          email: data.user.email
-        }));
+        localStorage.setItem('nvu_teacher', JSON.stringify({ id: data.user.id, email: data.user.email }));
 
-        document.getElementById('teacher-success').textContent = 'Đăng nhập thành công! Đang chuyển hướng...';
+        document.getElementById('teacher-success').textContent = 'Đăng nhập thành công!';
         document.getElementById('teacher-success').style.display = 'block';
-
         setTimeout(() => { window.location.href = 'teacher-dashboard.html'; }, 1000);
 
       } catch (err) {
         let msg = err.message;
         if (msg.includes('Invalid login')) msg = 'Email hoặc mật khẩu không đúng!';
-        showError('teacher', msg);
+        showErr('teacher', msg);
       } finally {
         btn.disabled = false;
-        btn.innerHTML = 'Đăng nhập';
+        btn.innerHTML = 'Sign in';
       }
     }
 
-    function showError(panel, msg) {
+    function showErr(panel, msg) {
       const el = document.getElementById(panel + '-error');
       el.textContent = msg;
       el.style.display = 'block';
     }
 
-    // Enter key support
     document.addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
-        if (document.getElementById('student-panel').classList.contains('active')) studentLogin();
-        else teacherLogin();
-      }
+      if (e.key !== 'Enter') return;
+      if (document.getElementById('student-panel').classList.contains('active')) studentLogin();
+      else if (document.getElementById('teacher-panel').classList.contains('active')) teacherLogin();
     });
 
-    // Check if already logged in
-    const existingStudent = localStorage.getItem('nvu_student');
-    if (existingStudent) {
-      const s = JSON.parse(existingStudent);
-      document.getElementById('student-name').value = s.name;
-      document.getElementById('student-class').value = s.classCode;
+    // Pre-fill if already logged in
+    const s = localStorage.getItem('nvu_student');
+    if (s) {
+      const st = JSON.parse(s);
+      document.getElementById('student-name').value = st.name;
+      document.getElementById('student-class').value = st.classCode;
     }
   </script>
 </body>
