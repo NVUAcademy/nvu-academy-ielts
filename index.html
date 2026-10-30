@@ -237,25 +237,34 @@ async function loadToday() {
   const today = isoToday();
   document.getElementById('today-date').textContent = shortVi(today);
   try {
+    const fd = new Date(); fd.setDate(fd.getDate() - 14);
+    const fromIso = fd.getFullYear() + '-' + String(fd.getMonth()+1).padStart(2,'0') + '-' + String(fd.getDate()).padStart(2,'0');
     const [idx, quiz] = await Promise.all([
       fetch('daily-index.json', { cache: 'no-cache' }).then(r => r.json()).then(j => j.practices || []).catch(() => []),
       fetch('quiz-week1-ielts14.json', { cache: 'no-cache' }).then(r => r.json()).then(j => j.quiz).catch(() => null)
     ]);
-    const [sc, qr] = await Promise.all([
+    const [sch, sc, qr] = await Promise.all([
+      db.from('schedule').select('day, practice_id, vocab, note').eq('class_code', student.classCode).gte('day', fromIso).lte('day', today),
       db.from('daily_scores').select('practice_date, section, score, max_score').eq('student_id', student.id),
       db.from('weekly_quiz_results').select('week_number, total_score, max_score').eq('student_id', student.id)
     ]);
+    const byId = {}; idx.forEach(p => byId[p.id] = p);
     const done = {}; (sc.data || []).forEach(r => { done[r.practice_date + '|' + r.section] = r; });
-    const mine = idx.filter(p => (p.class_codes || []).includes(student.classCode));
-    const isDone = p => done[p.date + '|' + (p.section || 'listening')];
-    const todays = mine.filter(p => p.date === today);
-    const owed = mine.filter(p => p.date < today && !isDone(p)).sort((a, b) => a.date.localeCompare(b.date));
+    const isDone = it => done[it.day + '|' + (it.p.section || 'listening')];
+    const rows = sch.data || [];
+    let plan;
+    if (rows.length) plan = rows.filter(r => r.practice_id && byId[r.practice_id]).map(r => ({ p: byId[r.practice_id], day: r.day }));
+    else plan = idx.filter(p => (p.class_codes || []).includes(student.classCode) && p.date >= fromIso && p.date <= today).map(p => ({ p, day: p.date }));
+    const todayRow = rows.find(r => r.day === today) || {};
+    const todays = plan.filter(i => i.day === today);
+    const owed = plan.filter(i => i.day < today && !isDone(i)).sort((a, b) => a.day.localeCompare(b.day));
+    const link = it => `daily-practice.html?p=${esc(it.p.id)}&d=${esc(it.day)}`;
 
     let html = '<div class="sec-label">Hôm nay</div>';
-    html += `<a class="task" href="Foundation_Vocab_Quest.html"><div class="ic" style="background:var(--mint)">🎮</div><div class="tt"><b>Học từ vựng · Vocab Quest</b><span>20 từ mỗi ngày, 6 vòng luyện tập</span></div><span class="pill todo">Vào học</span></a>`;
-    todays.forEach(p => {
-      const r = isDone(p);
-      html += `<a class="task" href="daily-practice.html?p=${esc(p.id)}"><div class="ic" style="background:var(--pink)">📅</div><div class="tt"><b>Daily Practice · ${esc(p.title)}</b><span>${esc(p.subtitle || '')}</span></div>${r ? `<span class="pill done">Đã làm ${r.score}/${r.max_score}</span>` : '<span class="pill todo">Chưa làm</span>'}</a>`;
+    html += `<a class="task" href="Foundation_Vocab_Quest.html"><div class="ic" style="background:var(--mint)">🎮</div><div class="tt"><b>Học từ vựng · Vocab Quest</b><span>${todayRow.vocab ? 'Từ hôm nay: ' + esc(todayRow.vocab) : '20 từ mỗi ngày, 6 vòng luyện tập'}</span></div><span class="pill todo">Vào học</span></a>`;
+    todays.forEach(it => {
+      const r = isDone(it);
+      html += `<a class="task" href="${link(it)}"><div class="ic" style="background:var(--pink)">📅</div><div class="tt"><b>Daily Practice · ${esc(it.p.title)}</b><span>${esc(it.p.subtitle || '')}</span></div>${r ? `<span class="pill done">Đã làm ${r.score}/${r.max_score}</span>` : '<span class="pill todo">Chưa làm</span>'}</a>`;
     });
     const quizToday = quiz && (quiz.class_codes || []).includes(student.classCode) && DAY_KEYS.indexOf(quiz.available_day) === new Date().getDay();
     if (quizToday) {
@@ -263,18 +272,18 @@ async function loadToday() {
       html += `<a class="task" href="weekly-quiz.html"><div class="ic" style="background:var(--butter)">📝</div><div class="tt"><b>Weekly Quiz · Tuần ${quiz.week_number}</b><span>${quiz.max_score} điểm, 4 phần</span></div>${q ? `<span class="pill done">Đã làm ${q.total_score}/${q.max_score}</span>` : '<span class="pill todo">Chưa làm</span>'}</a>`;
     }
     if (!todays.length && !quizToday) html += '<div class="empty">Hôm nay chưa có bài Daily Practice. Hãy học từ vựng nhé!</div>';
+    if (todayRow.note) html += `<div class="empty">📝 ${esc(todayRow.note)}</div>`;
 
     if (owed.length) {
       html += '<div class="sec-label">Cần làm bù</div>';
-      owed.forEach(p => {
-        html += `<a class="task" href="daily-practice.html?p=${esc(p.id)}"><div class="ic" style="background:var(--lilac)">↩️</div><div class="tt"><b>${esc(p.title)}</b><span>${esc(shortVi(p.date))} · ${esc(p.subtitle || '')}</span></div><span class="pill late">Làm bù</span></a>`;
+      owed.forEach(it => {
+        html += `<a class="task" href="${link(it)}"><div class="ic" style="background:var(--lilac)">↩️</div><div class="tt"><b>${esc(it.p.title)}</b><span>${esc(shortVi(it.day))} · ${esc(it.p.subtitle || '')}</span></div><span class="pill late">Làm bù</span></a>`;
       });
     }
     body.innerHTML = html;
   } catch (e) {
     body.innerHTML = `<div class="empty">Chưa tải được danh sách việc hôm nay (${esc(e.message)}).</div>`;
   }
-}
-</script>
+}</script>
 </body>
 </html>

@@ -164,7 +164,16 @@ async function boot() {
 }
 
 async function renderList(idx) {
-  const mine = idx.filter(x => isTeacher || (x.class_codes || []).includes(student.classCode));
+  let mine = idx.filter(x => isTeacher || (x.class_codes || []).includes(student.classCode));
+  if (student) {
+    const fd = new Date(); fd.setDate(fd.getDate() - 30);
+    const fromIso = fd.getFullYear() + '-' + String(fd.getMonth()+1).padStart(2,'0') + '-' + String(fd.getDate()).padStart(2,'0');
+    const { data: srows } = await db.from('schedule').select('day, practice_id').eq('class_code', student.classCode).gte('day', fromIso);
+    if (srows && srows.length) {
+      const byId = {}; idx.forEach(x => byId[x.id] = x);
+      mine = srows.filter(r => r.practice_id && byId[r.practice_id]).map(r => ({ ...byId[r.practice_id], date: r.day }));
+    }
+  }
   let done = {};
   if (student) {
     const { data } = await db.from('daily_scores').select('practice_date, section, score, max_score').eq('student_id', student.id);
@@ -177,13 +186,14 @@ async function renderList(idx) {
       const open = isTeacher || x.date <= today;
       return `<div class="card list-item"><div><div class="t">${esc(x.title)}</div><div class="sub">${esc(x.subtitle || '')} · ${esc(x.date)}</div></div>
         <div>${r ? `<span class="badge done">Đã làm ${r.score}/${r.max_score}</span> ` : open ? '<span class="badge todo">Chưa làm</span> ' : '<span class="badge lock">Chưa mở</span> '}
-        ${open ? `<a class="btn small" href="?p=${esc(x.id)}">${r ? 'Làm lại' : 'Làm bài'}</a>` : ''}</div></div>`;
+        ${open ? `<a class="btn small" href="?p=${esc(x.id)}&d=${esc(x.date)}">${r ? 'Làm lại' : 'Làm bài'}</a>` : ''}</div></div>`;
     }).join('') : '<div class="card"><p class="sub">Chưa có bài nào cho lớp của bạn.</p></div>');
 }
 
 async function openPractice(meta) {
   try { P = await (await fetch(meta.file, { cache: 'no-cache' })).json(); }
   catch (e) { $('app').innerHTML = `<div class="card"><h2>Không tải được bài</h2><p class="sub">${esc(e.message)}</p></div>`; return; }
+  { const dq = params.get('d') || ''; P.date = /^\d{4}-\d{2}-\d{2}$/.test(dq) ? dq : meta.date; P.day = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'][new Date(P.date + 'T00:00:00').getDay()]; }
   if (!isTeacher && !(P.class_codes || []).includes(student.classCode)) {
     $('app').innerHTML = `<div class="card arch"><h2>Không dành cho lớp của bạn</h2></div>`; return;
   }
