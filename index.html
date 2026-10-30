@@ -1,208 +1,281 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NVU Academy — IELTS Learning Platform</title>
-  <style>
-    :root {
-      --bg: #0f1117;
-      --surface: #1a1d27;
-      --accent: #6c63ff;
-      --accent2: #ff6584;
-      --text: #e8eaf0;
-      --muted: #8b8fa8;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
-    header {
-      padding: 24px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #2a2d3a;
-    }
-    .logo {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-    .logo span { color: var(--accent); }
-    .badge {
-      font-size: 11px;
-      background: var(--accent);
-      color: white;
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-weight: 600;
-    }
-    .hero {
-      text-align: center;
-      padding: 80px 32px 60px;
-    }
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 16px;
-    }
-    .hero h1 span { color: var(--accent); }
-    .hero p {
-      color: var(--muted);
-      font-size: 18px;
-      max-width: 500px;
-      margin: 0 auto 40px;
-      line-height: 1.6;
-    }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 32px 80px;
-    }
-    .card {
-      background: var(--surface);
-      border-radius: 16px;
-      padding: 28px;
-      border: 1px solid #2a2d3a;
-      text-decoration: none;
-      color: var(--text);
-      transition: transform 0.2s, border-color 0.2s;
-      display: block;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent);
-    }
-    .card-icon { font-size: 36px; margin-bottom: 16px; }
-    .card h2 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-    .card p { color: var(--muted); font-size: 14px; line-height: 1.6; }
-    .card .tag {
-      display: inline-block;
-      margin-top: 16px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-    .coming-soon { opacity: 0.5; cursor: not-allowed; }
-    .coming-soon:hover { transform: none; border-color: #2a2d3a; }
-    footer {
-      text-align: center;
-      padding: 24px;
-      color: var(--muted);
-      font-size: 13px;
-      border-top: 1px solid #2a2d3a;
-    }
-    .user-chip {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #1a1d27;
-      border: 1px solid #2a2d3a;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: border-color 0.2s;
-      text-decoration: none;
-      color: var(--text);
-    }
-    .user-chip:hover { border-color: var(--accent); }
-    .login-btn {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 9px 20px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-    .login-btn:hover { opacity: 0.85; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVU Academy — IELTS Learning Platform</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#F8F2E9; --paper:#FFFCF6; --ink:#2F2638; --muted:#7D7183;
+  --gold:#B08D57; --gold-soft:#D9C49C; --line:rgba(176,141,87,.45); --soft:#F2E9DC;
+  --shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 18px 40px -22px rgba(64,40,52,.35), 0 2px 6px -3px rgba(64,40,52,.18);
+  --pink:#EBC7C9; --mint:#CBDCCB; --butter:#F0DFB6; --lilac:#D9CFE7; --sky:#C9DBE6; --peach:#F1D2BF;
+  --good:#5E8B6E; --warn:#A97F2E; --bad:#B05468; --on-pastel:#2F2638;
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif; --body:"Jost","Futura","Century Gothic",system-ui,sans-serif;
+  --r:22px; --r-sm:14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:#1D1723; --paper:#271F2E; --ink:#F3EADF; --muted:#B5A8B4; --gold:#D3B47A; --gold-soft:#7E6A49; --line:rgba(211,180,122,.4); --soft:#30273A;
+    --shadow:0 18px 40px -20px rgba(0,0,0,.7), 0 2px 6px -3px rgba(0,0,0,.5);
+    --pink:#C99AA0; --mint:#A3BEA6; --butter:#D8C08A; --lilac:#B5A7CC; --sky:#A2BDCC; --peach:#D2A88F; --good:#9CCBA9; --warn:#D8B66A; --bad:#E08C9E; --on-pastel:#241C2B;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:#1D1723; --paper:#271F2E; --ink:#F3EADF; --muted:#B5A8B4; --gold:#D3B47A; --gold-soft:#7E6A49; --line:rgba(211,180,122,.4); --soft:#30273A;
+  --shadow:0 18px 40px -20px rgba(0,0,0,.7), 0 2px 6px -3px rgba(0,0,0,.5);
+  --pink:#C99AA0; --mint:#A3BEA6; --butter:#D8C08A; --lilac:#B5A7CC; --sky:#A2BDCC; --peach:#D2A88F; --good:#9CCBA9; --warn:#D8B66A; --bad:#E08C9E; --on-pastel:#241C2B;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:var(--body); background:var(--bg); color:var(--ink); min-height:100vh; font-size:17px; line-height:1.5; }
+body::before { content:''; position:fixed; inset:0; pointer-events:none;
+  background-image:radial-gradient(circle at 15% 10%, rgba(235,199,201,.28) 0, transparent 45%), radial-gradient(circle at 85% 90%, rgba(217,207,231,.28) 0, transparent 45%); }
+.wrap { max-width:1040px; margin:0 auto; padding:0 22px; position:relative; z-index:1; }
+header { display:flex; align-items:center; justify-content:space-between; padding:22px 0; border-bottom:1px solid var(--line); }
+.logo { font-family:var(--display); font-size:26px; font-weight:600; letter-spacing:.02em; }
+.logo em { color:var(--gold); font-weight:400; }
+.chip, .login-btn { display:flex; align-items:center; gap:8px; background:var(--paper); border:1px solid var(--line); padding:8px 16px; border-radius:30px; font-size:15px; font-weight:500; color:var(--ink); text-decoration:none; box-shadow:var(--shadow); }
+.chip small { color:var(--muted); font-size:13px; }
+.login-btn { background:var(--gold); color:#fff; border-color:var(--gold); }
+.hero { text-align:center; padding:54px 0 34px; }
+.hero .eyebrow { font-size:13px; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); font-weight:500; }
+.hero h1 { font-family:var(--display); font-weight:500; font-size:clamp(2.2rem,5vw,3.6rem); line-height:1.1; margin:12px 0 10px; }
+.hero h1 em { color:var(--gold); font-style:italic; font-weight:400; }
+.hero p { color:var(--muted); font-size:18px; }
+.orn { width:64px; height:1px; background:var(--gold); margin:18px auto 0; position:relative; }
+.orn::after { content:'◆'; position:absolute; left:50%; top:-8px; transform:translateX(-50%); font-size:10px; color:var(--gold); background:var(--bg); padding:0 8px; }
+
+.today { background:var(--paper); border:1px solid var(--line); border-radius:var(--r) var(--r) var(--r) var(--r); box-shadow:var(--shadow); padding:26px 28px; margin-bottom:34px; }
+.today-head { display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:6px; }
+.today h2 { font-family:var(--display); font-weight:500; font-size:28px; }
+.today .date { color:var(--muted); font-size:16px; }
+.sec-label { font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600; margin:18px 0 8px; }
+.task { display:flex; align-items:center; gap:14px; padding:13px 16px; border:1px solid var(--line); border-radius:var(--r-sm); margin-bottom:10px; background:var(--soft); text-decoration:none; color:var(--ink); transition:transform .15s; }
+.task:hover { transform:translateX(3px); }
+.task .ic { width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; color:var(--on-pastel); flex:none; }
+.task .tt { flex:1; } .task .tt b { font-weight:600; font-size:17px; } .task .tt span { display:block; color:var(--muted); font-size:15px; }
+.pill { font-size:13px; font-weight:600; padding:4px 12px; border-radius:20px; white-space:nowrap; }
+.pill.todo { background:rgba(176,141,87,.18); color:var(--warn); } .pill.done { background:rgba(94,139,110,.18); color:var(--good); } .pill.late { background:rgba(176,84,104,.16); color:var(--bad); }
+.empty { color:var(--muted); font-size:16px; padding:6px 2px; }
+
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; padding-bottom:70px; }
+.card { background:var(--c, var(--pink)); color:var(--on-pastel); border-radius:120px 120px var(--r) var(--r); padding:46px 28px 28px; text-decoration:none; display:block; box-shadow:var(--shadow); border:1px solid var(--line); transition:transform .2s; text-align:center; position:relative; }
+.card:hover { transform:translateY(-5px); }
+.card .ic { font-size:32px; margin-bottom:10px; }
+.card h3 { font-family:var(--display); font-weight:600; font-size:23px; margin-bottom:8px; }
+.card p { font-size:16px; line-height:1.55; opacity:.85; }
+.card .tag { display:inline-block; margin-top:16px; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; border-top:1px solid rgba(47,38,56,.35); padding-top:10px; }
+.card.soon { opacity:.55; cursor:default; } .card.soon:hover { transform:none; }
+footer { text-align:center; padding:26px; color:var(--muted); font-size:14px; border-top:1px solid var(--line); letter-spacing:.06em; }
+/* Backgrounds */
+#bgfx { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+body[data-bg="aurora"] { background:linear-gradient(120deg,#F8F2E9,#EBC7C9,#D9CFE7,#C9DBE6,#CBDCCB,#F8F2E9); background-size:400% 400%; animation:aur 22s ease infinite; }
+@keyframes aur { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+body[data-bg="sakura"] { background:linear-gradient(180deg,#FBEFEF,#F8F2E9); }
+body[data-bg="night"] { background:linear-gradient(180deg,#14101B,#241C2B 60%,#2D2338); }
+body[data-bg="rain"] { background:linear-gradient(180deg,#E3EAF0,#C9DBE6 70%,#B9CBD8); }
+.petal { position:absolute; top:-30px; width:12px; height:16px; background:radial-gradient(circle at 30% 30%,#fff 0,#EBC7C9 60%,#D99AA3); border-radius:80% 0 80% 0; opacity:.8; animation:fall linear infinite; }
+@keyframes fall { to { transform:translate3d(var(--dx,60px),110vh,0) rotate(540deg); } }
+.star { position:absolute; width:3px; height:3px; border-radius:50%; background:#fff; animation:tw 3s ease-in-out infinite; }
+@keyframes tw { 0%,100%{opacity:.15} 50%{opacity:1} }
+.drop { position:absolute; top:-40px; width:1.5px; height:34px; background:linear-gradient(transparent,rgba(255,255,255,.75)); animation:rain linear infinite; }
+@keyframes rain { to { transform:translateY(115vh); } }
+.bgvid { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.vidshade { position:absolute; inset:0; background:color-mix(in srgb, var(--bg) 22%, transparent); }
+body[data-vid] header, body[data-vid] .hero { background:color-mix(in srgb, var(--bg) 72%, transparent); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border-radius:var(--r); }
+body[data-vid] .hero { margin-top:20px; padding:36px 16px 28px; }
+body[data-vid] footer { background:color-mix(in srgb, var(--bg) 72%, transparent); position:relative; z-index:1; }
+@media (prefers-reduced-motion: reduce) { #bgfx *, body[data-bg] { animation:none !important; } .bgvid { display:none; } }
+.bgbtn { position:fixed; right:18px; bottom:18px; z-index:50; width:50px; height:50px; border-radius:50%; border:1px solid var(--line); background:var(--paper); box-shadow:var(--shadow); font-size:22px; cursor:pointer; }
+.bgpanel { position:fixed; right:18px; bottom:78px; z-index:50; background:var(--paper); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); padding:14px; display:none; min-width:210px; }
+.bgpanel.open { display:block; }
+.bgpanel b { display:block; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+.bgopt { display:block; width:100%; text-align:left; padding:9px 12px; margin-bottom:6px; border-radius:12px; border:1px solid var(--line); background:var(--soft); color:var(--ink); font-family:inherit; font-size:15px; cursor:pointer; }
+.bgopt.on { border-color:var(--gold); background:var(--paper); font-weight:600; }
+.meme { background:var(--paper); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); padding:22px; margin-bottom:34px; text-align:center; display:none; }
+.meme h2 { font-family:var(--display); font-weight:500; font-size:24px; margin-bottom:12px; }
+.meme img { max-width:100%; max-height:420px; border-radius:var(--r-sm); border:1px solid var(--line); }
+.meme p { color:var(--muted); font-size:16px; margin-top:10px; }
+.hero, .today, .cards, header, .meme { position:relative; z-index:1; }
+@media (max-width:560px) { .today { padding:20px 16px; } header { padding:16px 0; } .logo { font-size:22px; } }
+</style>
 </head>
 <body>
+<div class="wrap">
   <header>
-    <div class="logo">NVU <span>Academy</span></div>
-    <div id="auth-area">
-      <a href="login.html" class="login-btn" id="login-btn">Đăng nhập</a>
-    </div>
+    <div class="logo">NVU <em>Academy</em></div>
+    <div id="auth-area"><a href="login.html" class="login-btn">Đăng nhập</a></div>
   </header>
-  <script>
-    // Show student info if logged in
-    const s = localStorage.getItem('nvu_student');
-    if (s) {
-      const student = JSON.parse(s);
-      document.getElementById('auth-area').innerHTML = `
-        <a href="login.html" class="user-chip" title="Đổi tài khoản">
-          <span>${student.avatar || '🎓'}</span>
-          <span>${student.name}</span>
-          <span style="color:#8b8fa8;font-size:12px">${student.classCode}</span>
-        </a>`;
-    }
-  </script>
 
   <div class="hero">
-    <h1>Học IELTS<br><span>cùng Mr. Nam</span></h1>
+    <div class="eyebrow">IELTS Learning Platform</div>
+    <h1>Học IELTS<br><em>cùng Mr. Nam</em></h1>
     <p>Luyện tập hàng ngày · Từ vựng · Listening · Writing · Speaking</p>
+    <div class="orn"></div>
   </div>
+
+  <section class="today" id="today" style="display:none">
+    <div class="today-head"><h2>Hôm nay cần làm</h2><span class="date" id="today-date"></span></div>
+    <div id="today-body"><div class="empty">Đang tải…</div></div>
+  </section>
+
+  <section class="meme" id="meme"><h2>Meme hôm nay 😄</h2><img id="meme-img" alt="meme"><p id="meme-cap"></p></section>
 
   <div class="cards">
-    <a href="Foundation_Vocab_Quest.html" class="card">
-      <div class="card-icon">🎮</div>
-      <h2>Vocab Quest</h2>
-      <p>Học từ vựng theo game — 20 từ mỗi ngày, 6 vòng luyện tập, nhân vật hero.</p>
-      <div class="tag">→ Vào học</div>
+    <a href="Foundation_Vocab_Quest.html" class="card" style="--c:var(--mint)">
+      <div class="ic">🎮</div><h3>Vocab Quest</h3>
+      <p>Học từ vựng theo game, 20 từ mỗi ngày, 6 vòng luyện tập, nhân vật hero.</p><div class="tag">Vào học →</div>
     </a>
-
-    <div class="card" onclick="location.href='daily-practice.html'" style="cursor:pointer">
-      <div class="card-icon">📅</div>
-      <h2>Daily Practice</h2>
-      <p>Luyện tập hàng ngày Thứ 2–Thứ 5: Vocab, Grammar, Listening có timer.</p>
-      <div class="tag">→ Làm bài</div>
+    <a href="daily-practice.html" class="card" style="--c:var(--pink)">
+      <div class="ic">📅</div><h3>Daily Practice</h3>
+      <p>Luyện tập hàng ngày Thứ 2–Thứ 5: Vocab, Grammar, Listening và ghi âm.</p><div class="tag">Làm bài →</div>
+    </a>
+    <a href="weekly-quiz.html" class="card" style="--c:var(--butter)">
+      <div class="ic">📝</div><h3>Weekly Quiz</h3>
+      <p>Kiểm tra tổng hợp cuối tuần, 30 điểm, 4 phần A, B, C, D.</p><div class="tag">Làm bài →</div>
+    </a>
+    <div class="card soon" style="--c:var(--lilac)">
+      <div class="ic">✍️</div><h3>AI Writing Check</h3>
+      <p>Nộp bài essay, AI chấm theo 4 tiêu chí IELTS và nhận xét chi tiết.</p><div class="tag">Sắp ra mắt</div>
     </div>
-
-    <div class="card" onclick="location.href='weekly-quiz.html'" style="cursor:pointer">
-      <div class="card-icon">📝</div>
-      <h2>Weekly Quiz</h2>
-      <p>Kiểm tra tổng hợp cuối tuần /30 điểm — 4 parts A, B, C, D.</p>
-      <div class="tag">→ Làm bài</div>
+    <div class="card soon" style="--c:var(--sky)">
+      <div class="ic">🎤</div><h3>AI Speaking Coach</h3>
+      <p>Luyện nói với AI, ghi âm giọng nói, nhận điểm và nhận xét phát âm.</p><div class="tag">Sắp ra mắt</div>
     </div>
-
-    <div class="card coming-soon">
-      <div class="card-icon">✍️</div>
-      <h2>AI Writing Check</h2>
-      <p>Nộp bài essay — AI chấm theo 4 tiêu chí IELTS và cho feedback chi tiết.</p>
-      <div class="tag">Sắp ra mắt</div>
-    </div>
-
-    <div class="card coming-soon">
-      <div class="card-icon">🎤</div>
-      <h2>AI Speaking Coach</h2>
-      <p>Luyện nói với AI — record giọng nói, nhận điểm và nhận xét phát âm.</p>
-      <div class="tag">Sắp ra mắt</div>
-    </div>
-
-    <div class="card coming-soon">
-      <div class="card-icon">🏆</div>
-      <h2>Bảng xếp hạng</h2>
-      <p>Ranking real-time — xem điểm của cả lớp, phấn đấu lên top mỗi tuần.</p>
-      <div class="tag">Sắp ra mắt</div>
+    <div class="card soon" style="--c:var(--peach)">
+      <div class="ic">🏆</div><h3>Bảng xếp hạng</h3>
+      <p>Ranking real-time, xem điểm của cả lớp, phấn đấu lên top mỗi tuần.</p><div class="tag">Sắp ra mắt</div>
     </div>
   </div>
+</div>
+<footer>Mr. Nam · NVU Academy · IELTS Foundation → 7.0</footer>
 
-  <footer>Mr. Nam · NVU Academy · IELTS Foundation → 7.0</footer>
+<div id="bgfx"></div>
+<button class="bgbtn" id="bgbtn" title="Chọn nền" aria-label="Chọn nền">🎨</button>
+<div class="bgpanel" id="bgpanel"></div>
+
+<script>
+/* Background picker */
+const BGS = [
+  { id: 'cream',  name: '🤍 Cream (mặc định)' },
+  { id: 'aurora', name: '🌈 Aurora chuyển màu' },
+  { id: 'sakura', name: '🌸 Sakura rơi' },
+  { id: 'night',  name: '🌙 Đêm sao' },
+  { id: 'rain',   name: '🌧️ Mưa nhẹ' },
+  { id: 'v-swamp',  name: '🐈‍⬛ Video: Mèo đầm lầy', video: 'backgrounds/bg-swamp-cat.mp4', theme: 'dark' },
+  { id: 'v-chill',  name: '😺 Video: Mèo chill', video: 'backgrounds/bg-chill-cat.mp4', theme: 'light' },
+  { id: 'v-autumn', name: '🍂 Video: Núi mùa thu', video: 'backgrounds/bg-autumn.mp4', theme: 'light' }
+];
+function applyBg(id) {
+  const fx = document.getElementById('bgfx'); fx.innerHTML = '';
+  document.body.removeAttribute('data-bg');
+  const root = document.documentElement;
+  const def = BGS.find(b => b.id === id) || {};
+  document.body.removeAttribute('data-vid');
+  if (id === 'night' || def.theme === 'dark') root.setAttribute('data-theme', 'dark'); else if (id === 'cream' || !id) root.removeAttribute('data-theme'); else root.setAttribute('data-theme', 'light');
+  if (id && id !== 'cream' && !def.video) document.body.setAttribute('data-bg', id);
+  if (def.video) {
+    document.body.setAttribute('data-vid', '1');
+    const v = document.createElement('video');
+    v.className = 'bgvid'; v.src = def.video; v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'auto';
+    fx.appendChild(v);
+    const p = v.play(); if (p && p.catch) p.catch(() => {});
+    const sh = document.createElement('div'); sh.className = 'vidshade'; fx.appendChild(sh);
+  }
+  const mk = (cls, n, fn) => { for (let i = 0; i < n; i++) { const e = document.createElement('div'); e.className = cls; fn(e, i); fx.appendChild(e); } };
+  if (id === 'sakura') mk('petal', 22, (e) => { e.style.left = Math.random() * 100 + '%'; e.style.animationDuration = (9 + Math.random() * 9) + 's'; e.style.animationDelay = (-Math.random() * 15) + 's'; e.style.setProperty('--dx', (Math.random() * 160 - 40) + 'px'); e.style.transform = 'scale(' + (0.7 + Math.random() * 0.9) + ')'; });
+  if (id === 'night') mk('star', 70, (e) => { e.style.left = Math.random() * 100 + '%'; e.style.top = Math.random() * 100 + '%'; e.style.animationDelay = (Math.random() * 3) + 's'; e.style.animationDuration = (2 + Math.random() * 3) + 's'; });
+  if (id === 'rain') mk('drop', 45, (e) => { e.style.left = Math.random() * 100 + '%'; e.style.animationDuration = (0.9 + Math.random() * 0.9) + 's'; e.style.animationDelay = (-Math.random() * 2) + 's'; });
+  try { localStorage.setItem('nvu_bg', id || 'cream'); } catch (e) {}
+  document.querySelectorAll('.bgopt').forEach(b => b.classList.toggle('on', b.dataset.id === (id || 'cream')));
+}
+(function () {
+  const p = document.getElementById('bgpanel');
+  p.innerHTML = '<b>Chọn nền</b>' + BGS.map(b => `<button class="bgopt" data-id="${b.id}">${b.name}</button>`).join('');
+  p.addEventListener('click', e => { const t = e.target.closest('.bgopt'); if (t) applyBg(t.dataset.id); });
+  document.getElementById('bgbtn').addEventListener('click', () => p.classList.toggle('open'));
+  let saved = 'cream'; try { saved = localStorage.getItem('nvu_bg') || 'cream'; } catch (e) {}
+  applyBg(saved);
+})();
+
+/* Meme of the day: đọc memes.json, mỗi ngày một ảnh */
+(async function () {
+  try {
+    const list = await (await fetch('memes.json', { cache: 'no-cache' })).json();
+    if (!Array.isArray(list) || !list.length) return;
+    const day = Math.floor(Date.now() / 86400000);
+    const m = list[day % list.length];
+    document.getElementById('meme-img').src = m.src;
+    document.getElementById('meme-cap').textContent = m.caption || '';
+    document.getElementById('meme').style.display = 'block';
+  } catch (e) {}
+})();
+</script>
+<script>
+const SUPABASE_URL = 'https://sxnxbbosfyapmmkrhcdj.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_OMyiSjOVcKOfRdZO9JwSZg_8XogOYkZ';
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const DAYS_VI = ['Chủ Nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'];
+const DAY_KEYS = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+function isoToday() { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+function shortVi(iso) { const d = new Date(iso + 'T00:00:00'); return DAYS_VI[d.getDay()] + ' ' + String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0'); }
+
+let student = null;
+try { student = JSON.parse(lsGet('nvu_student') || 'null'); } catch (e) {}
+if (student) {
+  document.getElementById('auth-area').innerHTML =
+    `<a href="login.html" class="chip" title="Đổi tài khoản"><span>${esc(student.avatar || '🎓')}</span><span>${esc(student.name)}</span><small>${esc(student.classCode)}</small></a>`;
+  loadToday();
+}
+
+async function loadToday() {
+  const box = document.getElementById('today'), body = document.getElementById('today-body');
+  box.style.display = 'block';
+  const today = isoToday();
+  document.getElementById('today-date').textContent = shortVi(today);
+  try {
+    const [idx, quiz] = await Promise.all([
+      fetch('daily-index.json', { cache: 'no-cache' }).then(r => r.json()).then(j => j.practices || []).catch(() => []),
+      fetch('quiz-week1-ielts14.json', { cache: 'no-cache' }).then(r => r.json()).then(j => j.quiz).catch(() => null)
+    ]);
+    const [sc, qr] = await Promise.all([
+      db.from('daily_scores').select('practice_date, section, score, max_score').eq('student_id', student.id),
+      db.from('weekly_quiz_results').select('week_number, total_score, max_score').eq('student_id', student.id)
+    ]);
+    const done = {}; (sc.data || []).forEach(r => { done[r.practice_date + '|' + r.section] = r; });
+    const mine = idx.filter(p => (p.class_codes || []).includes(student.classCode));
+    const isDone = p => done[p.date + '|' + (p.section || 'listening')];
+    const todays = mine.filter(p => p.date === today);
+    const owed = mine.filter(p => p.date < today && !isDone(p)).sort((a, b) => a.date.localeCompare(b.date));
+
+    let html = '<div class="sec-label">Hôm nay</div>';
+    html += `<a class="task" href="Foundation_Vocab_Quest.html"><div class="ic" style="background:var(--mint)">🎮</div><div class="tt"><b>Học từ vựng · Vocab Quest</b><span>20 từ mỗi ngày, 6 vòng luyện tập</span></div><span class="pill todo">Vào học</span></a>`;
+    todays.forEach(p => {
+      const r = isDone(p);
+      html += `<a class="task" href="daily-practice.html?p=${esc(p.id)}"><div class="ic" style="background:var(--pink)">📅</div><div class="tt"><b>Daily Practice · ${esc(p.title)}</b><span>${esc(p.subtitle || '')}</span></div>${r ? `<span class="pill done">Đã làm ${r.score}/${r.max_score}</span>` : '<span class="pill todo">Chưa làm</span>'}</a>`;
+    });
+    const quizToday = quiz && (quiz.class_codes || []).includes(student.classCode) && DAY_KEYS.indexOf(quiz.available_day) === new Date().getDay();
+    if (quizToday) {
+      const q = (qr.data || []).find(x => x.week_number === quiz.week_number);
+      html += `<a class="task" href="weekly-quiz.html"><div class="ic" style="background:var(--butter)">📝</div><div class="tt"><b>Weekly Quiz · Tuần ${quiz.week_number}</b><span>${quiz.max_score} điểm, 4 phần</span></div>${q ? `<span class="pill done">Đã làm ${q.total_score}/${q.max_score}</span>` : '<span class="pill todo">Chưa làm</span>'}</a>`;
+    }
+    if (!todays.length && !quizToday) html += '<div class="empty">Hôm nay chưa có bài Daily Practice. Hãy học từ vựng nhé!</div>';
+
+    if (owed.length) {
+      html += '<div class="sec-label">Cần làm bù</div>';
+      owed.forEach(p => {
+        html += `<a class="task" href="daily-practice.html?p=${esc(p.id)}"><div class="ic" style="background:var(--lilac)">↩️</div><div class="tt"><b>${esc(p.title)}</b><span>${esc(shortVi(p.date))} · ${esc(p.subtitle || '')}</span></div><span class="pill late">Làm bù</span></a>`;
+      });
+    }
+    body.innerHTML = html;
+  } catch (e) {
+    body.innerHTML = `<div class="empty">Chưa tải được danh sách việc hôm nay (${esc(e.message)}).</div>`;
+  }
+}
+</script>
 </body>
 </html>
