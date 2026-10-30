@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NVU Academy — IELTS Learning Platform</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --accent: #6c63ff;
+      --accent2: #ff6584;
+      --text: #e8eaf0;
+      --muted: #8b8fa8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    header {
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #2a2d3a;
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent); }
+    .badge {
+      font-size: 11px;
+      background: var(--accent);
+      color: white;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .hero {
+      text-align: center;
+      padding: 80px 32px 60px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 500px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+    }
+    .card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid #2a2d3a;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.2s, border-color 0.2s;
+      display: block;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+    .card-icon { font-size: 36px; margin-bottom: 16px; }
+    .card h2 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: 14px; line-height: 1.6; }
+    .card .tag {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .coming-soon { opacity: 0.5; cursor: not-allowed; }
+    .coming-soon:hover { transform: none; border-color: #2a2d3a; }
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid #2a2d3a;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">NVU <span>Academy</span></div>
+    <div class="badge">IELTS Platform</div>
+  </header>
+
+  <div class="hero">
+    <h1>Học IELTS<br><span>cùng Mr. Nam</span></h1>
+    <p>Luyện tập hàng ngày · Từ vựng · Listening · Writing · Speaking</p>
+  </div>
+
+  <div class="cards">
+    <a href="Foundation_Vocab_Quest.html" class="card">
+      <div class="card-icon">🎮</div>
+      <h2>Vocab Quest</h2>
+      <p>Học từ vựng theo game — 20 từ mỗi ngày, 6 vòng luyện tập, nhân vật hero.</p>
+      <div class="tag">→ Vào học</div>
+    </a>
+
+    <div class="card coming-soon">
+      <div class="card-icon">📅</div>
+      <h2>Daily Practice</h2>
+      <p>Luyện tập hàng ngày Thứ 2–Thứ 5: Vocab, Grammar, Listening có timer.</p>
+      <div class="tag">Sắp ra mắt</div>
+    </div>
+
+    <div class="card coming-soon">
+      <div class="card-icon">📝</div>
+      <h2>Weekly Quiz</h2>
+      <p>Kiểm tra tổng hợp cuối tuần /30 điểm — 4 parts A, B, C, D.</p>
+      <div class="tag">Sắp ra mắt</div>
+    </div>
+
+    <div class="card coming-soon">
+      <div class="card-icon">✍️</div>
+      <h2>AI Writing Check</h2>
+      <p>Nộp bài essay — AI chấm theo 4 tiêu chí IELTS và cho feedback chi tiết.</p>
+      <div class="tag">Sắp ra mắt</div>
+    </div>
+
+    <div class="card coming-soon">
+      <div class="card-icon">🎤</div>
+      <h2>AI Speaking Coach</h2>
+      <p>Luyện nói với AI — record giọng nói, nhận điểm và nhận xét phát âm.</p>
+      <div class="tag">Sắp ra mắt</div>
+    </div>
+
+    <div class="card coming-soon">
+      <div class="card-icon">🏆</div>
+      <h2>Bảng xếp hạng</h2>
+      <p>Ranking real-time — xem điểm của cả lớp, phấn đấu lên top mỗi tuần.</p>
+      <div class="tag">Sắp ra mắt</div>
+    </div>
+  </div>
+
+  <footer>Mr. Nam · NVU Academy · IELTS Foundation → 7.0</footer>
+</body>
+</html>

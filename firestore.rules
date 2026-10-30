@@ -1,0 +1,32 @@
+rules_version = '2';
+// Replace TEACHER_UID_HERE with the teacher's user id (shown on the page after the first sign-in).
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isTeacher() { return signedIn() && request.auth.uid == 'TEACHER_UID_HERE'; }
+
+    // Class content: every signed-in student reads, only the teacher writes.
+    match /classes/{id}  { allow read: if signedIn(); allow write: if isTeacher(); }
+    match /lessons/{id}  { allow read: if signedIn(); allow write: if isTeacher(); }
+    match /vocab/{id}    { allow read: if signedIn(); allow write: if isTeacher(); }
+    match /prompts/{id}  { allow read: if signedIn(); allow write: if isTeacher(); }
+    match /samples/{id}  { allow read: if signedIn(); allow write: if isTeacher(); }
+    match /homework/{id} { allow read: if signedIn(); allow write: if isTeacher(); }
+    match /settings/{id} { allow read: if signedIn(); allow write: if isTeacher(); }
+
+    // Student profile (name, classes, hero): classmates can see names; each student edits only their own.
+    match /students/{uid} { allow read: if signedIn(); allow write: if isTeacher() || request.auth.uid == uid; }
+
+    // Homework submissions, mastered words, error log, game progress: private to the student and the teacher.
+    match /subs/{uid} { allow read, write: if isTeacher() || request.auth.uid == uid; }
+
+    // Lesson-hub comments: everyone reads, each student writes only their own.
+    match /chat/{uid} { allow read: if signedIn(); allow write: if isTeacher() || request.auth.uid == uid; }
+
+    // Grades and bonus points: the student reads their own, only the teacher writes.
+    match /grades/{uid} { allow read: if isTeacher() || request.auth.uid == uid; allow write: if isTeacher(); }
+
+    // Teacher's private data (fees).
+    match /data/users/{uid}/{doc} { allow read, write: if signedIn() && request.auth.uid == uid; }
+  }
+}
