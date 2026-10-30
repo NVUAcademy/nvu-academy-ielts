@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Dashboard — NVU Academy</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f5f0eb;
+      --surface: rgba(255,252,248,0.95);
+      --border: rgba(139,115,85,0.2);
+      --accent: #8B6914;
+      --text: #2c2416;
+      --muted: #8B7355;
+      --green: #5a8a5a;
+      --red: #c0392b;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      width: 240px;
+      background: #2c2416;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+    }
+    .sidebar-brand {
+      padding: 28px 24px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .sidebar-brand .name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: white;
+      font-weight: 700;
+    }
+    .sidebar-brand .name em { color: #d4a843; font-style: italic; }
+    .sidebar-brand .sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; letter-spacing: 0.1em; }
+
+    .nav { padding: 16px 0; flex: 1; }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 24px;
+      color: rgba(255,255,255,0.6);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      border-left: 3px solid transparent;
+    }
+    .nav-item:hover { color: white; background: rgba(255,255,255,0.05); }
+    .nav-item.active { color: white; border-left-color: #d4a843; background: rgba(212,168,67,0.1); }
+    .nav-icon { font-size: 18px; width: 22px; text-align: center; }
+
+    .sidebar-footer {
+      padding: 16px 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .teacher-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .teacher-avatar {
+      width: 36px; height: 36px;
+      background: #d4a843;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .teacher-info .name { font-size: 13px; color: white; font-weight: 600; }
+    .teacher-info .role { font-size: 11px; color: rgba(255,255,255,0.4); }
+    .signout-btn {
+      width: 100%;
+      padding: 9px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .signout-btn:hover { background: rgba(255,255,255,0.15); color: white; }
+
+    /* Main content */
+    .main {
+      margin-left: 240px;
+      padding: 32px;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      margin-bottom: 28px;
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .page-sub { color: var(--muted); font-size: 14px; margin-top: 4px; }
+
+    /* Stat cards */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .stat-label { font-size: 12px; color: var(--muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+    .stat-value { font-size: 32px; font-weight: 700; color: var(--text); }
+    .stat-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    /* Tables */
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .section-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .section-title { font-size: 16px; font-weight: 700; }
+    .section-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    select.filter {
+      padding: 7px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+    th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: rgba(139,115,85,0.05);
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 14px 16px;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(139,115,85,0.08);
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(139,115,85,0.03); }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .badge-green { background: rgba(90,138,90,0.15); color: #3a6a3a; }
+    .badge-red { background: rgba(192,57,43,0.12); color: var(--red); }
+    .badge-gold { background: rgba(139,105,20,0.15); color: var(--accent); }
+
+    .score-bar-wrap { display: flex; align-items: center; gap: 10px; }
+    .score-bar {
+      flex: 1; height: 6px; background: rgba(139,115,85,0.15); border-radius: 3px; overflow: hidden;
+    }
+    .score-bar-fill { height: 100%; background: var(--green); border-radius: 3px; transition: width 0.5s; }
+
+    /* Tab panels */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .empty-state {
+      padding: 48px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .empty-icon { font-size: 40px; margin-bottom: 12px; }
+    .empty-text { font-size: 15px; }
+
+    .loading { padding: 32px; text-align: center; color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 900px) {
+      .sidebar { width: 60px; }
+      .sidebar .nav-item span:not(.nav-icon) { display: none; }
+      .sidebar-brand .name, .sidebar-brand .sub { display: none; }
+      .sidebar-footer .teacher-info, .sidebar-footer .signout-btn { display: none; }
+      .main { margin-left: 60px; padding: 20px; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-brand">
+    <div class="name">NVU <em>Academy</em></div>
+    <div class="sub">TEACHER PORTAL</div>
+  </div>
+
+  <nav class="nav">
+    <div class="nav-item active" onclick="showTab('overview')">
+      <span class="nav-icon">📊</span>
+      <span>Tổng quan</span>
+    </div>
+    <div class="nav-item" onclick="showTab('students')">
+      <span class="nav-icon">🎓</span>
+      <span>Học sinh</span>
+    </div>
+    <div class="nav-item" onclick="showTab('scores')">
+      <span class="nav-icon">📝</span>
+      <span>Điểm số</span>
+    </div>
+    <div class="nav-item" onclick="showTab('errors')">
+      <span class="nav-icon">⚠️</span>
+      <span>Error logs</span>
+    </div>
+    <div class="nav-item" onclick="showTab('ranking')">
+      <span class="nav-icon">🏆</span>
+      <span>Xếp hạng</span>
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="teacher-chip">
+      <div class="teacher-avatar">👨‍🏫</div>
+      <div class="teacher-info">
+        <div class="name">Mr. Nam</div>
+        <div class="role">Giáo viên IELTS</div>
+      </div>
+    </div>
+    <button class="signout-btn" onclick="signOut()">Đăng xuất</button>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <!-- OVERVIEW TAB -->
+  <div id="tab-overview" class="tab-panel active">
+    <div class="page-header">
+      <div class="page-title">Tổng quan lớp học</div>
+      <div class="page-sub" id="today-date"></div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Tổng học sinh</div>
+        <div class="stat-value" id="stat-students">—</div>
+        <div class="stat-sub">đã đăng ký</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Hoạt động hôm nay</div>
+        <div class="stat-value" id="stat-active">—</div>
+        <div class="stat-sub">học sinh online</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Bài luyện tập</div>
+        <div class="stat-value" id="stat-practices">—</div>
+        <div class="stat-sub">tuần này</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Lỗi cần ôn</div>
+        <div class="stat-value" id="stat-errors">—</div>
+        <div class="stat-sub">chưa giải quyết</div>
+      </div>
+    </div>
+
+    <!-- Quick ranking -->
+    <div class="section-card">
+      <div class="section-header">
+        <div>
+          <div class="section-title">🏆 Top học sinh tuần này</div>
+          <div class="section-sub">Điểm tổng từ daily practice</div>
+        </div>
+        <select class="filter" id="class-filter-overview" onchange="loadOverviewRanking()">
+          <option value="">Tất cả lớp</option>
+          <option value="FOUNDATION11">Foundation 11</option>
+          <option value="FOUNDATION12">Foundation 12</option>
+          <option value="PREIELTS12">Pre-IELTS 12</option>
+          <option value="IELTS13">IELTS 13</option>
+          <option value="LYTHUYET3">Lý thuyết 3</option>
+        </select>
+      </div>
+      <div id="overview-ranking"><div class="loading">Đang tải...</div></div>
+    </div>
+  </div>
+
+  <!-- STUDENTS TAB -->
+  <div id="tab-students" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Danh sách học sinh</div>
+      <div class="page-sub">Tất cả học sinh đã đăng ký</div>
+    </div>
+    <div class="section-card">
+      <div class="section-header">
+        <div class="filter-bar">
+          <select class="filter" id="class-filter-students" onchange="loadStudents()">
+            <option value="">Tất cả lớp</option>
+            <option value="FOUNDATION11">Foundation 11</option>
+            <option value="FOUNDATION12">Foundation 12</option>
+            <option value="PREIELTS12">Pre-IELTS 12</option>
+            <option value="IELTS13">IELTS 13</option>
+            <option value="LYTHUYET3">Lý thuyết 3</option>
+          </select>
+        </div>
+      </div>
+      <div id="students-table"><div class="loading">Đang tải...</div></div>
+    </div>
+  </div>
+
+  <!-- SCORES TAB -->
+  <div id="tab-scores" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Điểm số</div>
+      <div class="page-sub">Daily practice + Weekly quiz</div>
+    </div>
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">Daily Practice (tuần này)</div>
+        <select class="filter" id="class-filter-scores" onchange="loadScores()">
+          <option value="">Tất cả lớp</option>
+          <option value="FOUNDATION11">Foundation 11</option>
+          <option value="FOUNDATION12">Foundation 12</option>
+          <option value="PREIELTS12">Pre-IELTS 12</option>
+          <option value="IELTS13">IELTS 13</option>
+          <option value="LYTHUYET3">Lý thuyết 3</option>
+        </select>
+      </div>
+      <div id="scores-table"><div class="loading">Đang tải...</div></div>
+    </div>
+  </div>
+
+  <!-- ERROR LOGS TAB -->
+  <div id="tab-errors" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Error Logs</div>
+      <div class="page-sub">Nhật ký lỗi của học sinh</div>
+    </div>
+    <div class="section-card">
+      <div class="section-header">
+        <div class="filter-bar">
+          <select class="filter" id="error-type-filter" onchange="loadErrors()">
+            <option value="">Tất cả loại lỗi</option>
+            <option value="vocabulary">Từ vựng</option>
+            <option value="grammar">Ngữ pháp</option>
+            <option value="listening">Listening</option>
+            <option value="pronunciation">Phát âm</option>
+          </select>
+          <select class="filter" id="class-filter-errors" onchange="loadErrors()">
+            <option value="">Tất cả lớp</option>
+            <option value="FOUNDATION11">Foundation 11</option>
+            <option value="FOUNDATION12">Foundation 12</option>
+            <option value="PREIELTS12">Pre-IELTS 12</option>
+            <option value="IELTS13">IELTS 13</option>
+            <option value="LYTHUYET3">Lý thuyết 3</option>
+          </select>
+        </div>
+      </div>
+      <div id="errors-table"><div class="loading">Đang tải...</div></div>
+    </div>
+  </div>
+
+  <!-- RANKING TAB -->
+  <div id="tab-ranking" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Bảng xếp hạng</div>
+      <div class="page-sub">Điểm tổng cộng dồn</div>
+    </div>
+    <div class="section-card">
+      <div class="section-header">
+        <select class="filter" id="class-filter-ranking" onchange="loadRanking()">
+          <option value="">Tất cả lớp</option>
+          <option value="FOUNDATION11">Foundation 11</option>
+          <option value="FOUNDATION12">Foundation 12</option>
+          <option value="PREIELTS12">Pre-IELTS 12</option>
+          <option value="IELTS13">IELTS 13</option>
+          <option value="LYTHUYET3">Lý thuyết 3</option>
+        </select>
+      </div>
+      <div id="ranking-table"><div class="loading">Đang tải...</div></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://sxnxbbosfyapmmkrhcdj.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_OMyiSjOVcKOfRdZO9JwSZg_8XogOYkZ';
+  const { createClient } = supabase;
+  const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Auth check
+  (async () => {
+    const { data: { session } } = await db.auth.getSession();
+    if (!session) {
+      window.location.href = 'login.html';
+      return;
+    }
+    loadAll();
+  })();
+
+  function loadAll() {
+    document.getElementById('today-date').textContent =
+      new Date().toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    loadStats();
+    loadOverviewRanking();
+  }
+
+  async function loadStats() {
+    const [{ count: studentCount }, { count: errorCount }] = await Promise.all([
+      db.from('students').select('*', { count: 'exact', head: true }),
+      db.from('error_logs').select('*', { count: 'exact', head: true }).eq('is_resolved', false)
+    ]);
+
+    // Active today
+    const today = new Date().toISOString().split('T')[0];
+    const { count: activeCount } = await db.from('daily_scores')
+      .select('student_id', { count: 'exact', head: true })
+      .eq('practice_date', today);
+
+    // This week practices
+    const monday = getMonday();
+    const { count: practiceCount } = await db.from('daily_scores')
+      .select('*', { count: 'exact', head: true })
+      .gte('practice_date', monday);
+
+    document.getElementById('stat-students').textContent = studentCount || 0;
+    document.getElementById('stat-active').textContent = activeCount || 0;
+    document.getElementById('stat-practices').textContent = practiceCount || 0;
+    document.getElementById('stat-errors').textContent = errorCount || 0;
+  }
+
+  function getMonday() {
+    const d = new Date();
+    const day = d.getDay();
+    const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+    return new Date(d.setDate(diff)).toISOString().split('T')[0];
+  }
+
+  async function loadOverviewRanking() {
+    const classCode = document.getElementById('class-filter-overview').value;
+    let query = db.from('students').select('id, full_name, class_code, avatar_emoji, total_score')
+      .order('total_score', { ascending: false }).limit(10);
+    if (classCode) query = query.eq('class_code', classCode);
+    const { data } = await query;
+    renderRankingTable('overview-ranking', data);
+  }
+
+  async function loadStudents() {
+    const classCode = document.getElementById('class-filter-students').value;
+    let query = db.from('students').select('*').order('created_at', { ascending: false });
+    if (classCode) query = query.eq('class_code', classCode);
+    const { data } = await query;
+
+    if (!data || data.length === 0) {
+      document.getElementById('students-table').innerHTML = emptyState('Chưa có học sinh nào đăng ký');
+      return;
+    }
+
+    document.getElementById('students-table').innerHTML = `
+      <table>
+        <thead><tr>
+          <th>#</th><th>Học sinh</th><th>Lớp</th><th>Điểm tổng</th><th>Streak</th><th>Hoạt động cuối</th>
+        </tr></thead>
+        <tbody>
+          ${data.map((s, i) => `<tr>
+            <td style="color:var(--muted)">${i + 1}</td>
+            <td><span style="margin-right:8px">${s.avatar_emoji || '🎓'}</span><strong>${s.full_name}</strong></td>
+            <td><span class="badge badge-gold">${s.class_code}</span></td>
+            <td><strong>${s.total_score || 0}</strong></td>
+            <td>${s.streak_days || 0} ngày 🔥</td>
+            <td style="color:var(--muted)">${s.last_active ? new Date(s.last_active).toLocaleDateString('vi-VN') : '—'}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+
+  async function loadScores() {
+    const classCode = document.getElementById('class-filter-scores').value;
+    const monday = getMonday();
+    let query = db.from('daily_scores')
+      .select('*, students(full_name, class_code, avatar_emoji)')
+      .gte('practice_date', monday)
+      .order('practice_date', { ascending: false })
+      .limit(50);
+    const { data } = await query;
+
+    if (!data || data.length === 0) {
+      document.getElementById('scores-table').innerHTML = emptyState('Chưa có điểm nào tuần này');
+      return;
+    }
+
+    const filtered = classCode ? data.filter(d => d.students?.class_code === classCode) : data;
+
+    document.getElementById('scores-table').innerHTML = `
+      <table>
+        <thead><tr>
+          <th>Học sinh</th><th>Lớp</th><th>Ngày</th><th>Phần</th><th>Điểm</th><th>Tiến độ</th>
+        </tr></thead>
+        <tbody>
+          ${filtered.map(s => `<tr>
+            <td>${s.students?.avatar_emoji || '🎓'} <strong>${s.students?.full_name || '—'}</strong></td>
+            <td><span class="badge badge-gold">${s.students?.class_code || '—'}</span></td>
+            <td style="color:var(--muted)">${new Date(s.practice_date).toLocaleDateString('vi-VN')}</td>
+            <td>${s.section}</td>
+            <td><strong>${s.score}/${s.max_score}</strong></td>
+            <td>
+              <div class="score-bar-wrap">
+                <div class="score-bar"><div class="score-bar-fill" style="width:${Math.round(s.score/s.max_score*100)}%"></div></div>
+                <span style="font-size:12px;color:var(--muted);width:36px">${Math.round(s.score/s.max_score*100)}%</span>
+              </div>
+            </td>
+          </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+
+  async function loadErrors() {
+    const classCode = document.getElementById('class-filter-errors').value;
+    const errType = document.getElementById('error-type-filter').value;
+    let query = db.from('error_logs')
+      .select('*, students(full_name, class_code)')
+      .order('created_at', { ascending: false })
+      .limit(50);
+    if (errType) query = query.eq('error_type', errType);
+    const { data } = await query;
+
+    if (!data || data.length === 0) {
+      document.getElementById('errors-table').innerHTML = emptyState('Chưa có lỗi nào được ghi nhận');
+      return;
+    }
+
+    const filtered = classCode ? data.filter(d => d.students?.class_code === classCode) : data;
+    const typeLabel = { vocabulary: 'Từ vựng', grammar: 'Ngữ pháp', listening: 'Listening', pronunciation: 'Phát âm' };
+
+    document.getElementById('errors-table').innerHTML = `
+      <table>
+        <thead><tr>
+          <th>Học sinh</th><th>Loại lỗi</th><th>Nội dung sai</th><th>Đáp án đúng</th><th>Nguồn</th><th>Trạng thái</th>
+        </tr></thead>
+        <tbody>
+          ${filtered.map(e => `<tr>
+            <td><strong>${e.students?.full_name || '—'}</strong><br><span style="font-size:11px;color:var(--muted)">${e.students?.class_code || ''}</span></td>
+            <td><span class="badge badge-red">${typeLabel[e.error_type] || e.error_type}</span></td>
+            <td style="color:var(--red)">${e.error_content}</td>
+            <td style="color:var(--green)">${e.correct_answer || '—'}</td>
+            <td style="color:var(--muted);font-size:12px">${e.source || '—'}</td>
+            <td><span class="badge ${e.is_resolved ? 'badge-green' : 'badge-red'}">${e.is_resolved ? 'Đã ôn' : 'Cần ôn'}</span></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+
+  async function loadRanking() {
+    const classCode = document.getElementById('class-filter-ranking').value;
+    let query = db.from('students').select('id, full_name, class_code, avatar_emoji, total_score, streak_days')
+      .order('total_score', { ascending: false });
+    if (classCode) query = query.eq('class_code', classCode);
+    const { data } = await query;
+    renderRankingTable('ranking-table', data);
+  }
+
+  function renderRankingTable(elId, data) {
+    if (!data || data.length === 0) {
+      document.getElementById(elId).innerHTML = emptyState('Chưa có dữ liệu xếp hạng');
+      return;
+    }
+    const medals = ['🥇', '🥈', '🥉'];
+    document.getElementById(elId).innerHTML = `
+      <table>
+        <thead><tr><th>Hạng</th><th>Học sinh</th><th>Lớp</th><th>Điểm</th><th>Streak</th></tr></thead>
+        <tbody>
+          ${data.map((s, i) => `<tr>
+            <td style="font-size:20px;text-align:center">${medals[i] || `<span style="color:var(--muted)">${i+1}</span>`}</td>
+            <td>${s.avatar_emoji || '🎓'} <strong>${s.full_name}</strong></td>
+            <td><span class="badge badge-gold">${s.class_code}</span></td>
+            <td><strong style="font-size:18px">${s.total_score || 0}</strong></td>
+            <td>${s.streak_days || 0} 🔥</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+
+  function emptyState(msg) {
+    return `<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">${msg}</div></div>`;
+  }
+
+  function showTab(tab) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    event.currentTarget.classList.add('active');
+
+    if (tab === 'students') loadStudents();
+    else if (tab === 'scores') loadScores();
+    else if (tab === 'errors') loadErrors();
+    else if (tab === 'ranking') loadRanking();
+  }
+
+  async function signOut() {
+    await db.auth.signOut();
+    localStorage.removeItem('nvu_teacher');
+    window.location.href = 'login.html';
+  }
+</script>
+</body>
+</html>
