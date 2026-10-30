@@ -56,7 +56,7 @@
       gap: 12px;
       padding: 12px 24px;
       color: rgba(255,255,255,0.6);
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.15s;
@@ -110,11 +110,11 @@
     }
     .page-title {
       font-family: 'Playfair Display', serif;
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 700;
       color: var(--text);
     }
-    .page-sub { color: var(--muted); font-size: 14px; margin-top: 4px; }
+    .page-sub { color: var(--muted); font-size: 16px; margin-top: 4px; }
 
     /* Stat cards */
     .stats-row {
@@ -129,8 +129,8 @@
       border-radius: 16px;
       padding: 20px 24px;
     }
-    .stat-label { font-size: 12px; color: var(--muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
-    .stat-value { font-size: 32px; font-weight: 700; color: var(--text); }
+    .stat-label { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+    .stat-value { font-size: 36px; font-weight: 700; color: var(--text); }
     .stat-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
 
     /* Tables */
@@ -148,8 +148,8 @@
       align-items: center;
       justify-content: space-between;
     }
-    .section-title { font-size: 16px; font-weight: 700; }
-    .section-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .section-title { font-size: 19px; font-weight: 700; }
+    .section-sub { font-size: 14px; color: var(--muted); margin-top: 2px; }
 
     .filter-bar {
       display: flex;
@@ -162,7 +162,7 @@
       border-radius: 8px;
       background: var(--bg);
       color: var(--text);
-      font-size: 13px;
+      font-size: 15px;
       outline: none;
       cursor: pointer;
     }
@@ -171,7 +171,7 @@
     th {
       padding: 12px 16px;
       text-align: left;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -181,7 +181,7 @@
     }
     td {
       padding: 14px 16px;
-      font-size: 14px;
+      font-size: 16px;
       border-bottom: 1px solid rgba(139,115,85,0.08);
     }
     tr:last-child td { border-bottom: none; }
@@ -191,7 +191,7 @@
       display: inline-block;
       padding: 3px 10px;
       border-radius: 20px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
     }
     .badge-green { background: rgba(90,138,90,0.15); color: #3a6a3a; }
@@ -226,6 +226,26 @@
       .main { margin-left: 60px; padding: 20px; }
       .stats-row { grid-template-columns: repeat(2, 1fr); }
     }
+
+    /* Error Log tab */
+    .btn-sm {
+      padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px;
+      background: var(--bg); color: var(--text); font-size: 14px; font-weight: 600; cursor: pointer;
+    }
+    .btn-sm:hover { background: #ede5db; }
+    .pct { display: inline-block; min-width: 46px; padding: 4px 8px; border-radius: 8px; font-size: 15px; font-weight: 700; }
+    .pct-green { background: rgba(90,138,90,0.18); color: #2f5f2f; }
+    .pct-yellow { background: rgba(212,168,67,0.25); color: #7a5a08; }
+    .pct-red { background: rgba(192,57,43,0.16); color: var(--red); }
+    .pct-plain { background: rgba(139,115,85,0.1); color: var(--muted); }
+    .trend { display: flex; align-items: flex-end; gap: 14px; min-height: 130px; overflow-x: auto; padding-bottom: 4px; }
+    .trend-col { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; min-width: 44px; }
+    .trend-bar { width: 26px; border-radius: 6px 6px 0 0; max-height: 100px; }
+    .trend-bar.pct-green { background: #5a8a5a; }
+    .trend-bar.pct-yellow { background: #d4a843; }
+    .trend-bar.pct-red { background: #c0392b; }
+    .trend-val { font-size: 13px; font-weight: 700; }
+    .trend-lab { font-size: 13px; color: var(--muted); }
   </style>
 </head>
 <body>
@@ -373,30 +393,63 @@
   <!-- ERROR LOGS TAB -->
   <div id="tab-errors" class="tab-panel">
     <div class="page-header">
-      <div class="page-title">Error Logs</div>
-      <div class="page-sub">Nhật ký lỗi của học sinh</div>
+      <div class="page-title">Error Log</div>
+      <div class="page-sub">Tự cập nhật khi học sinh nộp bài · <span id="el-updated">—</span></div>
     </div>
+
     <div class="section-card">
       <div class="section-header">
         <div class="filter-bar">
-          <select class="filter" id="error-type-filter" onchange="loadErrors()">
+          <select class="filter" id="class-filter-errors" onchange="loadErrors()">
+            <option value="">Tất cả lớp</option>
+          </select>
+          <select class="filter" id="el-week" onchange="renderErrorLog()">
+            <option value="">Tất cả các tuần</option>
+          </select>
+          <select class="filter" id="error-type-filter" onchange="renderErrorLog()">
             <option value="">Tất cả loại lỗi</option>
             <option value="vocabulary">Từ vựng</option>
             <option value="grammar">Ngữ pháp</option>
             <option value="listening">Listening</option>
             <option value="pronunciation">Phát âm</option>
           </select>
-          <select class="filter" id="class-filter-errors" onchange="loadErrors()">
-            <option value="">Tất cả lớp</option>
-            <option value="FOUNDATION11">Foundation 11</option>
-            <option value="FOUNDATION12">Foundation 12</option>
-            <option value="PREIELTS12">Pre-IELTS 12</option>
-            <option value="IELTS13">IELTS 13</option>
-            <option value="LYTHUYET3">Lý thuyết 3</option>
-          </select>
+          <button class="btn-sm" onclick="loadErrors()">↻ Tải lại</button>
+        </div>
+        <span id="el-live" class="badge badge-gold">Đang kết nối…</span>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Bảng điểm theo buổi kiểm tra</div>
+          <div class="section-sub">Xanh ≥ 90% · Vàng 70–89% · Đỏ &lt; 70% · Quiz tuần hiển thị theo tổng /30</div>
         </div>
       </div>
-      <div id="errors-table"><div class="loading">Đang tải...</div></div>
+      <div id="el-matrix" style="overflow-x:auto"><div class="loading">Đang tải...</div></div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Lỗi chung của lớp</div>
+          <div class="section-sub">Ô đỏ: từ 2 học sinh trở lên cùng sai, nên ôn lại trên lớp</div>
+        </div>
+      </div>
+      <div id="el-common"><div class="loading">Đang tải...</div></div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Từng học viên</div>
+          <div class="section-sub">Tiến độ điểm theo buổi và danh sách lỗi</div>
+        </div>
+        <select class="filter" id="el-student" onchange="renderStudentErrors()">
+          <option value="">— Chọn học sinh —</option>
+        </select>
+      </div>
+      <div id="el-student-view"><div class="empty-state"><div class="empty-text">Chọn một học sinh để xem chi tiết</div></div></div>
     </div>
   </div>
 
@@ -442,6 +495,7 @@
   function loadAll() {
     document.getElementById('today-date').textContent =
       new Date().toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    populateClassSelects();
     loadStats();
     loadOverviewRanking();
   }
@@ -555,40 +609,230 @@
       </table>`;
   }
 
-  async function loadErrors() {
-    const classCode = document.getElementById('class-filter-errors').value;
-    const errType = document.getElementById('error-type-filter').value;
-    let query = db.from('error_logs')
-      .select('*, students(full_name, class_code)')
-      .order('created_at', { ascending: false })
-      .limit(50);
-    if (errType) query = query.eq('error_type', errType);
-    const { data } = await query;
+  /* ---------- Error Log (tự cập nhật) ---------- */
+  const TYPE_LABEL = { vocabulary: 'Từ vựng', grammar: 'Ngữ pháp', listening: 'Listening', pronunciation: 'Phát âm' };
+  let EL = { students: [], daily: [], quiz: [], errors: [] };
+  let elChannel = null, elTimer = null, elDebounce = null;
 
-    if (!data || data.length === 0) {
-      document.getElementById('errors-table').innerHTML = emptyState('Chưa có lỗi nào được ghi nhận');
+  function esc(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+  function normKey(s) {
+    return String(s ?? '').toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, '').replace(/\s+/g, ' ').trim();
+  }
+  function mondayOf(dateStr) {
+    const d = new Date(String(dateStr).slice(0, 10) + 'T00:00:00');
+    const diff = d.getDate() - d.getDay() + (d.getDay() === 0 ? -6 : 1);
+    d.setDate(diff);
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  function shortDate(dateStr) {
+    const p = String(dateStr).slice(0, 10).split('-');
+    return p[2] + '/' + p[1];
+  }
+  function errDate(e) { return String(e.practice_date || e.created_at || '').slice(0, 10); }
+  function pctClass(p) { return p >= 90 ? 'pct-green' : p >= 70 ? 'pct-yellow' : 'pct-red'; }
+
+  async function populateClassSelects() {
+    const { data } = await db.from('classes').select('class_code, class_name').order('class_name');
+    if (!data || !data.length) return;
+    document.querySelectorAll('select[id^="class-filter"]').forEach(sel => {
+      const cur = sel.value;
+      sel.innerHTML = '<option value="">Tất cả lớp</option>' +
+        data.map(c => `<option value="${esc(c.class_code)}">${esc(c.class_name)}</option>`).join('');
+      sel.value = cur;
+    });
+  }
+
+  async function loadErrors(silent) {
+    const classCode = document.getElementById('class-filter-errors').value;
+    if (!silent) {
+      ['el-matrix', 'el-common'].forEach(id => document.getElementById(id).innerHTML = '<div class="loading">Đang tải...</div>');
+    }
+    let sq = db.from('students').select('id, full_name, class_code, avatar_emoji').order('full_name');
+    if (classCode) sq = sq.eq('class_code', classCode);
+    const { data: students, error } = await sq;
+    if (error) {
+      document.getElementById('el-matrix').innerHTML = emptyState('Không tải được: ' + esc(error.message));
       return;
     }
+    const ids = (students || []).map(s => s.id);
+    if (!ids.length) {
+      EL = { students: [], daily: [], quiz: [], errors: [] };
+      renderErrorLog();
+      return;
+    }
+    const [d, q, e] = await Promise.all([
+      db.from('daily_scores').select('student_id, practice_date, score, max_score').in('student_id', ids).limit(5000),
+      db.from('weekly_quiz_results').select('student_id, quiz_date, week_number, total_score, max_score').in('student_id', ids),
+      db.from('error_logs').select('*').in('student_id', ids).order('created_at', { ascending: false }).limit(3000)
+    ]);
+    EL = { students, daily: d.data || [], quiz: q.data || [], errors: e.data || [] };
+    document.getElementById('el-updated').textContent = 'cập nhật ' + new Date().toLocaleTimeString('vi-VN');
+    populateWeekSelect();
+    renderErrorLog();
+    startErrorLive();
+  }
 
-    const filtered = classCode ? data.filter(d => d.students?.class_code === classCode) : data;
-    const typeLabel = { vocabulary: 'Từ vựng', grammar: 'Ngữ pháp', listening: 'Listening', pronunciation: 'Phát âm' };
+  function populateWeekSelect() {
+    const sel = document.getElementById('el-week');
+    const cur = sel.value;
+    const weeks = new Set();
+    EL.errors.forEach(e => { const d = errDate(e); if (d) weeks.add(mondayOf(d)); });
+    EL.daily.forEach(r => weeks.add(mondayOf(r.practice_date)));
+    EL.quiz.forEach(r => weeks.add(mondayOf(r.quiz_date)));
+    const list = [...weeks].sort().reverse();
+    sel.innerHTML = '<option value="">Tất cả các tuần</option>' +
+      list.map(w => `<option value="${w}">Tuần ${shortDate(w)}</option>`).join('');
+    sel.value = list.includes(cur) ? cur : '';
+  }
 
-    document.getElementById('errors-table').innerHTML = `
-      <table>
-        <thead><tr>
-          <th>Học sinh</th><th>Loại lỗi</th><th>Nội dung sai</th><th>Đáp án đúng</th><th>Nguồn</th><th>Trạng thái</th>
-        </tr></thead>
-        <tbody>
-          ${filtered.map(e => `<tr>
-            <td><strong>${e.students?.full_name || '—'}</strong><br><span style="font-size:11px;color:var(--muted)">${e.students?.class_code || ''}</span></td>
-            <td><span class="badge badge-red">${typeLabel[e.error_type] || e.error_type}</span></td>
-            <td style="color:var(--red)">${e.error_content}</td>
-            <td style="color:var(--green)">${e.correct_answer || '—'}</td>
-            <td style="color:var(--muted);font-size:12px">${e.source || '—'}</td>
-            <td><span class="badge ${e.is_resolved ? 'badge-green' : 'badge-red'}">${e.is_resolved ? 'Đã ôn' : 'Cần ôn'}</span></td>
-          </tr>`).join('')}
-        </tbody>
-      </table>`;
+  function renderErrorLog() {
+    const week = document.getElementById('el-week').value;
+    const type = document.getElementById('error-type-filter').value;
+    renderMatrix(week);
+    renderCommonErrors(week, type);
+    populateStudentSelect();
+    renderStudentErrors();
+  }
+
+  function buildSessions(week) {
+    const sessions = [];
+    const seenDaily = new Set();
+    EL.daily.forEach(r => {
+      if (week && mondayOf(r.practice_date) !== week) return;
+      if (seenDaily.has(r.practice_date)) return;
+      seenDaily.add(r.practice_date);
+      sessions.push({ key: 'd:' + r.practice_date, label: shortDate(r.practice_date), sort: r.practice_date, kind: 'daily' });
+    });
+    const seenQuiz = new Set();
+    EL.quiz.forEach(r => {
+      if (week && mondayOf(r.quiz_date) !== week) return;
+      if (seenQuiz.has(r.week_number)) return;
+      seenQuiz.add(r.week_number);
+      sessions.push({ key: 'q:' + r.week_number, label: 'Quiz T' + r.week_number, sort: String(r.quiz_date), kind: 'quiz' });
+    });
+    sessions.sort((a, b) => a.sort.localeCompare(b.sort));
+    return sessions.slice(-12);
+  }
+
+  function studentPct(studentId, session) {
+    if (session.kind === 'daily') {
+      const rows = EL.daily.filter(r => r.student_id === studentId && 'd:' + r.practice_date === session.key);
+      const max = rows.reduce((n, r) => n + (r.max_score || 0), 0);
+      if (!max) return null;
+      return Math.round(rows.reduce((n, r) => n + (r.score || 0), 0) / max * 100);
+    }
+    const r = EL.quiz.find(x => x.student_id === studentId && 'q:' + x.week_number === session.key);
+    return r && r.max_score ? Math.round(r.total_score / r.max_score * 100) : null;
+  }
+
+  function renderMatrix(week) {
+    const el = document.getElementById('el-matrix');
+    if (!EL.students.length) { el.innerHTML = emptyState('Chưa có học sinh nào'); return; }
+    const sessions = buildSessions(week);
+    if (!sessions.length) { el.innerHTML = emptyState('Chưa có điểm nào trong khoảng này'); return; }
+    const noteCount = {};
+    EL.errors.forEach(e => { noteCount[e.student_id] = (noteCount[e.student_id] || 0) + (e.is_resolved ? 0 : 1); });
+    el.innerHTML = `<table>
+      <thead><tr><th>Học sinh</th>${sessions.map(s => `<th style="text-align:center">${esc(s.label)}</th>`).join('')}<th style="text-align:center">Lỗi cần ôn</th></tr></thead>
+      <tbody>${EL.students.map(st => `<tr>
+        <td>${esc(st.avatar_emoji || '🎓')} <strong>${esc(st.full_name)}</strong><br><span style="font-size:11px;color:var(--muted)">${esc(st.class_code)}</span></td>
+        ${sessions.map(s => {
+          const p = studentPct(st.id, s);
+          return p === null ? '<td style="text-align:center;color:var(--muted)">—</td>'
+            : `<td style="text-align:center"><span class="pct ${pctClass(p)}">${p}%</span></td>`;
+        }).join('')}
+        <td style="text-align:center">${noteCount[st.id] ? `<span class="badge badge-red">${noteCount[st.id]}</span>` : '<span class="badge badge-green">0</span>'}</td>
+      </tr>`).join('')}</tbody></table>`;
+  }
+
+  function renderCommonErrors(week, type) {
+    const el = document.getElementById('el-common');
+    const rows = EL.errors.filter(e => (!week || mondayOf(errDate(e)) === week) && (!type || e.error_type === type));
+    if (!rows.length) { el.innerHTML = emptyState('Chưa có lỗi nào được ghi nhận'); return; }
+    const groups = {};
+    rows.forEach(e => {
+      const k = e.error_type + '|' + normKey(e.correct_answer || e.error_content);
+      const g = groups[k] || (groups[k] = { type: e.error_type, correct: e.correct_answer || '—', context: e.context, students: new Set(), count: 0, wrong: {} });
+      g.students.add(e.student_id);
+      g.count++;
+      const w = (e.error_content || '').trim() || '(blank)';
+      g.wrong[w] = (g.wrong[w] || 0) + 1;
+    });
+    const list = Object.values(groups).sort((a, b) => b.students.size - a.students.size || b.count - a.count).slice(0, 40);
+    el.innerHTML = `<table>
+      <thead><tr><th>Loại</th><th>Câu hỏi / đáp án đúng</th><th style="text-align:center">Số HS sai</th><th>Hay trả lời sai</th></tr></thead>
+      <tbody>${list.map(g => {
+        const common = g.students.size >= 2;
+        const top = Object.entries(g.wrong).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([w, n]) => `${esc(w)}${n > 1 ? ` ×${n}` : ''}`).join(' · ');
+        return `<tr>
+          <td><span class="badge badge-gold">${esc(TYPE_LABEL[g.type] || g.type)}</span></td>
+          <td>${g.context ? `<div style="font-size:12px;color:var(--muted);margin-bottom:3px">${esc(g.context)}</div>` : ''}<strong style="color:var(--green)">${esc(g.correct)}</strong></td>
+          <td style="text-align:center"><span class="pct ${common ? 'pct-red' : 'pct-plain'}">${g.students.size}</span>${common ? '<div style="font-size:10px;color:var(--red);margin-top:2px">Ôn trên lớp</div>' : ''}</td>
+          <td style="color:var(--red);font-size:13px">${top}</td></tr>`;
+      }).join('')}</tbody></table>`;
+  }
+
+  function populateStudentSelect() {
+    const sel = document.getElementById('el-student');
+    const cur = sel.value;
+    sel.innerHTML = '<option value="">— Chọn học sinh —</option>' +
+      EL.students.map(s => `<option value="${esc(s.id)}">${esc(s.full_name)} (${esc(s.class_code)})</option>`).join('');
+    sel.value = EL.students.some(s => s.id === cur) ? cur : '';
+  }
+
+  function renderStudentErrors() {
+    const view = document.getElementById('el-student-view');
+    const id = document.getElementById('el-student').value;
+    if (!id) { view.innerHTML = '<div class="empty-state"><div class="empty-text">Chọn một học sinh để xem chi tiết</div></div>'; return; }
+    const week = document.getElementById('el-week').value;
+    const type = document.getElementById('error-type-filter').value;
+    const sessions = buildSessions('');
+    const bars = sessions.map(s => ({ s, p: studentPct(id, s) })).filter(x => x.p !== null);
+    const errs = EL.errors.filter(e => e.student_id === id && (!week || mondayOf(errDate(e)) === week) && (!type || e.error_type === type));
+    view.innerHTML = `
+      <div style="padding:20px 24px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Độ chính xác theo buổi</div>
+        ${bars.length ? `<div class="trend">${bars.map(b => `<div class="trend-col"><div class="trend-val">${b.p}%</div><div class="trend-bar ${pctClass(b.p)}" style="height:${Math.max(b.p, 4)}px"></div><div class="trend-lab">${esc(b.s.label)}</div></div>`).join('')}</div>`
+          : '<div style="color:var(--muted);font-size:14px">Chưa có điểm.</div>'}
+      </div>
+      ${errs.length ? `<table>
+        <thead><tr><th>Loại</th><th>Câu hỏi</th><th>Trả lời</th><th>Đáp án đúng</th><th>Nguồn · ngày</th><th></th></tr></thead>
+        <tbody>${errs.map(e => `<tr>
+          <td><span class="badge badge-red">${esc(TYPE_LABEL[e.error_type] || e.error_type)}</span></td>
+          <td style="font-size:13px;color:var(--muted)">${esc(e.context || '—')}</td>
+          <td style="color:var(--red)">${esc(e.error_content)}</td>
+          <td style="color:var(--green)">${esc(e.correct_answer || '—')}</td>
+          <td style="color:var(--muted);font-size:12px">${esc(e.source || '—')} · ${esc(shortDate(errDate(e)))}</td>
+          <td><button class="btn-sm" onclick="toggleResolved('${esc(e.id)}', ${e.is_resolved ? 'false' : 'true'})">${e.is_resolved ? 'Mở lại' : 'Đã ôn ✓'}</button></td>
+        </tr>`).join('')}</tbody></table>` : emptyState('Học sinh này chưa có lỗi nào trong khoảng đã chọn')}`;
+  }
+
+  async function toggleResolved(id, val) {
+    const { error } = await db.from('error_logs').update({ is_resolved: val }).eq('id', id);
+    if (error) { alert('Không cập nhật được: ' + error.message); return; }
+    const row = EL.errors.find(e => e.id === id);
+    if (row) row.is_resolved = val;
+    renderErrorLog();
+    loadStats();
+  }
+
+  /* Tự cập nhật: Supabase Realtime + tải lại mỗi 60 giây khi đang mở tab */
+  function startErrorLive() {
+    if (elChannel) return;
+    const badge = document.getElementById('el-live');
+    const refresh = () => { clearTimeout(elDebounce); elDebounce = setTimeout(() => loadErrors(true), 1500); };
+    elChannel = db.channel('el-live');
+    ['error_logs', 'weekly_quiz_results', 'daily_scores'].forEach(table =>
+      elChannel.on('postgres_changes', { event: '*', schema: 'public', table }, refresh));
+    elChannel.subscribe(status => {
+      if (status === 'SUBSCRIBED') { badge.className = 'badge badge-green'; badge.textContent = '● Live'; }
+      else if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') { badge.className = 'badge badge-gold'; badge.textContent = 'Tự tải mỗi 60 giây'; }
+    });
+    elTimer = setInterval(() => {
+      if (document.getElementById('tab-errors').classList.contains('active')) loadErrors(true);
+    }, 60000);
   }
 
   async function loadRanking() {
