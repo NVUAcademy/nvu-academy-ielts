@@ -1,0 +1,14 @@
+{
+  "practices": [
+    {
+      "id": "w1-thu",
+      "file": "daily-w1-thu.json",
+      "title": "Thursday Daily Practice",
+      "subtitle": "Listening practice: numbers and distractors",
+      "day": "thursday",
+      "date": "2026-10-29",
+      "week_number": 1,
+      "class_codes": ["IELTS14"]
+    }
+  ]
+}

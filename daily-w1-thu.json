@@ -1,0 +1,146 @@
+{
+  "id": "w1-thu",
+  "title": "Thursday Daily Practice",
+  "subtitle": "Listening practice: numbers and distractors",
+  "theme": "Unit 1 · The Man-made Environment",
+  "source": "Mindset for IELTS Level 2, Unit 1, pages 22–23",
+  "class_codes": ["IELTS14"],
+  "week_number": 1,
+  "day": "thursday",
+  "date": "2026-10-29",
+  "section": "listening",
+  "minutes": 80,
+  "intro": "Làm các bước theo thứ tự. Viết số bằng chữ số (52, không viết fifty-two) trừ khi đề yêu cầu viết bằng chữ. Mỗi track chỉ nghe theo hướng dẫn của từng bước.",
+  "audio": {
+    "t04": { "label": "Track 04 · Numbers in short conversations", "src": "audio/Mindset_L2_04.mp3" },
+    "t05": { "label": "Track 05 · Property information sheet", "src": "audio/Mindset_L2_05.mp3" },
+    "t07": { "label": "Track 07 · The en-suite bathroom", "src": "audio/Mindset_L2_07.mp3" }
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Numbers in short conversations",
+      "minutes": 10,
+      "audio": "t04",
+      "instructions": "Bạn sẽ nghe 5 đoạn hội thoại ngắn (Exercise 4, trang 22). Nghe một lần và ghi số của từng đoạn.",
+      "kind": "fill",
+      "items": [
+        { "id": "s1_1", "label": "1", "prefix": "£", "fields": [ { "answer": "53.72" } ], "explain": "Người nói đầu tiên nói £43.72 (gây nhiễu), số đúng là £53.72." },
+        { "id": "s1_2", "label": "2", "fields": [ { "answer": "472", "suffix": "km" } ], "explain": "Được xác nhận hai lần." },
+        { "id": "s1_3", "label": "3", "fields": [ { "answer": "01897625730", "placeholder": "số điện thoại" } ], "explain": "Người gọi nghe nhầm 01857 629 730. Số đúng là 01897 625 730." },
+        { "id": "s1_4", "label": "4", "fields": [ { "answer": "110", "suffix": "m" }, { "answer": "55", "suffix": "m" } ], "joiner": "×", "explain": "Được nhắc lại để xác nhận." },
+        { "id": "s1_5", "label": "5", "fields": [ { "answer": "B1074", "placeholder": "mã đường" } ], "explain": "Người gọi nghe nhầm D1074. Đúng là B1074." }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Property information sheet",
+      "minutes": 20,
+      "audio": "t05",
+      "instructions": "Trước khi nghe, đọc bảng và đoán mỗi chỗ trống cần loại đáp án nào: giá tiền hay hai số đo (dài × rộng). Nghe Track 05 một lần và điền gap 1–5. Chú ý: người nói đôi khi nói một số rồi sửa lại. Hãy ghi số đã được sửa. Sau đó ghi số SAI mà người nói đã nói đầu tiên ở gap 1.",
+      "kind": "fill",
+      "context": [
+        "Kitchen: 3.10 × 2.25 m",
+        "Lounge 2: 6.50 × 4.25 m",
+        "Front garden: 10 × 8 m",
+        "Bedroom 3: 3.25 × 2.5 m"
+      ],
+      "items": [
+        { "id": "s2_1", "label": "1 · Price", "prefix": "£", "fields": [ { "answer": "350000", "placeholder": "350,000" } ], "explain": "Người nói sửa £340,000 thành £350,000." },
+        { "id": "s2_2", "label": "2 · Lounge 1", "fields": [ { "answer": "4.3" }, { "answer": "3.28", "suffix": "m" } ], "joiner": "×" },
+        { "id": "s2_3", "label": "3 · Rear garden", "fields": [ { "answer": "30" }, { "answer": "10", "suffix": "m" } ], "joiner": "×" },
+        { "id": "s2_4", "label": "4 · Bedroom 1", "fields": [ { "answer": "4.91", "accept": ["4.9"] }, { "answer": "3.95", "suffix": "m" } ], "joiner": "×", "explain": "Người nói tự sửa 4.9 m thành 4.91 m. Chấp nhận cả hai." },
+        { "id": "s2_5", "label": "5 · Bedroom 2", "fields": [ { "answer": "4.2" }, { "answer": "3.55", "suffix": "m" } ], "joiner": "×" },
+        { "id": "s2_wrong", "label": "Gap 1 · số SAI nói đầu tiên", "prefix": "£", "fields": [ { "answer": "340000", "placeholder": "340,000" } ], "explain": "Số sai người nói nói đầu tiên là £340,000." }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Number dictation",
+      "minutes": 5,
+      "audio": "t04",
+      "instructions": "Nghe lại Track 04. Che các đáp án Step 1 và viết 5 số một lần nữa. So sánh hai lần và xem có chỗ nào khác nhau không.",
+      "kind": "fill",
+      "items": [
+        { "id": "s3_1", "label": "1", "prefix": "£", "fields": [ { "answer": "53.72" } ] },
+        { "id": "s3_2", "label": "2", "fields": [ { "answer": "472", "suffix": "km" } ] },
+        { "id": "s3_3", "label": "3", "fields": [ { "answer": "01897625730" } ] },
+        { "id": "s3_4", "label": "4", "fields": [ { "answer": "110", "suffix": "m" }, { "answer": "55", "suffix": "m" } ], "joiner": "×" },
+        { "id": "s3_5", "label": "5", "fields": [ { "answer": "B1074" } ] }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · One distractor question",
+      "minutes": 5,
+      "audio": "t07",
+      "instructions": "Đọc câu hỏi, nghe Track 07 (Exercise 7, trang 23) và chọn một đáp án. Sau đó viết một câu giải thích vì sao mỗi đáp án sai là sai: \"A is wrong because …\".",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s4_1", "q": "The en-suite bathroom will be useful because",
+          "options": { "A": "it has a shower unit.", "B": "it has a big bath.", "C": "it helps everyone in the mornings." },
+          "answer": "C",
+          "explain": "Người mua nói \"That would come in very useful when we all get up to get ready for school or work\". Lợi ích là sự tiện lợi buổi sáng cho cả gia đình."
+        }
+      ],
+      "open": [
+        { "id": "s4_wa", "q": "A is wrong because …", "model": "A is wrong because the shower unit is mentioned as a limitation (\"only has a shower unit and not a big bath\"), not as the reason it is useful." },
+        { "id": "s4_wb", "q": "B is wrong because …", "model": "B is wrong because the en-suite does not have a big bath. The main bathroom does. The speaker explicitly contrasts the two." }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Why the distractors are wrong",
+      "minutes": 10,
+      "instructions": "Xem lại 5 câu hỏi Track 06 của thứ Tư (không cần audio). Với mỗi câu, viết một câu giải thích vì sao một đáp án sai là sai. Dùng mỗi từ sau đúng một lần: surname, price, loan, already, hopes. Ví dụ: \"In Q1, A is wrong because Prendergast is her surname, not her road.\"",
+      "words": ["surname", "price", "loan", "already", "hopes"],
+      "kind": "open-with-context",
+      "context": [
+        { "q": "At the moment, Caroline lives in", "options": ["A Prendergast Road.", "B Lanchester Road.", "C Riverside Road."] },
+        { "q": "Caroline wants to make a first offer of", "options": ["A £300,000.", "B £350,000.", "C £340,000."] },
+        { "q": "Caroline and her family", "options": ["A have sold their house.", "B are selling their house now.", "C will sell their house in two months' time."] },
+        { "q": "It may take longer to sell the house if", "options": ["A the bank does not check the house quickly.", "B there are plans to do some building near the house.", "C her husband has problems at work."] },
+        { "q": "If the sellers do not accept her first offer, Caroline will need to", "options": ["A increase her offer.", "B come to an agreement in a week.", "C contact her bank and ask for more money."] }
+      ],
+      "open": [
+        { "id": "s5_1", "q": "Q1" },
+        { "id": "s5_2", "q": "Q2" },
+        { "id": "s5_3", "q": "Q3" },
+        { "id": "s5_4", "q": "Q4" },
+        { "id": "s5_5", "q": "Q5" }
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Step 6 · Sentences with numbers",
+      "minutes": 10,
+      "instructions": "Viết 6 câu về ngôi nhà ở bảng Step 2. Mỗi câu dùng một phòng hoặc khu vườn khác nhau, và viết số bằng chữ. Ví dụ: \"The second lounge is six point five metres long and four point two five metres wide.\" (Đã dùng Lounge 2, đừng lặp lại.)",
+      "kind": "open",
+      "open": [
+        { "id": "s6_1", "q": "Câu 1", "model": "The kitchen is three point one metres long and two point two five metres wide." },
+        { "id": "s6_2", "q": "Câu 2", "model": "The first lounge is four point three metres long and three point two eight metres wide." },
+        { "id": "s6_3", "q": "Câu 3", "model": "The front garden is ten metres long and eight metres wide." },
+        { "id": "s6_4", "q": "Câu 4", "model": "The rear garden is thirty metres long and ten metres wide." },
+        { "id": "s6_5", "q": "Câu 5", "model": "The main bedroom is four point nine one metres long and three point nine five metres wide." },
+        { "id": "s6_6", "q": "Câu 6", "model": "Bedroom 2: four point two metres long and three point five five metres wide (hoặc Bedroom 3: three point two five by two point five metres)." }
+      ]
+    },
+    {
+      "id": "s7",
+      "title": "Step 7 · Shadowing and voice note",
+      "minutes": 10,
+      "audio": "t05",
+      "instructions": "Shadow các dòng cuối Track 05. Round 1: nghe và đọc theo. Round 2: nói cùng người nói, bắt chước trọng âm, nhịp điệu và âm cuối. Round 3: ghi âm chính mình, sau đó thêm 1 phút nói về loại số khó nhất hôm nay (giá tiền, số đo hay số điện thoại) và một việc bạn sẽ làm khác đi lần sau.",
+      "kind": "voice",
+      "lines": [
+        "Estate agent: Here's the main bedroom. It's 4.91 m × 3.95 m – perfect for a large double bed. Oh, sorry, that's 4.91 m long and 3.95 m wide.",
+        "Estate agent: Here's the second bedroom. It's 4.2 m × 3.55 m – ideal for children to share.",
+        "Caroline: 4.2 m long and 3.55 m wide? OK, that's good."
+      ],
+      "note": "Thầy sẽ nghe và nhận xét voice note của bạn."
+    }
+  ],
+  "send_today": "Hoàn thành các bước trên web. Voice note (Step 7) sẽ được gửi tự động cho thầy khi bạn bấm Nộp bài.",
+  "error_type": "listening"
+}

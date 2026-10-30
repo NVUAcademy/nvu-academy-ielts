@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Practice — NVU Academy</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f0eb; --student: #5a8a5a; --student-soft: #e8f0e8;
+  --accent: #8B6914; --text: #2c2416; --muted: #8B7355;
+  --line: rgba(139,115,85,0.25); --ok: #3f7a3f; --bad: #b03a2e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 0 16px 80px; font-size: 17px; }
+body::before { content: ''; position: fixed; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle at 20% 20%, rgba(200,180,160,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(180,160,200,0.15) 0%, transparent 50%); }
+.wrap { max-width: 780px; margin: 0 auto; position: relative; z-index: 1; }
+.topbar { display: flex; justify-content: space-between; padding: 18px 0; font-size: 14px; color: var(--muted); }
+.topbar a { color: var(--accent); text-decoration: none; font-weight: 500; }
+.hero { text-align: center; padding: 8px 0 22px; }
+.hero .eyebrow { font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: .25em; text-transform: uppercase; color: var(--muted); }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: 34px; margin: 6px 0; }
+.hero h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
+.hero .theme { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 20px; color: var(--muted); }
+.card { background: rgba(255,252,248,0.95); border: 1px solid var(--line); border-radius: 24px; padding: 26px; box-shadow: 0 8px 40px rgba(0,0,0,.06); margin-bottom: 18px; }
+.card.arch { border-radius: 140px 140px 24px 24px; padding-top: 52px; text-align: center; background: linear-gradient(160deg, rgba(232,240,232,.95) 0%, rgba(252,250,246,.98) 45%); }
+.card h2 { font-family: 'Playfair Display', serif; font-weight: 400; font-size: 24px; margin-bottom: 6px; }
+.sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 19px; color: var(--muted); }
+.btn { display: inline-block; border: none; cursor: pointer; background: var(--student); color: #fff; border-radius: 50px; padding: 14px 30px; font-size: 14px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; font-family: inherit; text-decoration: none; }
+.btn:hover { background: #4a7a4a; } .btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn.ghost { background: transparent; color: var(--student); border: 1px solid var(--student); }
+.btn.ghost:hover { background: var(--student-soft); }
+.btn.small { padding: 8px 18px; font-size: 12px; }
+.btn.rec { background: #b03a2e; } .btn.rec:hover { background: #962f25; }
+.notice { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px 18px; font-size: 16px; line-height: 1.6; margin: 14px 0; color: #5a4a38; }
+.notice.warn { background: rgba(139,105,20,.08); border-color: rgba(139,105,20,.3); }
+
+.list-item { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
+.list-item .t { font-family: 'Playfair Display', serif; font-size: 20px; }
+.badge { display: inline-block; padding: 3px 11px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+.badge.done { background: rgba(90,138,90,.15); color: #3a6a3a; } .badge.todo { background: rgba(139,105,20,.15); color: var(--accent); } .badge.lock { background: rgba(139,115,85,.15); color: var(--muted); }
+
+.bar { position: sticky; top: 0; z-index: 10; background: rgba(245,240,235,.96); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); margin: 0 -16px 18px; padding: 10px 16px; }
+.bar-inner { max-width: 780px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.timer { font-family: 'Playfair Display', serif; font-size: 21px; } .timer small { font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-right: 6px; }
+.prog { font-size: 14px; color: var(--muted); }
+
+.step-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+.step-head h2 { margin-bottom: 0; font-size: 22px; }
+.mins { font-size: 13px; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+.instr { font-size: 16px; line-height: 1.65; color: #5a4a38; margin: 10px 0 14px; }
+.audio-box { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; }
+.audio-box .lab { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 6px; }
+audio { width: 100%; }
+.ctx { font-size: 15px; color: var(--muted); background: rgba(139,115,85,.07); border-radius: 12px; padding: 10px 14px; margin-bottom: 14px; line-height: 1.7; }
+.row { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.row .lab { min-width: 140px; font-weight: 600; font-size: 16px; }
+.row .pre, .row .suf, .row .join { color: var(--muted); font-size: 16px; }
+input[type=text], textarea { background: #f5f0eb; border: 1px solid var(--line); border-radius: 12px; padding: 11px 14px; color: var(--text); font-size: 17px; font-family: inherit; outline: none; }
+input[type=text] { width: 150px; }
+textarea { width: 100%; min-height: 72px; resize: vertical; }
+input[type=text]:focus, textarea:focus { border-color: var(--accent); background: #fff; }
+.q { margin: 14px 0; } .q .qt { font-size: 17px; line-height: 1.6; margin-bottom: 8px; }
+.opt { display: flex; align-items: center; gap: 10px; cursor: pointer; background: #f5f0eb; border: 1px solid var(--line); border-radius: 12px; padding: 11px 14px; font-size: 16px; margin-bottom: 8px; }
+.opt.sel { border-color: var(--student); background: var(--student-soft); } .opt input { accent-color: var(--student); } .opt b { color: var(--accent); }
+.ctx-q { margin: 8px 0; font-size: 16px; } .ctx-q .o { color: var(--muted); font-size: 15px; margin-left: 14px; }
+.words { margin: 8px 0 12px; } .word { display: inline-block; background: rgba(139,105,20,.12); color: var(--accent); border-radius: 20px; padding: 3px 12px; margin: 2px 4px 2px 0; font-size: 14px; font-weight: 600; }
+.lines { border-left: 3px solid var(--accent); background: #fff; padding: 12px 16px; border-radius: 0 12px 12px 0; margin: 12px 0; font-size: 16px; line-height: 1.7; }
+.recbox { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-top: 12px; }
+.recbox .status { font-size: 15px; color: var(--muted); margin: 8px 0; }
+.recbox .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #b03a2e; margin-right: 6px; animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: .2; } }
+
+.score-big { font-family: 'Playfair Display', serif; font-size: 62px; line-height: 1; } .score-big small { font-size: 24px; color: var(--muted); }
+.review { border-top: 1px solid var(--line); padding: 12px 0; font-size: 16px; line-height: 1.6; }
+.review .bad { color: var(--bad); font-weight: 600; } .review .good { color: var(--ok); font-weight: 600; } .review .ex { color: var(--muted); font-style: italic; }
+.model { color: var(--ok); }
+.saved { font-size: 15px; margin-top: 12px; } .saved.ok { color: var(--ok); } .saved.err { color: var(--bad); }
+.submit-row { text-align: center; margin: 22px 0; }
+@media (max-width: 560px) { .hero h1 { font-size: 28px; } .card { padding: 20px 16px; } .card.arch { border-radius: 100px 100px 20px 20px; } .row .lab { min-width: 100%; } input[type=text] { width: 120px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a href="index.html">← Trang chủ</a><span id="who"></span></div>
+  <div id="app"></div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://sxnxbbosfyapmmkrhcdj.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_OMyiSjOVcKOfRdZO9JwSZg_8XogOYkZ';
+const { createClient } = supabase;
+const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const params = new URLSearchParams(location.search);
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = s => String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
+const lsGet = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+const lsDel = k => { try { localStorage.removeItem(k); } catch (e) {} };
+
+let student = null, isTeacher = false;
+let P = null;               // current practice
+let answers = {};
+let existing = null;
+let totalSec = 0, totalTimer = null;
+let recorder = null, recChunks = [], recBlob = null, recStream = null, recSec = 0, recTimer = null;
+
+/* ---------- marking ---------- */
+function normVal(s) {
+  let v = String(s ?? '').toLowerCase().replace(/[£$,\s]/g, '').replace(/(km|m)$/, '');
+  return v;
+}
+function sameVal(a, b) {
+  const x = normVal(a), y = normVal(b);
+  if (!x || !y) return false;
+  if (x === y) return true;
+  const num = /^\d*\.?\d+$/;
+  if (num.test(x) && num.test(y) && !/^0\d/.test(x) && !/^0\d/.test(y)) return parseFloat(x) === parseFloat(y);
+  return false;
+}
+function fieldOk(f, given) {
+  return [f.answer, ...(f.accept || [])].some(a => sameVal(a, given));
+}
+function itemOk(it, kind) {
+  if (kind === 'mcq') return (answers[it.id] || '') === it.answer;
+  return it.fields.every((f, i) => fieldOk(f, answers[`${it.id}_${i}`] || ''));
+}
+function closedItems() {
+  const out = [];
+  P.steps.forEach(st => {
+    if (st.kind === 'fill' || st.kind === 'mcq') st.items.forEach(it => out.push({ step: st, it, kind: st.kind }));
+  });
+  return out;
+}
+function givenText(it, kind) {
+  if (kind === 'mcq') return answers[it.id] ? `${answers[it.id]}. ${it.options[answers[it.id]] || ''}` : '(blank)';
+  const parts = it.fields.map((f, i) => (answers[`${it.id}_${i}`] || '').trim());
+  return parts.every(x => !x) ? '(blank)' : parts.join(it.joiner ? ` ${it.joiner} ` : ' ');
+}
+function correctText(it, kind) {
+  if (kind === 'mcq') return `${it.answer}. ${it.options[it.answer]}`;
+  return it.fields.map(f => `${f.answer}${f.suffix ? ' ' + f.suffix : ''}`).join(it.joiner ? ` ${it.joiner} ` : ' ');
+}
+
+/* ---------- boot ---------- */
+async function boot() {
+  isTeacher = !!lsGet('nvu_teacher');
+  const s = lsGet('nvu_student');
+  if (s) { try { student = JSON.parse(s); } catch (e) {} }
+  if (!student && !isTeacher) { location.href = 'login.html'; return; }
+  $('who').textContent = student ? `${student.avatar || '🎓'} ${student.name} · ${student.classCode}` : 'Giáo viên (xem thử)';
+
+  let idx;
+  try { idx = (await (await fetch('daily-index.json', { cache: 'no-cache' })).json()).practices; }
+  catch (e) { $('app').innerHTML = `<div class="card"><h2>Không tải được danh sách bài</h2></div>`; return; }
+
+  const pid = (params.get('p') || '').replace(/[^a-z0-9_-]/gi, '');
+  if (pid) { const meta = idx.find(x => x.id === pid); if (meta) return openPractice(meta); }
+  renderList(idx);
+}
+
+async function renderList(idx) {
+  const mine = idx.filter(x => isTeacher || (x.class_codes || []).includes(student.classCode));
+  let done = {};
+  if (student) {
+    const { data } = await db.from('daily_scores').select('practice_date, section, score, max_score').eq('student_id', student.id);
+    (data || []).forEach(r => { done[r.practice_date + '|' + r.section] = r; });
+  }
+  const today = new Date().toISOString().slice(0, 10);
+  $('app').innerHTML = `<div class="hero"><div class="eyebrow">Daily Practice</div><h1>Luyện tập <em>hàng ngày</em></h1><div class="theme">Thứ Hai – Thứ Năm</div></div>` +
+    (mine.length ? mine.slice().sort((a, b) => b.date.localeCompare(a.date)).map(x => {
+      const r = done[x.date + '|listening'] || done[x.date + '|' + (x.section || '')];
+      const open = isTeacher || x.date <= today;
+      return `<div class="card list-item"><div><div class="t">${esc(x.title)}</div><div class="sub">${esc(x.subtitle || '')} · ${esc(x.date)}</div></div>
+        <div>${r ? `<span class="badge done">Đã làm ${r.score}/${r.max_score}</span> ` : open ? '<span class="badge todo">Chưa làm</span> ' : '<span class="badge lock">Chưa mở</span> '}
+        ${open ? `<a class="btn small" href="?p=${esc(x.id)}">${r ? 'Làm lại' : 'Làm bài'}</a>` : ''}</div></div>`;
+    }).join('') : '<div class="card"><p class="sub">Chưa có bài nào cho lớp của bạn.</p></div>');
+}
+
+async function openPractice(meta) {
+  try { P = await (await fetch(meta.file, { cache: 'no-cache' })).json(); }
+  catch (e) { $('app').innerHTML = `<div class="card"><h2>Không tải được bài</h2><p class="sub">${esc(e.message)}</p></div>`; return; }
+  if (!isTeacher && !(P.class_codes || []).includes(student.classCode)) {
+    $('app').innerHTML = `<div class="card arch"><h2>Không dành cho lớp của bạn</h2></div>`; return;
+  }
+  if (student) {
+    const { data } = await db.from('daily_scores').select('*').eq('student_id', student.id).eq('practice_date', P.date).eq('section', P.section).maybeSingle();
+    existing = data || null;
+  }
+  try { answers = JSON.parse(lsGet(draftKey()) || '{}'); } catch (e) { answers = {}; }
+  renderIntro();
+}
+const draftKey = () => `nvu_daily_draft_${P.id}_${student ? student.id : 'teacher'}`;
+
+function head() {
+  return `<div class="hero"><div class="eyebrow">Daily Practice · ${esc(P.day)} · Week ${P.week_number}</div>
+    <h1>${esc(P.title.replace(' Daily Practice', ''))} <em>Practice</em></h1><div class="theme">${esc(P.subtitle)}</div></div>`;
+}
+
+function renderIntro() {
+  $('app').innerHTML = head() + `<div class="card arch">
+    <h2>${esc(P.theme)}</h2>
+    <p class="sub">Khoảng ${P.minutes} phút · ${P.steps.length} bước · nguồn: ${esc(P.source)}</p>
+    <div class="notice" style="text-align:left">${esc(P.intro)}</div>
+    ${existing ? `<div class="notice warn" style="text-align:left">Bạn đã làm bài này: <b>${existing.score}/${existing.max_score}</b>. Làm lại sẽ ghi đè điểm cũ.</div>` : ''}
+    <div class="notice" style="text-align:left">Bài có bước ghi âm: hãy cho phép trình duyệt dùng micro khi được hỏi.</div>
+    <button class="btn" onclick="startPractice()">Bắt đầu →</button></div>
+    <div style="text-align:center"><a href="daily-practice.html" style="color:var(--accent);font-size:14px">← Danh sách bài</a></div>`;
+}
+
+function startPractice() {
+  totalSec = 0;
+  totalTimer = setInterval(() => { totalSec++; const e = $('tt'); if (e) e.textContent = fmt(totalSec); }, 1000);
+  renderPractice();
+}
+
+function filledCount() {
+  let n = 0, t = 0;
+  closedItems().forEach(({ it, kind }) => {
+    t++;
+    if (kind === 'mcq' ? answers[it.id] : it.fields.every((f, i) => (answers[`${it.id}_${i}`] || '').trim())) n++;
+  });
+  return `${n}/${t} câu`;
+}
+
+function renderPractice() {
+  const keep = window.scrollY;
+  $('app').innerHTML = head() + `<div class="bar"><div class="bar-inner">
+      <div class="timer"><small>Đã làm</small><span id="tt">${fmt(totalSec)}</span> <span class="prog">/ ${P.minutes} phút gợi ý</span></div>
+      <div class="prog" id="prog">${filledCount()}</div></div></div>` +
+    P.steps.map(stepHtml).join('') +
+    `<div class="submit-row"><button class="btn" onclick="submitPractice()">Nộp bài</button></div>`;
+  window.scrollTo(0, keep);
+}
+
+function audioHtml(key) {
+  if (!key) return '';
+  const a = P.audio[key];
+  return `<div class="audio-box"><div class="lab">🎧 ${esc(a.label)}</div><audio controls preload="metadata" src="${esc(a.src)}"></audio></div>`;
+}
+
+function stepHtml(st) {
+  let body = '';
+  if (st.context && st.kind === 'fill') body += `<div class="ctx">${st.context.map(esc).join('<br>')}</div>`;
+  if (st.kind === 'fill') body += st.items.map(it => fillRow(it)).join('');
+  else if (st.kind === 'mcq') {
+    body += st.items.map(it => `<div class="q"><div class="qt">${esc(it.q)}</div>${Object.entries(it.options).map(([k, t]) =>
+      `<label class="opt ${answers[it.id] === k ? 'sel' : ''}"><input type="radio" name="${it.id}" ${answers[it.id] === k ? 'checked' : ''} onchange="setAns('${it.id}','${k}',true)"><span><b>${k}.</b> ${esc(t)}</span></label>`).join('')}</div>`).join('');
+    body += (st.open || []).map(openBox).join('');
+  } else if (st.kind === 'open-with-context') {
+    body += `<div class="words">${st.words.map(w => `<span class="word">${esc(w)}</span>`).join('')}</div>`;
+    body += st.context.map((c, i) => `<div class="ctx-q"><b>Q${i + 1}.</b> ${esc(c.q)}${c.options.map(o => `<div class="o">${esc(o)}</div>`).join('')}</div>`).join('');
+    body += st.open.map(openBox).join('');
+  } else if (st.kind === 'open') body += st.open.map(openBox).join('');
+  else if (st.kind === 'voice') body += `<div class="lines">${st.lines.map(esc).join('<br>')}</div>` + recorderHtml() + `<div class="sub" style="margin-top:10px;font-size:17px">${esc(st.note || '')}</div>`;
+  return `<div class="card"><div class="step-head"><h2>${esc(st.title)}</h2><span class="mins">${st.minutes} phút</span></div>
+    <div class="instr">${esc(st.instructions)}</div>${audioHtml(st.audio)}${body}</div>`;
+}
+
+function fillRow(it) {
+  return `<div class="row"><span class="lab">${esc(it.label)}</span>${it.prefix ? `<span class="pre">${esc(it.prefix)}</span>` : ''}${it.fields.map((f, i) =>
+    `${i > 0 ? `<span class="join">${esc(it.joiner || '')}</span>` : ''}<input type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${esc(f.placeholder || '')}" value="${esc(answers[`${it.id}_${i}`] || '')}" oninput="setAns('${it.id}_${i}', this.value)">${f.suffix ? `<span class="suf">${esc(f.suffix)}</span>` : ''}`).join('')}</div>`;
+}
+function openBox(o) {
+  return `<div class="q"><div class="qt"><b>${esc(o.q)}</b></div><textarea oninput="setAns('${o.id}', this.value)">${esc(answers[o.id] || '')}</textarea></div>`;
+}
+function setAns(id, v, rerender) {
+  answers[id] = v; lsSet(draftKey(), JSON.stringify(answers));
+  if (rerender) renderPractice(); else { const e = $('prog'); if (e) e.textContent = filledCount(); }
+}
+
+/* ---------- recorder ---------- */
+function recorderHtml() {
+  return `<div class="recbox" id="recbox"><button class="btn rec small" id="recbtn" onclick="toggleRec()">● Ghi âm</button>
+    <div class="status" id="recstatus">${recBlob ? 'Đã có bản ghi. Nghe lại bên dưới hoặc ghi lại.' : 'Chưa có bản ghi. Round 3 + 1 phút nói về loại số khó nhất.'}</div>
+    <audio controls id="recplay" style="${recBlob ? '' : 'display:none'}" ${recBlob ? `src="${URL.createObjectURL(recBlob)}"` : ''}></audio></div>`;
+}
+async function toggleRec() {
+  const btn = $('recbtn'), st = $('recstatus');
+  if (recorder && recorder.state === 'recording') { recorder.stop(); return; }
+  try {
+    recStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  } catch (e) { st.textContent = 'Không dùng được micro: ' + e.message; return; }
+  const mime = window.MediaRecorder && MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : (MediaRecorder.isTypeSupported('audio/mp4') ? 'audio/mp4' : '');
+  recChunks = [];
+  recorder = new MediaRecorder(recStream, mime ? { mimeType: mime } : undefined);
+  recorder.ondataavailable = e => { if (e.data.size) recChunks.push(e.data); };
+  recorder.onstop = () => {
+    clearInterval(recTimer);
+    recStream.getTracks().forEach(t => t.stop());
+    recBlob = new Blob(recChunks, { type: recorder.mimeType || mime || 'audio/webm' });
+    btn.textContent = '● Ghi lại'; btn.classList.add('rec');
+    st.textContent = `Đã ghi ${fmt(recSec)}. Nghe lại bên dưới.`;
+    const pl = $('recplay'); pl.src = URL.createObjectURL(recBlob); pl.style.display = '';
+  };
+  recSec = 0; recorder.start();
+  btn.textContent = '■ Dừng';
+  st.innerHTML = '<span class="dot"></span><span id="recsec">00:00</span>';
+  recTimer = setInterval(() => { recSec++; const e = $('recsec'); if (e) e.textContent = fmt(recSec); }, 1000);
+}
+
+/* ---------- submit ---------- */
+async function submitPractice() {
+  const items = closedItems();
+  const blanks = items.filter(({ it, kind }) => kind === 'mcq' ? !answers[it.id] : it.fields.some((f, i) => !(answers[`${it.id}_${i}`] || '').trim())).length;
+  if (blanks && !confirm(`Còn ${blanks} câu chưa điền. Vẫn nộp bài?`)) return;
+  if (recorder && recorder.state === 'recording') { alert('Hãy bấm Dừng ghi âm trước khi nộp bài.'); return; }
+  if (!recBlob && !confirm('Bạn chưa ghi âm voice note (Step 7). Vẫn nộp bài?')) return;
+  clearInterval(totalTimer);
+  const res = items.map(x => ({ ...x, ok: itemOk(x.it, x.kind) }));
+  const score = res.filter(r => r.ok).length;
+  renderResult(res, score, 'saving');
+  renderResult(res, score, await save(res, score));
+}
+
+async function save(res, score) {
+  if (!student) return 'teacher';
+  try {
+    let voicePath = null;
+    if (recBlob) {
+      const ext = /mp4/.test(recBlob.type) ? 'm4a' : 'webm';
+      voicePath = `daily/${student.id}/${P.id}-${Date.now()}.${ext}`;
+      const { error: ue } = await db.storage.from('voice-notes').upload(voicePath, recBlob, { contentType: recBlob.type, upsert: false });
+      if (ue) { voicePath = null; var voiceErr = ue.message; }
+    }
+    const core = {
+      student_id: student.id, practice_date: P.date, day_of_week: P.day, section: P.section,
+      score, max_score: res.length, time_taken_seconds: totalSec
+    };
+    const extra = { answers, practice_id: P.id, voice_path: voicePath };
+    let { error } = await db.from('daily_scores').upsert({ ...core, ...extra }, { onConflict: 'student_id,practice_date,section' });
+    if (error && /column|schema cache/i.test(error.message)) ({ error } = await db.from('daily_scores').upsert(core, { onConflict: 'student_id,practice_date,section' }));
+    if (error) throw error;
+    if (!existing) {
+      const rows = res.filter(r => !r.ok).map(r => ({
+        student_id: student.id, error_type: P.error_type || 'listening',
+        error_content: givenText(r.it, r.kind), correct_answer: correctText(r.it, r.kind),
+        context: `${r.step.title}: ${r.kind === 'mcq' ? r.it.q : r.it.label}`, source: 'daily_practice', practice_date: P.date
+      }));
+      if (rows.length) { const { error: e2 } = await db.from('error_logs').insert(rows); if (e2) throw e2; }
+    }
+    lsDel(draftKey());
+    existing = { score, max_score: res.length };
+    return voiceErr ? 'ok-novoice:' + voiceErr : 'ok';
+  } catch (e) { return 'err:' + e.message; }
+}
+
+function renderResult(res, score, status) {
+  const msg = status === 'saving' ? '<div class="saved">Đang lưu…</div>'
+    : status === 'ok' ? '<div class="saved ok">✓ Đã lưu điểm, lỗi sai và voice note. Thầy sẽ nghe và nhận xét.</div>'
+    : status === 'teacher' ? '<div class="saved">Chế độ giáo viên xem thử: không lưu.</div>'
+    : status.startsWith('ok-novoice') ? `<div class="saved err">Đã lưu điểm nhưng chưa gửi được voice note (${esc(status.slice(11))}). Hãy gửi voice note cho thầy qua Zalo.</div>`
+    : `<div class="saved err">Không lưu được: ${esc(status.slice(4))}. Hãy chụp màn hình điểm gửi thầy.</div>`;
+  const wrong = res.filter(r => !r.ok).map(r => `<div class="review"><b>${esc(r.step.title.split(' · ')[0])} · ${esc(r.kind === 'mcq' ? r.it.q : r.it.label)}</b><br>
+    Bạn trả lời: <span class="bad">${esc(givenText(r.it, r.kind))}</span> · Đáp án: <span class="good">${esc(correctText(r.it, r.kind))}</span>
+    ${r.it.explain ? `<br><span class="ex">${esc(r.it.explain)}</span>` : ''}</div>`).join('');
+  const openModels = P.steps.flatMap(st => (st.open || []).filter(o => o.model).map(o => ({ st, o }))).map(({ st, o }) =>
+    `<div class="review"><b>${esc(st.title.split(' · ')[0])} · ${esc(o.q)}</b><br>Bạn viết: ${esc(answers[o.id] || '(bỏ trống)')}<br><span class="model">Gợi ý mẫu: ${esc(o.model)}</span></div>`).join('');
+  $('app').innerHTML = head() + `<div class="card arch"><div class="sub">Kết quả phần tự chấm</div>
+      <div class="score-big">${score}<small> / ${res.length}</small></div>
+      <div class="notice">Thời gian: <b>${fmt(totalSec)}</b> / ${P.minutes} phút gợi ý</div>${msg}</div>
+    <div class="card"><h2>Câu cần xem lại (${res.length - score})</h2>${wrong || '<p class="sub">Không có câu sai. Tuyệt vời!</p>'}</div>
+    <div class="card"><h2>Bài viết: so sánh với đáp án mẫu</h2><p class="sub">Phần này thầy nhận xét riêng, không tính vào điểm tự chấm.</p>${openModels}</div>
+    <div style="text-align:center"><a class="btn" href="daily-practice.html" style="text-decoration:none">Danh sách bài</a></div>`;
+  window.scrollTo(0, 0);
+}
+
+window.addEventListener('beforeunload', e => { if (totalTimer && !document.querySelector('.score-big')) { e.preventDefault(); e.returnValue = ''; } });
+boot();
+</script>
+</body>
+</html>
