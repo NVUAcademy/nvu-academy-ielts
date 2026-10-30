@@ -102,13 +102,57 @@
       font-size: 13px;
       border-top: 1px solid #2a2d3a;
     }
+    .user-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #1a1d27;
+      border: 1px solid #2a2d3a;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .user-chip:hover { border-color: var(--accent); }
+    .login-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 9px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .login-btn:hover { opacity: 0.85; }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">NVU <span>Academy</span></div>
-    <div class="badge">IELTS Platform</div>
+    <div id="auth-area">
+      <a href="login.html" class="login-btn" id="login-btn">Đăng nhập</a>
+    </div>
   </header>
+  <script>
+    // Show student info if logged in
+    const s = localStorage.getItem('nvu_student');
+    if (s) {
+      const student = JSON.parse(s);
+      document.getElementById('auth-area').innerHTML = `
+        <a href="login.html" class="user-chip" title="Đổi tài khoản">
+          <span>${student.avatar || '🎓'}</span>
+          <span>${student.name}</span>
+          <span style="color:#8b8fa8;font-size:12px">${student.classCode}</span>
+        </a>`;
+    }
+  </script>
 
   <div class="hero">
     <h1>Học IELTS<br><span>cùng Mr. Nam</span></h1>
