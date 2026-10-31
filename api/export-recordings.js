@@ -64,8 +64,13 @@ async function authorised(req) {
   if (process.env.CRON_SECRET && tok === process.env.CRON_SECRET) return 'cron';
   const r = await fetch(SB_URL() + '/auth/v1/user', { headers: { apikey: SB_HEAD().apikey, Authorization: 'Bearer ' + tok } });
   if (!r.ok) return false; const u = await r.json();
-  const allow = (process.env.TEACHER_EMAILS || 'leviethoainam287@gmail.com').toLowerCase().split(',').map(x => x.trim()).filter(Boolean);
-  return u && u.email && allow.includes(String(u.email).toLowerCase()) ? u.email : false;
+  if (!u || !u.email) return false;
+  const email = String(u.email).toLowerCase();
+  /* danh sách giáo viên / trợ giảng nằm trong bảng staff_emails; TEACHER_EMAILS là danh sách dự phòng */
+  const rows = await (await sb('/rest/v1/staff_emails?select=email&email=eq.' + encodeURIComponent(email))).json().catch(() => []);
+  if (Array.isArray(rows) && rows.length) return u.email;
+  const allow = (process.env.TEACHER_EMAILS || '').toLowerCase().split(',').map(x => x.trim()).filter(Boolean);
+  return allow.includes(email) ? u.email : false;
 }
 
 /* ---------- gom ghi âm cần xuất ---------- */
