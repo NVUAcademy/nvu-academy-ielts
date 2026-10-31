@@ -1,0 +1,58 @@
+{
+  "id": "w2-sat-ielts13",
+  "title": "Saturday Daily Practice",
+  "subtitle": "Writing Part 1: making orange juice, and reading preview",
+  "theme": "Trial Lesson 2 · Process writing and reading",
+  "source": "Pre-IELTS Trial Lesson 2, Daily Practice (Saturday 31/10)",
+  "class_codes": ["IELTS13"],
+  "week_number": 2,
+  "day": "saturday",
+  "date": "2026-10-31",
+  "section": "reading",
+  "minutes": 60,
+  "intro": "Làm lần lượt 3 bước, khoảng 60 phút. Hạn nộp 23:00 cùng ngày. Bài viết do thầy chấm; viết vào vở rồi chụp ảnh gửi thầy, hoặc gõ thẳng vào ô trên web. Chủ nhật là buổi học P1 (17:00 đến 19:00), chỉ khởi động 15 phút, không nộp bài.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Writing Part 1: making orange juice",
+      "minutes": 30,
+      "instructions": "Ghi chú: 1 oranges picked from the trees by hand · 2 oranges washed · 3 oranges squeezed by a machine · 4 juice filtered to remove the seeds · 5 juice poured into bottles · 6 bottles delivered to shops by truck. Hãy mô tả quy trình, 150 từ, có introduction và overview, dùng thể bị động hiện tại đơn và từ nối trình tự. Không chép nguyên ghi chú. Viết 20 phút như thi thật, rồi 10 phút tự sửa theo danh sách: (1) introduction viết lại đề bằng lời của em · (2) overview nêu số bước, bước đầu và bước cuối · (3) từ nối First, Next, After that, Finally · (4) động từ bị động hiện tại đơn · (5) mô tả thiết bị, ví dụ a squeezing machine · (6) kiểm tra chính tả -ed và is / are. Mỗi mục đạt được 1 điểm.",
+      "kind": "open",
+      "open": [
+        { "id": "s1_1", "q": "Bài viết của em (150 từ)", "model": "Mẫu thầy gợi ý: Introduction: \"The notes show how orange juice is made.\" Overview: \"There are six stages, from picking the oranges to delivering the bottles to shops.\" Thầy chấm bài và ước lượng TA, CC, LR, GRA cho từng bài." }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Reading preview",
+      "minutes": 15,
+      "instructions": "Đọc đoạn văn một lần, rồi chọn True, False hoặc Not Given. Gạch chân từ trong bài cho thấy đáp án.",
+      "kind": "mcq",
+      "context": [
+        "Why students procrastinate",
+        "Many students delay their work even when an exam is close. Psychologists say the reason is not laziness but stress: a difficult task makes people feel anxious, so they choose something easier, such as checking their phone. A study of 300 university students found that those who made a daily plan the night before started their homework earlier than those who did not. Another finding was that students who worked in short blocks of 25 minutes, with a five-minute break, felt less tired. However, the study did not show whether the plan or the short blocks improved exam results."
+      ],
+      "items": [
+        { "id": "s2_1", "q": "Psychologists believe laziness is the main reason students delay work.", "options": { "A": "True", "B": "False", "C": "Not Given" }, "answer": "B", "explain": "\"not laziness but stress\"." },
+        { "id": "s2_2", "q": "A difficult task can make people feel anxious.", "options": { "A": "True", "B": "False", "C": "Not Given" }, "answer": "A", "explain": "\"a difficult task makes people feel anxious\"." },
+        { "id": "s2_3", "q": "The study included students from several countries.", "options": { "A": "True", "B": "False", "C": "Not Given" }, "answer": "C", "explain": "Bài chỉ nói 300 university students, không nói quốc gia." },
+        { "id": "s2_4", "q": "Students who planned the night before started their homework earlier.", "options": { "A": "True", "B": "False", "C": "Not Given" }, "answer": "A", "explain": "Đúng theo bài." },
+        { "id": "s2_5", "q": "The study proved that short blocks improve exam results.", "options": { "A": "True", "B": "False", "C": "Not Given" }, "answer": "B", "explain": "\"the study did not show whether ...\"." }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Voice note",
+      "minutes": 5,
+      "instructions": "Đọc to phần introduction và overview em vừa viết. Phát âm rõ các đuôi -ed. Ghi âm 1 voice note.",
+      "kind": "voice",
+      "lines": [
+        "Đọc phần introduction và overview của chính em."
+      ],
+      "note": "Thầy sẽ nghe và nhận xét âm cuối -ed của em."
+    }
+  ],
+  "send_today": "Hoàn thành các bước trên web. Voice note ở Step 3 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "reading"
+}

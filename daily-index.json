@@ -9,6 +9,28 @@
       "date": "2026-10-29",
       "week_number": 1,
       "class_codes": ["IELTS14"]
+    },
+    {
+      "id": "w2-fri-ielts13",
+      "file": "daily-w2-fri-ielts13.json",
+      "title": "Friday Daily Practice",
+      "subtitle": "Review Trial Lesson 2: busy lives and how things are made",
+      "day": "friday",
+      "date": "2026-10-30",
+      "week_number": 2,
+      "section": "vocabulary",
+      "class_codes": ["IELTS13"]
+    },
+    {
+      "id": "w2-sat-ielts13",
+      "file": "daily-w2-sat-ielts13.json",
+      "title": "Saturday Daily Practice",
+      "subtitle": "Writing Part 1: making orange juice, and reading preview",
+      "day": "saturday",
+      "date": "2026-10-31",
+      "week_number": 2,
+      "section": "reading",
+      "class_codes": ["IELTS13"]
     }
   ]
 }

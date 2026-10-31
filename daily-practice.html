@@ -258,7 +258,7 @@ function audioHtml(key) {
 
 function stepHtml(st) {
   let body = '';
-  if (st.context && st.kind === 'fill') body += `<div class="ctx">${st.context.map(esc).join('<br>')}</div>`;
+  if (st.context && (st.kind === 'fill' || st.kind === 'mcq')) body += `<div class="ctx">${st.context.map(esc).join('<br>')}</div>`;
   if (st.kind === 'fill') body += st.items.map(it => fillRow(it)).join('');
   else if (st.kind === 'mcq') {
     body += st.items.map(it => `<div class="q"><div class="qt">${esc(it.q)}</div>${Object.entries(it.options).map(([k, t]) =>
