@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tài liệu — NVU Academy</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#F8F2E9; --paper:#FFFCF6; --ink:#2F2638; --muted:#7D7183; --gold:#B08D57; --line:rgba(176,141,87,.45); --soft:#F2E9DC; --shadow:0 18px 40px -22px rgba(64,40,52,.35), 0 2px 6px -3px rgba(64,40,52,.18); --pink:#EBC7C9; --mint:#CBDCCB; --butter:#F0DFB6; --lilac:#D9CFE7; --display:"Bodoni Moda","Didot",Georgia,serif; --body:"Jost","Futura",system-ui,sans-serif; }
+@media (prefers-color-scheme: dark) { :root { --bg:#1D1723; --paper:#271F2E; --ink:#F3EADF; --muted:#B5A8B4; --gold:#D3B47A; --line:rgba(211,180,122,.4); --soft:#30273A; --pink:#C99AA0; --mint:#A3BEA6; --butter:#D8C08A; --lilac:#B5A7CC; } }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:var(--body); background:var(--bg); color:var(--ink); min-height:100vh; font-size:17px; padding:0 18px 60px; }
+.wrap { max-width:860px; margin:0 auto; }
+.top { display:flex; justify-content:space-between; padding:20px 0; font-size:15px; color:var(--muted); }
+.top a { color:var(--gold); text-decoration:none; font-weight:500; }
+h1 { font-family:var(--display); font-weight:500; font-size:34px; text-align:center; margin:10px 0 4px; }
+h1 em { color:var(--gold); font-weight:400; }
+.sub { text-align:center; color:var(--muted); margin-bottom:22px; }
+.tabs { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:20px; }
+.tab { border:1px solid var(--line); background:var(--paper); color:var(--muted); border-radius:30px; padding:8px 18px; font:inherit; font-size:15px; cursor:pointer; }
+.tab.on { background:var(--gold); color:#fff; border-color:var(--gold); }
+.item { display:flex; align-items:center; gap:14px; background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:14px 18px; margin-bottom:12px; box-shadow:var(--shadow); }
+.ic { width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:22px; color:#2F2638; flex:none; }
+.tt { flex:1; min-width:0; } .tt b { font-size:18px; display:block; } .tt span { color:var(--muted); font-size:14px; }
+.btn { border:none; background:var(--gold); color:#fff; border-radius:30px; padding:9px 20px; font:inherit; font-size:14px; font-weight:600; cursor:pointer; letter-spacing:.06em; }
+.empty { text-align:center; color:var(--muted); padding:30px; }
+#viewer { display:none; position:fixed; inset:0; z-index:100; background:rgba(20,14,26,.88); padding:14px; }
+#viewer .bar { display:flex; justify-content:space-between; align-items:center; color:#fff; margin-bottom:8px; }
+#viewer iframe { width:100%; height:calc(100% - 46px); border:0; border-radius:12px; background:#fff; }
+</style>
+<script src="theme.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="index.html">← Trang chủ</a><span id="who"></span></div>
+  <h1>Tài liệu <em>lớp học</em></h1>
+  <div class="sub">Slide, handout và bài tập thầy chia sẻ cho lớp của bạn</div>
+  <div class="tabs" id="tabs"></div>
+  <div id="list"><div class="empty">Đang tải…</div></div>
+</div>
+<div id="viewer"><div class="bar"><b id="vt"></b><span><button class="btn" onclick="document.getElementById('vf').requestFullscreen&&document.getElementById('vf').requestFullscreen()">⛶ Toàn màn hình</button> <button class="btn" onclick="closeV()">✕ Đóng</button></span></div><iframe id="vf" sandbox="allow-scripts allow-popups allow-forms"></iframe></div>
+
+<script>
+const db = supabase.createClient('https://sxnxbbosfyapmmkrhcdj.supabase.co', 'sb_publishable_OMyiSjOVcKOfRdZO9JwSZg_8XogOYkZ');
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const KIND = { slide: ['Slide', '🖥️', 'var(--lilac)'], handout: ['Handout', '📄', 'var(--butter)'], daily: ['Daily Practice', '📅', 'var(--pink)'], other: ['Khác', '📎', 'var(--mint)'] };
+let student = null, rows = [], filter = '';
+try { student = JSON.parse(localStorage.getItem('nvu_student') || 'null'); } catch (e) {}
+if (!student) location.href = 'login.html';
+else { document.getElementById('who').textContent = `${student.avatar || '🎓'} ${student.name} · ${student.classCode}`; load(); }
+
+async function load() {
+  const { data, error } = await db.from('materials').select('*').eq('class_code', student.classCode).eq('shared', true).order('lesson_date', { ascending: false, nullsFirst: false }).order('created_at', { ascending: false });
+  if (error) { document.getElementById('list').innerHTML = `<div class="empty">Không tải được: ${esc(error.message)}</div>`; return; }
+  rows = data || [];
+  document.getElementById('tabs').innerHTML = [['', 'Tất cả']].concat(Object.entries(KIND).map(([k, v]) => [k, v[0]]))
+    .map(([k, n]) => `<button class="tab ${filter === k ? 'on' : ''}" onclick="setF('${k}')">${n}</button>`).join('');
+  const list = rows.filter(r => !filter || r.kind === filter);
+  document.getElementById('list').innerHTML = list.length ? list.map(r => {
+    const k = KIND[r.kind] || KIND.other;
+    return `<div class="item"><div class="ic" style="background:${k[2]}">${k[1]}</div><div class="tt"><b>${esc(r.title)}</b><span>${esc(k[0])}${r.lesson_date ? ' · ' + esc(r.lesson_date.split('-').reverse().join('/')) : ''}</span></div><button class="btn" onclick="openM('${esc(r.id)}')">Mở</button></div>`;
+  }).join('') : '<div class="empty">Chưa có tài liệu nào được chia sẻ.</div>';
+}
+function setF(k) { filter = k; load(); }
+async function openM(id) {
+  const r = rows.find(x => x.id === id); if (!r) return;
+  if (/html?$/i.test(r.file_name || '') || r.mime === 'text/html') {
+    const { data, error } = await db.storage.from('materials').download(r.file_path);
+    if (error) { alert('Không mở được: ' + error.message); return; }
+    document.getElementById('vt').textContent = r.title;
+    document.getElementById('vf').srcdoc = await data.text();
+    document.getElementById('viewer').style.display = 'block';
+  } else {
+    const { data, error } = await db.storage.from('materials').createSignedUrl(r.file_path, 600);
+    if (error) { alert('Không mở được: ' + error.message); return; }
+    window.open(data.signedUrl, '_blank', 'noopener');
+  }
+}
+function closeV() { document.getElementById('viewer').style.display = 'none'; document.getElementById('vf').srcdoc = ''; }
+</script>
+</body>
+</html>
