@@ -93,7 +93,7 @@ Quy tắc:
 - Chỉ trả về một đối tượng JSON, không thêm chữ nào bên ngoài.`;
 
 function buildPrompt(p) {
-  return `Loại bài: ${p.task_type === 'read_aloud' ? 'Đọc theo văn bản mẫu (shadowing / read aloud)' : 'Nói tự do theo đề'}
+  return `Loại bài: ${p.task_type === 'read_aloud' ? 'Đọc theo văn bản mẫu (shadowing / read aloud)' : p.task_type === 'mixed' ? 'Đọc theo văn bản mẫu ở phần đầu, sau đó nói thêm tự do (phần mẫu chỉ so với phần đầu bản chép lời)' : 'Nói tự do theo đề'}
 Đề hoặc ngữ cảnh: ${p.prompt || '(không có)'}
 Văn bản mẫu: ${p.target_text || '(không có)'}
 Lần thứ: ${p.attempt}
@@ -102,7 +102,7 @@ ${p.previous ? `Lần trước: độ khớp ${p.previous.accuracy}% và các t�
 Transcript của học sinh: """${p.transcript}"""
 Thống kê lưu loát: ${JSON.stringify(p.fluency)}
 Độ khớp với văn bản mẫu: ${p.align && p.align.accuracy !== null ? p.align.accuracy + '%' : 'không áp dụng'}
-Khác biệt so với mẫu: ${JSON.stringify((p.align && p.align.diffs || []).slice(0, 25))}
+Khác biệt so với mẫu: ${JSON.stringify((p.align && p.align.diffs || []).filter(x => p.task_type !== 'mixed' || x.type !== 'extra').slice(0, 25))}
 
 Trả về JSON đúng dạng:
 {
@@ -167,8 +167,10 @@ module.exports = async function handler(req, res) {
     if (words(transcript).length < 3) return bad(res, 422, 'Không nghe rõ giọng nói. Em ghi âm lại ở nơi yên tĩnh hơn nhé.');
 
     /* 3. So khớp và thống kê */
-    const task_type = b.task_type === 'read_aloud' ? 'read_aloud' : 'free';
-    const align = task_type === 'read_aloud' && b.target_text ? alignWords(b.target_text, transcript) : null;
+    const task_type = ['read_aloud', 'mixed'].includes(b.task_type) ? b.task_type : 'free';
+    /* 'mixed' = đọc theo mẫu rồi nói thêm: chỉ so phần đầu của bản chép lời với văn bản mẫu */
+    const spokenForAlign = task_type === 'mixed' ? words(transcript).slice(0, Math.ceil(words(b.target_text).length * 1.3) + 3).join(' ') : transcript;
+    const align = task_type !== 'free' && b.target_text ? alignWords(b.target_text, spokenForAlign) : null;
     const fluency = fluencyStats(w);
     let previous = null;
     if (b.parent_id) {
@@ -181,7 +183,7 @@ module.exports = async function handler(req, res) {
     const fb = await askClaude(SYSTEM, buildPrompt({ task_type, prompt: b.prompt, target_text: b.target_text, attempt, previous, transcript, fluency, align }));
     fb.accuracy = align ? align.accuracy : null;
     fb.fluency = fluency;
-    fb.diffs = align ? align.diffs.slice(0, 25) : [];
+    fb.diffs = align ? align.diffs.filter(x => task_type !== 'mixed' || x.type !== 'extra').slice(0, 25) : [];
 
     /* 5. Lưu */
     const row = {
