@@ -65,7 +65,7 @@ async function transcribe(buf, filename, mime) {
   fd.append('timestamp_granularities[]', 'word');
   fd.append('timestamp_granularities[]', 'segment');
   fd.append('temperature', '0');   /* Không đưa văn bản mẫu vào prompt để Whisper không tự sửa lỗi phát âm giúp học sinh */
-  const r = await fetch('https://api.openai.com/v1/audio/transcriptions', { method: 'POST', headers: { Authorization: 'Bearer ' + process.env.OPENAI_API_KEY }, body: fd });
+  const r = await fetch('https://api.openai.com/v1/audio/transcriptions', { method: 'POST', headers: { Authorization: 'Bearer ' + process.env.OPENAI_API_KEY }, body: fd, signal: AbortSignal.timeout(25000) }).catch(e => { throw new Error('Whisper: ' + (e.name === 'TimeoutError' ? 'quá thời gian chờ (25 giây)' : e.message)); });
   if (!r.ok) throw new Error('Whisper: ' + r.status + ' ' + (await r.text()).slice(0, 300));
   return r.json();
 }
@@ -97,7 +97,7 @@ async function azureAssess(wavBuf, referenceText) {
   const cfg = { GradingSystem: 'HundredMark', Granularity: 'Phoneme', Dimension: 'Comprehensive', EnableMiscue: !!referenceText, EnableProsodyAssessment: true, PhonemeAlphabet: 'IPA' };
   if (referenceText) cfg.ReferenceText = referenceText;
   const url = `https://${region}.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US&format=detailed`;
-  const r = await fetch(url, { method: 'POST', headers: { 'Ocp-Apim-Subscription-Key': key, 'Content-Type': 'audio/wav; codecs=audio/pcm; samplerate=16000', Accept: 'application/json', 'Pronunciation-Assessment': Buffer.from(JSON.stringify(cfg)).toString('base64') }, body: clip });
+  const r = await fetch(url, { method: 'POST', headers: { 'Ocp-Apim-Subscription-Key': key, 'Content-Type': 'audio/wav; codecs=audio/pcm; samplerate=16000', Accept: 'application/json', 'Pronunciation-Assessment': Buffer.from(JSON.stringify(cfg)).toString('base64') }, body: clip, signal: AbortSignal.timeout(15000) }).catch(e => { throw new Error('Azure: ' + (e.name === 'TimeoutError' ? 'quá thời gian chờ (15 giây), kiểm tra lại AZURE_SPEECH_REGION' : e.message)); });
   if (!r.ok) throw new Error('Azure: ' + r.status + ' ' + (await r.text()).slice(0, 200));
   const j = await r.json();
   if (j.RecognitionStatus && j.RecognitionStatus !== 'Success') throw new Error('Azure không nhận ra giọng nói (' + j.RecognitionStatus + ')');
@@ -121,8 +121,8 @@ async function askClaude(system, user) {
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: { 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-    body: JSON.stringify({ model: CLAUDE_MODEL, max_tokens: 1800, temperature: 0.3, system, messages: [{ role: 'user', content: user }] })
-  });
+    body: JSON.stringify({ model: CLAUDE_MODEL, max_tokens: 1800, temperature: 0.3, system, messages: [{ role: 'user', content: user }] }), signal: AbortSignal.timeout(30000)
+  }).catch(e => { throw new Error('Claude: ' + (e.name === 'TimeoutError' ? 'quá thời gian chờ (30 giây)' : e.message)); });
   if (!r.ok) throw new Error('Claude: ' + r.status + ' ' + (await r.text()).slice(0, 300));
   const j = await r.json();
   const text = (j.content || []).map(c => c.text || '').join('');
