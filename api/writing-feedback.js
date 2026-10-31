@@ -21,11 +21,16 @@ Quy tắc:
 - Tối đa 3 lỗi quan trọng nhất (ưu tiên lỗi lặp lại hoặc lỗi chặn người đọc hiểu), 1 điểm khen cụ thể, 1 việc luyện tiếp.
 - Điểm band ước lượng theo 4 tiêu chí TA, CC, LR, GRA (thang 0 đến 9, bước 0.5) và overall; phải thận trọng, chưa phải điểm chính thức.
 - Nếu bài quá ngắn hoặc lạc đề, nói rõ điều đó trong "summary" và cho band thấp tương ứng.
+- Trong nội dung các chuỗi JSON TUYỆT ĐỐI không dùng dấu nháy kép ("); khi trích dẫn hãy dùng nháy đơn ('). Không xuống dòng bên trong chuỗi.
 - Chỉ trả về MỘT đối tượng JSON, không thêm chữ nào bên ngoài, đúng dạng:
 {"band":{"ta":0,"cc":0,"lr":0,"gra":0,"overall":0},"summary":"...","praise":"...","fixes":[{"quote":"...","problem":"...","correction":"...","rule":"..."}],"checklist":[{"item":"...","ok":true}],"rewrite":"một câu mẫu viết lại hay hơn dựa trên ý của học sinh","next_step":"..."}
 Trường "checklist" liệt kê tiêu chí lớp đã học (nếu được cung cấp trong yêu cầu), mỗi tiêu chí ok đúng hoặc sai.`;
 
-async function askClaude(user) {
+async function askClaude(user, retry) {
+  try { return await askClaudeOnce(user + (retry ? '\n\nLưu ý: lần trước JSON bị lỗi cú pháp. Không dùng dấu nháy kép bên trong giá trị chuỗi, chỉ dùng nháy đơn.' : '')); }
+  catch (e) { if (!retry && /JSON/i.test(String(e.message))) return askClaude(user, true); throw e; }
+}
+async function askClaudeOnce(user) {
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: { 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
