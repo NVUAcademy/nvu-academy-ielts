@@ -388,6 +388,10 @@ function qHtml(q, p) {
   } else if (q.type === 'open') {
     input = `<textarea placeholder="${esc(q.placeholder || '')}" oninput="setAns('${q.id}',this.value)">${esc(v)}</textarea>`;
     if (q.id === 'q30') {
+      input += `<div style="margin:10px 0;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff">
+        <button class="btn ghost small" id="qrec" onclick="qToggleRec()">● Ghi âm 30 giây ngay tại đây</button>
+        <span id="qrecst" style="font-size:14px;color:var(--muted);margin-left:8px">${qBlob ? 'Đã có bản ghi. Bấm ghi lại nếu muốn đổi.' : 'AI sẽ nhận xét ngay sau khi em nộp bài.'}</span>
+        <audio id="qplay" controls style="width:100%;margin-top:8px;${qBlob ? '' : 'display:none'}" ${qBlob ? `src="${URL.createObjectURL(qBlob)}"` : ''}></audio></div>`;
       input += `<label class="opt ${answers.q30_sent === '1' ? 'sel' : ''}" style="margin-top:8px">
         <input type="checkbox" ${answers.q30_sent === '1' ? 'checked' : ''} onchange="setAns('q30_sent', this.checked ? '1' : '', true)">
         <span>Tôi đã ghi âm 30 giây và gửi voice note cho thầy</span></label>`;
@@ -437,6 +441,7 @@ async function submitQuiz() {
   renderResult(res, 'saving');
   const status = await saveResult(res);
   renderResult(res, status);
+  qAi();
 }
 
 async function saveResult(res) {
@@ -472,6 +477,45 @@ async function saveResult(res) {
     return 'ok';
   } catch (e) {
     return 'err:' + e.message;
+  }
+}
+
+/* Ghi âm Q30 và AI nhận xét ngay sau khi nộp */
+let qBlob = null, qRec = null, qStream = null, qTimer = null, qSec = 0;
+async function qToggleRec() {
+  const btn = document.getElementById('qrec'), st = document.getElementById('qrecst');
+  if (qRec && qRec.state === 'recording') { qRec.stop(); return; }
+  try { qStream = await navigator.mediaDevices.getUserMedia({ audio: true }); } catch (e) { st.textContent = 'Không dùng được micro: ' + e.message; return; }
+  const mime = MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : (MediaRecorder.isTypeSupported('audio/mp4') ? 'audio/mp4' : '');
+  const chunks = []; qRec = new MediaRecorder(qStream, mime ? { mimeType: mime } : undefined);
+  qRec.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
+  qRec.onstop = () => { clearInterval(qTimer); qStream.getTracks().forEach(t => t.stop()); qBlob = new Blob(chunks, { type: qRec.mimeType || mime || 'audio/webm' });
+    answers.q30_sent = '1'; saveDraft(); btn.textContent = '● Ghi lại'; st.textContent = 'Đã ghi ' + fmt(qSec) + '. Nghe lại bên dưới.';
+    const p = document.getElementById('qplay'); p.src = URL.createObjectURL(qBlob); p.style.display = ''; };
+  qSec = 0; qRec.start(); btn.textContent = '■ Dừng'; st.textContent = 'Đang ghi… 00:00';
+  qTimer = setInterval(() => { qSec++; st.textContent = 'Đang ghi… ' + fmt(qSec); if (qSec >= 90) qRec.stop(); }, 1000);
+}
+async function qAi() {
+  if (!qBlob || !student) return;
+  const anchor = document.querySelector('.card.arch'); if (!anchor) return;
+  const box = document.createElement('div'); box.className = 'card';
+  box.innerHTML = '<h2>Nhận xét AI về bài nói (Q30)</h2><p class="sub">AI đang nghe bài của em… (khoảng 15 đến 30 giây)</p>';
+  anchor.insertAdjacentElement('afterend', box);
+  try {
+    const ext = /mp4/.test(qBlob.type) ? 'm4a' : 'webm', path = `speaking/${student.id}/quiz-w${quiz.week_number}-${Date.now()}.${ext}`;
+    const { error: ue } = await db.storage.from('voice-notes').upload(path, qBlob, { contentType: qBlob.type, upsert: false });
+    if (ue) throw new Error('Không tải được bản ghi: ' + ue.message);
+    const q30 = partQuestions('D').find(q => q.id === 'q30');
+    const r = await fetch('/api/speaking-feedback', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'feedback', student_id: student.id, voice_path: path, task_type: 'free', prompt: q30 ? q30.q : 'Weekly quiz speaking' }) });
+    const j = await r.json(); if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
+    const f = j.feedback, b = f.band || {};
+    box.innerHTML = `<h2>Nhận xét AI về bài nói (Q30)</h2><p style="margin:10px 0">${esc(f.summary)}</p><div class="review"><span class="good">✓ ${esc(f.praise)}</span></div>
+      ${(f.fix || []).map(x => `<div class="review"><b>${esc(x.point)}</b><br>Ví dụ: ${esc(x.example)}<br><span class="ex">${esc(x.how)}</span></div>`).join('')}
+      <div class="review"><b>Việc tiếp theo:</b> ${esc(f.next_step)}</div>
+      <p class="sub" style="font-size:15px;margin-top:8px">Band ước lượng: Fluency ${b.fluency ?? '–'} · Từ vựng ${b.lexical ?? '–'} · Ngữ pháp ${b.grammar ?? '–'} · Phát âm ${b.pronunciation_estimate ?? '–'} (chỉ để tham khảo).</p>
+      <div style="margin-top:12px"><a class="btn small" href="speaking.html" style="text-decoration:none">Luyện đọc lại các từ cần sửa →</a></div>`;
+  } catch (e) {
+    box.innerHTML = `<h2>Nhận xét AI về bài nói (Q30)</h2><p class="sub" style="font-size:16px">Chưa có nhận xét tự động (${esc(e.message)}). Thầy Nam sẽ nghe và nhận xét cho em.</p>`;
   }
 }
 

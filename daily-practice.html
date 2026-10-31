@@ -326,6 +326,32 @@ async function submitPractice() {
   const score = res.filter(r => r.ok).length;
   renderResult(res, score, 'saving');
   renderResult(res, score, await save(res, score));
+  runAi();
+}
+
+/* AI nhận xét voice note ngay sau khi nộp bài */
+async function runAi() {
+  const vp = window._lastVoice; if (!vp || !student) return;
+  const st = P.steps.find(s => s.kind === 'voice');
+  const target = st ? st.lines.map(l => l.replace(/^[^:]{1,20}:\s*/, '')).join(' ') : '';
+  const anchor = document.querySelector('.card.arch'); if (!anchor) return;
+  const box = document.createElement('div'); box.className = 'card';
+  box.innerHTML = '<h2>Nhận xét AI về bài nói</h2><p class="sub">AI đang nghe bài của em… (khoảng 15 đến 30 giây)</p>';
+  anchor.insertAdjacentElement('afterend', box);
+  try {
+    const r = await fetch('/api/speaking-feedback', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'feedback', student_id: student.id, voice_path: vp, task_type: target ? 'mixed' : 'free', prompt: (st && st.title) || 'Daily Practice voice note', target_text: target || null }) });
+    const j = await r.json(); if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
+    const f = j.feedback, b = f.band || {};
+    box.innerHTML = `<h2>Nhận xét AI về bài nói</h2>${f.accuracy != null ? `<div class="sub" style="font-size:17px">Độ khớp với câu mẫu: <b style="color:var(--ink)">${f.accuracy}%</b></div>` : ''}
+      <p style="margin:10px 0">${esc(f.summary)}</p><div class="review"><span class="good">✓ ${esc(f.praise)}</span></div>
+      ${(f.fix || []).map(x => `<div class="review"><b>${esc(x.point)}</b><br>Ví dụ: ${esc(x.example)}<br><span class="ex">${esc(x.how)}</span></div>`).join('')}
+      ${(f.focus_words || []).length ? `<div class="review">Từ nên đọc lại: ${f.focus_words.map(w => `<span class="word">${esc(w)}</span>`).join('')}</div>` : ''}
+      <div class="review"><b>Việc tiếp theo:</b> ${esc(f.next_step)}</div>
+      <p class="sub" style="font-size:15px;margin-top:8px">Band ước lượng: Fluency ${b.fluency ?? '–'} · Từ vựng ${b.lexical ?? '–'} · Ngữ pháp ${b.grammar ?? '–'} · Phát âm ${b.pronunciation_estimate ?? '–'} (chỉ để tham khảo, thầy Nam sẽ nghe và nhận xét thêm).</p>
+      <div style="margin-top:12px"><a class="btn small" href="speaking.html" style="text-decoration:none">Luyện đọc lại các từ cần sửa →</a></div>`;
+  } catch (e) {
+    box.innerHTML = `<h2>Nhận xét AI về bài nói</h2><p class="sub" style="font-size:16px">Chưa có nhận xét tự động (${esc(e.message)}). Thầy Nam sẽ nghe voice note và nhận xét cho em.</p>`;
+  }
 }
 
 async function save(res, score) {
@@ -336,7 +362,7 @@ async function save(res, score) {
       const ext = /mp4/.test(recBlob.type) ? 'm4a' : 'webm';
       voicePath = `daily/${student.id}/${P.id}-${Date.now()}.${ext}`;
       const { error: ue } = await db.storage.from('voice-notes').upload(voicePath, recBlob, { contentType: recBlob.type, upsert: false });
-      if (ue) { voicePath = null; var voiceErr = ue.message; }
+      if (ue) { voicePath = null; var voiceErr = ue.message; } else { window._lastVoice = voicePath; }
     }
     const core = {
       student_id: student.id, practice_date: P.date, day_of_week: P.day, section: P.section,
