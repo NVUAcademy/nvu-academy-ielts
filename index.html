@@ -136,9 +136,9 @@ body[data-vid] footer { background:color-mix(in srgb, var(--bg) 72%, transparent
   <section class="meme" id="meme"><h2>Meme hôm nay 😄</h2><img id="meme-img" alt="meme"><p id="meme-cap"></p></section>
 
   <div class="cards">
-    <a href="Foundation_Vocab_Quest.html" class="card" style="--c:var(--mint)">
+    <a href="Foundation_Vocab_Quest.html" id="vq-card" class="card" style="--c:var(--mint)">
       <div class="ic">🎮</div><h3>Vocab Quest</h3>
-      <p>Học từ vựng theo game, 20 từ mỗi ngày, 6 vòng luyện tập, nhân vật hero.</p><div class="tag">Vào học →</div>
+      <p id="vq-card-p">Học từ vựng theo game, 20 từ mỗi ngày, 6 vòng luyện tập, nhân vật hero.</p><div class="tag">Vào học →</div>
     </a>
     <a href="daily-practice.html" class="card" style="--c:var(--pink)">
       <div class="ic">📅</div><h3>Daily Practice</h3>
@@ -246,6 +246,13 @@ function shortVi(iso) { const d = new Date(iso + 'T00:00:00'); return DAYS_VI[d.
 
 let student = null;
 try { student = JSON.parse(lsGet('nvu_student') || 'null'); } catch (e) {}
+/* Vocab Quest riêng theo lớp: IELTS 13 → Pre, IELTS 14 → Intermediate, còn lại → Foundation */
+const VQ = (function () {
+  const m = { IELTS13: ['Vocab_Quest_Pre.html', '10 từ mỗi ngày, có collocation, EXP và cấp độ'], IELTS14: ['Vocab_Quest_Inter.html', '10 từ mỗi ngày, có collocation, EXP và cấp độ'] };
+  const x = student && m[student.classCode];
+  return x ? { url: x[0], sub: x[1] } : { url: 'Foundation_Vocab_Quest.html', sub: '20 từ mỗi ngày, 6 vòng luyện tập' };
+})();
+(function () { const c = document.getElementById('vq-card'), p = document.getElementById('vq-card-p'); if (c) c.href = VQ.url; if (p && VQ.url !== 'Foundation_Vocab_Quest.html') p.textContent = 'Học từ vựng theo game: 10 từ mỗi ngày, có collocation, đánh boss, tích EXP và lên cấp.'; })();
 if (student) {
   document.getElementById('auth-area').innerHTML =
     `<a href="login.html" class="chip" title="Đổi tài khoản"><span>${esc(student.avatar || '🎓')}</span><span>${esc(student.name)}</span><small>${esc(student.classCode)}</small></a>`;
@@ -282,7 +289,7 @@ async function loadToday() {
     const link = it => `daily-practice.html?p=${esc(it.p.id)}&d=${esc(it.day)}`;
 
     let html = '<div class="sec-label">Hôm nay</div>';
-    html += `<a class="task" href="Foundation_Vocab_Quest.html"><div class="ic" style="background:var(--mint)">🎮</div><div class="tt"><b>Học từ vựng · Vocab Quest</b><span>${todayRow.vocab ? 'Từ hôm nay: ' + esc(todayRow.vocab) : '20 từ mỗi ngày, 6 vòng luyện tập'}</span></div><span class="pill todo">Vào học</span></a>`;
+    html += `<a class="task" href="${VQ.url}"><div class="ic" style="background:var(--mint)">🎮</div><div class="tt"><b>Học từ vựng · Vocab Quest</b><span>${todayRow.vocab ? 'Từ hôm nay: ' + esc(todayRow.vocab) : VQ.sub}</span></div><span class="pill todo">Vào học</span></a>`;
     todays.forEach(it => {
       const r = isDone(it);
       html += `<a class="task" href="${link(it)}"><div class="ic" style="background:var(--pink)">📅</div><div class="tt"><b>Daily Practice · ${esc(it.p.title)}</b><span>${esc(it.p.subtitle || '')}</span></div>${r ? `<span class="pill done">Đã làm ${r.score}/${r.max_score}</span>` : '<span class="pill todo">Chưa làm</span>'}</a>`;
