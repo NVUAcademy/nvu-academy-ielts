@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NVU Academy — IELTS Learning Platform</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="meow.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -69,6 +70,16 @@ header { display:flex; align-items:center; justify-content:space-between; paddin
 .card .tag { display:inline-block; margin-top:16px; font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; border-top:1px solid rgba(47,38,56,.35); padding-top:10px; }
 .card.soon { opacity:.55; cursor:default; } .card.soon:hover { transform:none; }
 footer { text-align:center; padding:26px; color:var(--muted); font-size:14px; border-top:1px solid var(--line); letter-spacing:.06em; }
+.wallet-top { display:flex; gap:22px; align-items:center; flex-wrap:wrap; }
+.wallet-bal { font-family:var(--display); font-size:54px; line-height:1; }
+.wallet-bal small { font-size:15px; font-family:var(--body); color:var(--muted); letter-spacing:.12em; text-transform:uppercase; display:block; margin-top:6px; }
+.wstat { background:var(--soft); border:1px solid var(--line); border-radius:var(--r-sm); padding:10px 16px; min-width:120px; } .wstat b { display:block; font-size:22px; } .wstat span { color:var(--muted); font-size:13px; }
+.wdots { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; } .wdot { flex:1; min-width:56px; text-align:center; border:1px solid var(--line); border-radius:12px; padding:8px 4px; background:var(--soft); font-size:12px; color:var(--muted); } .wdot b { display:block; font-size:15px; color:var(--ink); }
+.wdot.du { background:rgba(94,139,110,.22); } .wdot.muon { background:rgba(212,168,67,.25); } .wdot.nua, .wdot.bu { background:rgba(181,167,204,.35); } .wdot.khong { background:rgba(176,84,104,.2); }
+.bday-card { text-align:center; } .bday-card h2 { font-size:32px; } .bday-card .cake { font-size:56px; }
+.bday-card input[type=date] { font:inherit; padding:10px 14px; border-radius:12px; border:1px solid var(--line); background:var(--paper); color:var(--ink); }
+.bday-btn { font:inherit; border:none; background:var(--gold); color:#fff; border-radius:30px; padding:10px 24px; cursor:pointer; font-weight:600; margin-left:8px; }
+.bday-later { background:none; border:none; color:var(--muted); cursor:pointer; font:inherit; text-decoration:underline; margin-left:10px; }
 /* Backgrounds */
 #bgfx { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
 body[data-bg="aurora"] { background:linear-gradient(120deg,#F8F2E9,#EBC7C9,#D9CFE7,#C9DBE6,#CBDCCB,#F8F2E9); background-size:400% 400%; animation:aur 22s ease infinite; }
@@ -115,6 +126,8 @@ body[data-vid] footer { background:color-mix(in srgb, var(--bg) 72%, transparent
     <div class="orn"></div>
   </div>
 
+  <section class="today" id="bday" style="display:none"></section>
+  <section class="today" id="wallet" style="display:none"></section>
   <section class="today" id="today" style="display:none">
     <div class="today-head"><h2>Hôm nay cần làm</h2><span class="date" id="today-date"></span></div>
     <div id="today-body"><div class="empty">Đang tải…</div></div>
@@ -232,7 +245,7 @@ try { student = JSON.parse(lsGet('nvu_student') || 'null'); } catch (e) {}
 if (student) {
   document.getElementById('auth-area').innerHTML =
     `<a href="login.html" class="chip" title="Đổi tài khoản"><span>${esc(student.avatar || '🎓')}</span><span>${esc(student.name)}</span><small>${esc(student.classCode)}</small></a>`;
-  loadToday();
+  loadToday(); loadWallet(); loadBirthday();
 }
 
 async function loadToday() {
@@ -288,6 +301,57 @@ async function loadToday() {
   } catch (e) {
     body.innerHTML = `<div class="empty">Chưa tải được danh sách việc hôm nay (${esc(e.message)}).</div>`;
   }
-}</script>
+}
+/* Ví Meow */
+async function loadWallet() {
+  try {
+    const { data: cl } = await db.from('classes').select('meow_enabled').eq('class_code', student.classCode).maybeSingle();
+    if (!cl || !cl.meow_enabled) return;
+    const [a, b] = await Promise.all([
+      db.from('meow_status').select('day, status').eq('student_id', student.id).limit(5000),
+      db.from('meow_redeem').select('amount').eq('student_id', student.id)
+    ]);
+    const rows = a.data || [], red = (b.data || []).reduce((n, r) => n + r.amount, 0);
+    const c = MEOW.calc(rows, red);
+    const ws = MEOW.weekStart(isoToday()), map = {}; rows.forEach(r => map[r.day] = r.status);
+    const wk = c.weeks.find(w => w.start === ws) || { sum: 0, bonus: 0, total: 0 };
+    const NAMES = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+    const dots = [0, 1, 2, 3, 4, 5, 6].map(i => { const d = MEOW.addDays(ws, i), s = map[d]; return `<div class="wdot ${s || ''}"><b>${NAMES[MEOW.dow(d)]}</b>${s ? MEOW.ST[s] + '<br>+' + MEOW.dayMeow(s, d) : '—'}</div>`; }).join('');
+    const el = document.getElementById('wallet'); el.style.display = 'block';
+    el.innerHTML = `<div class="today-head"><h2>Ví Tiền Meow</h2><span class="date">Tuần này: ${wk.total} Meow${wk.bonus ? ' (gồm thưởng đủ tuần ' + wk.bonus + ')' : ''}</span></div>
+      <div class="wallet-top"><div class="wallet-bal">${c.balance}<small>Meow trong ví</small></div>
+        <div class="wstat"><b>${c.current}</b><span>Chuỗi ngày hiện tại</span></div>
+        <div class="wstat"><b>${c.longest}</b><span>Chuỗi dài nhất</span></div>
+        <div class="wstat"><b>${c.bonusWeeks}</b><span>Tuần đủ thưởng</span></div></div>
+      <div class="wdots">${dots}</div>`;
+  } catch (e) {}
+}
+
+/* Sinh nhật */
+async function loadBirthday() {
+  try {
+    const { data } = await db.rpc('my_birthday_status', { p_student: student.id });
+    const el = document.getElementById('bday');
+    if (data === 'today') {
+      el.style.display = 'block'; el.className = 'today bday-card';
+      el.innerHTML = `<div class="cake">🎂</div><h2>Chúc mừng sinh nhật, ${esc(student.name)}!</h2><p class="sub" style="font-family:var(--body);color:var(--muted);font-size:18px;margin-top:6px">Thầy Nam và cả lớp chúc em một tuổi mới thật nhiều niềm vui, sức khỏe và tiến bộ trong việc học IELTS. Happy birthday!</p>`;
+    } else if (data === 'missing') {
+      let skip = null; try { skip = localStorage.getItem('nvu_bday_skip'); } catch (e) {}
+      if (skip === isoToday()) return;
+      el.style.display = 'block'; el.className = 'today bday-card';
+      el.innerHTML = `<h2>Thêm ngày sinh của em</h2><p class="sub" style="font-family:var(--body);color:var(--muted);font-size:16px;margin:6px 0 14px">Để thầy chúc mừng em đúng ngày sinh nhật. Chỉ thầy giáo xem được thông tin này.</p>
+        <input type="date" id="bday-in" max="${isoToday()}"><button class="bday-btn" onclick="saveBirthday()">Lưu</button><button class="bday-later" onclick="skipBirthday()">Để sau</button>`;
+    }
+  } catch (e) {}
+}
+async function saveBirthday() {
+  const v = document.getElementById('bday-in').value; if (!v) return;
+  const { error } = await db.rpc('set_my_birth_date', { p_student: student.id, p_date: v });
+  const el = document.getElementById('bday');
+  if (error) { el.insertAdjacentHTML('beforeend', `<p style="color:var(--bad)">Chưa lưu được: ${esc(error.message)}</p>`); return; }
+  el.style.display = 'none'; loadBirthday();
+}
+function skipBirthday() { try { localStorage.setItem('nvu_bday_skip', isoToday()); } catch (e) {} document.getElementById('bday').style.display = 'none'; }
+</script>
 </body>
 </html>
