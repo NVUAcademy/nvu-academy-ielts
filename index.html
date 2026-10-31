@@ -148,6 +148,10 @@ body[data-vid] footer { background:color-mix(in srgb, var(--bg) 72%, transparent
       <div class="ic">📝</div><h3>Weekly Quiz</h3>
       <p>Kiểm tra tổng hợp cuối tuần, 30 điểm, 4 phần A, B, C, D.</p><div class="tag">Làm bài →</div>
     </a>
+    <a href="errors.html" class="card" style="--c:var(--peach)">
+      <div class="ic">🧩</div><h3>Nhật ký lỗi</h3>
+      <p>Xem lại các câu đã sai và ôn lại cho đến khi nắm chắc.</p><div class="tag">Ôn lỗi →</div>
+    </a>
     <a href="materials.html" class="card" style="--c:var(--sky)">
       <div class="ic">📚</div><h3>Tài liệu</h3>
       <p>Slide, handout và bài tập thầy chia sẻ cho lớp của bạn.</p><div class="tag">Xem →</div>
@@ -288,6 +292,10 @@ async function loadToday() {
       const q = (qr.data || []).find(x => x.week_number === quiz.week_number);
       html += `<a class="task" href="weekly-quiz.html"><div class="ic" style="background:var(--butter)">📝</div><div class="tt"><b>Weekly Quiz · Tuần ${quiz.week_number}</b><span>${quiz.max_score} điểm, 4 phần</span></div>${q ? `<span class="pill done">Đã làm ${q.total_score}/${q.max_score}</span>` : '<span class="pill todo">Chưa làm</span>'}</a>`;
     }
+    try {
+      const { count: openErr } = await db.from('error_logs').select('id', { count: 'exact', head: true }).eq('student_id', student.id).eq('is_resolved', false);
+      if (openErr) html += `<a class="task" href="errors.html"><div class="ic" style="background:var(--peach)">🧩</div><div class="tt"><b>Ôn lỗi sai</b><span>${openErr} câu cần ôn, mỗi lượt khoảng 5 phút</span></div><span class="pill todo">Ôn ngay</span></a>`;
+    } catch (e) {}
     if (!todays.length && !quizToday) html += '<div class="empty">Hôm nay chưa có bài Daily Practice. Hãy học từ vựng nhé!</div>';
     if (todayRow.note) html += `<div class="empty">📝 ${esc(todayRow.note)}</div>`;
 

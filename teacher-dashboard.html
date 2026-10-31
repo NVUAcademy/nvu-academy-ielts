@@ -945,9 +945,10 @@
     const sessions = buildSessions(week);
     if (!sessions.length) { el.innerHTML = emptyState('Chưa có điểm nào trong khoảng này'); return; }
     const noteCount = {};
-    EL.errors.forEach(e => { noteCount[e.student_id] = (noteCount[e.student_id] || 0) + (e.is_resolved ? 0 : 1); });
+    const doneCount = {};
+    EL.errors.forEach(e => { noteCount[e.student_id] = (noteCount[e.student_id] || 0) + (e.is_resolved ? 0 : 1); if (e.is_resolved) doneCount[e.student_id] = (doneCount[e.student_id] || 0) + 1; });
     el.innerHTML = `<table>
-      <thead><tr><th>Học sinh</th>${sessions.map(s => `<th style="text-align:center">${esc(s.label)}</th>`).join('')}<th style="text-align:center">Lỗi cần ôn</th></tr></thead>
+      <thead><tr><th>Học sinh</th>${sessions.map(s => `<th style="text-align:center">${esc(s.label)}</th>`).join('')}<th style="text-align:center">Lỗi cần ôn</th><th style="text-align:center">Đã nắm</th></tr></thead>
       <tbody>${EL.students.map(st => `<tr>
         <td>${esc(st.avatar_emoji || '🎓')} <strong>${esc(st.full_name)}</strong><br><span style="font-size:11px;color:var(--muted)">${esc(st.class_code)}</span></td>
         ${sessions.map(s => {
@@ -955,7 +956,7 @@
           return p === null ? '<td style="text-align:center;color:var(--muted)">—</td>'
             : `<td style="text-align:center"><span class="pct ${pctClass(p)}">${p}%</span></td>`;
         }).join('')}
-        <td style="text-align:center">${noteCount[st.id] ? `<span class="badge badge-red">${noteCount[st.id]}</span>` : '<span class="badge badge-green">0</span>'}</td>
+        <td style="text-align:center">${noteCount[st.id] ? `<span class="badge badge-red">${noteCount[st.id]}</span>` : '<span class="badge badge-green">0</span>'}</td><td style="text-align:center">${doneCount[st.id] || 0}</td>
       </tr>`).join('')}</tbody></table>`;
   }
 
