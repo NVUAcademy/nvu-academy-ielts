@@ -1,0 +1,91 @@
+{
+  "id": "w2-sun-ielts13",
+  "title": "Sunday Daily Practice",
+  "subtitle": "Class P1 warm-up: recall the 10 new words and read your orange juice answer aloud",
+  "theme": "Trial Lesson 2 · Warm-up for class P1",
+  "source": "Pre-IELTS Trial Lesson 2, Daily Practice (Sunday 1/11, class day P1)",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 2,
+  "day": "sunday",
+  "date": "2026-11-01",
+  "section": "vocabulary",
+  "minutes": 15,
+  "intro": "Buổi học P1 từ 17:00 đến 19:00. Chỉ làm khởi động 15 phút, mang bút và ghi chú đến lớp. Hạn nộp 23:00 cùng ngày: đủ và đúng hạn được 10 Meow (buổi học), muộn hoặc làm một nửa được 5 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocabulary recall",
+      "minutes": 5,
+      "instructions": "Điền từ hoặc cụm từ trong khung (prioritise · unwind · packed with · juggling · productive). Đổi dạng từ nếu cần.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "I need to ____ my tasks: exams come first, then essays.",
+          "fields": [
+            {
+              "answer": "prioritise",
+              "accept": [
+                "prioritize"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "Cooking helps me ____ after a busy week.",
+          "fields": [
+            {
+              "answer": "unwind"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "Our class was ____ new students this term.",
+          "fields": [
+            {
+              "answer": "packed with"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "She is ____ three jobs at the moment.",
+          "fields": [
+            {
+              "answer": "juggling"
+            }
+          ],
+          "explain": "Sau am, is, are là động từ thêm -ing: juggling."
+        },
+        {
+          "id": "s1_5",
+          "label": "We finished everything today. It was a very ____ day.",
+          "fields": [
+            {
+              "answer": "productive"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Speaking warm-up and voice note",
+      "minutes": 10,
+      "instructions": "Nói to 10 từ mới, mỗi từ kèm một ví dụ của em (hectic, commute, keep up with, a sense of achievement, juggle, be packed with, unwind, productive, procrastinate, prioritise). Sau đó đọc to phần introduction và overview bài orange juice của thứ 7, đọc một lần. Ghi âm 1 voice note.",
+      "kind": "voice",
+      "lines": [
+        "1. Nói 10 từ mới, mỗi từ một ví dụ.",
+        "2. Đọc to introduction và overview bài orange juice của thứ 7, một lần."
+      ],
+      "note": "Thầy sẽ nghe và nhận xét phát âm, đuôi -ed và nhịp đọc."
+    }
+  ],
+  "send_today": "Hoàn thành 2 bước trên web. Voice note ở Step 2 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "vocabulary"
+}

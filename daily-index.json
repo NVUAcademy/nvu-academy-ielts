@@ -39,6 +39,19 @@
                                           ]
                       },
                       {
+                          "id":  "w2-sun-ielts13",
+                          "file":  "daily-w2-sun-ielts13.json",
+                          "title":  "Sunday Daily Practice",
+                          "subtitle":  "Class P1 warm-up: recall the 10 new words and read your orange juice answer aloud",
+                          "day":  "sunday",
+                          "date":  "2026-11-01",
+                          "week_number":  2,
+                          "section":  "vocabulary",
+                          "class_codes":  [
+                                              "IELTS13"
+                                          ]
+                      },
+                      {
                           "id":  "w3-sun-found11",
                           "file":  "daily-w3-sun-found11.json",
                           "title":  "Sunday Daily Practice",
