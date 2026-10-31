@@ -390,7 +390,7 @@
 
       <div class="field">
         <label>Họ và tên</label>
-        <input type="text" id="student-name" placeholder="Ví dụ: Nguyễn Văn An" autocomplete="name">
+        <input type="text" id="student-name" placeholder="Đầy đủ họ và tên, ví dụ: Nguyễn Văn An" autocomplete="name">
       </div>
 
       <div class="field">
@@ -526,13 +526,10 @@
           return;
         }
 
+        /* Một tên là một tài khoản: phải nhập đầy đủ họ tên đã đăng ký, không tự tạo tài khoản mới */
         if (!existing) {
-          const { data: newStudent, error } = await db
-            .from('students')
-            .insert({ full_name: name, class_code: classCode, avatar_emoji: selectedAvatar })
-            .select().single();
-          if (error) throw error;
-          existing = newStudent;
+          showErr('student', 'Không tìm thấy học sinh "' + name + '" trong lớp này. Em nhập ĐẦY ĐỦ họ và tên như thầy đã đăng ký (cả họ, tên đệm và tên), hoặc bấm "Đăng nhập bằng Google". Nếu vẫn không được, nhắn thầy nhé.');
+          return;
         }
 
         localStorage.setItem('nvu_student', JSON.stringify({
