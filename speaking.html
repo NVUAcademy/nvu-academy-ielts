@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Speaking Coach — NVU Academy</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="theme.js"></script>
+<style>
+:root { --bg:#F8F2E9; --paper:#FFFCF6; --ink:#2F2638; --muted:#7D7183; --gold:#B08D57; --line:rgba(176,141,87,.45); --soft:#F2E9DC; --shadow:0 18px 40px -22px rgba(64,40,52,.35), 0 2px 6px -3px rgba(64,40,52,.18); --good:#5E8B6E; --bad:#B05468; --display:"Bodoni Moda","Didot",Georgia,serif; --body:"Jost","Futura",system-ui,sans-serif; }
+@media (prefers-color-scheme: dark) { :root { --bg:#1D1723; --paper:#271F2E; --ink:#F3EADF; --muted:#B5A8B4; --gold:#D3B47A; --line:rgba(211,180,122,.4); --soft:#30273A; --good:#9CCBA9; --bad:#E08C9E; } }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:var(--body); background:var(--bg); color:var(--ink); min-height:100vh; font-size:17px; padding:0 18px 70px; }
+.wrap { max-width:800px; margin:0 auto; }
+.top { display:flex; justify-content:space-between; padding:20px 0; font-size:15px; color:var(--muted); } .top a { color:var(--gold); text-decoration:none; font-weight:500; }
+h1 { font-family:var(--display); font-weight:500; font-size:34px; text-align:center; margin:10px 0 4px; } h1 em { color:var(--gold); font-weight:400; }
+.sub { text-align:center; color:var(--muted); margin-bottom:20px; }
+.card { background:var(--paper); border:1px solid var(--line); border-radius:22px; padding:22px 24px; box-shadow:var(--shadow); margin-bottom:16px; }
+.card h2 { font-family:var(--display); font-weight:500; font-size:22px; margin-bottom:8px; }
+.tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; } .tab { border:1px solid var(--line); background:var(--soft); color:var(--ink); border-radius:30px; padding:8px 18px; font:inherit; font-size:15px; cursor:pointer; } .tab.on { background:var(--gold); color:#fff; border-color:var(--gold); }
+.task { border:1px solid var(--line); background:var(--soft); border-radius:14px; padding:12px 16px; margin-bottom:10px; cursor:pointer; font-size:16px; line-height:1.55; } .task.on { border-color:var(--gold); background:var(--paper); }
+.task small { display:block; color:var(--muted); font-size:13px; margin-bottom:2px; letter-spacing:.06em; text-transform:uppercase; }
+textarea { width:100%; min-height:90px; background:var(--soft); border:1px solid var(--line); border-radius:14px; padding:12px 14px; font:inherit; font-size:17px; color:var(--ink); resize:vertical; outline:none; }
+.btn { border:none; background:var(--gold); color:#fff; border-radius:30px; padding:12px 28px; font:inherit; font-size:15px; font-weight:600; cursor:pointer; letter-spacing:.05em; } .btn:disabled { opacity:.5; cursor:not-allowed; } .btn.rec { background:#b03a2e; } .btn.ghost { background:none; border:1px solid var(--gold); color:var(--gold); }
+.status { color:var(--muted); font-size:15px; margin:10px 0; } .dot { display:inline-block; width:10px; height:10px; border-radius:50%; background:#b03a2e; margin-right:6px; animation:bl 1s infinite; } @keyframes bl { 50% { opacity:.2; } }
+audio { width:100%; margin-top:10px; }
+.chip { display:inline-block; background:rgba(176,141,87,.18); color:var(--gold); border-radius:20px; padding:4px 14px; margin:3px 6px 3px 0; font-size:15px; font-weight:600; }
+.chip.snd { background:rgba(176,84,104,.14); color:var(--bad); }
+.bands { display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:10px; margin:12px 0; } .band { background:var(--soft); border:1px solid var(--line); border-radius:14px; padding:10px; text-align:center; } .band b { display:block; font-family:var(--display); font-size:26px; } .band span { font-size:12px; color:var(--muted); letter-spacing:.06em; text-transform:uppercase; }
+.fix { border-top:1px solid var(--line); padding:10px 0; } .fix b { color:var(--bad); } .good { color:var(--good); font-weight:600; }
+table { width:100%; border-collapse:collapse; font-size:15px; } td, th { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); } th { color:var(--muted); font-size:12px; letter-spacing:.08em; text-transform:uppercase; }
+.err { background:rgba(176,84,104,.12); color:var(--bad); border-radius:12px; padding:12px 16px; margin-top:12px; }
+.note { font-size:14px; color:var(--muted); margin-top:8px; line-height:1.5; }
+.hist { border-top:1px solid var(--line); padding:10px 0; font-size:15px; } .hist:first-child { border-top:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="index.html">← Trang chủ</a><span id="who"></span></div>
+  <h1>AI Speaking <em>Coach</em></h1>
+  <div class="sub">Ghi âm, nhận xét ngay, rồi đọc lại các từ cần sửa để AI chấm lại.</div>
+
+  <div class="card" id="setup">
+    <div class="tabs"><button class="tab on" id="m-read" onclick="setMode('read_aloud')">Đọc theo văn bản mẫu</button><button class="tab" id="m-free" onclick="setMode('free')">Nói tự do theo đề</button></div>
+    <div id="tasks"></div>
+    <div id="custom-box"><textarea id="target" placeholder="Hoặc gõ câu em muốn đọc ở đây"></textarea></div>
+  </div>
+
+  <div class="card" id="recorder">
+    <h2 id="rec-title">Ghi âm</h2>
+    <div id="rec-text" style="font-size:19px;line-height:1.6;margin-bottom:10px"></div>
+    <button class="btn rec" id="recbtn" onclick="toggleRec()">● Ghi âm</button>
+    <div class="status" id="recstatus">Chưa có bản ghi. Ghi âm tối đa 2 phút.</div>
+    <audio controls id="recplay" style="display:none"></audio>
+    <div style="margin-top:14px"><button class="btn" id="sendbtn" onclick="send()" disabled>Gửi cho AI nhận xét</button></div>
+    <div id="msg"></div>
+  </div>
+
+  <div id="result"></div>
+  <div class="card"><h2>Lịch sử của em</h2><div id="history"><div class="note">Đang tải…</div></div></div>
+</div>
+
+<script>
+const db = supabase.createClient('https://sxnxbbosfyapmmkrhcdj.supabase.co', 'sb_publishable_OMyiSjOVcKOfRdZO9JwSZg_8XogOYkZ');
+const API = '/api/speaking-feedback';
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = s => String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
+let student = null, mode = 'read_aloud', tasks = { read_aloud: [], free: [] }, cur = null;   // cur = { text, prompt }
+let parentId = null, attempt = 1, prevAccuracy = null;
+let recorder = null, chunks = [], blob = null, stream = null, sec = 0, timer = null;
+try { student = JSON.parse(localStorage.getItem('nvu_student') || 'null'); } catch (e) {}
+if (!student) location.href = 'login.html';
+else { document.getElementById('who').textContent = `${student.avatar || '🎓'} ${student.name} · ${student.classCode}`; init(); }
+
+async function init() {
+  try { tasks = await (await fetch('speaking-tasks.json', { cache: 'no-cache' })).json(); } catch (e) {}
+  setMode('read_aloud'); loadHistory();
+}
+function setMode(m) {
+  mode = m; parentId = null; attempt = 1; prevAccuracy = null;
+  document.getElementById('m-read').classList.toggle('on', m === 'read_aloud'); document.getElementById('m-free').classList.toggle('on', m === 'free');
+  document.getElementById('custom-box').style.display = m === 'read_aloud' ? 'block' : 'none';
+  const list = (tasks[m] || []).filter(t => !t.class_codes || t.class_codes.includes(student.classCode));
+  document.getElementById('tasks').innerHTML = list.map((t, i) => `<div class="task" onclick="pick(${i})" id="task-${i}"><small>${esc(t.tag || '')}</small>${esc(t.text || t.prompt)}</div>`).join('') || '<div class="note">Chưa có đề mẫu.</div>';
+  if (list.length) pick(0); else { cur = null; showTarget(); }
+  window._list = list;
+}
+function pick(i) {
+  document.querySelectorAll('.task').forEach(e => e.classList.remove('on')); document.getElementById('task-' + i).classList.add('on');
+  const t = window._list[i]; cur = mode === 'read_aloud' ? { text: t.text, prompt: t.tag || 'Read aloud' } : { text: '', prompt: t.prompt };
+  parentId = null; attempt = 1; prevAccuracy = null; showTarget();
+}
+function showTarget() {
+  document.getElementById('rec-text').innerHTML = cur ? (mode === 'read_aloud' ? `<b>Đọc to:</b> ${esc(cur.text)}` : `<b>Đề:</b> ${esc(cur.prompt)}`) : '';
+}
+document.addEventListener('input', e => { if (e.target.id === 'target' && mode === 'read_aloud') { cur = { text: e.target.value.trim(), prompt: 'Custom' }; parentId = null; attempt = 1; showTarget(); } });
+
+async function toggleRec() {
+  const btn = document.getElementById('recbtn'), st = document.getElementById('recstatus');
+  if (recorder && recorder.state === 'recording') { recorder.stop(); return; }
+  try { stream = await navigator.mediaDevices.getUserMedia({ audio: true }); } catch (e) { st.textContent = 'Không dùng được micro: ' + e.message; return; }
+  const mime = MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : (MediaRecorder.isTypeSupported('audio/mp4') ? 'audio/mp4' : '');
+  chunks = []; recorder = new MediaRecorder(stream, mime ? { mimeType: mime } : undefined);
+  recorder.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
+  recorder.onstop = () => { clearInterval(timer); stream.getTracks().forEach(t => t.stop()); blob = new Blob(chunks, { type: recorder.mimeType || mime || 'audio/webm' });
+    btn.textContent = '● Ghi lại'; st.textContent = `Đã ghi ${fmt(sec)}. Nghe lại rồi gửi.`; const p = document.getElementById('recplay'); p.src = URL.createObjectURL(blob); p.style.display = ''; document.getElementById('sendbtn').disabled = false; };
+  sec = 0; recorder.start(); btn.textContent = '■ Dừng'; st.innerHTML = '<span class="dot"></span><span id="rs">00:00</span>';
+  timer = setInterval(() => { sec++; const e = document.getElementById('rs'); if (e) e.textContent = fmt(sec); if (sec >= 120) recorder.stop(); }, 1000);
+}
+
+async function send() {
+  if (!blob) return;
+  if (mode === 'read_aloud' && !(cur && cur.text)) { showErr('Hãy chọn hoặc gõ câu cần đọc.'); return; }
+  const btn = document.getElementById('sendbtn'); btn.disabled = true; btn.textContent = 'Đang chấm… (khoảng 15–30 giây)'; document.getElementById('msg').innerHTML = '';
+  try {
+    const ext = /mp4/.test(blob.type) ? 'm4a' : 'webm', path = `speaking/${student.id}/${Date.now()}.${ext}`;
+    const { error: ue } = await db.storage.from('voice-notes').upload(path, blob, { contentType: blob.type, upsert: false });
+    if (ue) throw new Error('Không tải được bản ghi: ' + ue.message);
+    const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'feedback', student_id: student.id, voice_path: path, task_type: mode, prompt: cur.prompt, target_text: mode === 'read_aloud' ? cur.text : null, parent_id: parentId, attempt }) });
+    let j; try { j = await r.json(); } catch (e) { throw new Error('AI chưa được bật trên máy chủ (thầy cần thêm khóa API).'); }
+    if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
+    render(j); loadHistory();
+  } catch (e) { showErr(e.message); }
+  btn.disabled = false; btn.textContent = 'Gửi cho AI nhận xét';
+}
+function showErr(m) { document.getElementById('msg').innerHTML = `<div class="err">${esc(m)}</div>`; }
+
+function render(j) {
+  const f = j.feedback, b = f.band || {};
+  const improved = f.improved ? `<div class="good" style="margin:8px 0">So với lần trước: ${esc(f.improved)}${prevAccuracy !== null && f.accuracy !== null ? ` (độ khớp ${prevAccuracy}% → ${f.accuracy}%)` : ''}</div>` : '';
+  const diffs = (f.diffs || []).length ? `<table><tr><th>Mẫu</th><th>AI nghe được</th></tr>${f.diffs.map(d => `<tr><td>${esc(d.expected || '—')}</td><td>${d.type === 'missing' ? '<i>(không nghe thấy)</i>' : esc(d.heard || '')}</td></tr>`).join('')}</table>` : '';
+  document.getElementById('result').innerHTML = `<div class="card"><h2>Nhận xét của AI · lần ${j.attempt}</h2>
+    ${f.accuracy !== null ? `<div style="font-size:15px;color:var(--muted)">Độ khớp với văn bản mẫu: <b style="color:var(--ink);font-size:20px">${f.accuracy}%</b></div>` : ''}
+    <p style="margin:10px 0">${esc(f.summary)}</p><div class="good">✓ ${esc(f.praise)}</div>${improved}
+    ${(f.fix || []).map(x => `<div class="fix"><b>${esc(x.point)}</b><br>Ví dụ: ${esc(x.example)}<br>Cách sửa: ${esc(x.how)}</div>`).join('')}
+    ${(f.focus_words || []).length ? `<div style="margin-top:10px"><small>Từ cần đọc lại</small><br>${f.focus_words.map(w => `<span class="chip">${esc(w)}</span>`).join('')}</div>` : ''}
+    ${(f.focus_sounds || []).length ? `<div style="margin-top:6px"><small>Âm cần luyện</small><br>${f.focus_sounds.map(w => `<span class="chip snd">${esc(w)}</span>`).join('')}</div>` : ''}
+    <div class="note" style="margin-top:10px"><b>Việc tiếp theo:</b> ${esc(f.next_step)}</div>
+    <div class="bands"><div class="band"><b>${b.fluency ?? '–'}</b><span>Fluency</span></div><div class="band"><b>${b.lexical ?? '–'}</b><span>Từ vựng</span></div><div class="band"><b>${b.grammar ?? '–'}</b><span>Ngữ pháp</span></div><div class="band"><b>${b.pronunciation_estimate ?? '–'}</b><span>Phát âm (ước lượng)</span></div><div class="band"><b>${b.overall ?? '–'}</b><span>Tổng</span></div></div>
+    <div class="note">Điểm band chỉ là ước lượng tham khảo. AI chỉ nhận được bản chép lời, không nghe trực tiếp, nên phần phát âm có thể chưa chính xác. Thầy Nam sẽ nghe và nhận xét thêm.</div>
+    ${diffs ? `<div style="margin-top:12px"><small>So sánh với văn bản mẫu</small>${diffs}</div>` : ''}
+    <div class="note" style="margin-top:10px">Bản chép lời: “${esc(j.transcript)}”</div>
+    ${f.retry_text ? `<div style="margin-top:14px"><button class="btn" onclick='retry(${JSON.stringify(f.retry_text).replace(/'/g, "&#39;")}, ${JSON.stringify(j.id || null)}, ${f.accuracy === null ? 'null' : f.accuracy}, ${j.attempt})'>Đọc lại các từ cần sửa →</button></div>` : ''}</div>`;
+  document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+}
+function retry(text, id, acc, att) {
+  mode = 'read_aloud'; document.getElementById('m-read').classList.add('on'); document.getElementById('m-free').classList.remove('on'); document.getElementById('custom-box').style.display = 'block';
+  cur = { text, prompt: 'Luyện lại các từ cần sửa' }; parentId = id; attempt = att + 1; prevAccuracy = acc;
+  document.getElementById('target').value = text; showTarget(); blob = null; document.getElementById('recplay').style.display = 'none'; document.getElementById('sendbtn').disabled = true; document.getElementById('recstatus').textContent = 'Đọc to câu trên, rồi gửi lại để AI so sánh với lần trước.';
+  document.getElementById('recorder').scrollIntoView({ behavior: 'smooth' });
+}
+
+async function loadHistory() {
+  const el = document.getElementById('history');
+  try {
+    const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'history', student_id: student.id }) });
+    const j = await r.json(); if (!j.ok) throw new Error(j.error);
+    el.innerHTML = (j.items || []).length ? j.items.map(h => `<div class="hist"><b>${esc(String(h.submitted_at).slice(8, 10) + '/' + String(h.submitted_at).slice(5, 7))}</b> · lần ${h.attempt || 1} · band ước lượng ${h.overall_band ?? '–'}<br><span style="color:var(--muted)">${esc((h.question || '').slice(0, 90))}</span>${h.teacher_comment ? `<br><span class="good">Thầy Nam: ${esc(h.teacher_comment)}</span>` : ''}</div>`).join('') : '<div class="note">Chưa có lượt nào.</div>';
+  } catch (e) { el.innerHTML = '<div class="note">Chưa có lịch sử (AI chưa được bật hoặc chưa có lượt nào).</div>'; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "read_aloud": [
+    { "tag": "Shadowing · Track 05 (IELTS 14)", "text": "Here's the main bedroom. It's four point nine one metres by three point nine five metres, perfect for a large double bed.", "class_codes": ["IELTS14"] },
+    { "tag": "Shadowing · Track 05 (IELTS 14)", "text": "Here's the second bedroom. It's four point two metres by three point five five metres, ideal for children to share.", "class_codes": ["IELTS14"] },
+    { "tag": "Âm /b/ và /p/ (IELTS 13)", "text": "My best friend is based in a big city, and we always plan to support each other.", "class_codes": ["IELTS13", "PREIELTS12"] },
+    { "tag": "Âm cuối /s/ và /z/ (IELTS 13)", "text": "My parents are very supportive, and my two sisters study at the same school.", "class_codes": ["IELTS13", "PREIELTS12"] },
+    { "tag": "Phát âm cơ bản", "text": "She sells seashells by the seashore, and she shares them with her sister.", "class_codes": null }
+  ],
+  "free": [
+    { "prompt": "Describe the area where you live. What do you like about it and what would you change? (about 1 minute)", "class_codes": ["IELTS14"] },
+    { "prompt": "Talk about your family. Who are you closest to and why? (about 1 minute)", "class_codes": ["IELTS13", "PREIELTS12"] },
+    { "prompt": "Tell me about your hometown. Is it a good place to live?" }
+  ]
+}
