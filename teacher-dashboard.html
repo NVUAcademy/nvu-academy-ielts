@@ -373,6 +373,21 @@
       </div>
       <div id="overview-ranking"><div class="loading">Đang tải...</div></div>
     </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div>
+          <div class="section-title">👥 Giáo viên và trợ giảng</div>
+          <div class="section-sub">Chỉ Gmail trong danh sách này vào được trang giáo viên (đăng nhập Google ở cổng Teacher)</div>
+        </div>
+      </div>
+      <div id="staff-list"><div class="loading">Đang tải...</div></div>
+      <div style="padding:12px 24px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <input type="email" class="filter" id="staff-email" placeholder="Gmail của trợ giảng" style="min-width:240px">
+        <button class="btn-sm" onclick="addStaff()">+ Thêm trợ giảng</button>
+        <span id="staff-msg" style="font-size:12px"></span>
+      </div>
+    </div>
   </div>
 
   <!-- STUDENTS TAB -->
@@ -746,6 +761,13 @@
       window.location.href = 'login.html';
       return;
     }
+    /* Chỉ Gmail có trong danh sách giáo viên / trợ giảng mới được vào */
+    const { data: isStaff } = await db.rpc('is_staff');
+    if (!isStaff) {
+      await db.auth.signOut(); localStorage.removeItem('nvu_teacher');
+      window.location.href = 'login.html';
+      return;
+    }
     loadAll();
   })();
 
@@ -755,6 +777,29 @@
     populateClassSelects();
     loadStats();
     loadOverviewRanking();
+    loadStaff();
+  }
+
+  /* Giáo viên và trợ giảng được đăng nhập trang này */
+  async function loadStaff() {
+    const el = document.getElementById('staff-list'); if (!el) return;
+    const { data, error } = await db.from('staff_emails').select('*').order('role', { ascending: false });
+    if (error) { el.innerHTML = emptyState('Không tải được: ' + esc(error.message)); return; }
+    el.innerHTML = '<table><tbody>' + (data || []).map(s => `<tr><td><strong>${esc(s.email)}</strong></td><td>${s.role === 'teacher' ? '<span class="badge badge-gold">Giáo viên</span>' : '<span class="badge badge-green">Trợ giảng</span>'}</td><td style="text-align:right">${s.role === 'teacher' ? '' : `<button class="btn-sm" onclick="removeStaff('${esc(s.email)}')">Xóa</button>`}</td></tr>`).join('') + '</tbody></table>';
+  }
+  async function addStaff() {
+    const inp = document.getElementById('staff-email'), msg = document.getElementById('staff-msg');
+    const email = inp.value.trim().toLowerCase();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { msg.style.color = 'var(--red)'; msg.textContent = 'Email chưa đúng định dạng'; return; }
+    const { error } = await db.from('staff_emails').upsert({ email, role: 'assistant', name: 'Trợ giảng' }, { onConflict: 'email', ignoreDuplicates: true });
+    if (error) { msg.style.color = 'var(--red)'; msg.textContent = 'Không thêm được: ' + error.message; return; }
+    inp.value = ''; msg.style.color = 'var(--green)'; msg.textContent = '✓ Đã thêm. Trợ giảng vào bằng "Đăng nhập bằng Google" ở cổng Teacher.'; loadStaff();
+  }
+  async function removeStaff(email) {
+    if (!confirm('Xóa quyền của ' + email + '?')) return;
+    const { error } = await db.from('staff_emails').delete().eq('email', email).eq('role', 'assistant');
+    if (error) { alert('Không xóa được: ' + error.message); return; }
+    loadStaff();
   }
 
   async function loadStats() {
