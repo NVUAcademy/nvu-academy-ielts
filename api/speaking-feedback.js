@@ -188,7 +188,8 @@ module.exports = async function handler(req, res) {
 
   /* Học sinh phải tồn tại */
   const st = await (await sb('/rest/v1/students?id=eq.' + studentId + '&select=id,full_name,class_code')).json();
-  if (!Array.isArray(st) || !st.length) return bad(res, 403, 'Không tìm thấy học sinh');
+  if (!Array.isArray(st)) return bad(res, 500, 'Supabase từ chối khóa dịch vụ: ' + String((st && (st.message || st.hint)) || '').slice(0, 160));
+  if (!st.length) return bad(res, 403, 'Không tìm thấy học sinh');
 
   if (action === 'history') {
     const rows = await (await sb('/rest/v1/speaking_submissions?student_id=eq.' + studentId + '&order=submitted_at.desc&limit=30&select=id,question,transcript,overall_band,feedback_json,submitted_at,attempt,teacher_comment,approved')).json();
