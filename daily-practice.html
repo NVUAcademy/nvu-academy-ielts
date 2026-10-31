@@ -178,7 +178,7 @@ async function renderList(idx) {
   }
   let done = {};
   if (student) {
-    const { data } = await db.from('daily_scores').select('practice_date, section, score, max_score').eq('student_id', student.id);
+    const { data } = await db.from('daily_scores').select('practice_date, section, score, max_score, teacher_comment').eq('student_id', student.id);
     (data || []).forEach(r => { done[r.practice_date + '|' + r.section] = r; });
   }
   const today = new Date().toISOString().slice(0, 10);
@@ -188,7 +188,8 @@ async function renderList(idx) {
       const open = isTeacher || x.date <= today;
       return `<div class="card list-item"><div><div class="t">${esc(x.title)}</div><div class="sub">${esc(x.subtitle || '')} · ${esc(x.date)}</div></div>
         <div>${r ? `<span class="badge done">Đã làm ${r.score}/${r.max_score}</span> ` : open ? '<span class="badge todo">Chưa làm</span> ' : '<span class="badge lock">Chưa mở</span> '}
-        ${open ? `<a class="btn small" href="?p=${esc(x.id)}&d=${esc(x.date)}">${r ? 'Làm lại' : 'Làm bài'}</a>` : ''}</div></div>`;
+        ${open ? `<a class="btn small" href="?p=${esc(x.id)}&d=${esc(x.date)}">${r ? 'Làm lại' : 'Làm bài'}</a>` : ''}</div>
+        ${r && r.teacher_comment ? `<div style="flex-basis:100%;margin-top:8px;padding:10px 14px;border-radius:12px;background:rgba(94,139,110,.14);color:var(--good);font-size:15px;line-height:1.5"><b>Nhận xét của thầy:</b> ${esc(r.teacher_comment)}</div>` : ''}</div>`;
     }).join('') : '<div class="card"><p class="sub">Chưa có bài nào cho lớp của bạn.</p></div>');
 }
 

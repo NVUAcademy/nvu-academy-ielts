@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teacher Dashboard — NVU Academy</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -288,6 +289,10 @@
       <span class="nav-icon">🐱</span>
       <span>Tiền Meow</span>
     </div>
+    <div class="nav-item" onclick="showTab('recordings')">
+      <span class="nav-icon">🎙️</span>
+      <span>Ghi âm</span>
+    </div>
     <div class="nav-item" onclick="showTab('library')">
       <span class="nav-icon">📚</span>
       <span>Thư viện</span>
@@ -530,6 +535,28 @@
     <div class="section-card">
       <div class="section-header"><div><div class="section-title">Sinh nhật sắp tới</div><div class="section-sub">Trong 30 ngày tới (học sinh tự nhập ngày sinh ở trang chủ)</div></div></div>
       <div id="att-birthdays"><div class="loading">Đang tải...</div></div>
+    </div>
+  </div>
+
+  <!-- RECORDINGS TAB -->
+  <div id="tab-recordings" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Ghi âm của học sinh</div>
+      <div class="page-sub">Voice note từ Daily Practice, Quiz và AI Speaking Coach. Nghe, nhận xét và tải về theo ngày với tên file rõ ràng</div>
+    </div>
+    <div class="section-card">
+      <div class="section-header">
+        <div class="filter-bar" style="flex-wrap:wrap">
+          <select class="filter" id="class-filter-rec" onchange="loadRecordings()"><option value="">— Chọn lớp —</option></select>
+          <label style="font-size:13px;color:var(--muted)">Từ</label><input type="date" class="filter" id="rc-from" onchange="loadRecordings()">
+          <label style="font-size:13px;color:var(--muted)">đến</label><input type="date" class="filter" id="rc-to" onchange="loadRecordings()">
+          <select class="filter" id="rc-src" onchange="renderRecordings()"><option value="">Tất cả nguồn</option><option value="daily">Daily Practice</option><option value="speaking">Speaking / Quiz</option></select>
+          <button class="btn-sm" onclick="loadRecordings()">↻ Tải lại</button>
+          <button class="btn-sm" style="background:#5a8a5a;color:#fff;border-color:#5a8a5a" onclick="zipRecordings()">⬇ Tải ZIP</button>
+        </div>
+        <span class="section-sub" id="rc-status"></span>
+      </div>
+      <div id="rc-list"><div class="empty-state"><div class="empty-text">Chọn lớp để xem ghi âm</div></div></div>
     </div>
   </div>
 
@@ -1584,6 +1611,112 @@
   }
 
 
+  /* ---------- Ghi âm của học sinh (nghe, nhận xét, xuất ZIP) ---------- */
+  let RC = { rows: [], index: null };
+  const RC_DOW = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+  function asciiName(s) { return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
+  function recName(r) {
+    const d = new Date(r.date + 'T00:00:00'), ext = (r.path.split('.').pop() || 'wav').toLowerCase();
+    const kind = r.src === 'daily' ? 'Daily' : 'Speaking';
+    return `${r.date}_${RC_DOW[d.getDay()]}_${asciiName(r.cls)}_${asciiName(r.student)}_${kind}-${asciiName(r.title).slice(0, 40)}.${ext}`;
+  }
+
+  async function loadRecordings() {
+    const to = document.getElementById('rc-to'), from = document.getElementById('rc-from');
+    if (!to.value) to.value = isoOf(new Date());
+    if (!from.value) from.value = addDays(isoOf(new Date()), -7);
+    const cls = document.getElementById('class-filter-rec').value;
+    const list = document.getElementById('rc-list');
+    if (!cls) { list.innerHTML = '<div class="empty-state"><div class="empty-text">Chọn lớp để xem ghi âm</div></div>'; return; }
+    list.innerHTML = '<div class="loading">Đang tải...</div>';
+    try { if (!RC.index) RC.index = (await (await fetch('daily-index.json', { cache: 'no-cache' })).json()).practices || []; } catch (e) { RC.index = []; }
+    const titleOf = id => { const p = (RC.index || []).find(x => x.id === id); return p ? p.title : (id || 'Daily Practice'); };
+    const [a, b] = await Promise.all([
+      db.from('daily_scores').select('id, practice_date, practice_id, voice_path, teacher_comment, score, max_score, students!inner(full_name, class_code)')
+        .not('voice_path', 'is', null).eq('students.class_code', cls).gte('practice_date', from.value).lte('practice_date', to.value).order('practice_date', { ascending: false }),
+      db.from('speaking_submissions').select('id, audio_url, question, submitted_at, feedback_json, overall_band, teacher_comment, students!inner(full_name, class_code)')
+        .eq('students.class_code', cls).gte('submitted_at', from.value + 'T00:00:00').lte('submitted_at', addDays(to.value, 1) + 'T00:00:00').order('submitted_at', { ascending: false })
+    ]);
+    const err = a.error || b.error;
+    if (err) { list.innerHTML = emptyState('Không tải được: ' + esc(err.message)); return; }
+    const rows = [];
+    (a.data || []).forEach(r => rows.push({ key: 'd' + r.id, src: 'daily', id: r.id, student: r.students.full_name, cls, date: r.practice_date, title: titleOf(r.practice_id), path: r.voice_path, comment: r.teacher_comment || '', ai: null, score: r.score != null ? `${r.score}/${r.max_score}` : '' }));
+    (b.data || []).forEach(r => {
+      if (!r.audio_url) return;
+      const fb = r.feedback_json || {}, ld = new Date(r.submitted_at), date = isoOf(ld);
+      rows.push({ key: 's' + r.id, src: 'speaking', id: r.id, student: r.students.full_name, cls, date, title: (r.question || 'Speaking').slice(0, 40), path: r.audio_url, comment: r.teacher_comment || '', ai: { band: r.overall_band, pron: fb.azure ? fb.azure.pronunciation : null, summary: fb.summary, fix: fb.fix, focus: fb.focus_words, transcript: null } });
+    });
+    rows.sort((x, y) => x.date < y.date ? 1 : x.date > y.date ? -1 : x.student.localeCompare(y.student, 'vi'));
+    RC.rows = rows; renderRecordings();
+  }
+
+  function renderRecordings() {
+    const src = document.getElementById('rc-src').value;
+    const rows = RC.rows.filter(r => !src || r.src === src);
+    const list = document.getElementById('rc-list');
+    document.getElementById('rc-status').textContent = `${rows.length} bản ghi`;
+    if (!rows.length) { list.innerHTML = emptyState('Chưa có bản ghi nào trong khoảng này'); return; }
+    let html = '', cur = '';
+    rows.forEach(r => {
+      if (r.date !== cur) { cur = r.date; const d = new Date(r.date + 'T00:00:00'); html += `<div style="padding:10px 24px;background:rgba(139,115,85,.08);font-weight:700;font-size:14px">${RC_DOW[d.getDay()]} ${r.date.slice(8, 10)}/${r.date.slice(5, 7)}/${r.date.slice(0, 4)}</div>`; }
+      const ai = r.ai ? `<div style="font-size:12px;color:var(--muted);margin-top:4px">AI: band ${r.ai.band ?? '–'}${r.ai.pron != null ? ' · phát âm ' + r.ai.pron : ''}${r.ai.summary ? '<br>' + esc(r.ai.summary) : ''}</div>` : '';
+      html += `<div style="padding:12px 24px;border-bottom:1px solid rgba(139,115,85,.12)">
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+          <div><strong>${esc(r.student)}</strong> <span class="badge badge-gold">${r.src === 'daily' ? 'Daily' : 'Speaking'}</span> ${r.score ? `<span class="badge badge-green">${esc(r.score)}</span>` : ''}
+            <div style="font-size:13px;color:var(--muted)">${esc(r.title)}</div><div style="font-size:11px;color:var(--muted);font-family:monospace">${esc(recName(r))}</div>${ai}</div>
+          <div id="au-${esc(r.key)}"><button class="btn-sm" onclick="playRec('${esc(r.key)}')">▶ Nghe</button></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:8px"><textarea id="cm-${esc(r.key)}" class="zl-text" rows="2" style="font-size:14px" placeholder="Nhận xét của thầy hoặc trợ giảng (1 điểm khen, tối đa 2 lỗi, 1 việc luyện tiếp)">${esc(r.comment)}</textarea>
+          <button class="btn-sm" onclick="saveRecComment('${esc(r.key)}')" style="align-self:flex-start">Lưu</button></div>
+        <div id="cs-${esc(r.key)}" style="font-size:12px;color:var(--green);min-height:14px"></div></div>`;
+    });
+    list.innerHTML = html;
+  }
+
+  async function playRec(key) {
+    const r = RC.rows.find(x => x.key === key); if (!r) return;
+    const { data, error } = await db.storage.from('voice-notes').createSignedUrl(r.path, 3600);
+    if (error) { alert('Không mở được bản ghi: ' + error.message); return; }
+    document.getElementById('au-' + key).innerHTML = `<audio controls autoplay src="${esc(data.signedUrl)}" style="max-width:300px"></audio>`;
+  }
+
+  async function saveRecComment(key) {
+    const r = RC.rows.find(x => x.key === key); if (!r) return;
+    const val = document.getElementById('cm-' + key).value.trim() || null;
+    const t = r.src === 'daily' ? 'daily_scores' : 'speaking_submissions';
+    const patch = r.src === 'daily' ? { teacher_comment: val } : { teacher_comment: val, approved: !!val };
+    const { error } = await db.from(t).update(patch).eq('id', r.id);
+    const el = document.getElementById('cs-' + key);
+    if (error) { el.style.color = 'var(--red)'; el.textContent = 'Không lưu được: ' + error.message; return; }
+    r.comment = val || ''; el.style.color = 'var(--green)'; el.textContent = '✓ Đã lưu, học sinh sẽ thấy nhận xét này';
+  }
+
+  async function zipRecordings() {
+    const src = document.getElementById('rc-src').value;
+    const rows = RC.rows.filter(r => !src || r.src === src);
+    const st = document.getElementById('rc-status');
+    if (!rows.length) { alert('Chưa có bản ghi nào để tải.'); return; }
+    if (typeof JSZip === 'undefined') { alert('Chưa tải được thư viện nén. Hãy tải lại trang.'); return; }
+    const zip = new JSZip(), csv = ['file,hoc_sinh,lop,ngay,nguon,bai,nhan_xet'];
+    const q = s => '"' + String(s || '').replace(/"/g, '""') + '"';
+    let n = 0;
+    for (const r of rows) {
+      st.textContent = `Đang nén ${++n}/${rows.length}…`;
+      const { data, error } = await db.storage.from('voice-notes').download(r.path);
+      if (error) { csv.push(`${q('(lỗi tải) ' + recName(r))},${q(r.student)},${q(r.cls)},${r.date},${r.src},${q(r.title)},${q(error.message)}`); continue; }
+      zip.folder(r.date).file(recName(r), data);
+      csv.push(`${q(r.date + '/' + recName(r))},${q(r.student)},${q(r.cls)},${r.date},${r.src},${q(r.title)},${q(r.comment)}`);
+    }
+    zip.file('danh-sach.csv', '﻿' + csv.join('\n'));
+    st.textContent = 'Đang tạo file ZIP…';
+    const blob = await zip.generateAsync({ type: 'blob' });
+    const name = `ghi-am_${asciiName(AT_CLS_FOR_ZIP())}_${document.getElementById('rc-from').value}_${document.getElementById('rc-to').value}.zip`;
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    st.textContent = `Đã tải ${name} (${rows.length} bản ghi). Giải nén rồi kéo vào thư mục Drive của lớp.`;
+  }
+  function AT_CLS_FOR_ZIP() { return document.getElementById('class-filter-rec').value || 'lop'; }
+
+
   function showTab(tab) {
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -1596,6 +1729,7 @@
     else if (tab === 'zalo') loadZalo();
     else if (tab === 'schedule') loadSchedule();
     else if (tab === 'library') loadLibrary();
+    else if (tab === 'recordings') loadRecordings();
     else if (tab === 'meow') loadMeow();
     else if (tab === 'attendance') loadAttendance();
     else if (tab === 'ranking') loadRanking();
