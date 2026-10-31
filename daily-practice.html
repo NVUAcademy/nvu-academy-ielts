@@ -82,6 +82,7 @@ input[type=text]:focus, textarea:focus { border-color: var(--accent); background
 @media (max-width: 560px) { .hero h1 { font-size: 28px; } .card { padding: 20px 16px; } .card.arch { border-radius: 100px 100px 20px 20px; } .row .lab { min-width: 100%; } input[type=text] { width: 120px; } }
 </style>
 <script src="theme.js"></script>
+<script src="wav.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -347,6 +348,7 @@ async function runAi() {
       ${(f.fix || []).map(x => `<div class="review"><b>${esc(x.point)}</b><br>Ví dụ: ${esc(x.example)}<br><span class="ex">${esc(x.how)}</span></div>`).join('')}
       ${(f.focus_words || []).length ? `<div class="review">Từ nên đọc lại: ${f.focus_words.map(w => `<span class="word">${esc(w)}</span>`).join('')}</div>` : ''}
       <div class="review"><b>Việc tiếp theo:</b> ${esc(f.next_step)}</div>
+      ${f.azure ? `<div class="review">Điểm phát âm Azure: <b>${f.azure.pronunciation}</b>/100 (chính xác ${f.azure.accuracy}, lưu loát ${f.azure.fluency})${(f.azure.weak_words || []).length ? '<br>Từ cần sửa: ' + f.azure.weak_words.map(w => `<span class="word">${esc(w.word)} ${w.score}</span>`).join('') : ''}</div>` : ''}
       <p class="sub" style="font-size:15px;margin-top:8px">Band ước lượng: Fluency ${b.fluency ?? '–'} · Từ vựng ${b.lexical ?? '–'} · Ngữ pháp ${b.grammar ?? '–'} · Phát âm ${b.pronunciation_estimate ?? '–'} (chỉ để tham khảo, thầy Nam sẽ nghe và nhận xét thêm).</p>
       <div style="margin-top:12px"><a class="btn small" href="speaking.html" style="text-decoration:none">Luyện đọc lại các từ cần sửa →</a></div>`;
   } catch (e) {
@@ -359,9 +361,10 @@ async function save(res, score) {
   try {
     let voicePath = null;
     if (recBlob) {
-      const ext = /mp4/.test(recBlob.type) ? 'm4a' : 'webm';
+      let upBlob = recBlob; try { upBlob = await blobToWav16k(recBlob); } catch (e) {}
+      const ext = upBlob.type === 'audio/wav' ? 'wav' : (/mp4/.test(upBlob.type) ? 'm4a' : 'webm');
       voicePath = `daily/${student.id}/${P.id}-${Date.now()}.${ext}`;
-      const { error: ue } = await db.storage.from('voice-notes').upload(voicePath, recBlob, { contentType: recBlob.type, upsert: false });
+      const { error: ue } = await db.storage.from('voice-notes').upload(voicePath, upBlob, { contentType: upBlob.type, upsert: false });
       if (ue) { voicePath = null; var voiceErr = ue.message; } else { window._lastVoice = voicePath; }
     }
     const core = {

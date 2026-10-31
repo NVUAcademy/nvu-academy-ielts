@@ -7,6 +7,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="theme.js"></script>
+<script src="wav.js"></script>
 <style>
 :root { --bg:#F8F2E9; --paper:#FFFCF6; --ink:#2F2638; --muted:#7D7183; --gold:#B08D57; --line:rgba(176,141,87,.45); --soft:#F2E9DC; --shadow:0 18px 40px -22px rgba(64,40,52,.35), 0 2px 6px -3px rgba(64,40,52,.18); --good:#5E8B6E; --bad:#B05468; --display:"Bodoni Moda","Didot",Georgia,serif; --body:"Jost","Futura",system-ui,sans-serif; }
 @media (prefers-color-scheme: dark) { :root { --bg:#1D1723; --paper:#271F2E; --ink:#F3EADF; --muted:#B5A8B4; --gold:#D3B47A; --line:rgba(211,180,122,.4); --soft:#30273A; --good:#9CCBA9; --bad:#E08C9E; } }
@@ -114,8 +115,9 @@ async function send() {
   if (mode === 'read_aloud' && !(cur && cur.text)) { showErr('Hãy chọn hoặc gõ câu cần đọc.'); return; }
   const btn = document.getElementById('sendbtn'); btn.disabled = true; btn.textContent = 'Đang chấm… (khoảng 15–30 giây)'; document.getElementById('msg').innerHTML = '';
   try {
-    const ext = /mp4/.test(blob.type) ? 'm4a' : 'webm', path = `speaking/${student.id}/${Date.now()}.${ext}`;
-    const { error: ue } = await db.storage.from('voice-notes').upload(path, blob, { contentType: blob.type, upsert: false });
+    let upBlob = blob; try { upBlob = await blobToWav16k(blob); } catch (e) {}
+    const ext = upBlob.type === 'audio/wav' ? 'wav' : (/mp4/.test(upBlob.type) ? 'm4a' : 'webm'), path = `speaking/${student.id}/${Date.now()}.${ext}`;
+    const { error: ue } = await db.storage.from('voice-notes').upload(path, upBlob, { contentType: upBlob.type, upsert: false });
     if (ue) throw new Error('Không tải được bản ghi: ' + ue.message);
     const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'feedback', student_id: student.id, voice_path: path, task_type: mode, prompt: cur.prompt, target_text: mode === 'read_aloud' ? cur.text : null, parent_id: parentId, attempt }) });
     let j; try { j = await r.json(); } catch (e) { throw new Error('AI chưa được bật trên máy chủ (thầy cần thêm khóa API).'); }
@@ -137,8 +139,12 @@ function render(j) {
     ${(f.focus_words || []).length ? `<div style="margin-top:10px"><small>Từ cần đọc lại</small><br>${f.focus_words.map(w => `<span class="chip">${esc(w)}</span>`).join('')}</div>` : ''}
     ${(f.focus_sounds || []).length ? `<div style="margin-top:6px"><small>Âm cần luyện</small><br>${f.focus_sounds.map(w => `<span class="chip snd">${esc(w)}</span>`).join('')}</div>` : ''}
     <div class="note" style="margin-top:10px"><b>Việc tiếp theo:</b> ${esc(f.next_step)}</div>
+    ${f.azure ? `<div style="margin-top:12px"><small>Điểm phát âm đo bởi Azure (thang 100, ${f.azure.assessed_seconds} giây đầu)</small>
+      <div class="bands"><div class="band"><b>${f.azure.pronunciation}</b><span>Phát âm</span></div><div class="band"><b>${f.azure.accuracy}</b><span>Chính xác</span></div><div class="band"><b>${f.azure.fluency}</b><span>Lưu loát</span></div>${f.azure.prosody != null ? `<div class="band"><b>${f.azure.prosody}</b><span>Ngữ điệu</span></div>` : ''}${f.azure.completeness != null ? `<div class="band"><b>${f.azure.completeness}</b><span>Đủ câu</span></div>` : ''}</div>
+      ${(f.azure.weak_words || []).length ? `<div class="note">Từ cần sửa: ${f.azure.weak_words.map(w => `<span class="chip snd">${esc(w.word)} ${w.score}</span>`).join('')}</div>` : ''}
+      ${(f.azure.weak_phonemes || []).length ? `<div class="note">Âm yếu nhất: ${f.azure.weak_phonemes.map(p => `<span class="chip snd">/${esc(p.phoneme)}/ ${p.avg}</span>`).join('')}</div>` : ''}</div>` : ''}
     <div class="bands"><div class="band"><b>${b.fluency ?? '–'}</b><span>Fluency</span></div><div class="band"><b>${b.lexical ?? '–'}</b><span>Từ vựng</span></div><div class="band"><b>${b.grammar ?? '–'}</b><span>Ngữ pháp</span></div><div class="band"><b>${b.pronunciation_estimate ?? '–'}</b><span>Phát âm (ước lượng)</span></div><div class="band"><b>${b.overall ?? '–'}</b><span>Tổng</span></div></div>
-    <div class="note">Điểm band chỉ là ước lượng tham khảo. AI chỉ nhận được bản chép lời, không nghe trực tiếp, nên phần phát âm có thể chưa chính xác. Thầy Nam sẽ nghe và nhận xét thêm.</div>
+    <div class="note">Điểm band chỉ là ước lượng tham khảo. ${f.azure ? 'Phần phát âm dựa trên điểm Azure đo từng từ và từng âm.' : 'AI chỉ nhận được bản chép lời, không nghe trực tiếp, nên phần phát âm có thể chưa chính xác.'} Thầy Nam sẽ nghe và nhận xét thêm.</div>
     ${diffs ? `<div style="margin-top:12px"><small>So sánh với văn bản mẫu</small>${diffs}</div>` : ''}
     <div class="note" style="margin-top:10px">Bản chép lời: “${esc(j.transcript)}”</div>
     ${f.retry_text ? `<div style="margin-top:14px"><button class="btn" onclick='retry(${JSON.stringify(f.retry_text).replace(/'/g, "&#39;")}, ${JSON.stringify(j.id || null)}, ${f.accuracy === null ? 'null' : f.accuracy}, ${j.attempt})'>Đọc lại các từ cần sửa →</button></div>` : ''}</div>`;

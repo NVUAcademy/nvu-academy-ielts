@@ -180,6 +180,7 @@ input[type=text]:focus, textarea:focus { border-color: var(--accent); background
 }
 </style>
 <script src="theme.js"></script>
+<script src="wav.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -502,8 +503,9 @@ async function qAi() {
   box.innerHTML = '<h2>Nhận xét AI về bài nói (Q30)</h2><p class="sub">AI đang nghe bài của em… (khoảng 15 đến 30 giây)</p>';
   anchor.insertAdjacentElement('afterend', box);
   try {
-    const ext = /mp4/.test(qBlob.type) ? 'm4a' : 'webm', path = `speaking/${student.id}/quiz-w${quiz.week_number}-${Date.now()}.${ext}`;
-    const { error: ue } = await db.storage.from('voice-notes').upload(path, qBlob, { contentType: qBlob.type, upsert: false });
+    let upBlob = qBlob; try { upBlob = await blobToWav16k(qBlob); } catch (e) {}
+    const ext = upBlob.type === 'audio/wav' ? 'wav' : (/mp4/.test(upBlob.type) ? 'm4a' : 'webm'), path = `speaking/${student.id}/quiz-w${quiz.week_number}-${Date.now()}.${ext}`;
+    const { error: ue } = await db.storage.from('voice-notes').upload(path, upBlob, { contentType: upBlob.type, upsert: false });
     if (ue) throw new Error('Không tải được bản ghi: ' + ue.message);
     const q30 = partQuestions('D').find(q => q.id === 'q30');
     const r = await fetch('/api/speaking-feedback', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'feedback', student_id: student.id, voice_path: path, task_type: 'free', prompt: q30 ? q30.q : 'Weekly quiz speaking' }) });
@@ -512,6 +514,7 @@ async function qAi() {
     box.innerHTML = `<h2>Nhận xét AI về bài nói (Q30)</h2><p style="margin:10px 0">${esc(f.summary)}</p><div class="review"><span class="good">✓ ${esc(f.praise)}</span></div>
       ${(f.fix || []).map(x => `<div class="review"><b>${esc(x.point)}</b><br>Ví dụ: ${esc(x.example)}<br><span class="ex">${esc(x.how)}</span></div>`).join('')}
       <div class="review"><b>Việc tiếp theo:</b> ${esc(f.next_step)}</div>
+      ${f.azure ? `<div class="review">Điểm phát âm Azure: <b>${f.azure.pronunciation}</b>/100 (chính xác ${f.azure.accuracy}, lưu loát ${f.azure.fluency})${(f.azure.weak_words || []).length ? '<br>Từ cần sửa: ' + f.azure.weak_words.map(w => `${esc(w.word)} (${w.score})`).join(', ') : ''}</div>` : ''}
       <p class="sub" style="font-size:15px;margin-top:8px">Band ước lượng: Fluency ${b.fluency ?? '–'} · Từ vựng ${b.lexical ?? '–'} · Ngữ pháp ${b.grammar ?? '–'} · Phát âm ${b.pronunciation_estimate ?? '–'} (chỉ để tham khảo).</p>
       <div style="margin-top:12px"><a class="btn small" href="speaking.html" style="text-decoration:none">Luyện đọc lại các từ cần sửa →</a></div>`;
   } catch (e) {
