@@ -190,6 +190,9 @@ module.exports = async function handler(req, res) {
   const st = await (await sb('/rest/v1/students?id=eq.' + studentId + '&select=id,full_name,class_code')).json();
   if (!Array.isArray(st)) return bad(res, 500, 'Supabase từ chối khóa dịch vụ: ' + String((st && (st.message || st.hint)) || '').slice(0, 160));
   if (!st.length) return bad(res, 403, 'Không tìm thấy học sinh');
+  /* Chỉ các lớp được mở AI (mặc định IELTS 13 và IELTS 14; đổi bằng biến AI_CLASSES) */
+  const AI_CLASSES = (process.env.AI_CLASSES || 'IELTS13,IELTS14').split(',').map(s => s.trim().toUpperCase()).filter(Boolean);
+  if (action !== 'history' && !AI_CLASSES.includes(String(st[0].class_code).toUpperCase())) return bad(res, 403, 'Lớp của em chưa mở tính năng AI chấm nói. Thầy sẽ nghe và nhận xét trực tiếp.');
 
   if (action === 'history') {
     const rows = await (await sb('/rest/v1/speaking_submissions?student_id=eq.' + studentId + '&order=submitted_at.desc&limit=30&select=id,question,transcript,overall_band,feedback_json,submitted_at,attempt,teacher_comment,approved')).json();
