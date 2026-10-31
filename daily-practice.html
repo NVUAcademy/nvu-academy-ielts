@@ -205,9 +205,34 @@ async function openPractice(meta) {
     existing = data || null;
   }
   try { answers = JSON.parse(lsGet(draftKey()) || '{}'); } catch (e) { answers = {}; }
+  await draftPull();
   renderIntro();
 }
 const draftKey = () => `nvu_daily_draft_${P.id}_${student ? student.id : 'teacher'}`;
+
+/* Bài đang làm dở được lưu cả trên máy chủ để không mất khi đổi trình duyệt hoặc tải lại trang */
+let draftT = null, inProgress = false;
+function draftPush() {
+  if (!student || isTeacher) return; clearTimeout(draftT);
+  draftT = setTimeout(async () => { try { await db.from('daily_drafts').upsert({ student_id: student.id, practice_id: P.id, practice_date: P.date, answers, updated_at: new Date().toISOString() }, { onConflict: 'student_id,practice_id,practice_date' }); } catch (e) {} }, 1200);
+}
+async function draftPull() {
+  if (!student || isTeacher) return;
+  try {
+    const { data } = await db.from('daily_drafts').select('answers').eq('student_id', student.id).eq('practice_id', P.id).eq('practice_date', P.date).maybeSingle();
+    if (data && data.answers && Object.keys(data.answers).length) { answers = { ...data.answers, ...answers }; lsSet(draftKey(), JSON.stringify(answers)); }
+  } catch (e) {}
+}
+async function draftDel() { if (!student || isTeacher) return; clearTimeout(draftT); try { await db.from('daily_drafts').delete().eq('student_id', student.id).eq('practice_id', P.id).eq('practice_date', P.date); } catch (e) {} }
+window.addEventListener('beforeunload', e => { if (inProgress) { e.preventDefault(); e.returnValue = ''; } });
+
+/* Xem lại bài đã nộp (điểm, câu sai, đáp án, nhận xét của thầy) */
+function reviewSubmitted() {
+  answers = (existing && existing.answers) || {};
+  const res = closedItems().map(x => ({ ...x, ok: itemOk(x.it, x.kind) }));
+  totalSec = (existing && existing.time_taken_seconds) || 0;
+  renderResult(res, res.filter(r => r.ok).length, 'review');
+}
 
 function head() {
   return `<div class="hero"><div class="eyebrow">Daily Practice · ${esc(P.day)} · Week ${P.week_number}</div>
@@ -219,14 +244,15 @@ function renderIntro() {
     <h2>${esc(P.theme)}</h2>
     <p class="sub">Khoảng ${P.minutes} phút · ${P.steps.length} bước · nguồn: ${esc(P.source)}</p>
     <div class="notice" style="text-align:left">${esc(P.intro)}</div>
-    ${existing ? `<div class="notice warn" style="text-align:left">Bạn đã làm bài này: <b>${existing.score}/${existing.max_score}</b>. Làm lại sẽ ghi đè điểm cũ.</div>` : ''}
+    ${existing ? `<div class="notice warn" style="text-align:left">Bạn đã làm bài này: <b>${existing.score}/${existing.max_score}</b>. Làm lại sẽ ghi đè điểm cũ.${existing.answers ? ' <button class="btn small" onclick="reviewSubmitted()">Xem lại bài đã nộp</button>' : ''}</div>` : ''}
     <div class="notice" style="text-align:left">Bài có bước ghi âm: hãy cho phép trình duyệt dùng micro khi được hỏi.</div>
+    <div class="notice" style="text-align:left">Nên mở bằng <b>Chrome hoặc Safari</b> (không dùng trình duyệt trong Zalo) và <b>chưa nộp thì đừng đóng hoặc tải lại trang</b>. Các câu em trả lời được tự lưu, nhưng bản ghi âm thì phải ghi lại nếu trang bị tải lại.</div>
     <button class="btn" onclick="startPractice()">Bắt đầu →</button></div>
     <div style="text-align:center"><a href="daily-practice.html" style="color:var(--accent);font-size:14px">← Danh sách bài</a></div>`;
 }
 
 function startPractice() {
-  totalSec = 0;
+  totalSec = 0; inProgress = true;
   totalTimer = setInterval(() => { totalSec++; const e = $('tt'); if (e) e.textContent = fmt(totalSec); }, 1000);
   renderPractice();
 }
@@ -282,7 +308,7 @@ function openBox(o) {
   return `<div class="q"><div class="qt"><b>${esc(o.q)}</b></div><textarea oninput="setAns('${o.id}', this.value)">${esc(answers[o.id] || '')}</textarea></div>`;
 }
 function setAns(id, v, rerender) {
-  answers[id] = v; lsSet(draftKey(), JSON.stringify(answers));
+  answers[id] = v; lsSet(draftKey(), JSON.stringify(answers)); draftPush();
   if (rerender) renderPractice(); else { const e = $('prog'); if (e) e.textContent = filledCount(); }
 }
 
@@ -323,7 +349,7 @@ async function submitPractice() {
   if (blanks && !confirm(`Còn ${blanks} câu chưa điền. Vẫn nộp bài?`)) return;
   if (recorder && recorder.state === 'recording') { alert('Hãy bấm Dừng ghi âm trước khi nộp bài.'); return; }
   if (!recBlob && !confirm('Bạn chưa ghi âm voice note (Step 7). Vẫn nộp bài?')) return;
-  clearInterval(totalTimer);
+  clearInterval(totalTimer); inProgress = false;
   const res = items.map(x => ({ ...x, ok: itemOk(x.it, x.kind) }));
   const score = res.filter(r => r.ok).length;
   renderResult(res, score, 'saving');
@@ -384,8 +410,8 @@ async function save(res, score) {
       }));
       if (rows.length) { const { error: e2 } = await db.from('error_logs').insert(rows); if (e2) throw e2; }
     }
-    lsDel(draftKey());
-    existing = { score, max_score: res.length };
+    lsDel(draftKey()); draftDel();
+    existing = { score, max_score: res.length, answers, time_taken_seconds: totalSec };
     return voiceErr ? 'ok-novoice:' + voiceErr : 'ok';
   } catch (e) { return 'err:' + e.message; }
 }
@@ -393,6 +419,7 @@ async function save(res, score) {
 function renderResult(res, score, status) {
   const msg = status === 'saving' ? '<div class="saved">Đang lưu…</div>'
     : status === 'ok' ? '<div class="saved ok">✓ Đã lưu điểm, lỗi sai và voice note. Thầy sẽ nghe và nhận xét.</div>'
+    : status === 'review' ? `<div class="saved ok">Đây là bài em đã nộp trước đó.</div>${existing && existing.teacher_comment ? `<div class="review"><b>Nhận xét của thầy:</b> ${esc(existing.teacher_comment)}</div>` : ''}`
     : status === 'teacher' ? '<div class="saved">Chế độ giáo viên xem thử: không lưu.</div>'
     : status.startsWith('ok-novoice') ? `<div class="saved err">Đã lưu điểm nhưng chưa gửi được voice note (${esc(status.slice(11))}). Hãy gửi voice note cho thầy qua Zalo.</div>`
     : `<div class="saved err">Không lưu được: ${esc(status.slice(4))}. Hãy chụp màn hình điểm gửi thầy.</div>`;
