@@ -82,11 +82,19 @@ function wavTrim(buf, maxSec) {
     p += 8 + size + (size % 2);
   }
   if (dataStart < 0) return null;
-  const rate = buf.readUInt32LE(24), ch = buf.readUInt16LE(22), bits = buf.readUInt16LE(34);
-  if (rate !== 16000 || ch !== 1 || bits !== 16) return null;
-  const take = Math.min(dataLen, rate * 2 * maxSec);
-  const head = Buffer.alloc(44); buf.copy(head, 0, 0, 44);
-  head.writeUInt32LE(36 + take, 4); head.writeUInt32LE(take, 40);
+  /* Đọc định dạng từ chunk "fmt " (không giả định tiêu đề chuẩn 44 byte) rồi dựng lại tiêu đề chuẩn */
+  let rate = 0, ch = 0, bits = 0, tag = 0, q = 12;
+  while (q + 8 <= buf.length) {
+    const id = buf.toString('ascii', q, q + 4), size = buf.readUInt32LE(q + 4);
+    if (id === 'fmt ') { tag = buf.readUInt16LE(q + 8); ch = buf.readUInt16LE(q + 10); rate = buf.readUInt32LE(q + 12); bits = buf.readUInt16LE(q + 22); break; }
+    q += 8 + size + (size % 2);
+  }
+  if ((tag !== 1 && tag !== 0xFFFE) || rate !== 16000 || ch !== 1 || bits !== 16) return null;
+  const take = Math.min(dataLen, rate * 2 * maxSec) & ~1;
+  const head = Buffer.alloc(44);
+  head.write('RIFF', 0, 'ascii'); head.writeUInt32LE(36 + take, 4); head.write('WAVE', 8, 'ascii'); head.write('fmt ', 12, 'ascii');
+  head.writeUInt32LE(16, 16); head.writeUInt16LE(1, 20); head.writeUInt16LE(1, 22); head.writeUInt32LE(16000, 24); head.writeUInt32LE(32000, 28); head.writeUInt16LE(2, 32); head.writeUInt16LE(16, 34);
+  head.write('data', 36, 'ascii'); head.writeUInt32LE(take, 40);
   return Buffer.concat([head, buf.subarray(dataStart, dataStart + take)]);
 }
 
@@ -197,26 +205,6 @@ module.exports = async function handler(req, res) {
   if (action === 'history') {
     const rows = await (await sb('/rest/v1/speaking_submissions?student_id=eq.' + studentId + '&order=submitted_at.desc&limit=30&select=id,question,transcript,overall_band,feedback_json,submitted_at,attempt,teacher_comment,approved')).json();
     return res.status(200).json({ ok: true, items: rows });
-  }
-
-  /* Chẩn đoán tạm thời: kiểm tra Azure có phản hồi không (không lưu gì, không lộ khóa) */
-  if (action === 'azure_probe') {
-    const pp = String(b.voice_path || '');
-    if (!pp.startsWith('daily/' + studentId + '/') || !process.env.AZURE_SPEECH_KEY) return bad(res, 400, 'thiếu điều kiện');
-    const fr0 = await sb('/storage/v1/object/voice-notes/' + pp.split('/').map(encodeURIComponent).join('/'));
-    const clip = wavTrim(Buffer.from(await fr0.arrayBuffer()), 10);
-    const region = process.env.AZURE_SPEECH_REGION, out = { region: JSON.stringify(region), keyLen: (process.env.AZURE_SPEECH_KEY || '').length };
-    const tryIt = async (name, url, headers) => {
-      const t0 = Date.now();
-      try {
-        const r = await fetch(url, { method: 'POST', headers: { 'Ocp-Apim-Subscription-Key': process.env.AZURE_SPEECH_KEY, 'Content-Type': 'audio/wav; codecs=audio/pcm; samplerate=16000', Accept: 'application/json', ...headers }, body: clip, signal: AbortSignal.timeout(12000) });
-        out[name] = { status: r.status, ms: Date.now() - t0, body: (await r.text()).slice(0, 220) };
-      } catch (e) { out[name] = { error: e.name + ' ' + (e.cause && e.cause.code ? e.cause.code : e.message), ms: Date.now() - t0 }; }
-    };
-    const base = `https://${region}.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US`;
-    await tryIt('plain', base, {});
-    await tryIt('pa_basic', base + '&format=detailed', { 'Pronunciation-Assessment': Buffer.from(JSON.stringify({ ReferenceText: 'The bread is baked and packed in boxes.', GradingSystem: 'HundredMark', Granularity: 'Phoneme', Dimension: 'Comprehensive' })).toString('base64') });
-    return res.status(200).json({ ok: true, probe: out });
   }
 
   /* action = feedback */
