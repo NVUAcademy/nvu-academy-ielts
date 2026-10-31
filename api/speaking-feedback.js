@@ -66,6 +66,53 @@ async function transcribe(buf, filename, mime) {
   return r.json();
 }
 
+/* ---------- Azure Pronunciation Assessment (tuỳ chọn, bật khi có AZURE_SPEECH_KEY và AZURE_SPEECH_REGION) ---------- */
+const AZURE_MAX_SEC = 30;   /* REST chỉ chấm được đoạn ngắn: lấy tối đa 30 giây đầu */
+
+function wavTrim(buf, maxSec) {
+  if (buf.length < 44 || buf.toString('ascii', 0, 4) !== 'RIFF' || buf.toString('ascii', 8, 12) !== 'WAVE') return null;
+  let p = 12, dataStart = -1, dataLen = 0;
+  while (p + 8 <= buf.length) {
+    const id = buf.toString('ascii', p, p + 4), size = buf.readUInt32LE(p + 4);
+    if (id === 'data') { dataStart = p + 8; dataLen = Math.min(size, buf.length - dataStart); break; }
+    p += 8 + size + (size % 2);
+  }
+  if (dataStart < 0) return null;
+  const rate = buf.readUInt32LE(24), ch = buf.readUInt16LE(22), bits = buf.readUInt16LE(34);
+  if (rate !== 16000 || ch !== 1 || bits !== 16) return null;
+  const take = Math.min(dataLen, rate * 2 * maxSec);
+  const head = Buffer.alloc(44); buf.copy(head, 0, 0, 44);
+  head.writeUInt32LE(36 + take, 4); head.writeUInt32LE(take, 40);
+  return Buffer.concat([head, buf.subarray(dataStart, dataStart + take)]);
+}
+
+async function azureAssess(wavBuf, referenceText) {
+  const region = process.env.AZURE_SPEECH_REGION, key = process.env.AZURE_SPEECH_KEY;
+  const clip = wavTrim(wavBuf, AZURE_MAX_SEC);
+  if (!clip) throw new Error('file không phải WAV 16 kHz');
+  const cfg = { GradingSystem: 'HundredMark', Granularity: 'Phoneme', Dimension: 'Comprehensive', EnableMiscue: !!referenceText, EnableProsodyAssessment: true, PhonemeAlphabet: 'IPA' };
+  if (referenceText) cfg.ReferenceText = referenceText;
+  const url = `https://${region}.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US&format=detailed`;
+  const r = await fetch(url, { method: 'POST', headers: { 'Ocp-Apim-Subscription-Key': key, 'Content-Type': 'audio/wav; codecs=audio/pcm; samplerate=16000', Accept: 'application/json', 'Pronunciation-Assessment': Buffer.from(JSON.stringify(cfg)).toString('base64') }, body: clip });
+  if (!r.ok) throw new Error('Azure: ' + r.status + ' ' + (await r.text()).slice(0, 200));
+  const j = await r.json();
+  if (j.RecognitionStatus && j.RecognitionStatus !== 'Success') throw new Error('Azure không nhận ra giọng nói (' + j.RecognitionStatus + ')');
+  const n = (j.NBest || [])[0]; if (!n) throw new Error('Azure không trả về kết quả');
+  const pa = o => (o && o.PronunciationAssessment) || o || {};
+  const top = pa(n);
+  const wordsOut = (n.Words || []).map(w => ({ w: w.Word, acc: Math.round(pa(w).AccuracyScore), err: pa(w).ErrorType || 'None', ph: (w.Phonemes || []).map(x => ({ p: x.Phoneme, acc: Math.round(pa(x).AccuracyScore) })) }));
+  const agg = {};
+  wordsOut.forEach(w => w.ph.forEach(x => { const a = agg[x.p] || (agg[x.p] = { sum: 0, n: 0 }); a.sum += x.acc; a.n++; }));
+  const weakPhonemes = Object.entries(agg).map(([p, a]) => ({ phoneme: p, avg: Math.round(a.sum / a.n), count: a.n })).filter(x => x.avg < 70).sort((a, b) => a.avg - b.avg).slice(0, 5);
+  const weakWords = wordsOut.filter(w => w.acc < 70 || (w.err && w.err !== 'None')).sort((a, b) => a.acc - b.acc).slice(0, 8)
+    .map(w => ({ word: w.w, score: w.acc, error: w.err, weak_phonemes: w.ph.filter(x => x.acc < 60).map(x => x.p + ':' + x.acc) }));
+  return {
+    pronunciation: Math.round(top.PronScore || 0), accuracy: Math.round(top.AccuracyScore || 0), fluency: Math.round(top.FluencyScore || 0),
+    completeness: top.CompletenessScore != null ? Math.round(top.CompletenessScore) : null, prosody: top.ProsodyScore != null ? Math.round(top.ProsodyScore) : null,
+    assessed_seconds: Math.round(Math.min(wavBuf.length / 32000, AZURE_MAX_SEC)), weak_words: weakWords, weak_phonemes: weakPhonemes
+  };
+}
+
 async function askClaude(system, user) {
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -87,7 +134,7 @@ async function sb(path, opts) {
 
 const SYSTEM = `Bạn là giám khảo và huấn luyện viên IELTS Speaking cho học sinh Việt Nam (trình độ A2 đến B2) của thầy Nam. Trả lời bằng tiếng Việt, ngắn gọn, ấm áp, cụ thể; ví dụ và từ cần luyện giữ bằng tiếng Anh.
 Quy tắc:
-- Bạn chỉ nhận được bản chép lời (transcript) từ nhận dạng giọng nói, KHÔNG nghe được âm thanh. Vì vậy phần phát âm chỉ là ƯỚC LƯỢNG dựa trên từ bị nhận sai so với văn bản mẫu và các lỗi thường gặp của người Việt (âm cuối /s/ /z/ /t/ /d/, /b/ và /p/, /s/ và /ʃ/, trọng âm, ngắt cụm). Không khẳng định chắc chắn, dùng "có thể".
+- Bạn nhận được bản chép lời (transcript) từ nhận dạng giọng nói và KHÔNG nghe được âm thanh. Nếu có "Điểm phát âm Azure" thì đó là dữ liệu đáng tin nhất cho phần phát âm: dựa vào điểm từng từ và từng âm (IPA) để chỉ ra từ và âm cần sửa, và dùng nó để định điểm pronunciation. Nếu KHÔNG có dữ liệu Azure, phần phát âm chỉ là ƯỚC LƯỢNG dựa trên từ bị nhận sai so với văn bản mẫu và các lỗi thường gặp của người Việt (âm cuối /s/ /z/ /t/ /d/, /b/ và /p/, /s/ và /ʃ/, trọng âm, ngắt cụm); khi đó không khẳng định chắc chắn, dùng "có thể".
 - Không bịa lỗi. Chỉ nêu từ có trong dữ liệu. Tối đa 2 điểm cần sửa, 1 điểm khen, 1 việc luyện tiếp.
 - Điểm band là ước lượng tham khảo (thang 0 đến 9, bước 0.5), ghi rõ chưa phải điểm chính thức.
 - Chỉ trả về một đối tượng JSON, không thêm chữ nào bên ngoài.`;
@@ -97,11 +144,12 @@ function buildPrompt(p) {
 Đề hoặc ngữ cảnh: ${p.prompt || '(không có)'}
 Văn bản mẫu: ${p.target_text || '(không có)'}
 Lần thứ: ${p.attempt}
-${p.previous ? `Lần trước: độ khớp ${p.previous.accuracy}% và các từ cần sửa là ${JSON.stringify(p.previous.focus_words)}.` : ''}
+${p.previous ? `Lần trước: độ khớp ${p.previous.accuracy}%, điểm phát âm Azure ${p.previous.azure_pronunciation ?? 'không có'}, các từ cần sửa là ${JSON.stringify(p.previous.focus_words)}.` : ''}
 
 Transcript của học sinh: """${p.transcript}"""
 Thống kê lưu loát: ${JSON.stringify(p.fluency)}
 Độ khớp với văn bản mẫu: ${p.align && p.align.accuracy !== null ? p.align.accuracy + '%' : 'không áp dụng'}
+Điểm phát âm Azure (thang 100, đo trên ${p.azure ? p.azure.assessed_seconds + ' giây đầu' : ''}): ${p.azure ? JSON.stringify(p.azure) : 'không có'}
 Khác biệt so với mẫu: ${JSON.stringify((p.align && p.align.diffs || []).filter(x => p.task_type !== 'mixed' || x.type !== 'extra').slice(0, 25))}
 
 Trả về JSON đúng dạng:
@@ -175,13 +223,24 @@ module.exports = async function handler(req, res) {
     let previous = null;
     if (b.parent_id) {
       const pr = await (await sb('/rest/v1/speaking_submissions?id=eq.' + encodeURIComponent(b.parent_id) + '&student_id=eq.' + studentId + '&select=feedback_json')).json();
-      if (pr[0] && pr[0].feedback_json) previous = { accuracy: pr[0].feedback_json.accuracy, focus_words: pr[0].feedback_json.focus_words || [] };
+      if (pr[0] && pr[0].feedback_json) previous = { accuracy: pr[0].feedback_json.accuracy, focus_words: pr[0].feedback_json.focus_words || [], azure_pronunciation: pr[0].feedback_json.azure ? pr[0].feedback_json.azure.pronunciation : null };
     }
     const attempt = previous ? (parseInt(b.attempt, 10) || 2) : 1;
 
+    /* 3b. Azure chấm phát âm từng từ và từng âm (nếu đã cấu hình và file là WAV) */
+    let azure = null, azureError = null;
+    if (process.env.AZURE_SPEECH_KEY && process.env.AZURE_SPEECH_REGION) {
+      try {
+        const ref = task_type !== 'free' && b.target_text ? b.target_text : words(transcript).slice(0, 80).join(' ');
+        azure = await azureAssess(buf, ref);
+      } catch (e) { azureError = String(e.message || e).slice(0, 200); }
+    }
+
     /* 4. Claude nhận xét */
-    const fb = await askClaude(SYSTEM, buildPrompt({ task_type, prompt: b.prompt, target_text: b.target_text, attempt, previous, transcript, fluency, align }));
+    const fb = await askClaude(SYSTEM, buildPrompt({ task_type, prompt: b.prompt, target_text: b.target_text, attempt, previous, transcript, fluency, align, azure }));
     fb.accuracy = align ? align.accuracy : null;
+    fb.azure = azure; if (azureError) fb.azure_error = azureError;
+    if (azure && !(fb.focus_words || []).length) fb.focus_words = azure.weak_words.map(x => x.word).slice(0, 6);
     fb.fluency = fluency;
     fb.diffs = align ? align.diffs.filter(x => task_type !== 'mixed' || x.type !== 'extra').slice(0, 25) : [];
 
@@ -200,4 +259,4 @@ module.exports = async function handler(req, res) {
   }
 };
 
-module.exports._test = { alignWords, fluencyStats, words };
+module.exports._test = { alignWords, fluencyStats, words, wavTrim };
