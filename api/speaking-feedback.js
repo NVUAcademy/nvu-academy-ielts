@@ -199,6 +199,26 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ ok: true, items: rows });
   }
 
+  /* Chẩn đoán tạm thời: kiểm tra Azure có phản hồi không (không lưu gì, không lộ khóa) */
+  if (action === 'azure_probe') {
+    const pp = String(b.voice_path || '');
+    if (!pp.startsWith('daily/' + studentId + '/') || !process.env.AZURE_SPEECH_KEY) return bad(res, 400, 'thiếu điều kiện');
+    const fr0 = await sb('/storage/v1/object/voice-notes/' + pp.split('/').map(encodeURIComponent).join('/'));
+    const clip = wavTrim(Buffer.from(await fr0.arrayBuffer()), 10);
+    const region = process.env.AZURE_SPEECH_REGION, out = { region: JSON.stringify(region), keyLen: (process.env.AZURE_SPEECH_KEY || '').length };
+    const tryIt = async (name, url, headers) => {
+      const t0 = Date.now();
+      try {
+        const r = await fetch(url, { method: 'POST', headers: { 'Ocp-Apim-Subscription-Key': process.env.AZURE_SPEECH_KEY, 'Content-Type': 'audio/wav; codecs=audio/pcm; samplerate=16000', Accept: 'application/json', ...headers }, body: clip, signal: AbortSignal.timeout(12000) });
+        out[name] = { status: r.status, ms: Date.now() - t0, body: (await r.text()).slice(0, 220) };
+      } catch (e) { out[name] = { error: e.name + ' ' + (e.cause && e.cause.code ? e.cause.code : e.message), ms: Date.now() - t0 }; }
+    };
+    const base = `https://${region}.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US`;
+    await tryIt('plain', base, {});
+    await tryIt('pa_basic', base + '&format=detailed', { 'Pronunciation-Assessment': Buffer.from(JSON.stringify({ ReferenceText: 'The bread is baked and packed in boxes.', GradingSystem: 'HundredMark', Granularity: 'Phoneme', Dimension: 'Comprehensive' })).toString('base64') });
+    return res.status(200).json({ ok: true, probe: out });
+  }
+
   /* action = feedback */
   const path = String(b.voice_path || '');
   if (!path.startsWith('daily/' + studentId + '/') && !path.startsWith('speaking/' + studentId + '/')) return bad(res, 403, 'Đường dẫn file không thuộc học sinh này');
