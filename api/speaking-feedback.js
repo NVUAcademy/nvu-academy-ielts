@@ -97,7 +97,7 @@ async function azureAssess(wavBuf, referenceText) {
   const cfg = { GradingSystem: 'HundredMark', Granularity: 'Phoneme', Dimension: 'Comprehensive', EnableMiscue: !!referenceText, EnableProsodyAssessment: true, PhonemeAlphabet: 'IPA' };
   if (referenceText) cfg.ReferenceText = referenceText;
   const url = `https://${region}.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US&format=detailed`;
-  const r = await fetch(url, { method: 'POST', headers: { 'Ocp-Apim-Subscription-Key': key, 'Content-Type': 'audio/wav; codecs=audio/pcm; samplerate=16000', Accept: 'application/json', 'Pronunciation-Assessment': Buffer.from(JSON.stringify(cfg)).toString('base64') }, body: clip, signal: AbortSignal.timeout(15000) }).catch(e => { throw new Error('Azure: ' + (e.name === 'TimeoutError' ? 'quá thời gian chờ (15 giây), kiểm tra lại AZURE_SPEECH_REGION' : e.message)); });
+  const r = await fetch(url, { method: 'POST', headers: { 'Ocp-Apim-Subscription-Key': key, 'Content-Type': 'audio/wav; codecs=audio/pcm; samplerate=16000', Accept: 'application/json', 'Pronunciation-Assessment': Buffer.from(JSON.stringify(cfg)).toString('base64') }, body: clip, signal: AbortSignal.timeout(15000) }).catch(e => { throw new Error('Azure: ' + (e.name === 'TimeoutError' ? 'quá thời gian chờ (15 giây). Region đang dùng: "' + region + '", kiểm tra lại AZURE_SPEECH_REGION' : e.message)); });
   if (!r.ok) throw new Error('Azure: ' + r.status + ' ' + (await r.text()).slice(0, 200));
   const j = await r.json();
   if (j.RecognitionStatus && j.RecognitionStatus !== 'Success') throw new Error('Azure không nhận ra giọng nói (' + j.RecognitionStatus + ')');
