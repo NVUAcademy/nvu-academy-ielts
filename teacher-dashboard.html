@@ -550,6 +550,8 @@
           <select class="filter" id="rc-src" onchange="renderRecordings()"><option value="">Tất cả nguồn</option><option value="daily">Daily Practice</option><option value="speaking">Speaking / Quiz</option></select>
           <button class="btn-sm" onclick="loadRecordings()">↻ Tải lại</button>
           <button class="btn-sm" style="background:#5a8a5a;color:#fff;border-color:#5a8a5a" onclick="zipRecordings()">⬇ Tải ZIP</button>
+          <button class="btn-sm" style="background:#4a7ab0;color:#fff;border-color:#4a7ab0" onclick="exportToDrive()">☁ Đẩy lên Drive</button>
+          <a class="btn-sm" id="drive-link" href="#" target="_blank" rel="noopener" style="display:none;text-decoration:none">📁 Mở thư mục Drive</a>
         </div>
         <span class="section-sub" id="rc-status"></span>
       </div>
@@ -1726,6 +1728,25 @@
     st.textContent = `Đã tải ${name} (${rows.length} bản ghi). Giải nén rồi kéo vào thư mục Drive của lớp.`;
   }
   function AT_CLS_FOR_ZIP() { return document.getElementById('class-filter-rec').value || 'lop'; }
+
+  /* Link thư mục Drive từng lớp (mở khi chọn lớp có thư mục) */
+  const DRIVE_FOLDER_LINKS = { FOUNDATION11: 'https://drive.google.com/drive/folders/1E3iSQSH9poDJmot-ZuLd9crB77SNBy4-' };
+  function updateDriveLink() { const a = document.getElementById('drive-link'); if (!a) return; const u = DRIVE_FOLDER_LINKS[document.getElementById('class-filter-rec').value]; a.style.display = u ? '' : 'none'; if (u) a.href = u; }
+  document.addEventListener('change', e => { if (e.target && e.target.id === 'class-filter-rec') updateDriveLink(); });
+
+  async function exportToDrive() {
+    const cls = document.getElementById('class-filter-rec').value, st = document.getElementById('rc-status');
+    if (!cls) { alert('Chọn lớp trước.'); return; }
+    if (!DRIVE_FOLDER_LINKS[cls]) { alert('Lớp này chưa có thư mục Drive. Hiện mới có Foundation 11.'); return; }
+    const { data: { session } } = await db.auth.getSession();
+    if (!session) { alert('Phiên đăng nhập đã hết, hãy đăng nhập lại.'); return; }
+    st.textContent = 'Đang đẩy ghi âm lên Drive…';
+    try {
+      const r = await fetch('/api/export-recordings?days=7&cls=' + encodeURIComponent(cls), { headers: { Authorization: 'Bearer ' + session.access_token } });
+      const j = await r.json();
+      st.textContent = j.ok ? `Đã đẩy ${j.uploaded} file mới lên Drive (đã có sẵn ${j.skipped})${j.failed && j.failed.length ? ', lỗi ' + j.failed.length + ': ' + j.failed[0].error : ''}` : 'Lỗi: ' + j.error;
+    } catch (e) { st.textContent = 'Lỗi: ' + e.message; }
+  }
 
 
   function showTab(tab) {
