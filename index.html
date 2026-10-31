@@ -294,7 +294,8 @@ async function loadToday() {
       const r = isDone(it);
       html += `<a class="task" href="${link(it)}"><div class="ic" style="background:var(--pink)">📅</div><div class="tt"><b>Daily Practice · ${esc(it.p.title)}</b><span>${esc(it.p.subtitle || '')}</span></div>${r ? `<span class="pill done">Đã làm ${r.score}/${r.max_score}</span>` : '<span class="pill todo">Chưa làm</span>'}</a>`;
     });
-    const quizToday = quiz && (quiz.class_codes || []).includes(student.classCode) && DAY_KEYS.indexOf(quiz.available_day) === new Date().getDay();
+    const _qd = new Date(), _qiso = _qd.getFullYear() + '-' + String(_qd.getMonth() + 1).padStart(2, '0') + '-' + String(_qd.getDate()).padStart(2, '0');
+    const quizToday = quiz && (quiz.class_codes || []).includes(student.classCode) && (quiz.available_from ? (_qiso >= quiz.available_from && _qiso <= (quiz.available_until || quiz.available_from)) : DAY_KEYS.indexOf(quiz.available_day) === _qd.getDay());
     if (quizToday) {
       const q = (qr.data || []).find(x => x.week_number === quiz.week_number);
       html += `<a class="task" href="weekly-quiz.html"><div class="ic" style="background:var(--butter)">📝</div><div class="tt"><b>Weekly Quiz · Tuần ${quiz.week_number}</b><span>${quiz.max_score} điểm, 4 phần</span></div>${q ? `<span class="pill done">Đã làm ${q.total_score}/${q.max_score}</span>` : '<span class="pill todo">Chưa làm</span>'}</a>`;

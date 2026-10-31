@@ -290,9 +290,12 @@ async function boot() {
   }
 
   // day gate (teachers bypass)
-  const dayOk = DAYS[quiz.available_day] === new Date().getDay();
+  /* Mở theo khoảng ngày (available_from đến available_until) nếu có, nếu không thì chỉ mở đúng thứ trong tuần */
+  const _d = new Date(), todayIso = _d.getFullYear() + '-' + String(_d.getMonth() + 1).padStart(2, '0') + '-' + String(_d.getDate()).padStart(2, '0');
+  const dayOk = quiz.available_from ? (todayIso >= quiz.available_from && todayIso <= (quiz.available_until || quiz.available_from)) : DAYS[quiz.available_day] === _d.getDay();
+  const fmtIso = s => s.slice(8, 10) + '/' + s.slice(5, 7);
   if (!dayOk && !isTeacher) {
-    $('app').innerHTML = intro() + `<div class="notice warn">Bài quiz mở vào <b>${DAY_VI[quiz.available_day] || quiz.available_day}</b>. Hôm nay chưa đến ngày làm bài.${
+    $('app').innerHTML = intro() + `<div class="notice warn">${quiz.available_from ? `Bài quiz mở từ <b>${fmtIso(quiz.available_from)}</b> đến <b>${fmtIso(quiz.available_until || quiz.available_from)}</b>.` : `Bài quiz mở vào <b>${DAY_VI[quiz.available_day] || quiz.available_day}</b>.`} Hôm nay chưa đến ngày làm bài.${
       existing ? ` Điểm lần trước của bạn: <b>${existing.total_score}/${existing.max_score}</b>.` : ''}</div>`;
     return;
   }

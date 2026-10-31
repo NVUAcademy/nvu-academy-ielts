@@ -9,6 +9,8 @@
       "IELTS14"
     ],
     "available_day": "friday",
+    "available_from": "2026-10-30",
+    "available_until": "2026-11-01",
     "max_score": 30,
     "audio_hosting": "Audio files are served from the repo at /audio/ (copied from the original Google Drive files). view_url keeps the original Drive link as a backup.",
     "audio": {
