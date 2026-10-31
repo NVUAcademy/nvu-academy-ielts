@@ -29,7 +29,7 @@ async function askClaude(user) {
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: { 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-    body: JSON.stringify({ model: CLAUDE_MODEL, max_tokens: 1600, temperature: 0.3, system: SYSTEM, messages: [{ role: 'user', content: user }] })
+    body: JSON.stringify({ model: CLAUDE_MODEL, max_tokens: 1600, system: SYSTEM, messages: [{ role: 'user', content: user }] })
   });
   if (!r.ok) throw new Error('Claude: ' + r.status + ' ' + (await r.text()).slice(0, 300));
   const j = await r.json();

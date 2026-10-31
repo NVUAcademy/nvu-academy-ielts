@@ -121,7 +121,7 @@ async function askClaude(system, user) {
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: { 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-    body: JSON.stringify({ model: CLAUDE_MODEL, max_tokens: 1800, temperature: 0.3, system, messages: [{ role: 'user', content: user }] }), signal: AbortSignal.timeout(30000)
+    body: JSON.stringify({ model: CLAUDE_MODEL, max_tokens: 1800, system, messages: [{ role: 'user', content: user }] }), signal: AbortSignal.timeout(30000)
   }).catch(e => { throw new Error('Claude: ' + (e.name === 'TimeoutError' ? 'quá thời gian chờ (30 giây)' : e.message)); });
   if (!r.ok) throw new Error('Claude: ' + r.status + ' ' + (await r.text()).slice(0, 300));
   const j = await r.json();
