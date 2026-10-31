@@ -509,12 +509,18 @@
       btn.innerHTML = '<span class="spinner"></span>Đang xử lý...';
 
       try {
-        let { data: existing } = await db
-          .from('students')
-          .select('*')
-          .eq('full_name', name)
-          .eq('class_code', classCode)
-          .single();
+        /* So tên không phân biệt dấu, hoa thường và khoảng trắng; báo rõ nếu bạn chọn nhầm lớp */
+        const norm = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase().replace(/\s+/g, ' ').trim();
+        const { data: all } = await db.from('students').select('*');
+        const same = (all || []).filter(s => norm(s.full_name) === norm(name));
+        let existing = same.find(s => s.class_code === classCode) || null;
+        if (!existing && same.length) {
+          const sel = document.getElementById('student-class');
+          const label = c => { const o = Array.from(sel.options).find(x => x.value === c); return o ? o.textContent : c; };
+          const rightClasses = same.map(s => label(s.class_code)).join(' hoặc ');
+          showErr('student', 'Bạn ' + same[0].full_name + ' thuộc lớp ' + rightClasses + ', không phải lớp ' + label(classCode) + '. Em chọn lại đúng lớp nhé!');
+          return;
+        }
 
         if (!existing) {
           const { data: newStudent, error } = await db
