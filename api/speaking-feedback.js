@@ -13,7 +13,11 @@ const DAILY_LIMIT = parseInt(process.env.DAILY_LIMIT || '8', 10);
 const MAX_AUDIO_BYTES = 12 * 1024 * 1024;
 
 const SB_URL = () => (process.env.SUPABASE_URL || '').replace(/\/$/, '');
-const SB_HEAD = () => ({ apikey: process.env.SUPABASE_SERVICE_KEY, Authorization: 'Bearer ' + process.env.SUPABASE_SERVICE_KEY });
+/* Khóa kiểu mới (sb_secret_...) không phải JWT nên chỉ gửi header apikey; khóa service_role cũ (JWT) vẫn cần Bearer */
+const SB_HEAD = () => {
+  const k = process.env.SUPABASE_SERVICE_KEY || '';
+  return k.startsWith('sb_') ? { apikey: k } : { apikey: k, Authorization: 'Bearer ' + k };
+};
 
 /* ---------- Tiện ích so khớp giọng nói với văn bản mẫu ---------- */
 function normWord(w) { return String(w || '').toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]/g, ''); }
