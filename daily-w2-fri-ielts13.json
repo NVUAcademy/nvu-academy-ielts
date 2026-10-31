@@ -4,7 +4,9 @@
   "subtitle": "Review Trial Lesson 2: busy lives and how things are made",
   "theme": "Trial Lesson 2 · Busy lives and how things are made",
   "source": "Pre-IELTS Trial Lesson 2, Daily Practice (Friday 30/10)",
-  "class_codes": ["IELTS13"],
+  "class_codes": [
+    "IELTS13"
+  ],
   "week_number": 2,
   "day": "friday",
   "date": "2026-10-30",
@@ -12,7 +14,10 @@
   "minutes": 60,
   "intro": "Làm lần lượt 5 bước, khoảng 60 phút. Hạn nộp 23:00 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Phần phát âm và bài nói sẽ do thầy chấm. Đừng xem đáp án trước khi làm xong.",
   "audio": {
-    "shadow": { "label": "Shadowing · Daily practice Friday 30/10", "src": "audio/Shadowing_Daily_Practice_Fri_30_10.wav" }
+    "shadow": {
+      "label": "Shadowing · Daily practice Friday 30/10",
+      "src": "audio/Shadowing_Daily_Practice_Fri_30_10.wav"
+    }
   },
   "steps": [
     {
@@ -22,29 +27,129 @@
       "instructions": "Điền từ hoặc cụm từ trong khung (procrastinate · keep up with · hectic · a sense of achievement · juggle · be packed with · unwind · productive · commute · prioritise). Đổi dạng từ nếu cần. Sau đó đọc to từng câu.",
       "kind": "fill",
       "items": [
-        { "id": "s1_1", "label": "My weekdays are ____ because I have classes from morning to night.", "fields": [ { "answer": "hectic" } ] },
-        { "id": "s1_2", "label": "My ____ to university takes forty minutes by bus.", "fields": [ { "answer": "commute" } ] },
-        { "id": "s1_3", "label": "After the exam, I usually ____ by watching a film.", "fields": [ { "answer": "unwind" } ] },
-        { "id": "s1_4", "label": "My sister ____ a baby and her online classes.", "fields": [ { "answer": "juggles" } ], "explain": "Chủ ngữ my sister số ít, hiện tại đơn nên thêm -s: juggles." },
-        { "id": "s1_5", "label": "If you want a high band, you must ____ speaking practice over games.", "fields": [ { "answer": "prioritise", "accept": ["prioritize"] } ] },
-        { "id": "s1_6", "label": "I tend to ____ when I have a long essay to write.", "fields": [ { "answer": "procrastinate" } ] },
-        { "id": "s1_7", "label": "Yesterday was a very ____ day: I finished all my homework.", "fields": [ { "answer": "productive" } ] },
-        { "id": "s1_8", "label": "When I finished my first marathon, I felt ____.", "fields": [ { "answer": "a sense of achievement" } ] },
-        { "id": "s1_9", "label": "The cinema was ____ people on opening night.", "fields": [ { "answer": "packed with" } ] },
-        { "id": "s1_10", "label": "The teacher speaks so fast that I cannot ____ her.", "fields": [ { "answer": "keep up with" } ] }
+        {
+          "id": "s1_1",
+          "label": "My weekdays are ____ because I have classes from morning to night.",
+          "fields": [
+            {
+              "answer": "hectic"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "My ____ to university takes forty minutes by bus.",
+          "fields": [
+            {
+              "answer": "commute"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "After the exam, I usually ____ by watching a film.",
+          "fields": [
+            {
+              "answer": "unwind"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "My sister ____ a baby and her online classes.",
+          "fields": [
+            {
+              "answer": "juggles"
+            }
+          ],
+          "explain": "Chủ ngữ my sister số ít, hiện tại đơn nên thêm -s: juggles."
+        },
+        {
+          "id": "s1_5",
+          "label": "If you want a high band, you must ____ speaking practice over games.",
+          "fields": [
+            {
+              "answer": "prioritise",
+              "accept": [
+                "prioritize"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "I tend to ____ when I have a long essay to write.",
+          "fields": [
+            {
+              "answer": "procrastinate"
+            }
+          ]
+        },
+        {
+          "id": "s1_7",
+          "label": "Yesterday was a very ____ day: I finished all my homework.",
+          "fields": [
+            {
+              "answer": "productive"
+            }
+          ]
+        },
+        {
+          "id": "s1_8",
+          "label": "When I finished my first marathon, I felt ____.",
+          "fields": [
+            {
+              "answer": "a sense of achievement"
+            }
+          ]
+        },
+        {
+          "id": "s1_9",
+          "label": "The cinema was ____ people on opening night.",
+          "fields": [
+            {
+              "answer": "packed with"
+            }
+          ]
+        },
+        {
+          "id": "s1_10",
+          "label": "The teacher speaks so fast that I cannot ____ her.",
+          "fields": [
+            {
+              "answer": "keep up with"
+            }
+          ]
+        }
       ]
     },
     {
       "id": "s2",
       "title": "Step 2 · Grammar: passive (viết lại câu)",
       "minutes": 8,
-      "instructions": "How paper is made. Viết lại các câu sau ở thể bị động hiện tại đơn trong vở hoặc vào ô, rồi bấm xem đáp án mẫu để so sánh.",
+      "instructions": "How paper is made. Viết lại các câu sau ở thể bị động hiện tại đơn vào ô bên dưới, rồi bấm xem đáp án mẫu để so sánh.",
       "kind": "open",
       "open": [
-        { "id": "s2_1", "q": "1 · Workers cut down the trees.", "model": "The trees are cut down." },
-        { "id": "s2_2", "q": "2 · A machine turns the wood into pulp.", "model": "The wood is turned into pulp." },
-        { "id": "s2_3", "q": "3 · They press the pulp into thin sheets.", "model": "The pulp is pressed into thin sheets." },
-        { "id": "s2_4", "q": "4 · They dry the sheets and cut them to size.", "model": "The sheets are dried and cut to size." }
+        {
+          "id": "s2_1",
+          "q": "1 · Workers cut down the trees.",
+          "model": "The trees are cut down."
+        },
+        {
+          "id": "s2_2",
+          "q": "2 · A machine turns the wood into pulp.",
+          "model": "The wood is turned into pulp."
+        },
+        {
+          "id": "s2_3",
+          "q": "3 · They press the pulp into thin sheets.",
+          "model": "The pulp is pressed into thin sheets."
+        },
+        {
+          "id": "s2_4",
+          "q": "4 · They dry the sheets and cut them to size.",
+          "model": "The sheets are dried and cut to size."
+        }
       ]
     },
     {
@@ -54,12 +159,45 @@
       "instructions": "Sửa lỗi sai trong câu 5–8: điền phần đúng vào ô.",
       "kind": "fill",
       "items": [
-        { "id": "s2_5", "label": "5 · The trees is cut down. → The trees ____ cut down.", "fields": [ { "answer": "are" } ] },
-        { "id": "s2_6", "label": "6 · The pulp press into sheets. → The pulp ____ into sheets.", "fields": [ { "answer": "is pressed" } ] },
-        { "id": "s2_7", "label": "7 · My brother always is late. → My brother ____ late.", "fields": [ { "answer": "is always" } ] },
-        { "id": "s2_8", "label": "8 · She watches often television. → She ____ television.", "fields": [ { "answer": "often watches" } ] }
+        {
+          "id": "s2_5",
+          "label": "5 · The trees is cut down. → The trees ____ cut down.",
+          "fields": [
+            {
+              "answer": "are"
+            }
+          ]
+        },
+        {
+          "id": "s2_6",
+          "label": "6 · The pulp press into sheets. → The pulp ____ into sheets.",
+          "fields": [
+            {
+              "answer": "is pressed"
+            }
+          ]
+        },
+        {
+          "id": "s2_7",
+          "label": "7 · My brother always is late. → My brother ____ late.",
+          "fields": [
+            {
+              "answer": "is always"
+            }
+          ]
+        },
+        {
+          "id": "s2_8",
+          "label": "8 · She watches often television. → She ____ television.",
+          "fields": [
+            {
+              "answer": "often watches"
+            }
+          ]
+        }
       ]
-    },    {
+    },
+    {
       "id": "s3",
       "title": "Step 3 · Reading",
       "minutes": 15,
@@ -69,11 +207,66 @@
         "Linh is a second-year student who lives fifteen kilometres from her university. Her commute takes 50 minutes by bus, so she gets up at 5.30 every morning. She is rarely free: on weekdays she has lessons until 4 pm and then works as a waitress for three hours. At weekends she teaches two children, which she enjoys because it gives her a sense of achievement. Linh often feels stressed in the evening, so she unwinds by cooking. She says her biggest problem is procrastination: she usually delays her essays until the last night. This term she is trying to prioritise her studies, so she has reduced her work to two evenings a week."
       ],
       "items": [
-        { "id": "s3_1", "label": "1 · How long is Linh’s commute?", "fields": [ { "answer": "50 minutes", "accept": ["fifty minutes", "50 mins"] } ] },
-        { "id": "s3_2", "label": "2 · What job does Linh do after lessons?", "fields": [ { "answer": "waitress", "accept": ["a waitress"] } ] },
-        { "id": "s3_3", "label": "3 · How does Linh unwind in the evening?", "fields": [ { "answer": "cooking" } ] },
-        { "id": "s3_4", "label": "4 · What does she usually delay until the last night?", "fields": [ { "answer": "essays", "accept": ["her essays"] } ] },
-        { "id": "s3_5", "label": "5 · How many evenings a week does she work now?", "fields": [ { "answer": "two", "accept": ["2", "two evenings", "2 evenings"] } ] }
+        {
+          "id": "s3_1",
+          "label": "1 · How long is Linh’s commute?",
+          "fields": [
+            {
+              "answer": "50 minutes",
+              "accept": [
+                "fifty minutes",
+                "50 mins"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2 · What job does Linh do after lessons?",
+          "fields": [
+            {
+              "answer": "waitress",
+              "accept": [
+                "a waitress"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3 · How does Linh unwind in the evening?",
+          "fields": [
+            {
+              "answer": "cooking"
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "4 · What does she usually delay until the last night?",
+          "fields": [
+            {
+              "answer": "essays",
+              "accept": [
+                "her essays"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_5",
+          "label": "5 · How many evenings a week does she work now?",
+          "fields": [
+            {
+              "answer": "two",
+              "accept": [
+                "2",
+                "two evenings",
+                "2 evenings"
+              ]
+            }
+          ]
+        }
       ]
     },
     {
@@ -83,7 +276,11 @@
       "instructions": "Đánh dấu âm tiết mang trọng âm của: hectic · commute · prioritise · procrastinate · productive. Viết ra rồi bấm xem đáp án mẫu để so sánh.",
       "kind": "open",
       "open": [
-        { "id": "s4_1", "q": "Trọng âm của 5 từ", "model": "HEC-tic · com-MUTE · pri-OR-i-tise · pro-CRAS-ti-nate · pro-DUC-tive" }
+        {
+          "id": "s4_1",
+          "q": "Trọng âm của 5 từ",
+          "model": "HEC-tic · com-MUTE · pri-OR-i-tise · pro-CRAS-ti-nate · pro-DUC-tive"
+        }
       ]
     },
     {

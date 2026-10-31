@@ -113,7 +113,8 @@ let recorder = null, recChunks = [], recBlob = null, recStream = null, recSec = 
 
 /* ---------- marking ---------- */
 function normVal(s) {
-  let v = String(s ?? '').toLowerCase().replace(/[£$,\s]/g, '').replace(/(km|m)$/, '');
+  let v = String(s ?? '').toLowerCase().replace(/[£$,\s]/g, '');
+  const m = v.match(/^(\d*\.?\d+)(km|m)$/); if (m) v = m[1];   /* chỉ bỏ đơn vị khi đứng sau một con số */
   return v;
 }
 function sameVal(a, b) {
@@ -232,6 +233,7 @@ function reviewSubmitted() {
   const res = closedItems().map(x => ({ ...x, ok: itemOk(x.it, x.kind) }));
   totalSec = (existing && existing.time_taken_seconds) || 0;
   renderResult(res, res.filter(r => r.ok).length, 'review');
+  showSavedWritingAi();
 }
 
 function head() {
@@ -355,6 +357,44 @@ async function submitPractice() {
   renderResult(res, score, 'saving');
   renderResult(res, score, await save(res, score));
   runAi();
+  runWritingAi();
+}
+
+/* AI nhận xét bài viết (các ô có cờ "ai" trong đề) sau khi nộp bài */
+function writingFbHtml(f) {
+  const b = f.band || {};
+  return `<h2>Nhận xét AI về bài viết</h2><div class="sub" style="font-size:17px">${f.word_count || ''} từ · Band ước lượng: <b style="color:var(--ink)">${b.overall ?? '–'}</b> (TA ${b.ta ?? '–'} · CC ${b.cc ?? '–'} · LR ${b.lr ?? '–'} · GRA ${b.gra ?? '–'})</div>
+    <p style="margin:10px 0">${esc(f.summary)}</p><div class="review"><span class="good">✓ ${esc(f.praise)}</span></div>
+    ${(f.fixes || []).map(x => `<div class="review"><b>${esc(x.quote)}</b><br>${esc(x.problem)}<br><span class="good">→ ${esc(x.correction)}</span>${x.rule ? `<br><span class="ex">${esc(x.rule)}</span>` : ''}</div>`).join('')}
+    ${(f.checklist || []).length ? `<div class="review"><b>Checklist</b><br>${f.checklist.map(c => `${c.ok ? '✓' : '✗'} ${esc(c.item)}`).join('<br>')}</div>` : ''}
+    ${f.rewrite ? `<div class="review"><b>Câu mẫu viết lại:</b> ${esc(f.rewrite)}</div>` : ''}
+    <div class="review"><b>Việc tiếp theo:</b> ${esc(f.next_step)}</div>
+    <p class="sub" style="font-size:15px;margin-top:8px">Band chỉ để tham khảo, thầy Nam sẽ đọc và nhận xét thêm.</p>`;
+}
+async function runWritingAi() {
+  if (!student || isTeacher) return;
+  const items = []; P.steps.forEach(st => (st.open || []).forEach(o => { if (o.ai && (answers[o.id] || '').trim().split(/\s+/).filter(Boolean).length >= 5) items.push(o); }));
+  const anchor = document.querySelector('.card.arch'); if (!items.length || !anchor) return;
+  for (const o of items) {
+    const box = document.createElement('div'); box.className = 'card';
+    box.innerHTML = '<h2>Nhận xét AI về bài viết</h2><p class="sub">AI đang đọc bài viết của em… (khoảng 15 đến 30 giây)</p>';
+    anchor.insertAdjacentElement('afterend', box);
+    try {
+      const r = await fetch('/api/writing-feedback', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ student_id: student.id, practice_id: P.id, item_id: o.id, date: P.date, text: answers[o.id], prompt: o.ai.task, task_type: o.ai.type, level: o.ai.level, min_words: o.ai.min_words, criteria: o.ai.criteria }) });
+      const j = await r.json(); if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
+      box.innerHTML = writingFbHtml(j.feedback);
+    } catch (e) {
+      box.innerHTML = `<h2>Nhận xét AI về bài viết</h2><p class="sub" style="font-size:16px">Chưa có nhận xét tự động (${esc(e.message)}). Thầy Nam sẽ đọc và nhận xét bài viết của em.</p>`;
+    }
+  }
+}
+async function showSavedWritingAi() {
+  if (!student) return;
+  try {
+    const { data } = await db.from('writing_feedback').select('item_id, feedback').eq('student_id', student.id).eq('practice_id', P.id).eq('practice_date', P.date);
+    const anchor = document.querySelector('.card.arch'); if (!anchor) return;
+    (data || []).forEach(row => { const box = document.createElement('div'); box.className = 'card'; box.innerHTML = writingFbHtml(row.feedback || {}); anchor.insertAdjacentElement('afterend', box); });
+  } catch (e) {}
 }
 
 /* AI nhận xét voice note ngay sau khi nộp bài */

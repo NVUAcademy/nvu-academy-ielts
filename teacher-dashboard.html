@@ -293,6 +293,10 @@
       <span class="nav-icon">🎙️</span>
       <span>Ghi âm</span>
     </div>
+    <div class="nav-item" onclick="showTab('submissions')">
+      <span class="nav-icon">📝</span>
+      <span>Bài làm</span>
+    </div>
     <div class="nav-item" onclick="showTab('library')">
       <span class="nav-icon">📚</span>
       <span>Thư viện</span>
@@ -571,6 +575,26 @@
         <span class="section-sub" id="rc-status"></span>
       </div>
       <div id="rc-list"><div class="empty-state"><div class="empty-text">Chọn lớp để xem ghi âm</div></div></div>
+    </div>
+  </div>
+
+  <!-- SUBMISSIONS TAB -->
+  <div id="tab-submissions" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Bài làm của học sinh</div>
+      <div class="page-sub">Điểm tự chấm, câu trả lời, bài viết, ghi âm và nhận xét của từng bạn trong Daily Practice</div>
+    </div>
+    <div class="section-card">
+      <div class="section-header">
+        <div class="filter-bar" style="flex-wrap:wrap">
+          <select class="filter" id="class-filter-sub" onchange="loadSubmissions()"><option value="">— Chọn lớp —</option></select>
+          <label style="font-size:13px;color:var(--muted)">Từ</label><input type="date" class="filter" id="sb-from" onchange="loadSubmissions()">
+          <label style="font-size:13px;color:var(--muted)">đến</label><input type="date" class="filter" id="sb-to" onchange="loadSubmissions()">
+          <button class="btn-sm" onclick="loadSubmissions()">↻ Tải lại</button>
+        </div>
+        <span class="section-sub" id="sb-status"></span>
+      </div>
+      <div id="sb-list"><div class="empty-state"><div class="empty-text">Chọn lớp để xem bài làm</div></div></div>
     </div>
   </div>
 
@@ -1774,6 +1798,92 @@
   }
   function AT_CLS_FOR_ZIP() { return document.getElementById('class-filter-rec').value || 'lop'; }
 
+  /* ---------- Bài làm: xem bài tự chấm, bài viết, ghi âm và viết nhận xét ---------- */
+  const SUB = { rows: [], cache: {}, index: null };
+  const sbSolve = {
+    norm(s) { let v = String(s ?? '').toLowerCase().replace(/[£$,\s]/g, ''); const m = v.match(/^(\d*\.?\d+)(km|m)$/); if (m) v = m[1]; return v; },
+    same(a, b) { const x = this.norm(a), y = this.norm(b); if (!x || !y) return false; if (x === y) return true; const n = /^\d*\.?\d+$/; return n.test(x) && n.test(y) && !/^0\d/.test(x) && !/^0\d/.test(y) && parseFloat(x) === parseFloat(y); },
+    field(f, g) { return [f.answer, ...(f.accept || [])].some(a => this.same(a, g)); }
+  };
+  async function sbIndex() {
+    if (!SUB.index) { try { SUB.index = (await (await fetch('daily-index.json', { cache: 'no-cache' })).json()).practices || []; } catch (e) { SUB.index = []; } }
+    return SUB.index;
+  }
+  async function sbPractice(id) {
+    if (SUB.cache[id]) return SUB.cache[id];
+    const m = (await sbIndex()).find(x => x.id === id); if (!m) return null;
+    try { SUB.cache[id] = await (await fetch(m.file, { cache: 'no-cache' })).json(); } catch (e) { return null; }
+    return SUB.cache[id];
+  }
+  async function loadSubmissions() {
+    const to = document.getElementById('sb-to'), from = document.getElementById('sb-from');
+    if (!to.value) to.value = isoOf(new Date());
+    if (!from.value) from.value = addDays(isoOf(new Date()), -7);
+    const cls = document.getElementById('class-filter-sub').value, list = document.getElementById('sb-list');
+    if (!cls) { list.innerHTML = '<div class="empty-state"><div class="empty-text">Chọn lớp để xem bài làm</div></div>'; return; }
+    list.innerHTML = '<div class="loading">Đang tải...</div>';
+    await sbIndex();
+    const { data, error } = await db.from('daily_scores').select('id, student_id, practice_date, practice_id, section, score, max_score, time_taken_seconds, answers, voice_path, teacher_comment, students!inner(full_name, class_code)')
+      .eq('students.class_code', cls).gte('practice_date', from.value).lte('practice_date', to.value).order('practice_date', { ascending: false });
+    if (error) { list.innerHTML = emptyState('Không tải được: ' + esc(error.message)); return; }
+    SUB.rows = data || [];
+    document.getElementById('sb-status').textContent = SUB.rows.length + ' bài đã nộp';
+    if (!SUB.rows.length) { list.innerHTML = emptyState('Chưa có bài nộp trong khoảng này'); return; }
+    const title = id => { const p = SUB.index.find(x => x.id === id); return p ? p.title + ' · ' + p.subtitle : (id || 'Daily Practice'); };
+    let html = '', cur = '';
+    SUB.rows.slice().sort((a, b) => a.practice_date < b.practice_date ? 1 : a.practice_date > b.practice_date ? -1 : a.students.full_name.localeCompare(b.students.full_name, 'vi')).forEach(r => {
+      if (r.practice_date !== cur) { cur = r.practice_date; html += `<div style="padding:10px 24px;background:rgba(139,115,85,.08);font-weight:700;font-size:14px">${r.practice_date.slice(8, 10)}/${r.practice_date.slice(5, 7)}/${r.practice_date.slice(0, 4)}</div>`; }
+      html += `<div style="padding:10px 24px;border-bottom:1px solid rgba(139,115,85,.12)"><div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+        <div><strong>${esc(r.students.full_name)}</strong> <span class="badge badge-green">${r.score}/${r.max_score}</span> ${r.voice_path ? '<span class="badge badge-gold">🎙 có ghi âm</span>' : ''} ${r.teacher_comment ? '<span class="badge badge-gold">đã nhận xét</span>' : ''}
+        <div style="font-size:13px;color:var(--muted)">${esc(title(r.practice_id))}${r.time_taken_seconds ? ' · ' + Math.round(r.time_taken_seconds / 60) + ' phút' : ''}</div></div>
+        <button class="btn-sm" onclick="toggleSub('${r.id}')">Xem bài</button></div><div id="sbd-${r.id}"></div></div>`;
+    });
+    list.innerHTML = html;
+  }
+  async function toggleSub(id) {
+    const box = document.getElementById('sbd-' + id); if (!box) return; if (box.innerHTML) { box.innerHTML = ''; return; }
+    const r = SUB.rows.find(x => String(x.id) === String(id)); if (!r) return;
+    box.innerHTML = '<div class="loading">Đang tải...</div>';
+    const P = await sbPractice(r.practice_id), A = r.answers || {};
+    if (!P) { box.innerHTML = emptyState('Không mở được đề của bài này'); return; }
+    const line = (ok, label, given, right) => `<div style="padding:3px 0;font-size:13.5px">${ok ? '<span style="color:var(--green)">✓</span>' : '<span style="color:var(--red)">✗</span>'} <b>${esc(label)}</b> → ${given ? esc(given) : '<i>(bỏ trống)</i>'}${ok ? '' : ` <span style="color:var(--green)">· đúng: ${esc(right)}</span>`}</div>`;
+    let h = '<div style="margin-top:8px;padding:10px 14px;background:#faf6ee;border-radius:10px">';
+    P.steps.forEach(st => {
+      let body = '';
+      if (st.kind === 'mcq') st.items.forEach(it => { const g = A[it.id]; body += line((g || '') === it.answer, it.q, g ? g + '. ' + (it.options[g] || '') : '', it.answer + '. ' + it.options[it.answer]); });
+      else if (st.kind === 'fill') st.items.forEach(it => { const gs = it.fields.map((f, i) => (A[`${it.id}_${i}`] || '').trim()), j = it.joiner ? ' ' + it.joiner + ' ' : ' '; body += line(it.fields.every((f, i) => sbSolve.field(f, gs[i])), it.label, gs.every(x => !x) ? '' : gs.join(j), it.fields.map(f => f.answer).join(j)); });
+      (st.open || []).forEach(o => { body += `<div style="padding:6px 10px;margin:4px 0;background:#fff;border-left:3px solid #b08d57;font-size:13.5px"><b>${esc(o.q)}</b><br>${A[o.id] ? esc(A[o.id]).replace(/\n/g, '<br>') : '<i>(bỏ trống)</i>'}${o.model ? `<div style="color:var(--muted);font-size:12px;margin-top:4px">Mẫu: ${esc(o.model)}</div>` : ''}</div>`; });
+      if (body) h += `<div style="margin:8px 0"><div style="font-weight:700;font-size:13px;color:var(--muted)">${esc(st.title)}</div>${body}</div>`;
+    });
+    try {
+      const { data: wf } = await db.from('writing_feedback').select('item_id, feedback').eq('student_id', r.student_id).eq('practice_id', r.practice_id).eq('practice_date', r.practice_date);
+      (wf || []).forEach(w => {
+        const f = w.feedback || {}, b = f.band || {};
+        h += `<div style="margin:10px 0;padding:10px 12px;background:#eef3fb;border-radius:10px;font-size:13.5px"><b>🤖 AI chấm bài viết</b> · ${f.word_count || ''} từ · Band ước lượng <b>${b.overall ?? '–'}</b> (TA ${b.ta ?? '–'} · CC ${b.cc ?? '–'} · LR ${b.lr ?? '–'} · GRA ${b.gra ?? '–'})
+          <div style="margin:6px 0">${esc(f.summary || '')}</div><div style="color:var(--green)">✓ ${esc(f.praise || '')}</div>
+          ${(f.fixes || []).map(x => `<div style="margin-top:4px"><b>${esc(x.quote)}</b> → <span style="color:var(--green)">${esc(x.correction)}</span><br><span style="color:var(--muted)">${esc(x.problem)}</span></div>`).join('')}
+          ${(f.checklist || []).length ? `<div style="margin-top:4px">${f.checklist.map(c => (c.ok ? '✓ ' : '✗ ') + esc(c.item)).join(' · ')}</div>` : ''}
+          <div style="margin-top:4px;color:var(--muted)">Việc tiếp: ${esc(f.next_step || '')}</div></div>`;
+      });
+    } catch (e) {}
+    if (r.voice_path) h += `<div id="sbv-${r.id}" style="margin:8px 0"><button class="btn-sm" onclick="playSub('${r.id}')">▶ Nghe ghi âm</button></div>`;
+    h += `<div style="display:flex;gap:8px;margin-top:8px"><textarea id="sbc-${r.id}" class="zl-text" rows="2" style="font-size:14px" placeholder="Nhận xét (1 điểm khen, tối đa 2 lỗi, 1 việc luyện tiếp)">${esc(r.teacher_comment || '')}</textarea><button class="btn-sm" onclick="saveSubComment('${r.id}')" style="align-self:flex-start">Lưu</button></div><div id="sbs-${r.id}" style="font-size:12px;min-height:14px"></div></div>`;
+    box.innerHTML = h;
+  }
+  async function playSub(id) {
+    const r = SUB.rows.find(x => String(x.id) === String(id)); if (!r) return;
+    const { data, error } = await db.storage.from('voice-notes').createSignedUrl(r.voice_path, 3600);
+    if (error) { alert('Không mở được bản ghi: ' + error.message); return; }
+    document.getElementById('sbv-' + id).innerHTML = `<audio controls autoplay src="${esc(data.signedUrl)}" style="max-width:320px"></audio>`;
+  }
+  async function saveSubComment(id) {
+    const r = SUB.rows.find(x => String(x.id) === String(id)); if (!r) return;
+    const val = document.getElementById('sbc-' + id).value.trim() || null, el = document.getElementById('sbs-' + id);
+    const { error } = await db.from('daily_scores').update({ teacher_comment: val }).eq('id', r.id);
+    if (error) { el.style.color = 'var(--red)'; el.textContent = 'Không lưu được: ' + error.message; return; }
+    r.teacher_comment = val; el.style.color = 'var(--green)'; el.textContent = '✓ Đã lưu, học sinh thấy nhận xét này trong Daily Practice';
+  }
+
   /* Link thư mục Drive từng lớp (mở khi chọn lớp có thư mục) */
   const DRIVE_FOLDER_LINKS = { FOUNDATION11: 'https://drive.google.com/drive/folders/1E3iSQSH9poDJmot-ZuLd9crB77SNBy4-' };
   function updateDriveLink() { const a = document.getElementById('drive-link'); if (!a) return; const u = DRIVE_FOLDER_LINKS[document.getElementById('class-filter-rec').value]; a.style.display = u ? '' : 'none'; if (u) a.href = u; }
@@ -1807,6 +1917,7 @@
     else if (tab === 'schedule') loadSchedule();
     else if (tab === 'library') loadLibrary();
     else if (tab === 'recordings') loadRecordings();
+    else if (tab === 'submissions') loadSubmissions();
     else if (tab === 'meow') loadMeow();
     else if (tab === 'attendance') loadAttendance();
     else if (tab === 'ranking') loadRanking();

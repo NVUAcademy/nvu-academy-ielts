@@ -322,15 +322,33 @@ function renderIntro() {
 }
 
 /* ---------- quiz ---------- */
-function startQuiz() {
+async function startQuiz() {
   started = true;
   answers = {};
   try { answers = JSON.parse(lsGet(draftKey()) || '{}'); } catch (e) {}
+  await quizDraftPull();
   totalTimer = setInterval(() => { totalSec++; const e = $('ttotal'); if (e) e.textContent = fmt(totalSec); }, 1000);
   renderQuiz();
 }
 function draftKey() { return `nvu_quiz_draft_${QUIZ_FILE}_${student ? student.id : 'teacher'}`; }
-function saveDraft() { lsSet(draftKey(), JSON.stringify(answers)); }
+function saveDraft() { lsSet(draftKey(), JSON.stringify(answers)); quizDraftPush(); }
+
+/* Bài đang làm dở cũng được lưu trên máy chủ để không mất khi đổi trình duyệt hoặc tải lại trang */
+let quizDraftT = null, quizSubmitted = false;
+const QD = () => ({ practice_id: 'quiz:' + QUIZ_FILE, practice_date: '2000-01-01' });
+function quizDraftPush() {
+  if (!student || isTeacher) return; clearTimeout(quizDraftT);
+  quizDraftT = setTimeout(async () => { try { await db.from('daily_drafts').upsert({ student_id: student.id, ...QD(), answers, updated_at: new Date().toISOString() }, { onConflict: 'student_id,practice_id,practice_date' }); } catch (e) {} }, 1200);
+}
+async function quizDraftPull() {
+  if (!student || isTeacher) return;
+  try {
+    const { data } = await db.from('daily_drafts').select('answers').eq('student_id', student.id).eq('practice_id', QD().practice_id).eq('practice_date', QD().practice_date).maybeSingle();
+    if (data && data.answers && Object.keys(data.answers).length) { answers = { ...data.answers, ...answers }; lsSet(draftKey(), JSON.stringify(answers)); }
+  } catch (e) {}
+}
+async function quizDraftDel() { if (!student || isTeacher) return; clearTimeout(quizDraftT); try { await db.from('daily_drafts').delete().eq('student_id', student.id).eq('practice_id', QD().practice_id).eq('practice_date', QD().practice_date); } catch (e) {} }
+window.addEventListener('beforeunload', e => { if (started && !quizSubmitted) { e.preventDefault(); e.returnValue = ''; } });
 
 function renderQuiz() {
   const tabs = ['A','B','C','D'].map(p =>
@@ -473,7 +491,7 @@ async function saveResult(res) {
       const { error: e2 } = await db.from('error_logs').insert(rows);
       if (e2) throw e2;
     }
-    lsDel(draftKey());
+    lsDel(draftKey()); quizDraftDel(); quizSubmitted = true;
     existing = core;
     return 'ok';
   } catch (e) {

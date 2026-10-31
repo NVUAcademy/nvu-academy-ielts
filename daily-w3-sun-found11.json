@@ -4,16 +4,24 @@
   "subtitle": "B5 · Home Sweet Home: rooms and furniture, /p/ and /b/",
   "theme": "B5 · Home Sweet Home",
   "source": "Foundation 11, B5 Home Sweet Home, Part 7D Homework (Sunday 1/11)",
-  "class_codes": ["FOUNDATION11"],
+  "class_codes": [
+    "FOUNDATION11"
+  ],
   "week_number": 4,
   "day": "sunday",
   "date": "2026-11-01",
   "section": "vocabulary",
   "minutes": 45,
-  "intro": "Làm lần lượt 5 bước. Hạn nộp 23:00 cùng ngày. Bước cuối là ghi âm: nghe 'My bedroom' rồi đọc theo, thầy sẽ nghe và nhận xét. Bài viết ở bước 4 em cũng chép vào vở và chụp ảnh gửi nhóm Zalo như mọi khi.",
+  "intro": "Làm lần lượt 5 bước. Hạn nộp 23:00 cùng ngày. Bài viết ở bước 4 em gõ thẳng vào ô trên web. Bước cuối là ghi âm: nghe 'My bedroom' rồi đọc theo, thầy sẽ nghe và nhận xét.",
   "audio": {
-    "bedroom": { "label": "Audio · My bedroom", "src": "audio/B5_Audio_1_My_bedroom.mp3" },
-    "exit": { "label": "Audio · Exit check: p or b?", "src": "audio/B5_Audio_3_Exit_check.mp3" }
+    "bedroom": {
+      "label": "Audio · My bedroom",
+      "src": "audio/B5_Audio_1_My_bedroom.mp3"
+    },
+    "exit": {
+      "label": "Audio · Exit check: p or b?",
+      "src": "audio/B5_Audio_3_Exit_check.mp3"
+    }
   },
   "steps": [
     {
@@ -23,20 +31,132 @@
       "instructions": "Nhìn nghĩa tiếng Việt, nói từ tiếng Anh ra tiếng, rồi gõ lại từ đó (đánh vần đúng). Làm 3 lần như trong bài tập về nhà.",
       "kind": "fill",
       "items": [
-        { "id": "s1_1", "label": "phòng khách", "fields": [ { "answer": "living room" } ] },
-        { "id": "s1_2", "label": "phòng ngủ", "fields": [ { "answer": "bedroom" } ] },
-        { "id": "s1_3", "label": "nhà bếp", "fields": [ { "answer": "kitchen" } ] },
-        { "id": "s1_4", "label": "phòng tắm", "fields": [ { "answer": "bathroom" } ] },
-        { "id": "s1_5", "label": "ghế sô-pha", "fields": [ { "answer": "sofa" } ] },
-        { "id": "s1_6", "label": "bàn", "fields": [ { "answer": "table" } ] },
-        { "id": "s1_7", "label": "ghế", "fields": [ { "answer": "chair" } ] },
-        { "id": "s1_8", "label": "bàn học", "fields": [ { "answer": "desk" } ] },
-        { "id": "s1_9", "label": "tủ quần áo", "fields": [ { "answer": "wardrobe" } ] },
-        { "id": "s1_10", "label": "kệ (số ít)", "fields": [ { "answer": "shelf" } ] },
-        { "id": "s1_11", "label": "giường", "fields": [ { "answer": "bed" } ] },
-        { "id": "s1_12", "label": "đèn", "fields": [ { "answer": "lamp" } ] },
-        { "id": "s1_13", "label": "cửa sổ", "fields": [ { "answer": "window" } ] },
-        { "id": "s1_14", "label": "cửa ra vào", "fields": [ { "answer": "door" } ] }
+        {
+          "id": "s1_1",
+          "label": "phòng khách",
+          "fields": [
+            {
+              "answer": "living room"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "phòng ngủ",
+          "fields": [
+            {
+              "answer": "bedroom"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "nhà bếp",
+          "fields": [
+            {
+              "answer": "kitchen"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "phòng tắm",
+          "fields": [
+            {
+              "answer": "bathroom"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "ghế sô-pha",
+          "fields": [
+            {
+              "answer": "sofa"
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "bàn",
+          "fields": [
+            {
+              "answer": "table"
+            }
+          ]
+        },
+        {
+          "id": "s1_7",
+          "label": "ghế",
+          "fields": [
+            {
+              "answer": "chair"
+            }
+          ]
+        },
+        {
+          "id": "s1_8",
+          "label": "bàn học",
+          "fields": [
+            {
+              "answer": "desk"
+            }
+          ]
+        },
+        {
+          "id": "s1_9",
+          "label": "tủ quần áo",
+          "fields": [
+            {
+              "answer": "wardrobe"
+            }
+          ]
+        },
+        {
+          "id": "s1_10",
+          "label": "kệ (số ít)",
+          "fields": [
+            {
+              "answer": "shelf"
+            }
+          ]
+        },
+        {
+          "id": "s1_11",
+          "label": "giường",
+          "fields": [
+            {
+              "answer": "bed"
+            }
+          ]
+        },
+        {
+          "id": "s1_12",
+          "label": "đèn",
+          "fields": [
+            {
+              "answer": "lamp"
+            }
+          ]
+        },
+        {
+          "id": "s1_13",
+          "label": "cửa sổ",
+          "fields": [
+            {
+              "answer": "window"
+            }
+          ]
+        },
+        {
+          "id": "s1_14",
+          "label": "cửa ra vào",
+          "fields": [
+            {
+              "answer": "door"
+            }
+          ]
+        }
       ]
     },
     {
@@ -47,11 +167,51 @@
       "instructions": "Nghe 5 câu và chọn từ em nghe được trong mỗi cặp.",
       "kind": "mcq",
       "items": [
-        { "id": "s2_1", "q": "1. pear or bear?", "options": { "A": "bear", "B": "pear" }, "answer": "B" },
-        { "id": "s2_2", "q": "2. bat or pat?", "options": { "A": "bat", "B": "pat" }, "answer": "A" },
-        { "id": "s2_3", "q": "3. bark or park?", "options": { "A": "bark", "B": "park" }, "answer": "B" },
-        { "id": "s2_4", "q": "4. cab or cap?", "options": { "A": "cab", "B": "cap" }, "answer": "A" },
-        { "id": "s2_5", "q": "5. pear or bear?", "options": { "A": "pear", "B": "bear" }, "answer": "B" }
+        {
+          "id": "s2_1",
+          "q": "1. pear or bear?",
+          "options": {
+            "A": "bear",
+            "B": "pear"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s2_2",
+          "q": "2. bat or pat?",
+          "options": {
+            "A": "bat",
+            "B": "pat"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s2_3",
+          "q": "3. bark or park?",
+          "options": {
+            "A": "bark",
+            "B": "park"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s2_4",
+          "q": "4. cab or cap?",
+          "options": {
+            "A": "cab",
+            "B": "cap"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s2_5",
+          "q": "5. pear or bear?",
+          "options": {
+            "A": "pear",
+            "B": "bear"
+          },
+          "answer": "B"
+        }
       ]
     },
     {
@@ -61,21 +221,72 @@
       "instructions": "Điền từ còn thiếu.",
       "kind": "fill",
       "items": [
-        { "id": "s3_1", "label": "There ___ two chairs in the kitchen.", "fields": [ { "answer": "are" } ] },
-        { "id": "s3_2", "label": "There ___ a lamp on the desk.", "fields": [ { "answer": "is" } ] },
-        { "id": "s3_3", "label": "The cat is ___ the box. (inside)", "fields": [ { "answer": "in" } ] },
-        { "id": "s3_4", "label": "___ there a TV? — No, there ___.", "fields": [ { "answer": "Is" }, { "answer": "isn’t", "accept": ["isn't", "is not"] } ] },
-        { "id": "s3_5", "label": "Where’s the teddy bear? — It’s ___ the bed.", "fields": [ { "answer": "on" } ] }
+        {
+          "id": "s3_1",
+          "label": "There ___ two chairs in the kitchen.",
+          "fields": [
+            {
+              "answer": "are"
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "There ___ a lamp on the desk.",
+          "fields": [
+            {
+              "answer": "is"
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "The cat is ___ the box. (inside)",
+          "fields": [
+            {
+              "answer": "in"
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "___ there a TV? — No, there ___.",
+          "fields": [
+            {
+              "answer": "Is"
+            },
+            {
+              "answer": "isn’t",
+              "accept": [
+                "isn't",
+                "is not"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_5",
+          "label": "Where’s the teddy bear? — It’s ___ the bed.",
+          "fields": [
+            {
+              "answer": "on"
+            }
+          ]
+        }
       ]
     },
     {
       "id": "s4",
       "title": "Step 4 · Writing: my room",
       "minutes": 10,
-      "instructions": "Viết 4 đến 5 câu về phòng của em, rồi chép cẩn thận vào vở và chụp ảnh gửi Zalo. Dùng there is / there are và 2 chỗ (on, next to, behind...). Kiểm tra: chữ cái đầu viết hoa và có dấu chấm · there is / there are · 2 địa điểm · 1 tính từ · có từ chứa /p/ hoặc /b/.",
+      "instructions": "Viết 4 đến 5 câu về phòng của em, gõ thẳng vào ô bên dưới. Dùng there is / there are và 2 chỗ (on, next to, behind...). Kiểm tra: chữ cái đầu viết hoa và có dấu chấm · there is / there are · 2 địa điểm · 1 tính từ · có từ chứa /p/ hoặc /b/.",
       "kind": "open",
       "open": [
-        { "id": "s4_1", "q": "Bài viết của em", "model": "Mẫu khung: This is my bedroom. It is (small / big / nice). There is a ___ next to the ___. There are ___ on the ___. There isn’t a ___. I like my room." }
+        {
+          "id": "s4_1",
+          "q": "Bài viết của em",
+          "model": "Mẫu khung: This is my bedroom. It is (small / big / nice). There is a ___ next to the ___. There are ___ on the ___. There isn’t a ___. I like my room."
+        }
       ]
     },
     {
