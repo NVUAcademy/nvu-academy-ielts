@@ -382,7 +382,11 @@
       <div class="gate-icon" style="background: rgba(100,160,100,0.3);">🎓</div>
       <div class="gate-title">Student gate</div>
       <div class="gate-divider"></div>
-      <div class="gate-sub">Nhập tên và chọn lớp để bắt đầu học</div>
+      <div class="gate-sub">Đăng nhập bằng Google hoặc nhập tên và chọn lớp</div>
+
+      <button class="submit-btn student" id="google-btn" onclick="googleLogin()" style="background:#fff;color:#3c4043;border:1px solid #dadce0;margin-bottom:6px">
+        <svg width="18" height="18" viewBox="0 0 48 48" style="vertical-align:middle;margin-right:8px"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.9 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>Đăng nhập bằng Google</button>
+      <div style="text-align:center;font-size:12px;color:#8B7355;margin:10px 0">— hoặc —</div>
 
       <div class="field">
         <label>Họ và tên</label>
@@ -395,8 +399,7 @@
           <option value="">— Chọn lớp —</option>
           <option value="FOUNDATION11">Foundation 11</option>
           <option value="FOUNDATION12">Foundation 12</option>
-          <option value="PREIELTS12">Pre-IELTS 12</option>
-          <option value="IELTS13">IELTS 13</option>
+          <option value="IELTS13">IELTS 13 (Pre-IELTS)</option>
           <option value="IELTS14">IELTS 14 (Intermediate)</option>
           <option value="LYTHUYET3">Lý thuyết 3</option>
         </select>
@@ -587,6 +590,32 @@
       else if (document.getElementById('teacher-panel').classList.contains('active')) teacherLogin();
     });
 
+    async function googleLogin() {
+      const { error } = await db.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.origin + '/login.html?g=1' } });
+      if (error) showErr('student', 'Không mở được đăng nhập Google: ' + error.message);
+    }
+
+    async function finishGoogle() {
+      showPanel('student');
+      const succEl = document.getElementById('student-success');
+      succEl.textContent = 'Đang kiểm tra tài khoản Google...'; succEl.style.display = 'block';
+      const { data: { session } } = await db.auth.getSession();
+      if (!session) { succEl.style.display = 'none'; showErr('student', 'Đăng nhập Google chưa hoàn tất, em thử lại nhé.'); return; }
+      const { data, error } = await db.rpc('google_student');
+      const email = session.user.email;
+      await db.auth.signOut();
+      succEl.style.display = 'none';
+      if (error || !data || !data.length) {
+        showErr('student', 'Gmail ' + email + ' chưa được thầy đăng ký. Em nhắn thầy để nhập email này, hoặc nhập tên và chọn lớp bên dưới.');
+        return;
+      }
+      const s = data[0];
+      localStorage.setItem('nvu_student', JSON.stringify({ id: s.id, name: s.full_name, classCode: s.class_code, avatar: s.avatar_emoji || '🎓' }));
+      succEl.textContent = 'Chào mừng ' + s.full_name + '! Đang vào lớp học...'; succEl.style.display = 'block';
+      setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+    }
+    if (location.search.indexOf('g=1') >= 0) finishGoogle();
+
     // Pre-fill if already logged in
     const s = localStorage.getItem('nvu_student');
     if (s) {
@@ -597,3 +626,4 @@
   </script>
 </body>
 </html>
+

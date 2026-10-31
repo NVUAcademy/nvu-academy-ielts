@@ -367,8 +367,7 @@
           <option value="">Tất cả lớp</option>
           <option value="FOUNDATION11">Foundation 11</option>
           <option value="FOUNDATION12">Foundation 12</option>
-          <option value="PREIELTS12">Pre-IELTS 12</option>
-          <option value="IELTS13">IELTS 13</option>
+          <option value="IELTS13">IELTS 13 (Pre-IELTS)</option>
           <option value="LYTHUYET3">Lý thuyết 3</option>
         </select>
       </div>
@@ -389,8 +388,7 @@
             <option value="">Tất cả lớp</option>
             <option value="FOUNDATION11">Foundation 11</option>
             <option value="FOUNDATION12">Foundation 12</option>
-            <option value="PREIELTS12">Pre-IELTS 12</option>
-            <option value="IELTS13">IELTS 13</option>
+            <option value="IELTS13">IELTS 13 (Pre-IELTS)</option>
             <option value="LYTHUYET3">Lý thuyết 3</option>
           </select>
         </div>
@@ -412,8 +410,7 @@
           <option value="">Tất cả lớp</option>
           <option value="FOUNDATION11">Foundation 11</option>
           <option value="FOUNDATION12">Foundation 12</option>
-          <option value="PREIELTS12">Pre-IELTS 12</option>
-          <option value="IELTS13">IELTS 13</option>
+          <option value="IELTS13">IELTS 13 (Pre-IELTS)</option>
           <option value="LYTHUYET3">Lý thuyết 3</option>
         </select>
       </div>
@@ -723,8 +720,7 @@
           <option value="">Tất cả lớp</option>
           <option value="FOUNDATION11">Foundation 11</option>
           <option value="FOUNDATION12">Foundation 12</option>
-          <option value="PREIELTS12">Pre-IELTS 12</option>
-          <option value="IELTS13">IELTS 13</option>
+          <option value="IELTS13">IELTS 13 (Pre-IELTS)</option>
           <option value="LYTHUYET3">Lý thuyết 3</option>
         </select>
       </div>
@@ -810,22 +806,37 @@
       return;
     }
 
+    const em = await db.from('student_emails').select('student_id, email');
+    const emailOf = {}; (em.data || []).forEach(r => { emailOf[r.student_id] = r.email; });
+
     document.getElementById('students-table').innerHTML = `
       <table>
         <thead><tr>
-          <th>#</th><th>Học sinh</th><th>Lớp</th><th>Điểm tổng</th><th>Streak</th><th>Hoạt động cuối</th>
+          <th>#</th><th>Học sinh</th><th>Lớp</th><th>Email Google (để đăng nhập)</th><th>Điểm tổng</th><th>Streak</th><th>Hoạt động cuối</th>
         </tr></thead>
         <tbody>
           ${data.map((s, i) => `<tr>
             <td style="color:var(--muted)">${i + 1}</td>
             <td><span style="margin-right:8px">${s.avatar_emoji || '🎓'}</span><strong>${s.full_name}</strong></td>
             <td><span class="badge badge-gold">${s.class_code}</span></td>
+            <td><input type="email" class="filter" style="min-width:210px" placeholder="gmail của học sinh" value="${esc(emailOf[s.id] || '')}" onchange="saveStudentEmail('${s.id}', this)"><div id="se-${s.id}" style="font-size:11px;min-height:13px"></div></td>
             <td><strong>${s.total_score || 0}</strong></td>
             <td>${s.streak_days || 0} ngày 🔥</td>
             <td style="color:var(--muted)">${s.last_active ? new Date(s.last_active).toLocaleDateString('vi-VN') : '—'}</td>
           </tr>`).join('')}
         </tbody>
       </table>`;
+  }
+
+  async function saveStudentEmail(id, input) {
+    const email = input.value.trim().toLowerCase();
+    const el = document.getElementById('se-' + id);
+    let error;
+    if (!email) ({ error } = await db.from('student_emails').delete().eq('student_id', id));
+    else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { el.style.color = 'var(--red)'; el.textContent = 'Email chưa đúng định dạng'; return; }
+    else ({ error } = await db.from('student_emails').upsert({ student_id: id, email }, { onConflict: 'student_id' }));
+    if (error) { el.style.color = 'var(--red)'; el.textContent = /duplicate|unique/i.test(error.message) ? 'Email này đã gắn cho bạn khác' : 'Không lưu được: ' + error.message; return; }
+    input.value = email; el.style.color = 'var(--green)'; el.textContent = email ? '✓ Đã lưu' : '✓ Đã xóa';
   }
 
   async function loadScores() {
