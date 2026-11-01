@@ -285,7 +285,20 @@
         {
           "id": "s4_1",
           "q": "Bài viết của em",
-          "model": "Mẫu khung: This is my bedroom. It is (small / big / nice). There is a ___ next to the ___. There are ___ on the ___. There isn’t a ___. I like my room."
+          "model": "Mẫu khung: This is my bedroom. It is (small / big / nice). There is a ___ next to the ___. There are ___ on the ___. There isn’t a ___. I like my room.",
+          "ai": {
+            "type": "Viết đoạn ngắn mô tả phòng, bài luyện tập cho Foundation",
+            "level": "Foundation (A1 đến A2)",
+            "min_words": 30,
+            "task": "Viết 4 đến 5 câu về phòng của em. Dùng there is / there are và 2 địa điểm (on, next to, behind...).",
+            "criteria": [
+              "chữ cái đầu câu viết hoa và có dấu chấm",
+              "dùng there is / there are đúng",
+              "có 2 địa điểm (on, next to, behind...)",
+              "có 1 tính từ mô tả phòng",
+              "có từ chứa âm /p/ hoặc /b/"
+            ]
+          }
         }
       ]
     },
