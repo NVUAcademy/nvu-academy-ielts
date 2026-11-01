@@ -1,0 +1,412 @@
+{
+  "_note": "NVU Academy - Weekly Quiz Week 1 (30 points) for the IELTS Intermediate class. Extracted 1:1 from the teacher's artifact 'Friday Weekly Quiz' (https://claude.ai/artifact/K56kCFc6uZBESfjyZ9PDnu). IMPORT RULES: (1) Save results to Supabase table weekly_quiz_results: student_id, quiz_date, week_number = 1, part_a_score (/12), part_b_score (/6), part_c_score (/8), part_d_score (/4), total_score (/30), max_score = 30. UNIQUE(student_id, week_number) so use upsert on those two columns. (2) Class assignment: this quiz belongs to class_code IELTS14 (IELTS Inter 14, confirmed by teacher; add this class to the classes table). Implement as a field quiz.class_codes = ['IELTS14'] and only show the quiz to students whose students.class_code is in that list; teacher dashboard filters by the same field. (3) Wrong answers -> insert rows into error_logs: error_type = 'vocabulary' (A) | 'grammar' (B) | 'listening' (C), error_content = student's answer (or '(blank)'), correct_answer = answer, context = q, source = 'weekly_quiz'. (4) Marking: text answers are compared case-insensitive after stripping punctuation and extra spaces, and match if equal to 'answer' OR any entry in 'accept'. 'accept' lists were added by the assistant to be tolerant (contractions, spelling variants) and can be edited by the teacher. MCQ: compare the chosen letter with 'answer'. Part D is open writing/speaking: 1 point per task with more than 5 characters typed (attempt-based, as in the original artifact); teacher gives real feedback later. (5) Timer: whole quiz has a running total timer; each part has its own start/pause timer; store per-part seconds if wanted. (6) Quiz visibility: original title says Friday, but weekly quiz day vs. the new Friday daily practice is still to be decided by the teacher - make 'available_day' a config value, default 'friday'.",
+  "quiz": {
+    "id": "weekly-w1-ielts14",
+    "title": "Weekly Quiz - Week 1",
+    "theme": "Urban living / describing where you live",
+    "week_number": 1,
+    "class_codes": [
+      "IELTS14"
+    ],
+    "available_day": "friday",
+    "max_score": 30,
+    "audio_hosting": "Audio files are served from the repo at /audio/ (copied from the original Google Drive files). view_url keeps the original Drive link as a backup.",
+    "audio": {
+      "track02": {
+        "label": "Track 02 - Three Flats",
+        "file_name": "Mindset_L2_02.mp3",
+        "drive_file_id": "1nGPq2zcayJuDHbAsAEgr_ZVG3r1enX8k",
+        "src": "/audio/Mindset_L2_02.mp3",
+        "view_url": "https://drive.google.com/file/d/1nGPq2zcayJuDHbAsAEgr_ZVG3r1enX8k/view"
+      },
+      "track03": {
+        "label": "Track 03 - Estate Agent Notes",
+        "file_name": "Mindset_L2_03.mp3",
+        "drive_file_id": "1d8tgAJ98cb1S9b-7jUprXWQVUWhkFpvc",
+        "src": "/audio/Mindset_L2_03.mp3",
+        "view_url": "https://drive.google.com/file/d/1d8tgAJ98cb1S9b-7jUprXWQVUWhkFpvc/view"
+      },
+      "drive_folder": "https://drive.google.com/drive/folders/1rJ7yQAULR8SiQhixjIxPTIP9bK8NGiX6"
+    },
+    "parts": {
+      "A": {
+        "title": "Vocabulary",
+        "questions_range": "Q1-12",
+        "max_score": 12,
+        "audio": null,
+        "instructions": "Fill in the gaps with the correct word/phrase. Choose from the box or answer MCQ.",
+        "questions": [
+          {
+            "id": "q1",
+            "type": "fill",
+            "q": "Many big cities are ________ populated, making them noisy and crowded.",
+            "answer": "densely",
+            "accept": [
+              "densely"
+            ]
+          },
+          {
+            "id": "q2",
+            "type": "fill",
+            "q": "The old neighbourhood looks ________ — buildings need repairs and streets are dirty.",
+            "answer": "run-down",
+            "accept": [
+              "run-down",
+              "rundown",
+              "run down"
+            ]
+          },
+          {
+            "id": "q3",
+            "type": "fill",
+            "q": "The town has great ________ — shops, schools, parks and hospitals are all nearby.",
+            "answer": "local amenities",
+            "accept": [
+              "local amenities"
+            ]
+          },
+          {
+            "id": "q4",
+            "type": "fill",
+            "q": "Most residents want more ________ — gardens, parks and trees are important for wellbeing.",
+            "answer": "green spaces",
+            "accept": [
+              "green spaces",
+              "green space"
+            ]
+          },
+          {
+            "id": "q5",
+            "type": "fill",
+            "q": "________ is a problem — cities keep expanding and taking over the countryside.",
+            "answer": "Urban sprawl",
+            "accept": [
+              "urban sprawl"
+            ]
+          },
+          {
+            "id": "q6",
+            "type": "mcq",
+            "q": "Which phrase best describes a city centre?",
+            "options": {
+              "A": "It is lively",
+              "B": "It is run-down",
+              "C": "It is quiet and peaceful"
+            },
+            "answer": "A"
+          },
+          {
+            "id": "q7",
+            "type": "mcq",
+            "q": "People with lower incomes often live…",
+            "options": {
+              "A": "in detached houses with gardens",
+              "B": "in tower blocks",
+              "C": "in leafy suburbs"
+            },
+            "answer": "B"
+          },
+          {
+            "id": "q8",
+            "type": "mcq",
+            "q": "Which statement describes an urban area with poor liveability?",
+            "options": {
+              "A": "It has a strong sense of community",
+              "B": "It has few parks",
+              "C": "It is close to good schools"
+            },
+            "answer": "B"
+          },
+          {
+            "id": "q9",
+            "type": "fill",
+            "q": "My village has ________ — everyone knows each other and helps out.",
+            "answer": "a strong sense of community",
+            "accept": [
+              "a strong sense of community",
+              "strong sense of community"
+            ]
+          },
+          {
+            "id": "q10",
+            "type": "fill",
+            "q": "I grew up in ________ — it was calm and safe, with very little traffic.",
+            "answer": "a quiet residential area",
+            "accept": [
+              "a quiet residential area",
+              "quiet residential area"
+            ]
+          },
+          {
+            "id": "q11",
+            "type": "fill",
+            "q": "Good transport gives residents easy ________ to jobs, shops and services.",
+            "answer": "access",
+            "accept": [
+              "access"
+            ]
+          },
+          {
+            "id": "q12",
+            "type": "fill",
+            "q": "The population of this city is growing at a ________ pace.",
+            "answer": "rapid",
+            "accept": [
+              "rapid"
+            ]
+          }
+        ]
+      },
+      "B": {
+        "title": "Grammar",
+        "questions_range": "Q13-18",
+        "max_score": 6,
+        "audio": null,
+        "instructions": "Use the correct verb form (simple present, present continuous, or present perfect). Q17-18: write a correct sentence using the words given; fix the word order.",
+        "questions": [
+          {
+            "id": "q13",
+            "type": "fill",
+            "q": "She ________ (live) in the city centre — she was born there.",
+            "answer": "lives",
+            "accept": [
+              "lives"
+            ],
+            "explain": "simple present - permanent fact"
+          },
+          {
+            "id": "q14",
+            "type": "fill",
+            "q": "I ________ (stay) with my cousin this month while my flat is being painted.",
+            "answer": "am staying",
+            "accept": [
+              "am staying",
+              "'m staying",
+              "m staying"
+            ],
+            "explain": "present continuous - temporary"
+          },
+          {
+            "id": "q15",
+            "type": "fill",
+            "q": "The city ________ (grow) rapidly because of new businesses moving in.",
+            "answer": "is growing",
+            "accept": [
+              "is growing",
+              "'s growing",
+              "s growing"
+            ],
+            "explain": "present continuous - in-progress change"
+          },
+          {
+            "id": "q16",
+            "type": "fill",
+            "q": "We ________ (live) here since 2010 — sixteen years already!",
+            "answer": "have lived",
+            "accept": [
+              "have lived",
+              "'ve lived",
+              "ve lived"
+            ],
+            "explain": "present perfect - since"
+          },
+          {
+            "id": "q17",
+            "type": "sentence",
+            "q": "green space / My hometown / of / a lot / has →",
+            "answer": "My hometown has a lot of green space.",
+            "accept": [
+              "My hometown has a lot of green space.",
+              "My hometown has a lot of green space",
+              "My hometown has lots of green space.",
+              "My hometown has lots of green space"
+            ]
+          },
+          {
+            "id": "q18",
+            "type": "sentence",
+            "q": "now / crowded / in my area / very / is / It →",
+            "answer": "It is very crowded in my area now.",
+            "accept": [
+              "It is very crowded in my area now.",
+              "It is very crowded in my area now",
+              "Now it is very crowded in my area.",
+              "Now it is very crowded in my area",
+              "It's very crowded in my area now.",
+              "It's very crowded in my area now"
+            ]
+          }
+        ]
+      },
+      "C": {
+        "title": "Listening",
+        "questions_range": "Q19-26",
+        "max_score": 8,
+        "audio": [
+          "track02",
+          "track03"
+        ],
+        "groups": [
+          {
+            "audio": "track02",
+            "instructions": "Track 02 - Three flats (A = ground floor, B = first floor, C = two-level). Which flat is described?",
+            "question_ids": [
+              "q19",
+              "q20",
+              "q21"
+            ]
+          },
+          {
+            "audio": "track03",
+            "instructions": "Track 03 - Estate agent notes. Fill in the missing information.",
+            "question_ids": [
+              "q22",
+              "q23",
+              "q24",
+              "q25",
+              "q26"
+            ]
+          }
+        ],
+        "questions": [
+          {
+            "id": "q19",
+            "type": "mcq",
+            "q": "You can get to the garden through the living room AND the kitchen.",
+            "options": {
+              "A": "Flat A (ground floor)",
+              "B": "Flat B (first floor)",
+              "C": "Flat C (two-level)"
+            },
+            "answer": "A",
+            "explain": "Flat A: garden accessible from living room and kitchen"
+          },
+          {
+            "id": "q20",
+            "type": "mcq",
+            "q": "There is a separate dining room that could be used as a third bedroom.",
+            "options": {
+              "A": "Flat A",
+              "B": "Flat B",
+              "C": "Flat C"
+            },
+            "answer": "B",
+            "explain": "Flat B: separate dining room / possible 3rd bedroom"
+          },
+          {
+            "id": "q21",
+            "type": "mcq",
+            "q": "This flat has two levels and a small shower room downstairs.",
+            "options": {
+              "A": "Flat A",
+              "B": "Flat B",
+              "C": "Flat C"
+            },
+            "answer": "C",
+            "explain": "Flat C: two levels, shower room downstairs"
+          },
+          {
+            "id": "q22",
+            "type": "fill",
+            "q": "Property address: ________ Road, Sheffield.",
+            "answer": "Churchill",
+            "accept": [
+              "churchill"
+            ]
+          },
+          {
+            "id": "q23",
+            "type": "fill",
+            "q": "Number of reception rooms: ________",
+            "answer": "two",
+            "accept": [
+              "two",
+              "2"
+            ],
+            "explain": "2 lounges"
+          },
+          {
+            "id": "q24",
+            "type": "fill",
+            "q": "Problem noted: lock on the ________ door needs fixing.",
+            "answer": "sunroom",
+            "accept": [
+              "sunroom",
+              "sun room"
+            ]
+          },
+          {
+            "id": "q25",
+            "type": "fill",
+            "q": "Viewing appointment time: ________",
+            "answer": "1:00",
+            "accept": [
+              "1:00",
+              "1.00",
+              "one",
+              "one o'clock",
+              "1 o'clock",
+              "1pm",
+              "1 pm",
+              "1:00 pm",
+              "1:00pm",
+              "13:00",
+              "13.00",
+              "1"
+            ]
+          },
+          {
+            "id": "q26",
+            "type": "fill",
+            "q": "Client surname: ________",
+            "answer": "Elliot",
+            "accept": [
+              "elliot",
+              "elliott"
+            ]
+          }
+        ]
+      },
+      "D": {
+        "title": "Writing & Speaking",
+        "questions_range": "Q27-30",
+        "max_score": 4,
+        "audio": null,
+        "scoring": "attempt_based: 1 point per task when the student types more than 5 characters; teacher gives real feedback separately",
+        "instructions": "Write sentences using the vocabulary and grammar from this week. Q29-30 are open tasks - teacher will give feedback.",
+        "questions": [
+          {
+            "id": "q27",
+            "type": "open",
+            "q": "Write a sentence about your area using densely populated and lack of green spaces.",
+            "placeholder": "My area is densely populated and…",
+            "model_answer": "My area is densely populated and has a lack of green spaces."
+          },
+          {
+            "id": "q28",
+            "type": "open",
+            "q": "Write a sentence using a strong sense of community and urban sprawl.",
+            "placeholder": "My village has a strong sense of community, but…",
+            "model_answer": "My village has a strong sense of community, but urban sprawl is reaching it."
+          },
+          {
+            "id": "q29",
+            "type": "open",
+            "q": "Describe where you live in 2-3 sentences. Use at least 3 vocabulary items from this week.",
+            "placeholder": "I live in… It is… The area has…",
+            "model_answer": null,
+            "note": "Open task - teacher gives individual feedback on vocabulary and grammar accuracy."
+          },
+          {
+            "id": "q30",
+            "type": "open",
+            "q": "Speaking: Record a 30-second voice note about your hometown. Describe it and say what you like or would change.",
+            "placeholder": "(Optional: write notes for your voice note here.)",
+            "model_answer": null,
+            "note": "Speaking task - record a 30-second voice note and send it to the teacher. Typing notes is optional. Later this can feed the AI Speaking coach (Whisper -> Claude)."
+          }
+        ]
+      }
+    }
+  }
+}
