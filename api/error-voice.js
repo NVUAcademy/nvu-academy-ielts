@@ -4,7 +4,7 @@
    Biến môi trường: GEMINI_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_KEY
    Tuỳ chọn: GEMINI_MODEL (mặc định gemini-2.5-flash), VOICE_DAILY_LIMIT (mặc định 30 lượt/ngày) */
 
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
 const DAILY_LIMIT = parseInt(process.env.VOICE_DAILY_LIMIT || '30', 10);
 const MAX_B64 = 1200 * 1024; /* khoảng 18 giây WAV 16 kHz mono */
 const MIN_B64 = 2000;
