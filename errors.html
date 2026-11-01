@@ -113,7 +113,7 @@ function renderWeek() {
 function renderReviewHome() {
   const open = errs.filter(e => !e.is_resolved);
   document.getElementById('view').innerHTML = open.length
-    ? `<div class="card" style="text-align:center"><div class="rv-tag">Bộ bài ôn lỗi</div><div style="font-size:19px;margin:10px 0 16px">Em còn <b>${open.length}</b> lỗi cần ôn. Mỗi lượt ôn gồm tối đa ${SESSION_N} câu, ưu tiên các lỗi mới và lỗi chưa ôn đủ.</div><button class="btn" onclick="startReview()">Bắt đầu ôn</button></div>`
+    ? `<div class="card" style="text-align:center"><div class="rv-tag">Bộ bài ôn lỗi</div><div style="font-size:19px;margin:10px 0 16px">Em còn <b>${open.length}</b> lỗi cần ôn. Mỗi lượt ôn gồm tối đa ${SESSION_N} câu, ưu tiên các lỗi mới và lỗi chưa ôn đủ.</div><button class="btn" onclick="startReview()">Bắt đầu ôn</button> <button class="btn ghost" onclick="startPractice()">Luyện lại các lỗi</button></div>`
     : '<div class="card empty">Em chưa có lỗi nào cần ôn. Cứ giữ phong độ nhé!</div>';
 }
 function normA(s) { return String(s ?? '').toLowerCase().replace(/[×]/g, 'x').replace(/\b(km|m)\b/g, '').replace(/^[a-d]\.\s*/i, '').replace(/[£$,]/g, '').replace(/[‘’'`]/g, '').replace(/[-‐-―]/g, ' ').replace(/[^\p{L}\p{N}\s.x]/gu, '').replace(/\s+/g, ' ').trim(); }
@@ -157,6 +157,47 @@ async function answer(val) {
   if (isSound(e)) setupVoice(e);
 }
 function next() { rv.i++; rv.answered = false; renderCard(); }
+
+/* ---------- Bài luyện tập tạo từ các lỗi đã sai: làm cả bài, nộp rồi chấm ngay ---------- */
+const PRACTICE_N = 15;
+let pr = null;
+function startPractice() {
+  const seen = new Set(), items = [];
+  [...errs].sort((a, b) => (a.is_resolved ? 1 : 0) - (b.is_resolved ? 1 : 0) || (errDate(a) < errDate(b) ? 1 : -1)).forEach(e => {
+    const k = normA(e.correct_answer);
+    if (!k || seen.has(k)) return;
+    seen.add(k); items.push(e);
+  });
+  if (!items.length) { document.getElementById('view').innerHTML = '<div class="card empty">Chưa có lỗi nào để luyện.</div>'; return; }
+  pr = { items: items.slice(0, PRACTICE_N) };
+  renderPractice();
+}
+function renderPractice() {
+  const rows = pr.items.map((e, i) => {
+    const input = isMcq(e)
+      ? `<select id="pa${i}" style="width:100%;padding:12px;border-radius:14px;border:1px solid var(--line);background:var(--soft);color:var(--ink);font:inherit;font-size:16px"><option value="">— chọn —</option>${[e.correct_answer, e.error_content].filter((x, k, a) => x && a.indexOf(x) === k).sort(() => Math.random() - 0.5).map(o => `<option value="${esc(o)}">${esc(o)}</option>`).join('')}</select>`
+      : `<input type="text" id="pa${i}" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Gõ đáp án">`;
+    return `<div class="err"><div class="q">${esc(TYPE[e.error_type] || e.error_type)} · câu ${i + 1}/${pr.items.length}</div><div class="rv-q" style="font-size:18px;margin:6px 0 10px">${esc(e.context || e.correct_answer)}</div>${input}</div>`;
+  }).join('');
+  document.getElementById('view').innerHTML = `<div class="card"><div class="rv-tag">Bài luyện từ các lỗi đã sai</div><div class="meta" style="margin:6px 0 10px">${pr.items.length} câu. Làm xong bấm nộp để chấm.</div>${rows}<div style="margin-top:14px"><button class="btn" onclick="submitPractice()">Nộp và chấm</button></div></div>`;
+}
+async function submitPractice() {
+  let right = 0;
+  const results = await Promise.all(pr.items.map(async (e, i) => {
+    const val = document.getElementById('pa' + i).value;
+    const ok = sameA(val, e.correct_answer);
+    if (ok) right++;
+    const streak = ok ? (e.review_streak || 0) + 1 : 0, mastered = streak >= MASTER_AT;
+    const upd = { review_streak: streak, last_review: isoToday(), is_resolved: mastered, resolved_at: mastered ? new Date().toISOString() : null };
+    await fetch('/api/review-error', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ student_id: student.id, error_id: e.id, ...upd }) }).catch(() => {});
+    Object.assign(e, upd);
+    return { e, ok, val };
+  }));
+  document.getElementById('view').innerHTML = `<div class="card"><div class="rv-tag">Kết quả bài luyện</div><div style="font-size:30px;font-family:var(--display);margin:10px 0">${right} / ${pr.items.length} đúng</div>` +
+    results.map(({ e, ok, val }) => `<div class="err"><div class="q">${esc(e.context || '')}</div><div class="row"><span>Em trả lời: <span class="${ok ? 'good' : 'bad'}">${esc(val || '—')}</span></span>${ok ? '' : `<span>Đáp án: <span class="good">${esc(e.correct_answer)}</span></span>`}</div></div>`).join('') +
+    `<div style="margin-top:14px"><button class="btn" onclick="load()">Về nhật ký lỗi</button></div></div>`;
+  stats();
+}
 
 /* ---------- Luyện phát âm cho lỗi âm: đọc lại đáp án, AI nghe và nhận xét ---------- */
 const isSound = e => ['pronunciation', 'listening'].includes(e.error_type) && !isMcq(e);
