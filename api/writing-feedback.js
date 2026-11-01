@@ -41,7 +41,14 @@ async function askClaudeOnce(user) {
   const text = (j.content || []).map(c => c.text || '').join('');
   const m = text.match(/\{[\s\S]*\}/);
   if (!m) throw new Error('Claude không trả về JSON');
-  return JSON.parse(m[0]);
+  return parseClaudeJson(m[0]);
+}
+
+/* Claude đôi khi thiếu dấu phẩy hoặc để dấu phẩy thừa: thử sửa trước khi báo lỗi */
+function parseClaudeJson(s) {
+  try { return JSON.parse(s); } catch (e) {}
+  const fixed = s.replace(/,\s*([}\]])/g, '$1').replace(/([}\]"0-9el])\s*\n\s*(?=["{[])/g, '$1,\n');
+  try { return JSON.parse(fixed); } catch (e) { throw new Error('Phản hồi AI bị lỗi định dạng, em thử lại hoặc báo thầy'); }
 }
 
 module.exports = async function handler(req, res) {
