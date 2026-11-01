@@ -246,6 +246,7 @@ function shortVi(iso) { const d = new Date(iso + 'T00:00:00'); return DAYS_VI[d.
 
 let student = null;
 try { student = JSON.parse(lsGet('nvu_student') || 'null'); } catch (e) {}
+if (!student) location.replace('login.html'); /* chưa đăng nhập thì vào trang đăng nhập trước */
 /* Vocab Quest riêng theo lớp: IELTS 13 → Pre, IELTS 14 → Intermediate, còn lại → Foundation */
 const VQ = (function () {
   const m = { IELTS13: ['Vocab_Quest_Pre.html', '10 từ mỗi ngày, có collocation, EXP và cấp độ'], IELTS14: ['Vocab_Quest_Inter.html', '10 từ mỗi ngày, có collocation, EXP và cấp độ'] };
