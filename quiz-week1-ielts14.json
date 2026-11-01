@@ -42,10 +42,9 @@
             "id": "q1",
             "type": "fill",
             "q": "Many big cities are ________ populated, making them noisy and crowded.",
-            "answer": "densely populated",
+            "answer": "densely",
             "accept": [
-              "densely populated",
-              "densely-populated"
+              "densely"
             ]
           },
           {

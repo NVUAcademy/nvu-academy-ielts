@@ -1,0 +1,56 @@
+
+<!-- MUSIC PLAYER (nhạc nền khi làm bài) -->
+<style>
+.mp-btn { position:fixed; left:16px; bottom:16px; z-index:60; width:52px; height:52px; border-radius:50%; border:1px solid rgba(139,115,85,.4); background:#FFFCF6; box-shadow:0 10px 24px -10px rgba(64,40,52,.45); font-size:22px; cursor:pointer; }
+.mp-btn.on { background:#B08D57; color:#fff; animation:mpspin 6s linear infinite; }
+@keyframes mpspin { to { box-shadow:0 0 0 6px rgba(176,141,87,.25); } }
+.mp-panel { position:fixed; left:16px; bottom:78px; z-index:60; width:240px; background:#FFFCF6; color:#2c2416; border:1px solid rgba(139,115,85,.4); border-radius:18px; box-shadow:0 18px 40px -18px rgba(64,40,52,.5); padding:14px; display:none; font-family:'Inter',sans-serif; }
+.mp-panel.open { display:block; }
+.mp-panel b { display:block; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:#8B6914; margin-bottom:8px; }
+.mp-track { display:block; width:100%; text-align:left; padding:9px 12px; margin-bottom:6px; border-radius:12px; border:1px solid rgba(139,115,85,.3); background:#F2E9DC; color:#2c2416; font:inherit; font-size:15px; cursor:pointer; }
+.mp-track.on { border-color:#B08D57; background:#fff; font-weight:600; }
+.mp-row { display:flex; align-items:center; gap:10px; margin-top:8px; font-size:14px; }
+.mp-row input[type=range] { flex:1; accent-color:#B08D57; }
+.mp-note { font-size:12px; color:#8B7355; margin-top:8px; line-height:1.4; }
+@media (max-width:560px) { .mp-btn { left:auto; right:10px; bottom:10px; width:40px; height:40px; font-size:18px; } .mp-panel { left:auto; right:10px; bottom:60px; } }
+</style>
+<button class="mp-btn" id="mp-btn" title="Nhạc nền" aria-label="Nhạc nền">🎵</button>
+<div class="mp-panel" id="mp-panel"></div>
+<script>
+(function () {
+  const TRACKS = [
+    { id: 'giorno', name: '🎹 Giorno\'s Theme (Epic)', src: 'music/music-giorno.mp3' },
+    { id: 'jotaro', name: '⭐ Jotaro Theme (Epic)', src: 'music/music-jotaro.mp3' },
+    { id: 'pillarmen', name: '🌅 Pillar Men – Awaken (Epic)', src: 'music/music-pillarmen.mp3' }
+  ];
+  const ls = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} } };
+  const audio = new Audio(); audio.loop = true; audio.preload = 'none'; audio.dataset.music = '1';
+  let cur = ls.get('nvu_music_track') || '', wanted = false, pausedByOther = false;
+  audio.volume = Math.min(1, Math.max(0, parseFloat(ls.get('nvu_music_vol') || '0.35')));
+  const btn = document.getElementById('mp-btn'), panel = document.getElementById('mp-panel');
+  function render() {
+    panel.innerHTML = '<b>Nhạc khi làm bài</b>' +
+      TRACKS.map(t => `<button class="mp-track ${cur === t.id && wanted ? 'on' : ''}" data-id="${t.id}">${t.name}</button>`).join('') +
+      `<button class="mp-track ${!wanted ? 'on' : ''}" data-id="off">🔇 Tắt nhạc</button>` +
+      `<div class="mp-row"><span>🔈</span><input type="range" id="mp-vol" min="0" max="1" step="0.05" value="${audio.volume}"><span>🔊</span></div>` +
+      '<div class="mp-note">Nhạc lặp lại liên tục và tự dừng khi bạn nghe audio của bài.</div>';
+    btn.classList.toggle('on', wanted && !audio.paused);
+  }
+  function play(id) {
+    const t = TRACKS.find(x => x.id === id); if (!t) return;
+    if (cur !== id || !audio.src || !audio.src.endsWith(t.src)) { audio.src = t.src; }
+    cur = id; wanted = true; ls.set('nvu_music_track', id);
+    const p = audio.play(); if (p && p.catch) p.catch(() => { wanted = false; render(); });
+    render();
+  }
+  function stop() { wanted = false; audio.pause(); render(); }
+  btn.addEventListener('click', () => panel.classList.toggle('open'));
+  panel.addEventListener('click', e => { const t = e.target.closest('.mp-track'); if (!t) return; t.dataset.id === 'off' ? stop() : play(t.dataset.id); });
+  panel.addEventListener('input', e => { if (e.target.id === 'mp-vol') { audio.volume = parseFloat(e.target.value); ls.set('nvu_music_vol', String(audio.volume)); } });
+  /* Tự dừng khi audio khác (Listening) phát, rồi tiếp tục khi nó dừng */
+  document.addEventListener('play', e => { const a = e.target; if (a === audio || !(a instanceof HTMLAudioElement) || a.dataset.music) return; if (wanted && !audio.paused) { audio.pause(); pausedByOther = true; render(); } }, true);
+  const resume = e => { const a = e.target; if (a === audio || !(a instanceof HTMLAudioElement)) return; if (pausedByOther && wanted) { pausedByOther = false; const p = audio.play(); if (p && p.catch) p.catch(() => {}); render(); } };
+  document.addEventListener('pause', resume, true); document.addEventListener('ended', resume, true);
+  render();
+})();
+</script>
