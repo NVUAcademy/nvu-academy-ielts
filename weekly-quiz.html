@@ -474,26 +474,15 @@ async function saveResult(res) {
     part_a_score: res.scores.A, part_b_score: res.scores.B, part_c_score: res.scores.C, part_d_score: res.scores.D,
     total_score: res.total, max_score: quiz.max_score
   };
-  const extra = { answers, part_seconds: { ...partSec, total: totalSec }, quiz_id: quiz.id };
   try {
-    let { error } = await db.from('weekly_quiz_results').upsert({ ...core, ...extra }, { onConflict: 'student_id,week_number' });
-    if (error && /column|schema cache/i.test(error.message)) {
-      ({ error } = await db.from('weekly_quiz_results').upsert(core, { onConflict: 'student_id,week_number' }));
-    }
-    if (error) throw error;
-
-    if (!existing && res.wrong.length) {
-      const rows = res.wrong.map(w => ({
-        student_id: student.id,
-        error_type: PART_TYPE[w.part],
-        error_content: (w.given || '').trim() ? (w.q.type === 'mcq' ? `${w.given}. ${w.q.options[w.given] || ''}` : w.given.trim()) : '(blank)',
-        correct_answer: w.q.type === 'mcq' ? `${w.q.answer}. ${w.q.options[w.q.answer]}` : w.q.answer,
-        context: w.q.q,
-        source: 'weekly_quiz'
-      }));
-      const { error: e2 } = await db.from('error_logs').insert(rows);
-      if (e2) throw e2;
-    }
+    const errors = !existing ? res.wrong.map(w => ({
+      error_type: PART_TYPE[w.part],
+      error_content: (w.given || '').trim() ? (w.q.type === 'mcq' ? `${w.given}. ${w.q.options[w.given] || ''}` : w.given.trim()) : '(blank)',
+      correct_answer: w.q.type === 'mcq' ? `${w.q.answer}. ${w.q.options[w.q.answer]}` : w.q.answer,
+      context: w.q.q
+    })) : [];
+    const sr = await fetch('/api/submit-weekly', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...core, quiz_id: quiz.id, answers, part_seconds: { ...partSec, total: totalSec }, errors }) });
+    const sj = await sr.json(); if (!sj.ok) throw new Error(sj.error || 'Lỗi không rõ');
     lsDel(draftKey()); quizDraftDel(); quizSubmitted = true;
     existing = core;
     return 'ok';
