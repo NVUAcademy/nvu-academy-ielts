@@ -55,7 +55,7 @@
       todays.forEach(p => lines.push(`${n++}. Daily Practice: ${p.title}${p.subtitle ? ' (' + p.subtitle + ')' : ''}\n   👉 ${SITE}/daily-practice.html?p=${p.id}`));
       if (quizToday) lines.push(`${n++}. Weekly Quiz (${ZL.quiz.max_score} điểm)\n   👉 ${SITE}/weekly-quiz.html`);
       if (n === 1) lines.push('(Chưa có bài nào được xếp cho hôm nay)');
-      lines.push('', `⏰ Hạn nộp: ${cls === 'IELTS13' ? '23:30' : '23:00'} tối nay.`);
+      lines.push('', `⏰ Hạn nộp: ${cls === 'IELTS13' ? '23:30 tối nay' : cls === 'IELTS14' ? '0:00 đêm nay' : '23:00 tối nay'}.`);
 
       const owed = {};
       mine.filter(p => p.date < date).forEach(p => {

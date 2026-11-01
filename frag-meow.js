@@ -87,7 +87,7 @@
         if (MEOW.type(d) === 'hoc' || d > today || mwStatus(s.id, d)) return;
         const sub = MW.scores.filter(x => x.student_id === s.id && x.practice_date === d).sort((a, b) => a.created_at < b.created_at ? -1 : 1)[0];
         if (!sub) return;
-        up.push({ student_id: s.id, day: d, status: new Date(sub.created_at) <= new Date(d + (MW.cls === 'IELTS13' ? 'T23:30:00' : 'T23:00:00')) ? 'du' : 'muon' });
+        up.push({ student_id: s.id, day: d, status: new Date(sub.created_at) <= (MW.cls === 'IELTS13' ? new Date(d + 'T23:30:00') : MW.cls === 'IELTS14' ? new Date(new Date(d + 'T00:00:00').getTime() + 86400000) : new Date(d + 'T23:00:00')) ? 'du' : 'muon' });
       });
     });
     if (!up.length) { alert('Không có ô nào để gợi ý (chưa có bài nộp mới cho các ô còn trống).'); return; }
