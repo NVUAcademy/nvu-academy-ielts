@@ -4,7 +4,8 @@
    Biến môi trường: GEMINI_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_KEY
    Tuỳ chọn: GEMINI_MODEL (mặc định gemini-2.5-flash), VOICE_DAILY_LIMIT (mặc định 30 lượt/ngày) */
 
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
+/* Thử lần lượt các model nhận được âm thanh; model nào báo 404 thì chuyển sang model sau */
+const GEMINI_MODELS = (process.env.GEMINI_MODEL || 'gemini-2.5-pro,gemini-2.5-flash,gemini-2.0-flash').split(',').map(s => s.trim()).filter(Boolean);
 const DAILY_LIMIT = parseInt(process.env.VOICE_DAILY_LIMIT || '30', 10);
 const MAX_B64 = 1200 * 1024; /* khoảng 18 giây WAV 16 kHz mono */
 const MIN_B64 = 2000;
@@ -37,15 +38,20 @@ function parseJson(s) {
 }
 
 async function gradeWithGemini(target, b64) {
-  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json', 'x-goog-api-key': process.env.GEMINI_API_KEY },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: PROMPT(target) }, { inline_data: { mime_type: 'audio/wav', data: b64 } }] }],
-      generationConfig: { responseMimeType: 'application/json', temperature: 0.2 }
-    }),
-    signal: AbortSignal.timeout(40000)
-  });
+  let r = null;
+  for (const model of GEMINI_MODELS) {
+    r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'x-goog-api-key': process.env.GEMINI_API_KEY },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: PROMPT(target) }, { inline_data: { mime_type: 'audio/wav', data: b64 } }] }],
+        generationConfig: { responseMimeType: 'application/json', temperature: 0.2 }
+      }),
+      signal: AbortSignal.timeout(40000)
+    });
+    if (r.status !== 404) break;
+    if (model !== GEMINI_MODELS[GEMINI_MODELS.length - 1]) await r.text();
+  }
   if (!r.ok) throw new Error('Gemini: ' + r.status + ' ' + (await r.text()).slice(0, 200));
   const j = await r.json();
   const text = ((j.candidates && j.candidates[0] && j.candidates[0].content && j.candidates[0].content.parts) || []).map(p => p.text || '').join('');
