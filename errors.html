@@ -150,7 +150,7 @@ async function answer(val) {
   const streak = ok ? (e.review_streak || 0) + 1 : 0, mastered = streak >= MASTER_AT;
   if (ok) rv.right++;
   const upd = { review_streak: streak, last_review: isoToday(), is_resolved: mastered, resolved_at: mastered ? new Date().toISOString() : null };
-  const { error } = await db.from('error_logs').update(upd).eq('id', e.id);
+  const { error } = await fetch('/api/review-error', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ student_id: student.id, error_id: e.id, ...upd }) }).then(r => r.json()).then(j => j.ok ? { error: null } : { error: { message: j.error } }, err => ({ error: err }));
   Object.assign(e, upd);
   document.getElementById('fb').innerHTML = `<div class="fb ${ok ? 'ok' : 'no'}">${ok ? (mastered ? 'Đúng rồi! Em đã nắm câu này.' : `Đúng rồi! Thêm ${MASTER_AT - streak} lần đúng liên tiếp nữa là nắm.`) : `Chưa đúng. Đáp án: <b>${esc(e.correct_answer)}</b>`}${error ? '<br><small>(Chưa lưu được tiến độ: ' + esc(error.message) + ')</small>' : ''}</div><div style="margin-top:14px"><button class="btn" onclick="next()">Câu tiếp →</button></div>`;
   document.querySelectorAll('.opt').forEach(b => b.disabled = true);
