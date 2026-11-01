@@ -1,7 +1,8 @@
 /* NVU Academy: áp dụng nền học sinh đã chọn ở trang chủ cho mọi trang (quiz, daily practice, tài liệu, game) */
 (function () {
-  var id = 'cream';
-  try { id = localStorage.getItem('nvu_bg') || 'cream'; } catch (e) {}
+  /* Mặc định là video núi mùa thu. Khóa nvu_bg2 để học sinh cũ cũng được đổi sang mặc định mới */
+  var id = 'v-autumn';
+  try { id = localStorage.getItem('nvu_bg2') || 'v-autumn'; } catch (e) {}
   if (!id || id === 'cream') return;
   var VIDEOS = { 'v-swamp': 'backgrounds/bg-swamp-cat.mp4', 'v-chill': 'backgrounds/bg-chill-cat.mp4', 'v-autumn': 'backgrounds/bg-autumn.mp4' };
   var css = '' +

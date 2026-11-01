@@ -208,7 +208,7 @@ function applyBg(id) {
   if (id === 'sakura') mk('petal', 22, (e) => { e.style.left = Math.random() * 100 + '%'; e.style.animationDuration = (9 + Math.random() * 9) + 's'; e.style.animationDelay = (-Math.random() * 15) + 's'; e.style.setProperty('--dx', (Math.random() * 160 - 40) + 'px'); e.style.transform = 'scale(' + (0.7 + Math.random() * 0.9) + ')'; });
   if (id === 'night') mk('star', 70, (e) => { e.style.left = Math.random() * 100 + '%'; e.style.top = Math.random() * 100 + '%'; e.style.animationDelay = (Math.random() * 3) + 's'; e.style.animationDuration = (2 + Math.random() * 3) + 's'; });
   if (id === 'rain') mk('drop', 45, (e) => { e.style.left = Math.random() * 100 + '%'; e.style.animationDuration = (0.9 + Math.random() * 0.9) + 's'; e.style.animationDelay = (-Math.random() * 2) + 's'; });
-  try { localStorage.setItem('nvu_bg', id || 'cream'); } catch (e) {}
+  try { localStorage.setItem('nvu_bg2', id || 'cream'); } catch (e) {}
   document.querySelectorAll('.bgopt').forEach(b => b.classList.toggle('on', b.dataset.id === (id || 'cream')));
 }
 (function () {
@@ -216,7 +216,7 @@ function applyBg(id) {
   p.innerHTML = '<b>Chọn nền</b>' + BGS.map(b => `<button class="bgopt" data-id="${b.id}">${b.name}</button>`).join('');
   p.addEventListener('click', e => { const t = e.target.closest('.bgopt'); if (t) applyBg(t.dataset.id); });
   document.getElementById('bgbtn').addEventListener('click', () => p.classList.toggle('open'));
-  let saved = 'cream'; try { saved = localStorage.getItem('nvu_bg') || 'cream'; } catch (e) {}
+  let saved = 'v-autumn'; try { saved = localStorage.getItem('nvu_bg2') || 'v-autumn'; } catch (e) {}
   applyBg(saved);
 })();
 
