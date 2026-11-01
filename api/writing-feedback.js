@@ -2,7 +2,7 @@
    Biến môi trường: ANTHROPIC_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_KEY (đã có)
    Tuỳ chọn: CLAUDE_MODEL, AI_CLASSES (mặc định IELTS13,IELTS14), WRITING_LIMIT (số bài viết AI chấm mỗi ngày, mặc định 4) */
 const CLAUDE_MODEL = process.env.CLAUDE_MODEL || 'claude-sonnet-5-5';
-const AI_CLASSES = (process.env.AI_CLASSES || 'IELTS13,IELTS14').split(',').map(s => s.trim().toUpperCase()).filter(Boolean);
+const AI_CLASSES = (process.env.AI_CLASSES || 'IELTS13,IELTS14,FOUNDATION11').split(',').map(s => s.trim().toUpperCase()).filter(Boolean);
 const LIMIT = Math.max(1, parseInt(process.env.WRITING_LIMIT || '4', 10) || 4);
 
 const SB_URL = () => (process.env.SUPABASE_URL || '').replace(/\/$/, '');
