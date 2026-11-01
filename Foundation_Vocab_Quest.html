@@ -722,17 +722,17 @@ const dayXp = dr => Object.values((dr&&dr.xpGot)||{}).reduce((a,b)=>a+b,0);
 const daysDone = () => Object.values((S.prog&&S.prog.days)||{}).filter(d=>d&&d.fin).length;
 /* Đồng bộ lên Supabase theo tài khoản đăng nhập (nếu có) */
 const LOGIN = (()=>{ try{ return JSON.parse(localStorage.getItem('nvu_student')||'null'); }catch{ return null; } })();
-const VQDB = (LOGIN && window.supabase) ? window.supabase.createClient('https://sxnxbbosfyapmmkrhcdj.supabase.co','sb_publishable_OMyiSjOVcKOfRdZO9JwSZg_8XogOYkZ') : null;
+
 let syncT=null;
-function syncPush(){ if(!VQDB||!LOGIN||!S.prog) return; clearTimeout(syncT); syncT=setTimeout(async()=>{ try{
-  await VQDB.from('vocab_progress').upsert({student_id:LOGIN.id, game_id:CFG.id, xp:S.prog.xp||0, points:S.prog.pts||0, level:lvOf(S.prog.xp), days_done:daysDone(), prog:S.prog, updated_at:new Date().toISOString()},{onConflict:'student_id,game_id'}); }catch(e){} },900); }
+function syncPush(){ if(!LOGIN||!S.prog) return; clearTimeout(syncT); syncT=setTimeout(async()=>{ try{
+  await fetch('/api/vq-progress',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({student_id:LOGIN.id, game_id:CFG.id, xp:S.prog.xp||0, points:S.prog.pts||0, prog:S.prog})}); }catch(e){} },900); }
 function mergeProg(a,b){ const out={...b,...a}; out.days={...(b.days||{})};
   for(const [k,v] of Object.entries(a.days||{})){ const r=out.days[k]; if(!r || (!!v.fin&&!r.fin) || (!!v.fin===!!r.fin && Object.keys(v.st||{}).length>=Object.keys(r.st||{}).length)) out.days[k]=v; }
   out.xp=Math.max(a.xp||0,b.xp||0); out.pts=Math.max(a.pts||0,b.pts||0); out.daily={...(b.daily||{})};
   for(const [d,v] of Object.entries(a.daily||{})){ const r=out.daily[d]; out.daily[d]= r ? {xp:Math.max(r.xp,v.xp),pts:Math.max(r.pts,v.pts),battles:Math.max(r.battles||0,v.battles||0),wins:Math.max(r.wins||0,v.wins||0)} : v; }
   return out; }
-async function syncPull(){ if(!VQDB||!LOGIN||!S.prog||!S.profile) return; try{
-  const {data}=await VQDB.from('vocab_progress').select('prog,xp').eq('student_id',LOGIN.id).eq('game_id',CFG.id).maybeSingle();
+async function syncPull(){ if(!LOGIN||!S.prog||!S.profile) return; try{
+  const {data}=(await (await fetch('/api/vq-progress?student_id='+encodeURIComponent(LOGIN.id)+'&game_id='+encodeURIComponent(CFG.id))).json()).data||{};
   if(data&&data.prog){ S.prog=mergeProg(S.prog,data.prog); ls.set('prog:'+nameKey(S.profile.name), S.prog); render(); }
   syncPush(); }catch(e){} }
 function saveProg(){ if(S.profile) ls.set('prog:'+nameKey(S.profile.name), S.prog); syncPush(); }

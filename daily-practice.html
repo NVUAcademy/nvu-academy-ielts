@@ -215,16 +215,16 @@ const draftKey = () => `nvu_daily_draft_${P.id}_${student ? student.id : 'teache
 let draftT = null, inProgress = false;
 function draftPush() {
   if (!student || isTeacher) return; clearTimeout(draftT);
-  draftT = setTimeout(async () => { try { await db.from('daily_drafts').upsert({ student_id: student.id, practice_id: P.id, practice_date: P.date, answers, updated_at: new Date().toISOString() }, { onConflict: 'student_id,practice_id,practice_date' }); } catch (e) {} }, 1200);
+  draftT = setTimeout(async () => { try { await fetch('/api/draft', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ student_id: student.id, practice_id: P.id, practice_date: P.date, answers }) }); } catch (e) {} }, 1200);
 }
 async function draftPull() {
   if (!student || isTeacher) return;
   try {
-    const { data } = await db.from('daily_drafts').select('answers').eq('student_id', student.id).eq('practice_id', P.id).eq('practice_date', P.date).maybeSingle();
+    const { data } = (await (await fetch('/api/draft?' + new URLSearchParams({ student_id: student.id, practice_id: P.id, practice_date: P.date }))).json()).data || {};
     if (data && data.answers && Object.keys(data.answers).length) { answers = { ...data.answers, ...answers }; lsSet(draftKey(), JSON.stringify(answers)); }
   } catch (e) {}
 }
-async function draftDel() { if (!student || isTeacher) return; clearTimeout(draftT); try { await db.from('daily_drafts').delete().eq('student_id', student.id).eq('practice_id', P.id).eq('practice_date', P.date); } catch (e) {} }
+async function draftDel() { if (!student || isTeacher) return; clearTimeout(draftT); try { await fetch('/api/draft?' + new URLSearchParams({ student_id: student.id, practice_id: P.id, practice_date: P.date }), { method: 'DELETE' }); } catch (e) {} }
 window.addEventListener('beforeunload', e => { if (inProgress) { e.preventDefault(); e.returnValue = ''; } });
 
 /* Xem lại bài đã nộp (điểm, câu sai, đáp án, nhận xét của thầy) */
