@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Dashboard — NVU Academy</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f5f0eb;
+      --surface: rgba(255,252,248,0.95);
+      --border: rgba(139,115,85,0.2);
+      --accent: #8B6914;
+      --text: #2c2416;
+      --muted: #8B7355;
+      --green: #5a8a5a;
+      --red: #c0392b;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      width: 240px;
+      background: #2c2416;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+    }
+    .sidebar-brand {
+      padding: 28px 24px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .sidebar-brand .name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: white;
+      font-weight: 700;
+    }
+    .sidebar-brand .name em { color: #d4a843; font-style: italic; }
+    .sidebar-brand .sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; letter-spacing: 0.1em; }
+
+    .nav { padding: 16px 0; flex: 1; }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 24px;
+      color: rgba(255,255,255,0.6);
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      border-left: 3px solid transparent;
+    }
+    .nav-item:hover { color: white; background: rgba(255,255,255,0.05); }
+    .nav-item.active { color: white; border-left-color: #d4a843; background: rgba(212,168,67,0.1); }
+    .nav-icon { font-size: 18px; width: 22px; text-align: center; }
+
+    .sidebar-footer {
+      padding: 16px 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .teacher-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .teacher-avatar {
+      width: 36px; height: 36px;
+      background: #d4a843;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .teacher-info .name { font-size: 13px; color: white; font-weight: 600; }
+    .teacher-info .role { font-size: 11px; color: rgba(255,255,255,0.4); }
+    .signout-btn {
+      width: 100%;
+      padding: 9px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .signout-btn:hover { background: rgba(255,255,255,0.15); color: white; }
+
+    /* Main content */
+    .main {
+      margin-left: 240px;
+      padding: 32px;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      margin-bottom: 28px;
+    }
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .page-sub { color: var(--muted); font-size: 16px; margin-top: 4px; }
+
+    /* Stat cards */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+    .stat-label { font-size: 13px; color: var(--muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+    .stat-value { font-size: 36px; font-weight: 700; color: var(--text); }
+    .stat-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    /* Tables */
+    .section-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .section-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .section-title { font-size: 19px; font-weight: 700; }
+    .section-sub { font-size: 14px; color: var(--muted); margin-top: 2px; }
+
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    select.filter {
+      padding: 7px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+    th {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: rgba(139,115,85,0.05);
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 14px 16px;
+      font-size: 16px;
+      border-bottom: 1px solid rgba(139,115,85,0.08);
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(139,115,85,0.03); }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .badge-green { background: rgba(90,138,90,0.15); color: #3a6a3a; }
+    .badge-red { background: rgba(192,57,43,0.12); color: var(--red); }
+    .badge-gold { background: rgba(139,105,20,0.15); color: var(--accent); }
+
+    .score-bar-wrap { display: flex; align-items: center; gap: 10px; }
+    .score-bar {
+      flex: 1; height: 6px; background: rgba(139,115,85,0.15); border-radius: 3px; overflow: hidden;
+    }
+    .score-bar-fill { height: 100%; background: var(--green); border-radius: 3px; transition: width 0.5s; }
+
+    /* Tab panels */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .empty-state {
+      padding: 48px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .empty-icon { font-size: 40px; margin-bottom: 12px; }
+    .empty-text { font-size: 15px; }
+
+    .loading { padding: 32px; text-align: center; color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 900px) {
+      .sidebar { width: 60px; }
+      .sidebar .nav-item span:not(.nav-icon) { display: none; }
+      .sidebar-brand .name, .sidebar-brand .sub { display: none; }
+      .sidebar-footer .teacher-info, .sidebar-footer .signout-btn { display: none; }
+      .main { margin-left: 60px; padding: 20px; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Error Log tab */
+    .btn-sm {
+      padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px;
+      background: var(--bg); color: var(--text); font-size: 14px; font-weight: 600; cursor: pointer;
+    }
+    .btn-sm:hover { background: #ede5db; }
+    .drive-link { display:block; padding:12px 16px; border:1px solid var(--border); border-radius:12px; background:var(--bg); color:var(--text); text-decoration:none; font-size:15px; font-weight:600; }
+    .drive-link:hover { border-color: var(--accent); background:#fff; }
+    .pct { display: inline-block; min-width: 46px; padding: 4px 8px; border-radius: 8px; font-size: 15px; font-weight: 700; }
+    .pct-green { background: rgba(90,138,90,0.18); color: #2f5f2f; }
+    .pct-yellow { background: rgba(212,168,67,0.25); color: #7a5a08; }
+    .pct-red { background: rgba(192,57,43,0.16); color: var(--red); }
+    .pct-plain { background: rgba(139,115,85,0.1); color: var(--muted); }
+    .trend { display: flex; align-items: flex-end; gap: 14px; min-height: 130px; overflow-x: auto; padding-bottom: 4px; }
+    .trend-col { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; min-width: 44px; }
+    .trend-bar { width: 26px; border-radius: 6px 6px 0 0; max-height: 100px; }
+    .trend-bar.pct-green { background: #5a8a5a; }
+    .trend-bar.pct-yellow { background: #d4a843; }
+    .trend-bar.pct-red { background: #c0392b; }
+    .trend-val { font-size: 13px; font-weight: 700; }
+    .trend-lab { font-size: 13px; color: var(--muted); }
+
+    .zl-label { display:block; font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+    .zl-text { width:100%; border:1px solid var(--border); border-radius:12px; padding:12px 14px; background:#fff; color:var(--text); font-family:inherit; font-size:16px; line-height:1.6; resize:vertical; outline:none; }
+    input[type=date].filter { padding:6px 10px; }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-brand">
+    <div class="name">NVU <em>Academy</em></div>
+    <div class="sub">TEACHER PORTAL</div>
+  </div>
+
+  <nav class="nav">
+    <div class="nav-item active" onclick="showTab('overview')">
+      <span class="nav-icon">📊</span>
+      <span>Tổng quan</span>
+    </div>
+    <div class="nav-item" onclick="showTab('students')">
+      <span class="nav-icon">🎓</span>
+      <span>Học sinh</span>
+    </div>
+    <div class="nav-item" onclick="showTab('scores')">
+      <span class="nav-icon">📝</span>
+      <span>Điểm số</span>
+    </div>
+    <div class="nav-item" onclick="showTab('errors')">
+      <span class="nav-icon">⚠️</span>
+      <span>Error logs</span>
+    </div>
+    <div class="nav-item" onclick="showTab('attendance')">
+      <span class="nav-icon">✅</span>
+      <span>Điểm danh</span>
+    </div>
+    <div class="nav-item" onclick="showTab('meow')">
+      <span class="nav-icon">🐱</span>
+      <span>Tiền Meow</span>
+    </div>
+    <div class="nav-item" onclick="showTab('recordings')">
+      <span class="nav-icon">🎙️</span>
+      <span>Ghi âm</span>
+    </div>
+    <div class="nav-item" onclick="showTab('submissions')">
+      <span class="nav-icon">📝</span>
+      <span>Bài làm</span>
+    </div>
+    <div class="nav-item" onclick="showTab('library')">
+      <span class="nav-icon">📚</span>
+      <span>Thư viện</span>
+    </div>
+    <div class="nav-item" onclick="showTab('schedule')">
+      <span class="nav-icon">🗓️</span>
+      <span>Lịch bài</span>
+    </div>
+    <div class="nav-item" onclick="showTab('zalo')">
+      <span class="nav-icon">💬</span>
+      <span>Nhắc Zalo</span>
+    </div>
+    <div class="nav-item" onclick="showTab('ranking')">
+      <span class="nav-icon">🏆</span>
+      <span>Xếp hạng</span>
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="teacher-chip">
+      <div class="teacher-avatar">👨‍🏫</div>
+      <div class="teacher-info">
+        <div class="name">Mr. Nam</div>
+        <div class="role">Giáo viên IELTS</div>
+      </div>
+    </div>
+    <button class="signout-btn" onclick="signOut()">Đăng xuất</button>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <!-- OVERVIEW TAB -->
+  <div id="tab-overview" class="tab-panel active">
+    <div class="page-header">
+      <div class="page-title">Tổng quan lớp học</div>
+      <div class="page-sub" id="today-date"></div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-label">Tổng học sinh</div>
+        <div class="stat-value" id="stat-students">—</div>
+        <div class="stat-sub">đã đăng ký</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Hoạt động hôm nay</div>
+        <div class="stat-value" id="stat-active">—</div>
+        <div class="stat-sub">học sinh online</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Bài luyện tập</div>
+        <div class="stat-value" id="stat-practices">—</div>
+        <div class="stat-sub">tuần này</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Lỗi cần ôn</div>
+        <div class="stat-value" id="stat-errors">—</div>
+        <div class="stat-sub">chưa giải quyết</div>
+      </div>
+    </div>
+
+    <!-- Quick ranking -->
+    <div class="section-card">
+      <div class="section-header">
+        <div>
+          <div class="section-title">🏆 Top học sinh tuần này</div>
+          <div class="section-sub">Điểm tổng từ daily practice</div>
+        </div>
+        <select class="filter" id="class-filter-overview" onchange="loadOverviewRanking()">
+          <option value="">Tất cả lớp</option>
+          <option value="FOUNDATION11">Foundation 11</option>
+          <option value="FOUNDATION12">Foundation 12</option>
+          <option value="IELTS13">IELTS 13 (Pre-IELTS)</option>
+          <option value="LYTHUYET3">Lý thuyết 3</option>
+        </select>
+      </div>
+      <div id="overview-ranking"><div class="loading">Đang tải...</div></div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div>
+          <div class="section-title">👥 Giáo viên và trợ giảng</div>
+          <div class="section-sub">Chỉ Gmail trong danh sách này vào được trang giáo viên (đăng nhập Google ở cổng Teacher)</div>
+        </div>
+      </div>
+      <div id="staff-list"><div class="loading">Đang tải...</div></div>
+      <div style="padding:12px 24px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <input type="email" class="filter" id="staff-email" placeholder="Gmail của trợ giảng" style="min-width:240px">
+        <button class="btn-sm" onclick="addStaff()">+ Thêm trợ giảng</button>
+        <span id="staff-msg" style="font-size:12px"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STUDENTS TAB -->
+  <div id="tab-students" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Danh sách học sinh</div>
+      <div class="page-sub">Tất cả học sinh đã đăng ký</div>
+    </div>
+    <div class="section-card">
+      <div class="section-header">
+        <div class="filter-bar">
+          <select class="filter" id="class-filter-students" onchange="loadStudents()">
+            <option value="">Tất cả lớp</option>
+            <option value="FOUNDATION11">Foundation 11</option>
+            <option value="FOUNDATION12">Foundation 12</option>
+            <option value="IELTS13">IELTS 13 (Pre-IELTS)</option>
+            <option value="LYTHUYET3">Lý thuyết 3</option>
+          </select>
+        </div>
+      </div>
+      <div id="students-table"><div class="loading">Đang tải...</div></div>
+    </div>
+  </div>
+
+  <!-- SCORES TAB -->
+  <div id="tab-scores" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Điểm số</div>
+      <div class="page-sub">Daily practice + Weekly quiz</div>
+    </div>
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">Daily Practice (tuần này)</div>
+        <select class="filter" id="class-filter-scores" onchange="loadScores()">
+          <option value="">Tất cả lớp</option>
+          <option value="FOUNDATION11">Foundation 11</option>
+          <option value="FOUNDATION12">Foundation 12</option>
+          <option value="IELTS13">IELTS 13 (Pre-IELTS)</option>
+          <option value="LYTHUYET3">Lý thuyết 3</option>
+        </select>
+      </div>
+      <div id="scores-table"><div class="loading">Đang tải...</div></div>
+    </div>
+  </div>
+
+  <!-- ERROR LOGS TAB -->
+  <div id="tab-errors" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Error Log</div>
+      <div class="page-sub">Tự cập nhật khi học sinh nộp bài · <span id="el-updated">—</span></div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div class="filter-bar">
+          <select class="filter" id="class-filter-errors" onchange="loadErrors()">
+            <option value="">Tất cả lớp</option>
+          </select>
+          <select class="filter" id="el-week" onchange="renderErrorLog()">
+            <option value="">Tất cả các tuần</option>
+          </select>
+          <select class="filter" id="error-type-filter" onchange="renderErrorLog()">
+            <option value="">Tất cả loại lỗi</option>
+            <option value="vocabulary">Từ vựng</option>
+            <option value="grammar">Ngữ pháp</option>
+            <option value="listening">Listening</option>
+            <option value="pronunciation">Phát âm</option>
+          </select>
+          <button class="btn-sm" onclick="loadErrors()">↻ Tải lại</button>
+        </div>
+        <span id="el-live" class="badge badge-gold">Đang kết nối…</span>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Bảng điểm theo buổi kiểm tra</div>
+          <div class="section-sub">Xanh ≥ 90% · Vàng 70–89% · Đỏ &lt; 70% · Quiz tuần hiển thị theo tổng /30</div>
+        </div>
+      </div>
+      <div id="el-matrix" style="overflow-x:auto"><div class="loading">Đang tải...</div></div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Lỗi chung của lớp</div>
+          <div class="section-sub">Ô đỏ: từ 2 học sinh trở lên cùng sai, nên ôn lại trên lớp</div>
+        </div>
+      </div>
+      <div id="el-common"><div class="loading">Đang tải...</div></div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Từng học viên</div>
+          <div class="section-sub">Tiến độ điểm theo buổi và danh sách lỗi</div>
+        </div>
+        <select class="filter" id="el-student" onchange="renderStudentErrors()">
+          <option value="">— Chọn học sinh —</option>
+        </select>
+      </div>
+      <div id="el-student-view"><div class="empty-state"><div class="empty-text">Chọn một học sinh để xem chi tiết</div></div></div>
+    </div>
+  </div>
+
+  <!-- MEOW TAB -->
+  <div id="tab-meow" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Tiền Meow</div>
+      <div class="page-sub">Chọn trạng thái từng ngày, ví và chuỗi ngày tự tính theo cơ chế của lớp</div>
+    </div>
+    <div class="section-card">
+      <div class="section-header">
+        <div class="filter-bar" style="flex-wrap:wrap">
+          <select class="filter" id="class-filter-meow" onchange="loadMeow()"><option value="">— Chọn lớp —</option></select>
+          <button class="btn-sm" onclick="mwShift(-1)">← Tuần trước</button>
+          <strong id="mw-week" style="font-size:15px"></strong>
+          <button class="btn-sm" onclick="mwShift(1)">Tuần sau →</button>
+          <button class="btn-sm" onclick="mwThisWeek()">Tuần này</button>
+          <button class="btn-sm" onclick="suggestMeow()">Gợi ý từ bài đã nộp</button>
+        </div>
+        <label style="font-size:14px;cursor:pointer"><input type="checkbox" id="mw-enabled" onchange="toggleMeowClass(this.checked)"> Bật Meow cho lớp này</label>
+      </div>
+      <div style="padding:10px 24px;font-size:13px;color:var(--muted);line-height:1.6">
+        Đủ: đủ Meow ngày đó (ôn 20, ngày học 10) · Muộn: ngày ôn nhận nửa, ngày học vẫn đủ · Nửa và Bù: nhận nửa · Không nộp: 0 và chuỗi về 0 · Để trống: chưa chấm.
+        Thưởng đủ tuần 100, trừ 5 cho mỗi ngày Bù. "Gợi ý từ bài đã nộp" điền Đủ (trước 23:00) hoặc Muộn cho ngày ôn còn trống mà học sinh đã nộp Daily Practice.
+      </div>
+      <div id="mw-grid" style="overflow-x:auto"><div class="empty-state"><div class="empty-text">Chọn lớp để bắt đầu</div></div></div>
+    </div>
+  </div>
+
+  <!-- ATTENDANCE TAB -->
+  <div id="tab-attendance" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Điểm danh</div>
+      <div class="page-sub">Chỉ cần tick những bạn <b>vắng</b>. Các bạn còn lại tự động là có mặt</div>
+    </div>
+    <div class="section-card">
+      <div class="section-header">
+        <div class="filter-bar" style="flex-wrap:wrap">
+          <select class="filter" id="class-filter-att" onchange="loadAttendance()"><option value="">— Chọn lớp —</option></select>
+          <input type="date" class="filter" id="att-day" onchange="loadAttendance()">
+          <input type="text" class="filter" id="att-label" placeholder="Buổi (ví dụ B5)" style="width:150px">
+        </div>
+        <span class="section-sub" id="att-status"></span>
+      </div>
+      <div id="att-list" style="padding:12px 24px"><div class="empty-state"><div class="empty-text">Chọn lớp và ngày</div></div></div>
+      <div style="padding:0 24px 20px"><button class="btn-sm" style="background:#5a8a5a;color:#fff;border-color:#5a8a5a" onclick="saveAttendance()">Lưu điểm danh</button></div>
+    </div>
+    <div class="section-card">
+      <div class="section-header"><div><div class="section-title">Lịch sử và thống kê</div><div class="section-sub">Số buổi có mặt của từng học sinh</div></div></div>
+      <div id="att-history"><div class="loading">Đang tải...</div></div>
+    </div>
+    <div class="section-card">
+      <div class="section-header"><div><div class="section-title">Sinh nhật sắp tới</div><div class="section-sub">Trong 30 ngày tới (học sinh tự nhập ngày sinh ở trang chủ)</div></div></div>
+      <div id="att-birthdays"><div class="loading">Đang tải...</div></div>
+    </div>
+  </div>
+
+  <!-- RECORDINGS TAB -->
+  <div id="tab-recordings" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Ghi âm của học sinh</div>
+      <div class="page-sub">Voice note từ Daily Practice, Quiz và AI Speaking Coach. Nghe, nhận xét và tải về theo ngày với tên file rõ ràng</div>
+    </div>
+    <div class="section-card">
+      <div class="section-header">
+        <div class="filter-bar" style="flex-wrap:wrap">
+          <select class="filter" id="class-filter-rec" onchange="loadRecordings()"><option value="">— Chọn lớp —</option></select>
+          <label style="font-size:13px;color:var(--muted)">Từ</label><input type="date" class="filter" id="rc-from" onchange="loadRecordings()">
+          <label style="font-size:13px;color:var(--muted)">đến</label><input type="date" class="filter" id="rc-to" onchange="loadRecordings()">
+          <select class="filter" id="rc-src" onchange="renderRecordings()"><option value="">Tất cả nguồn</option><option value="daily">Daily Practice</option><option value="speaking">Speaking / Quiz</option></select>
+          <button class="btn-sm" onclick="loadRecordings()">↻ Tải lại</button>
+          <button class="btn-sm" style="background:#5a8a5a;color:#fff;border-color:#5a8a5a" onclick="zipRecordings()">⬇ Tải ZIP</button>
+          <button class="btn-sm" style="background:#4a7ab0;color:#fff;border-color:#4a7ab0" onclick="exportToDrive()">☁ Đẩy lên Drive</button>
+          <a class="btn-sm" id="drive-link" href="#" target="_blank" rel="noopener" style="display:none;text-decoration:none">📁 Mở thư mục Drive</a>
+        </div>
+        <span class="section-sub" id="rc-status"></span>
+      </div>
+      <div id="rc-list"><div class="empty-state"><div class="empty-text">Chọn lớp để xem ghi âm</div></div></div>
+    </div>
+  </div>
+
+  <!-- SUBMISSIONS TAB -->
+  <div id="tab-submissions" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Bài làm của học sinh</div>
+      <div class="page-sub">Điểm tự chấm, câu trả lời, bài viết, ghi âm và nhận xét của từng bạn trong Daily Practice</div>
+    </div>
+    <div class="section-card">
+      <div class="section-header">
+        <div class="filter-bar" style="flex-wrap:wrap">
+          <select class="filter" id="class-filter-sub" onchange="loadSubmissions()"><option value="">— Chọn lớp —</option></select>
+          <label style="font-size:13px;color:var(--muted)">Từ</label><input type="date" class="filter" id="sb-from" onchange="loadSubmissions()">
+          <label style="font-size:13px;color:var(--muted)">đến</label><input type="date" class="filter" id="sb-to" onchange="loadSubmissions()">
+          <button class="btn-sm" onclick="loadSubmissions()">↻ Tải lại</button>
+        </div>
+        <span class="section-sub" id="sb-status"></span>
+      </div>
+      <div id="sb-list"><div class="empty-state"><div class="empty-text">Chọn lớp để xem bài làm</div></div></div>
+    </div>
+  </div>
+
+  <!-- LIBRARY TAB -->
+  <div id="tab-library" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Thư viện bài giảng</div>
+      <div class="page-sub">Lưu slide HTML, handout và file Daily Practice. Bật "Cho học sinh xem" để hiện ở trang Tài liệu của lớp</div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header"><div><div class="section-title">Kho sách và giáo trình (Google Drive)</div><div class="section-sub">Thư mục "Tài liệu dạy IELTS". Chỉ dành cho giáo viên, mở trong Google Drive</div></div>
+        <a class="btn-sm" style="text-decoration:none" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1luYTaBTAG9qDYmzBfsiESocKFchUYzmq">Mở thư mục gốc ↗</a></div>
+      <div style="padding:16px 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px">
+        <a class="drive-link" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1Be9xquUVtB4CeLsBzH-EJ0ZDDliOG3ww">🎧 Dạy Listening</a>
+        <a class="drive-link" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/13bdnR-hmUuSU8fsGf0-seES57LPnafq1">✍️ Dạy Writing</a>
+        <a class="drive-link" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1xLj4v_7xfYQLAAdkzU6_m9dtsX0wIsoe">🗣️ Pronunciation</a>
+        <a class="drive-link" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1pPGuheTAPofsQBd4Lt9zKNRssstdRn4I">📖 Vocabulary</a>
+        <a class="drive-link" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1gyZ8foKXYAXot63aBQ31ugLvrYOjY7p-">🧩 Grammar</a>
+        <a class="drive-link" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1qBtl6acGXkjxFtlG_TK4QcqA1Mc35Xey">📘 Barron Essential Words for IELTS</a>
+        <a class="drive-link" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1p1yjiFAQ02_NRmpRNVbeKoOSyFEu7uei">📕 Cambridge IELTS</a>
+        <a class="drive-link" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/16df5_bCJmM6q9MXaBqP78IM99-vS2PP3">📗 Complete IELTS</a>
+        <a class="drive-link" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1DVw_w_kSqAs_7lv0wycLPFuldyzn3cCd">📙 IELTS Advantage</a>
+        <a class="drive-link" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1A6hboSm3OTd44iXlgbkdufV1tVnPt1Dr">📓 IELTS Mindset</a>
+        <a class="drive-link" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/19iDfQAvpxg6AKVSLLaqSx7PgURESgtGM">📚 Official Cambridge Guide to IELTS</a>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header"><div class="section-title">Tải tài liệu lên</div></div>
+      <div style="padding:16px 24px">
+        <div class="filter-bar" style="flex-wrap:wrap;margin-bottom:12px">
+          <select class="filter" id="class-filter-libup"><option value="">— Lớp —</option></select>
+          <select class="filter" id="lib-kind">
+            <option value="slide">Slide (HTML)</option>
+            <option value="handout">Handout</option>
+            <option value="daily">Daily Practice</option>
+            <option value="other">Khác</option>
+          </select>
+          <input type="date" class="filter" id="lib-date" title="Ngày dạy">
+        </div>
+        <label class="zl-label">Tên tài liệu</label>
+        <input type="text" id="lib-title" class="zl-text" style="height:44px" placeholder="Ví dụ: Session 1 – Letters and Sounds">
+        <div style="margin-top:12px"><input type="file" id="lib-file" accept=".html,.htm,.pdf,.docx,.pptx,.xlsx,.mp3,.png,.jpg,.jpeg" multiple></div>
+        <label style="display:flex;gap:8px;align-items:center;margin-top:12px;font-size:15px"><input type="checkbox" id="lib-shared"> Cho học sinh xem ngay</label>
+        <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <button class="btn-sm" style="background:#5a8a5a;color:#fff;border-color:#5a8a5a" onclick="uploadMaterial()">Tải lên</button>
+          <span class="section-sub" id="lib-status"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div class="filter-bar" style="flex-wrap:wrap">
+          <select class="filter" id="class-filter-lib" onchange="loadLibrary()"><option value="">Tất cả lớp</option></select>
+          <select class="filter" id="lib-kind-filter" onchange="loadLibrary()">
+            <option value="">Tất cả loại</option><option value="slide">Slide</option><option value="handout">Handout</option><option value="daily">Daily Practice</option><option value="other">Khác</option>
+          </select>
+          <input type="text" id="lib-search" class="filter" placeholder="Tìm theo tên…" oninput="renderLibrary()" style="min-width:180px">
+        </div>
+      </div>
+      <div id="lib-list"><div class="loading">Đang tải...</div></div>
+    </div>
+  </div>
+
+  <!-- LIBRARY VIEWER -->
+  <div id="lib-viewer" style="display:none;position:fixed;inset:0;z-index:300;background:rgba(20,14,26,.86);padding:18px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;color:#fff">
+      <b id="lib-viewer-title" style="font-size:17px"></b>
+      <span><button class="btn-sm" onclick="document.getElementById('lib-frame').requestFullscreen && document.getElementById('lib-frame').requestFullscreen()">⛶ Toàn màn hình</button> <button class="btn-sm" onclick="closeViewer()">✕ Đóng</button></span>
+    </div>
+    <iframe id="lib-frame" sandbox="allow-scripts allow-popups allow-forms" style="width:100%;height:calc(100% - 46px);border:0;border-radius:12px;background:#fff"></iframe>
+  </div>
+
+  <!-- SCHEDULE TAB -->
+  <div id="tab-schedule" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Lịch bài</div>
+      <div class="page-sub">Xếp bài Daily Practice và từ vựng cho từng ngày. Học sinh và tin Zalo sẽ lấy theo lịch này</div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div><div class="section-title">Thêm hoặc sửa lịch một ngày</div><div class="section-sub">Chọn lớp và ngày. Lưu lại ngày đã có thì sẽ ghi đè</div></div>
+      </div>
+      <div style="padding:16px 24px">
+        <div class="filter-bar" style="margin-bottom:14px;flex-wrap:wrap">
+          <select class="filter" id="class-filter-sched" onchange="loadSchedule()">
+            <option value="">— Chọn lớp —</option>
+          </select>
+          <input type="date" class="filter" id="sc-day">
+          <select class="filter" id="sc-practice"><option value="">— Không có bài Daily Practice —</option></select>
+        </div>
+        <label class="zl-label">Từ vựng hôm nay (tuỳ chọn)</label>
+        <textarea id="sc-vocab" class="zl-text" rows="2" placeholder="Ví dụ: densely populated, run-down, local amenities, green spaces, urban sprawl"></textarea>
+        <label class="zl-label" style="margin-top:12px">Ghi chú (tuỳ chọn)</label>
+        <textarea id="sc-note" class="zl-text" rows="2" placeholder="Ví dụ: Làm bài trong sách Mindset trang 22–23"></textarea>
+        <div style="margin-top:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <button class="btn-sm" style="background:#5a8a5a;color:#fff;border-color:#5a8a5a" onclick="saveSchedule()">Lưu lịch</button>
+          <span class="section-sub" id="sc-status"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div><div class="section-title">Lịch sắp tới và vừa qua</div><div class="section-sub">Từ 7 ngày trước đến 30 ngày sau</div></div>
+      </div>
+      <div id="sc-list"><div class="empty-state"><div class="empty-text">Chọn lớp để xem lịch</div></div></div>
+    </div>
+  </div>
+
+  <!-- ZALO REMINDER TAB -->
+  <div id="tab-zalo" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Nhắc Zalo</div>
+      <div class="page-sub">Soạn sẵn tin nhắn, bấm Copy rồi dán vào nhóm Zalo của lớp</div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div class="filter-bar">
+          <select class="filter" id="class-filter-zalo" onchange="buildZalo()">
+            <option value="">— Chọn lớp —</option>
+          </select>
+          <input type="date" class="filter" id="zl-date" onchange="buildZalo()">
+          <button class="btn-sm" onclick="buildZalo()">↻ Soạn lại</button>
+        </div>
+        <span class="section-sub" id="zl-status"></span>
+      </div>
+      <div style="padding:16px 24px">
+        <label class="zl-label">Từ vựng / ghi chú thêm cho tin sáng (tuỳ chọn)</label>
+        <textarea id="zl-extra" class="zl-text" rows="2" placeholder="Ví dụ: Vocab hôm nay: densely populated, run-down, local amenities, green spaces, urban sprawl" oninput="buildZalo()"></textarea>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div><div class="section-title">☀️ Tin sáng: hôm nay cần làm</div><div class="section-sub">Gồm bài hôm nay, từ vựng và bài còn thiếu cần bù</div></div>
+        <button class="btn-sm" onclick="copyZalo('zl-morning', this)">Copy</button>
+      </div>
+      <div style="padding:16px 24px"><textarea id="zl-morning" class="zl-text" rows="12"></textarea></div>
+    </div>
+
+    <div class="section-card">
+      <div class="section-header">
+        <div><div class="section-title">⏰ Tin nhắc: ai chưa nộp bài</div><div class="section-sub">Theo ngày đã chọn ở trên (thường là hôm qua hoặc tối nay)</div></div>
+        <button class="btn-sm" onclick="copyZalo('zl-remind', this)">Copy</button>
+      </div>
+      <div style="padding:16px 24px"><textarea id="zl-remind" class="zl-text" rows="10"></textarea></div>
+    </div>
+  </div>
+
+  <!-- RANKING TAB -->
+  <div id="tab-ranking" class="tab-panel">
+    <div class="page-header">
+      <div class="page-title">Bảng xếp hạng</div>
+      <div class="page-sub">Điểm tổng cộng dồn</div>
+    </div>
+    <div class="section-card">
+      <div class="section-header">
+        <select class="filter" id="class-filter-ranking" onchange="loadRanking()">
+          <option value="">Tất cả lớp</option>
+          <option value="FOUNDATION11">Foundation 11</option>
+          <option value="FOUNDATION12">Foundation 12</option>
+          <option value="IELTS13">IELTS 13 (Pre-IELTS)</option>
+          <option value="LYTHUYET3">Lý thuyết 3</option>
+        </select>
+      </div>
+      <div id="ranking-table"><div class="loading">Đang tải...</div></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="meow.js"></script>
+<script>
+  const SUPABASE_URL = 'https://sxnxbbosfyapmmkrhcdj.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_OMyiSjOVcKOfRdZO9JwSZg_8XogOYkZ';
+  const { createClient } = supabase;
+  const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Auth check
+  (async () => {
+    const { data: { session } } = await db.auth.getSession();
+    if (!session) {
+      window.location.href = 'login.html';
+      return;
+    }
+    /* Chỉ Gmail có trong danh sách giáo viên / trợ giảng mới được vào */
+    const { data: isStaff } = await db.rpc('is_staff');
+    if (!isStaff) {
+      await db.auth.signOut(); localStorage.removeItem('nvu_teacher');
+      window.location.href = 'login.html';
+      return;
+    }
+    loadAll();
+  })();
+
+  function loadAll() {
+    document.getElementById('today-date').textContent =
+      new Date().toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    populateClassSelects();
+    loadStats();
+    loadOverviewRanking();
+    loadStaff();
+  }
+
+  /* Giáo viên và trợ giảng được đăng nhập trang này */
+  async function loadStaff() {
+    const el = document.getElementById('staff-list'); if (!el) return;
+    const { data, error } = await db.from('staff_emails').select('*').order('role', { ascending: false });
+    if (error) { el.innerHTML = emptyState('Không tải được: ' + esc(error.message)); return; }
+    el.innerHTML = '<table><tbody>' + (data || []).map(s => `<tr><td><strong>${esc(s.email)}</strong></td><td>${s.role === 'teacher' ? '<span class="badge badge-gold">Giáo viên</span>' : '<span class="badge badge-green">Trợ giảng</span>'}</td><td style="text-align:right">${s.role === 'teacher' ? '' : `<button class="btn-sm" onclick="removeStaff('${esc(s.email)}')">Xóa</button>`}</td></tr>`).join('') + '</tbody></table>';
+  }
+  async function addStaff() {
+    const inp = document.getElementById('staff-email'), msg = document.getElementById('staff-msg');
+    const email = inp.value.trim().toLowerCase();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { msg.style.color = 'var(--red)'; msg.textContent = 'Email chưa đúng định dạng'; return; }
+    const { error } = await db.from('staff_emails').upsert({ email, role: 'assistant', name: 'Trợ giảng' }, { onConflict: 'email', ignoreDuplicates: true });
+    if (error) { msg.style.color = 'var(--red)'; msg.textContent = 'Không thêm được: ' + error.message; return; }
+    inp.value = ''; msg.style.color = 'var(--green)'; msg.textContent = '✓ Đã thêm. Trợ giảng vào bằng "Đăng nhập bằng Google" ở cổng Teacher.'; loadStaff();
+  }
+  async function removeStaff(email) {
+    if (!confirm('Xóa quyền của ' + email + '?')) return;
+    const { error } = await db.from('staff_emails').delete().eq('email', email).eq('role', 'assistant');
+    if (error) { alert('Không xóa được: ' + error.message); return; }
+    loadStaff();
+  }
+
+  async function loadStats() {
+    const [{ count: studentCount }, { count: errorCount }] = await Promise.all([
+      db.from('students').select('*', { count: 'exact', head: true }),
+      db.from('error_logs').select('*', { count: 'exact', head: true }).eq('is_resolved', false)
+    ]);
+
+    // Active today
+    const today = new Date().toISOString().split('T')[0];
+    const { count: activeCount } = await db.from('daily_scores')
+      .select('student_id', { count: 'exact', head: true })
+      .eq('practice_date', today);
+
+    // This week practices
+    const monday = getMonday();
+    const { count: practiceCount } = await db.from('daily_scores')
+      .select('*', { count: 'exact', head: true })
+      .gte('practice_date', monday);
+
+    document.getElementById('stat-students').textContent = studentCount || 0;
+    document.getElementById('stat-active').textContent = activeCount || 0;
+    document.getElementById('stat-practices').textContent = practiceCount || 0;
+    document.getElementById('stat-errors').textContent = errorCount || 0;
+  }
+
+  function getMonday() {
+    const d = new Date();
+    const day = d.getDay();
+    const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+    return new Date(d.setDate(diff)).toISOString().split('T')[0];
+  }
+
+  async function loadOverviewRanking() {
+    const classCode = document.getElementById('class-filter-overview').value;
+    let query = db.from('students').select('id, full_name, class_code, avatar_emoji, total_score')
+      .order('total_score', { ascending: false }).limit(10);
+    if (classCode) query = query.eq('class_code', classCode);
+    const { data } = await query;
+    renderRankingTable('overview-ranking', data);
+  }
+
+  async function loadStudents() {
+    const classCode = document.getElementById('class-filter-students').value;
+    let query = db.from('students').select('*').order('created_at', { ascending: false });
+    if (classCode) query = query.eq('class_code', classCode);
+    const { data } = await query;
+
+    if (!data || data.length === 0) {
+      document.getElementById('students-table').innerHTML = emptyState('Chưa có học sinh nào đăng ký');
+      return;
+    }
+
+    const em = await db.from('student_emails').select('student_id, email');
+    const emailOf = {}; (em.data || []).forEach(r => { emailOf[r.student_id] = r.email; });
+
+    document.getElementById('students-table').innerHTML = `
+      <table>
+        <thead><tr>
+          <th>#</th><th>Học sinh</th><th>Lớp</th><th>Email Google (để đăng nhập)</th><th>Điểm tổng</th><th>Streak</th><th>Hoạt động cuối</th>
+        </tr></thead>
+        <tbody>
+          ${data.map((s, i) => `<tr>
+            <td style="color:var(--muted)">${i + 1}</td>
+            <td><span style="margin-right:8px">${s.avatar_emoji || '🎓'}</span><strong>${s.full_name}</strong></td>
+            <td><span class="badge badge-gold">${s.class_code}</span></td>
+            <td><input type="email" class="filter" style="min-width:210px" placeholder="gmail của học sinh" value="${esc(emailOf[s.id] || '')}" onchange="saveStudentEmail('${s.id}', this)"><div id="se-${s.id}" style="font-size:11px;min-height:13px"></div></td>
+            <td><strong>${s.total_score || 0}</strong></td>
+            <td>${s.streak_days || 0} ngày 🔥</td>
+            <td style="color:var(--muted)">${s.last_active ? new Date(s.last_active).toLocaleDateString('vi-VN') : '—'}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+
+  async function saveStudentEmail(id, input) {
+    const email = input.value.trim().toLowerCase();
+    const el = document.getElementById('se-' + id);
+    let error;
+    if (!email) ({ error } = await db.from('student_emails').delete().eq('student_id', id));
+    else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { el.style.color = 'var(--red)'; el.textContent = 'Email chưa đúng định dạng'; return; }
+    else ({ error } = await db.from('student_emails').upsert({ student_id: id, email }, { onConflict: 'student_id' }));
+    if (error) { el.style.color = 'var(--red)'; el.textContent = /duplicate|unique/i.test(error.message) ? 'Email này đã gắn cho bạn khác' : 'Không lưu được: ' + error.message; return; }
+    input.value = email; el.style.color = 'var(--green)'; el.textContent = email ? '✓ Đã lưu' : '✓ Đã xóa';
+  }
+
+  async function loadScores() {
+    const classCode = document.getElementById('class-filter-scores').value;
+    const monday = getMonday();
+    let query = db.from('daily_scores')
+      .select('*, students(full_name, class_code, avatar_emoji)')
+      .gte('practice_date', monday)
+      .order('practice_date', { ascending: false })
+      .limit(50);
+    const { data } = await query;
+
+    if (!data || data.length === 0) {
+      document.getElementById('scores-table').innerHTML = emptyState('Chưa có điểm nào tuần này');
+      return;
+    }
+
+    const filtered = classCode ? data.filter(d => d.students?.class_code === classCode) : data;
+
+    document.getElementById('scores-table').innerHTML = `
+      <table>
+        <thead><tr>
+          <th>Học sinh</th><th>Lớp</th><th>Ngày</th><th>Phần</th><th>Điểm</th><th>Tiến độ</th>
+        </tr></thead>
+        <tbody>
+          ${filtered.map(s => `<tr>
+            <td>${s.students?.avatar_emoji || '🎓'} <strong>${s.students?.full_name || '—'}</strong></td>
+            <td><span class="badge badge-gold">${s.students?.class_code || '—'}</span></td>
+            <td style="color:var(--muted)">${new Date(s.practice_date).toLocaleDateString('vi-VN')}</td>
+            <td>${s.section}</td>
+            <td><strong>${s.score}/${s.max_score}</strong></td>
+            <td>
+              <div class="score-bar-wrap">
+                <div class="score-bar"><div class="score-bar-fill" style="width:${Math.round(s.score/s.max_score*100)}%"></div></div>
+                <span style="font-size:12px;color:var(--muted);width:36px">${Math.round(s.score/s.max_score*100)}%</span>
+              </div>
+            </td>
+          </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+
+  /* ---------- Error Log (tự cập nhật) ---------- */
+  const TYPE_LABEL = { vocabulary: 'Từ vựng', grammar: 'Ngữ pháp', listening: 'Listening', pronunciation: 'Phát âm' };
+  let EL = { students: [], daily: [], quiz: [], errors: [] };
+  let elChannel = null, elTimer = null, elDebounce = null;
+
+  function esc(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+  function normKey(s) {
+    return String(s ?? '').toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, '').replace(/\s+/g, ' ').trim();
+  }
+  function mondayOf(dateStr) {
+    const d = new Date(String(dateStr).slice(0, 10) + 'T00:00:00');
+    const diff = d.getDate() - d.getDay() + (d.getDay() === 0 ? -6 : 1);
+    d.setDate(diff);
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  function shortDate(dateStr) {
+    const p = String(dateStr).slice(0, 10).split('-');
+    return p[2] + '/' + p[1];
+  }
+  function errDate(e) { return String(e.practice_date || e.created_at || '').slice(0, 10); }
+  function pctClass(p) { return p >= 90 ? 'pct-green' : p >= 70 ? 'pct-yellow' : 'pct-red'; }
+
+  async function populateClassSelects() {
+    const { data } = await db.from('classes').select('class_code, class_name').order('class_name');
+    if (!data || !data.length) return;
+    document.querySelectorAll('select[id^="class-filter"]').forEach(sel => {
+      const cur = sel.value;
+      sel.innerHTML = '<option value="">Tất cả lớp</option>' +
+        data.map(c => `<option value="${esc(c.class_code)}">${esc(c.class_name)}</option>`).join('');
+      sel.value = cur;
+    });
+  }
+
+  async function loadErrors(silent) {
+    const classCode = document.getElementById('class-filter-errors').value;
+    if (!silent) {
+      ['el-matrix', 'el-common'].forEach(id => document.getElementById(id).innerHTML = '<div class="loading">Đang tải...</div>');
+    }
+    let sq = db.from('students').select('id, full_name, class_code, avatar_emoji').order('full_name');
+    if (classCode) sq = sq.eq('class_code', classCode);
+    const { data: students, error } = await sq;
+    if (error) {
+      document.getElementById('el-matrix').innerHTML = emptyState('Không tải được: ' + esc(error.message));
+      return;
+    }
+    const ids = (students || []).map(s => s.id);
+    if (!ids.length) {
+      EL = { students: [], daily: [], quiz: [], errors: [] };
+      renderErrorLog();
+      return;
+    }
+    const [d, q, e] = await Promise.all([
+      db.from('daily_scores').select('student_id, practice_date, score, max_score').in('student_id', ids).limit(5000),
+      db.from('weekly_quiz_results').select('student_id, quiz_date, week_number, total_score, max_score').in('student_id', ids),
+      db.from('error_logs').select('*').in('student_id', ids).order('created_at', { ascending: false }).limit(3000)
+    ]);
+    EL = { students, daily: d.data || [], quiz: q.data || [], errors: e.data || [] };
+    document.getElementById('el-updated').textContent = 'cập nhật ' + new Date().toLocaleTimeString('vi-VN');
+    populateWeekSelect();
+    renderErrorLog();
+    startErrorLive();
+  }
+
+  function populateWeekSelect() {
+    const sel = document.getElementById('el-week');
+    const cur = sel.value;
+    const weeks = new Set();
+    EL.errors.forEach(e => { const d = errDate(e); if (d) weeks.add(mondayOf(d)); });
+    EL.daily.forEach(r => weeks.add(mondayOf(r.practice_date)));
+    EL.quiz.forEach(r => weeks.add(mondayOf(r.quiz_date)));
+    const list = [...weeks].sort().reverse();
+    sel.innerHTML = '<option value="">Tất cả các tuần</option>' +
+      list.map(w => `<option value="${w}">Tuần ${shortDate(w)}</option>`).join('');
+    sel.value = list.includes(cur) ? cur : '';
+  }
+
+  function renderErrorLog() {
+    const week = document.getElementById('el-week').value;
+    const type = document.getElementById('error-type-filter').value;
+    renderMatrix(week);
+    renderCommonErrors(week, type);
+    populateStudentSelect();
+    renderStudentErrors();
+  }
+
+  function buildSessions(week) {
+    const sessions = [];
+    const seenDaily = new Set();
+    EL.daily.forEach(r => {
+      if (week && mondayOf(r.practice_date) !== week) return;
+      if (seenDaily.has(r.practice_date)) return;
+      seenDaily.add(r.practice_date);
+      sessions.push({ key: 'd:' + r.practice_date, label: shortDate(r.practice_date), sort: r.practice_date, kind: 'daily' });
+    });
+    const seenQuiz = new Set();
+    EL.quiz.forEach(r => {
+      if (week && mondayOf(r.quiz_date) !== week) return;
+      if (seenQuiz.has(r.week_number)) return;
+      seenQuiz.add(r.week_number);
+      sessions.push({ key: 'q:' + r.week_number, label: 'Quiz T' + r.week_number, sort: String(r.quiz_date), kind: 'quiz' });
+    });
+    sessions.sort((a, b) => a.sort.localeCompare(b.sort));
+    return sessions.slice(-12);
+  }
+
+  function studentPct(studentId, session) {
+    if (session.kind === 'daily') {
+      const rows = EL.daily.filter(r => r.student_id === studentId && 'd:' + r.practice_date === session.key);
+      const max = rows.reduce((n, r) => n + (r.max_score || 0), 0);
+      if (!max) return null;
+      return Math.round(rows.reduce((n, r) => n + (r.score || 0), 0) / max * 100);
+    }
+    const r = EL.quiz.find(x => x.student_id === studentId && 'q:' + x.week_number === session.key);
+    return r && r.max_score ? Math.round(r.total_score / r.max_score * 100) : null;
+  }
+
+  function renderMatrix(week) {
+    const el = document.getElementById('el-matrix');
+    if (!EL.students.length) { el.innerHTML = emptyState('Chưa có học sinh nào'); return; }
+    const sessions = buildSessions(week);
+    if (!sessions.length) { el.innerHTML = emptyState('Chưa có điểm nào trong khoảng này'); return; }
+    const noteCount = {};
+    const doneCount = {};
+    EL.errors.forEach(e => { noteCount[e.student_id] = (noteCount[e.student_id] || 0) + (e.is_resolved ? 0 : 1); if (e.is_resolved) doneCount[e.student_id] = (doneCount[e.student_id] || 0) + 1; });
+    el.innerHTML = `<table>
+      <thead><tr><th>Học sinh</th>${sessions.map(s => `<th style="text-align:center">${esc(s.label)}</th>`).join('')}<th style="text-align:center">Lỗi cần ôn</th><th style="text-align:center">Đã nắm</th></tr></thead>
+      <tbody>${EL.students.map(st => `<tr>
+        <td>${esc(st.avatar_emoji || '🎓')} <strong>${esc(st.full_name)}</strong><br><span style="font-size:11px;color:var(--muted)">${esc(st.class_code)}</span></td>
+        ${sessions.map(s => {
+          const p = studentPct(st.id, s);
+          return p === null ? '<td style="text-align:center;color:var(--muted)">—</td>'
+            : `<td style="text-align:center"><span class="pct ${pctClass(p)}">${p}%</span></td>`;
+        }).join('')}
+        <td style="text-align:center">${noteCount[st.id] ? `<span class="badge badge-red">${noteCount[st.id]}</span>` : '<span class="badge badge-green">0</span>'}</td><td style="text-align:center">${doneCount[st.id] || 0}</td>
+      </tr>`).join('')}</tbody></table>`;
+  }
+
+  function renderCommonErrors(week, type) {
+    const el = document.getElementById('el-common');
+    const rows = EL.errors.filter(e => (!week || mondayOf(errDate(e)) === week) && (!type || e.error_type === type));
+    if (!rows.length) { el.innerHTML = emptyState('Chưa có lỗi nào được ghi nhận'); return; }
+    const groups = {};
+    rows.forEach(e => {
+      const k = e.error_type + '|' + normKey(e.correct_answer || e.error_content);
+      const g = groups[k] || (groups[k] = { type: e.error_type, correct: e.correct_answer || '—', context: e.context, students: new Set(), count: 0, wrong: {} });
+      g.students.add(e.student_id);
+      g.count++;
+      const w = (e.error_content || '').trim() || '(blank)';
+      g.wrong[w] = (g.wrong[w] || 0) + 1;
+    });
+    const list = Object.values(groups).sort((a, b) => b.students.size - a.students.size || b.count - a.count).slice(0, 40);
+    el.innerHTML = `<table>
+      <thead><tr><th>Loại</th><th>Câu hỏi / đáp án đúng</th><th style="text-align:center">Số HS sai</th><th>Hay trả lời sai</th></tr></thead>
+      <tbody>${list.map(g => {
+        const common = g.students.size >= 2;
+        const top = Object.entries(g.wrong).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([w, n]) => `${esc(w)}${n > 1 ? ` ×${n}` : ''}`).join(' · ');
+        return `<tr>
+          <td><span class="badge badge-gold">${esc(TYPE_LABEL[g.type] || g.type)}</span></td>
+          <td>${g.context ? `<div style="font-size:12px;color:var(--muted);margin-bottom:3px">${esc(g.context)}</div>` : ''}<strong style="color:var(--green)">${esc(g.correct)}</strong></td>
+          <td style="text-align:center"><span class="pct ${common ? 'pct-red' : 'pct-plain'}">${g.students.size}</span>${common ? '<div style="font-size:10px;color:var(--red);margin-top:2px">Ôn trên lớp</div>' : ''}</td>
+          <td style="color:var(--red);font-size:13px">${top}</td></tr>`;
+      }).join('')}</tbody></table>`;
+  }
+
+  function populateStudentSelect() {
+    const sel = document.getElementById('el-student');
+    const cur = sel.value;
+    sel.innerHTML = '<option value="">— Chọn học sinh —</option>' +
+      EL.students.map(s => `<option value="${esc(s.id)}">${esc(s.full_name)} (${esc(s.class_code)})</option>`).join('');
+    sel.value = EL.students.some(s => s.id === cur) ? cur : '';
+  }
+
+  function renderStudentErrors() {
+    const view = document.getElementById('el-student-view');
+    const id = document.getElementById('el-student').value;
+    if (!id) { view.innerHTML = '<div class="empty-state"><div class="empty-text">Chọn một học sinh để xem chi tiết</div></div>'; return; }
+    const week = document.getElementById('el-week').value;
+    const type = document.getElementById('error-type-filter').value;
+    const sessions = buildSessions('');
+    const bars = sessions.map(s => ({ s, p: studentPct(id, s) })).filter(x => x.p !== null);
+    const errs = EL.errors.filter(e => e.student_id === id && (!week || mondayOf(errDate(e)) === week) && (!type || e.error_type === type));
+    view.innerHTML = `
+      <div style="padding:20px 24px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Độ chính xác theo buổi</div>
+        ${bars.length ? `<div class="trend">${bars.map(b => `<div class="trend-col"><div class="trend-val">${b.p}%</div><div class="trend-bar ${pctClass(b.p)}" style="height:${Math.max(b.p, 4)}px"></div><div class="trend-lab">${esc(b.s.label)}</div></div>`).join('')}</div>`
+          : '<div style="color:var(--muted);font-size:14px">Chưa có điểm.</div>'}
+      </div>
+      ${errs.length ? `<table>
+        <thead><tr><th>Loại</th><th>Câu hỏi</th><th>Trả lời</th><th>Đáp án đúng</th><th>Nguồn · ngày</th><th></th></tr></thead>
+        <tbody>${errs.map(e => `<tr>
+          <td><span class="badge badge-red">${esc(TYPE_LABEL[e.error_type] || e.error_type)}</span></td>
+          <td style="font-size:13px;color:var(--muted)">${esc(e.context || '—')}</td>
+          <td style="color:var(--red)">${esc(e.error_content)}</td>
+          <td style="color:var(--green)">${esc(e.correct_answer || '—')}</td>
+          <td style="color:var(--muted);font-size:12px">${esc(e.source || '—')} · ${esc(shortDate(errDate(e)))}</td>
+          <td><button class="btn-sm" onclick="toggleResolved('${esc(e.id)}', ${e.is_resolved ? 'false' : 'true'})">${e.is_resolved ? 'Mở lại' : 'Đã ôn ✓'}</button></td>
+        </tr>`).join('')}</tbody></table>` : emptyState('Học sinh này chưa có lỗi nào trong khoảng đã chọn')}`;
+  }
+
+  async function toggleResolved(id, val) {
+    const { error } = await db.from('error_logs').update({ is_resolved: val }).eq('id', id);
+    if (error) { alert('Không cập nhật được: ' + error.message); return; }
+    const row = EL.errors.find(e => e.id === id);
+    if (row) row.is_resolved = val;
+    renderErrorLog();
+    loadStats();
+  }
+
+  /* Tự cập nhật: Supabase Realtime + tải lại mỗi 60 giây khi đang mở tab */
+  function startErrorLive() {
+    if (elChannel) return;
+    const badge = document.getElementById('el-live');
+    const refresh = () => { clearTimeout(elDebounce); elDebounce = setTimeout(() => loadErrors(true), 1500); };
+    elChannel = db.channel('el-live');
+    ['error_logs', 'weekly_quiz_results', 'daily_scores'].forEach(table =>
+      elChannel.on('postgres_changes', { event: '*', schema: 'public', table }, refresh));
+    elChannel.subscribe(status => {
+      if (status === 'SUBSCRIBED') { badge.className = 'badge badge-green'; badge.textContent = '● Live'; }
+      else if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') { badge.className = 'badge badge-gold'; badge.textContent = 'Tự tải mỗi 60 giây'; }
+    });
+    elTimer = setInterval(() => {
+      if (document.getElementById('tab-errors').classList.contains('active')) loadErrors(true);
+    }, 60000);
+  }
+
+  async function loadRanking() {
+    const classCode = document.getElementById('class-filter-ranking').value;
+    let query = db.from('students').select('id, full_name, class_code, avatar_emoji, total_score, streak_days')
+      .order('total_score', { ascending: false });
+    if (classCode) query = query.eq('class_code', classCode);
+    const { data } = await query;
+    renderRankingTable('ranking-table', data);
+  }
+
+  function renderRankingTable(elId, data) {
+    if (!data || data.length === 0) {
+      document.getElementById(elId).innerHTML = emptyState('Chưa có dữ liệu xếp hạng');
+      return;
+    }
+    const medals = ['🥇', '🥈', '🥉'];
+    document.getElementById(elId).innerHTML = `
+      <table>
+        <thead><tr><th>Hạng</th><th>Học sinh</th><th>Lớp</th><th>Điểm</th><th>Streak</th></tr></thead>
+        <tbody>
+          ${data.map((s, i) => `<tr>
+            <td style="font-size:20px;text-align:center">${medals[i] || `<span style="color:var(--muted)">${i+1}</span>`}</td>
+            <td>${s.avatar_emoji || '🎓'} <strong>${s.full_name}</strong></td>
+            <td><span class="badge badge-gold">${s.class_code}</span></td>
+            <td><strong style="font-size:18px">${s.total_score || 0}</strong></td>
+            <td>${s.streak_days || 0} 🔥</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+
+  function emptyState(msg) {
+    return `<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">${msg}</div></div>`;
+  }
+
+  /* ---------- Nhắc Zalo ---------- */
+  const SITE = 'https://nvu-academy-ielts.vercel.app';
+  const DAY_VI_Z = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+  let ZL = { index: null, quiz: null };
+
+  function isoToday() {
+    const d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  function viDate(iso) {
+    const d = new Date(iso + 'T00:00:00');
+    return `${DAY_VI_Z[d.getDay()]} ${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
+  }
+  function loadZalo() {
+    const dt = document.getElementById('zl-date');
+    if (!dt.value) dt.value = isoToday();
+    buildZalo();
+  }
+
+  async function buildZalo() {
+    const cls = document.getElementById('class-filter-zalo').value;
+    const date = document.getElementById('zl-date').value || isoToday();
+    const morning = document.getElementById('zl-morning');
+    const remind = document.getElementById('zl-remind');
+    const status = document.getElementById('zl-status');
+    if (!cls) { morning.value = ''; remind.value = ''; status.textContent = 'Hãy chọn lớp'; return; }
+    status.textContent = 'Đang soạn…';
+    try {
+      if (!ZL.index) ZL.index = (await (await fetch('daily-index.json', { cache: 'no-cache' })).json()).practices || [];
+      if (!ZL.quiz) { try { ZL.quiz = (await (await fetch('quiz-week1-ielts14.json', { cache: 'no-cache' })).json()).quiz; } catch (e) { ZL.quiz = false; } }
+      const clsName = (document.querySelector('#class-filter-zalo option:checked') || {}).textContent || cls;
+      const byId = {}; ZL.index.forEach(p => byId[p.id] = p);
+      const fromIso = isoOf(new Date(new Date(date + 'T00:00:00').getTime() - 14 * 86400000));
+      const { data: sch } = await db.from('schedule').select('day, practice_id, vocab, note').eq('class_code', cls).gte('day', fromIso).lte('day', date);
+      let plan = (sch || []).filter(r => r.practice_id && byId[r.practice_id]).map(r => ({ p: byId[r.practice_id], day: r.day }));
+      if (!(sch || []).length) plan = ZL.index.filter(p => (p.class_codes || []).includes(cls) && p.date >= fromIso && p.date <= date).map(p => ({ p, day: p.date }));
+      const todayRow = (sch || []).find(r => r.day === date) || {};
+
+      const { data: students } = await db.from('students').select('id, full_name').eq('class_code', cls).order('full_name');
+      const ids = (students || []).map(s => s.id);
+      let scores = [], quizRes = [];
+      if (ids.length) {
+        const [a, b] = await Promise.all([
+          db.from('daily_scores').select('student_id, practice_date, section').in('student_id', ids),
+          db.from('weekly_quiz_results').select('student_id, week_number').in('student_id', ids)
+        ]);
+        scores = a.data || []; quizRes = b.data || [];
+      }
+      const doneSet = new Set(scores.map(r => r.student_id + '|' + r.practice_date + '|' + r.section));
+      const done = (sid, it) => doneSet.has(sid + '|' + it.day + '|' + (it.p.section || 'listening'));
+      const link = it => `${SITE}/daily-practice.html?p=${it.p.id}&d=${it.day}`;
+
+      /* Tin sáng */
+      const todays = plan.filter(i => i.day === date), past = plan.filter(i => i.day < date);
+      const dow = new Date(date + 'T00:00:00').getDay();
+      const quizToday = ZL.quiz && (ZL.quiz.class_codes || []).includes(cls) &&
+        ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'].indexOf(ZL.quiz.available_day) === dow;
+      const manual = document.getElementById('zl-extra').value.trim();
+      const vocab = (manual || todayRow.vocab || '').replace(/^vocab hôm nay:\s*/i, '').replace(/^từ vựng:\s*/i, '');
+      const lines = [`📚 ${clsName} · ${viDate(date)}`, '', 'Hôm nay các bạn cần làm:'];
+      let n = 1;
+      if (vocab) lines.push(`${n++}. Từ vựng: ${vocab}`);
+      todays.forEach(it => lines.push(`${n++}. Daily Practice: ${it.p.title}${it.p.subtitle ? ' (' + it.p.subtitle + ')' : ''}\n   👉 ${link(it)}`));
+      if (quizToday) lines.push(`${n++}. Weekly Quiz (${ZL.quiz.max_score} điểm)\n   👉 ${SITE}/weekly-quiz.html`);
+      if (n === 1) lines.push('(Chưa có bài nào được xếp cho hôm nay)');
+      if (todayRow.note) lines.push('', '📝 ' + todayRow.note);
+      lines.push('', `⏰ Hạn nộp: ${cls === 'IELTS13' ? '23:30' : '23:00'} tối nay.`);
+
+      const owed = {};
+      past.forEach(it => (students || []).forEach(s => { if (!done(s.id, it)) (owed[s.full_name] = owed[s.full_name] || []).push(`${it.p.title} ${viDate(it.day).split(' ').slice(-1)[0]}`); }));
+      const owedNames = Object.keys(owed);
+      if (owedNames.length) {
+        lines.push('', '📌 Bài còn thiếu, các bạn làm bù sớm nhé:');
+        owedNames.forEach(nm => lines.push(`- ${nm}: ${owed[nm].join('; ')}`));
+        lines.push(`Làm bù tại: ${SITE}/daily-practice.html`);
+      }
+      lines.push('', 'Chúc cả lớp học tốt! — Mr. Nam');
+      morning.value = lines.join('\n');
+
+      /* Tin nhắc chưa nộp */
+      const rl = [];
+      if (!todays.length) rl.push(`(Không có bài Daily Practice nào của ${viDate(date)} để kiểm tra)`);
+      todays.forEach(it => {
+        const missing = (students || []).filter(s => !done(s.id, it)).map(s => s.full_name);
+        rl.push(`⏰ Nhắc nộp bài: ${it.p.title} (${viDate(it.day)})`);
+        if (!missing.length) rl.push('Cả lớp đã nộp bài. Cảm ơn các bạn! 🎉');
+        else {
+          rl.push(`Thầy chưa thấy bài của ${missing.length}/${(students || []).length} bạn:`);
+          missing.forEach(nm => rl.push(`- ${nm}`));
+          rl.push('', `Các bạn làm và nộp tại: ${link(it)}`);
+          rl.push('Bạn nào chưa kịp thì làm bù và nhắn thầy nhé.');
+        }
+        rl.push('');
+      });
+      if (quizToday) {
+        const missingQ = (students || []).filter(s => !quizRes.some(r => r.student_id === s.id && r.week_number === ZL.quiz.week_number)).map(s => s.full_name);
+        rl.push(`⏰ Weekly Quiz tuần ${ZL.quiz.week_number}`);
+        rl.push(missingQ.length ? `Chưa làm (${missingQ.length}/${(students || []).length}): ${missingQ.join(', ')}` : 'Cả lớp đã làm quiz. 🎉');
+      }
+      remind.value = rl.join('\n').trim();
+      status.textContent = `${(students || []).length} học sinh · cập nhật ${new Date().toLocaleTimeString('vi-VN')}`;
+    } catch (e) {
+      status.textContent = 'Lỗi: ' + e.message;
+    }
+  }
+
+  async function copyZalo(id, btn) {
+    const ta = document.getElementById(id);
+    try { await navigator.clipboard.writeText(ta.value); }
+    catch (e) { ta.select(); document.execCommand('copy'); }
+    const old = btn.textContent; btn.textContent = 'Đã copy ✓';
+    setTimeout(() => btn.textContent = old, 1500);
+  }
+
+  /* ---------- Lịch bài ---------- */
+  let SC = { index: null, rows: [] };
+  function isoOf(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function addDays(iso, n) { const d = new Date(iso + 'T00:00:00'); d.setDate(d.getDate() + n); return isoOf(d); }
+
+  async function loadSchedule() {
+    const cls = document.getElementById('class-filter-sched').value;
+    const dayEl = document.getElementById('sc-day');
+    if (!dayEl.value) dayEl.value = isoOf(new Date());
+    try {
+      if (!SC.index) SC.index = (await (await fetch('daily-index.json', { cache: 'no-cache' })).json()).practices || [];
+    } catch (e) { SC.index = []; }
+    const sel = document.getElementById('sc-practice');
+    const cur = sel.value;
+    sel.innerHTML = '<option value="">— Không có bài Daily Practice —</option>' +
+      SC.index.filter(p => !cls || (p.class_codes || []).includes(cls))
+        .map(p => `<option value="${esc(p.id)}">${esc(p.title)} (${esc(p.subtitle || '')})</option>`).join('');
+    sel.value = cur;
+    const list = document.getElementById('sc-list');
+    if (!cls) { list.innerHTML = '<div class="empty-state"><div class="empty-text">Chọn lớp để xem lịch</div></div>'; return; }
+    const today = isoOf(new Date());
+    const { data, error } = await db.from('schedule').select('*').eq('class_code', cls)
+      .gte('day', addDays(today, -7)).lte('day', addDays(today, 30)).order('day');
+    if (error) { list.innerHTML = emptyState('Không tải được: ' + esc(error.message)); return; }
+    SC.rows = data || [];
+    if (!SC.rows.length) { list.innerHTML = emptyState('Chưa có lịch nào cho lớp này'); return; }
+    const byId = {}; SC.index.forEach(p => byId[p.id] = p);
+    const DAY = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+    list.innerHTML = `<table><thead><tr><th>Ngày</th><th>Bài Daily Practice</th><th>Từ vựng</th><th>Ghi chú</th><th></th></tr></thead><tbody>${
+      SC.rows.map(r => {
+        const p = byId[r.practice_id]; const d = new Date(r.day + 'T00:00:00');
+        return `<tr${r.day === today ? ' style="background:rgba(212,168,67,.12)"' : ''}>
+          <td><strong>${DAY[d.getDay()]} ${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}</strong>${r.day === today ? ' <span class="badge badge-gold">Hôm nay</span>' : ''}</td>
+          <td>${p ? esc(p.title) : '<span style="color:var(--muted)">—</span>'}</td>
+          <td style="font-size:14px">${esc(r.vocab || '')}</td>
+          <td style="font-size:14px;color:var(--muted)">${esc(r.note || '')}</td>
+          <td style="white-space:nowrap"><button class="btn-sm" onclick="editSchedule('${esc(r.id)}')">Sửa</button> <button class="btn-sm" onclick="deleteSchedule('${esc(r.id)}')">Xóa</button></td></tr>`;
+      }).join('')}</tbody></table>`;
+  }
+
+  function editSchedule(id) {
+    const r = SC.rows.find(x => x.id === id); if (!r) return;
+    document.getElementById('sc-day').value = r.day;
+    document.getElementById('sc-practice').value = r.practice_id || '';
+    document.getElementById('sc-vocab').value = r.vocab || '';
+    document.getElementById('sc-note').value = r.note || '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  async function saveSchedule() {
+    const cls = document.getElementById('class-filter-sched').value;
+    const day = document.getElementById('sc-day').value;
+    const st = document.getElementById('sc-status');
+    if (!cls) { st.textContent = 'Hãy chọn lớp'; return; }
+    if (!day) { st.textContent = 'Hãy chọn ngày'; return; }
+    const row = {
+      class_code: cls, day,
+      practice_id: document.getElementById('sc-practice').value || null,
+      vocab: document.getElementById('sc-vocab').value.trim() || null,
+      note: document.getElementById('sc-note').value.trim() || null
+    };
+    st.textContent = 'Đang lưu…';
+    const { error } = await db.from('schedule').upsert(row, { onConflict: 'class_code,day' });
+    if (error) { st.textContent = 'Lỗi: ' + error.message + ' (cần đăng nhập tài khoản giáo viên)'; return; }
+    st.textContent = '✓ Đã lưu ' + day;
+    loadSchedule();
+  }
+
+  async function deleteSchedule(id) {
+    if (!confirm('Xóa lịch của ngày này?')) return;
+    const { error } = await db.from('schedule').delete().eq('id', id);
+    if (error) { alert('Không xóa được: ' + error.message); return; }
+    loadSchedule();
+  }
+
+  /* ---------- Thư viện bài giảng ---------- */
+  let LIB = { rows: [] };
+  const KIND_VI = { slide: 'Slide', handout: 'Handout', daily: 'Daily Practice', other: 'Khác' };
+  function fmtSize(n) { return n > 1048576 ? (n / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round((n || 0) / 1024)) + ' KB'; }
+  function safeName(s) { return String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').replace(/[^A-Za-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '') || 'file'; }
+
+  async function loadLibrary() {
+    const dt = document.getElementById('lib-date'); if (!dt.value) dt.value = isoOf(new Date());
+    const cls = document.getElementById('class-filter-lib').value;
+    const kind = document.getElementById('lib-kind-filter').value;
+    let q = db.from('materials').select('*').order('lesson_date', { ascending: false, nullsFirst: false }).order('created_at', { ascending: false }).limit(500);
+    if (cls) q = q.eq('class_code', cls);
+    if (kind) q = q.eq('kind', kind);
+    const { data, error } = await q;
+    if (error) { document.getElementById('lib-list').innerHTML = emptyState('Không tải được: ' + esc(error.message)); return; }
+    LIB.rows = data || [];
+    renderLibrary();
+  }
+
+  function renderLibrary() {
+    const el = document.getElementById('lib-list');
+    const s = (document.getElementById('lib-search').value || '').toLowerCase().trim();
+    const rows = LIB.rows.filter(r => !s || (r.title + ' ' + (r.file_name || '')).toLowerCase().includes(s));
+    if (!rows.length) { el.innerHTML = emptyState('Chưa có tài liệu nào'); return; }
+    el.innerHTML = `<table><thead><tr><th>Tên</th><th>Lớp</th><th>Loại</th><th>Ngày dạy</th><th>Dung lượng</th><th>Học sinh xem</th><th></th></tr></thead><tbody>${rows.map(r => `<tr>
+      <td><strong>${esc(r.title)}</strong><br><span style="font-size:12px;color:var(--muted)">${esc(r.file_name || '')}</span></td>
+      <td><span class="badge badge-gold">${esc(r.class_code)}</span></td>
+      <td>${esc(KIND_VI[r.kind] || r.kind)}</td>
+      <td style="color:var(--muted)">${r.lesson_date ? esc(r.lesson_date.split('-').reverse().join('/')) : '—'}</td>
+      <td style="color:var(--muted);font-size:13px">${esc(fmtSize(r.size_bytes))}</td>
+      <td><label style="cursor:pointer"><input type="checkbox" ${r.shared ? 'checked' : ''} onchange="toggleShared('${esc(r.id)}', this.checked)"> ${r.shared ? 'Đang chia sẻ' : 'Riêng tư'}</label></td>
+      <td style="white-space:nowrap"><button class="btn-sm" onclick="openMaterial('${esc(r.id)}')">Xem</button> <button class="btn-sm" onclick="downloadMaterial('${esc(r.id)}')">Tải</button> <button class="btn-sm" onclick="deleteMaterial('${esc(r.id)}')">Xóa</button></td></tr>`).join('')}</tbody></table>`;
+  }
+
+  async function uploadMaterial() {
+    const cls = document.getElementById('class-filter-libup').value;
+    const files = [...document.getElementById('lib-file').files];
+    const st = document.getElementById('lib-status');
+    let title = document.getElementById('lib-title').value.trim();
+    if (!cls) { st.textContent = 'Hãy chọn lớp'; return; }
+    if (!files.length) { st.textContent = 'Hãy chọn file'; return; }
+    for (let i = 0; i < files.length; i++) {
+      const f = files[i];
+      if (f.size > 50 * 1048576) { st.textContent = `${f.name} lớn hơn 50 MB, bỏ qua`; continue; }
+      st.textContent = `Đang tải ${i + 1}/${files.length}: ${f.name}…`;
+      const path = `${cls}/${Date.now()}-${safeName(f.name)}`;
+      const { error: ue } = await db.storage.from('materials').upload(path, f, { contentType: f.type || 'application/octet-stream', upsert: false });
+      if (ue) { st.textContent = 'Lỗi tải lên: ' + ue.message; return; }
+      const { error: ie } = await db.from('materials').insert({
+        class_code: cls, title: (files.length === 1 && title) ? title : (title ? title + ' – ' : '') + f.name.replace(/\.[^.]+$/, ''),
+        kind: document.getElementById('lib-kind').value, lesson_date: document.getElementById('lib-date').value || null,
+        file_path: path, file_name: f.name, mime: f.type || null, size_bytes: f.size, shared: document.getElementById('lib-shared').checked
+      });
+      if (ie) { st.textContent = 'Lỗi lưu thông tin: ' + ie.message; return; }
+    }
+    st.textContent = '✓ Đã tải lên ' + files.length + ' file';
+    document.getElementById('lib-file').value = ''; document.getElementById('lib-title').value = '';
+    loadLibrary();
+  }
+
+  async function toggleShared(id, val) {
+    const { error } = await db.from('materials').update({ shared: val }).eq('id', id);
+    if (error) { alert('Không cập nhật được: ' + error.message); return; }
+    const r = LIB.rows.find(x => x.id === id); if (r) r.shared = val; renderLibrary();
+  }
+
+  async function openMaterial(id) {
+    const r = LIB.rows.find(x => x.id === id); if (!r) return;
+    const isHtml = /html?$/i.test(r.file_name || '') || r.mime === 'text/html';
+    if (isHtml) {
+      const { data, error } = await db.storage.from('materials').download(r.file_path);
+      if (error) { alert('Không mở được: ' + error.message); return; }
+      document.getElementById('lib-viewer-title').textContent = r.title;
+      document.getElementById('lib-frame').srcdoc = await data.text();
+      document.getElementById('lib-viewer').style.display = 'block';
+    } else {
+      const { data, error } = await db.storage.from('materials').createSignedUrl(r.file_path, 600);
+      if (error) { alert('Không mở được: ' + error.message); return; }
+      window.open(data.signedUrl, '_blank', 'noopener');
+    }
+  }
+  function closeViewer() { document.getElementById('lib-viewer').style.display = 'none'; document.getElementById('lib-frame').srcdoc = ''; }
+
+  async function downloadMaterial(id) {
+    const r = LIB.rows.find(x => x.id === id); if (!r) return;
+    const { data, error } = await db.storage.from('materials').createSignedUrl(r.file_path, 600, { download: r.file_name || true });
+    if (error) { alert('Không tải được: ' + error.message); return; }
+    window.open(data.signedUrl, '_blank', 'noopener');
+  }
+
+  async function deleteMaterial(id) {
+    const r = LIB.rows.find(x => x.id === id); if (!r) return;
+    if (!confirm(`Xóa vĩnh viễn "${r.title}"?`)) return;
+    await db.storage.from('materials').remove([r.file_path]);
+    const { error } = await db.from('materials').delete().eq('id', id);
+    if (error) { alert('Không xóa được: ' + error.message); return; }
+    loadLibrary();
+  }
+
+
+  /* ---------- Tiền Meow (giáo viên) ---------- */
+  let MW = { start: '', cls: '', students: [], rows: [], redeem: [], scores: [] };
+  const MW_OPTS = [['', '—'], ['du', 'Đủ'], ['muon', 'Muộn'], ['nua', 'Nửa'], ['bu', 'Bù'], ['khong', 'Không nộp']];
+  const MW_DAYNAME = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+  const MW_COLOR = { du: '#dcebdc', muon: '#f0e4c0', nua: '#f3dccb', bu: '#e0d6ee', khong: '#f0cdd0' };
+
+  function mwShort(iso) { return iso.slice(8, 10) + '/' + iso.slice(5, 7); }
+  function mwShift(n) { MW.start = MEOW.addDays(MW.start || MEOW.weekStart(MEOW.iso(new Date())), 7 * n); loadMeow(); }
+  function mwThisWeek() { MW.start = MEOW.weekStart(MEOW.iso(new Date())); loadMeow(); }
+
+  async function loadMeow() {
+    if (!MW.start) MW.start = MEOW.weekStart(MEOW.iso(new Date()));
+    const cls = document.getElementById('class-filter-meow').value; MW.cls = cls;
+    document.getElementById('mw-week').textContent = `Tuần ${mwShort(MW.start)} – ${mwShort(MEOW.addDays(MW.start, 6))}`;
+    const box = document.getElementById('mw-grid');
+    if (!cls) { box.innerHTML = emptyState('Chọn lớp để bắt đầu'); return; }
+    const [{ data: cl }, { data: students, error }] = await Promise.all([
+      db.from('classes').select('meow_enabled').eq('class_code', cls).maybeSingle(),
+      db.from('students').select('id, full_name, avatar_emoji').eq('class_code', cls).order('full_name')
+    ]);
+    document.getElementById('mw-enabled').checked = !!(cl && cl.meow_enabled);
+    if (error) { box.innerHTML = emptyState('Không tải được: ' + esc(error.message)); return; }
+    MW.students = students || [];
+    const ids = MW.students.map(s => s.id);
+    if (!ids.length) { box.innerHTML = emptyState('Lớp chưa có học sinh'); return; }
+    const [a, b, c] = await Promise.all([
+      db.from('meow_status').select('student_id, day, status').in('student_id', ids).limit(10000),
+      db.from('meow_redeem').select('*').in('student_id', ids).order('created_at', { ascending: false }),
+      db.from('daily_scores').select('student_id, practice_date, created_at').in('student_id', ids).gte('practice_date', MW.start).lte('practice_date', MEOW.addDays(MW.start, 6))
+    ]);
+    MW.rows = a.data || []; MW.redeem = b.data || []; MW.scores = c.data || [];
+    renderMeow();
+  }
+
+  function mwStatus(sid, day) { const r = MW.rows.find(x => x.student_id === sid && x.day === day); return r ? r.status : ''; }
+
+  function renderMeow() {
+    const box = document.getElementById('mw-grid');
+    const days = [0, 1, 2, 3, 4, 5, 6].map(i => MEOW.addDays(MW.start, i));
+    const today = MEOW.iso(new Date());
+    const calcs = {};
+    MW.students.forEach(s => {
+      const rows = MW.rows.filter(r => r.student_id === s.id).map(r => ({ day: r.day, status: r.status }));
+      const red = MW.redeem.filter(r => r.student_id === s.id).reduce((n, r) => n + r.amount, 0);
+      calcs[s.id] = MEOW.calc(rows, red);
+    });
+    const head = '<tr><th style="min-width:120px">Ngày</th>' + MW.students.map(s => `<th style="text-align:center;min-width:112px">${esc(s.avatar_emoji || '')} ${esc(s.full_name)}</th>`).join('') + '</tr>';
+    const body = days.map(d => {
+      const t = MEOW.type(d), b = MEOW.base(d);
+      return `<tr${d === today ? ' style="background:rgba(212,168,67,.12)"' : ''}><td><strong>${MW_DAYNAME[MEOW.dow(d)]} ${mwShort(d)}</strong><br><span style="font-size:11px;color:var(--muted)">${t === 'hoc' ? 'Ngày học' : 'Ngày ôn'} · tối đa ${b}</span></td>` +
+        MW.students.map(s => {
+          const v = mwStatus(s.id, d), m = v ? MEOW.dayMeow(v, d) : null;
+          return `<td style="text-align:center"><select class="filter" style="background:${MW_COLOR[v] || ''};min-width:92px" onchange="setMeow('${esc(s.id)}','${d}',this.value)">${MW_OPTS.map(o => `<option value="${o[0]}"${o[0] === v ? ' selected' : ''}>${o[1]}</option>`).join('')}</select>${m !== null ? `<div style="font-size:11px;color:var(--muted);margin-top:2px">+${m}</div>` : ''}</td>`;
+        }).join('') + '</tr>';
+    }).join('');
+    const weekOf = (s) => (calcs[s.id].weeks.find(w => w.start === MW.start) || { sum: 0, bonus: 0, total: 0 });
+    const foot = [
+      ['Meow trong tuần (ngày)', s => weekOf(s).sum],
+      ['Thưởng đủ tuần', s => weekOf(s).bonus ? '+' + weekOf(s).bonus : '—'],
+      ['Tổng tuần', s => `<b>${weekOf(s).total}</b>`],
+      ['Chuỗi hiện tại', s => calcs[s.id].current + ' ngày'],
+      ['Chuỗi dài nhất', s => calcs[s.id].longest + ' ngày'],
+      ['Tổng đã kiếm', s => calcs[s.id].total],
+      ['Đã đổi thưởng', s => calcs[s.id].redeemed],
+      ['Số dư ví Meow', s => `<b style="font-size:17px;color:var(--accent)">${calcs[s.id].balance}</b>`]
+    ].map(([label, fn]) => `<tr style="background:rgba(139,115,85,.05)"><td><strong>${label}</strong></td>${MW.students.map(s => `<td style="text-align:center">${fn(s)}</td>`).join('')}</tr>`).join('') +
+      `<tr><td></td>${MW.students.map(s => `<td style="text-align:center"><button class="btn-sm" onclick="redeemMeow('${esc(s.id)}')">Đổi thưởng</button></td>`).join('')}</tr>`;
+    box.innerHTML = `<table><thead>${head}</thead><tbody>${body}${foot}</tbody></table>`;
+  }
+
+  async function setMeow(sid, day, val) {
+    let err;
+    if (!val) { ({ error: err } = await db.from('meow_status').delete().eq('student_id', sid).eq('day', day)); MW.rows = MW.rows.filter(r => !(r.student_id === sid && r.day === day)); }
+    else {
+      ({ error: err } = await db.from('meow_status').upsert({ student_id: sid, day, status: val, updated_at: new Date().toISOString() }, { onConflict: 'student_id,day' }));
+      const r = MW.rows.find(x => x.student_id === sid && x.day === day); if (r) r.status = val; else MW.rows.push({ student_id: sid, day, status: val });
+    }
+    if (err) alert('Không lưu được: ' + err.message);
+    renderMeow();
+  }
+
+  async function suggestMeow() {
+    if (!MW.cls) return;
+    const today = MEOW.iso(new Date()), up = [];
+    MW.students.forEach(s => {
+      [0, 1, 2, 3, 4, 5, 6].map(i => MEOW.addDays(MW.start, i)).forEach(d => {
+        if (MEOW.type(d) === 'hoc' || d > today || mwStatus(s.id, d)) return;
+        const sub = MW.scores.filter(x => x.student_id === s.id && x.practice_date === d).sort((a, b) => a.created_at < b.created_at ? -1 : 1)[0];
+        if (!sub) return;
+        up.push({ student_id: s.id, day: d, status: new Date(sub.created_at) <= new Date(d + (MW.cls === 'IELTS13' ? 'T23:30:00' : 'T23:00:00')) ? 'du' : 'muon' });
+      });
+    });
+    if (!up.length) { alert('Không có ô nào để gợi ý (chưa có bài nộp mới cho các ô còn trống).'); return; }
+    if (!confirm(`Điền ${up.length} ô từ bài đã nộp? Thầy vẫn sửa được từng ô sau đó.`)) return;
+    const { error } = await db.from('meow_status').upsert(up, { onConflict: 'student_id,day' });
+    if (error) { alert('Không lưu được: ' + error.message); return; }
+    loadMeow();
+  }
+
+  async function redeemMeow(sid) {
+    const s = MW.students.find(x => x.id === sid);
+    const rows = MW.rows.filter(r => r.student_id === sid).map(r => ({ day: r.day, status: r.status }));
+    const bal = MEOW.calc(rows, MW.redeem.filter(r => r.student_id === sid).reduce((n, r) => n + r.amount, 0)).balance;
+    const a = prompt(`${s.full_name} có ${bal} Meow. Đổi bao nhiêu Meow?`, ''); if (!a) return;
+    const amount = parseInt(a, 10);
+    if (!(amount > 0) || amount > bal) { alert('Số Meow không hợp lệ hoặc vượt quá số dư.'); return; }
+    const note = prompt('Đổi lấy gì? (ghi chú)', '') || null;
+    const { error } = await db.from('meow_redeem').insert({ student_id: sid, amount, note });
+    if (error) { alert('Không lưu được: ' + error.message); return; }
+    loadMeow();
+  }
+
+  async function toggleMeowClass(on) {
+    if (!MW.cls) return;
+    const { error } = await db.from('classes').update({ meow_enabled: on }).eq('class_code', MW.cls);
+    if (error) alert('Không cập nhật được: ' + error.message);
+  }
+
+  /* ---------- Điểm danh (tick vắng, còn lại tự là có mặt) ---------- */
+  let AT = { cls: '', students: [], absent: new Set(), sessionId: null };
+
+  async function loadAttendance() {
+    const cls = document.getElementById('class-filter-att').value; AT.cls = cls;
+    const dayEl = document.getElementById('att-day'); if (!dayEl.value) dayEl.value = MEOW.iso(new Date());
+    const list = document.getElementById('att-list');
+    if (!cls) { list.innerHTML = '<div class="empty-state"><div class="empty-text">Chọn lớp và ngày</div></div>'; loadAttHistory(); return; }
+    const { data: students } = await db.from('students').select('id, full_name, avatar_emoji').eq('class_code', cls).order('full_name');
+    AT.students = students || [];
+    const { data: sess } = await db.from('attendance_sessions').select('*').eq('class_code', cls).eq('day', dayEl.value).maybeSingle();
+    AT.sessionId = sess ? sess.id : null; AT.absent = new Set();
+    document.getElementById('att-label').value = sess ? (sess.label || '') : '';
+    if (sess) { const { data: ab } = await db.from('attendance_absent').select('student_id').eq('session_id', sess.id); (ab || []).forEach(x => AT.absent.add(x.student_id)); }
+    document.getElementById('att-status').textContent = sess ? 'Đã lưu trước đó, có thể sửa' : 'Chưa điểm danh buổi này, mặc định tất cả có mặt';
+    renderAttList(); loadAttHistory();
+  }
+
+  function renderAttList() {
+    const list = document.getElementById('att-list');
+    if (!AT.students.length) { list.innerHTML = emptyState('Lớp chưa có học sinh'); return; }
+    const absentN = AT.absent.size;
+    list.innerHTML = `<div style="font-size:14px;color:var(--muted);margin-bottom:8px">Có mặt <b>${AT.students.length - absentN}</b> · Vắng <b>${absentN}</b> / ${AT.students.length}</div>` +
+      AT.students.map(s => `<label style="display:flex;align-items:center;gap:12px;padding:10px 14px;border:1px solid var(--border);border-radius:12px;margin-bottom:8px;cursor:pointer;background:${AT.absent.has(s.id) ? 'rgba(192,57,43,.08)' : 'rgba(90,138,90,.08)'}">
+        <input type="checkbox" style="width:20px;height:20px" ${AT.absent.has(s.id) ? 'checked' : ''} onchange="toggleAbsent('${esc(s.id)}', this.checked)">
+        <span style="font-size:16px">${esc(s.avatar_emoji || '🎓')} <b>${esc(s.full_name)}</b></span>
+        <span style="margin-left:auto;font-weight:700;font-size:13px;color:${AT.absent.has(s.id) ? 'var(--red)' : 'var(--green)'}">${AT.absent.has(s.id) ? 'VẮNG' : 'Có mặt'}</span></label>`).join('');
+  }
+  function toggleAbsent(id, on) { if (on) AT.absent.add(id); else AT.absent.delete(id); renderAttList(); }
+
+  async function saveAttendance() {
+    if (!AT.cls) { alert('Hãy chọn lớp'); return; }
+    const day = document.getElementById('att-day').value;
+    const label = document.getElementById('att-label').value.trim() || null;
+    const { data: sess, error } = await db.from('attendance_sessions').upsert({ class_code: AT.cls, day, label }, { onConflict: 'class_code,day' }).select().single();
+    if (error) { alert('Không lưu được: ' + error.message); return; }
+    await db.from('attendance_absent').delete().eq('session_id', sess.id);
+    if (AT.absent.size) {
+      const { error: e2 } = await db.from('attendance_absent').insert([...AT.absent].map(student_id => ({ session_id: sess.id, student_id })));
+      if (e2) { alert('Không lưu được danh sách vắng: ' + e2.message); return; }
+    }
+    AT.sessionId = sess.id;
+    document.getElementById('att-status').textContent = '✓ Đã lưu ' + day;
+    loadAttHistory();
+  }
+
+  async function loadAttHistory() {
+    const box = document.getElementById('att-history');
+    if (!AT.cls) { box.innerHTML = emptyState('Chọn lớp để xem lịch sử'); loadBirthdays(); return; }
+    const { data: sess } = await db.from('attendance_sessions').select('id, day, label, attendance_absent(student_id)').eq('class_code', AT.cls).order('day', { ascending: false }).limit(60);
+    const rows = sess || [];
+    if (!rows.length) { box.innerHTML = emptyState('Chưa có buổi nào được điểm danh'); loadBirthdays(); return; }
+    const name = {}; AT.students.forEach(s => name[s.id] = s.full_name);
+    const absCount = {}; rows.forEach(r => (r.attendance_absent || []).forEach(a => absCount[a.student_id] = (absCount[a.student_id] || 0) + 1));
+    box.innerHTML = `<div style="padding:12px 24px"><div class="section-sub" style="margin-bottom:8px">Có mặt / tổng ${rows.length} buổi đã điểm danh</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">${AT.students.map(s => `<span class="badge ${absCount[s.id] ? 'badge-gold' : 'badge-green'}">${esc(s.full_name)}: ${rows.length - (absCount[s.id] || 0)}/${rows.length}</span>`).join('')}</div></div>
+      <table><thead><tr><th>Ngày</th><th>Buổi</th><th>Vắng</th></tr></thead><tbody>${rows.map(r => `<tr><td>${esc(r.day.split('-').reverse().join('/'))}</td><td>${esc(r.label || '')}</td><td style="color:var(--red)">${(r.attendance_absent || []).map(a => esc(name[a.student_id] || '?')).join(', ') || '<span style="color:var(--green)">Không ai vắng</span>'}</td></tr>`).join('')}</tbody></table>`;
+    loadBirthdays();
+  }
+
+  async function loadBirthdays() {
+    const box = document.getElementById('att-birthdays');
+    const { data, error } = await db.from('student_profiles').select('birth_date, students(full_name, class_code)').not('birth_date', 'is', null);
+    if (error) { box.innerHTML = emptyState('Không tải được: ' + esc(error.message)); return; }
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const list = (data || []).map(p => {
+      const b = new Date(p.birth_date + 'T00:00:00'); let next = new Date(today.getFullYear(), b.getMonth(), b.getDate());
+      if (next < today) next = new Date(today.getFullYear() + 1, b.getMonth(), b.getDate());
+      return { name: p.students ? p.students.full_name : '?', cls: p.students ? p.students.class_code : '', days: Math.round((next - today) / 86400000), age: next.getFullYear() - b.getFullYear(), d: next };
+    }).filter(x => x.days <= 30).sort((a, b) => a.days - b.days);
+    box.innerHTML = list.length ? `<table><thead><tr><th>Học sinh</th><th>Lớp</th><th>Ngày</th><th>Tuổi</th><th></th></tr></thead><tbody>${list.map(x => `<tr><td><strong>${esc(x.name)}</strong></td><td><span class="badge badge-gold">${esc(x.cls)}</span></td><td>${String(x.d.getDate()).padStart(2, '0')}/${String(x.d.getMonth() + 1).padStart(2, '0')}</td><td>${x.age}</td><td>${x.days === 0 ? '<span class="badge badge-green">Hôm nay! 🎂</span>' : 'còn ' + x.days + ' ngày'}</td></tr>`).join('')}</tbody></table>`
+      : emptyState('Chưa có sinh nhật nào trong 30 ngày tới (hoặc học sinh chưa nhập ngày sinh)');
+  }
+
+
+  /* ---------- Ghi âm của học sinh (nghe, nhận xét, xuất ZIP) ---------- */
+  let RC = { rows: [], index: null };
+  const RC_DOW = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+  function asciiName(s) { return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
+  function recName(r) {
+    const d = new Date(r.date + 'T00:00:00'), ext = (r.path.split('.').pop() || 'wav').toLowerCase();
+    const kind = r.src === 'daily' ? 'Daily' : 'Speaking';
+    return `${r.date}_${RC_DOW[d.getDay()]}_${asciiName(r.cls)}_${asciiName(r.student)}_${kind}-${asciiName(r.title).slice(0, 40)}.${ext}`;
+  }
+
+  async function loadRecordings() {
+    const to = document.getElementById('rc-to'), from = document.getElementById('rc-from');
+    if (!to.value) to.value = isoOf(new Date());
+    if (!from.value) from.value = addDays(isoOf(new Date()), -7);
+    const cls = document.getElementById('class-filter-rec').value;
+    const list = document.getElementById('rc-list');
+    if (!cls) { list.innerHTML = '<div class="empty-state"><div class="empty-text">Chọn lớp để xem ghi âm</div></div>'; return; }
+    list.innerHTML = '<div class="loading">Đang tải...</div>';
+    try { if (!RC.index) RC.index = (await (await fetch('daily-index.json', { cache: 'no-cache' })).json()).practices || []; } catch (e) { RC.index = []; }
+    const titleOf = id => { const p = (RC.index || []).find(x => x.id === id); return p ? p.title : (id || 'Daily Practice'); };
+    const [a, b] = await Promise.all([
+      db.from('daily_scores').select('id, practice_date, practice_id, voice_path, teacher_comment, score, max_score, students!inner(full_name, class_code)')
+        .not('voice_path', 'is', null).eq('students.class_code', cls).gte('practice_date', from.value).lte('practice_date', to.value).order('practice_date', { ascending: false }),
+      db.from('speaking_submissions').select('id, audio_url, question, submitted_at, feedback_json, overall_band, teacher_comment, students!inner(full_name, class_code)')
+        .eq('students.class_code', cls).gte('submitted_at', from.value + 'T00:00:00').lte('submitted_at', addDays(to.value, 1) + 'T00:00:00').order('submitted_at', { ascending: false })
+    ]);
+    const err = a.error || b.error;
+    if (err) { list.innerHTML = emptyState('Không tải được: ' + esc(err.message)); return; }
+    const rows = [];
+    (a.data || []).forEach(r => rows.push({ key: 'd' + r.id, src: 'daily', id: r.id, student: r.students.full_name, cls, date: r.practice_date, title: titleOf(r.practice_id), path: r.voice_path, comment: r.teacher_comment || '', ai: null, score: r.score != null ? `${r.score}/${r.max_score}` : '' }));
+    (b.data || []).forEach(r => {
+      if (!r.audio_url) return;
+      const fb = r.feedback_json || {}, ld = new Date(r.submitted_at), date = isoOf(ld);
+      rows.push({ key: 's' + r.id, src: 'speaking', id: r.id, student: r.students.full_name, cls, date, title: (r.question || 'Speaking').slice(0, 40), path: r.audio_url, comment: r.teacher_comment || '', ai: { band: r.overall_band, pron: fb.azure ? fb.azure.pronunciation : null, summary: fb.summary, fix: fb.fix, focus: fb.focus_words, transcript: null } });
+    });
+    rows.sort((x, y) => x.date < y.date ? 1 : x.date > y.date ? -1 : x.student.localeCompare(y.student, 'vi'));
+    RC.rows = rows; renderRecordings();
+  }
+
+  function renderRecordings() {
+    const src = document.getElementById('rc-src').value;
+    const rows = RC.rows.filter(r => !src || r.src === src);
+    const list = document.getElementById('rc-list');
+    document.getElementById('rc-status').textContent = `${rows.length} bản ghi`;
+    if (!rows.length) { list.innerHTML = emptyState('Chưa có bản ghi nào trong khoảng này'); return; }
+    let html = '', cur = '';
+    rows.forEach(r => {
+      if (r.date !== cur) { cur = r.date; const d = new Date(r.date + 'T00:00:00'); html += `<div style="padding:10px 24px;background:rgba(139,115,85,.08);font-weight:700;font-size:14px">${RC_DOW[d.getDay()]} ${r.date.slice(8, 10)}/${r.date.slice(5, 7)}/${r.date.slice(0, 4)}</div>`; }
+      const ai = r.ai ? `<div style="font-size:12px;color:var(--muted);margin-top:4px">AI: band ${r.ai.band ?? '–'}${r.ai.pron != null ? ' · phát âm ' + r.ai.pron : ''}${r.ai.summary ? '<br>' + esc(r.ai.summary) : ''}</div>` : '';
+      html += `<div style="padding:12px 24px;border-bottom:1px solid rgba(139,115,85,.12)">
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+          <div><strong>${esc(r.student)}</strong> <span class="badge badge-gold">${r.src === 'daily' ? 'Daily' : 'Speaking'}</span> ${r.score ? `<span class="badge badge-green">${esc(r.score)}</span>` : ''}
+            <div style="font-size:13px;color:var(--muted)">${esc(r.title)}</div><div style="font-size:11px;color:var(--muted);font-family:monospace">${esc(recName(r))}</div>${ai}</div>
+          <div id="au-${esc(r.key)}"><button class="btn-sm" onclick="playRec('${esc(r.key)}')">▶ Nghe</button></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:8px"><textarea id="cm-${esc(r.key)}" class="zl-text" rows="2" style="font-size:14px" placeholder="Nhận xét của thầy hoặc trợ giảng (1 điểm khen, tối đa 2 lỗi, 1 việc luyện tiếp)">${esc(r.comment)}</textarea>
+          <button class="btn-sm" onclick="saveRecComment('${esc(r.key)}')" style="align-self:flex-start">Lưu</button></div>
+        <div id="cs-${esc(r.key)}" style="font-size:12px;color:var(--green);min-height:14px"></div></div>`;
+    });
+    list.innerHTML = html;
+  }
+
+  async function playRec(key) {
+    const r = RC.rows.find(x => x.key === key); if (!r) return;
+    const { data, error } = await db.storage.from('voice-notes').createSignedUrl(r.path, 3600);
+    if (error) { alert('Không mở được bản ghi: ' + error.message); return; }
+    document.getElementById('au-' + key).innerHTML = `<audio controls autoplay src="${esc(data.signedUrl)}" style="max-width:300px"></audio>`;
+  }
+
+  async function saveRecComment(key) {
+    const r = RC.rows.find(x => x.key === key); if (!r) return;
+    const val = document.getElementById('cm-' + key).value.trim() || null;
+    const t = r.src === 'daily' ? 'daily_scores' : 'speaking_submissions';
+    const patch = r.src === 'daily' ? { teacher_comment: val } : { teacher_comment: val, approved: !!val };
+    const { error } = await db.from(t).update(patch).eq('id', r.id);
+    const el = document.getElementById('cs-' + key);
+    if (error) { el.style.color = 'var(--red)'; el.textContent = 'Không lưu được: ' + error.message; return; }
+    r.comment = val || ''; el.style.color = 'var(--green)'; el.textContent = '✓ Đã lưu, học sinh sẽ thấy nhận xét này';
+  }
+
+  async function zipRecordings() {
+    const src = document.getElementById('rc-src').value;
+    const rows = RC.rows.filter(r => !src || r.src === src);
+    const st = document.getElementById('rc-status');
+    if (!rows.length) { alert('Chưa có bản ghi nào để tải.'); return; }
+    if (typeof JSZip === 'undefined') { alert('Chưa tải được thư viện nén. Hãy tải lại trang.'); return; }
+    const zip = new JSZip(), csv = ['file,hoc_sinh,lop,ngay,nguon,bai,nhan_xet'];
+    const q = s => '"' + String(s || '').replace(/"/g, '""') + '"';
+    let n = 0;
+    for (const r of rows) {
+      st.textContent = `Đang nén ${++n}/${rows.length}…`;
+      const { data, error } = await db.storage.from('voice-notes').download(r.path);
+      if (error) { csv.push(`${q('(lỗi tải) ' + recName(r))},${q(r.student)},${q(r.cls)},${r.date},${r.src},${q(r.title)},${q(error.message)}`); continue; }
+      zip.folder(r.date).file(recName(r), data);
+      csv.push(`${q(r.date + '/' + recName(r))},${q(r.student)},${q(r.cls)},${r.date},${r.src},${q(r.title)},${q(r.comment)}`);
+    }
+    zip.file('danh-sach.csv', '﻿' + csv.join('\n'));
+    st.textContent = 'Đang tạo file ZIP…';
+    const blob = await zip.generateAsync({ type: 'blob' });
+    const name = `ghi-am_${asciiName(AT_CLS_FOR_ZIP())}_${document.getElementById('rc-from').value}_${document.getElementById('rc-to').value}.zip`;
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    st.textContent = `Đã tải ${name} (${rows.length} bản ghi). Giải nén rồi kéo vào thư mục Drive của lớp.`;
+  }
+  function AT_CLS_FOR_ZIP() { return document.getElementById('class-filter-rec').value || 'lop'; }
+
+  /* ---------- Bài làm: xem bài tự chấm, bài viết, ghi âm và viết nhận xét ---------- */
+  const SUB = { rows: [], cache: {}, index: null };
+  const sbSolve = {
+    norm(s) { let v = String(s ?? '').toLowerCase().replace(/[£$,\s]/g, ''); const m = v.match(/^(\d*\.?\d+)(km|m)$/); if (m) v = m[1]; return v; },
+    same(a, b) { const x = this.norm(a), y = this.norm(b); if (!x || !y) return false; if (x === y) return true; const n = /^\d*\.?\d+$/; return n.test(x) && n.test(y) && !/^0\d/.test(x) && !/^0\d/.test(y) && parseFloat(x) === parseFloat(y); },
+    field(f, g) { return [f.answer, ...(f.accept || [])].some(a => this.same(a, g)); }
+  };
+  async function sbIndex() {
+    if (!SUB.index) { try { SUB.index = (await (await fetch('daily-index.json', { cache: 'no-cache' })).json()).practices || []; } catch (e) { SUB.index = []; } }
+    return SUB.index;
+  }
+  async function sbPractice(id) {
+    if (SUB.cache[id]) return SUB.cache[id];
+    const m = (await sbIndex()).find(x => x.id === id); if (!m) return null;
+    try { SUB.cache[id] = await (await fetch(m.file, { cache: 'no-cache' })).json(); } catch (e) { return null; }
+    return SUB.cache[id];
+  }
+  async function loadSubmissions() {
+    const to = document.getElementById('sb-to'), from = document.getElementById('sb-from');
+    if (!to.value) to.value = isoOf(new Date());
+    if (!from.value) from.value = addDays(isoOf(new Date()), -7);
+    const cls = document.getElementById('class-filter-sub').value, list = document.getElementById('sb-list');
+    if (!cls) { list.innerHTML = '<div class="empty-state"><div class="empty-text">Chọn lớp để xem bài làm</div></div>'; return; }
+    list.innerHTML = '<div class="loading">Đang tải...</div>';
+    await sbIndex();
+    const { data, error } = await db.from('daily_scores').select('id, student_id, practice_date, practice_id, section, score, max_score, time_taken_seconds, answers, voice_path, teacher_comment, students!inner(full_name, class_code)')
+      .eq('students.class_code', cls).gte('practice_date', from.value).lte('practice_date', to.value).order('practice_date', { ascending: false });
+    if (error) { list.innerHTML = emptyState('Không tải được: ' + esc(error.message)); return; }
+    SUB.rows = data || [];
+    document.getElementById('sb-status').textContent = SUB.rows.length + ' bài đã nộp';
+    if (!SUB.rows.length) { list.innerHTML = emptyState('Chưa có bài nộp trong khoảng này'); return; }
+    const title = id => { const p = SUB.index.find(x => x.id === id); return p ? p.title + ' · ' + p.subtitle : (id || 'Daily Practice'); };
+    let html = '', cur = '';
+    SUB.rows.slice().sort((a, b) => a.practice_date < b.practice_date ? 1 : a.practice_date > b.practice_date ? -1 : a.students.full_name.localeCompare(b.students.full_name, 'vi')).forEach(r => {
+      if (r.practice_date !== cur) { cur = r.practice_date; html += `<div style="padding:10px 24px;background:rgba(139,115,85,.08);font-weight:700;font-size:14px">${r.practice_date.slice(8, 10)}/${r.practice_date.slice(5, 7)}/${r.practice_date.slice(0, 4)}</div>`; }
+      html += `<div style="padding:10px 24px;border-bottom:1px solid rgba(139,115,85,.12)"><div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+        <div><strong>${esc(r.students.full_name)}</strong> <span class="badge badge-green">${r.score}/${r.max_score}</span> ${r.voice_path ? '<span class="badge badge-gold">🎙 có ghi âm</span>' : ''} ${r.teacher_comment ? '<span class="badge badge-gold">đã nhận xét</span>' : ''}
+        <div style="font-size:13px;color:var(--muted)">${esc(title(r.practice_id))}${r.time_taken_seconds ? ' · ' + Math.round(r.time_taken_seconds / 60) + ' phút' : ''}</div></div>
+        <button class="btn-sm" onclick="toggleSub('${r.id}')">Xem bài</button></div><div id="sbd-${r.id}"></div></div>`;
+    });
+    list.innerHTML = html;
+  }
+  async function toggleSub(id) {
+    const box = document.getElementById('sbd-' + id); if (!box) return; if (box.innerHTML) { box.innerHTML = ''; return; }
+    const r = SUB.rows.find(x => String(x.id) === String(id)); if (!r) return;
+    box.innerHTML = '<div class="loading">Đang tải...</div>';
+    const P = await sbPractice(r.practice_id), A = r.answers || {};
+    if (!P) { box.innerHTML = emptyState('Không mở được đề của bài này'); return; }
+    const line = (ok, label, given, right) => `<div style="padding:3px 0;font-size:13.5px">${ok ? '<span style="color:var(--green)">✓</span>' : '<span style="color:var(--red)">✗</span>'} <b>${esc(label)}</b> → ${given ? esc(given) : '<i>(bỏ trống)</i>'}${ok ? '' : ` <span style="color:var(--green)">· đúng: ${esc(right)}</span>`}</div>`;
+    let h = '<div style="margin-top:8px;padding:10px 14px;background:#faf6ee;border-radius:10px">';
+    P.steps.forEach(st => {
+      let body = '';
+      if (st.kind === 'mcq') st.items.forEach(it => { const g = A[it.id]; body += line((g || '') === it.answer, it.q, g ? g + '. ' + (it.options[g] || '') : '', it.answer + '. ' + it.options[it.answer]); });
+      else if (st.kind === 'fill') st.items.forEach(it => { const gs = it.fields.map((f, i) => (A[`${it.id}_${i}`] || '').trim()), j = it.joiner ? ' ' + it.joiner + ' ' : ' '; body += line(it.fields.every((f, i) => sbSolve.field(f, gs[i])), it.label, gs.every(x => !x) ? '' : gs.join(j), it.fields.map(f => f.answer).join(j)); });
+      (st.open || []).forEach(o => { body += `<div style="padding:6px 10px;margin:4px 0;background:#fff;border-left:3px solid #b08d57;font-size:13.5px"><b>${esc(o.q)}</b><br>${A[o.id] ? esc(A[o.id]).replace(/\n/g, '<br>') : '<i>(bỏ trống)</i>'}${o.model ? `<div style="color:var(--muted);font-size:12px;margin-top:4px">Mẫu: ${esc(o.model)}</div>` : ''}</div>`; });
+      if (body) h += `<div style="margin:8px 0"><div style="font-weight:700;font-size:13px;color:var(--muted)">${esc(st.title)}</div>${body}</div>`;
+    });
+    try {
+      const { data: wf } = await db.from('writing_feedback').select('item_id, feedback').eq('student_id', r.student_id).eq('practice_id', r.practice_id).eq('practice_date', r.practice_date);
+      (wf || []).forEach(w => {
+        const f = w.feedback || {}, b = f.band || {};
+        h += `<div style="margin:10px 0;padding:10px 12px;background:#eef3fb;border-radius:10px;font-size:13.5px"><b>🤖 AI chấm bài viết</b> · ${f.word_count || ''} từ · Band ước lượng <b>${b.overall ?? '–'}</b> (TA ${b.ta ?? '–'} · CC ${b.cc ?? '–'} · LR ${b.lr ?? '–'} · GRA ${b.gra ?? '–'})
+          <div style="margin:6px 0">${esc(f.summary || '')}</div><div style="color:var(--green)">✓ ${esc(f.praise || '')}</div>
+          ${(f.fixes || []).map(x => `<div style="margin-top:4px"><b>${esc(x.quote)}</b> → <span style="color:var(--green)">${esc(x.correction)}</span><br><span style="color:var(--muted)">${esc(x.problem)}</span></div>`).join('')}
+          ${(f.checklist || []).length ? `<div style="margin-top:4px">${f.checklist.map(c => (c.ok ? '✓ ' : '✗ ') + esc(c.item)).join(' · ')}</div>` : ''}
+          <div style="margin-top:4px;color:var(--muted)">Việc tiếp: ${esc(f.next_step || '')}</div></div>`;
+      });
+    } catch (e) {}
+    if (r.voice_path) h += `<div id="sbv-${r.id}" style="margin:8px 0"><button class="btn-sm" onclick="playSub('${r.id}')">▶ Nghe ghi âm</button></div>`;
+    h += `<div style="display:flex;gap:8px;margin-top:8px"><textarea id="sbc-${r.id}" class="zl-text" rows="2" style="font-size:14px" placeholder="Nhận xét (1 điểm khen, tối đa 2 lỗi, 1 việc luyện tiếp)">${esc(r.teacher_comment || '')}</textarea><button class="btn-sm" onclick="saveSubComment('${r.id}')" style="align-self:flex-start">Lưu</button></div><div id="sbs-${r.id}" style="font-size:12px;min-height:14px"></div></div>`;
+    box.innerHTML = h;
+  }
+  async function playSub(id) {
+    const r = SUB.rows.find(x => String(x.id) === String(id)); if (!r) return;
+    const { data, error } = await db.storage.from('voice-notes').createSignedUrl(r.voice_path, 3600);
+    if (error) { alert('Không mở được bản ghi: ' + error.message); return; }
+    document.getElementById('sbv-' + id).innerHTML = `<audio controls autoplay src="${esc(data.signedUrl)}" style="max-width:320px"></audio>`;
+  }
+  async function saveSubComment(id) {
+    const r = SUB.rows.find(x => String(x.id) === String(id)); if (!r) return;
+    const val = document.getElementById('sbc-' + id).value.trim() || null, el = document.getElementById('sbs-' + id);
+    const { error } = await db.from('daily_scores').update({ teacher_comment: val }).eq('id', r.id);
+    if (error) { el.style.color = 'var(--red)'; el.textContent = 'Không lưu được: ' + error.message; return; }
+    r.teacher_comment = val; el.style.color = 'var(--green)'; el.textContent = '✓ Đã lưu, học sinh thấy nhận xét này trong Daily Practice';
+  }
+
+  /* Link thư mục Drive từng lớp (mở khi chọn lớp có thư mục) */
+  const DRIVE_FOLDER_LINKS = { FOUNDATION11: 'https://drive.google.com/drive/folders/1E3iSQSH9poDJmot-ZuLd9crB77SNBy4-' };
+  function updateDriveLink() { const a = document.getElementById('drive-link'); if (!a) return; const u = DRIVE_FOLDER_LINKS[document.getElementById('class-filter-rec').value]; a.style.display = u ? '' : 'none'; if (u) a.href = u; }
+  document.addEventListener('change', e => { if (e.target && e.target.id === 'class-filter-rec') updateDriveLink(); });
+
+  async function exportToDrive() {
+    const cls = document.getElementById('class-filter-rec').value, st = document.getElementById('rc-status');
+    if (!cls) { alert('Chọn lớp trước.'); return; }
+    if (!DRIVE_FOLDER_LINKS[cls]) { alert('Lớp này chưa có thư mục Drive. Hiện mới có Foundation 11.'); return; }
+    const { data: { session } } = await db.auth.getSession();
+    if (!session) { alert('Phiên đăng nhập đã hết, hãy đăng nhập lại.'); return; }
+    st.textContent = 'Đang đẩy ghi âm lên Drive…';
+    try {
+      const r = await fetch('/api/export-recordings?days=7&cls=' + encodeURIComponent(cls), { headers: { Authorization: 'Bearer ' + session.access_token } });
+      const j = await r.json();
+      st.textContent = j.ok ? `Đã đẩy ${j.uploaded} file mới lên Drive (đã có sẵn ${j.skipped})${j.failed && j.failed.length ? ', lỗi ' + j.failed.length + ': ' + j.failed[0].error : ''}` : 'Lỗi: ' + j.error;
+    } catch (e) { st.textContent = 'Lỗi: ' + e.message; }
+  }
+
+
+  function showTab(tab) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    event.currentTarget.classList.add('active');
+
+    if (tab === 'students') loadStudents();
+    else if (tab === 'scores') loadScores();
+    else if (tab === 'errors') loadErrors();
+    else if (tab === 'zalo') loadZalo();
+    else if (tab === 'schedule') loadSchedule();
+    else if (tab === 'library') loadLibrary();
+    else if (tab === 'recordings') loadRecordings();
+    else if (tab === 'submissions') loadSubmissions();
+    else if (tab === 'meow') loadMeow();
+    else if (tab === 'attendance') loadAttendance();
+    else if (tab === 'ranking') loadRanking();
+  }
+
+  async function signOut() {
+    await db.auth.signOut();
+    localStorage.removeItem('nvu_teacher');
+    window.location.href = 'login.html';
+  }
+</script>
+</body>
+</html>
