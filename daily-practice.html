@@ -438,18 +438,13 @@ async function save(res, score) {
       student_id: student.id, practice_date: P.date, day_of_week: P.day, section: P.section,
       score, max_score: res.length, time_taken_seconds: totalSec
     };
-    const extra = { answers, practice_id: P.id, voice_path: voicePath };
-    let { error } = await db.from('daily_scores').upsert({ ...core, ...extra }, { onConflict: 'student_id,practice_date,section' });
-    if (error && /column|schema cache/i.test(error.message)) ({ error } = await db.from('daily_scores').upsert(core, { onConflict: 'student_id,practice_date,section' }));
-    if (error) throw error;
-    if (!existing) {
-      const rows = res.filter(r => !r.ok).map(r => ({
-        student_id: student.id, error_type: P.error_type || 'listening',
-        error_content: givenText(r.it, r.kind), correct_answer: correctText(r.it, r.kind),
-        context: `${r.step.title}: ${r.kind === 'mcq' ? r.it.q : r.it.label}`, source: 'daily_practice', practice_date: P.date
-      }));
-      if (rows.length) { const { error: e2 } = await db.from('error_logs').insert(rows); if (e2) throw e2; }
-    }
+    const errors = !existing ? res.filter(r => !r.ok).map(r => ({
+      error_type: P.error_type || 'listening',
+      error_content: givenText(r.it, r.kind), correct_answer: correctText(r.it, r.kind),
+      context: `${r.step.title}: ${r.kind === 'mcq' ? r.it.q : r.it.label}`
+    })) : [];
+    const sr = await fetch('/api/submit-daily', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...core, practice_id: P.id, answers, voice_path: voicePath, errors }) });
+    const sj = await sr.json(); if (!sj.ok) throw new Error(sj.error || 'Lỗi không rõ');
     lsDel(draftKey()); draftDel();
     existing = { score, max_score: res.length, answers, time_taken_seconds: totalSec };
     return voiceErr ? 'ok-novoice:' + voiceErr : 'ok';
