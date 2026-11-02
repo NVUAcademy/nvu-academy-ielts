@@ -304,7 +304,12 @@ async function loadToday() {
 
     let replies = [];
     try { replies = ((await fetch('/api/voice-reply?student_id=' + encodeURIComponent(student.id)).then(r => r.json())).replies) || []; } catch (e) {}
+    /* Chuỗi học: số ngày liên tiếp có làm bài (tính từ hôm nay, hoặc từ hôm qua nếu hôm nay chưa làm) */
+    const iso = x => x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0');
+    const dayKeys = new Set((sc.data || []).map(r => r.practice_date));
+    let streak = 0; { const d = new Date(); if (!dayKeys.has(iso(d))) d.setDate(d.getDate() - 1); while (dayKeys.has(iso(d))) { streak++; d.setDate(d.getDate() - 1); } }
     let html = '<div class="sec-label">Hôm nay</div>';
+    html += `<div class="task"><div class="ic" style="background:var(--butter)">🔥</div><div class="tt"><b>${streak} ngày liên tiếp</b><span>${streak ? 'Làm bài mỗi ngày để giữ chuỗi.' : 'Làm một bài hôm nay để bắt đầu chuỗi.'}</span></div></div>`;
     html += `<a class="task" href="${VQ.url}"><div class="ic" style="background:var(--mint)">🎮</div><div class="tt"><b>Học từ vựng · Vocab Quest</b><span>${todayRow.vocab ? 'Từ hôm nay: ' + esc(todayRow.vocab) : VQ.sub}</span></div><span class="pill todo">Vào học</span></a>`;
     todays.forEach(it => {
       const r = isDone(it);
