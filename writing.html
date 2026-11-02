@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IELTS Writing · NVU Academy</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="chart.js"></script>
 <style>
   :root { --bg:#F8F2E9; --paper:#FFFCF6; --ink:#2F2638; --muted:#7D7183; --gold:#B08D57; --line:rgba(176,141,87,.45); --soft:#F2E9DC; --good:#5E8B6E; --bad:#B05468; }
   body { margin:0; background:var(--bg); color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI",sans-serif; font-size:16px; line-height:1.55; }
@@ -47,6 +48,7 @@
     </div>
     <button class="btn ghost" onclick="newPrompt()">Đổi đề</button>
     <div class="prompt" id="prompt"></div>
+    <div id="chart" style="margin:10px 0"></div>
     <div class="crit" id="crit"></div>
     <textarea id="essay" placeholder="Viết bài của em ở đây…" oninput="countWords()"></textarea>
     <div class="count" id="count">0 từ</div>
@@ -87,6 +89,7 @@ function newPrompt() {
   cur = list[Math.floor(Math.random() * list.length)];
   document.getElementById('prompt').innerHTML = '<b>' + esc(cur.topic) + '</b><br>' + esc(cur.task);
   document.getElementById('crit').textContent = 'Tiêu chí: ' + cur.criteria.join(' · ');
+  document.getElementById('chart').innerHTML = drawChart(cur.chart);
   document.getElementById('essay').value = '';
   countWords();
 }
