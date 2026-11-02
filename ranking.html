@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bảng xếp hạng · NVU Academy</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root { --bg:#F8F2E9; --paper:#FFFCF6; --ink:#2F2638; --muted:#7D7183; --gold:#B08D57; --line:rgba(176,141,87,.45); --soft:#F2E9DC; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI",sans-serif; font-size:16px; }
+  .wrap { max-width:720px; margin:0 auto; padding:18px 16px 60px; }
+  .top { display:flex; justify-content:space-between; font-size:15px; color:var(--muted); }
+  .top a { color:var(--gold); text-decoration:none; font-weight:600; }
+  h1 { font-size:26px; text-align:center; margin:14px 0 4px; }
+  .sub { text-align:center; color:var(--muted); margin-bottom:18px; font-size:15px; }
+  .card { background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:8px 0; }
+  .row { display:flex; align-items:center; gap:12px; padding:12px 18px; border-top:1px solid var(--line); }
+  .row:first-child { border-top:none; }
+  .rank { width:34px; text-align:center; font-weight:700; color:var(--gold); font-size:18px; }
+  .name { flex:1; }
+  .pts { font-weight:700; }
+  .me { background:var(--soft); border-radius:12px; }
+  .meta { font-size:13px; color:var(--muted); }
+  .empty { text-align:center; color:var(--muted); padding:24px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="index.html">← Trang chủ</a><span id="who"></span></div>
+  <h1>🏆 Bảng xếp hạng</h1>
+  <div class="sub" id="period"></div>
+  <div class="card" id="board"><div class="empty">Đang tải…</div></div>
+  <p class="meta" style="text-align:center;margin-top:14px">Điểm = tổng điểm các bài Daily Practice đã nộp trong tuần này (từ thứ 2 đến hôm nay), cùng lớp.</p>
+</div>
+<script>
+const SUPABASE_URL = 'https://sxnxbbosfyapmmkrhcdj.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_OMyiSjOVcKOfRdZO9JwSZg_8XogOYkZ';
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let student = null;
+try { student = JSON.parse(localStorage.getItem('nvu_student') || 'null'); } catch (e) {}
+if (!student) location.replace('login.html');
+else { document.getElementById('who').textContent = student.name + ' · ' + student.classCode; load(); }
+
+/* Thứ 2 của tuần hiện tại, theo giờ Việt Nam */
+function mondayIso() {
+  const vn = new Date(Date.now() + 7 * 3600e3);
+  const dow = (vn.getUTCDay() + 6) % 7;
+  const mon = new Date(Date.UTC(vn.getUTCFullYear(), vn.getUTCMonth(), vn.getUTCDate() - dow));
+  return mon.toISOString().slice(0, 10);
+}
+function todayIso() { return new Date(Date.now() + 7 * 3600e3).toISOString().slice(0, 10); }
+
+async function load() {
+  const from = mondayIso(), to = todayIso();
+  document.getElementById('period').textContent = 'Tuần này: từ ' + from.slice(8, 10) + '/' + from.slice(5, 7) + ' đến ' + to.slice(8, 10) + '/' + to.slice(5, 7);
+  const { data, error } = await db.from('daily_scores')
+    .select('student_id, score, max_score, practice_date, students!inner(full_name, class_code)')
+    .eq('students.class_code', student.classCode).gte('practice_date', from).lte('practice_date', to).limit(2000);
+  const board = document.getElementById('board');
+  if (error) { board.innerHTML = '<div class="empty">Không tải được bảng xếp hạng.</div>'; return; }
+  const agg = {};
+  (data || []).forEach(r => {
+    const a = agg[r.student_id] || (agg[r.student_id] = { name: r.students.full_name, pts: 0, n: 0 });
+    a.pts += r.score || 0; a.n += 1;
+  });
+  const rows = Object.entries(agg).map(([id, a]) => ({ id, ...a })).sort((x, y) => y.pts - x.pts || y.n - x.n || x.name.localeCompare(y.name));
+  if (!rows.length) { board.innerHTML = '<div class="empty">Chưa có bài nộp nào trong tuần này.</div>'; return; }
+  board.innerHTML = rows.map((r, i) => `
+    <div class="row ${r.id === student.id ? 'me' : ''}">
+      <div class="rank">${i + 1}</div>
+      <div class="name"><b>${esc(r.name)}</b>${r.id === student.id ? ' (em)' : ''}<div class="meta">${r.n} bài đã nộp</div></div>
+      <div class="pts">${r.pts} điểm</div>
+    </div>`).join('');
+}
+</script>
+</body>
+</html>
