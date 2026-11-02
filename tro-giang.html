@@ -57,10 +57,15 @@ function isoDaysAgo(n) { return new Date(Date.now() - n * 86400000).toISOString(
 
 async function load() {
   const { data, error } = await db.from('daily_scores')
-    .select('id, student_id, practice_id, practice_date, section, score, max_score, students(full_name, class_code)')
-    .gte('practice_date', isoDaysAgo(14)).order('practice_date', { ascending: false }).limit(500);
+    .select('id, student_id, practice_id, practice_date, section, score, max_score, voice_path, students(full_name, class_code)')
+    .gte('practice_date', isoDaysAgo(14)).not('voice_path', 'is', null).order('practice_date', { ascending: false }).limit(500);
   if (error) { document.getElementById('list').innerHTML = `<div class="bad">Không tải được: ${esc(error.message)}</div>`; return; }
   rows = data || [];
+  /* Link nghe file ghi âm bài nộp của học sinh (có hạn 1 giờ) */
+  await Promise.all(rows.map(async r => {
+    const { data: s } = await db.storage.from('voice-notes').createSignedUrl(r.voice_path, 3600);
+    r.audioUrl = s ? s.signedUrl : null;
+  }));
   render();
 }
 
@@ -71,6 +76,8 @@ function render() {
     <div class="row" id="row-${esc(r.id)}">
       <b>${esc(r.students ? r.students.full_name : '—')}</b> · ${esc(r.students ? r.students.class_code : '')}
       <div class="meta">${esc(r.practice_date)} · ${esc(r.practice_id)} · ${esc(r.section || '')} · ${r.score}/${r.max_score}</div>
+      <div class="lbl">Bài nộp của học sinh</div>
+      ${r.audioUrl ? `<audio controls preload="none" src="${esc(r.audioUrl)}"></audio>` : '<div class="meta bad">Không mở được file ghi âm của bài này</div>'}
       <div class="lbl">1 · Nhận xét</div>
       <textarea id="cm-${esc(r.id)}" placeholder="Nhận xét bài làm của học sinh…"></textarea>
       <div class="lbl">2 · Ghi âm các từ học sinh phát âm sai (để học sinh đọc theo)</div>
@@ -79,7 +86,7 @@ function render() {
       <div class="lbl">3 · Gửi</div>
       <div style="margin-top:6px"><button class="primary" onclick="sendAll('${esc(r.id)}')">Gửi cho học sinh</button></div>
       <div class="msg" id="msg-${esc(r.id)}"></div>
-    </div>`).join('') : '<div class="meta">Chưa có bài làm nào trong 14 ngày gần nhất.</div>';
+    </div>`).join('') : '<div class="meta">Chưa có bài nộp ghi âm nào trong 14 ngày gần nhất.</div>';
 }
 
 async function startRec(id) {
