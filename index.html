@@ -114,15 +114,6 @@ body[data-vid] footer { background:color-mix(in srgb, var(--bg) 72%, transparent
 </head>
 <body>
 <div class="wrap">
-<div id="guest-choice" style="display:none;max-width:720px;margin:60px auto;padding:0 18px;text-align:center">
-  <h2 style="font-family:var(--display);font-size:30px;margin-bottom:8px">Chọn vai trò của bạn</h2>
-  <p style="color:var(--muted);margin-bottom:26px">Học sinh đăng nhập bằng họ tên và lớp. Giáo viên và trợ giảng đăng nhập bằng Google.</p>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
-    <a href="login.html" class="card" style="--c:var(--mint);text-decoration:none;color:inherit"><div class="ic">🎓</div><h3>Trang học sinh</h3><p>Làm bài, xem nhận xét và nghe giọng nói của trợ giảng.</p><div class="tag">Đăng nhập →</div></a>
-    <a href="login.html?t=1" class="card" style="--c:var(--butter);text-decoration:none;color:inherit"><div class="ic">👩‍🏫</div><h3>Trang giáo viên</h3><p>Quản lý lớp, điểm số, lịch bài và nhắc Zalo.</p><div class="tag">Đăng nhập →</div></a>
-    <a href="login.html?t=1" class="card" style="--c:var(--lilac);text-decoration:none;color:inherit"><div class="ic">🎙</div><h3>Trang trợ giảng</h3><p>Nghe bài nộp của học sinh, nhận xét và ghi âm phản hồi.</p><div class="tag">Đăng nhập →</div></a>
-  </div>
-</div>
   <header>
     <div class="logo">NVU <em>Academy</em></div>
     <div id="auth-area"><a href="login.html" class="login-btn">Đăng nhập</a></div>
@@ -252,11 +243,7 @@ function shortVi(iso) { const d = new Date(iso + 'T00:00:00'); return DAYS_VI[d.
 
 let student = null;
 try { student = JSON.parse(lsGet('nvu_student') || 'null'); } catch (e) {}
-if (!student) {
-  /* Khách chưa đăng nhập: chỉ hiện lựa chọn vai trò */
-  Array.from(document.body.children).forEach(e => { if (e.id !== 'guest-choice') e.style.display = 'none'; });
-  document.getElementById('guest-choice').style.display = 'block';
-}
+if (!student) location.replace('login.html'); /* chưa đăng nhập thì vào trang đăng nhập */
 /* Vocab Quest riêng theo lớp: IELTS 13 → Pre, IELTS 14 → Intermediate, còn lại → Foundation */
 const VQ = (function () {
   const m = { IELTS13: ['Vocab_Quest_Pre.html', '10 từ mỗi ngày, có collocation, EXP và cấp độ'], IELTS14: ['Vocab_Quest_Inter.html', '10 từ mỗi ngày, có collocation, EXP và cấp độ'] };
@@ -394,6 +381,5 @@ async function saveBirthday() {
 }
 function skipBirthday() { try { localStorage.setItem('nvu_bday_skip', isoToday()); } catch (e) {} document.getElementById('bday').style.display = 'none'; }
 </script>
-<div style="text-align:center;margin:36px 0 10px"><a href="guide/huong-dan-tong-hop.pdf" target="_blank" rel="noopener" style="display:inline-block;padding:10px 22px;border-radius:30px;border:1px solid #B08D57;color:#B08D57;text-decoration:none;font-weight:600">📘 Hướng dẫn sử dụng (PDF)</a></div>
 </body>
 </html>
