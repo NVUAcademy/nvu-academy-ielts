@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Writing · NVU Academy</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  :root { --bg:#F8F2E9; --paper:#FFFCF6; --ink:#2F2638; --muted:#7D7183; --gold:#B08D57; --line:rgba(176,141,87,.45); --soft:#F2E9DC; --good:#5E8B6E; --bad:#B05468; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI",sans-serif; font-size:16px; line-height:1.55; }
+  .wrap { max-width:820px; margin:0 auto; padding:18px 16px 60px; }
+  .top { display:flex; justify-content:space-between; font-size:15px; color:var(--muted); }
+  .top a { color:var(--gold); text-decoration:none; font-weight:600; }
+  h1 { font-size:26px; text-align:center; margin:14px 0 4px; }
+  .sub { text-align:center; color:var(--muted); margin-bottom:18px; }
+  .card { background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:18px 20px; margin-bottom:14px; }
+  .tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+  .tab { border:1px solid var(--line); background:var(--soft); border-radius:30px; padding:8px 16px; font:inherit; cursor:pointer; color:var(--ink); }
+  .tab.on { background:var(--gold); color:#fff; border-color:var(--gold); }
+  .btn { border:none; background:var(--gold); color:#fff; border-radius:30px; padding:11px 24px; font:inherit; font-weight:600; cursor:pointer; }
+  .btn:disabled { opacity:.5; cursor:not-allowed; }
+  .btn.ghost { background:none; border:1px solid var(--gold); color:var(--gold); }
+  textarea { width:100%; min-height:260px; background:var(--soft); border:1px solid var(--line); border-radius:14px; padding:12px 14px; font:inherit; font-size:17px; color:var(--ink); box-sizing:border-box; }
+  .prompt { font-size:17px; margin:8px 0 12px; }
+  .crit { color:var(--muted); font-size:14px; margin-top:8px; }
+  .count { font-size:14px; color:var(--muted); margin-top:6px; }
+  .bands { display:grid; grid-template-columns:repeat(auto-fit,minmax(110px,1fr)); gap:10px; margin:12px 0; }
+  .band { background:var(--soft); border:1px solid var(--line); border-radius:14px; padding:10px; text-align:center; }
+  .band b { display:block; font-size:24px; }
+  .band span { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
+  .review { border-top:1px solid var(--line); padding:10px 0; }
+  .good { color:var(--good); } .bad { color:var(--bad); }
+  .hist { border-top:1px solid var(--line); padding:10px 0; font-size:15px; }
+  .msg { margin-top:10px; font-size:15px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="luyen-de.html">← Luyện đề</a><span id="who"></span></div>
+  <h1>IELTS <em>Writing</em></h1>
+  <div class="sub">Chọn dạng bài, viết xong rồi gửi AI chấm. Có thể sửa và gửi lại.</div>
+
+  <div class="card">
+    <div class="tabs">
+      <button class="tab on" id="t1" onclick="setType('task1')">Task 1 (biểu đồ, bảng, quy trình)</button>
+      <button class="tab" id="t2" onclick="setType('task2')">Task 2 (luận)</button>
+    </div>
+    <button class="btn ghost" onclick="newPrompt()">Đổi đề</button>
+    <div class="prompt" id="prompt"></div>
+    <div class="crit" id="crit"></div>
+    <textarea id="essay" placeholder="Viết bài của em ở đây…" oninput="countWords()"></textarea>
+    <div class="count" id="count">0 từ</div>
+    <div style="margin-top:12px"><button class="btn" id="send" onclick="send()">Gửi AI chấm</button></div>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <div id="result"></div>
+  <div class="card"><h2 style="margin-top:0">Lịch sử bài viết của em</h2><div id="history"><div class="hist">Đang tải…</div></div></div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://sxnxbbosfyapmmkrhcdj.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_OMyiSjOVcKOfRdZO9JwSZg_8XogOYkZ';
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const PRACTICE_ID = 'luyen-de-writing';
+let student = null, data = null, type = 'task2', cur = null;
+
+try { student = JSON.parse(localStorage.getItem('nvu_student') || 'null'); } catch (e) {}
+if (!student) location.replace('login.html');
+else { document.getElementById('who').textContent = student.name + ' · ' + student.classCode; init(); }
+
+async function init() {
+  try { data = await (await fetch('writing-ielts.json', { cache: 'no-cache' })).json(); } catch (e) { data = { task1: [], task2: [] }; }
+  setType('task2');
+  loadHistory();
+}
+function setType(t) {
+  type = t;
+  document.getElementById('t1').classList.toggle('on', t === 'task1');
+  document.getElementById('t2').classList.toggle('on', t === 'task2');
+  newPrompt();
+}
+function newPrompt() {
+  const list = (data && data[type]) || [];
+  if (!list.length) { cur = null; document.getElementById('prompt').textContent = 'Chưa có đề.'; return; }
+  cur = list[Math.floor(Math.random() * list.length)];
+  document.getElementById('prompt').innerHTML = '<b>' + esc(cur.topic) + '</b><br>' + esc(cur.task);
+  document.getElementById('crit').textContent = 'Tiêu chí: ' + cur.criteria.join(' · ');
+  document.getElementById('essay').value = '';
+  countWords();
+}
+function countWords() {
+  const n = (document.getElementById('essay').value.match(/[A-Za-z0-9’'-]+/g) || []).length;
+  document.getElementById('count').textContent = n + ' từ';
+  return n;
+}
+async function send() {
+  const btn = document.getElementById('send'), msg = document.getElementById('msg');
+  const text = document.getElementById('essay').value.trim();
+  const n = countWords();
+  if (!cur) return;
+  if (n < 50) { msg.innerHTML = '<span class="bad">Bài còn quá ngắn (tối thiểu 50 từ để AI chấm).</span>'; return; }
+  btn.disabled = true; msg.textContent = 'AI đang chấm bài, khoảng 20 đến 40 giây…';
+  try {
+    const r = await fetch('/api/writing-feedback', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({
+      student_id: student.id, practice_id: PRACTICE_ID, item_id: cur.topic.slice(0, 40), date: new Date(Date.now() + 7 * 3600e3).toISOString().slice(0, 10),
+      text, prompt: cur.task, task_type: cur.type, level: 'Pre-IELTS (A2 đến B1)', min_words: type === 'task1' ? 150 : 250, criteria: cur.criteria })});
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
+    showResult(j.feedback);
+    msg.textContent = '';
+    loadHistory();
+  } catch (e) {
+    msg.innerHTML = '<span class="bad">Chưa chấm được: ' + esc(e.message) + '</span>';
+  } finally { btn.disabled = false; }
+}
+function showResult(f) {
+  const b = f.band || {};
+  document.getElementById('result').innerHTML = '<div class="card"><h2 style="margin-top:0">Nhận xét AI</h2>' +
+    '<div class="bands"><div class="band"><b>' + (b.ta ?? '–') + '</b><span>Task</span></div><div class="band"><b>' + (b.cc ?? '–') + '</b><span>Coherence</span></div><div class="band"><b>' + (b.lr ?? '–') + '</b><span>Lexical</span></div><div class="band"><b>' + (b.gra ?? '–') + '</b><span>Grammar</span></div><div class="band"><b>' + (b.overall ?? '–') + '</b><span>Tổng</span></div></div>' +
+    '<p>' + esc(f.summary) + '</p><p class="good">✓ ' + esc(f.praise) + '</p>' +
+    (f.fixes || []).map(x => '<div class="review"><b>' + esc(x.quote) + '</b><br>' + esc(x.problem) + '<br><span class="good">→ ' + esc(x.correction) + '</span></div>').join('') +
+    '<div class="review"><b>Việc tiếp theo:</b> ' + esc(f.next_step) + '</div>' +
+    '<p class="crit">Band chỉ để tham khảo. Sửa bài theo nhận xét rồi bấm Gửi AI chấm để chấm lại.</p></div>';
+  document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+}
+async function loadHistory() {
+  const el = document.getElementById('history');
+  try {
+    const { data: rows } = await db.from('writing_feedback').select('item_id, overall, created_at, feedback').eq('student_id', student.id).eq('practice_id', PRACTICE_ID).order('created_at', { ascending: false }).limit(30);
+    el.innerHTML = (rows || []).length ? rows.map(r => '<div class="hist"><b>' + esc(String(r.created_at).slice(8, 10) + '/' + String(r.created_at).slice(5, 7)) + '</b> · ' + esc(r.item_id) + ' · band ' + (r.overall ?? '–') + '</div>').join('') : '<div class="hist">Chưa có bài nào.</div>';
+  } catch (e) { el.innerHTML = '<div class="hist">Chưa tải được lịch sử. <button class="btn ghost" onclick="loadHistory()">Tải lại</button></div>'; }
+}
+</script>
+</body>
+</html>
