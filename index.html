@@ -272,12 +272,12 @@ async function loadToday() {
     ]);
     const [sch, sc, qr] = await Promise.all([
       db.from('schedule').select('day, practice_id, vocab, note').eq('class_code', student.classCode).gte('day', fromIso).lte('day', today),
-      db.from('daily_scores').select('practice_date, section, score, max_score').eq('student_id', student.id),
+      db.from('daily_scores').select('practice_date, practice_id, section, score, max_score').eq('student_id', student.id),
       db.from('weekly_quiz_results').select('week_number, total_score, max_score').eq('student_id', student.id)
     ]);
     const byId = {}; idx.forEach(p => byId[p.id] = p);
-    const done = {}; (sc.data || []).forEach(r => { done[r.practice_date + '|' + r.section] = r; });
-    const isDone = it => done[it.day + '|' + (it.p.section || 'listening')];
+    const done = {}; (sc.data || []).forEach(r => { done[r.practice_date + '|' + r.practice_id] = r; done[r.practice_date + '|' + r.section] = r; });
+    const isDone = it => done[it.day + '|' + it.p.id] || done[it.day + '|' + (it.p.section || 'listening')];
     const rows = sch.data || [];
     let plan;
     if (rows.length) plan = rows.filter(r => r.practice_id && byId[r.practice_id]).map(r => ({ p: byId[r.practice_id], day: r.day }));
