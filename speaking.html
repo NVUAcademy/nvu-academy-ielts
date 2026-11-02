@@ -152,6 +152,7 @@ function render(j) {
     ${(f.fix || []).map(x => `<div class="fix"><b>${esc(x.point)}</b><br>Ví dụ: ${esc(x.example)}<br>Cách sửa: ${esc(x.how)}</div>`).join('')}
     ${(f.focus_words || []).length ? `<div style="margin-top:10px"><small>Từ cần đọc lại</small><br>${f.focus_words.map(w => `<span class="chip">${esc(w)}</span>`).join('')}</div>` : ''}
     ${(f.focus_sounds || []).length ? `<div style="margin-top:6px"><small>Âm cần luyện</small><br>${f.focus_sounds.map(w => `<span class="chip snd">${esc(w)}</span>`).join('')}</div>` : ''}
+    ${(f.criteria || []).length ? `<div style="margin-top:12px"><small>Gợi ý cải thiện theo 4 tiêu chí</small>${f.criteria.map(c => `<div class="note" style="margin-top:6px"><b>${esc(c.name)}</b>: ${esc(c.tip)}</div>`).join("")}</div>` : ""}
     <div class="note" style="margin-top:10px"><b>Việc tiếp theo:</b> ${esc(f.next_step)}</div>
     ${f.azure ? `<div style="margin-top:12px"><small>Điểm phát âm đo bởi Azure (thang 100, ${f.azure.assessed_seconds} giây đầu)</small>
       <div class="bands"><div class="band"><b>${f.azure.pronunciation}</b><span>Phát âm</span></div><div class="band"><b>${f.azure.accuracy}</b><span>Chính xác</span></div><div class="band"><b>${f.azure.fluency}</b><span>Lưu loát</span></div>${f.azure.prosody != null ? `<div class="band"><b>${f.azure.prosody}</b><span>Ngữ điệu</span></div>` : ''}${f.azure.completeness != null ? `<div class="band"><b>${f.azure.completeness}</b><span>Đủ câu</span></div>` : ''}</div>
