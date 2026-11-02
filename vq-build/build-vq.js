@@ -3,6 +3,7 @@ const fs = require('fs'), path = require('path');
 const { PRE, INTER, toTsv } = require('./vq-data.js');
 const ROOT = path.join(__dirname, '..');
 const { FOUND3 } = require('./found3.js');
+const { FOUND4 } = require('./found4.js');
 /* Nguồn: bản Foundation gốc (trước khi thêm Week 3 và EXP) để các chỗ vá luôn khớp */
 const SRC = fs.readFileSync(path.join(ROOT, 'Foundation_Vocab_Quest.before-week3.html'), 'utf8');
 
@@ -192,7 +193,7 @@ const BASE = JSON.parse(cfgText);
 function build(out, opts) {
   const cfg = opts.foundation
     /* Foundation: giữ cấu hình gốc và Week 1, thêm Week 3; có EXP nhưng không có collocation */
-    ? { ...BASE, colloc: false, classes: opts.classes, weeks: [...BASE.weeks.filter(w => w.week !== 3), { week: 3, tsv: toTsv(FOUND3, 5) }] }
+    ? { ...BASE, colloc: false, classes: opts.classes, weeks: [...BASE.weeks.filter(w => w.week !== 3 && w.week !== 4), { week: 3, tsv: toTsv(FOUND3, 5) }, { week: 4, tsv: toTsv(FOUND4.map(r => r.split('|').slice(0, 5).join('|')), 5) }] }
     : { ...BASE, id: opts.id, cls: opts.cls, title: opts.title, perDay: 10, pass: 0.8, lockByDate: true, colloc: true, classes: opts.classes,
       weeks: [{ week: 1, tsv: toTsv(opts.list) }] };
   const L = lines.slice(); L[ci] = 'const CFG = ' + JSON.stringify(cfg) + ';';
