@@ -289,12 +289,21 @@ async function loadToday() {
     const owed = plan.filter(i => i.day < today && !isDone(i)).sort((a, b) => a.day.localeCompare(b.day));
     const link = it => `daily-practice.html?p=${esc(it.p.id)}&d=${esc(it.day)}`;
 
+    let replies = [];
+    try { replies = ((await fetch('/api/voice-reply?student_id=' + encodeURIComponent(student.id)).then(r => r.json())).replies) || []; } catch (e) {}
     let html = '<div class="sec-label">Hôm nay</div>';
     html += `<a class="task" href="${VQ.url}"><div class="ic" style="background:var(--mint)">🎮</div><div class="tt"><b>Học từ vựng · Vocab Quest</b><span>${todayRow.vocab ? 'Từ hôm nay: ' + esc(todayRow.vocab) : VQ.sub}</span></div><span class="pill todo">Vào học</span></a>`;
     todays.forEach(it => {
       const r = isDone(it);
       html += `<a class="task" href="${link(it)}"><div class="ic" style="background:var(--pink)">📅</div><div class="tt"><b>Daily Practice · ${esc(it.p.title)}</b><span>${esc(it.p.subtitle || '')}</span></div>${r ? `<span class="pill done">Đã làm ${r.score}/${r.max_score}</span>` : '<span class="pill todo">Chưa làm</span>'}</a>`;
     });
+    if (replies.length) {
+      html += '<div class="sec-label">Nhận xét giọng nói từ trợ giảng</div>';
+      replies.forEach(x => {
+        const t = (byId[x.practice_id] && byId[x.practice_id].title) || 'Bài luyện tập';
+        html += `<div class="task" style="flex-wrap:wrap"><div class="ic" style="background:var(--lilac)">🎧</div><div class="tt"><b>${esc(t)}</b><span>${esc(x.date)}</span></div><audio controls preload="none" src="${esc(x.url)}" style="width:100%;margin-top:8px"></audio></div>`;
+      });
+    }
     const _qd = new Date(), _qiso = _qd.getFullYear() + '-' + String(_qd.getMonth() + 1).padStart(2, '0') + '-' + String(_qd.getDate()).padStart(2, '0');
     const quizToday = quiz && (quiz.class_codes || []).includes(student.classCode) && (quiz.available_from ? (_qiso >= quiz.available_from && _qiso <= (quiz.available_until || quiz.available_from)) : DAY_KEYS.indexOf(quiz.available_day) === _qd.getDay());
     if (quizToday) {
