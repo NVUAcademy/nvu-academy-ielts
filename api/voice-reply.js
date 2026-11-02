@@ -1,6 +1,6 @@
-/* Nhận xét bằng giọng nói của trợ giảng gửi cho học sinh (tro-giang.html và index.html).
-   POST (trợ giảng/giáo viên): kiểm tra đăng nhập và có trong staff_emails, lưu file vào voice-notes, ghi bảng voice_replies.
-   GET (học sinh): trả về các nhận xét 14 ngày gần nhất kèm link nghe có hạn 1 giờ.
+/* Nhận xét của trợ giảng gửi cho học sinh (tro-giang.html và index.html).
+   POST (trợ giảng/giáo viên): kiểm tra đăng nhập và có trong staff_emails, lưu nhận xét và/hoặc file ghi âm.
+   GET (học sinh): trả về các nhận xét 14 ngày gần nhất, kèm link nghe có hạn 1 giờ nếu có ghi âm.
    Biến môi trường: SUPABASE_URL, SUPABASE_SERVICE_KEY (đã có) */
 
 const SB_URL = () => (process.env.SUPABASE_URL || '').replace(/\/$/, '');
@@ -30,6 +30,14 @@ async function staffEmail(req) {
 
 const cutoff = () => new Date(Date.now() - 14 * 86400000).toISOString().slice(0, 10);
 
+/* Tạo link nghe có hạn 1 giờ cho file ghi âm */
+async function signedUrl(path) {
+  const s = await (await sb('/storage/v1/object/sign/voice-notes/' + path.split('/').map(encodeURIComponent).join('/'), {
+    method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ expiresIn: 3600 })
+  })).json();
+  return s.signedURL ? SB_URL() + '/storage/v1' + s.signedURL : null;
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'content-type, authorization');
@@ -47,14 +55,11 @@ module.exports = async function handler(req, res) {
       const st = await (await sb('/rest/v1/students?id=eq.' + studentId + '&select=id')).json();
       if (!Array.isArray(st) || !st.length) return bad(res, 403, 'Không tìm thấy học sinh');
 
-      const rows = await (await sb('/rest/v1/voice_replies?select=id,practice_id,practice_date,section,path,created_at&student_id=eq.' + studentId + '&practice_date=gte.' + cutoff() + '&order=created_at.desc&limit=50')).json();
+      const rows = await (await sb('/rest/v1/voice_replies?select=id,practice_id,practice_date,section,path,comment,created_at&student_id=eq.' + studentId + '&practice_date=gte.' + cutoff() + '&order=created_at.desc&limit=50')).json();
       const replies = [];
       for (const r of Array.isArray(rows) ? rows : []) {
-        const s = await (await sb('/storage/v1/object/sign/voice-notes/' + r.path.split('/').map(encodeURIComponent).join('/'), {
-          method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ expiresIn: 3600 })
-        })).json();
-        if (!s.signedURL) continue;
-        replies.push({ id: r.id, practice_id: r.practice_id, date: r.practice_date, section: r.section, created_at: r.created_at, url: SB_URL() + '/storage/v1' + s.signedURL });
+        const url = r.path ? await signedUrl(r.path) : null;
+        replies.push({ id: r.id, practice_id: r.practice_id, date: r.practice_date, section: r.section, created_at: r.created_at, comment: r.comment || '', url });
       }
       return res.status(200).json({ ok: true, replies });
     }
@@ -69,27 +74,35 @@ module.exports = async function handler(req, res) {
     const practiceDate = String(b.practice_date || '');
     const section = String(b.section || '').slice(0, 40);
     if (!practiceId || !DATE.test(practiceDate)) return bad(res, 400, 'Thiếu thông tin bài làm');
-    const mime = String(b.mime || '').toLowerCase().split(';')[0];
-    if (!EXT[mime]) return bad(res, 400, 'Định dạng ghi âm không được hỗ trợ');
+
+    const comment = String(b.comment || '').trim().slice(0, 1000);
     const audio = String(b.audio || '');
-    if (!/^[A-Za-z0-9+/=]+$/.test(audio)) return bad(res, 400, 'Âm thanh không hợp lệ');
-    if (audio.length > MAX_B64) return bad(res, 413, 'Ghi âm quá dài, tối đa khoảng 2 phút');
-    if (audio.length < 1000) return bad(res, 400, 'Ghi âm quá ngắn');
+    const mime = String(b.mime || '').toLowerCase().split(';')[0];
+    if (!comment && !audio) return bad(res, 400, 'Cần có nhận xét hoặc ghi âm');
+    if (audio) {
+      if (!EXT[mime]) return bad(res, 400, 'Định dạng ghi âm không được hỗ trợ');
+      if (!/^[A-Za-z0-9+/=]+$/.test(audio)) return bad(res, 400, 'Âm thanh không hợp lệ');
+      if (audio.length > MAX_B64) return bad(res, 413, 'Ghi âm quá dài, tối đa khoảng 2 phút');
+      if (audio.length < 1000) return bad(res, 400, 'Ghi âm quá ngắn');
+    }
 
     const st = await (await sb('/rest/v1/students?id=eq.' + studentId + '&select=id')).json();
     if (!Array.isArray(st) || !st.length) return bad(res, 403, 'Không tìm thấy học sinh');
 
-    const path = `replies/${studentId}/${Date.now()}.${EXT[mime]}`;
-    const up = await sb('/storage/v1/object/voice-notes/' + path.split('/').map(encodeURIComponent).join('/'), {
-      method: 'POST', headers: { 'content-type': mime, 'x-upsert': 'false' }, body: Buffer.from(audio, 'base64')
-    });
-    if (!up.ok) return bad(res, 500, 'Không lưu được file ghi âm: ' + (await up.text()).slice(0, 160));
+    let path = null;
+    if (audio) {
+      path = 'replies/' + studentId + '/' + Date.now() + '.' + EXT[mime];
+      const up = await sb('/storage/v1/object/voice-notes/' + path.split('/').map(encodeURIComponent).join('/'), {
+        method: 'POST', headers: { 'content-type': mime, 'x-upsert': 'false' }, body: Buffer.from(audio, 'base64')
+      });
+      if (!up.ok) return bad(res, 500, 'Không lưu được file ghi âm: ' + (await up.text()).slice(0, 160));
+    }
 
     const ins = await sb('/rest/v1/voice_replies', {
       method: 'POST', headers: { 'content-type': 'application/json', Prefer: 'return=minimal' },
-      body: JSON.stringify({ student_id: studentId, practice_id: practiceId, practice_date: practiceDate, section, path, created_by: email })
+      body: JSON.stringify({ student_id: studentId, practice_id: practiceId, practice_date: practiceDate, section, path, comment: comment || null, created_by: email })
     });
-    if (!ins.ok) return bad(res, 500, 'Đã lưu file nhưng chưa ghi được nhận xét: ' + (await ins.text()).slice(0, 160));
+    if (!ins.ok) return bad(res, 500, 'Không ghi được nhận xét: ' + (await ins.text()).slice(0, 160));
     return res.status(200).json({ ok: true });
   } catch (e) {
     return bad(res, 500, 'Lỗi máy chủ: ' + e.message);
