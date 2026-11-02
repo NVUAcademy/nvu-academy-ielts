@@ -43,7 +43,8 @@ table { width:100%; border-collapse:collapse; font-size:15px; } td, th { text-al
   <div class="sub">Ghi âm, nhận xét ngay, rồi đọc lại các từ cần sửa để AI chấm lại.</div>
 
   <div class="card" id="setup">
-    <div class="tabs"><button class="tab on" id="m-read" onclick="setMode('read_aloud')">Đọc theo văn bản mẫu</button><button class="tab" id="m-free" onclick="setMode('free')">Nói tự do theo đề</button></div>
+    <div class="tabs"><button class="tab on" id="m-read" onclick="setMode('read_aloud')">Đọc theo văn bản mẫu</button><button class="tab" id="m-free" onclick="setMode('free')">Nói tự do theo đề</button><button class="tab" id="m-ielts" onclick="setMode('ielts')">IELTS Speaking</button></div>
+    <div id="ielts-bar" style="display:none;margin-bottom:12px"><div class="tabs"><button class="tab" id="p1" onclick="setPart('p1')">Part 1</button><button class="tab" id="p2" onclick="setPart('p2')">Part 2</button><button class="tab" id="p3" onclick="setPart('p3')">Part 3</button><button class="btn ghost" onclick="newTopic()">Đổi chủ đề</button></div></div>
     <div id="tasks"></div>
     <div id="custom-box"><textarea id="target" placeholder="Hoặc gõ câu em muốn đọc ở đây"></textarea></div>
   </div>
@@ -67,7 +68,7 @@ const db = supabase.createClient('https://sxnxbbosfyapmmkrhcdj.supabase.co', 'sb
 const API = '/api/speaking-feedback';
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt = s => String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
-let student = null, mode = 'read_aloud', tasks = { read_aloud: [], free: [] }, cur = null;   // cur = { text, prompt }
+let student = null, mode = 'read_aloud', tasks = { read_aloud: [], free: [] }, cur = null, ielts = null, ielts_part = 'p1';   // cur = { text, prompt }
 let parentId = null, attempt = 1, prevAccuracy = null;
 let recorder = null, chunks = [], blob = null, stream = null, sec = 0, timer = null;
 try { student = JSON.parse(localStorage.getItem('nvu_student') || 'null'); } catch (e) {}
@@ -76,16 +77,29 @@ else { document.getElementById('who').textContent = `${student.avatar || '🎓'}
 
 async function init() {
   try { tasks = await (await fetch('speaking-tasks.json', { cache: 'no-cache' })).json(); } catch (e) {}
-  setMode('read_aloud'); loadHistory();
+  try { ielts = await (await fetch('speaking-ielts.json', { cache: 'no-cache' })).json(); } catch (e) {}
+  loadHistory();
+  try { setMode('read_aloud'); } catch (e) { console.error(e); }
 }
 function setMode(m) {
   mode = m; parentId = null; attempt = 1; prevAccuracy = null;
   document.getElementById('m-read').classList.toggle('on', m === 'read_aloud'); document.getElementById('m-free').classList.toggle('on', m === 'free');
   document.getElementById('custom-box').style.display = m === 'read_aloud' ? 'block' : 'none';
+  document.getElementById('ielts-bar').style.display = m === 'ielts' ? 'block' : 'none';
+  document.getElementById('m-ielts').classList.toggle('on', m === 'ielts');
+  if (m === 'ielts') { document.getElementById('tasks').innerHTML = ''; window._list = []; setPart(ielts_part); return; }
   const list = (tasks[m] || []).filter(t => !t.class_codes || t.class_codes.includes(student.classCode));
   document.getElementById('tasks').innerHTML = list.map((t, i) => `<div class="task" onclick="pick(${i})" id="task-${i}"><small>${esc(t.tag || '')}</small>${esc(t.text || t.prompt)}</div>`).join('') || '<div class="note">Chưa có đề mẫu.</div>';
   if (list.length) pick(0); else { cur = null; showTarget(); }
   window._list = list;
+}
+function setPart(p) { ielts_part = p; ['p1', 'p2', 'p3'].forEach(x => document.getElementById(x).classList.toggle('on', x === p)); newTopic(); }
+function newTopic() {
+  const key = 'part' + ielts_part[1]; const list = (ielts && ielts[key]) || [];
+  if (!list.length) { cur = null; showTarget(); return; }
+  const t = list[Math.floor(Math.random() * list.length)];
+  const prompt = key === 'part2' ? '[Part 2 · ' + t.topic + '] ' + t.cue + ' (Nói khoảng ' + (t.minutes || 2) + ' phút.)' : '[' + (key === 'part1' ? 'Part 1' : 'Part 3') + ' · ' + t.topic + '] ' + t.questions.join(' ');
+  cur = { text: '', prompt }; parentId = null; attempt = 1; prevAccuracy = null; showTarget();
 }
 function pick(i) {
   document.querySelectorAll('.task').forEach(e => e.classList.remove('on')); document.getElementById('task-' + i).classList.add('on');
@@ -119,7 +133,7 @@ async function send() {
     const ext = upBlob.type === 'audio/wav' ? 'wav' : (/mp4/.test(upBlob.type) ? 'm4a' : 'webm'), path = `speaking/${student.id}/${Date.now()}.${ext}`;
     const { error: ue } = await db.storage.from('voice-notes').upload(path, upBlob, { contentType: upBlob.type, upsert: false });
     if (ue) throw new Error('Không tải được bản ghi: ' + ue.message);
-    const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'feedback', student_id: student.id, voice_path: path, task_type: mode, prompt: cur.prompt, target_text: mode === 'read_aloud' ? cur.text : null, parent_id: parentId, attempt }) });
+    const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'feedback', student_id: student.id, voice_path: path, task_type: mode === 'read_aloud' ? 'read_aloud' : 'free', prompt: cur.prompt, target_text: mode === 'read_aloud' ? cur.text : null, parent_id: parentId, attempt }) });
     let j; try { j = await r.json(); } catch (e) { throw new Error('AI chưa được bật trên máy chủ (thầy cần thêm khóa API).'); }
     if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
     render(j); loadHistory();
@@ -160,10 +174,10 @@ function retry(text, id, acc, att) {
 async function loadHistory() {
   const el = document.getElementById('history');
   try {
-    const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'history', student_id: student.id }) });
+    const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'history', student_id: student.id }), signal: AbortSignal.timeout(20000) });
     const j = await r.json(); if (!j.ok) throw new Error(j.error);
     el.innerHTML = (j.items || []).length ? j.items.map(h => `<div class="hist"><b>${esc(String(h.submitted_at).slice(8, 10) + '/' + String(h.submitted_at).slice(5, 7))}</b> · lần ${h.attempt || 1} · band ước lượng ${h.overall_band ?? '–'}<br><span style="color:var(--muted)">${esc((h.question || '').slice(0, 90))}</span>${h.teacher_comment ? `<br><span class="good">Thầy Nam: ${esc(h.teacher_comment)}</span>` : ''}</div>`).join('') : '<div class="note">Chưa có lượt nào.</div>';
-  } catch (e) { el.innerHTML = '<div class="note">Chưa có lịch sử (AI chưa được bật hoặc chưa có lượt nào).</div>'; }
+  } catch (e) { el.innerHTML = '<div class="note">Chưa tải được lịch sử. <button class="btn ghost" onclick="loadHistory()">Tải lại</button></div>'; }
 }
 </script>
 </body>
