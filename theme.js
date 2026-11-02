@@ -4,7 +4,7 @@
   var id = 'v-autumn';
   try { id = localStorage.getItem('nvu_bg2') || 'v-autumn'; } catch (e) {}
   if (!id || id === 'cream') return;
-  var VIDEOS = { 'v-swamp': 'backgrounds/bg-swamp-cat.mp4', 'v-chill': 'backgrounds/bg-chill-cat.mp4', 'v-autumn': 'backgrounds/bg-autumn.mp4' };
+  var VIDEOS = { 'v-swamp': 'backgrounds/bg-swamp-cat.mp4', 'v-chill': 'backgrounds/bg-chill-cat.mp4', 'v-autumn': 'backgrounds/bg-autumn.mp4', 'v-starry': 'backgrounds/bg-starry-night.mp4' };
   var css = '' +
     '#nvubg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}' +
     'html.nvu-bg,html.nvu-bg body{background:transparent !important}' +
