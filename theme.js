@@ -13,7 +13,7 @@
     'html.nvu-bg-sakura{background:linear-gradient(180deg,#FBEFEF,#F8F2E9) !important}' +
     'html.nvu-bg-night{background:linear-gradient(180deg,#14101B,#241C2B 60%,#2D2338) !important}' +
     'html.nvu-bg-rain{background:linear-gradient(180deg,#E3EAF0,#C9DBE6 70%,#B9CBD8) !important}' +
-    'html.nvu-bg .wrap{background:rgba(248,242,233,.86);border-radius:26px;padding-left:20px;padding-right:20px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}' +
+    'html.nvu-bg .wrap{background:rgba(248,242,233,.86);border-radius:26px;padding-left:20px;padding-right:20px' +
     '.nvu-petal{position:absolute;top:-30px;width:12px;height:16px;background:radial-gradient(circle at 30% 30%,#fff 0,#EBC7C9 60%,#D99AA3);border-radius:80% 0 80% 0;opacity:.8;animation:nvuFall linear infinite}' +
     '@keyframes nvuFall{to{transform:translate3d(var(--dx,60px),110vh,0) rotate(540deg)}}' +
     '.nvu-star{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;animation:nvuTw 3s ease-in-out infinite}' +
