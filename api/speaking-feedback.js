@@ -178,6 +178,7 @@ Trả về JSON đúng dạng:
  "fix": [{"point":"điểm cần sửa","example":"ví dụ từ bài của em","how":"cách sửa ngắn"}],
  "focus_words": ["tối đa 6 từ tiếng Anh nên đọc lại, lấy từ dữ liệu"],
  "focus_sounds": ["tối đa 3 âm cần luyện, ví dụ /b/ và /p/"],
+ "criteria": [{"name":"Fluency and Coherence","tip":"1 đến 2 câu gợi ý cải thiện về lưu loát và mạch lạc, dựa trên thống kê lưu loát và cách nối ý"},{"name":"Lexical Resource","tip":"1 đến 2 câu gợi ý về từ vựng: từ nào nên đổi, từ nào nên thêm, dựa trên bài nói"},{"name":"Grammatical Range and Accuracy","tip":"1 đến 2 câu gợi ý về ngữ pháp: lỗi lặp lại và cách dùng cấu trúc đa dạng hơn"},{"name":"Pronunciation","tip":"1 đến 2 câu gợi ý về phát âm, dựa trên điểm Azure và các âm yếu"}],
  "next_step": "1 việc luyện tiếp",
  "band": {"fluency": 0, "lexical": 0, "grammar": 0, "pronunciation_estimate": 0, "overall": 0},
  "improved": ${p.previous ? '"nhận xét ngắn so với lần trước"' : 'null'},
