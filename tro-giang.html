@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trợ giảng · Ghi nhận xét giọng nói</title>
+<title>Trợ giảng · Nhận xét cho học sinh</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   body { font-family: system-ui, sans-serif; background:#F8F2E9; color:#2F2638; margin:0; padding:18px; }
@@ -13,11 +13,13 @@
   select, button { font:inherit; padding:9px 14px; border-radius:12px; border:1px solid #B08D57; background:#FFFCF6; color:#2F2638; }
   button.primary { background:#B08D57; color:#fff; border:none; cursor:pointer; }
   button:disabled { opacity:.5; }
-  .row { background:#FFFCF6; border:1px solid rgba(176,141,87,.45); border-radius:16px; padding:14px 16px; margin-bottom:10px; }
+  .row { background:#FFFCF6; border:1px solid rgba(176,141,87,.45); border-radius:16px; padding:14px 16px; margin-bottom:12px; }
   .meta { font-size:14px; color:#7D7183; margin-top:4px; }
   .msg { font-size:15px; margin-top:8px; }
   .ok { color:#5E8B6E; } .bad { color:#B05468; }
+  textarea { width:100%; min-height:70px; font:inherit; font-size:16px; padding:10px 12px; border-radius:12px; border:1px solid #B08D57; background:#fff; color:#2F2638; margin-top:10px; box-sizing:border-box; }
   audio { width:100%; margin-top:8px; }
+  .lbl { font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:#B08D57; margin-top:12px; font-weight:600; }
   .top { display:flex; justify-content:space-between; font-size:15px; }
   a { color:#B08D57; }
 </style>
@@ -25,10 +27,10 @@
 <body>
 <div class="wrap">
   <div class="top"><a href="index.html">← Trang học sinh</a><span id="who"></span></div>
-  <h1>Ghi nhận xét giọng nói cho học sinh</h1>
+  <h1>Nhận xét cho học sinh</h1>
   <div class="bar">
     <select id="cls" onchange="render()"><option value="">Tất cả lớp</option><option value="FOUNDATION11">Foundation 11</option><option value="IELTS13">IELTS 13</option><option value="IELTS14">IELTS 14</option></select>
-    <span class="meta">Hiện các bài làm trong 14 ngày gần nhất.</span>
+    <span class="meta">Bài làm trong 14 ngày gần nhất. Viết nhận xét, ghi âm các từ cần đọc lại, rồi gửi.</span>
   </div>
   <div id="list"><div class="meta">Đang tải…</div></div>
 </div>
@@ -38,7 +40,8 @@ const SUPABASE_URL = 'https://sxnxbbosfyapmmkrhcdj.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_OMyiSjOVcKOfRdZO9JwSZg_8XogOYkZ';
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let rows = [], recorder = null, chunks = [], recStream = null, recTimer = null, session = null;
+let rows = [], session = null, recorder = null, chunks = [], recStream = null, recTimer = null;
+const pending = {}; /* id -> { blob, url } */
 
 (async () => {
   const { data: { session: s } } = await db.auth.getSession();
@@ -50,7 +53,7 @@ let rows = [], recorder = null, chunks = [], recStream = null, recTimer = null, 
   load();
 })();
 
-function isoDaysAgo(n) { const d = new Date(Date.now() - n * 86400000); return d.toISOString().slice(0, 10); }
+function isoDaysAgo(n) { return new Date(Date.now() - n * 86400000).toISOString().slice(0, 10); }
 
 async function load() {
   const { data, error } = await db.from('daily_scores')
@@ -68,10 +71,14 @@ function render() {
     <div class="row" id="row-${esc(r.id)}">
       <b>${esc(r.students ? r.students.full_name : '—')}</b> · ${esc(r.students ? r.students.class_code : '')}
       <div class="meta">${esc(r.practice_date)} · ${esc(r.practice_id)} · ${esc(r.section || '')} · ${r.score}/${r.max_score}</div>
-      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
-        <button onclick="startRec('${esc(r.id)}')" id="rec-${esc(r.id)}">🎙 Ghi âm nhận xét</button>
-      </div>
+      <div class="lbl">1 · Nhận xét</div>
+      <textarea id="cm-${esc(r.id)}" placeholder="Nhận xét bài làm của học sinh…"></textarea>
+      <div class="lbl">2 · Ghi âm các từ học sinh phát âm sai (để học sinh đọc theo)</div>
+      <div style="margin-top:6px"><button id="rec-${esc(r.id)}" onclick="startRec('${esc(r.id)}')">🎙 Ghi âm</button></div>
       <div id="box-${esc(r.id)}"></div>
+      <div class="lbl">3 · Gửi</div>
+      <div style="margin-top:6px"><button class="primary" onclick="sendAll('${esc(r.id)}')">Gửi cho học sinh</button></div>
+      <div class="msg" id="msg-${esc(r.id)}"></div>
     </div>`).join('') : '<div class="meta">Chưa có bài làm nào trong 14 ngày gần nhất.</div>';
 }
 
@@ -89,11 +96,8 @@ async function startRec(id) {
     clearTimeout(recTimer); recStream.getTracks().forEach(t => t.stop());
     const blob = new Blob(chunks, { type: recorder.mimeType || 'audio/webm' });
     recorder = null; btn.textContent = '🎙 Ghi lại';
-    const url = URL.createObjectURL(blob);
-    box.innerHTML = `<audio controls src="${url}"></audio>
-      <div style="margin-top:8px;display:flex;gap:8px"><button class="primary" onclick="sendRec('${esc(id)}')">Gửi cho học sinh</button><button onclick="startRec('${esc(id)}')">Ghi lại</button></div>
-      <div class="msg" id="msg-${esc(id)}"></div>`;
-    window._pending = { id, blob };
+    pending[id] = { blob, url: URL.createObjectURL(blob) };
+    box.innerHTML = `<audio controls src="${pending[id].url}"></audio>`;
   };
   recorder.start(); btn.textContent = '⏹ Dừng';
   box.innerHTML = '<div class="msg">Đang ghi… tự dừng sau 90 giây.</div>';
@@ -108,21 +112,25 @@ function blobToB64(blob) {
   });
 }
 
-async function sendRec(id) {
+async function sendAll(id) {
   const msg = document.getElementById('msg-' + id);
-  const pending = window._pending;
-  if (!pending || pending.id !== id) { msg.innerHTML = '<span class="bad">Ghi âm lại rồi gửi.</span>'; return; }
+  const comment = document.getElementById('cm-' + id).value.trim();
+  const rec = pending[id];
+  if (!comment && !rec) { msg.innerHTML = '<span class="bad">Cần viết nhận xét hoặc ghi âm trước khi gửi.</span>'; return; }
   const r = rows.find(x => x.id === id); if (!r) return;
   msg.textContent = 'Đang gửi…';
   try {
+    const body = { student_id: r.student_id, practice_id: r.practice_id, practice_date: r.practice_date, section: r.section, comment };
+    if (rec) { body.mime = rec.blob.type; body.audio = await blobToB64(rec.blob); }
     const res = await fetch('/api/voice-reply', {
-      method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + session.access_token },
-      body: JSON.stringify({ student_id: r.student_id, practice_id: r.practice_id, practice_date: r.practice_date, section: r.section, mime: pending.blob.type, audio: await blobToB64(pending.blob) })
+      method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + session.access_token }, body: JSON.stringify(body)
     });
     const j = await res.json();
     if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
-    msg.innerHTML = '<span class="ok">✓ Đã gửi. Học sinh sẽ thấy trong mục "Hôm nay".</span>';
-    window._pending = null;
+    msg.innerHTML = '<span class="ok">✓ Đã gửi cho học sinh. Học sinh sẽ thấy trong mục "Hôm nay".</span>';
+    delete pending[id];
+    document.getElementById('cm-' + id).value = '';
+    document.getElementById('box-' + id).innerHTML = '';
   } catch (e) {
     msg.innerHTML = `<span class="bad">Chưa gửi được: ${esc(e.message)}</span>`;
   }
