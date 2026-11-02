@@ -1,0 +1,265 @@
+{
+  "id": "w2-tue-ielts13",
+  "title": "Tuesday Daily Practice",
+  "subtitle": "Listening Section 1: Greenfield Language Club form and error log",
+  "theme": "Trial Lesson 2 · Busy lives and how things are made",
+  "source": "DailyPractice_Trial2_Student.pdf / DailyPractice_Trial2_Teacher.pdf (Pre-IELTS Trial Lesson 2, Daily Practice), Tuesday 3/11 (Listening Section 1, self-written transcript)",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 2,
+  "day": "tuesday",
+  "date": "2026-11-03",
+  "section": "listening",
+  "minutes": 50,
+  "intro": "Làm lần lượt 4 bước, khoảng 50 phút. Nghe ở bước 2 tối đa 2 lần, không đọc trước đáp án. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Boost (không bắt buộc): nghe BBC 6 Minute English, ghi 5 con số hoặc ngày tháng em nghe được.",
+  "audio": {
+    "listening": {
+      "label": "Audio · Greenfield Language Club (Section 1)",
+      "src": "audio/IELTS13_W2_Tue_Listening_S1.mp3"
+    }
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Predict the answer type",
+      "minutes": 10,
+      "instructions": "Đọc phiếu trước khi nghe. Với mỗi chỗ trống, đoán loại đáp án và gõ một từ trong danh sách: name · spelling · number · date · price · time · place · thing.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. First name: ______",
+          "fields": [
+            {
+              "answer": "name"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. Surname: ______",
+          "fields": [
+            {
+              "answer": "spelling",
+              "accept": [
+                "name"
+              ]
+            }
+          ],
+          "explain": "Họ thường được đánh vần từng chữ cái, nên phải nghe spelling."
+        },
+        {
+          "id": "s1_3",
+          "label": "3. Mobile number: ______",
+          "fields": [
+            {
+              "answer": "number"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. Course chosen: ______",
+          "fields": [
+            {
+              "answer": "thing"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. Start date: ______",
+          "fields": [
+            {
+              "answer": "date"
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "6. Class time: starting at ______",
+          "fields": [
+            {
+              "answer": "time"
+            }
+          ]
+        },
+        {
+          "id": "s1_7",
+          "label": "7. Monthly fee: £ ______",
+          "fields": [
+            {
+              "answer": "price"
+            }
+          ]
+        },
+        {
+          "id": "s1_8",
+          "label": "8. Classroom: Room ______",
+          "fields": [
+            {
+              "answer": "number"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Listening Section 1",
+      "minutes": 25,
+      "audio": "listening",
+      "instructions": "Nghe 1 lần, rồi nghe thêm 1 lần. Không đọc trước đáp án. Viết KHÔNG QUÁ HAI TỪ VÀ/HOẶC MỘT SỐ cho mỗi chỗ trống. Greenfield Language Club · Membership enquiry. (Bài tự soạn để luyện, không phải đề thi thật.)",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. Customer's first name: ______",
+          "fields": [
+            {
+              "answer": "Nadia"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. Surname: ______",
+          "fields": [
+            {
+              "answer": "Hartley"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. Mobile number: ______",
+          "fields": [
+            {
+              "answer": "07412 859 630",
+              "accept": [
+                "07412859630",
+                "07412 859630",
+                "0741 2859 630"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. Course chosen: ______",
+          "fields": [
+            {
+              "answer": "IELTS preparation",
+              "accept": [
+                "IELTS Preparation",
+                "IELTS"
+              ]
+            }
+          ],
+          "explain": "Bẫy: Grammar Basics được nhắc trước nhưng chị Nadia đổi sang IELTS preparation."
+        },
+        {
+          "id": "s2_5",
+          "label": "5. Start date: ______ November",
+          "fields": [
+            {
+              "answer": "12",
+              "accept": [
+                "12th",
+                "twelfth"
+              ]
+            }
+          ],
+          "explain": "Bẫy: ngày 5 được nói trước, sau đó đổi sang ngày 12."
+        },
+        {
+          "id": "s2_6",
+          "label": "6. Classes Tuesday and Thursday, starting at ______ pm",
+          "fields": [
+            {
+              "answer": "6.30",
+              "accept": [
+                "6:30"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_7",
+          "label": "7. Monthly fee: £ ______",
+          "fields": [
+            {
+              "answer": "45"
+            }
+          ],
+          "explain": "Bẫy: forty pounds là giá năm ngoái."
+        },
+        {
+          "id": "s2_8",
+          "label": "8. Registration fee (one time): £ ______",
+          "fields": [
+            {
+              "answer": "15"
+            }
+          ],
+          "explain": "fifteen (nhấn âm cuối) khác fifty (nhấn âm đầu)."
+        },
+        {
+          "id": "s2_9",
+          "label": "9. Classroom: Room ______",
+          "fields": [
+            {
+              "answer": "12"
+            }
+          ],
+          "explain": "second floor là tầng, không phải số phòng."
+        },
+        {
+          "id": "s2_10",
+          "label": "10. Bring on the first day: ______",
+          "fields": [
+            {
+              "answer": "photo ID",
+              "accept": [
+                "a photo ID",
+                "photo id"
+              ]
+            }
+          ],
+          "explain": "Bẫy: student card chỉ là tùy chọn."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Error log",
+      "minutes": 10,
+      "instructions": "Với mỗi câu sai ở bước 2, ghi số câu và lý do: spelling · number · changed information (distractor) · plural · other. Cuối cùng viết một câu: 'Next time I will ...'.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s3_1",
+          "q": "Error log của em",
+          "model": "Q5: changed information (distractor). I wrote 5, but the speaker changed it to the twelfth. Next time I will wait until the speaker confirms the final answer."
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Voice note: names and numbers",
+      "minutes": 5,
+      "instructions": "Ghi âm khoảng 20 giây: đánh vần tên và họ của em bằng chữ cái tiếng Anh, đọc số điện thoại chậm theo từng nhóm, và nói ngày hôm nay.",
+      "kind": "voice",
+      "lines": [
+        "1. My first name is ... That's ... (spell it).",
+        "2. My surname is ... That's ... (spell it).",
+        "3. My phone number is ... (say it slowly, in groups).",
+        "4. Today is Tuesday, the third of November."
+      ],
+      "note": "Thầy sẽ nghe và nhận xét cách đọc chữ cái và con số."
+    }
+  ],
+  "send_today": "Hoàn thành 4 bước trên web. Voice note ở bước 4 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "listening"
+}

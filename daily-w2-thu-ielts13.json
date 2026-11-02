@@ -1,0 +1,89 @@
+{
+  "id": "w2-thu-ielts13",
+  "title": "Thursday Daily Practice",
+  "subtitle": "Class P2 warm-up: recall the new words and read your yoghurt answer aloud",
+  "theme": "Trial Lesson 2 · Warm-up for class P2",
+  "source": "DailyPractice_Trial2_Student.pdf / DailyPractice_Trial2_Teacher.pdf (Pre-IELTS Trial Lesson 2, Daily Practice), Thursday 5/11 (class day P2)",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 2,
+  "day": "thursday",
+  "date": "2026-11-05",
+  "section": "vocabulary",
+  "minutes": 15,
+  "intro": "Buổi học P2 từ 19:30 đến 21:30. Chỉ làm khởi động 2 bước, 15 phút, mang bút và ghi chú đến lớp. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 10 Meow (buổi học), muộn hoặc làm một nửa được 5 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocabulary recall",
+      "minutes": 5,
+      "instructions": "Điền từ hoặc cụm từ trong khung (hectic · commute · keep up with · a sense of achievement · procrastinate). Đổi dạng từ nếu cần.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "Exam week is always ____: I have three tests in two days.",
+          "fields": [
+            {
+              "answer": "hectic"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "I read English news every morning to ____ what happens in the world.",
+          "fields": [
+            {
+              "answer": "keep up with"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "Finishing my first 150-word essay gave me ____.",
+          "fields": [
+            {
+              "answer": "a sense of achievement"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "My ____ is short because I live near the campus.",
+          "fields": [
+            {
+              "answer": "commute"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "He often ____ until the night before the deadline.",
+          "fields": [
+            {
+              "answer": "procrastinates"
+            }
+          ],
+          "explain": "Chủ ngữ He + hiện tại đơn: thêm -s."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Speaking warm-up and voice note",
+      "minutes": 10,
+      "instructions": "Nói to 10 từ mới, mỗi từ một ví dụ của em, rồi nói lại error log của em từ thứ 3. Sau đó đọc to bài yoghurt của thứ 2, một lần. Ghi âm 1 voice note.",
+      "kind": "voice",
+      "lines": [
+        "1. Nói 10 từ mới, mỗi từ một ví dụ (hectic, commute, keep up with, a sense of achievement, juggle, be packed with, unwind, productive, procrastinate, prioritise).",
+        "2. Nói lại error log thứ 3: câu sai và 'Next time I will ...'.",
+        "3. Đọc to bài yoghurt của thứ 2, một lần."
+      ],
+      "note": "Thầy sẽ nghe và nhận xét phát âm, đuôi -ed và nhịp đọc."
+    }
+  ],
+  "send_today": "Hoàn thành 2 bước trên web. Voice note ở Step 2 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "vocabulary"
+}

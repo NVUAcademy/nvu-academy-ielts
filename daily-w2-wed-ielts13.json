@@ -1,0 +1,222 @@
+{
+  "id": "w2-wed-ielts13",
+  "title": "Wednesday Daily Practice",
+  "subtitle": "Weekly test /19 and Speaking preparation",
+  "theme": "Trial Lesson 2 · Busy lives and how things are made",
+  "source": "DailyPractice_Trial2_Student.pdf / DailyPractice_Trial2_Teacher.pdf (Pre-IELTS Trial Lesson 2, Daily Practice), Wednesday 4/11 (Weekly test /19)",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 2,
+  "day": "wednesday",
+  "date": "2026-11-04",
+  "section": "grammar",
+  "minutes": 58,
+  "intro": "Kiểm tra tuần /19 gồm 4 phần (Vocabulary 5, Grammar 5, Reading 4, Writing 5), làm trong 45 phút, không xem ghi chú, không tra từ điển. Sau đó là bước 5 chuẩn bị Speaking (15 phút). Tổng cộng 5 bước, khoảng 60 phút. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Section 1 · Vocabulary /5",
+      "minutes": 8,
+      "instructions": "Điền từ trong khung: bond · commute · nurture · packed · procrastinate · supportive. Có một từ không dùng. Không xem ghi chú, không tra từ điển.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. My ______ to work takes an hour.",
+          "fields": [
+            {
+              "answer": "commute"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. Do not ______: start your essay now!",
+          "fields": [
+            {
+              "answer": "procrastinate"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. A good coach can ______ a young player's talent.",
+          "fields": [
+            {
+              "answer": "nurture"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. The bus is ______ with students at 7 a.m.",
+          "fields": [
+            {
+              "answer": "packed"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. My family is very ______ of my decision to study abroad.",
+          "fields": [
+            {
+              "answer": "supportive"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Section 2 · Grammar /5",
+      "minutes": 10,
+      "instructions": "Câu 1 đến 3: chia động từ ở bị động hiện tại đơn. Câu 4 và 5: viết lại cả câu, đặt trạng từ tần suất đúng chỗ.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. Coffee ______ (grow) in the hills of Vietnam.",
+          "fields": [
+            {
+              "answer": "is grown"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. The bottles ______ (fill) by machines.",
+          "fields": [
+            {
+              "answer": "are filled"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. Salt ______ (add) to the water.",
+          "fields": [
+            {
+              "answer": "is added"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. My grandparents call me on Sundays. (always)",
+          "fields": [
+            {
+              "answer": "My grandparents always call me on Sundays.",
+              "accept": [
+                "My grandparents always call me on Sundays"
+              ]
+            }
+          ],
+          "explain": "Trạng từ tần suất đứng trước động từ thường."
+        },
+        {
+          "id": "s2_5",
+          "label": "5. She is tired in the morning. (usually)",
+          "fields": [
+            {
+              "answer": "She is usually tired in the morning.",
+              "accept": [
+                "She is usually tired in the morning"
+              ]
+            }
+          ],
+          "explain": "Trạng từ tần suất đứng sau động từ to be."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Section 3 · Reading /4",
+      "minutes": 10,
+      "instructions": "Đọc đoạn văn rồi trả lời, KHÔNG QUÁ HAI TỪ lấy từ đoạn văn. Đoạn văn: In many Vietnamese families, a weekend lunch often includes rice noodles. The noodles are made from rice flour and water. First, the rice is washed and soaked overnight. Then it is ground into a thick paste, which is steamed in thin sheets. The sheets are cut into long strips and served with herbs and fish sauce. Many people buy fresh noodles at the market, but some families still make them at home because they believe homemade noodles taste better.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. What are the noodles made from?",
+          "fields": [
+            {
+              "answer": "rice flour"
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2. How long is the rice soaked?",
+          "fields": [
+            {
+              "answer": "overnight"
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3. What is the paste steamed into?",
+          "fields": [
+            {
+              "answer": "thin sheets"
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "4. Why do some families make noodles at home?",
+          "fields": [
+            {
+              "answer": "taste better"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Section 4 · Writing /5",
+      "minutes": 15,
+      "instructions": "Viết introduction và overview (2 đến 3 câu) cho quy trình làm bánh mì. Ghi chú: 1 flour, water and yeast are mixed · 2 the dough rests for an hour · 3 the dough is baked in an oven · 4 the bread is sold in shops. Thầy chấm.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s4_1",
+          "q": "Introduction và overview của em",
+          "model": "The notes show how bread is made. There are four stages, from mixing the flour, water and yeast to selling the bread in shops.",
+          "ai": {
+            "type": "IELTS Writing Task 1 (process): introduction and overview only, weekly test",
+            "level": "Pre-IELTS (A2 đến B1)",
+            "min_words": 25,
+            "task": "Read the notes about how bread is made. Write an introduction and an overview (2 to 3 sentences). Notes: 1 flour, water and yeast are mixed; 2 the dough rests for an hour; 3 the dough is baked in an oven; 4 the bread is sold in shops.",
+            "criteria": [
+              "introduction is accurate and in the student's own words",
+              "overview gives the number of stages (four)",
+              "overview names the first and the last stage",
+              "at least two correct present simple passives",
+              "no details of every stage and no personal opinion"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Speaking preparation · voice note",
+      "minutes": 15,
+      "instructions": "Chuẩn bị từ khóa (không viết câu đầy đủ) cho từng câu hỏi theo A.R.E. (Answer, Reason, Example) và dùng ít nhất 2 từ mới của tuần. Sau đó ghi âm 1 voice note khoảng 45 giây trả lời cả ba câu.",
+      "kind": "voice",
+      "lines": [
+        "1. Is your day usually busy?",
+        "2. Do you prefer to study in the morning or in the evening?",
+        "3. How do you relax after a long day?"
+      ],
+      "note": "Thầy sẽ nghe và nhận xét A.R.E. và cách dùng từ mới."
+    }
+  ],
+  "send_today": "Hoàn thành 5 bước trên web. Bài viết và voice note sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "grammar"
+}

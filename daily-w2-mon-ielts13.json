@@ -1,0 +1,209 @@
+{
+  "id": "w2-mon-ielts13",
+  "title": "Monday Daily Practice",
+  "subtitle": "New Task 1: how yoghurt is made (introduction, overview, stages 1 to 3)",
+  "theme": "Trial Lesson 2 · Busy lives and how things are made",
+  "source": "DailyPractice_Trial2_Student.pdf / DailyPractice_Trial2_Teacher.pdf (Pre-IELTS Trial Lesson 2, Daily Practice), Monday 2/11",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 2,
+  "day": "monday",
+  "date": "2026-11-02",
+  "section": "writing",
+  "minutes": 50,
+  "intro": "Làm lần lượt 4 bước chính (khoảng 40 phút), bước 5 là Boost không bắt buộc (10 phút). Bài viết ở bước 3 em gõ thẳng vào ô trên web, thầy chấm. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Collocations",
+      "minutes": 10,
+      "instructions": "Ghép từ ở đầu câu (1 đến 6) với phần đuôi đúng (A đến F). Mỗi đuôi chỉ dùng một lần. Sau đó đọc to cả cụm.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s1_1",
+          "q": "1. a hectic ...",
+          "options": {
+            "A": "the news",
+            "B": "with meetings",
+            "C": "schedule",
+            "D": "work and study",
+            "E": "to work",
+            "F": "achievement"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s1_2",
+          "q": "2. commute ...",
+          "options": {
+            "A": "the news",
+            "B": "with meetings",
+            "C": "schedule",
+            "D": "work and study",
+            "E": "to work",
+            "F": "achievement"
+          },
+          "answer": "E"
+        },
+        {
+          "id": "s1_3",
+          "q": "3. keep up with ...",
+          "options": {
+            "A": "the news",
+            "B": "with meetings",
+            "C": "schedule",
+            "D": "work and study",
+            "E": "to work",
+            "F": "achievement"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s1_4",
+          "q": "4. a sense of ...",
+          "options": {
+            "A": "the news",
+            "B": "with meetings",
+            "C": "schedule",
+            "D": "work and study",
+            "E": "to work",
+            "F": "achievement"
+          },
+          "answer": "F"
+        },
+        {
+          "id": "s1_5",
+          "q": "5. be packed ...",
+          "options": {
+            "A": "the news",
+            "B": "with meetings",
+            "C": "schedule",
+            "D": "work and study",
+            "E": "to work",
+            "F": "achievement"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s1_6",
+          "q": "6. juggle ...",
+          "options": {
+            "A": "the news",
+            "B": "with meetings",
+            "C": "schedule",
+            "D": "work and study",
+            "E": "to work",
+            "F": "achievement"
+          },
+          "answer": "D",
+          "explain": "juggle work and study: vừa đi làm vừa đi học."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Plan: how yoghurt is made",
+      "minutes": 10,
+      "instructions": "Đề: The notes show the process of making yoghurt. Describe the process. Ghi chú: 1 heat the milk in a large metal pot · 2 cool it to 40 degrees · 3 add a spoonful of live yoghurt · 4 keep it warm for eight hours · 5 pour it into small cups · 6 store it in the fridge. Thiết bị: a large metal pot = a deep round container with a lid and two handles. Chỉ dùng ghi chú này, không xem bài cũ. Lập dàn ý 3 đoạn ngắn: introduction, overview, stages 1 to 3 (có mô tả thiết bị). Ghi từ khóa, không cần viết câu đầy đủ.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s2_1",
+          "q": "Dàn ý của em (introduction, overview, stages 1 to 3)",
+          "model": "Intro: notes show how yoghurt is made. Overview: six stages, from heating the milk to storing it in the fridge. Stages 1 to 3: milk heated (large metal pot: deep, round, lid, two handles), cooled to 40 degrees, live yoghurt added."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Write: introduction, overview, stages 1 to 3",
+      "minutes": 15,
+      "instructions": "Viết khoảng 80 từ (không phải 150): introduction, overview, và stages 1 to 3 trong ba câu. Dùng bị động hiện tại đơn (is / are + V3) và từ nối trình tự (First, Next, After that, and then). Không chép nguyên câu của bài mẫu trên lớp, không chép nguyên văn ghi chú. Challenge: thêm stage 4 bằng 'and then'.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s3_1",
+          "q": "Bài viết của em (khoảng 80 từ)",
+          "model": "The notes show how yoghurt is made. There are six stages in the process, from heating the milk to storing the finished yoghurt in the fridge. First, the milk is heated in a large metal pot, which is a deep round container with a lid and two handles. Next, it is cooled to 40 degrees, and then a spoonful of live yoghurt is added.",
+          "ai": {
+            "type": "IELTS Writing Task 1 (process), short version: introduction, overview and stages 1 to 3",
+            "level": "Pre-IELTS (A2 đến B1)",
+            "min_words": 70,
+            "task": "The notes show the process of making yoghurt. Describe the process. Notes: 1 heat the milk in a large metal pot; 2 cool it to 40 degrees; 3 add a spoonful of live yoghurt; 4 keep it warm for eight hours; 5 pour it into small cups; 6 store it in the fridge. Equipment: a large metal pot is a deep round container with a lid and two handles. Write about 80 words: the introduction, the overview, and stages 1 to 3 only.",
+            "criteria": [
+              "introduction paraphrases the task in the student's own words",
+              "overview gives the number of stages (six), the first and the last stage",
+              "present simple passive with correct is / are (the milk is heated, not the milk are heated)",
+              "sequencing expressions (First, Next, After that, and then)",
+              "describes the equipment (a large metal pot)",
+              "does not copy the notes word for word; no comma splices"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Check and voice note",
+      "minutes": 5,
+      "instructions": "Gạch chân mọi động từ bị động, khoanh mọi từ nối trình tự, đếm số từ. Đối chiếu 6 tiêu chí ở bài thứ 7 (introduction, overview, sequencing, passive, equipment, -ed và is / are). Sau đó ghi âm: đọc to introduction và overview của em, một lần.",
+      "kind": "voice",
+      "lines": [
+        "1. Đọc to introduction của em.",
+        "2. Đọc to overview của em. Nói rõ đuôi -ed: heated /ɪd/, cooled /d/, added /ɪd/."
+      ],
+      "note": "Thầy sẽ nghe và nhận xét đuôi -ed và nhịp đọc."
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Boost (optional): rewrite with the noun",
+      "minutes": 10,
+      "instructions": "Không bắt buộc. Viết lại câu bằng danh từ, theo mẫu: Sales dropped to 6,000 in May. → There was a drop in sales to 6,000 in May. Chỉ điền phần còn thiếu (tính từ + danh từ).",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s5_1",
+          "label": "Visitor numbers rose sharply in June. → There was a ____ in visitor numbers in June.",
+          "fields": [
+            {
+              "answer": "sharp rise"
+            }
+          ]
+        },
+        {
+          "id": "s5_2",
+          "label": "The price of rice fell slightly in July. → There was a ____ in the price of rice in July.",
+          "fields": [
+            {
+              "answer": "slight fall"
+            }
+          ]
+        },
+        {
+          "id": "s5_3",
+          "label": "Sales increased steadily in 2020. → There was a ____ in sales in 2020.",
+          "fields": [
+            {
+              "answer": "steady increase"
+            }
+          ]
+        },
+        {
+          "id": "s5_4",
+          "label": "The number of students dropped suddenly in March. → There was a ____ in the number of students in March.",
+          "fields": [
+            {
+              "answer": "sudden drop"
+            }
+          ],
+          "explain": "Trạng từ (suddenly) đổi thành tính từ (sudden) đứng trước danh từ."
+        }
+      ]
+    }
+  ],
+  "send_today": "Hoàn thành 4 bước trên web (bước 5 nếu muốn). Bài viết và voice note sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "writing"
+}

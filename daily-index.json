@@ -160,6 +160,54 @@
                           "class_codes":  [
                                               "FOUNDATION11"
                                           ]
+                      },
+                      {
+                          "id":  "w2-mon-ielts13",
+                          "file":  "daily-w2-mon-ielts13.json",
+                          "title":  "Monday Daily Practice",
+                          "subtitle":  "New Task 1: how yoghurt is made (introduction, overview, stages 1 to 3)",
+                          "day":  "monday",
+                          "date":  "2026-11-02",
+                          "week_number":  2,
+                          "class_codes":  [
+                                              "IELTS13"
+                                          ]
+                      },
+                      {
+                          "id":  "w2-tue-ielts13",
+                          "file":  "daily-w2-tue-ielts13.json",
+                          "title":  "Tuesday Daily Practice",
+                          "subtitle":  "Listening Section 1: Greenfield Language Club form and error log",
+                          "day":  "tuesday",
+                          "date":  "2026-11-03",
+                          "week_number":  2,
+                          "class_codes":  [
+                                              "IELTS13"
+                                          ]
+                      },
+                      {
+                          "id":  "w2-wed-ielts13",
+                          "file":  "daily-w2-wed-ielts13.json",
+                          "title":  "Wednesday Daily Practice",
+                          "subtitle":  "Weekly test /19 and Speaking preparation",
+                          "day":  "wednesday",
+                          "date":  "2026-11-04",
+                          "week_number":  2,
+                          "class_codes":  [
+                                              "IELTS13"
+                                          ]
+                      },
+                      {
+                          "id":  "w2-thu-ielts13",
+                          "file":  "daily-w2-thu-ielts13.json",
+                          "title":  "Thursday Daily Practice",
+                          "subtitle":  "Class P2 warm-up: recall the new words and read your yoghurt answer aloud",
+                          "day":  "thursday",
+                          "date":  "2026-11-05",
+                          "week_number":  2,
+                          "class_codes":  [
+                                              "IELTS13"
+                                          ]
                       }
                   ]
 }
