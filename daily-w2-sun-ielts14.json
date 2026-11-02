@@ -1,0 +1,152 @@
+{
+  "id": "w2-sun-ielts14",
+  "title": "Sunday Daily Practice",
+  "subtitle": "I2 · The Man-made Environment: key words, short answers, Task 1 introduction and voice note",
+  "theme": "I2 · The Man-made Environment",
+  "source": "Intermediate I2 handout (Lesson 2, Mindset Level 2 Unit 1, Antilia and Writing Task 1 introduction)",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 2,
+  "day": "sunday",
+  "date": "2026-11-01",
+  "section": "reading",
+  "minutes": 40,
+  "intro": "Lớp học sáng Chủ nhật. Làm lần lượt 4 bước, khoảng 40 phút. Hạn nộp 0:00 đêm nay (tức 00:00 Thứ 2). Bước viết có AI chấm ngay sau khi nộp, em sửa rồi gửi lại được. Bước cuối là voice note, thầy sẽ nghe và nhận xét.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Key words",
+      "minutes": 6,
+      "instructions": "Điền từ hoặc cụm từ phù hợp vào chỗ trống. Đổi dạng từ nếu cần.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "The house is very expensive and luxurious. It is ____.",
+          "fields": [
+            {
+              "answer": "extravagant"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "He received the land when his mother died. He ____ the land from her.",
+          "fields": [
+            {
+              "answer": "inherited"
+            }
+          ],
+          "explain": "Inherit (sth) from sb: thừa kế cái gì từ ai."
+        },
+        {
+          "id": "s1_3",
+          "label": "The money needed to keep the house in good condition was huge. The ____ were too high.",
+          "fields": [
+            {
+              "answer": "maintenance costs",
+              "accept": [
+                "maintenance cost"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "The family gave the castle to the state for free. They ____ the castle to the state.",
+          "fields": [
+            {
+              "answer": "donated"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "The house was built to make visitors feel welcome. The house was built to ____ guests.",
+          "fields": [
+            {
+              "answer": "entertain",
+              "accept": [
+                "entertain guests"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Reading: NO MORE THAN THREE WORDS AND/OR A NUMBER",
+      "minutes": 10,
+      "instructions": "Đọc câu hỏi, tìm từ khóa trong đoạn về Antilia, rồi điền câu trả lời không quá ba từ và/hoặc một số. Copy đúng từ trong bài. Sai số từ thì ghi lại vào nhật ký lỗi.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "How many lifts does the home have? ____",
+          "fields": [
+            {
+              "answer": "nine lifts",
+              "accept": [
+                "9 lifts"
+              ]
+            }
+          ],
+          "explain": "Câu trả lời là số lượng + danh từ: nine lifts (2 từ). Không viết cả câu nine lifts in the lobby (5 từ)."
+        },
+        {
+          "id": "s2_2",
+          "label": "There are many facilities to accommodate a large number of ____.",
+          "fields": [
+            {
+              "answer": "guests"
+            }
+          ],
+          "explain": "Đoạn văn paraphrase: designed to entertain guests. Đáp án là guests, không phải visitors."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Writing Task 1: Introduction",
+      "minutes": 15,
+      "instructions": "Biểu đồ cột cho thấy tỷ lệ người 25 đến 34 tuổi ở Anh sống trong nhà của mình (home owners) hay đi thuê (renters) từ 2004 đến 2014. Viết phần Introduction 2 đến 3 câu: paraphrase đề bài, không chép nguyên văn, không có số liệu. Gõ thẳng vào ô bên dưới rồi bấm Gửi AI chấm.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s3_1",
+          "q": "Introduction (2 đến 3 câu)",
+          "model": "The given bar chart illustrates the proportion of people aged 25 to 34 in the UK who owned or rented their homes over a ten-year period, commencing from 2004.",
+          "ai": {
+            "type": "IELTS Writing Task 1 (bar chart), Introduction",
+            "level": "Intermediate (B1 đến B2)",
+            "min_words": 20,
+            "task": "The bar chart shows how people aged 25 to 34 in the UK were housed (home owners or renters) from 2004 to 2014, in percent. Write only the Introduction: paraphrase the task, mention what, who, where, when and unit, do not copy the question word for word, and do not include any figures.",
+            "criteria": [
+              "paraphrase đủ 5 phần: what, who, where, when, unit",
+              "không chép nguyên văn đề bài",
+              "không có số liệu trong Introduction",
+              "dùng động từ và cụm từ mô tả biểu đồ đúng (illustrates, proportion of, over a ten-year period)",
+              "ngữ pháp và chính tả"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Voice note",
+      "minutes": 9,
+      "instructions": "Đọc to đoạn Introduction mẫu ở Step 3 một lần, rồi ghi âm 1 voice note.",
+      "kind": "voice",
+      "lines": [
+        "The given bar chart illustrates the proportion of people aged 25 to 34 in the UK who owned or rented their homes over a ten-year period, commencing from 2004."
+      ],
+      "note": "Thầy sẽ nghe và nhận xét phát âm, trọng âm và nhịp đọc."
+    }
+  ],
+  "send_today": "Hoàn thành 4 bước trên web. Voice note ở Step 4 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "reading"
+}
