@@ -1,0 +1,201 @@
+{
+  "id": "w4-sun-found11",
+  "title": "Sunday Daily Practice",
+  "subtitle": "Review Lessons 6 and 7, then write 50 words about a person",
+  "theme": "Week 4 · Review of Lessons 6 and 7",
+  "source": "Foundation 11 lesson plan, week 4 (B6 Time and routines, B7 Other people's habits), Sun 8 Nov",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 4,
+  "day": "sunday",
+  "date": "2026-11-08",
+  "section": "writing",
+  "minutes": 45,
+  "intro": "Four steps, about 45 minutes. Deadline: 23:00 the same day. Step 3 is a writing task: type it in the box on the website. Step 4 is a voice note.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Review: Lesson 6 and 7 words",
+      "minutes": 10,
+      "instructions": "Fill in each gap with one word from Lessons 6 and 7.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "The bus ____ at seven. (set off)",
+          "fields": [
+            {
+              "answer": "sets off",
+              "accept": [
+                "set off"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "I want to ____ fit by swimming. (keep)",
+          "fields": [
+            {
+              "answer": "keep",
+              "accept": [
+                "keep fit"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "My ____ is quite simple. (routine)",
+          "fields": [
+            {
+              "answer": "routine"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "She ____ running every morning. (go)",
+          "fields": [
+            {
+              "answer": "goes",
+              "accept": [
+                "go"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "He ____ at a hospital. (volunteer)",
+          "fields": [
+            {
+              "answer": "volunteers",
+              "accept": [
+                "volunteer"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "It is a ____ eight. (quarter to)",
+          "fields": [
+            {
+              "answer": "quarter to"
+            }
+          ]
+        },
+        {
+          "id": "s1_7",
+          "label": "I ____ the bed before breakfast. (make)",
+          "fields": [
+            {
+              "answer": "make",
+              "accept": [
+                "makes"
+              ]
+            }
+          ],
+          "explain": "I + make, no -s."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Grammar check",
+      "minutes": 10,
+      "instructions": "Choose the correct word.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "She ____ yoga before bed.",
+          "options": {
+            "A": "do",
+            "B": "does"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s2_2",
+          "q": "We ____ class on Friday.",
+          "options": {
+            "A": "have",
+            "B": "has"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s2_3",
+          "q": "He ____ like cold tea.",
+          "options": {
+            "A": "don't",
+            "B": "doesn't"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s2_4",
+          "q": "____ she go running?",
+          "options": {
+            "A": "Do",
+            "B": "Does"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s2_5",
+          "q": "I wake up ____ six on weekdays.",
+          "options": {
+            "A": "at",
+            "B": "on"
+          },
+          "answer": "A"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Writing: one person's habits (about 50 words)",
+      "minutes": 15,
+      "instructions": "Write about 50 words about one person you know. Use he or she, at least three verbs with -s or -es, one doesn't, and one Lesson 7 word. Type it in the box on the website.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s3_1",
+          "q": "A person I know",
+          "model": "My sister Lan is a busy student. She wakes up at six and makes breakfast for us. She goes to school by bike. In the evening she studies English and watches a short video. On Sunday she does the laundry. She doesn't like noise, so she reads in her room.",
+          "ai": {
+            "type": "Short paragraph about one person's habits",
+            "level": "Foundation (A1 to A2)",
+            "min_words": 40,
+            "task": "Write about 50 words about one person you know. Use he or she, at least three verbs with -s or -es, one doesn't, and one Lesson 7 word.",
+            "criteria": [
+              "about 50 words",
+              "he or she with a verb ending in -s or -es",
+              "at least one doesn't",
+              "one Lesson 7 word used correctly",
+              "capital letter at the start of each sentence and a full stop at the end"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Voice note: read your paragraph",
+      "minutes": 10,
+      "instructions": "Read your paragraph from step 3 aloud, slowly, then record one voice note.",
+      "kind": "voice",
+      "lines": [
+        "Read your paragraph aloud, slowly. Hold the -s and -es endings, and the final sound of watches and washes."
+      ],
+      "note": "Teacher listens for /ɪz/, /s/ and /z/ endings."
+    }
+  ],
+  "send_today": "Four steps. Writing in step 3 and voice note in step 4 are sent to the teacher when you press Submit.",
+  "error_type": "writing"
+}

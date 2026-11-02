@@ -1,0 +1,103 @@
+{
+  "id": "w4-sat-found11",
+  "title": "Saturday Daily Practice: class day warm-up",
+  "subtitle": "Class day B7: warm-up with the Lesson 7 words",
+  "theme": "Lesson 7 · Other people's habits",
+  "source": "Foundation 11 lesson plan, week 4 (B6 Time and routines, B7 Other people's habits), Sat 7 Nov (class day B7)",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 4,
+  "day": "saturday",
+  "date": "2026-11-07",
+  "section": "vocabulary",
+  "minutes": 15,
+  "intro": "Class day. This is a 15-minute warm-up only. Do not submit. Bring your notes to class.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Word recall",
+      "minutes": 8,
+      "instructions": "Fill in each gap with a Lesson 7 word. Change the form if needed.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "I ____ every weekend to stay healthy. (keep fit)",
+          "fields": [
+            {
+              "answer": "keep fit",
+              "accept": [
+                "keep healthy"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "She ____ running before breakfast. (go)",
+          "fields": [
+            {
+              "answer": "goes",
+              "accept": [
+                "go"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "He ____ the laundry on Sunday. (do)",
+          "fields": [
+            {
+              "answer": "does",
+              "accept": [
+                "do"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "My mum ____ the bed every morning. (make)",
+          "fields": [
+            {
+              "answer": "makes",
+              "accept": [
+                "make"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "Lan ____ painting last year. (take up)",
+          "fields": [
+            {
+              "answer": "took up",
+              "accept": [
+                "take up"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Say it aloud",
+      "minutes": 7,
+      "instructions": "Say three sentences with he or she and a Lesson 7 word. Record one voice note.",
+      "kind": "voice",
+      "lines": [
+        "1. She goes running every morning.",
+        "2. He doesn't like coffee.",
+        "3. My brother checks emails before lunch."
+      ],
+      "note": "Teacher listens for the -s and -es endings."
+    }
+  ],
+  "send_today": "Warm-up only. Do not submit.",
+  "error_type": "vocabulary"
+}

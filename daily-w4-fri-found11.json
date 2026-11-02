@@ -1,0 +1,301 @@
+{
+  "id": "w4-fri-found11",
+  "title": "Friday Daily Practice: weekly test /19",
+  "subtitle": "Weekly test on Lessons 6 and 7 (45 minutes, no notes)",
+  "theme": "Week 4 · Weekly test",
+  "source": "Foundation 11 lesson plan, week 4 (B6 Time and routines, B7 Other people's habits), Fri 6 Nov (weekly test)",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 4,
+  "day": "friday",
+  "date": "2026-11-06",
+  "section": "test",
+  "minutes": 45,
+  "intro": "Weekly test /19, about 45 minutes, no notes, no phone. Steps 1 to 4 are the test. Step 5 is a voice note. Step 6 is your reflection. Deadline: 23:00 the same day.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Test A: endings /3",
+      "minutes": 5,
+      "instructions": "Choose the ending sound of each word: /s/, /z/ or /ɪz/.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s1_1",
+          "q": "1. works",
+          "options": {
+            "A": "/s/",
+            "B": "/z/",
+            "C": "/ɪz/"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s1_2",
+          "q": "2. plays",
+          "options": {
+            "A": "/s/",
+            "B": "/z/",
+            "C": "/ɪz/"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s1_3",
+          "q": "3. washes",
+          "options": {
+            "A": "/s/",
+            "B": "/z/",
+            "C": "/ɪz/"
+          },
+          "answer": "C"
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Test B: words /6",
+      "minutes": 10,
+      "instructions": "Fill in each gap with one word from Lessons 6 and 7. The first letter is given.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "I ____ at the gym on Monday. (w___ o___)",
+          "fields": [
+            {
+              "answer": "work out",
+              "accept": [
+                "works out"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "She goes r____ every morning. (r)",
+          "fields": [
+            {
+              "answer": "running"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "I finish w____ at five. (w)",
+          "fields": [
+            {
+              "answer": "work"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "My mum does the l____ on Sunday. (l)",
+          "fields": [
+            {
+              "answer": "laundry"
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "Please c____ in before nine. (c)",
+          "fields": [
+            {
+              "answer": "clock in",
+              "accept": [
+                "clock-in"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_6",
+          "label": "It is a q____ to eight. (q)",
+          "fields": [
+            {
+              "answer": "quarter"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Test C: grammar /6",
+      "minutes": 10,
+      "instructions": "Fill in the gap or choose the correct word.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "She ____ up at six. (wake)",
+          "fields": [
+            {
+              "answer": "wakes",
+              "accept": [
+                "wakes up"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "He ____ coffee. (not like) — He ____ coffee.",
+          "fields": [
+            {
+              "answer": "doesn't like",
+              "accept": [
+                "does not like"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "We have class ____ Saturday.",
+          "fields": [
+            {
+              "answer": "on"
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "I go to bed ____ ten o'clock.",
+          "fields": [
+            {
+              "answer": "at"
+            }
+          ]
+        },
+        {
+          "id": "s3_5",
+          "label": "She ____ the bed every morning. (make)",
+          "fields": [
+            {
+              "answer": "makes"
+            }
+          ]
+        },
+        {
+          "id": "s3_6",
+          "label": "____ he study at night? (Do / Does)",
+          "fields": [
+            {
+              "answer": "Does"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Test D: reading /4",
+      "minutes": 10,
+      "instructions": "Read the text and answer NO MORE THAN TWO WORDS.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s4_1",
+          "label": "1. What time does Tam wake up?",
+          "fields": [
+            {
+              "answer": "seven",
+              "accept": [
+                "7",
+                "7:00",
+                "7 o'clock",
+                "at seven"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s4_2",
+          "label": "2. What does Tam do at eight?",
+          "fields": [
+            {
+              "answer": "yoga",
+              "accept": [
+                "does yoga",
+                "do yoga"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s4_3",
+          "label": "3. When does Tam have lunch?",
+          "fields": [
+            {
+              "answer": "noon",
+              "accept": [
+                "at noon",
+                "12",
+                "12:00",
+                "12 o'clock"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s4_4",
+          "label": "4. What does Tam do with his friend on Saturday?",
+          "fields": [
+            {
+              "answer": "goes running",
+              "accept": [
+                "go running",
+                "running"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Voice note",
+      "minutes": 10,
+      "instructions": "Read the 4 sentences below aloud, then record one voice note.",
+      "kind": "voice",
+      "lines": [
+        "1. She wakes up at six and makes breakfast.",
+        "2. He watches TV and washes the dishes.",
+        "3. My brother does the laundry on Sunday.",
+        "4. I don't work on Saturday."
+      ],
+      "note": "Teacher listens for the -s and -es endings and for /ɪz/ in watches and washes."
+    },
+    {
+      "id": "s6",
+      "title": "Step 6 · My week",
+      "minutes": 5,
+      "instructions": "Answer in English, one sentence each.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s6_1",
+          "q": "1. This week I learned:",
+          "model": "This week I learned how to talk about my routine with at, on and in."
+        },
+        {
+          "id": "s6_2",
+          "q": "2. The hardest thing was:",
+          "model": "The hardest thing was the -es spelling, like watches and goes."
+        },
+        {
+          "id": "s6_3",
+          "q": "3. Next week I want to:",
+          "model": "Next week I want to practise my -s endings every day."
+        }
+      ]
+    }
+  ],
+  "send_today": "Test steps 1 to 4 are marked /19. Voice note in step 5 is sent when you press Submit.",
+  "error_type": "grammar"
+}

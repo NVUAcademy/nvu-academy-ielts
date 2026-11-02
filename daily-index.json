@@ -76,6 +76,90 @@
                           "class_codes":  [
                                               "IELTS14"
                                           ]
+                      },
+                      {
+                          "id":  "w4-mon-found11",
+                          "file":  "daily-w4-mon-found11.json",
+                          "title":  "Monday Daily Practice",
+                          "subtitle":  "Class day: warm-up with the Lesson 6 words",
+                          "day":  "monday",
+                          "date":  "2026-11-02",
+                          "week_number":  4,
+                          "class_codes":  [
+                                              "FOUNDATION11"
+                                          ]
+                      },
+                      {
+                          "id":  "w4-tue-found11",
+                          "file":  "daily-w4-tue-found11.json",
+                          "title":  "Tuesday Daily Practice",
+                          "subtitle":  "Time and routines: vocabulary, at/on/in, sounds /t/ /d/ /h/ /w/",
+                          "day":  "tuesday",
+                          "date":  "2026-11-03",
+                          "week_number":  4,
+                          "class_codes":  [
+                                              "FOUNDATION11"
+                                          ]
+                      },
+                      {
+                          "id":  "w4-wed-found11",
+                          "file":  "daily-w4-wed-found11.json",
+                          "title":  "Wednesday Daily Practice",
+                          "subtitle":  "Time and routines: review, don\u0027t and do you, sounds /m/ /l/",
+                          "day":  "wednesday",
+                          "date":  "2026-11-04",
+                          "week_number":  4,
+                          "class_codes":  [
+                                              "FOUNDATION11"
+                                          ]
+                      },
+                      {
+                          "id":  "w4-thu-found11",
+                          "file":  "daily-w4-thu-found11.json",
+                          "title":  "Thursday Daily Practice",
+                          "subtitle":  "Other people\u0027s habits: he, she, it and the -s and -es endings",
+                          "day":  "thursday",
+                          "date":  "2026-11-05",
+                          "week_number":  4,
+                          "class_codes":  [
+                                              "FOUNDATION11"
+                                          ]
+                      },
+                      {
+                          "id":  "w4-fri-found11",
+                          "file":  "daily-w4-fri-found11.json",
+                          "title":  "Friday Daily Practice: weekly test /19",
+                          "subtitle":  "Weekly test on Lessons 6 and 7 (45 minutes, no notes)",
+                          "day":  "friday",
+                          "date":  "2026-11-06",
+                          "week_number":  4,
+                          "class_codes":  [
+                                              "FOUNDATION11"
+                                          ]
+                      },
+                      {
+                          "id":  "w4-sat-found11",
+                          "file":  "daily-w4-sat-found11.json",
+                          "title":  "Saturday Daily Practice: class day warm-up",
+                          "subtitle":  "Class day B7: warm-up with the Lesson 7 words",
+                          "day":  "saturday",
+                          "date":  "2026-11-07",
+                          "week_number":  4,
+                          "class_codes":  [
+                                              "FOUNDATION11"
+                                          ]
+                      },
+                      {
+                          "id":  "w4-sun-found11",
+                          "file":  "daily-w4-sun-found11.json",
+                          "title":  "Sunday Daily Practice",
+                          "subtitle":  "Review Lessons 6 and 7, then write 50 words about a person",
+                          "day":  "sunday",
+                          "date":  "2026-11-08",
+                          "week_number":  4,
+                          "class_codes":  [
+                                              "FOUNDATION11"
+                                          ]
                       }
                   ]
 }

@@ -1,0 +1,309 @@
+{
+  "id": "w4-wed-found11",
+  "title": "Wednesday Daily Practice",
+  "subtitle": "Time and routines: review, don't and do you, sounds /m/ /l/",
+  "theme": "Lesson 6 · Time and routines",
+  "source": "Foundation 11 lesson plan, week 4 (B6 Time and routines, B7 Other people's habits), Wed 4 Nov",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 4,
+  "day": "wednesday",
+  "date": "2026-11-04",
+  "section": "grammar",
+  "minutes": 60,
+  "intro": "Six steps, about 60 minutes. Deadline: 23:00 the same day. Step 6 is a voice note.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Match the word and the meaning",
+      "minutes": 8,
+      "instructions": "Write the letter of the meaning (A to D) next to each word.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s1_1",
+          "q": "1. bedtime",
+          "options": {
+            "A": "giờ đi ngủ",
+            "B": "giờ nghỉ trưa",
+            "C": "đi lại hằng ngày",
+            "D": "ngày nghỉ"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s1_2",
+          "q": "2. day off",
+          "options": {
+            "A": "giờ đi ngủ",
+            "B": "giờ nghỉ trưa",
+            "C": "đi lại hằng ngày",
+            "D": "ngày nghỉ"
+          },
+          "answer": "D"
+        },
+        {
+          "id": "s1_3",
+          "q": "3. commute",
+          "options": {
+            "A": "giờ đi ngủ",
+            "B": "giờ nghỉ trưa",
+            "C": "đi lại hằng ngày",
+            "D": "ngày nghỉ"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s1_4",
+          "q": "4. lunch break",
+          "options": {
+            "A": "giờ đi ngủ",
+            "B": "giờ nghỉ trưa",
+            "C": "đi lại hằng ngày",
+            "D": "ngày nghỉ"
+          },
+          "answer": "B"
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Grammar: at, on, in",
+      "minutes": 10,
+      "instructions": "Fill in at, on or in.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "We start class ____ eight o'clock.",
+          "fields": [
+            {
+              "answer": "at"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "They have a test ____ Friday.",
+          "fields": [
+            {
+              "answer": "on"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "I usually study ____ the evening.",
+          "fields": [
+            {
+              "answer": "in"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "My sister goes to bed ____ night.",
+          "fields": [
+            {
+              "answer": "at"
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "The bus leaves ____ half past seven.",
+          "fields": [
+            {
+              "answer": "at"
+            }
+          ]
+        },
+        {
+          "id": "s2_6",
+          "label": "We have a holiday ____ December.",
+          "fields": [
+            {
+              "answer": "in"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Don't and do you",
+      "minutes": 10,
+      "instructions": "Fill in the gap. Use don't or do with the correct subject.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "I ____ work on Sunday. (don't)",
+          "fields": [
+            {
+              "answer": "don't",
+              "accept": [
+                "do not"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "____ you start work early? (Do)",
+          "fields": [
+            {
+              "answer": "Do"
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "They ____ have lunch at home. (don't)",
+          "fields": [
+            {
+              "answer": "don't",
+              "accept": [
+                "do not"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "____ we finish at five? (Do)",
+          "fields": [
+            {
+              "answer": "Do"
+            }
+          ]
+        },
+        {
+          "id": "s3_5",
+          "label": "She ____ like cold coffee. (doesn't)",
+          "fields": [
+            {
+              "answer": "doesn't",
+              "accept": [
+                "does not"
+              ]
+            }
+          ],
+          "explain": "With he or she, use doesn't. Lesson 7 covers this in detail."
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Sounds: /m/ and /l/",
+      "minutes": 8,
+      "instructions": "Say each word aloud, then choose the word that starts with the sound.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s4_1",
+          "q": "1. Which word starts with /m/?",
+          "options": {
+            "A": "like",
+            "B": "make"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s4_2",
+          "q": "2. Which word starts with /l/?",
+          "options": {
+            "A": "laundry",
+            "B": "morning"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s4_3",
+          "q": "3. Which word starts with /m/?",
+          "options": {
+            "A": "relax",
+            "B": "my"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s4_4",
+          "q": "4. Which word starts with /l/?",
+          "options": {
+            "A": "mum",
+            "B": "late"
+          },
+          "answer": "B"
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Reading: Ben's Sunday",
+      "minutes": 12,
+      "instructions": "Read the text, then write True, False or Not Given.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s5_1",
+          "q": "Text: Ben does not work on Sunday. He makes the bed at eight and does the laundry at nine. He likes running in the park. In the evening he cooks dinner for his family.",
+          "options": {
+            "A": "True",
+            "B": "False",
+            "C": "Not Given"
+          },
+          "answer": "B",
+          "explain": "Ben does not work on Sunday, so the statement 'Ben works on Sunday' is false. Use: Ben doesn't work on Sunday."
+        },
+        {
+          "id": "s5_2",
+          "q": "1. Ben makes the bed in the morning.",
+          "options": {
+            "A": "True",
+            "B": "False",
+            "C": "Not Given"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s5_3",
+          "q": "2. Ben goes to the gym on Sunday.",
+          "options": {
+            "A": "True",
+            "B": "False",
+            "C": "Not Given"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s5_4",
+          "q": "3. Ben cooks dinner for his family.",
+          "options": {
+            "A": "True",
+            "B": "False",
+            "C": "Not Given"
+          },
+          "answer": "A"
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Step 6 · Voice note: read the sentences",
+      "minutes": 12,
+      "instructions": "Read these 3 sentences aloud, slowly, then record one voice note.",
+      "kind": "voice",
+      "lines": [
+        "1. Make the bed in the morning, then do the laundry.",
+        "2. My daily routine is quite simple.",
+        "3. Ben likes running and does yoga at night."
+      ],
+      "note": "Teacher listens for /m/ and /l/, and for the -s endings in likes, does, makes."
+    }
+  ],
+  "send_today": "Six steps. Voice note in step 6 is sent to the teacher when you press Submit.",
+  "error_type": "grammar"
+}

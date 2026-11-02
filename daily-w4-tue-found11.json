@@ -1,0 +1,298 @@
+{
+  "id": "w4-tue-found11",
+  "title": "Tuesday Daily Practice",
+  "subtitle": "Time and routines: vocabulary, at/on/in, sounds /t/ /d/ /h/ /w/",
+  "theme": "Lesson 6 · Time and routines",
+  "source": "Foundation 11 lesson plan, week 4 (B6 Time and routines, B7 Other people's habits), Tue 3 Nov",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 4,
+  "day": "tuesday",
+  "date": "2026-11-03",
+  "section": "vocabulary",
+  "minutes": 60,
+  "intro": "Six steps, about 60 minutes. Deadline: 23:00 the same day. Step 5 is a writing task: type it in the box on the website. Step 6 is a voice note.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocabulary",
+      "minutes": 8,
+      "instructions": "Fill in each gap with a Lesson 6 word.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "The journey to work takes forty minutes. It is my ____. (commute)",
+          "fields": [
+            {
+              "answer": "commute"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "I eat my sandwich at my desk during my ____. (lunch break)",
+          "fields": [
+            {
+              "answer": "lunch break"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "Do not ____ late for class. (be late for)",
+          "fields": [
+            {
+              "answer": "be late for",
+              "accept": [
+                "be late"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "I go to ____ at half past ten. (bedtime)",
+          "fields": [
+            {
+              "answer": "bedtime"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "It is a ____ eight. (quarter to)",
+          "fields": [
+            {
+              "answer": "quarter to"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Grammar: at, on, in",
+      "minutes": 10,
+      "instructions": "Choose the correct word.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "I wake up ____ six o'clock.",
+          "options": {
+            "A": "at",
+            "B": "on",
+            "C": "in"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s2_2",
+          "q": "We have English class ____ Monday.",
+          "options": {
+            "A": "at",
+            "B": "on",
+            "C": "in"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s2_3",
+          "q": "They go running ____ the morning.",
+          "options": {
+            "A": "at",
+            "B": "on",
+            "C": "in"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s2_4",
+          "q": "She starts work ____ nine.",
+          "options": {
+            "A": "at",
+            "B": "on",
+            "C": "in"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s2_5",
+          "q": "We have a day off ____ Sunday.",
+          "options": {
+            "A": "at",
+            "B": "on",
+            "C": "in"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s2_6",
+          "q": "My mum has lunch ____ noon.",
+          "options": {
+            "A": "at",
+            "B": "on",
+            "C": "in"
+          },
+          "answer": "A"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Sounds: /t/ /d/ /h/ /w/",
+      "minutes": 8,
+      "instructions": "Say each word aloud first, then choose the sound at the start.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s3_1",
+          "q": "1. Which word starts with /h/?",
+          "options": {
+            "A": "wake",
+            "B": "have"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s3_2",
+          "q": "2. Which word starts with /w/?",
+          "options": {
+            "A": "week",
+            "B": "hungry"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s3_3",
+          "q": "3. Which word starts with /d/?",
+          "options": {
+            "A": "day",
+            "B": "ten"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s3_4",
+          "q": "4. Which word starts with /t/?",
+          "options": {
+            "A": "dinner",
+            "B": "time"
+          },
+          "answer": "B"
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Reading: my day",
+      "minutes": 12,
+      "instructions": "Read the text, then answer with NO MORE THAN TWO WORDS from the text.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s4_1",
+          "label": "1. What time does Mai start work?",
+          "fields": [
+            {
+              "answer": "nine",
+              "accept": [
+                "9",
+                "9:00",
+                "9 o'clock",
+                "at nine"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s4_2",
+          "label": "2. What time does she finish work?",
+          "fields": [
+            {
+              "answer": "five",
+              "accept": [
+                "5",
+                "5:00",
+                "5 o'clock",
+                "at five"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s4_3",
+          "label": "3. When does she have a day off?",
+          "fields": [
+            {
+              "answer": "weekends",
+              "accept": [
+                "on weekends",
+                "at weekends",
+                "weekend",
+                "on the weekend"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s4_4",
+          "label": "4. What does she do on weekends?",
+          "fields": [
+            {
+              "answer": "goes running",
+              "accept": [
+                "go running",
+                "running",
+                "she goes running"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Writing: my day in 5 sentences",
+      "minutes": 15,
+      "instructions": "Write 5 sentences about your day. Use at, on or in, and at least two Lesson 6 words. Type it in the box on the website.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s5_1",
+          "q": "My day",
+          "model": "I wake up at six. I have breakfast at seven. I start work at nine on weekdays. I have a lunch break at twelve. I go to bed at eleven.",
+          "ai": {
+            "type": "Short paragraph about daily routine",
+            "level": "Foundation (A1 to A2)",
+            "min_words": 30,
+            "task": "Write 5 sentences about your day using at, on or in and at least two Lesson 6 words (commute, lunch break, finish work, clock in, bedtime, routine).",
+            "criteria": [
+              "5 complete sentences, starting with a capital letter and ending with a full stop",
+              "uses at, on or in correctly",
+              "uses at least two Lesson 6 words",
+              "uses the present simple with I or we, no -s",
+              "clear and readable"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Step 6 · Voice note",
+      "minutes": 7,
+      "instructions": "Read your 5 sentences from step 5 aloud, slowly, then record one voice note.",
+      "kind": "voice",
+      "lines": [
+        "Read your 5 sentences aloud, slowly."
+      ],
+      "note": "Teacher listens for /t/ /d/ /h/ /w/ and the stress in your words."
+    }
+  ],
+  "send_today": "Six steps on the website. Voice note in step 6 is sent to the teacher when you press Submit.",
+  "error_type": "vocabulary"
+}

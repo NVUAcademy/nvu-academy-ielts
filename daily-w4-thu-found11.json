@@ -1,0 +1,344 @@
+{
+  "id": "w4-thu-found11",
+  "title": "Thursday Daily Practice",
+  "subtitle": "Other people's habits: he, she, it and the -s and -es endings",
+  "theme": "Lesson 7 · Other people's habits",
+  "source": "Foundation 11 lesson plan, week 4 (B6 Time and routines, B7 Other people's habits), Thu 5 Nov",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 4,
+  "day": "thursday",
+  "date": "2026-11-05",
+  "section": "grammar",
+  "minutes": 60,
+  "intro": "Six steps, about 60 minutes. Deadline: 23:00 the same day. Step 5 is a writing task: type it in the box on the website. Step 6 is a voice note.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · He, she, it: add -s or -es",
+      "minutes": 10,
+      "instructions": "Write the correct form of the verb in brackets.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "She ____ up at six. (wake)",
+          "fields": [
+            {
+              "answer": "wakes",
+              "accept": [
+                "wakes up"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "He ____ coffee every morning. (drink)",
+          "fields": [
+            {
+              "answer": "drinks"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "My brother ____ English on Monday. (study)",
+          "fields": [
+            {
+              "answer": "studies"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "My mum ____ breakfast for us. (make)",
+          "fields": [
+            {
+              "answer": "makes"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "She ____ yoga before bed. (do)",
+          "fields": [
+            {
+              "answer": "does"
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "He ____ a car. (have)",
+          "fields": [
+            {
+              "answer": "has"
+            }
+          ]
+        },
+        {
+          "id": "s1_7",
+          "label": "It ____ at eight. (start)",
+          "fields": [
+            {
+              "answer": "starts"
+            }
+          ]
+        },
+        {
+          "id": "s1_8",
+          "label": "She ____ the laundry on Sunday. (do)",
+          "fields": [
+            {
+              "answer": "does"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Spelling: -es and -ies",
+      "minutes": 8,
+      "instructions": "Write the correct form.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "go → he ____",
+          "fields": [
+            {
+              "answer": "goes"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "watch → she ____",
+          "fields": [
+            {
+              "answer": "watches"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "teach → he ____",
+          "fields": [
+            {
+              "answer": "teaches"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "study → she ____",
+          "fields": [
+            {
+              "answer": "studies"
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "carry → he ____",
+          "fields": [
+            {
+              "answer": "carries"
+            }
+          ]
+        },
+        {
+          "id": "s2_6",
+          "label": "play → she ____",
+          "fields": [
+            {
+              "answer": "plays"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Vocabulary: Lesson 7 words",
+      "minutes": 10,
+      "instructions": "Fill in each gap with a Lesson 7 word. Change the form if needed.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "I ____ on Saturday, because I like to be healthy. (keep fit)",
+          "fields": [
+            {
+              "answer": "keep fit",
+              "accept": [
+                "keeps fit",
+                "keep fit"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "He ____ at the gym on Monday. (work out)",
+          "fields": [
+            {
+              "answer": "works out",
+              "accept": [
+                "work out"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "She ____ every morning in the park. (go running)",
+          "fields": [
+            {
+              "answer": "goes running",
+              "accept": [
+                "go running"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "My sister ____ at a hospital. (volunteer)",
+          "fields": [
+            {
+              "answer": "volunteers",
+              "accept": [
+                "volunteer"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_5",
+          "label": "He ____ football. (be fond of)",
+          "fields": [
+            {
+              "answer": "is fond of",
+              "accept": [
+                "be fond of",
+                "fond of"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_6",
+          "label": "Lan ____ painting last year. (take up)",
+          "fields": [
+            {
+              "answer": "took up",
+              "accept": [
+                "take up"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Reading: Hoa",
+      "minutes": 12,
+      "instructions": "Read the text, then answer True or False.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s4_1",
+          "q": "Text: Hoa is a busy student. She wakes up at six and makes breakfast for her brother. She goes to school by bike. In the evening she studies English. On Sunday she does the laundry and makes the bed.",
+          "options": {
+            "A": "True",
+            "B": "False"
+          },
+          "answer": "A",
+          "explain": "Hoa wakes up at six, so this is true."
+        },
+        {
+          "id": "s4_2",
+          "q": "1. Hoa makes dinner for her brother.",
+          "options": {
+            "A": "True",
+            "B": "False"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s4_3",
+          "q": "2. Hoa goes to school by bike.",
+          "options": {
+            "A": "True",
+            "B": "False"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s4_4",
+          "q": "3. Hoa does the laundry on Sunday.",
+          "options": {
+            "A": "True",
+            "B": "False"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s4_5",
+          "q": "4. Hoa studies English in the morning.",
+          "options": {
+            "A": "True",
+            "B": "False"
+          },
+          "answer": "B"
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Writing: a person's habits",
+      "minutes": 15,
+      "instructions": "Write about 40 to 50 words about one person you know. Use he or she, at least 3 verbs with -s or -es, and one doesn't. Type it in the box on the website.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s5_1",
+          "q": "A person I know",
+          "model": "My brother Minh is a hard-working student. He wakes up at six and goes running before breakfast. He studies English at night and watches a short video. He doesn't drink coffee, but he likes tea.",
+          "ai": {
+            "type": "Short paragraph about a person's daily habits",
+            "level": "Foundation (A1 to A2)",
+            "min_words": 40,
+            "task": "Write 40 to 50 words about one person you know. Use he or she, at least three verbs with -s or -es, and one negative with doesn't.",
+            "criteria": [
+              "about 40 to 50 words",
+              "he or she with a verb ending in -s or -es",
+              "at least one doesn't",
+              "capital letter at the start of each sentence and a full stop at the end",
+              "clear and readable"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Step 6 · Voice note: read your paragraph",
+      "minutes": 5,
+      "instructions": "Read your paragraph from step 5 aloud, slowly, then record one voice note.",
+      "kind": "voice",
+      "lines": [
+        "Read your paragraph aloud, slowly. Hold the -s and -es endings."
+      ],
+      "note": "Teacher listens for the -s, -es, and /ɪz/ endings."
+    }
+  ],
+  "send_today": "Six steps. Writing in step 5 and voice note in step 6 are sent to the teacher when you press Submit.",
+  "error_type": "grammar"
+}

@@ -1,0 +1,89 @@
+{
+  "id": "w4-mon-found11",
+  "title": "Monday Daily Practice",
+  "subtitle": "Class day: warm-up with the Lesson 6 words",
+  "theme": "Lesson 6 · Time and routines",
+  "source": "Foundation 11 lesson plan, week 4 (B6 Time and routines, B7 Other people's habits), Mon 2 Nov (class day B6)",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 4,
+  "day": "monday",
+  "date": "2026-11-02",
+  "section": "vocabulary",
+  "minutes": 15,
+  "intro": "Class day. This is a 15-minute warm-up only. Do not submit. Bring your notes to class.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Word recall",
+      "minutes": 8,
+      "instructions": "Fill in each gap with a word from Lesson 6. Change the form if needed.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "I ____ my job at five o'clock. (finish / finish work)",
+          "fields": [
+            {
+              "answer": "finish work"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "Please ____ before nine. (clock in)",
+          "fields": [
+            {
+              "answer": "clock in"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "The bus ____ at seven. (set off)",
+          "fields": [
+            {
+              "answer": "sets off",
+              "accept": [
+                "set off"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "Sunday is my ____. (day off)",
+          "fields": [
+            {
+              "answer": "day off"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "My daily ____ is quite simple. (routine)",
+          "fields": [
+            {
+              "answer": "routine"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Say it aloud",
+      "minutes": 7,
+      "instructions": "Say the 10 Lesson 6 words aloud, each with one example sentence. Record one voice note.",
+      "kind": "voice",
+      "lines": [
+        "commute · lunch break · finish work · clock in · day off · set off · be late for · bedtime · routine · quarter to"
+      ],
+      "note": "Teacher listens for stress: BED-time, ro-UTINE, QUAR-ter."
+    }
+  ],
+  "send_today": "Warm-up only. Do not submit.",
+  "error_type": "vocabulary"
+}
