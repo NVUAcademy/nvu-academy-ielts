@@ -787,6 +787,613 @@
         ],
         "type": "bar"
       }
+    },
+    {
+      "topic": "Mixed chart: university students and fees",
+      "type": "IELTS Writing Task 1, bài luyện tập",
+      "task": "Write at least 150 words. University students and tuition fees, 2010–2020. Summarise the main features and make comparisons where relevant.",
+      "criteria": [
+        "Introduction: paraphrase đề, không chép nguyên văn",
+        "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+        "Số liệu chọn lọc, đúng đơn vị",
+        "Từ vựng mô tả xu hướng, thay đổi và vị trí",
+        "Ngữ pháp và chính tả"
+      ],
+      "chart": {
+        "type": "mixed",
+        "title": "University students and tuition fees, 2010–2020",
+        "parts": [
+          {
+            "type": "bar",
+            "title": "Number of international students (thousands)",
+            "unit": "Thousands",
+            "labels": [
+              "2010",
+              "2015",
+              "2020"
+            ],
+            "series": [
+              {
+                "name": "International",
+                "color": "#5B7FA6",
+                "values": [
+                  40,
+                  55,
+                  70
+                ]
+              }
+            ]
+          },
+          {
+            "type": "line",
+            "title": "Average annual tuition fee (USD)",
+            "unit": "USD",
+            "labels": [
+              "2010",
+              "2015",
+              "2020"
+            ],
+            "series": [
+              {
+                "name": "Fee",
+                "color": "#B5553F",
+                "values": [
+                  8000,
+                  9500,
+                  11000
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "topic": "Mixed chart: energy sources and cost",
+      "type": "IELTS Writing Task 1, bài luyện tập",
+      "task": "Write at least 150 words. Energy use and cost in one country, 2000–2020. Summarise the main features and make comparisons where relevant.",
+      "criteria": [
+        "Introduction: paraphrase đề, không chép nguyên văn",
+        "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+        "Số liệu chọn lọc, đúng đơn vị",
+        "Từ vựng mô tả xu hướng, thay đổi và vị trí",
+        "Ngữ pháp và chính tả"
+      ],
+      "chart": {
+        "type": "mixed",
+        "title": "Energy use and cost in one country, 2000–2020",
+        "parts": [
+          {
+            "type": "bar",
+            "title": "Share of energy by source (%)",
+            "unit": "Percent",
+            "labels": [
+              "2000",
+              "2010",
+              "2020"
+            ],
+            "series": [
+              {
+                "name": "Coal",
+                "color": "#5B7FA6",
+                "values": [
+                  60,
+                  50,
+                  35
+                ]
+              },
+              {
+                "name": "Renewables",
+                "color": "#7E9B5B",
+                "values": [
+                  5,
+                  12,
+                  30
+                ]
+              }
+            ]
+          },
+          {
+            "type": "table",
+            "title": "Average electricity price (cents per kWh)",
+            "headers": [
+              "Year",
+              "2000",
+              "2010",
+              "2020"
+            ],
+            "rows": [
+              [
+                "Price",
+                "8",
+                "12",
+                "15"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "topic": "Mixed chart: tourists and spending",
+      "type": "IELTS Writing Task 1, bài luyện tập",
+      "task": "Write at least 150 words. Tourists to a coastal town, 2015–2019. Summarise the main features and make comparisons where relevant.",
+      "criteria": [
+        "Introduction: paraphrase đề, không chép nguyên văn",
+        "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+        "Số liệu chọn lọc, đúng đơn vị",
+        "Từ vựng mô tả xu hướng, thay đổi và vị trí",
+        "Ngữ pháp và chính tả"
+      ],
+      "chart": {
+        "type": "mixed",
+        "title": "Tourists to a coastal town, 2015–2019",
+        "parts": [
+          {
+            "type": "line",
+            "title": "Number of tourists (thousands)",
+            "unit": "Thousands",
+            "labels": [
+              "2015",
+              "2016",
+              "2017",
+              "2018",
+              "2019"
+            ],
+            "series": [
+              {
+                "name": "Tourists",
+                "color": "#5B7FA6",
+                "values": [
+                  120,
+                  135,
+                  150,
+                  165,
+                  140
+                ]
+              }
+            ]
+          },
+          {
+            "type": "bar",
+            "title": "Average spending per tourist (USD)",
+            "unit": "USD",
+            "labels": [
+              "2015",
+              "2016",
+              "2017",
+              "2018",
+              "2019"
+            ],
+            "series": [
+              {
+                "name": "Spending",
+                "color": "#7E9B5B",
+                "values": [
+                  300,
+                  310,
+                  320,
+                  340,
+                  330
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "topic": "Map: a town before and after development",
+      "type": "IELTS Writing Task 1, bài luyện tập",
+      "task": "Write at least 150 words. Map of Riverside town, 1990 and 2020. Summarise the main features and make comparisons where relevant.",
+      "criteria": [
+        "Introduction: paraphrase đề, không chép nguyên văn",
+        "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+        "Số liệu chọn lọc, đúng đơn vị",
+        "Từ vựng mô tả xu hướng, thay đổi và vị trí",
+        "Ngữ pháp và chính tả"
+      ],
+      "chart": {
+        "type": "map",
+        "title": "Map of Riverside town, 1990 and 2020",
+        "labels": [
+          "1990",
+          "2020"
+        ],
+        "before": [
+          {
+            "x": 20,
+            "y": 20,
+            "w": 120,
+            "h": 60,
+            "fill": "#E9E2D2",
+            "label": "Farm"
+          },
+          {
+            "x": 150,
+            "y": 20,
+            "w": 120,
+            "h": 60,
+            "fill": "#E9E2D2",
+            "label": "River"
+          },
+          {
+            "x": 20,
+            "y": 100,
+            "w": 250,
+            "h": 50,
+            "fill": "#E9E2D2",
+            "label": "Main road"
+          },
+          {
+            "x": 20,
+            "y": 170,
+            "w": 120,
+            "h": 50,
+            "fill": "#E9E2D2",
+            "label": "Houses"
+          }
+        ],
+        "after": [
+          {
+            "x": 20,
+            "y": 20,
+            "w": 120,
+            "h": 60,
+            "fill": "#D9E6D0",
+            "label": "Park"
+          },
+          {
+            "x": 150,
+            "y": 20,
+            "w": 120,
+            "h": 60,
+            "fill": "#E9E2D2",
+            "label": "River"
+          },
+          {
+            "x": 20,
+            "y": 100,
+            "w": 250,
+            "h": 50,
+            "fill": "#E9E2D2",
+            "label": "Main road"
+          },
+          {
+            "x": 20,
+            "y": 170,
+            "w": 120,
+            "h": 50,
+            "fill": "#F2D9C9",
+            "label": "Flats"
+          },
+          {
+            "x": 150,
+            "y": 170,
+            "w": 120,
+            "h": 50,
+            "fill": "#F2D9C9",
+            "label": "Shopping centre"
+          }
+        ]
+      }
+    },
+    {
+      "topic": "Map: a school campus after renovation",
+      "type": "IELTS Writing Task 1, bài luyện tập",
+      "task": "Write at least 150 words. Map of a school campus, before and after renovation. Summarise the main features and make comparisons where relevant.",
+      "criteria": [
+        "Introduction: paraphrase đề, không chép nguyên văn",
+        "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+        "Số liệu chọn lọc, đúng đơn vị",
+        "Từ vựng mô tả xu hướng, thay đổi và vị trí",
+        "Ngữ pháp và chính tả"
+      ],
+      "chart": {
+        "type": "map",
+        "title": "Map of a school campus, before and after renovation",
+        "labels": [
+          "Before",
+          "After"
+        ],
+        "before": [
+          {
+            "x": 20,
+            "y": 20,
+            "w": 120,
+            "h": 60,
+            "fill": "#E9E2D2",
+            "label": "Library"
+          },
+          {
+            "x": 150,
+            "y": 20,
+            "w": 120,
+            "h": 60,
+            "fill": "#E9E2D2",
+            "label": "Car park"
+          },
+          {
+            "x": 20,
+            "y": 110,
+            "w": 250,
+            "h": 60,
+            "fill": "#E9E2D2",
+            "label": "Sports field"
+          },
+          {
+            "x": 20,
+            "y": 185,
+            "w": 120,
+            "h": 40,
+            "fill": "#E9E2D2",
+            "label": "Canteen"
+          }
+        ],
+        "after": [
+          {
+            "x": 20,
+            "y": 20,
+            "w": 120,
+            "h": 60,
+            "fill": "#E9E2D2",
+            "label": "Library"
+          },
+          {
+            "x": 150,
+            "y": 20,
+            "w": 120,
+            "h": 60,
+            "fill": "#D9E6D0",
+            "label": "Garden"
+          },
+          {
+            "x": 20,
+            "y": 110,
+            "w": 250,
+            "h": 60,
+            "fill": "#E9E2D2",
+            "label": "Sports field"
+          },
+          {
+            "x": 20,
+            "y": 185,
+            "w": 120,
+            "h": 40,
+            "fill": "#E9E2D2",
+            "label": "Canteen"
+          },
+          {
+            "x": 150,
+            "y": 185,
+            "w": 120,
+            "h": 40,
+            "fill": "#F2D9C9",
+            "label": "New car park"
+          }
+        ]
+      }
+    },
+    {
+      "topic": "Map: an island before and after a new airport",
+      "type": "IELTS Writing Task 1, bài luyện tập",
+      "task": "Write at least 150 words. Map of an island, before and after an airport was built. Summarise the main features and make comparisons where relevant.",
+      "criteria": [
+        "Introduction: paraphrase đề, không chép nguyên văn",
+        "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+        "Số liệu chọn lọc, đúng đơn vị",
+        "Từ vựng mô tả xu hướng, thay đổi và vị trí",
+        "Ngữ pháp và chính tả"
+      ],
+      "chart": {
+        "type": "map",
+        "title": "Map of an island, before and after an airport was built",
+        "labels": [
+          "Before",
+          "After"
+        ],
+        "before": [
+          {
+            "x": 20,
+            "y": 20,
+            "w": 250,
+            "h": 60,
+            "fill": "#D6E4EE",
+            "label": "Sea"
+          },
+          {
+            "x": 20,
+            "y": 90,
+            "w": 120,
+            "h": 80,
+            "fill": "#E9E2D2",
+            "label": "Village"
+          },
+          {
+            "x": 150,
+            "y": 90,
+            "w": 120,
+            "h": 80,
+            "fill": "#D9E6D0",
+            "label": "Forest"
+          }
+        ],
+        "after": [
+          {
+            "x": 20,
+            "y": 20,
+            "w": 250,
+            "h": 60,
+            "fill": "#D6E4EE",
+            "label": "Sea"
+          },
+          {
+            "x": 20,
+            "y": 90,
+            "w": 120,
+            "h": 80,
+            "fill": "#E9E2D2",
+            "label": "Village"
+          },
+          {
+            "x": 150,
+            "y": 90,
+            "w": 120,
+            "h": 80,
+            "fill": "#F2D9C9",
+            "label": "Airport"
+          },
+          {
+            "x": 20,
+            "y": 185,
+            "w": 250,
+            "h": 40,
+            "fill": "#E9E2D2",
+            "label": "New hotel"
+          }
+        ]
+      }
+    },
+    {
+      "topic": "Cycle: life cycle of a frog",
+      "type": "IELTS Writing Task 1, bài luyện tập",
+      "task": "Write at least 150 words. The life cycle of a frog. Summarise the main features and make comparisons where relevant.",
+      "criteria": [
+        "Introduction: paraphrase đề, không chép nguyên văn",
+        "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+        "Số liệu chọn lọc, đúng đơn vị",
+        "Từ vựng mô tả xu hướng, thay đổi và vị trí",
+        "Ngữ pháp và chính tả"
+      ],
+      "chart": {
+        "type": "cycle",
+        "title": "The life cycle of a frog",
+        "steps": [
+          "Frog lays eggs in water",
+          "Eggs hatch into tadpoles",
+          "Tadpoles grow legs",
+          "Tadpoles lose tails",
+          "Young frog leaves water",
+          "Adult frog lays eggs"
+        ]
+      }
+    },
+    {
+      "topic": "Cycle: water cycle",
+      "type": "IELTS Writing Task 1, bài luyện tập",
+      "task": "Write at least 150 words. The water cycle. Summarise the main features and make comparisons where relevant.",
+      "criteria": [
+        "Introduction: paraphrase đề, không chép nguyên văn",
+        "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+        "Số liệu chọn lọc, đúng đơn vị",
+        "Từ vựng mô tả xu hướng, thay đổi và vị trí",
+        "Ngữ pháp và chính tả"
+      ],
+      "chart": {
+        "type": "cycle",
+        "title": "The water cycle",
+        "steps": [
+          "Sun heats the sea",
+          "Water evaporates",
+          "Vapour rises and cools",
+          "Clouds form",
+          "Rain falls",
+          "Water flows back to the sea"
+        ]
+      }
+    },
+    {
+      "topic": "Cycle: cotton clothes production",
+      "type": "IELTS Writing Task 1, bài luyện tập",
+      "task": "Write at least 150 words. The life cycle of a cotton T-shirt. Summarise the main features and make comparisons where relevant.",
+      "criteria": [
+        "Introduction: paraphrase đề, không chép nguyên văn",
+        "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+        "Số liệu chọn lọc, đúng đơn vị",
+        "Từ vựng mô tả xu hướng, thay đổi và vị trí",
+        "Ngữ pháp và chính tả"
+      ],
+      "chart": {
+        "type": "cycle",
+        "title": "The life cycle of a cotton T-shirt",
+        "steps": [
+          "Cotton is grown",
+          "Cotton is picked",
+          "Fibres are spun into thread",
+          "Thread is woven into cloth",
+          "T-shirt is sewn and sold",
+          "Worn T-shirt is recycled"
+        ]
+      }
+    },
+    {
+      "topic": "Diagram: how a solar panel system works",
+      "type": "IELTS Writing Task 1, bài luyện tập",
+      "task": "Write at least 150 words. How a home solar panel system works. Summarise the main features and make comparisons where relevant.",
+      "criteria": [
+        "Introduction: paraphrase đề, không chép nguyên văn",
+        "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+        "Số liệu chọn lọc, đúng đơn vị",
+        "Từ vựng mô tả xu hướng, thay đổi và vị trí",
+        "Ngữ pháp và chính tả"
+      ],
+      "chart": {
+        "type": "diagram",
+        "title": "How a home solar panel system works",
+        "boxes": [
+          "Sunlight hits the solar panels",
+          "Panels convert light into direct current",
+          "An inverter changes it to alternating current",
+          "Electricity powers the home",
+          "Extra electricity goes to the grid"
+        ]
+      }
+    },
+    {
+      "topic": "Diagram: parts of a bicycle",
+      "type": "IELTS Writing Task 1, bài luyện tập",
+      "task": "Write at least 150 words. The main parts of a bicycle. Summarise the main features and make comparisons where relevant.",
+      "criteria": [
+        "Introduction: paraphrase đề, không chép nguyên văn",
+        "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+        "Số liệu chọn lọc, đúng đơn vị",
+        "Từ vựng mô tả xu hướng, thay đổi và vị trí",
+        "Ngữ pháp và chính tả"
+      ],
+      "chart": {
+        "type": "diagram",
+        "title": "The main parts of a bicycle",
+        "boxes": [
+          "Frame connects all the parts",
+          "Handlebar controls the direction",
+          "Chain transfers power from pedals to wheels",
+          "Brakes stop the bicycle",
+          "Saddle supports the rider"
+        ]
+      }
+    },
+    {
+      "topic": "Diagram: a theatre layout",
+      "type": "IELTS Writing Task 1, bài luyện tập",
+      "task": "Write at least 150 words. Layout of a small theatre. Summarise the main features and make comparisons where relevant.",
+      "criteria": [
+        "Introduction: paraphrase đề, không chép nguyên văn",
+        "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+        "Số liệu chọn lọc, đúng đơn vị",
+        "Từ vựng mô tả xu hướng, thay đổi và vị trí",
+        "Ngữ pháp và chính tả"
+      ],
+      "chart": {
+        "type": "diagram",
+        "title": "Layout of a small theatre",
+        "boxes": [
+          "Stage at the front",
+          "Orchestra pit in front of the stage",
+          "Stalls on the ground floor",
+          "Balcony on the upper floor",
+          "Lighting booth at the back"
+        ]
+      }
     }
   ],
   "task2": [
@@ -1179,6 +1786,279 @@
       "type": "IELTS Writing Task 2, Vấn đề và giải pháp (Problem and solution)",
       "dang": "Vấn đề và giải pháp (Problem and solution)",
       "task": "A large amount of food is wasted every day in homes and shops. What problems does this cause, and what solutions can help reduce it?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Remote work and cities",
+      "type": "IELTS Writing Task 2, Ý kiến (To what extent)",
+      "dang": "Ý kiến (To what extent)",
+      "task": "Some people believe that remote work will reduce the need for big cities. To what extent do you agree or disagree?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Online news",
+      "type": "IELTS Writing Task 2, Ý kiến (To what extent)",
+      "dang": "Ý kiến (To what extent)",
+      "task": "People should get their news from reliable newspapers rather than from social media. To what extent do you agree or disagree?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Free university education",
+      "type": "IELTS Writing Task 2, Ý kiến (To what extent)",
+      "dang": "Ý kiến (To what extent)",
+      "task": "Governments should make university education free for all students. To what extent do you agree or disagree?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Speed limits",
+      "type": "IELTS Writing Task 2, Ý kiến (To what extent)",
+      "dang": "Ý kiến (To what extent)",
+      "task": "Strict speed limits are the best way to make roads safer. To what extent do you agree or disagree with this statement?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Tipping at restaurants",
+      "type": "IELTS Writing Task 2, Thảo luận hai quan điểm (Discuss both views)",
+      "dang": "Thảo luận hai quan điểm (Discuss both views)",
+      "task": "Some people think tipping should be compulsory in restaurants. Others believe it should be left to the customer. Discuss both views and give your opinion.",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Global English",
+      "type": "IELTS Writing Task 2, Thảo luận hai quan điểm (Discuss both views)",
+      "dang": "Thảo luận hai quan điểm (Discuss both views)",
+      "task": "Some people believe that everyone should learn English as a global language. Others think people should learn their own languages instead. Discuss both views and give your own opinion.",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Video games",
+      "type": "IELTS Writing Task 2, Thảo luận hai quan điểm (Discuss both views)",
+      "dang": "Thảo luận hai quan điểm (Discuss both views)",
+      "task": "Some people think video games are harmful for children. Others believe they can have educational value. Discuss both views and give your opinion.",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Renting or buying a home",
+      "type": "IELTS Writing Task 2, Thảo luận hai quan điểm (Discuss both views)",
+      "dang": "Thảo luận hai quan điểm (Discuss both views)",
+      "task": "Some people think it is better to rent a home than to buy one. Others believe buying is the better choice. Discuss both views and give your own opinion.",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Artificial intelligence at work",
+      "type": "IELTS Writing Task 2, Lợi và hại (Advantages and disadvantages)",
+      "dang": "Lợi và hại (Advantages and disadvantages)",
+      "task": "Artificial intelligence is being used more and more in the workplace. Do the advantages of this development outweigh the disadvantages?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Working from home",
+      "type": "IELTS Writing Task 2, Lợi và hại (Advantages and disadvantages)",
+      "dang": "Lợi và hại (Advantages and disadvantages)",
+      "task": "More people now work from home. What are the advantages and disadvantages of working from home for employees?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Big supermarkets",
+      "type": "IELTS Writing Task 2, Lợi và hại (Advantages and disadvantages)",
+      "dang": "Lợi và hại (Advantages and disadvantages)",
+      "task": "Large supermarket chains have replaced many small shops. Do the advantages outweigh the disadvantages?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Tourism in small towns",
+      "type": "IELTS Writing Task 2, Lợi và hại (Advantages and disadvantages)",
+      "dang": "Lợi và hại (Advantages and disadvantages)",
+      "task": "Tourism is bringing many visitors to small towns. What are the advantages and disadvantages of this for local people?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Stress at work",
+      "type": "IELTS Writing Task 2, Nguyên nhân và hậu quả (Causes and effects)",
+      "dang": "Nguyên nhân và hậu quả (Causes and effects)",
+      "task": "Many people feel stressed at work. What are the causes of this stress, and what effects does it have on people?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Decline of libraries",
+      "type": "IELTS Writing Task 2, Nguyên nhân và hậu quả (Causes and effects)",
+      "dang": "Nguyên nhân và hậu quả (Causes and effects)",
+      "task": "Fewer people are using public libraries today. What are the causes of this trend, and what effects does it have on communities?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Sleep problems",
+      "type": "IELTS Writing Task 2, Nguyên nhân và hậu quả (Causes and effects)",
+      "dang": "Nguyên nhân và hậu quả (Causes and effects)",
+      "task": "Many young people have problems sleeping. What are the causes, and what effects does this have on their lives?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Brain drain",
+      "type": "IELTS Writing Task 2, Nguyên nhân và hậu quả (Causes and effects)",
+      "dang": "Nguyên nhân và hậu quả (Causes and effects)",
+      "task": "Many skilled workers move from poorer countries to richer ones. What are the causes, and what effects does this have on the home country?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Noise in cities",
+      "type": "IELTS Writing Task 2, Vấn đề và giải pháp (Problem and solution)",
+      "dang": "Vấn đề và giải pháp (Problem and solution)",
+      "task": "Noise pollution is a growing problem in many cities. What are the causes of this problem and what solutions can help?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Childhood obesity",
+      "type": "IELTS Writing Task 2, Vấn đề và giải pháp (Problem and solution)",
+      "dang": "Vấn đề và giải pháp (Problem and solution)",
+      "task": "Childhood obesity is increasing in many countries. What problems does this cause, and what solutions could governments and families use?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Traffic jams in schools",
+      "type": "IELTS Writing Task 2, Vấn đề và giải pháp (Problem and solution)",
+      "dang": "Vấn đề và giải pháp (Problem and solution)",
+      "task": "Parents driving children to school cause traffic jams. What problems does this cause, and how can it be reduced?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Fake news",
+      "type": "IELTS Writing Task 2, Vấn đề và giải pháp (Problem and solution)",
+      "dang": "Vấn đề và giải pháp (Problem and solution)",
+      "task": "Fake news spreads quickly on the internet. What problems does it cause, and what solutions could reduce its effects?",
+      "criteria": [
+        "Thesis rõ ràng và có ý kiến cá nhân",
+        "Đủ các ý theo yêu cầu của đề",
+        "Mỗi đoạn thân bài có một ý chính và ví dụ",
+        "Từ nối lập luận và cấu trúc câu",
+        "Ngữ pháp và chính tả"
+      ]
+    },
+    {
+      "topic": "Housing shortage",
+      "type": "IELTS Writing Task 2, Vấn đề và giải pháp (Problem and solution)",
+      "dang": "Vấn đề và giải pháp (Problem and solution)",
+      "task": "Many cities do not have enough affordable housing. What problems does this cause, and what solutions could the government use?",
       "criteria": [
         "Thesis rõ ràng và có ý kiến cá nhân",
         "Đủ các ý theo yêu cầu của đề",
