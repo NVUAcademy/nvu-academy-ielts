@@ -12,7 +12,7 @@
   "date": "2026-11-01",
   "section": "reading",
   "minutes": 40,
-  "intro": "Lớp học sáng Chủ nhật. Làm lần lượt 4 bước, khoảng 40 phút. Hạn nộp 0:00 đêm nay (tức 00:00 Thứ 2). Bước viết có AI chấm ngay sau khi nộp, em sửa rồi gửi lại được. Bước cuối là voice note, thầy sẽ nghe và nhận xét.",
+  "intro": "Lớp học sáng Chủ nhật. Làm lần lượt 4 bước, khoảng 40 phút. Hạn nộp 0:00 đêm nay (tức 00:00 Thứ 2). Bước viết có AI chấm ngay sau khi nộp, em sửa rồi gửi lại được. Bước cuối là voice note, AI sẽ nhận xét phát âm ngay sau khi nộp.",
   "audio": {},
   "steps": [
     {
@@ -144,9 +144,9 @@
       "lines": [
         "The given bar chart illustrates the proportion of people aged 25 to 34 in the UK who owned or rented their homes over a ten-year period, commencing from 2004."
       ],
-      "note": "Thầy sẽ nghe và nhận xét phát âm, trọng âm và nhịp đọc."
+      "note": "AI sẽ nghe và nhận xét phát âm, trọng âm và nhịp đọc ngay sau khi em nộp bài. Thầy cũng sẽ xem lại."
     }
   ],
-  "send_today": "Hoàn thành 4 bước trên web. Voice note ở Step 4 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "send_today": "Hoàn thành 4 bước trên web. Voice note ở Step 4 sẽ được AI nhận xét ngay khi bấm Nộp bài.",
   "error_type": "reading"
 }
