@@ -184,6 +184,609 @@
                                                 ],
                                     "type":  "table"
                                 }
+                  },
+                  {
+                      "topic":  "Bar chart: time spent on phones by age group",
+                      "type":  "IELTS Writing Task 1 (bar chart), bài luyện tập",
+                      "task":  "The bar chart shows the average hours per day that people in four age groups spent on their phones in 2010 and 2020. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write at least 150 words.",
+                      "criteria":  [
+                                       "Introduction: paraphrase đề, không chép nguyên văn",
+                                       "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+                                       "Số liệu chọn lọc, đúng đơn vị",
+                                       "Từ vựng mô tả xu hướng và so sánh",
+                                       "Ngữ pháp và chính tả"
+                                   ],
+                      "chart":  {
+                                    "series":  [
+                                                   {
+                                                       "color":  "#5B7FA6",
+                                                       "name":  "2010",
+                                                       "values":  [
+                                                                      2,
+                                                                      3,
+                                                                      1,
+                                                                      0.5
+                                                                  ]
+                                                   },
+                                                   {
+                                                       "color":  "#7E9B5B",
+                                                       "name":  "2020",
+                                                       "values":  [
+                                                                      5,
+                                                                      6,
+                                                                      3,
+                                                                      2
+                                                                  ]
+                                                   }
+                                               ],
+                                    "title":  "Average hours per day spent on phones",
+                                    "unit":  "Hours",
+                                    "labels":  [
+                                                   "10–18",
+                                                   "19–30",
+                                                   "31–50",
+                                                   "51+"
+                                               ],
+                                    "type":  "bar"
+                                }
+                  },
+                  {
+                      "topic":  "Bar chart: cinema visits by age group",
+                      "type":  "IELTS Writing Task 1 (bar chart), bài luyện tập",
+                      "task":  "The bar chart shows the number of cinema visits per year by four age groups in two different years. Summarise the information and make comparisons. Write at least 150 words.",
+                      "criteria":  [
+                                       "Introduction: paraphrase đề, không chép nguyên văn",
+                                       "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+                                       "Số liệu chọn lọc, đúng đơn vị",
+                                       "Từ vựng mô tả xu hướng và so sánh",
+                                       "Ngữ pháp và chính tả"
+                                   ],
+                      "chart":  {
+                                    "series":  [
+                                                   {
+                                                       "color":  "#5B7FA6",
+                                                       "name":  "2000",
+                                                       "values":  [
+                                                                      12,
+                                                                      10,
+                                                                      4,
+                                                                      2
+                                                                  ]
+                                                   },
+                                                   {
+                                                       "color":  "#7E9B5B",
+                                                       "name":  "2015",
+                                                       "values":  [
+                                                                      15,
+                                                                      8,
+                                                                      5,
+                                                                      3
+                                                                  ]
+                                                   }
+                                               ],
+                                    "title":  "Cinema visits per person per year",
+                                    "unit":  "Visits",
+                                    "labels":  [
+                                                   "Under 18",
+                                                   "18–30",
+                                                   "31–50",
+                                                   "Over 50"
+                                               ],
+                                    "type":  "bar"
+                                }
+                  },
+                  {
+                      "topic":  "Bar chart: employment by sector",
+                      "type":  "IELTS Writing Task 1 (bar chart), bài luyện tập",
+                      "task":  "The bar chart shows the percentage of workers employed in three sectors in four countries in 2019. Summarise the main features and compare the four countries. Write at least 150 words.",
+                      "criteria":  [
+                                       "Introduction: paraphrase đề, không chép nguyên văn",
+                                       "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+                                       "Số liệu chọn lọc, đúng đơn vị",
+                                       "Từ vựng mô tả xu hướng và so sánh",
+                                       "Ngữ pháp và chính tả"
+                                   ],
+                      "chart":  {
+                                    "series":  [
+                                                   {
+                                                       "color":  "#7E9B5B",
+                                                       "name":  "Agriculture",
+                                                       "values":  [
+                                                                      40,
+                                                                      25,
+                                                                      10,
+                                                                      5
+                                                                  ]
+                                                   },
+                                                   {
+                                                       "color":  "#5B7FA6",
+                                                       "name":  "Industry",
+                                                       "values":  [
+                                                                      25,
+                                                                      35,
+                                                                      30,
+                                                                      20
+                                                                  ]
+                                                   },
+                                                   {
+                                                       "color":  "#B5553F",
+                                                       "name":  "Services",
+                                                       "values":  [
+                                                                      35,
+                                                                      40,
+                                                                      60,
+                                                                      75
+                                                                  ]
+                                                   }
+                                               ],
+                                    "title":  "Share of workers by sector, 2019",
+                                    "unit":  "Percent",
+                                    "labels":  [
+                                                   "Country A",
+                                                   "Country B",
+                                                   "Country C",
+                                                   "Country D"
+                                               ],
+                                    "type":  "bar"
+                                }
+                  },
+                  {
+                      "topic":  "Line graph: monthly rainfall in a city",
+                      "type":  "IELTS Writing Task 1 (line graph), bài luyện tập",
+                      "task":  "The line graph shows the amount of rainfall in a city each month during one year. Describe the main trends and make comparisons. Write at least 150 words.",
+                      "criteria":  [
+                                       "Introduction: paraphrase đề, không chép nguyên văn",
+                                       "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+                                       "Số liệu chọn lọc, đúng đơn vị",
+                                       "Từ vựng mô tả xu hướng và so sánh",
+                                       "Ngữ pháp và chính tả"
+                                   ],
+                      "chart":  {
+                                    "series":  [
+                                                   {
+                                                       "color":  "#5B7FA6",
+                                                       "name":  "Rainfall",
+                                                       "values":  [
+                                                                      20,
+                                                                      25,
+                                                                      40,
+                                                                      60,
+                                                                      90,
+                                                                      140,
+                                                                      180,
+                                                                      160,
+                                                                      110,
+                                                                      70,
+                                                                      40,
+                                                                      25
+                                                                  ]
+                                                   }
+                                               ],
+                                    "title":  "Monthly rainfall in a city, last year",
+                                    "unit":  "mm",
+                                    "labels":  [
+                                                   "J",
+                                                   "F",
+                                                   "M",
+                                                   "A",
+                                                   "M",
+                                                   "J",
+                                                   "J",
+                                                   "A",
+                                                   "S",
+                                                   "O",
+                                                   "N",
+                                                   "D"
+                                               ],
+                                    "type":  "line"
+                                }
+                  },
+                  {
+                      "topic":  "Line graph: car sales by brand",
+                      "type":  "IELTS Writing Task 1 (line graph), bài luyện tập",
+                      "task":  "The line graph shows the number of cars sold by three brands each year from 2010 to 2020. Summarise the information and make comparisons. Write at least 150 words.",
+                      "criteria":  [
+                                       "Introduction: paraphrase đề, không chép nguyên văn",
+                                       "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+                                       "Số liệu chọn lọc, đúng đơn vị",
+                                       "Từ vựng mô tả xu hướng và so sánh",
+                                       "Ngữ pháp và chính tả"
+                                   ],
+                      "chart":  {
+                                    "series":  [
+                                                   {
+                                                       "color":  "#5B7FA6",
+                                                       "name":  "Brand A",
+                                                       "values":  [
+                                                                      50,
+                                                                      55,
+                                                                      70,
+                                                                      80,
+                                                                      85,
+                                                                      60
+                                                                  ]
+                                                   },
+                                                   {
+                                                       "color":  "#7E9B5B",
+                                                       "name":  "Brand B",
+                                                       "values":  [
+                                                                      30,
+                                                                      28,
+                                                                      25,
+                                                                      22,
+                                                                      20,
+                                                                      18
+                                                                  ]
+                                                   },
+                                                   {
+                                                       "color":  "#B5553F",
+                                                       "name":  "Brand C",
+                                                       "values":  [
+                                                                      10,
+                                                                      15,
+                                                                      25,
+                                                                      35,
+                                                                      50,
+                                                                      70
+                                                                  ]
+                                                   }
+                                               ],
+                                    "title":  "Car sales by brand, 2010–2020",
+                                    "unit":  "Thousand cars",
+                                    "labels":  [
+                                                   "10",
+                                                   "12",
+                                                   "14",
+                                                   "16",
+                                                   "18",
+                                                   "20"
+                                               ],
+                                    "type":  "line"
+                                }
+                  },
+                  {
+                      "topic":  "Line graph: population of two towns",
+                      "type":  "IELTS Writing Task 1 (line graph), bài luyện tập",
+                      "task":  "The line graph shows the population of two towns from 1990 to 2030, including forecasts after 2020. Summarise the information and make comparisons. Write at least 150 words.",
+                      "criteria":  [
+                                       "Introduction: paraphrase đề, không chép nguyên văn",
+                                       "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+                                       "Số liệu chọn lọc, đúng đơn vị",
+                                       "Từ vựng mô tả xu hướng và so sánh",
+                                       "Ngữ pháp và chính tả"
+                                   ],
+                      "chart":  {
+                                    "series":  [
+                                                   {
+                                                       "color":  "#5B7FA6",
+                                                       "name":  "Town X",
+                                                       "values":  [
+                                                                      20,
+                                                                      25,
+                                                                      35,
+                                                                      45,
+                                                                      52
+                                                                  ]
+                                                   },
+                                                   {
+                                                       "color":  "#7E9B5B",
+                                                       "name":  "Town Y",
+                                                       "values":  [
+                                                                      40,
+                                                                      38,
+                                                                      36,
+                                                                      35,
+                                                                      33
+                                                                  ]
+                                                   }
+                                               ],
+                                    "title":  "Population of two towns (thousands)",
+                                    "unit":  "Thousand people",
+                                    "labels":  [
+                                                   "1990",
+                                                   "2000",
+                                                   "2010",
+                                                   "2020",
+                                                   "2030"
+                                               ],
+                                    "type":  "line"
+                                }
+                  },
+                  {
+                      "topic":  "Table: school enrolment by region",
+                      "type":  "IELTS Writing Task 1 (table), bài luyện tập",
+                      "task":  "The table shows the number of students enrolled in primary and secondary schools in four regions in 2005 and 2020. Summarise the information and make comparisons. Write at least 150 words.",
+                      "criteria":  [
+                                       "Introduction: paraphrase đề, không chép nguyên văn",
+                                       "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+                                       "Số liệu chọn lọc, đúng đơn vị",
+                                       "Từ vựng mô tả xu hướng và so sánh",
+                                       "Ngữ pháp và chính tả"
+                                   ],
+                      "chart":  {
+                                    "title":  "Students enrolled by region (thousands)",
+                                    "rows":  [
+                                                 [
+                                                     "North",
+                                                     "120",
+                                                     "95",
+                                                     "80",
+                                                     "90"
+                                                 ],
+                                                 [
+                                                     "Central",
+                                                     "90",
+                                                     "85",
+                                                     "60",
+                                                     "70"
+                                                 ],
+                                                 [
+                                                     "South",
+                                                     "150",
+                                                     "160",
+                                                     "110",
+                                                     "140"
+                                                 ],
+                                                 [
+                                                     "Highlands",
+                                                     "40",
+                                                     "45",
+                                                     "25",
+                                                     "30"
+                                                 ]
+                                             ],
+                                    "headers":  [
+                                                    "Region",
+                                                    "Primary 2005",
+                                                    "Primary 2020",
+                                                    "Secondary 2005",
+                                                    "Secondary 2020"
+                                                ],
+                                    "type":  "table"
+                                }
+                  },
+                  {
+                      "topic":  "Table: fruit production in four countries",
+                      "type":  "IELTS Writing Task 1 (table), bài luyện tập",
+                      "task":  "The table shows the tonnes of apples, oranges and bananas produced by four countries in 2010 and 2020. Summarise the information and make comparisons. Write at least 150 words.",
+                      "criteria":  [
+                                       "Introduction: paraphrase đề, không chép nguyên văn",
+                                       "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+                                       "Số liệu chọn lọc, đúng đơn vị",
+                                       "Từ vựng mô tả xu hướng và so sánh",
+                                       "Ngữ pháp và chính tả"
+                                   ],
+                      "chart":  {
+                                    "title":  "Fruit production (thousand tonnes), 2010 and 2020",
+                                    "rows":  [
+                                                 [
+                                                     "France",
+                                                     "800",
+                                                     "650",
+                                                     "120",
+                                                     "150",
+                                                     "10",
+                                                     "12"
+                                                 ],
+                                                 [
+                                                     "Italy",
+                                                     "400",
+                                                     "420",
+                                                     "600",
+                                                     "550",
+                                                     "5",
+                                                     "8"
+                                                 ],
+                                                 [
+                                                     "Spain",
+                                                     "300",
+                                                     "350",
+                                                     "900",
+                                                     "1,000",
+                                                     "30",
+                                                     "40"
+                                                 ],
+                                                 [
+                                                     "Greece",
+                                                     "200",
+                                                     "180",
+                                                     "250",
+                                                     "230",
+                                                     "2",
+                                                     "3"
+                                                 ]
+                                             ],
+                                    "headers":  [
+                                                    "Country",
+                                                    "Apples 2010",
+                                                    "Apples 2020",
+                                                    "Oranges 2010",
+                                                    "Oranges 2020",
+                                                    "Bananas 2010",
+                                                    "Bananas 2020"
+                                                ],
+                                    "type":  "table"
+                                }
+                  },
+                  {
+                      "topic":  "Table: sports participation by gender",
+                      "type":  "IELTS Writing Task 1 (table), bài luyện tập",
+                      "task":  "The table shows the percentage of men and women who took part in four sports in 2000 and 2020. Summarise the main features and make comparisons. Write at least 150 words.",
+                      "criteria":  [
+                                       "Introduction: paraphrase đề, không chép nguyên văn",
+                                       "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+                                       "Số liệu chọn lọc, đúng đơn vị",
+                                       "Từ vựng mô tả xu hướng và so sánh",
+                                       "Ngữ pháp và chính tả"
+                                   ],
+                      "chart":  {
+                                    "title":  "Participation in sports (% of adults)",
+                                    "rows":  [
+                                                 [
+                                                     "Football",
+                                                     "25",
+                                                     "22",
+                                                     "5",
+                                                     "12"
+                                                 ],
+                                                 [
+                                                     "Swimming",
+                                                     "20",
+                                                     "24",
+                                                     "18",
+                                                     "26"
+                                                 ],
+                                                 [
+                                                     "Cycling",
+                                                     "15",
+                                                     "20",
+                                                     "10",
+                                                     "17"
+                                                 ],
+                                                 [
+                                                     "Yoga",
+                                                     "3",
+                                                     "8",
+                                                     "12",
+                                                     "25"
+                                                 ]
+                                             ],
+                                    "headers":  [
+                                                    "Sport",
+                                                    "Men 2000",
+                                                    "Men 2020",
+                                                    "Women 2000",
+                                                    "Women 2020"
+                                                ],
+                                    "type":  "table"
+                                }
+                  },
+                  {
+                      "topic":  "Process: recycling paper",
+                      "type":  "IELTS Writing Task 1 (process), bài luyện tập",
+                      "task":  "The diagram shows the stages in recycling waste paper at a factory, from collection to the production of new paper. Summarise the information by selecting and reporting the main features. Write at least 150 words.",
+                      "criteria":  [
+                                       "Introduction: paraphrase đề, không chép nguyên văn",
+                                       "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+                                       "Số liệu chọn lọc, đúng đơn vị",
+                                       "Từ vựng mô tả xu hướng và so sánh",
+                                       "Ngữ pháp và chính tả"
+                                   ],
+                      "chart":  {
+                                    "title":  "Recycling waste paper at a factory",
+                                    "steps":  [
+                                                  "Paper is collected from homes and offices",
+                                                  "Paper is sorted by type",
+                                                  "Paper is mixed with water to make pulp",
+                                                  "Ink and dirt are removed from the pulp",
+                                                  "Pulp is pressed and dried into sheets",
+                                                  "New paper is cut and packed"
+                                              ],
+                                    "type":  "process"
+                                }
+                  },
+                  {
+                      "topic":  "Process: coffee production",
+                      "type":  "IELTS Writing Task 1 (process), bài luyện tập",
+                      "task":  "The diagram shows the stages in producing coffee, from growing the coffee plants to packing the roasted beans. Summarise the information and make comparisons where relevant. Write at least 150 words.",
+                      "criteria":  [
+                                       "Introduction: paraphrase đề, không chép nguyên văn",
+                                       "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+                                       "Số liệu chọn lọc, đúng đơn vị",
+                                       "Từ vựng mô tả xu hướng và so sánh",
+                                       "Ngữ pháp và chính tả"
+                                   ],
+                      "chart":  {
+                                    "title":  "Producing coffee",
+                                    "steps":  [
+                                                  "Coffee plants are grown on farms",
+                                                  "Cherries are picked by hand",
+                                                  "The fruit is removed from the seeds",
+                                                  "The beans are dried in the sun",
+                                                  "The beans are roasted",
+                                                  "The roasted beans are ground and packed"
+                                              ],
+                                    "type":  "process"
+                                }
+                  },
+                  {
+                      "topic":  "Process: water treatment",
+                      "type":  "IELTS Writing Task 1 (process), bài luyện tập",
+                      "task":  "The diagram shows how water is treated at a water plant before it is supplied to homes. Summarise the information by selecting and reporting the main features. Write at least 150 words.",
+                      "criteria":  [
+                                       "Introduction: paraphrase đề, không chép nguyên văn",
+                                       "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+                                       "Số liệu chọn lọc, đúng đơn vị",
+                                       "Từ vựng mô tả xu hướng và so sánh",
+                                       "Ngữ pháp và chính tả"
+                                   ],
+                      "chart":  {
+                                    "title":  "Water treatment at a water plant",
+                                    "steps":  [
+                                                  "Water is taken from a river",
+                                                  "Large objects are removed by screens",
+                                                  "Chemicals are added to settle dirt",
+                                                  "Water is filtered through sand",
+                                                  "Water is cleaned with chlorine",
+                                                  "Clean water is pumped to homes"
+                                              ],
+                                    "type":  "process"
+                                }
+                  },
+                  {
+                      "topic":  "Bar chart: favourite holiday types",
+                      "type":  "IELTS Writing Task 1 (bar chart), bài luyện tập",
+                      "task":  "The bar chart shows the percentage of people in three countries who chose four types of holiday in 2022. Summarise the information and make comparisons. Write at least 150 words.",
+                      "criteria":  [
+                                       "Introduction: paraphrase đề, không chép nguyên văn",
+                                       "Overview: nêu xu hướng hoặc điểm nổi bật chính",
+                                       "Số liệu chọn lọc, đúng đơn vị",
+                                       "Từ vựng mô tả xu hướng và so sánh",
+                                       "Ngữ pháp và chính tả"
+                                   ],
+                      "chart":  {
+                                    "series":  [
+                                                   {
+                                                       "color":  "#5B7FA6",
+                                                       "name":  "Country A",
+                                                       "values":  [
+                                                                      45,
+                                                                      20,
+                                                                      15,
+                                                                      20
+                                                                  ]
+                                                   },
+                                                   {
+                                                       "color":  "#7E9B5B",
+                                                       "name":  "Country B",
+                                                       "values":  [
+                                                                      30,
+                                                                      35,
+                                                                      20,
+                                                                      15
+                                                                  ]
+                                                   },
+                                                   {
+                                                       "color":  "#B5553F",
+                                                       "name":  "Country C",
+                                                       "values":  [
+                                                                      25,
+                                                                      15,
+                                                                      40,
+                                                                      20
+                                                                  ]
+                                                   }
+                                               ],
+                                    "title":  "Favourite holiday types, 2022",
+                                    "unit":  "Percent",
+                                    "labels":  [
+                                                   "Beach",
+                                                   "City",
+                                                   "Mountains",
+                                                   "Countryside"
+                                               ],
+                                    "type":  "bar"
+                                }
                   }
               ],
     "task2":  [
