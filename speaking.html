@@ -161,8 +161,14 @@ function render(j) {
     <div class="note">Điểm band chỉ là ước lượng tham khảo. ${f.azure ? 'Phần phát âm dựa trên điểm Azure đo từng từ và từng âm.' : 'AI chỉ nhận được bản chép lời, không nghe trực tiếp, nên phần phát âm có thể chưa chính xác.'} Thầy Nam sẽ nghe và nhận xét thêm.</div>
     ${diffs ? `<div style="margin-top:12px"><small>So sánh với văn bản mẫu</small>${diffs}</div>` : ''}
     <div class="note" style="margin-top:10px">Bản chép lời: “${esc(j.transcript)}”</div>
-    ${f.retry_text ? `<div style="margin-top:14px"><button class="btn" onclick='retry(${JSON.stringify(f.retry_text).replace(/'/g, "&#39;")}, ${JSON.stringify(j.id || null)}, ${f.accuracy === null ? 'null' : f.accuracy}, ${j.attempt})'>Đọc lại các từ cần sửa →</button></div>` : ''}</div>`;
+    ${f.retry_text ? `<div style="margin-top:14px"><button class="btn" onclick='retry(${JSON.stringify(f.retry_text).replace(/'/g, "&#39;")}, ${JSON.stringify(j.id || null)}, ${f.accuracy === null ? 'null' : f.accuracy}, ${j.attempt})'>Đọc lại các từ cần sửa →</button></div>` : (mode !== 'read_aloud' ? `<div style="margin-top:14px"><button class="btn" onclick="redo(${JSON.stringify(j.id || null)}, ${f.accuracy === null ? 'null' : f.accuracy}, ${j.attempt})">Nói lại đề này và chấm lại →</button></div>` : '')}</div>`;
   document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+}
+function redo(id, acc, att) {
+  parentId = id; attempt = (att || 1) + 1; prevAccuracy = acc; blob = null;
+  document.getElementById('recplay').style.display = 'none'; document.getElementById('sendbtn').disabled = true;
+  document.getElementById('recstatus').textContent = 'Nói lại đề trên, rồi gửi để AI so sánh với lần trước.';
+  document.getElementById('recorder').scrollIntoView({ behavior: 'smooth' });
 }
 function retry(text, id, acc, att) {
   mode = 'read_aloud'; document.getElementById('m-read').classList.add('on'); document.getElementById('m-free').classList.remove('on'); document.getElementById('custom-box').style.display = 'block';
