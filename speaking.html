@@ -79,7 +79,8 @@ async function init() {
   try { tasks = await (await fetch('speaking-tasks.json', { cache: 'no-cache' })).json(); } catch (e) {}
   try { ielts = await (await fetch('speaking-ielts.json', { cache: 'no-cache' })).json(); } catch (e) {}
   loadHistory();
-  try { setMode('read_aloud'); } catch (e) { console.error(e); }
+  const qs = new URLSearchParams(location.search);
+  try { if (qs.get('mode') === 'ielts') { ielts_part = qs.get('part') || 'p1'; setMode('ielts'); } else setMode('read_aloud'); } catch (e) { console.error(e); }
 }
 function setMode(m) {
   mode = m; parentId = null; attempt = 1; prevAccuracy = null;
