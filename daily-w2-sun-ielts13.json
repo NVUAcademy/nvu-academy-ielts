@@ -12,14 +12,14 @@
   "date": "2026-11-01",
   "section": "vocabulary",
   "minutes": 15,
-  "intro": "Buổi học P1 từ 17:00 đến 19:00. Chỉ làm khởi động 15 phút, mang bút và ghi chú đến lớp. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 10 Meow (buổi học), muộn hoặc làm một nửa được 5 Meow. Đừng xem đáp án trước khi làm xong.",
+  "intro": "P1 class from 17:00 to 19:00. Warm up for 15 minutes only, and bring a pen and notes to class. Deadline 23:30 the same day: complete and on time earns 10 Meow (class); late or half done earns 5 Meow. Do not look at the answers before you finish.",
   "audio": {},
   "steps": [
     {
       "id": "s1",
       "title": "Step 1 · Vocabulary recall",
       "minutes": 5,
-      "instructions": "Điền từ hoặc cụm từ trong khung (prioritise · unwind · packed with · juggling · productive). Đổi dạng từ nếu cần.",
+      "instructions": "Fill in the words or phrases from the box (prioritise · unwind · packed with · juggling · productive). Change the word form if needed.",
       "kind": "fill",
       "items": [
         {
@@ -77,7 +77,7 @@
       "id": "s2",
       "title": "Step 2 · Speaking warm-up and voice note",
       "minutes": 10,
-      "instructions": "Nói to 10 từ mới, mỗi từ kèm một ví dụ của em (hectic, commute, keep up with, a sense of achievement, juggle, be packed with, unwind, productive, procrastinate, prioritise). Sau đó đọc to phần introduction và overview bài orange juice của thứ 7, đọc một lần. Ghi âm 1 voice note.",
+      "instructions": "Say aloud the 10 new words, each with an example of your own (hectic, commute, keep up with, a sense of achievement, juggle, be packed with, unwind, productive, procrastinate, prioritise). Then read aloud the introduction and overview of the Saturday orange juice piece, once. Record 1 voice note.",
       "kind": "voice",
       "lines": [
         "1. Nói 10 từ mới, mỗi từ một ví dụ.",

@@ -12,14 +12,14 @@
   "date": "2026-11-04",
   "section": "grammar",
   "minutes": 58,
-  "intro": "Kiểm tra tuần /19 gồm 4 phần (Vocabulary 5, Grammar 5, Reading 4, Writing 5), làm trong 45 phút, không xem ghi chú, không tra từ điển. Sau đó là bước 5 chuẩn bị Speaking (15 phút). Tổng cộng 5 bước, khoảng 60 phút. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow.",
+  "intro": "Weekly test /19 has 4 parts (Vocabulary 5, Grammar 5, Reading 4, Writing 5), done in 45 minutes, without notes or a dictionary. Then step 5 prepares for Speaking (15 minutes). In total 5 steps, about 60 minutes. Deadline 23:30 the same day: complete and on time earns 20 Meow; late or half done earns 10 Meow.",
   "audio": {},
   "steps": [
     {
       "id": "s1",
       "title": "Section 1 · Vocabulary /5",
       "minutes": 8,
-      "instructions": "Điền từ trong khung: bond · commute · nurture · packed · procrastinate · supportive. Có một từ không dùng. Không xem ghi chú, không tra từ điển.",
+      "instructions": "Fill in the gaps from the box: bond · commute · nurture · packed · procrastinate · supportive. One word is not used. No notes, no dictionary.",
       "kind": "fill",
       "items": [
         {
@@ -73,7 +73,7 @@
       "id": "s2",
       "title": "Section 2 · Grammar /5",
       "minutes": 10,
-      "instructions": "Câu 1 đến 3: chia động từ ở bị động hiện tại đơn. Câu 4 và 5: viết lại cả câu, đặt trạng từ tần suất đúng chỗ.",
+      "instructions": "Questions 1 to 3: put the verbs in the present simple passive. Questions 4 and 5: rewrite the whole sentence, placing the frequency adverb in the correct position.",
       "kind": "fill",
       "items": [
         {
@@ -135,7 +135,7 @@
       "id": "s3",
       "title": "Section 3 · Reading /4",
       "minutes": 10,
-      "instructions": "Đọc đoạn văn rồi trả lời, KHÔNG QUÁ HAI TỪ lấy từ đoạn văn. Đoạn văn: In many Vietnamese families, a weekend lunch often includes rice noodles. The noodles are made from rice flour and water. First, the rice is washed and soaked overnight. Then it is ground into a thick paste, which is steamed in thin sheets. The sheets are cut into long strips and served with herbs and fish sauce. Many people buy fresh noodles at the market, but some families still make them at home because they believe homemade noodles taste better.",
+      "instructions": "Read the passage and answer with NO MORE THAN TWO WORDS taken from the passage. Passage: In many Vietnamese families, a weekend lunch often includes rice noodles. The noodles are made from rice flour and water. First, the rice is washed and soaked overnight. Then it is ground into a thick paste, which is steamed in thin sheets. The sheets are cut into long strips and served with herbs and fish sauce. Many people buy fresh noodles at the market, but some families still make them at home because they believe homemade noodles taste better.",
       "kind": "fill",
       "items": [
         {
@@ -180,7 +180,7 @@
       "id": "s4",
       "title": "Section 4 · Writing /5",
       "minutes": 15,
-      "instructions": "Viết introduction và overview (2 đến 3 câu) cho quy trình làm bánh mì. Ghi chú: 1 flour, water and yeast are mixed · 2 the dough rests for an hour · 3 the dough is baked in an oven · 4 the bread is sold in shops. Thầy chấm.",
+      "instructions": "Write an introduction and an overview (2 to 3 sentences) for the bread-making process. Notes: 1 flour, water and yeast are mixed · 2 the dough rests for an hour · 3 the dough is baked in an oven · 4 the bread is sold in shops. The teacher will mark it.",
       "kind": "open",
       "open": [
         {
@@ -207,7 +207,7 @@
       "id": "s5",
       "title": "Speaking preparation · voice note",
       "minutes": 15,
-      "instructions": "Chuẩn bị từ khóa (không viết câu đầy đủ) cho từng câu hỏi theo A.R.E. (Answer, Reason, Example) và dùng ít nhất 2 từ mới của tuần. Sau đó ghi âm 1 voice note khoảng 45 giây trả lời cả ba câu.",
+      "instructions": "Prepare keywords (not full sentences) for each question using A.R.E. (Answer, Reason, Example) and use at least 2 new words from this week. Then record 1 voice note of about 45 seconds answering all three questions.",
       "kind": "voice",
       "lines": [
         "1. Is your day usually busy?",

@@ -12,14 +12,14 @@
   "date": "2026-11-01",
   "section": "reading",
   "minutes": 40,
-  "intro": "Lớp học sáng Chủ nhật. Làm lần lượt 4 bước, khoảng 40 phút. Hạn nộp 0:00 đêm nay (tức 00:00 Thứ 2). Bước viết có AI chấm ngay sau khi nộp, em sửa rồi gửi lại được. Bước cuối là voice note, AI sẽ nhận xét phát âm ngay sau khi nộp.",
+  "intro": "Sunday morning class. Work through 4 steps, about 40 minutes. Deadline 00:00 tonight (that is 00:00 Monday). The writing step is marked by AI right after you submit, and you can edit and resubmit. The last step is a voice note; AI will comment on your pronunciation right after you submit.",
   "audio": {},
   "steps": [
     {
       "id": "s1",
       "title": "Step 1 · Key words",
       "minutes": 6,
-      "instructions": "Điền từ hoặc cụm từ phù hợp vào chỗ trống. Đổi dạng từ nếu cần.",
+      "instructions": "Fill in the suitable words or phrases in the gaps. Change the word form if needed.",
       "kind": "fill",
       "items": [
         {
@@ -80,7 +80,7 @@
       "id": "s2",
       "title": "Step 2 · Reading: NO MORE THAN THREE WORDS AND/OR A NUMBER",
       "minutes": 10,
-      "instructions": "Đọc câu hỏi, tìm từ khóa trong đoạn về Antilia, rồi điền câu trả lời không quá ba từ và/hoặc một số. Copy đúng từ trong bài. Sai số từ thì ghi lại vào nhật ký lỗi.",
+      "instructions": "Read the question, find the keywords in the passage about Antilia, then fill in the answer with NO MORE THAN THREE WORDS and/or a number. Copy the exact words from the passage. If you get a word count wrong, note it in your error log.",
       "passage_source": "handout I2, Lesson 2 (đoạn Antilia, Mindset Level 2 Unit 1)",
       "kind": "fill",
       "items": [
@@ -113,7 +113,7 @@
       "id": "s3",
       "title": "Step 3 · Writing Task 1: Introduction",
       "minutes": 15,
-      "instructions": "Biểu đồ cột cho thấy tỷ lệ người 25 đến 34 tuổi ở Anh sống trong nhà của mình (home owners) hay đi thuê (renters) từ 2004 đến 2014. Viết phần Introduction 2 đến 3 câu: paraphrase đề bài, không chép nguyên văn, không có số liệu. Gõ thẳng vào ô bên dưới rồi bấm Gửi AI chấm.",
+      "instructions": "The column chart shows the percentage of people aged 25 to 34 in England who lived in their own home (home owners) or rented (renters) from 2004 to 2014. Write a 2–3 sentence Introduction: paraphrase the task, do not copy it word for word, and do not include figures. Type directly into the box below, then press Send for AI marking.",
       "kind": "open",
       "open": [
         {
@@ -140,7 +140,7 @@
       "id": "s4",
       "title": "Step 4 · Voice note",
       "minutes": 9,
-      "instructions": "Đọc to đoạn Introduction mẫu ở Step 3 một lần, rồi ghi âm 1 voice note.",
+      "instructions": "Read aloud the sample Introduction in Step 3 once, then record 1 voice note.",
       "kind": "voice",
       "lines": [
         "The given bar chart illustrates the proportion of people aged 25 to 34 in the UK who owned or rented their homes over a ten-year period, commencing from 2004."

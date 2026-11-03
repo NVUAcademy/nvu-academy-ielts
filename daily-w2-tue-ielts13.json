@@ -12,7 +12,7 @@
   "date": "2026-11-03",
   "section": "listening",
   "minutes": 50,
-  "intro": "Làm lần lượt 4 bước, khoảng 50 phút. Nghe ở bước 2 tối đa 2 lần, không đọc trước đáp án. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Boost (không bắt buộc): nghe BBC 6 Minute English, ghi 5 con số hoặc ngày tháng em nghe được.",
+  "intro": "Work through 4 steps, about 50 minutes. Listen in step 2 at most twice; do not read the answers first. Deadline 23:30 the same day: complete and on time earns 20 Meow; late or half done earns 10 Meow. Boost (optional): listen to BBC 6 Minute English and write down 5 numbers or dates you hear.",
   "audio": {
     "listening": {
       "label": "Audio · Greenfield Language Club (Section 1)",
@@ -133,7 +133,7 @@
       "id": "s1",
       "title": "Step 1 · Predict the answer type",
       "minutes": 10,
-      "instructions": "Đọc phiếu trước khi nghe. Với mỗi chỗ trống, đoán loại đáp án và gõ một từ trong danh sách: name · spelling · number · date · price · time · place · thing.",
+      "instructions": "Read the form before listening. For each gap, guess the answer type and type one word from the list: name · spelling · number · date · price · time · place · thing.",
       "kind": "fill",
       "items": [
         {
@@ -219,7 +219,7 @@
       "title": "Step 2 · Listening Section 1",
       "minutes": 25,
       "audio": "listening",
-      "instructions": "Nghe 1 lần, rồi nghe thêm 1 lần. Không đọc trước đáp án. Viết KHÔNG QUÁ HAI TỪ VÀ/HOẶC MỘT SỐ cho mỗi chỗ trống. Greenfield Language Club · Membership enquiry. (Bài tự soạn để luyện, không phải đề thi thật.)",
+      "instructions": "Listen once, then listen once more. Do not read the answers first. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each gap. Greenfield Language Club · Membership enquiry. (Self-written practice, not a real exam.)",
       "kind": "fill",
       "items": [
         {
@@ -344,7 +344,7 @@
       "id": "s3",
       "title": "Step 3 · Error log",
       "minutes": 10,
-      "instructions": "Với mỗi câu sai ở bước 2, ghi số câu và lý do: spelling · number · changed information (distractor) · plural · other. Cuối cùng viết một câu: 'Next time I will ...'.",
+      "instructions": "For each wrong answer in step 2, write the question number and the reason: spelling · number · changed information (distractor) · plural · other. Finally write one sentence: 'Next time I will ...'.",
       "kind": "open",
       "open": [
         {
@@ -358,7 +358,7 @@
       "id": "s4",
       "title": "Step 4 · Voice note: names and numbers",
       "minutes": 5,
-      "instructions": "Ghi âm khoảng 20 giây: đánh vần tên và họ của em bằng chữ cái tiếng Anh, đọc số điện thoại chậm theo từng nhóm, và nói ngày hôm nay.",
+      "instructions": "Record about 20 seconds: spell your first and last name letter by letter in English, read your phone number slowly in groups, and say today's date.",
       "kind": "voice",
       "lines": [
         "1. My first name is ... That's ... (spell it).",

@@ -12,14 +12,14 @@
   "date": "2026-10-31",
   "section": "reading",
   "minutes": 60,
-  "intro": "Làm lần lượt 3 bước, khoảng 60 phút. Hạn nộp 23:30 cùng ngày. Em gõ bài viết thẳng vào ô trên web, AI sẽ nhận xét ngay sau khi nộp, thầy cũng đọc và nhận xét. Chủ nhật là buổi học P1 (17:00 đến 19:00), chỉ khởi động 15 phút, không nộp bài.",
+  "intro": "Work through 3 steps, about 60 minutes. Deadline 23:30 the same day. Type your essay directly into the box on the website. AI will comment right after you submit, and the teacher will also read and comment. Sunday is the P1 class (17:00 to 19:00): warm up for 15 minutes only, no submission.",
   "audio": {},
   "steps": [
     {
       "id": "s1",
       "title": "Step 1 · Writing Part 1: making orange juice",
       "minutes": 30,
-      "instructions": "Ghi chú: 1 oranges picked from the trees by hand · 2 oranges washed · 3 oranges squeezed by a machine · 4 juice filtered to remove the seeds · 5 juice poured into bottles · 6 bottles delivered to shops by truck. Hãy mô tả quy trình, 150 từ, có introduction và overview, dùng thể bị động hiện tại đơn và từ nối trình tự. Không chép nguyên ghi chú. Viết 20 phút như thi thật, rồi 10 phút tự sửa theo danh sách: (1) introduction viết lại đề bằng lời của em · (2) overview nêu số bước, bước đầu và bước cuối · (3) từ nối First, Next, After that, Finally · (4) động từ bị động hiện tại đơn · (5) mô tả thiết bị, ví dụ a squeezing machine · (6) kiểm tra chính tả -ed và is / are. Mỗi mục đạt được 1 điểm. Gõ bài viết vào ô bên dưới (khoảng 150 từ) rồi bấm Nộp bài ở cuối trang.",
+      "instructions": "Notes: 1 oranges picked from the trees by hand · 2 oranges washed · 3 oranges squeezed by a machine · 4 juice filtered to remove the seeds · 5 juice poured into bottles · 6 bottles delivered to shops by truck. Describe the process in 150 words, with an introduction and an overview, using the present simple passive and sequencing words. Do not copy the notes. Write for 20 minutes as in a real test, then spend 10 minutes self-correcting with this checklist: (1) rewrite the task in your own words in the introduction · (2) the overview states the number of steps, the first step and the last step · (3) sequencing words First, Next, After that, Finally · (4) present simple passive verbs · (5) describe the equipment, e.g. a squeezing machine · (6) check -ed spelling and is / are. Each item earns 1 point. Type your essay in the box below (about 150 words), then press Submit at the bottom of the page.",
       "kind": "open",
       "open": [
         {
@@ -47,7 +47,7 @@
       "id": "s2",
       "title": "Step 2 · Reading preview",
       "minutes": 15,
-      "instructions": "Đọc đoạn văn một lần, rồi chọn True, False hoặc Not Given. Gạch chân từ trong bài cho thấy đáp án.",
+      "instructions": "Read the passage once, then choose True, False or Not Given. Underline the words in the passage that show the answer.",
       "kind": "mcq",
       "context": [
         "Why students procrastinate",
@@ -115,7 +115,7 @@
       "id": "s3",
       "title": "Step 3 · Voice note",
       "minutes": 5,
-      "instructions": "Đọc to phần introduction và overview em vừa viết. Phát âm rõ các đuôi -ed. Ghi âm 1 voice note.",
+      "instructions": "Read aloud the introduction and overview you just wrote. Pronounce the -ed endings clearly. Record 1 voice note.",
       "kind": "voice",
       "lines": [
         "Đọc phần introduction và overview của chính em."

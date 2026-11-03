@@ -12,7 +12,7 @@
   "date": "2026-11-01",
   "section": "vocabulary",
   "minutes": 45,
-  "intro": "Làm lần lượt 5 bước. Hạn nộp 23:00 cùng ngày. Bài viết ở bước 4 em gõ thẳng vào ô trên web. Bước cuối là ghi âm: nghe 'My bedroom' rồi đọc theo, thầy sẽ nghe và nhận xét.",
+  "intro": "Work through 5 steps. Deadline 23:00 the same day. Type your writing in step 4 directly into the box on the website. The final step is a recording: listen to 'My bedroom', then repeat after it; the teacher will listen and comment.",
   "audio": {
     "bedroom": {
       "label": "Audio · My bedroom",
@@ -28,7 +28,7 @@
       "id": "s1",
       "title": "Step 1 · Flashcards: look, say, spell",
       "minutes": 10,
-      "instructions": "Nhìn nghĩa tiếng Việt, nói từ tiếng Anh ra tiếng, rồi gõ lại từ đó (đánh vần đúng). Làm 3 lần như trong bài tập về nhà.",
+      "instructions": "Look at the Vietnamese meaning, say the English word aloud, then type that word (spell it correctly). Do this 3 times, as in the homework exercise.",
       "kind": "fill",
       "items": [
         {
@@ -164,7 +164,7 @@
       "title": "Step 2 · Listen: p or b?",
       "minutes": 5,
       "audio": "exit",
-      "instructions": "Nghe 5 câu và chọn từ em nghe được trong mỗi cặp.",
+      "instructions": "Listen to 5 sentences and choose the word you hear in each pair.",
       "kind": "mcq",
       "items": [
         {
@@ -218,7 +218,7 @@
       "id": "s3",
       "title": "Step 3 · Grammar: there is / there are, in / on",
       "minutes": 5,
-      "instructions": "Điền từ còn thiếu.",
+      "instructions": "Fill in the missing word.",
       "kind": "fill",
       "items": [
         {
@@ -279,7 +279,7 @@
       "id": "s4",
       "title": "Step 4 · Writing: my room",
       "minutes": 10,
-      "instructions": "Viết 4 đến 5 câu về phòng của em, gõ thẳng vào ô bên dưới. Dùng there is / there are và 2 chỗ (on, next to, behind...). Kiểm tra: chữ cái đầu viết hoa và có dấu chấm · there is / there are · 2 địa điểm · 1 tính từ · có từ chứa /p/ hoặc /b/.",
+      "instructions": "Write 4 to 5 sentences about your room and type them directly into the box below. Use there is / there are and 2 location words (on, next to, behind...). Check: capital letter at the start and a full stop · there is / there are · 2 location words · 1 adjective · include a word with /p/ or /b/.",
       "kind": "open",
       "open": [
         {
@@ -307,7 +307,7 @@
       "title": "Step 5 · Sounds: read after the voice",
       "minutes": 10,
       "audio": "bedroom",
-      "instructions": "Nghe 'My bedroom' và đọc theo. Chú ý âm /p/ và /b/, và âm cuối của từ như wardrobe, desk, lamp. Sau đó ghi âm 1 voice note đọc cả đoạn.",
+      "instructions": "Listen to 'My bedroom' and repeat. Focus on the /p/ and /b/ sounds, and the final sounds of words like wardrobe, desk, lamp. Then record 1 voice note reading the whole passage.",
       "kind": "voice",
       "lines": [
         "Hello! My name is Linh. This is my bedroom. It is small, but it is very nice. There is a big bed next to the window. There is a desk and a chair behind the door. There are three books and a lamp on the desk. There are two pictures on the wall. There is a wardrobe next to the desk. I like my bedroom."

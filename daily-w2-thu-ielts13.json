@@ -12,14 +12,14 @@
   "date": "2026-11-05",
   "section": "vocabulary",
   "minutes": 15,
-  "intro": "Buổi học P2 từ 19:30 đến 21:30. Chỉ làm khởi động 2 bước, 15 phút, mang bút và ghi chú đến lớp. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 10 Meow (buổi học), muộn hoặc làm một nửa được 5 Meow. Đừng xem đáp án trước khi làm xong.",
+  "intro": "P2 class from 19:30 to 21:30. Warm up with 2 steps only, 15 minutes; bring a pen and notes to class. Deadline 23:30 the same day: complete and on time earns 10 Meow (class); late or half done earns 5 Meow. Do not look at the answers before you finish.",
   "audio": {},
   "steps": [
     {
       "id": "s1",
       "title": "Step 1 · Vocabulary recall",
       "minutes": 5,
-      "instructions": "Điền từ hoặc cụm từ trong khung (hectic · commute · keep up with · a sense of achievement · procrastinate). Đổi dạng từ nếu cần.",
+      "instructions": "Fill in the words or phrases from the box (hectic · commute · keep up with · a sense of achievement · procrastinate). Change the word form if needed.",
       "kind": "fill",
       "items": [
         {
@@ -74,7 +74,7 @@
       "id": "s2",
       "title": "Step 2 · Speaking warm-up and voice note",
       "minutes": 10,
-      "instructions": "Nói to 10 từ mới, mỗi từ một ví dụ của em, rồi nói lại error log của em từ thứ 3. Sau đó đọc to bài yoghurt của thứ 2, một lần. Ghi âm 1 voice note.",
+      "instructions": "Say aloud 10 new words, each with an example of your own, then say aloud your error log from Tuesday. Then read aloud your yoghurt piece from Monday, once. Record 1 voice note.",
       "kind": "voice",
       "lines": [
         "1. Nói 10 từ mới, mỗi từ một ví dụ (hectic, commute, keep up with, a sense of achievement, juggle, be packed with, unwind, productive, procrastinate, prioritise).",

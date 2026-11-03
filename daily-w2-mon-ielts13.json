@@ -12,14 +12,14 @@
   "date": "2026-11-02",
   "section": "writing",
   "minutes": 50,
-  "intro": "Làm lần lượt 4 bước chính (khoảng 40 phút), bước 5 là Boost không bắt buộc (10 phút). Bài viết ở bước 3 em gõ thẳng vào ô trên web, thầy chấm. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "intro": "Work through 4 main steps (about 40 minutes); step 5 is an optional Boost (10 minutes). Type your writing in step 3 directly into the box on the website; the teacher will mark it. Deadline 23:30 the same day: complete and on time earns 20 Meow; late or half done earns 10 Meow. Do not look at the answers before you finish.",
   "audio": {},
   "steps": [
     {
       "id": "s1",
       "title": "Step 1 · Collocations",
       "minutes": 10,
-      "instructions": "Ghép từ ở đầu câu (1 đến 6) với phần đuôi đúng (A đến F). Mỗi đuôi chỉ dùng một lần. Sau đó đọc to cả cụm.",
+      "instructions": "Match the beginnings of the sentences (1 to 6) with the correct endings (A to F). Each ending is used only once. Then read each full sentence aloud.",
       "kind": "mcq",
       "items": [
         {
@@ -107,7 +107,7 @@
       "id": "s2",
       "title": "Step 2 · Plan: how yoghurt is made",
       "minutes": 10,
-      "instructions": "Đề: The notes show the process of making yoghurt. Describe the process. Ghi chú: 1 heat the milk in a large metal pot · 2 cool it to 40 degrees · 3 add a spoonful of live yoghurt · 4 keep it warm for eight hours · 5 pour it into small cups · 6 store it in the fridge. Thiết bị: a large metal pot = a deep round container with a lid and two handles. Chỉ dùng ghi chú này, không xem bài cũ. Lập dàn ý 3 đoạn ngắn: introduction, overview, stages 1 to 3 (có mô tả thiết bị). Ghi từ khóa, không cần viết câu đầy đủ.",
+      "instructions": "Task: The notes show the process of making yoghurt. Describe the process. Notes: 1 heat the milk in a large metal pot · 2 cool it to 40 degrees · 3 add a spoonful of live yoghurt · 4 keep it warm for eight hours · 5 pour it into small cups · 6 store it in the fridge. Equipment: a large metal pot = a deep round container with a lid and two handles. Use only these notes, do not look at old work. Plan 3 short paragraphs: introduction, overview, stages 1 to 3 (describe the equipment). Write keywords; full sentences are not needed.",
       "kind": "open",
       "open": [
         {
@@ -121,7 +121,7 @@
       "id": "s3",
       "title": "Step 3 · Write: introduction, overview, stages 1 to 3",
       "minutes": 15,
-      "instructions": "Viết khoảng 80 từ (không phải 150): introduction, overview, và stages 1 to 3 trong ba câu. Dùng bị động hiện tại đơn (is / are + V3) và từ nối trình tự (First, Next, After that, and then). Không chép nguyên câu của bài mẫu trên lớp, không chép nguyên văn ghi chú. Challenge: thêm stage 4 bằng 'and then'.",
+      "instructions": "Write about 80 words (not 150): introduction, overview, and stages 1 to 3 in three sentences. Use the present simple passive (is / are + V3) and sequencing words (First, Next, After that, and then). Do not copy the sample answer from class and do not copy the notes word for word. Challenge: add stage 4 using 'and then'.",
       "kind": "open",
       "open": [
         {
@@ -149,7 +149,7 @@
       "id": "s4",
       "title": "Step 4 · Check and voice note",
       "minutes": 5,
-      "instructions": "Gạch chân mọi động từ bị động, khoanh mọi từ nối trình tự, đếm số từ. Đối chiếu 6 tiêu chí ở bài thứ 7 (introduction, overview, sequencing, passive, equipment, -ed và is / are). Sau đó ghi âm: đọc to introduction và overview của em, một lần.",
+      "instructions": "Underline every passive verb, circle every sequencing word, and count the words. Check your work against the 6 criteria from lesson 7 (introduction, overview, sequencing, passive, equipment, -ed and is / are). Then record yourself reading your introduction and overview aloud, once.",
       "kind": "voice",
       "lines": [
         "1. Đọc to introduction của em.",
@@ -161,7 +161,7 @@
       "id": "s5",
       "title": "Step 5 · Boost (optional): rewrite with the noun",
       "minutes": 10,
-      "instructions": "Không bắt buộc. Viết lại câu bằng danh từ, theo mẫu: Sales dropped to 6,000 in May. → There was a drop in sales to 6,000 in May. Chỉ điền phần còn thiếu (tính từ + danh từ).",
+      "instructions": "Optional. Rewrite each sentence with a noun, following the model: Sales dropped to 6,000 in May. → There was a drop in sales to 6,000 in May. Only fill in the missing part (adjective + noun).",
       "kind": "fill",
       "items": [
         {
