@@ -6,7 +6,7 @@
 
 const crypto = require('crypto');
 
-const VOICES = { A: '21m00Tcm4TlvDq8ikWAM', B: 'pNInz6obpgDQGcFmaJgB' }; /* A: giọng nữ, B: giọng nam */
+const VOICES = { A: 'Xb7hH8MSUJpSbSDYk0k2', B: 'BNgbHR0DNeZixGQVzloa' }; /* A: Alice (nữ, Anh), B: David - British Storyteller (nam, Anh) */
 const MODEL_ID = 'eleven_multilingual_v2';
 const MAX_LINE = 600, MAX_TOTAL = 2500, MAX_LINES = 30;
 /* Tốc độ đọc theo lớp (0.7 đến 1.2). Lớp không có trong bảng dùng 0.85 */
