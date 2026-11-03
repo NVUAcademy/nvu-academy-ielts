@@ -13,6 +13,7 @@ const MAX_LINE = 600, MAX_TOTAL = 2500, MAX_LINES = 30;
 const SPEED_BY_CLASS = { FOUNDATION11: 0.75, IELTS13: 0.85, IELTS14: 0.9 };
 const DEFAULT_SPEED = 0.85;
 const BUCKET = 'voice-notes';
+const CONCURRENCY = 3;
 
 const SB_URL = () => (process.env.SUPABASE_URL || '').replace(/\/$/, '');
 const SB_HEAD = () => {
@@ -73,7 +74,10 @@ module.exports = async function handler(req, res) {
     const cached = await signedUrl(path);
     if (cached) return res.status(200).json({ ok: true, url: cached, cached: true });
 
-    const parts = await Promise.all(lines.map(l => speak(l.text, VOICES[l.speaker], speed)));
+    /* Gói Starter chỉ cho 3 yêu cầu cùng lúc, nên tạo từng nhóm 3 câu */
+    const parts = [];
+    for (let i = 0; i < lines.length; i += CONCURRENCY)
+      parts.push(...await Promise.all(lines.slice(i, i + CONCURRENCY).map(l => speak(l.text, VOICES[l.speaker], speed))));
     const audio = Buffer.concat(parts);
     const up = await sb('/storage/v1/object/' + BUCKET + '/' + path, {
       method: 'POST', headers: { 'content-type': 'audio/mpeg', 'x-upsert': 'true' }, body: audio
