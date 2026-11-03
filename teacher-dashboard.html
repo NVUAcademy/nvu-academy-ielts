@@ -782,6 +782,12 @@
 
 <script src="meow.js"></script>
 <script>
+  /* Ô nhận xét tự giãn theo nội dung, không cần kéo */
+  function autoSize(t) { t.style.height = 'auto'; t.style.height = Math.max(120, t.scrollHeight + 4) + 'px'; }
+  const isCommentBox = el => el.tagName === 'TEXTAREA' && ((el.id || '').startsWith('cm-') || (el.id || '').startsWith('sbc-'));
+  document.addEventListener('input', e => { if (isCommentBox(e.target)) autoSize(e.target); });
+  /* Ô nhận xét hiện ra là đã đủ cao theo nội dung có sẵn, không chờ gõ */
+  new MutationObserver(() => document.querySelectorAll('textarea').forEach(t => { if (isCommentBox(t) && !t.dataset.sized && t.offsetParent !== null) { autoSize(t); t.dataset.sized = '1'; } })).observe(document.body, { childList: true, subtree: true });
   const SUPABASE_URL = 'https://sxnxbbosfyapmmkrhcdj.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_OMyiSjOVcKOfRdZO9JwSZg_8XogOYkZ';
   const { createClient } = supabase;
