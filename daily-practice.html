@@ -363,6 +363,25 @@ function setAns(id, v, rerender) {
 }
 
 /* ---------- recorder ---------- */
+/* Gửi bản ghi âm mới cho bài đã nộp (giữ nguyên điểm và nhận xét) */
+async function resendVoice() {
+  const msg = document.getElementById('resendmsg');
+  if (!recBlob) { msg.textContent = 'Chưa có bản ghi âm mới. Bấm "● Ghi âm" trước.'; return; }
+  msg.textContent = 'Đang gửi…';
+  try {
+    let upBlob = recBlob; try { upBlob = await blobToWav16k(recBlob); } catch (e) {}
+    const ext = upBlob.type === 'audio/wav' ? 'wav' : (/mp4/.test(upBlob.type) ? 'm4a' : 'webm');
+    const voicePath = `daily/${student.id}/${P.id}-${Date.now()}.${ext}`;
+    const { error: ue } = await db.storage.from('voice-notes').upload(voicePath, upBlob, { contentType: upBlob.type, upsert: false });
+    if (ue) throw new Error(ue.message);
+    const r = await fetch('/api/submit-daily', { method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ voice_only: true, student_id: student.id, practice_id: P.id, practice_date: P.date, section: P.section, voice_path: voicePath }) });
+    const j = await r.json(); if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
+    recBlob = null;
+    msg.textContent = '✓ Đã gửi bản ghi âm mới. Thầy sẽ nghe lại.';
+  } catch (e) { msg.textContent = 'Chưa gửi được: ' + e.message; }
+}
+
 function recorderHtml() {
   return `<div class="recbox" id="recbox"><button class="btn rec small" id="recbtn" onclick="toggleRec()">● Ghi âm</button>
     <div class="status" id="recstatus">${recBlob ? 'Đã có bản ghi. Nghe lại bên dưới hoặc ghi lại.' : 'Chưa có bản ghi. Round 3 + 1 phút nói về loại số khó nhất.'}</div>
@@ -502,7 +521,7 @@ async function save(res, score) {
 function renderResult(res, score, status) {
   const msg = status === 'saving' ? '<div class="saved">Đang lưu…</div>'
     : status === 'ok' ? '<div class="saved ok">✓ Đã lưu điểm, lỗi sai và voice note. Thầy sẽ nghe và nhận xét.</div>'
-    : status === 'review' ? `<div class="saved ok">Đây là bài em đã nộp trước đó.</div>${existing && existing.teacher_comment ? `<div class="review" style="white-space:pre-line"><b>Nhận xét của thầy:</b> ${esc(existing.teacher_comment)}</div>` : ''}`
+    : status === 'review' ? `<div class="saved ok">Đây là bài em đã nộp trước đó.</div>${existing && existing.teacher_comment ? `<div class="review" style="white-space:pre-line"><b>Nhận xét của thầy:</b> ${esc(existing.teacher_comment)}</div>` : ''}<div class="review"><b>Ghi âm lại theo nhận xét của thầy</b>${recorderHtml()}<button class="btn" style="margin-top:8px" onclick="resendVoice()">Gửi bản ghi âm mới cho thầy</button><div id="resendmsg" class="meta" style="margin-top:6px"></div></div>`
     : status === 'teacher' ? '<div class="saved">Chế độ giáo viên xem thử: không lưu.</div>'
     : status.startsWith('ok-novoice') ? `<div class="saved err">Đã lưu điểm nhưng chưa gửi được voice note (${esc(status.slice(11))}). Hãy gửi voice note cho thầy qua Zalo.</div>`
     : `<div class="saved err">Không lưu được: ${esc(status.slice(4))}. Hãy chụp màn hình điểm gửi thầy.</div>`;

@@ -122,7 +122,7 @@ body[data-vid] footer { background:color-mix(in srgb, var(--bg) 72%, transparent
   <div class="hero">
     <div class="eyebrow">IELTS Learning Platform</div>
     <h1>Học IELTS<br><em>cùng Mr. Nam</em></h1>
-    <p>Luyện tập hàng ngày · Từ vựng · Listening · Writing · Speaking</p>
+    <p>Luyện tập hàng ngày · Từ vựng · Listening · Reading · Writing · Speaking</p>
     <div class="orn"></div>
   </div>
 
@@ -320,7 +320,7 @@ async function loadToday() {
       html += '<div class="sec-label">Nhận xét từ trợ giảng</div>';
       allReplies.forEach(x => {
         const t = (byId[x.practice_id] && byId[x.practice_id].title) || 'Bài luyện tập';
-        html += `<div class="task" style="flex-wrap:wrap"><div class="ic" style="background:var(--lilac)">🎧</div><div class="tt"><b>${esc(t)}</b><span>${esc(x.date)}</span></div>${x.comment ? `<div style="width:100%;margin-top:8px;font-size:16px;white-space:pre-line">${esc(x.comment)}</div>` : ''}${x.url ? `<audio controls preload="none" src="${esc(x.url)}" style="width:100%;margin-top:8px"></audio>` : ''}</div>`;
+        html += `<div class="task" style="flex-wrap:wrap"><div class="ic" style="background:var(--lilac)">🎧</div><div class="tt"><b>${esc(t)}</b><span>${esc(x.date)}</span></div>${x.comment ? `<div style="width:100%;margin-top:8px;font-size:16px;white-space:pre-line">${esc(x.comment)}</div>` : ''}${x.url ? `<audio controls preload="none" src="${esc(x.url)}" style="width:100%;margin-top:8px"></audio>` : ''}${x.practice_id ? `<a class="btn small" style="margin-top:8px" href="daily-practice.html?p=${esc(x.practice_id)}&d=${esc(x.date)}">🎙 Ghi âm lại</a>` : ''}</div>`;
       });
     }
     const _qd = new Date(), _qiso = _qd.getFullYear() + '-' + String(_qd.getMonth() + 1).padStart(2, '0') + '-' + String(_qd.getDate()).padStart(2, '0');

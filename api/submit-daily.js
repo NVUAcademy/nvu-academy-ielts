@@ -33,6 +33,20 @@ module.exports = async function handler(req, res) {
 
     const studentId = String(b.student_id || '');
     if (!/^[0-9a-f-]{36}$/i.test(studentId)) return bad(res, 400, 'student_id không hợp lệ');
+
+    /* Ghi âm lại: chỉ thay file voice của bài đã nộp, giữ nguyên điểm, lỗi và nhận xét */
+    if (b.voice_only === true) {
+      const pd = String(b.practice_date || ''), pid = str(b.practice_id, 80), sec = str(b.section, 40), vp = str(b.voice_path, 200);
+      if (!dateOk(pd) || !pid || !sec) return bad(res, 400, 'Thiếu thông tin bài tập');
+      if (!vp || !vp.startsWith('daily/' + studentId + '/')) return bad(res, 403, 'voice_path không thuộc học sinh này');
+      const up = await sb(`/rest/v1/daily_scores?student_id=eq.${studentId}&practice_date=eq.${pd}&section=eq.${encodeURIComponent(sec)}&practice_id=eq.${encodeURIComponent(pid)}`, {
+        method: 'PATCH', headers: { 'content-type': 'application/json', Prefer: 'return=representation' }, body: JSON.stringify({ voice_path: vp })
+      });
+      const rows = await up.json().catch(() => []);
+      if (!up.ok || !Array.isArray(rows) || !rows.length) return bad(res, 404, 'Chưa có bài nộp để ghi âm lại');
+      return res.status(200).json({ ok: true });
+    }
+
     const st = await (await sb('/rest/v1/students?id=eq.' + studentId + '&select=id')).json();
     if (!Array.isArray(st)) return bad(res, 500, 'Supabase từ chối khóa dịch vụ');
     if (!st.length) return bad(res, 403, 'Không tìm thấy học sinh');
