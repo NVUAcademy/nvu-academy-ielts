@@ -86,6 +86,42 @@ async function speakEleven(text, voice, speed) {
   return Buffer.from(await r.arrayBuffer());
 }
 
+/* Google Gemini TTS (chỉ dùng khi TTS_PROVIDER=gemini). Đọc cả hội thoại trong một lần, giọng Kore (A) và Puck (B). */
+const useGemini = () => process.env.TTS_PROVIDER === 'gemini' && !!process.env.GEMINI_API_KEY;
+function pcmToWav(pcm, rate) {
+  const h = Buffer.alloc(44);
+  h.write('RIFF', 0); h.writeUInt32LE(36 + pcm.length, 4); h.write('WAVE', 8);
+  h.write('fmt ', 12); h.writeUInt32LE(16, 16); h.writeUInt16LE(1, 20); h.writeUInt16LE(1, 22);
+  h.writeUInt32LE(rate, 24); h.writeUInt32LE(rate * 2, 28); h.writeUInt16LE(2, 32); h.writeUInt16LE(16, 34);
+  h.write('data', 36); h.writeUInt32LE(pcm.length, 40);
+  return Buffer.concat([h, pcm]);
+}
+async function speakGemini(lines) {
+  const script = lines.map(l => 'Speaker' + (l.speaker === 'B' ? '2' : '1') + ': ' + l.text.replace(/\[\/?slow\]/g, '')).join('\n');
+  const prompt = 'Read this as a natural phone conversation with clear, expressive intonation and natural rhythm. ' +
+    'Pronounce IELTS as "eye-elts". When spelling letters or reading numbers, digits or addresses, slow down and pause briefly between each part.\n\n' + script;
+  const r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent', {
+    method: 'POST',
+    headers: { 'x-goog-api-key': process.env.GEMINI_API_KEY, 'content-type': 'application/json' },
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: {
+        responseModalities: ['AUDIO'],
+        speechConfig: { multiSpeakerVoiceConfig: { speakerVoiceConfigs: [
+          { speaker: 'Speaker1', voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Kore' } } },
+          { speaker: 'Speaker2', voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Puck' } } }
+        ] } }
+      }
+    })
+  });
+  const j = await r.json();
+  if (!r.ok) throw new Error('Gemini lỗi ' + r.status + ': ' + JSON.stringify(j).slice(0, 200));
+  const part = j.candidates && j.candidates[0] && j.candidates[0].content && j.candidates[0].content.parts && j.candidates[0].content.parts[0];
+  if (!part || !part.inlineData || !part.inlineData.data) throw new Error('Gemini không trả về audio');
+  const m = /rate=(\d+)/.exec(part.inlineData.mimeType || '');
+  return pcmToWav(Buffer.from(part.inlineData.data, 'base64'), m ? Number(m[1]) : 24000);
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'content-type');
@@ -111,18 +147,24 @@ module.exports = async function handler(req, res) {
     if (lines.reduce((n, l) => n + l.text.length, 0) > MAX_TOTAL) return bad(res, 400, 'Đoạn quá dài (tối đa ' + MAX_TOTAL + ' ký tự)');
 
     /* Cùng nội dung và tốc độ thì dùng lại file đã tạo */
-    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: useAzure() ? AZURE_VOICES : VOICES, m: useAzure() ? 'azure' : MODEL_ID, pv: 5 })).digest('hex').slice(0, 32);
-    const path = 'listening/' + hash + '.mp3';
+    const gem = useGemini();
+    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: useAzure() ? AZURE_VOICES : VOICES, m: gem ? 'gemini' : useAzure() ? 'azure' : MODEL_ID, pv: 6 })).digest('hex').slice(0, 32);
+    const path = 'listening/' + hash + (gem ? '.wav' : '.mp3');
     const cached = await signedUrl(path);
     if (cached) return res.status(200).json({ ok: true, url: cached, cached: true });
 
     /* Gói Starter chỉ cho 3 yêu cầu cùng lúc, nên tạo từng nhóm 3 câu */
-    const parts = [];
-    for (let i = 0; i < lines.length; i += CONCURRENCY)
-      parts.push(...await Promise.all(lines.slice(i, i + CONCURRENCY).map(l => speak(l.text, l.speaker, speed))));
-    const audio = Buffer.concat(parts);
+    let audio, contentType;
+    if (gem) {
+      audio = await speakGemini(lines); contentType = 'audio/wav';
+    } else {
+      const parts = [];
+      for (let i = 0; i < lines.length; i += CONCURRENCY)
+        parts.push(...await Promise.all(lines.slice(i, i + CONCURRENCY).map(l => speak(l.text, l.speaker, speed))));
+      audio = Buffer.concat(parts); contentType = 'audio/mpeg';
+    }
     const up = await sb('/storage/v1/object/' + BUCKET + '/' + path, {
-      method: 'POST', headers: { 'content-type': 'audio/mpeg', 'x-upsert': 'true' }, body: audio
+      method: 'POST', headers: { 'content-type': contentType, 'x-upsert': 'true' }, body: audio
     });
     if (!up.ok) return bad(res, 500, 'Không lưu được audio: ' + (await up.text()).slice(0, 160));
     const url = await signedUrl(path);
