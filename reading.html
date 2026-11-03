@@ -151,6 +151,26 @@ function renderResult() {
     '<table border="1" cellpadding="6" style="border-collapse:collapse;width:100%"><tr><th>Câu</th><th>Em trả lời</th><th>Đáp án</th><th></th></tr>' + rows + '</table>' +
     '<p style="margin-top:16px"><a href="luyen-de.html" class="btn ghost" style="text-decoration:none">← Về Luyện đề</a></p></div>';
   document.getElementById('nav').style.display = 'none';
+  saveReading(raw, total, band);
+}
+/* Lưu kết quả một lần khi nộp, rồi hiện lịch sử đọc của học sinh */
+let readingSaved = false;
+async function saveReading(raw, total, band) {
+  if (readingSaved) return;
+  readingSaved = true;
+  const box = document.querySelector('.result');
+  try {
+    await fetch('/api/skill-history', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({
+      student_id: student.id, skill: 'reading', test_id: TEST.id, test_title: TEST.title, score: raw, max_score: total, band, detail: { answers } }) });
+  } catch (e) {}
+  if (!box) return;
+  box.insertAdjacentHTML('beforeend', '<h3 style="margin-top:24px">Lịch sử làm bài đọc</h3><div id="rhist">Đang tải…</div>');
+  try {
+    const j = await (await fetch('/api/skill-history?student_id=' + encodeURIComponent(student.id) + '&skill=reading')).json();
+    const rows = (j && j.data) || [];
+    document.getElementById('rhist').innerHTML = rows.length ? rows.map(r => '<div style="padding:6px 0;border-top:1px solid #ddd">' +
+      new Date(r.created_at).toLocaleString('vi-VN') + ' · ' + r.score + ' / ' + r.max_score + ' · band ' + r.band + '</div>').join('') : 'Chưa có bài nào.';
+  } catch (e) { document.getElementById('rhist').textContent = 'Chưa tải được lịch sử.'; }
 }
 function startTimer() {
   tick = setInterval(() => {
