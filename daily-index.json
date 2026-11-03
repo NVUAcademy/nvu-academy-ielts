@@ -8,6 +8,7 @@
                           "day":  "thursday",
                           "date":  "2026-10-29",
                           "week_number":  1,
+                          "section":  "listening",
                           "class_codes":  [
                                               "IELTS14"
                                           ]
@@ -85,6 +86,7 @@
                           "day":  "monday",
                           "date":  "2026-11-02",
                           "week_number":  4,
+                          "section":  "vocabulary",
                           "class_codes":  [
                                               "FOUNDATION11"
                                           ]
@@ -97,6 +99,7 @@
                           "day":  "tuesday",
                           "date":  "2026-11-03",
                           "week_number":  4,
+                          "section":  "vocabulary",
                           "class_codes":  [
                                               "FOUNDATION11"
                                           ]
@@ -109,6 +112,7 @@
                           "day":  "wednesday",
                           "date":  "2026-11-04",
                           "week_number":  4,
+                          "section":  "grammar",
                           "class_codes":  [
                                               "FOUNDATION11"
                                           ]
@@ -121,6 +125,7 @@
                           "day":  "thursday",
                           "date":  "2026-11-05",
                           "week_number":  4,
+                          "section":  "grammar",
                           "class_codes":  [
                                               "FOUNDATION11"
                                           ]
@@ -133,6 +138,7 @@
                           "day":  "friday",
                           "date":  "2026-11-06",
                           "week_number":  4,
+                          "section":  "test",
                           "class_codes":  [
                                               "FOUNDATION11"
                                           ]
@@ -145,6 +151,7 @@
                           "day":  "saturday",
                           "date":  "2026-11-07",
                           "week_number":  4,
+                          "section":  "vocabulary",
                           "class_codes":  [
                                               "FOUNDATION11"
                                           ]
@@ -157,6 +164,7 @@
                           "day":  "sunday",
                           "date":  "2026-11-08",
                           "week_number":  4,
+                          "section":  "writing",
                           "class_codes":  [
                                               "FOUNDATION11"
                                           ]
@@ -169,6 +177,7 @@
                           "day":  "monday",
                           "date":  "2026-11-02",
                           "week_number":  2,
+                          "section":  "writing",
                           "class_codes":  [
                                               "IELTS13"
                                           ]
@@ -181,6 +190,7 @@
                           "day":  "tuesday",
                           "date":  "2026-11-03",
                           "week_number":  2,
+                          "section":  "listening",
                           "class_codes":  [
                                               "IELTS13"
                                           ]
@@ -193,6 +203,7 @@
                           "day":  "wednesday",
                           "date":  "2026-11-04",
                           "week_number":  2,
+                          "section":  "grammar",
                           "class_codes":  [
                                               "IELTS13"
                                           ]
@@ -205,6 +216,7 @@
                           "day":  "thursday",
                           "date":  "2026-11-05",
                           "week_number":  2,
+                          "section":  "vocabulary",
                           "class_codes":  [
                                               "IELTS13"
                                           ]
