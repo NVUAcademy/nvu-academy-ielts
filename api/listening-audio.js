@@ -36,7 +36,8 @@ async function signedUrl(path) {
 
 /* Azure AI Speech (ưu tiên nếu có AZURE_SPEECH_KEY). Giọng nữ Anh: Sonia; giọng nam Anh: Ryan. */
 const AZURE_VOICES = { A: 'en-GB-SoniaNeural', B: 'en-GB-RyanNeural' };
-const useAzure = () => !!process.env.AZURE_SPEECH_KEY;
+/* Mặc định dùng ElevenLabs (giọng Alice, David). Chỉ dùng Azure khi đặt TTS_PROVIDER=azure và có AZURE_SPEECH_KEY. */
+const useAzure = () => process.env.TTS_PROVIDER === 'azure' && !!process.env.AZURE_SPEECH_KEY;
 const xmlEsc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
 /* Chuyển transcript thành nội dung SSML cho Azure: ngắt nhịp tự nhiên, đọc chậm phần đánh vần, số và đoạn [slow]...[/slow] */
 function azureBody(text) {
