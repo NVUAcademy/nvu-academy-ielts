@@ -109,7 +109,7 @@ async function speakGemini(lines) {
         responseModalities: ['AUDIO'],
         speechConfig: { multiSpeakerVoiceConfig: { speakerVoiceConfigs: [
           { speaker: 'Speaker1', voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Kore' } } },
-          { speaker: 'Speaker2', voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Puck' } } }
+          { speaker: 'Speaker2', voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Sadaltager' } } }
         ] } }
       }
     })
@@ -148,7 +148,7 @@ module.exports = async function handler(req, res) {
 
     /* Cùng nội dung và tốc độ thì dùng lại file đã tạo */
     const gem = useGemini();
-    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: useAzure() ? AZURE_VOICES : VOICES, m: gem ? 'gemini' : useAzure() ? 'azure' : MODEL_ID, pv: 6 })).digest('hex').slice(0, 32);
+    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: useAzure() ? AZURE_VOICES : VOICES, m: gem ? 'gemini' : useAzure() ? 'azure' : MODEL_ID, pv: 7 })).digest('hex').slice(0, 32);
     const path = 'listening/' + hash + (gem ? '.wav' : '.mp3');
     const cached = await signedUrl(path);
     if (cached) return res.status(200).json({ ok: true, url: cached, cached: true });
