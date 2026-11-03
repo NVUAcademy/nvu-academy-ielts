@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Listening · NVU Academy</title>
+<style>
+  body { margin:0; font-family:Arial,"Helvetica Neue",sans-serif; color:#1b1b1b; background:#fff; font-size:15px; line-height:1.55; }
+  .hdr { display:flex; align-items:center; gap:18px; padding:12px 18px; border-bottom:1px solid #d6d6d6; }
+  .hdr .brand { font-weight:700; color:#e0662d; }
+  .hdr .title { font-weight:700; font-size:16px; }
+  .hdr a { margin-left:auto; color:#e0662d; text-decoration:none; font-weight:700; font-size:14px; }
+  .part-bar { background:#eef5ee; padding:12px 18px; border-bottom:1px solid #d6d6d6; }
+  .part-bar b { font-size:17px; } .part-bar div { color:#555; font-size:14px; }
+  .main { max-width:760px; margin:0 auto; padding:18px 18px 0; }
+  .player { background:#f7f7f7; border:1px solid #d6d6d6; border-radius:6px; padding:14px 16px; margin-bottom:18px; }
+  .player .msg { color:#555; font-size:14px; margin-top:8px; }
+  .q-instr { color:#333; margin-bottom:12px; }
+  .q { margin:0 0 16px; }
+  .q .qn { display:inline-block; min-width:26px; height:24px; line-height:24px; text-align:center; border:1px solid #1b1b1b; border-radius:3px; font-weight:700; margin-right:8px; }
+  .opts label { display:block; padding:4px 0; cursor:pointer; }
+  .opts input { margin-right:8px; }
+  input[type=text] { border:1px solid #999; border-radius:3px; padding:5px 8px; font-size:15px; width:200px; max-width:100%; }
+  .nav { position:fixed; left:0; right:0; bottom:0; background:#f4f4f4; border-top:1px solid #d6d6d6; display:flex; align-items:center; gap:14px; padding:8px 18px; flex-wrap:wrap; }
+  .nav .nums { display:flex; gap:6px; flex-wrap:wrap; }
+  .nav .num { min-width:26px; height:26px; line-height:26px; text-align:center; border:1px solid #888; border-radius:3px; cursor:pointer; background:#fff; font-size:13px; }
+  .nav .num.cur { border:2px solid #1b1b1b; font-weight:700; }
+  .nav .num.done { background:#d9ead3; }
+  .btn { background:#e0662d; color:#fff; border:none; border-radius:4px; padding:9px 18px; font-weight:700; cursor:pointer; }
+  .btn:disabled { opacity:.5; cursor:not-allowed; }
+  .btn.ghost { background:#fff; color:#e0662d; border:1px solid #e0662d; }
+  .result { padding:18px 22px; max-width:760px; margin:0 auto; }
+  .big { font-size:36px; font-weight:700; color:#e0662d; }
+  .wrap-bottom { height:90px; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="wrap-bottom"></div>
+<div class="nav" id="nav" style="display:none">
+  <button class="btn ghost" onclick="prevPart()">‹ Part trước</button>
+  <div class="nums" id="nums"></div>
+  <button class="btn ghost" onclick="nextPart()">Part sau ›</button>
+  <button class="btn" onclick="submitTest()">Nộp bài</button>
+</div>
+<script>
+let student = null;
+try { student = JSON.parse(localStorage.getItem('nvu_student') || 'null'); } catch (e) {}
+if (!student) location.replace('login.html');
+
+/* Đề thử: hội thoại và bài nói tự soạn, dạng câu hỏi như Listening IELTS. A là giọng nữ, B là giọng nam */
+const MAX_PLAYS = 2;
+const TEST = {
+  id: 'listening-demo-1', title: 'Listening Practice Test 1',
+  parts: [
+    { part: 1, intro: 'You will hear a phone call to a sports centre about swimming lessons.',
+      instr: 'Complete the form below. Write ONE WORD AND/OR A NUMBER for each answer.', type: 'gap',
+      lines: [
+        { speaker: 'A', text: 'Good morning, Riverside Sports Centre. How can I help you?' },
+        { speaker: 'B', text: 'Hi. I would like to book swimming lessons for my daughter.' },
+        { speaker: 'A', text: 'Of course. Can I have her name, please?' },
+        { speaker: 'B', text: 'Yes. Her first name is Emma, and her surname is Clarke. That is C, L, A, R, K, E.' },
+        { speaker: 'A', text: 'Thank you. And how old is she?' },
+        { speaker: 'B', text: 'She is eight. She turned eight last month.' },
+        { speaker: 'A', text: 'Great. We have a beginners class on Friday afternoons, but it is full. There is also one on Saturday mornings.' },
+        { speaker: 'B', text: 'Saturday is better for us. What time does it start?' },
+        { speaker: 'A', text: 'It starts at half past nine and finishes at ten fifteen.' },
+        { speaker: 'B', text: 'Perfect. How much does it cost?' },
+        { speaker: 'A', text: 'It is forty-five pounds for a course of six lessons.' },
+        { speaker: 'B', text: 'And what does she need to bring?' },
+        { speaker: 'A', text: 'Just a swimming costume and a towel. Goggles are optional.' }
+      ],
+      qs: [
+        { n: 1, text: 'Child’s surname: ______', answer: ['clarke'] },
+        { n: 2, text: 'Age: ______', answer: ['8', 'eight'] },
+        { n: 3, text: 'Day of the class: ______', answer: ['saturday', 'saturdays'] },
+        { n: 4, text: 'Start time: ______', answer: ['9.30', '9:30', 'half past nine', '930', '9.30am', '9:30am', '9.30 am', '9:30 am'] },
+        { n: 5, text: 'Price for six lessons: £______', answer: ['45', 'forty-five', 'forty five', '£45'] },
+        { n: 6, text: 'Bring a swimming costume and a ______', answer: ['towel'] }
+      ] },
+    { part: 2, intro: 'You will hear a guide talking to visitors at a museum.',
+      instr: 'Choose the correct letter, A, B or C.', type: 'mcq',
+      lines: [
+        { speaker: 'B', text: 'Welcome to the City History Museum. Before we start, here are a few things you should know.' },
+        { speaker: 'B', text: 'The museum opened in nineteen sixty-two, but the building itself is much older. It was once the city railway station.' },
+        { speaker: 'B', text: 'Today we will visit three floors. On the ground floor, you will find the shop and the cafe. Please note that the cafe closes at four o’clock, an hour before the museum closes.' },
+        { speaker: 'B', text: 'The first floor has our most popular exhibition, about the river and the boats that once carried goods into the city.' },
+        { speaker: 'B', text: 'You may take photos anywhere except on the second floor, where the old maps are kept, because the light can damage the paper.' },
+        { speaker: 'B', text: 'The tour takes about fifty minutes, and it finishes in the garden, where you can see a model of the old harbour.' }
+      ],
+      qs: [
+        { n: 7, text: 'What was the building before it became a museum?', opts: ['a school', 'a railway station', 'a hospital'], answer: 1 },
+        { n: 8, text: 'What time does the cafe close?', opts: ['at four o’clock', 'at five o’clock', 'at three o’clock'], answer: 0 },
+        { n: 9, text: 'Where are visitors not allowed to take photos?', opts: ['on the ground floor', 'on the first floor', 'on the second floor'], answer: 2 },
+        { n: 10, text: 'Where does the tour finish?', opts: ['in the cafe', 'in the garden', 'in the shop'], answer: 1 }
+      ] }
+  ]
+};
+
+const flat = TEST.parts.flatMap(p => p.qs.map(q => ({ ...q, part: p })));
+let curPart = 0, answers = {}, finished = false;
+const plays = {}, audioUrl = {};
+
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+function norm(s) { return String(s || '').toLowerCase().replace(/[’']/g, '').replace(/\s+/g, ' ').trim(); }
+function gapOk(q, v) { return q.answer.map(norm).includes(norm(v)); }
+
+function render() {
+  if (finished) return renderResult();
+  const p = TEST.parts[curPart];
+  const used = plays[p.part] || 0;
+  const qs = p.qs.map(x => {
+    const v = answers[x.n] ?? '';
+    const input = p.type === 'mcq'
+      ? x.opts.map((o, i) => '<label><input type="radio" name="q' + x.n + '" value="' + i + '" ' + (String(v) === String(i) ? 'checked' : '') + ' onchange="setAns(' + x.n + ',this.value)">' + String.fromCharCode(65 + i) + '. ' + esc(o) + '</label>').join('')
+      : '<input type="text" value="' + esc(v) + '" oninput="setAns(' + x.n + ',this.value)">';
+    return '<div class="q"><span class="qn">' + x.n + '</span>' + esc(x.text) + '<div class="opts" style="margin-top:6px">' + input + '</div></div>';
+  }).join('');
+  document.getElementById('app').innerHTML =
+    '<div class="hdr"><span class="brand">IELTS</span><span class="title">' + esc(TEST.title) + '</span><a href="luyen-de.html">← Luyện đề</a></div>' +
+    '<div class="part-bar"><b>Part ' + p.part + '</b><div>Listen and answer questions ' + p.qs[0].n + '–' + p.qs[p.qs.length - 1].n + '</div></div>' +
+    '<div class="main"><div class="player"><div>' + esc(p.intro) + '</div>' +
+    '<div style="margin-top:10px"><button class="btn" id="play" onclick="playPart()" ' + (used >= MAX_PLAYS ? 'disabled' : '') + '>▶ Nghe (' + used + '/' + MAX_PLAYS + ')</button></div>' +
+    '<audio id="aud" style="display:none"></audio><div class="msg" id="pmsg">Mỗi phần được nghe tối đa ' + MAX_PLAYS + ' lần. Đọc câu hỏi trước khi bấm nghe.</div></div>' +
+    '<div class="q-instr">' + esc(p.instr) + '</div>' + qs + '</div>';
+  renderNav();
+}
+function renderNav() {
+  document.getElementById('nav').style.display = 'flex';
+  document.getElementById('nums').innerHTML = flat.map(q => '<span class="num ' + (q.part === TEST.parts[curPart] ? 'cur' : '') + ' ' + (answers[q.n] !== undefined && answers[q.n] !== '' ? 'done' : '') + '" onclick="gotoPart(' + TEST.parts.indexOf(q.part) + ')">' + q.n + '</span>').join('');
+}
+function setAns(n, v) { answers[n] = v; renderNav(); }
+function gotoPart(i) { const a = document.getElementById('aud'); if (a) a.pause(); curPart = i; render(); }
+function prevPart() { if (curPart > 0) gotoPart(curPart - 1); }
+function nextPart() { if (curPart < TEST.parts.length - 1) gotoPart(curPart + 1); }
+
+async function playPart() {
+  const p = TEST.parts[curPart], btn = document.getElementById('play'), msg = document.getElementById('pmsg');
+  if ((plays[p.part] || 0) >= MAX_PLAYS) return;
+  btn.disabled = true;
+  try {
+    if (!audioUrl[p.part]) {
+      msg.textContent = 'Đang chuẩn bị audio, lần đầu có thể mất khoảng 20 giây…';
+      const r = await fetch('/api/listening-audio', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ student_id: student.id, lines: p.lines }) });
+      const j = await r.json();
+      if (!j.ok) throw new Error(j.error || 'Không tải được audio');
+      audioUrl[p.part] = j.url;
+    }
+    const a = document.getElementById('aud');
+    a.src = audioUrl[p.part];
+    plays[p.part] = (plays[p.part] || 0) + 1;
+    btn.textContent = '🔊 Đang phát (' + plays[p.part] + '/' + MAX_PLAYS + ')';
+    msg.textContent = 'Đang phát. Em vừa nghe vừa điền câu trả lời.';
+    a.onended = () => {
+      const left = MAX_PLAYS - plays[p.part];
+      btn.textContent = '▶ Nghe (' + plays[p.part] + '/' + MAX_PLAYS + ')';
+      btn.disabled = left <= 0;
+      msg.textContent = left > 0 ? 'Em còn ' + left + ' lần nghe cho phần này.' : 'Em đã hết lượt nghe phần này.';
+    };
+    await a.play();
+  } catch (e) {
+    msg.textContent = 'Lỗi: ' + e.message + '. Em thử lại hoặc báo thầy.';
+    btn.disabled = false;
+  }
+}
+
+function bandOf(raw, total) {
+  const pct = raw / total;
+  return pct >= 0.9 ? 8 : pct >= 0.8 ? 7 : pct >= 0.65 ? 6 : pct >= 0.5 ? 5 : pct >= 0.35 ? 4 : 3;
+}
+function isRight(q, v) { return q.part.type === 'mcq' ? String(v) === String(q.answer) : gapOk(q, v); }
+function submitTest() {
+  if (!confirm('Nộp bài bây giờ?')) return;
+  const a = document.getElementById('aud'); if (a) a.pause();
+  finished = true; render();
+}
+function renderResult() {
+  const total = flat.length, raw = flat.filter(q => isRight(q, answers[q.n])).length, band = bandOf(raw, total);
+  const rows = flat.map(q => {
+    const v = answers[q.n] ?? '';
+    const shown = q.part.type === 'mcq' ? (v === '' ? '' : String.fromCharCode(65 + Number(v))) : v;
+    const right = q.part.type === 'mcq' ? String.fromCharCode(65 + q.answer) : q.answer[0];
+    return '<tr><td>' + q.n + '</td><td>' + (esc(shown) || '—') + '</td><td>' + esc(right) + '</td><td>' + (isRight(q, v) ? '✓' : '✗') + '</td></tr>';
+  }).join('');
+  document.getElementById('app').innerHTML = '<div class="result"><h2>Kết quả</h2><div class="big">' + raw + ' / ' + total + '</div><p>Band ước lượng: <b>' + band + '.0</b> (chỉ để tham khảo)</p>' +
+    '<table border="1" cellpadding="6" style="border-collapse:collapse;width:100%"><tr><th>Câu</th><th>Em trả lời</th><th>Đáp án</th><th></th></tr>' + rows + '</table>' +
+    '<p style="margin-top:16px"><a href="luyen-de.html" class="btn ghost" style="text-decoration:none">← Về Luyện đề</a></p></div>';
+  document.getElementById('nav').style.display = 'none';
+  saveListening(raw, total, band);
+}
+/* Lưu kết quả một lần khi nộp, rồi hiện lịch sử nghe của học sinh */
+let listeningSaved = false;
+async function saveListening(raw, total, band) {
+  if (listeningSaved) return;
+  listeningSaved = true;
+  const box = document.querySelector('.result');
+  try {
+    await fetch('/api/skill-history', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({
+      student_id: student.id, skill: 'listening', test_id: TEST.id, test_title: TEST.title, score: raw, max_score: total, band, detail: { answers, plays } }) });
+  } catch (e) {}
+  if (!box) return;
+  box.insertAdjacentHTML('beforeend', '<h3 style="margin-top:24px">Lịch sử làm bài nghe</h3><div id="lhist">Đang tải…</div>');
+  try {
+    const j = await (await fetch('/api/skill-history?student_id=' + encodeURIComponent(student.id) + '&skill=listening')).json();
+    const rows = (j && j.data) || [];
+    document.getElementById('lhist').innerHTML = rows.length ? rows.map(r => '<div style="padding:6px 0;border-top:1px solid #ddd">' +
+      new Date(r.created_at).toLocaleString('vi-VN') + ' · ' + r.score + ' / ' + r.max_score + ' · band ' + r.band + '</div>').join('') : 'Chưa có bài nào.';
+  } catch (e) { document.getElementById('lhist').textContent = 'Chưa tải được lịch sử.'; }
+}
+if (student) render();
+</script>
+</body>
+</html>
