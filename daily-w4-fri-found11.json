@@ -196,7 +196,7 @@
       "id": "s4",
       "title": "Step 4 · Test D: reading /4",
       "minutes": 10,
-      "instructions": "Read the text and answer NO MORE THAN TWO WORDS.",
+      "instructions": "Read the text and answer NO MORE THAN TWO WORDS. Text: Tam is an office worker in Hanoi. On weekdays, he wakes up at seven o'clock. At eight, he does yoga for twenty minutes. He has breakfast and goes to work by motorbike. He has lunch at noon in a small restaurant near his office. He finishes work at five and then goes to the gym. On Saturday, he meets his friend in the park and goes running with him.",
       "kind": "fill",
       "items": [
         {

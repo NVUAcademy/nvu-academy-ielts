@@ -5,7 +5,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Jost:wght@400;500;600&display=swap">
-<style>@font-face{font-family:"Bodoni VN";src:local("Georgia"),local("Noto Serif"),local("Times New Roman");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+1EA0-1EF9,U+20AB;}
+<style>
 
 /* Layout: a vintage salon — ivory paper, dusty pastel panels framed in gold double rules, arched gates, Bodoni headings over a Jost body */
 :root{
@@ -15,7 +15,7 @@
   --pink:#EBC7C9; --mint:#CBDCCB; --butter:#F0DFB6; --lilac:#D9CFE7; --sky:#C9DBE6; --peach:#F1D2BF;
   --good:#5E8B6E; --warn:#A97F2E; --bad:#B05468;
   --a1:var(--pink); --a2:var(--mint); --a3:var(--butter);
-  --display:"Bodoni VN","Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
   --body:"Jost","Futura","Century Gothic",system-ui,sans-serif;
   --r:22px; --r-sm:14px; --fs:15px;
   --damask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27112%27%20height%3D%27112%27%20viewBox%3D%270%200%20112%20112%27%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%23B08D57%27%20stroke-width%3D%271%27%20opacity%3D%27.32%27%3E%3Cpath%20d%3D%27M56%200L112%2056L56%20112L0%2056Z%27/%3E%3Cpath%20d%3D%27M56%2032c8%209%208%2017%200%2024c-8-7-8-15%200-24zM56%2080c8-9%208-17%200-24c-8%207-8%2015%200%2024zM32%2056c9-8%2017-8%2024%200c-7%208-15%208-24%200zM80%2056c-9-8-17-8-24%200c7%208%2015%208%2024%200z%27/%3E%3Ccircle%20cx%3D%2756%27%20cy%3D%2756%27%20r%3D%273%27/%3E%3Cpath%20d%3D%27M0%200c6%204%206%2010%200%2014M112%200c-6%204-6%2010%200%2014M0%20112c6-4%206-10%200-14M112%20112c-6-4-6-10%200-14%27/%3E%3C/g%3E%3Cg%20fill%3D%27%23B08D57%27%20opacity%3D%27.32%27%3E%3Ccircle%20cx%3D%2756%27%20cy%3D%2714%27%20r%3D%271.6%27/%3E%3Ccircle%20cx%3D%2756%27%20cy%3D%2798%27%20r%3D%271.6%27/%3E%3Ccircle%20cx%3D%2714%27%20cy%3D%2756%27%20r%3D%271.6%27/%3E%3Ccircle%20cx%3D%2798%27%20cy%3D%2756%27%20r%3D%271.6%27/%3E%3C/g%3E%3C/svg%3E");
@@ -629,10 +629,13 @@ let wordAudio=null;
 function sayAloud(text){
   const w=String(text).trim().toLowerCase();
   if(!/^[a-z]+$/.test(w)) return sayAloudTTS(text);
-  const fail=()=>sayAloudTTS(text);
+  let started=false;
+  const fail=()=>{ if(started) return; started=true; sayAloudTTS(text); };
   try{ if(wordAudio) wordAudio.pause(); }catch{}
   const a=new Audio('https://www.oxfordlearnersdictionaries.com/media/english/us_pron/'+w[0]+'/'+w.slice(0,3)+'/'+w.slice(0,5)+'/'+w+'__us_1.mp3');
-  a.onerror=fail; wordAudio=a;
+  a.onerror=fail; a.onplaying=()=>{ started=true; }; wordAudio=a;
+  /* mp3 tải chậm hoặc treo (hay gặp trên điện thoại) thì không có lỗi nào, nên tự chuyển sang giọng máy sau 2,5 giây */
+  setTimeout(fail, 2500);
   const p=a.play(); if(p&&p.catch) p.catch(fail);
 }
 function sayAloudTTS(text){
