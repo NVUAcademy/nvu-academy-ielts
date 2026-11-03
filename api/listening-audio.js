@@ -80,7 +80,7 @@ async function speakEleven(text, voice, speed) {
   const r = await fetch('https://api.elevenlabs.io/v1/text-to-speech/' + voice + '?output_format=mp3_44100_128', {
     method: 'POST',
     headers: { 'xi-api-key': process.env.ELEVENLABS_API_KEY, 'content-type': 'application/json', accept: 'audio/mpeg' },
-    body: JSON.stringify({ text, model_id: MODEL_ID, voice_settings: { stability: 0.6, similarity_boost: 0.75, speed } })
+    body: JSON.stringify({ text, model_id: MODEL_ID, voice_settings: { stability: 0.35, similarity_boost: 0.75, style: 0.35, use_speaker_boost: true, speed } })
   });
   if (!r.ok) throw new Error('ElevenLabs lỗi ' + r.status + ': ' + (await r.text()).slice(0, 200));
   return Buffer.from(await r.arrayBuffer());
@@ -111,7 +111,7 @@ module.exports = async function handler(req, res) {
     if (lines.reduce((n, l) => n + l.text.length, 0) > MAX_TOTAL) return bad(res, 400, 'Đoạn quá dài (tối đa ' + MAX_TOTAL + ' ký tự)');
 
     /* Cùng nội dung và tốc độ thì dùng lại file đã tạo */
-    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: useAzure() ? AZURE_VOICES : VOICES, m: useAzure() ? 'azure' : MODEL_ID, pv: 4 })).digest('hex').slice(0, 32);
+    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: useAzure() ? AZURE_VOICES : VOICES, m: useAzure() ? 'azure' : MODEL_ID, pv: 5 })).digest('hex').slice(0, 32);
     const path = 'listening/' + hash + '.mp3';
     const cached = await signedUrl(path);
     if (cached) return res.status(200).json({ ok: true, url: cached, cached: true });
