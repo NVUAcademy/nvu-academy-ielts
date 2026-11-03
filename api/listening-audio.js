@@ -1,19 +1,47 @@
-/* Tạo audio Listening bằng ElevenLabs. Chỉ học sinh đã đăng nhập (student_id hợp lệ) mới gọi được.
+/* Tạo audio Listening bằng ElevenLabs, có 2 giọng cho hội thoại, lưu sẵn vào Supabase Storage để không tạo lại.
+   Chỉ học sinh đã đăng nhập (student_id hợp lệ) mới gọi được. Tốc độ đọc theo lớp của học sinh.
+   Gửi: { student_id, lines: [{ speaker: 'A' | 'B', text }] }  (hoặc { student_id, text } cho một giọng)
+   Trả: { ok, url } là link nghe có hạn 1 giờ.
    Biến môi trường: ELEVENLABS_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_KEY */
 
-const VOICE_ID = '21m00Tcm4TlvDq8ikWAM'; /* giọng mặc định của ElevenLabs, dùng được với gói miễn phí */
+const crypto = require('crypto');
+
+const VOICES = { A: '21m00Tcm4TlvDq8ikWAM', B: 'pNInz6obpgDQGcFmaJgB' }; /* A: giọng nữ, B: giọng nam */
 const MODEL_ID = 'eleven_multilingual_v2';
-const MAX_CHARS = 600;
+const MAX_LINE = 600, MAX_TOTAL = 2500, MAX_LINES = 30;
 /* Tốc độ đọc theo lớp (0.7 đến 1.2). Lớp không có trong bảng dùng 0.85 */
 const SPEED_BY_CLASS = { FOUNDATION11: 0.75, IELTS13: 0.85, IELTS14: 0.9 };
 const DEFAULT_SPEED = 0.85;
+const BUCKET = 'voice-notes';
 
 const SB_URL = () => (process.env.SUPABASE_URL || '').replace(/\/$/, '');
 const SB_HEAD = () => {
   const k = process.env.SUPABASE_SERVICE_KEY || '';
   return k.startsWith('sb_') ? { apikey: k } : { apikey: k, Authorization: 'Bearer ' + k };
 };
+const sb = (path, opts) => fetch(SB_URL() + path, { ...opts, headers: { ...SB_HEAD(), ...(opts && opts.headers) } });
 const bad = (res, code, msg) => res.status(code).json({ ok: false, error: msg });
+
+/* Link nghe có hạn; trả null nếu file chưa có */
+async function signedUrl(path) {
+  const r = await sb('/storage/v1/object/sign/' + BUCKET + '/' + path, {
+    method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ expiresIn: 3600 })
+  });
+  if (!r.ok) return null;
+  const j = await r.json();
+  const u = j.signedURL || j.signedUrl;
+  return u ? SB_URL() + '/storage/v1' + u : null;
+}
+
+async function speak(text, voice, speed) {
+  const r = await fetch('https://api.elevenlabs.io/v1/text-to-speech/' + voice + '?output_format=mp3_44100_128', {
+    method: 'POST',
+    headers: { 'xi-api-key': process.env.ELEVENLABS_API_KEY, 'content-type': 'application/json', accept: 'audio/mpeg' },
+    body: JSON.stringify({ text, model_id: MODEL_ID, voice_settings: { stability: 0.6, similarity_boost: 0.75, speed } })
+  });
+  if (!r.ok) throw new Error('ElevenLabs lỗi ' + r.status + ': ' + (await r.text()).slice(0, 200));
+  return Buffer.from(await r.arrayBuffer());
+}
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -21,31 +49,40 @@ module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return bad(res, 405, 'Chỉ dùng POST');
-  if (!process.env.ELEVENLABS_API_KEY) return bad(res, 500, 'Thiếu biến môi trường ELEVENLABS_API_KEY trên Vercel');
+  for (const k of ['ELEVENLABS_API_KEY', 'SUPABASE_URL', 'SUPABASE_SERVICE_KEY'])
+    if (!process.env[k]) return bad(res, 500, 'Thiếu biến môi trường ' + k + ' trên Vercel');
 
   try {
     const b = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
     const studentId = String(b.student_id || '');
     if (!/^[0-9a-f-]{36}$/i.test(studentId)) return bad(res, 400, 'student_id không hợp lệ');
-    const st = await (await fetch(SB_URL() + '/rest/v1/students?id=eq.' + studentId + '&select=id,class_code', { headers: SB_HEAD() })).json();
+    const st = await (await sb('/rest/v1/students?id=eq.' + studentId + '&select=id,class_code')).json();
     if (!Array.isArray(st) || !st.length) return bad(res, 403, 'Không tìm thấy học sinh');
     const speed = SPEED_BY_CLASS[st[0].class_code] || DEFAULT_SPEED;
 
-    const text = String(b.text || '').trim();
-    if (!text) return bad(res, 400, 'Thiếu text');
-    if (text.length > MAX_CHARS) return bad(res, 400, 'Đoạn text quá dài (tối đa ' + MAX_CHARS + ' ký tự)');
+    const raw = Array.isArray(b.lines) ? b.lines : [{ speaker: 'A', text: b.text }];
+    const lines = raw.map(l => ({ speaker: l && l.speaker === 'B' ? 'B' : 'A', text: String((l && l.text) || '').trim() })).filter(l => l.text);
+    if (!lines.length) return bad(res, 400, 'Thiếu nội dung cần đọc');
+    if (lines.length > MAX_LINES) return bad(res, 400, 'Quá nhiều câu (tối đa ' + MAX_LINES + ')');
+    if (lines.some(l => l.text.length > MAX_LINE)) return bad(res, 400, 'Có câu quá dài (tối đa ' + MAX_LINE + ' ký tự)');
+    if (lines.reduce((n, l) => n + l.text.length, 0) > MAX_TOTAL) return bad(res, 400, 'Đoạn quá dài (tối đa ' + MAX_TOTAL + ' ký tự)');
 
-    const r = await fetch('https://api.elevenlabs.io/v1/text-to-speech/' + VOICE_ID, {
-      method: 'POST',
-      headers: { 'xi-api-key': process.env.ELEVENLABS_API_KEY, 'content-type': 'application/json', accept: 'audio/mpeg' },
-      body: JSON.stringify({ text, model_id: MODEL_ID, voice_settings: { stability: 0.6, similarity_boost: 0.75, speed } })
+    /* Cùng nội dung và tốc độ thì dùng lại file đã tạo */
+    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: VOICES, m: MODEL_ID })).digest('hex').slice(0, 32);
+    const path = 'listening/' + hash + '.mp3';
+    const cached = await signedUrl(path);
+    if (cached) return res.status(200).json({ ok: true, url: cached, cached: true });
+
+    const parts = await Promise.all(lines.map(l => speak(l.text, VOICES[l.speaker], speed)));
+    const audio = Buffer.concat(parts);
+    const up = await sb('/storage/v1/object/' + BUCKET + '/' + path, {
+      method: 'POST', headers: { 'content-type': 'audio/mpeg', 'x-upsert': 'true' }, body: audio
     });
-    if (!r.ok) return bad(res, 502, 'ElevenLabs lỗi ' + r.status + ': ' + (await r.text()).slice(0, 200));
-
-    const audio = Buffer.from(await r.arrayBuffer());
-    res.setHeader('Content-Type', 'audio/mpeg');
-    return res.status(200).send(audio);
+    if (!up.ok) return bad(res, 500, 'Không lưu được audio: ' + (await up.text()).slice(0, 160));
+    const url = await signedUrl(path);
+    if (!url) return bad(res, 500, 'Không tạo được link nghe');
+    return res.status(200).json({ ok: true, url, cached: false });
   } catch (e) {
-    return bad(res, 500, 'Lỗi máy chủ: ' + e.message);
+    return bad(res, 500, 'Lỗi: ' + e.message);
   }
 };
