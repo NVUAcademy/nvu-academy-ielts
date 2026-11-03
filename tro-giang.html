@@ -57,7 +57,7 @@ function isoDaysAgo(n) { return new Date(Date.now() - n * 86400000).toISOString(
 
 async function load() {
   const { data, error } = await db.from('daily_scores')
-    .select('id, student_id, practice_id, practice_date, section, score, max_score, voice_path, students(full_name, class_code)')
+    .select('id, student_id, practice_id, practice_date, section, score, max_score, voice_path, teacher_comment, students(full_name, class_code)')
     .gte('practice_date', isoDaysAgo(14)).not('voice_path', 'is', null).order('practice_date', { ascending: false }).limit(500);
   if (error) { document.getElementById('list').innerHTML = `<div class="bad">Không tải được: ${esc(error.message)}</div>`; return; }
   rows = data || [];
@@ -79,7 +79,7 @@ function render() {
       <div class="lbl">Bài nộp của học sinh</div>
       ${r.audioUrl ? `<audio controls preload="none" src="${esc(r.audioUrl)}"></audio>` : '<div class="meta bad">Không mở được file ghi âm của bài này</div>'}
       <div class="lbl">1 · Nhận xét</div>
-      <textarea id="cm-${esc(r.id)}" placeholder="Nhận xét bài làm của học sinh…"></textarea>
+      <textarea id="cm-${esc(r.id)}" placeholder="Nhận xét bài làm của học sinh…">${esc(r.teacher_comment || '')}</textarea>
       <div class="lbl">2 · Ghi âm các từ học sinh phát âm sai (để học sinh đọc theo)</div>
       <div style="margin-top:6px"><button id="rec-${esc(r.id)}" onclick="startRec('${esc(r.id)}')">🎙 Ghi âm</button></div>
       <div id="box-${esc(r.id)}"></div>
@@ -134,9 +134,10 @@ async function sendAll(id) {
     });
     const j = await res.json();
     if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
-    msg.innerHTML = '<span class="ok">✓ Đã gửi cho học sinh. Học sinh sẽ thấy trong mục "Hôm nay".</span>';
+    msg.innerHTML = '<span class="ok">✓ Đã gửi cho học sinh. Nhận xét vẫn được giữ trên trang này.</span>';
     delete pending[id];
-    document.getElementById('cm-' + id).value = '';
+    if (comment) r.teacher_comment = comment;
+    document.getElementById('cm-' + id).value = r.teacher_comment || '';
     document.getElementById('box-' + id).innerHTML = '';
   } catch (e) {
     msg.innerHTML = `<span class="bad">Chưa gửi được: ${esc(e.message)}</span>`;

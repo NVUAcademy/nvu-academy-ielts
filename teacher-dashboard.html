@@ -796,6 +796,12 @@
       window.location.href = 'login.html';
       return;
     }
+    /* Trang này chỉ dành cho giáo viên; trợ giảng được chuyển sang trang trợ giảng */
+    const { data: me } = await db.from('staff_emails').select('role').eq('email', String(session.user.email).toLowerCase()).maybeSingle();
+    if (!me || me.role !== 'teacher') {
+      window.location.href = 'tro-giang.html';
+      return;
+    }
     loadAll();
   })();
 

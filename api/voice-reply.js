@@ -98,6 +98,16 @@ module.exports = async function handler(req, res) {
       if (!up.ok) return bad(res, 500, 'Không lưu được file ghi âm: ' + (await up.text()).slice(0, 160));
     }
 
+    /* Lưu nhận xét chữ vào đúng dòng bài làm của học sinh (chỗ trang học sinh và trang giáo viên đọc).
+       Chỉ ghi khi có chữ mới, nên không xóa nhận xét cũ nếu ô để trống. */
+    if (comment) {
+      const up = await sb('/rest/v1/daily_scores?student_id=eq.' + studentId + '&practice_id=eq.' + encodeURIComponent(practiceId) + '&practice_date=eq.' + practiceDate + '&section=eq.' + encodeURIComponent(section), {
+        method: 'PATCH', headers: { 'content-type': 'application/json', Prefer: 'return=minimal' },
+        body: JSON.stringify({ teacher_comment: comment })
+      });
+      if (!up.ok) return bad(res, 500, 'Không lưu được nhận xét vào bài làm: ' + (await up.text()).slice(0, 160));
+    }
+
     const ins = await sb('/rest/v1/voice_replies', {
       method: 'POST', headers: { 'content-type': 'application/json', Prefer: 'return=minimal' },
       body: JSON.stringify({ student_id: studentId, practice_id: practiceId, practice_date: practiceDate, section, path, comment: comment || null, created_by: email })

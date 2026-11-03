@@ -302,7 +302,8 @@ async function loadToday() {
     });
     /* Nhận xét chữ của trợ giảng/giáo viên (lưu ở daily_scores) cũng hiện ở mục này, không có ghi âm */
     const cut14 = new Date(Date.now() - 14 * 86400000).toISOString().slice(0, 10);
-    const textItems = (sc.data || []).filter(r => r.teacher_comment && r.practice_date >= cut14)
+    const textItems = (sc.data || []).filter(r => r.teacher_comment && r.practice_date >= cut14
+      && !replies.some(x => x.practice_id === r.practice_id && x.date === r.practice_date))
       .map(r => ({ practice_id: r.practice_id, date: r.practice_date, comment: r.teacher_comment, url: null }));
     const allReplies = replies.concat(textItems).sort((a, b) => String(b.date).localeCompare(String(a.date)));
     if (allReplies.length) {
