@@ -4,6 +4,7 @@
   },
   "crons": [
     { "path": "/api/export-recordings?days=3", "schedule": "30 16 * * *" },
-    { "path": "/api/export-recordings?task=report", "schedule": "30 17 * * *" }
+    { "path": "/api/export-recordings?task=report", "schedule": "30 17 * * *" },
+    { "path": "/api/export-recordings?task=meow", "schedule": "40 17 * * *" }
   ]
 }

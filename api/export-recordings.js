@@ -102,6 +102,20 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ ok: true, day: mail.day, subject: mail.subject, ...sent });
     }
 
+    /* ?task=meow: tự chấm Meow theo bài đã nộp của ngày hôm trước (xem lib/meow-auto.js). &dry=1 chỉ xem trước. */
+    if ((req.query || {}).task === 'meow') {
+      if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_KEY) return res.status(500).json({ ok: false, error: 'Thiếu SUPABASE_URL / SUPABASE_SERVICE_KEY trên Vercel' });
+      const q = req.query;
+      if (q.date && !/^\d{4}-\d{2}-\d{2}$/.test(q.date)) return res.status(400).json({ ok: false, error: 'date phải dạng YYYY-MM-DD' });
+      const day = q.date || new Date(Date.now() + 7 * 3600e3 - 86400e3).toISOString().slice(0, 10);
+      const meow = require('../lib/meow-auto.js');
+      const site = process.env.SITE_URL || 'https://nvu-academy-ielts.vercel.app';
+      const { rows, summary } = await meow.computeMeow(day, site);
+      if (q.dry) return res.status(200).json({ ok: true, dry: true, day, summary, would_write: rows.length });
+      const written = await meow.writeMeow(rows);
+      return res.status(200).json({ ok: true, day, written, summary });
+    }
+
     for (const k of ['GOOGLE_SA_JSON', 'DRIVE_FOLDERS', 'SUPABASE_URL', 'SUPABASE_SERVICE_KEY']) if (!process.env[k]) return res.status(500).json({ ok: false, error: 'Thiếu biến môi trường ' + k + ' trên Vercel' });
     const folders = JSON.parse(process.env.DRIVE_FOLDERS);
     const q = req.query || {}, days = Math.max(1, Math.min(14, parseInt(q.days || '3', 10) || 3));
