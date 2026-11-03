@@ -889,11 +889,12 @@
 
     const em = await db.from('student_emails').select('student_id, email');
     const emailOf = {}; (em.data || []).forEach(r => { emailOf[r.student_id] = r.email; });
+    studentNames = {}; (data || []).forEach(s => { studentNames[s.id] = s.full_name; });
 
     document.getElementById('students-table').innerHTML = `
       <table>
         <thead><tr>
-          <th>#</th><th>Học sinh</th><th>Lớp</th><th>Email Google (để đăng nhập)</th><th>Điểm tổng</th><th>Streak</th><th>Hoạt động cuối</th>
+          <th>#</th><th>Học sinh</th><th>Lớp</th><th>Email Google (để đăng nhập)</th><th>Điểm tổng</th><th>Streak</th><th>Hoạt động cuối</th><th>Xóa</th>
         </tr></thead>
         <tbody>
           ${data.map((s, i) => `<tr>
@@ -904,9 +905,23 @@
             <td><strong>${s.total_score || 0}</strong></td>
             <td>${s.streak_days || 0} ngày 🔥</td>
             <td style="color:var(--muted)">${s.last_active ? new Date(s.last_active).toLocaleDateString('vi-VN') : '—'}</td>
+            <td><button class="btn-sm" style="color:var(--red)" onclick="deleteStudent('${s.id}')">Xóa</button><div id="sd-${s.id}" style="font-size:11px;min-height:13px"></div></td>
           </tr>`).join('')}
         </tbody>
       </table>`;
+  }
+
+  let studentNames = {};
+  /* Xóa tài khoản học sinh (kèm toàn bộ bài làm, nhận xét, nhật ký lỗi của học sinh đó) */
+  async function deleteStudent(id) {
+    const name = studentNames[id] || 'học sinh này';
+    if (!confirm('Xóa tài khoản "' + name + '"?\nToàn bộ bài làm, nhận xét và nhật ký lỗi của học sinh này sẽ bị xóa, KHÔNG khôi phục được.')) return;
+    const el = document.getElementById('sd-' + id);
+    el.style.color = 'var(--muted)'; el.textContent = 'Đang xóa...';
+    const { data, error } = await db.from('students').delete().eq('id', id).select('id');
+    if (error) { el.style.color = 'var(--red)'; el.textContent = 'Không xóa được: ' + error.message; return; }
+    if (!data || !data.length) { el.style.color = 'var(--red)'; el.textContent = 'Không xóa được (chưa có quyền xóa học sinh)'; return; }
+    loadStudents();
   }
 
   async function saveStudentEmail(id, input) {
