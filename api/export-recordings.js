@@ -91,6 +91,17 @@ module.exports = async function handler(req, res) {
   try {
     const who = await authorised(req);
     if (!who) return res.status(401).json({ ok: false, error: 'Không có quyền' });
+
+    /* ?task=report: gửi báo cáo tiến độ trong ngày qua email (xem lib/daily-report.js) */
+    if ((req.query || {}).task === 'report') {
+      if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_KEY) return res.status(500).json({ ok: false, error: 'Thiếu SUPABASE_URL / SUPABASE_SERVICE_KEY trên Vercel' });
+      const report = require('../lib/daily-report.js');
+      const mail = await report.buildReport(req.query.date);
+      if (req.query.dry) return res.status(200).json({ ok: true, dry: true, subject: mail.subject, html: mail.html });
+      const sent = await report.sendReport(mail);
+      return res.status(200).json({ ok: true, day: mail.day, subject: mail.subject, ...sent });
+    }
+
     for (const k of ['GOOGLE_SA_JSON', 'DRIVE_FOLDERS', 'SUPABASE_URL', 'SUPABASE_SERVICE_KEY']) if (!process.env[k]) return res.status(500).json({ ok: false, error: 'Thiếu biến môi trường ' + k + ' trên Vercel' });
     const folders = JSON.parse(process.env.DRIVE_FOLDERS);
     const q = req.query || {}, days = Math.max(1, Math.min(14, parseInt(q.days || '3', 10) || 3));
