@@ -105,8 +105,9 @@ async function speakGeminiChunk(lines) {
     'A phone call to the reception of a language club to ask about evening IELTS courses. Polite, friendly, everyday tone.\n\n' +
     "## DIRECTOR'S NOTES\n" +
     'Style: natural conversation, warm and clear, with rising intonation on questions.\n' +
-    'Pace: slow and clear. Slow down further when spelling letters, reading phone numbers, names, addresses, room numbers and prices. ' +
-    'Pause briefly between groups of digits and between spelled letters.\n' +
+    'Pace: read at about three-quarters of normal conversational speed, deliberately slow and unhurried. ' +
+    'Slow down even further when spelling letters, reading phone numbers, names, addresses, room numbers and prices. ' +
+    'Leave a longer pause (about one second) after each sentence and a short pause between groups of digits and between spelled letters.\n' +
     'Pronunciation: IELTS is said as "eye-elts".\n\n' +
     '## TRANSCRIPT\n' + script;
   const r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent', {
@@ -163,7 +164,7 @@ module.exports = async function handler(req, res) {
 
     /* Cùng nội dung và tốc độ thì dùng lại file đã tạo */
     const gem = useGemini();
-    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: useAzure() ? AZURE_VOICES : VOICES, m: gem ? 'gemini' : useAzure() ? 'azure' : MODEL_ID, pv: 8 })).digest('hex').slice(0, 32);
+    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: useAzure() ? AZURE_VOICES : VOICES, m: gem ? 'gemini' : useAzure() ? 'azure' : MODEL_ID, pv: 9 })).digest('hex').slice(0, 32);
     const path = 'listening/' + hash + (gem ? '.wav' : '.mp3');
     const cached = await signedUrl(path);
     if (cached) return res.status(200).json({ ok: true, url: cached, cached: true });
