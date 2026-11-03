@@ -144,7 +144,7 @@ module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return bad(res, 405, 'Chỉ dùng POST');
-  for (const k of ['ELEVENLABS_API_KEY', 'SUPABASE_URL', 'SUPABASE_SERVICE_KEY'])
+  for (const k of ['SUPABASE_URL', 'SUPABASE_SERVICE_KEY', ...(useGemini() || useAzure() ? [] : ['ELEVENLABS_API_KEY'])])
     if (!process.env[k]) return bad(res, 500, 'Thiếu biến môi trường ' + k + ' trên Vercel');
 
   try {
