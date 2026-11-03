@@ -96,7 +96,7 @@ function pcmToWav(pcm, rate) {
   h.write('data', 36); h.writeUInt32LE(pcm.length, 40);
   return Buffer.concat([h, pcm]);
 }
-async function speakGemini(lines) {
+async function speakGeminiChunk(lines) {
   const script = lines.map(l => 'Speaker' + (l.speaker === 'B' ? '2' : '1') + ': ' + l.text.replace(/\[\/?slow\]/g, '')).join('\n');
   const prompt = 'Read this as a natural phone conversation with clear, expressive intonation and natural rhythm. ' +
     'Pronounce IELTS as "eye-elts". When spelling letters or reading numbers, digits or addresses, slow down and pause briefly between each part.\n\n' + script;
@@ -118,8 +118,14 @@ async function speakGemini(lines) {
   if (!r.ok) throw new Error('Gemini lỗi ' + r.status + ': ' + JSON.stringify(j).slice(0, 200));
   const part = j.candidates && j.candidates[0] && j.candidates[0].content && j.candidates[0].content.parts && j.candidates[0].content.parts[0];
   if (!part || !part.inlineData || !part.inlineData.data) throw new Error('Gemini không trả về audio');
-  const m = /rate=(\d+)/.exec(part.inlineData.mimeType || '');
-  return pcmToWav(Buffer.from(part.inlineData.data, 'base64'), m ? Number(m[1]) : 24000);
+  return Buffer.from(part.inlineData.data, 'base64');
+}
+/* Chia hội thoại thành đoạn 9 lượt, gọi song song để mỗi lần gọi không vượt 60 giây; ghép lại thành một WAV (24 kHz) */
+async function speakGemini(lines) {
+  const chunks = [];
+  for (let i = 0; i < lines.length; i += 9) chunks.push(lines.slice(i, i + 9));
+  const pcms = await Promise.all(chunks.map(speakGeminiChunk));
+  return pcmToWav(Buffer.concat(pcms), 24000);
 }
 
 module.exports = async function handler(req, res) {
