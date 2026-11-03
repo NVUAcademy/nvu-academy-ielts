@@ -872,13 +872,41 @@
     return new Date(d.setDate(diff)).toISOString().split('T')[0];
   }
 
+  /* Điểm, streak, hoạt động cuối của từng học sinh, tính từ daily_scores và weekly_quiz_results.
+     (Cột total_score / streak_days trong bảng students không được cập nhật nên không dùng.) */
+  async function studentStats(rows) {
+    const [d, q] = await Promise.all([
+      db.from('daily_scores').select('student_id, practice_date, score'),
+      db.from('weekly_quiz_results').select('student_id, total_score'),
+    ]);
+    const acc = {};
+    rows.forEach(r => { acc[r.id] = { total: 0, days: new Set(), last: null }; });
+    (d.data || []).forEach(x => {
+      const a = acc[x.student_id]; if (!a) return;
+      a.total += x.score || 0; a.days.add(x.practice_date);
+      if (!a.last || x.practice_date > a.last) a.last = x.practice_date;
+    });
+    (q.data || []).forEach(x => { const a = acc[x.student_id]; if (a) a.total += x.total_score || 0; });
+    const iso = dt => dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0');
+    const out = {};
+    rows.forEach(r => {
+      const a = acc[r.id];
+      let streak = 0; const day = new Date();
+      if (!a.days.has(iso(day))) day.setDate(day.getDate() - 1);
+      while (a.days.has(iso(day))) { streak++; day.setDate(day.getDate() - 1); }
+      out[r.id] = { total_score: a.total, streak_days: streak, last_active: a.last };
+    });
+    return out;
+  }
+
   async function loadOverviewRanking() {
     const classCode = document.getElementById('class-filter-overview').value;
-    let query = db.from('students').select('id, full_name, class_code, avatar_emoji, total_score')
-      .order('total_score', { ascending: false }).limit(10);
+    let query = db.from('students').select('id, full_name, class_code, avatar_emoji');
     if (classCode) query = query.eq('class_code', classCode);
     const { data } = await query;
-    renderRankingTable('overview-ranking', data);
+    const st = await studentStats(data || []);
+    const ranked = (data || []).map(s => ({ ...s, ...st[s.id] })).sort((a, b) => b.total_score - a.total_score).slice(0, 10);
+    renderRankingTable('overview-ranking', ranked);
   }
 
   async function loadStudents() {
@@ -894,6 +922,8 @@
 
     const em = await db.from('student_emails').select('student_id, email');
     const emailOf = {}; (em.data || []).forEach(r => { emailOf[r.student_id] = r.email; });
+    const st = await studentStats(data);
+    data.forEach(s => Object.assign(s, st[s.id]));
     studentNames = {}; (data || []).forEach(s => { studentNames[s.id] = s.full_name; });
 
     document.getElementById('students-table').innerHTML = `
@@ -1209,11 +1239,12 @@
 
   async function loadRanking() {
     const classCode = document.getElementById('class-filter-ranking').value;
-    let query = db.from('students').select('id, full_name, class_code, avatar_emoji, total_score, streak_days')
-      .order('total_score', { ascending: false });
+    let query = db.from('students').select('id, full_name, class_code, avatar_emoji');
     if (classCode) query = query.eq('class_code', classCode);
     const { data } = await query;
-    renderRankingTable('ranking-table', data);
+    const st = await studentStats(data || []);
+    const ranked = (data || []).map(s => ({ ...s, ...st[s.id] })).sort((a, b) => b.total_score - a.total_score);
+    renderRankingTable('ranking-table', ranked);
   }
 
   function renderRankingTable(elId, data) {
