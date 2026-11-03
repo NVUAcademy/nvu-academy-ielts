@@ -691,12 +691,16 @@
         showErr('teacher', 'Gmail ' + email + ' chưa có trong danh sách giáo viên và trợ giảng. Nhờ thầy Nam thêm email này.');
         return;
       }
-      /* Trợ giảng chỉ vào trang trợ giảng; trang giáo viên dành riêng cho giáo viên */
+      /* Trang giáo viên chỉ dành cho vai trò teacher. Trợ giảng phải đăng nhập ở trang trợ giảng. */
       const { data: me } = await db.from('staff_emails').select('role').eq('email', String(session.user.email).toLowerCase()).maybeSingle();
-      const dest = me && me.role === 'assistant' ? 'tro-giang.html' : 'teacher-dashboard.html';
+      if (!me || me.role !== 'teacher') {
+        const email = session.user.email; await db.auth.signOut(); okEl.style.display = 'none';
+        showErr('teacher', 'Gmail ' + email + ' không có quyền vào trang giáo viên. Trợ giảng vui lòng đăng nhập ở trang trợ giảng.');
+        return;
+      }
       localStorage.setItem('nvu_teacher', JSON.stringify({ id: session.user.id, email: session.user.email }));
       okEl.textContent = 'Đăng nhập thành công!';
-      setTimeout(() => { window.location.href = dest; }, 800);
+      setTimeout(() => { window.location.href = 'teacher-dashboard.html'; }, 800);
     }
     if (location.search.indexOf('t=1') >= 0) finishTeacherGoogle();
 
