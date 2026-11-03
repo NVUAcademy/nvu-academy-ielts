@@ -283,7 +283,24 @@ function renderPractice() {
 function audioHtml(key) {
   if (!key) return '';
   const a = P.audio[key];
+  /* Bài có transcript (lines) thì tạo audio bằng ElevenLabs khi học sinh bấm nghe; file đã tạo được lưu lại */
+  if (a.lines) return `<div class="audio-box"><div class="lab">🎧 ${esc(a.label)}</div><button class="btn small" onclick="loadTts('${esc(key)}', this)">▶ Nghe</button><audio controls preload="none" style="display:none;width:100%;margin-top:8px"></audio><div class="meta" style="font-size:13px"></div></div>`;
   return `<div class="audio-box"><div class="lab">🎧 ${esc(a.label)}</div><audio controls preload="metadata" src="${esc(a.src)}"></audio></div>`;
+}
+
+async function loadTts(key, btn) {
+  const box = btn.closest('.audio-box'), au = box.querySelector('audio'), msg = box.querySelector('.meta');
+  const lines = P.audio[key].lines;
+  btn.disabled = true; msg.textContent = 'Đang tạo audio, lần đầu có thể mất vài chục giây…';
+  try {
+    const r = await fetch('/api/listening-audio', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ student_id: student.id, lines }) });
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
+    au.src = j.url; au.style.display = 'block'; msg.textContent = '';
+    btn.style.display = 'none'; au.play().catch(() => {});
+  } catch (e) {
+    msg.textContent = 'Chưa tạo được audio: ' + e.message; btn.disabled = false;
+  }
 }
 
 /* Đoạn văn của bài đọc: trường passage, hoặc phần sau "Text:" trong instructions. Tách ra để hiện trong khung riêng */

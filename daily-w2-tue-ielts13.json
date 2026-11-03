@@ -16,7 +16,116 @@
   "audio": {
     "listening": {
       "label": "Audio · Greenfield Language Club (Section 1)",
-      "src": "audio/IELTS13_W2_Tue_Listening_S1.mp3"
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "Good morning, Greenfield Language Club. How can I help you?"
+        },
+        {
+          "speaker": "B",
+          "text": "Hello. I’d like some information about your evening courses, please."
+        },
+        {
+          "speaker": "A",
+          "text": "Of course. Can I take your name first?"
+        },
+        {
+          "speaker": "B",
+          "text": "Yes. My first name is Nadia."
+        },
+        {
+          "speaker": "A",
+          "text": "And your surname?"
+        },
+        {
+          "speaker": "B",
+          "text": "It’s Hartley. That’s H-A-R-T-L-E-Y."
+        },
+        {
+          "speaker": "A",
+          "text": "Thank you. And a mobile number, in case we need to call you?"
+        },
+        {
+          "speaker": "B",
+          "text": "Yes, it’s zero seven four one two, eight five nine, six three zero."
+        },
+        {
+          "speaker": "A",
+          "text": "Let me check: zero seven four one two, eight five nine, six three zero. Perfect."
+        },
+        {
+          "speaker": "B",
+          "text": "Great. I was thinking about the Grammar Basics course, but I really need to improve for an exam."
+        },
+        {
+          "speaker": "A",
+          "text": "Then I’d choose our IELTS preparation course. It’s very popular."
+        },
+        {
+          "speaker": "B",
+          "text": "Yes, that sounds better. I’ll take the IELTS preparation course."
+        },
+        {
+          "speaker": "A",
+          "text": "Good. The next group starts on the fifth of November."
+        },
+        {
+          "speaker": "B",
+          "text": "Oh, that’s a bit early for me. Is there a later group?"
+        },
+        {
+          "speaker": "A",
+          "text": "Yes, there’s another one starting on the twelfth of November."
+        },
+        {
+          "speaker": "B",
+          "text": "The twelfth is fine."
+        },
+        {
+          "speaker": "A",
+          "text": "The classes are on Tuesday and Thursday evenings, from half past six."
+        },
+        {
+          "speaker": "B",
+          "text": "Six thirty. Good. How much is it?"
+        },
+        {
+          "speaker": "A",
+          "text": "It was forty pounds a month last year, but now it’s forty-five."
+        },
+        {
+          "speaker": "B",
+          "text": "Forty-five. OK. Is there anything extra?"
+        },
+        {
+          "speaker": "A",
+          "text": "There’s a one-time registration fee of fifteen pounds."
+        },
+        {
+          "speaker": "B",
+          "text": "Fifteen. Right. And where are the classes?"
+        },
+        {
+          "speaker": "A",
+          "text": "In Room twelve, on the second floor."
+        },
+        {
+          "speaker": "B",
+          "text": "Twelve, second floor. What should I bring on the first day?"
+        },
+        {
+          "speaker": "A",
+          "text": "Please bring a photo ID, like a passport. We also need a student card if you have one, but that’s optional."
+        },
+        {
+          "speaker": "B",
+          "text": "A photo ID. Thank you very much."
+        },
+        {
+          "speaker": "A",
+          "text": "You’re welcome. We’ll see you on the twelfth."
+        }
+      ]
     }
   },
   "steps": [
