@@ -34,7 +34,28 @@ async function signedUrl(path) {
   return u ? SB_URL() + '/storage/v1' + u : null;
 }
 
-async function speak(text, voice, speed) {
+/* Azure AI Speech (ưu tiên nếu có AZURE_SPEECH_KEY). Giọng nữ Anh: Sonia; giọng nam Anh: Ryan. */
+const AZURE_VOICES = { A: 'en-GB-SoniaNeural', B: 'en-GB-RyanNeural' };
+const useAzure = () => !!process.env.AZURE_SPEECH_KEY;
+const xmlEsc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+async function speakAzure(text, speaker, speed) {
+  const region = process.env.AZURE_SPEECH_REGION;
+  if (!region) throw new Error('Thiếu AZURE_SPEECH_REGION trên Vercel (ví dụ southeastasia)');
+  const pct = Math.round((speed - 1) * 100);
+  const ssml = `<speak version="1.0" xml:lang="en-GB"><voice name="${AZURE_VOICES[speaker]}"><prosody rate="${pct}%">${xmlEsc(text)}</prosody></voice></speak>`;
+  const r = await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
+    method: 'POST',
+    headers: { 'Ocp-Apim-Subscription-Key': process.env.AZURE_SPEECH_KEY, 'Content-Type': 'application/ssml+xml', 'X-Microsoft-OutputFormat': 'audio-24khz-96kbitrate-mono-mp3', 'User-Agent': 'nvu-academy' },
+    body: ssml
+  });
+  if (!r.ok) throw new Error('Azure lỗi ' + r.status + ': ' + (await r.text()).slice(0, 200));
+  return Buffer.from(await r.arrayBuffer());
+}
+function speak(text, speaker, speed) {
+  return useAzure() ? speakAzure(text, speaker, speed) : speakEleven(text, VOICES[speaker], speed);
+}
+
+async function speakEleven(text, voice, speed) {
   const r = await fetch('https://api.elevenlabs.io/v1/text-to-speech/' + voice + '?output_format=mp3_44100_128', {
     method: 'POST',
     headers: { 'xi-api-key': process.env.ELEVENLABS_API_KEY, 'content-type': 'application/json', accept: 'audio/mpeg' },
@@ -69,7 +90,7 @@ module.exports = async function handler(req, res) {
     if (lines.reduce((n, l) => n + l.text.length, 0) > MAX_TOTAL) return bad(res, 400, 'Đoạn quá dài (tối đa ' + MAX_TOTAL + ' ký tự)');
 
     /* Cùng nội dung và tốc độ thì dùng lại file đã tạo */
-    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: VOICES, m: MODEL_ID })).digest('hex').slice(0, 32);
+    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: useAzure() ? AZURE_VOICES : VOICES, m: useAzure() ? 'azure' : MODEL_ID })).digest('hex').slice(0, 32);
     const path = 'listening/' + hash + '.mp3';
     const cached = await signedUrl(path);
     if (cached) return res.status(200).json({ ok: true, url: cached, cached: true });
@@ -77,7 +98,7 @@ module.exports = async function handler(req, res) {
     /* Gói Starter chỉ cho 3 yêu cầu cùng lúc, nên tạo từng nhóm 3 câu */
     const parts = [];
     for (let i = 0; i < lines.length; i += CONCURRENCY)
-      parts.push(...await Promise.all(lines.slice(i, i + CONCURRENCY).map(l => speak(l.text, VOICES[l.speaker], speed))));
+      parts.push(...await Promise.all(lines.slice(i, i + CONCURRENCY).map(l => speak(l.text, l.speaker, speed))));
     const audio = Buffer.concat(parts);
     const up = await sb('/storage/v1/object/' + BUCKET + '/' + path, {
       method: 'POST', headers: { 'content-type': 'audio/mpeg', 'x-upsert': 'true' }, body: audio
