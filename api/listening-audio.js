@@ -4,6 +4,9 @@
 const VOICE_ID = '21m00Tcm4TlvDq8ikWAM'; /* giọng mặc định của ElevenLabs, dùng được với gói miễn phí */
 const MODEL_ID = 'eleven_multilingual_v2';
 const MAX_CHARS = 600;
+/* Tốc độ đọc theo lớp (0.7 đến 1.2). Lớp không có trong bảng dùng 0.85 */
+const SPEED_BY_CLASS = { FOUNDATION11: 0.75, IELTS13: 0.85, IELTS14: 0.9 };
+const DEFAULT_SPEED = 0.85;
 
 const SB_URL = () => (process.env.SUPABASE_URL || '').replace(/\/$/, '');
 const SB_HEAD = () => {
@@ -24,8 +27,9 @@ module.exports = async function handler(req, res) {
     const b = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
     const studentId = String(b.student_id || '');
     if (!/^[0-9a-f-]{36}$/i.test(studentId)) return bad(res, 400, 'student_id không hợp lệ');
-    const st = await (await fetch(SB_URL() + '/rest/v1/students?id=eq.' + studentId + '&select=id', { headers: SB_HEAD() })).json();
+    const st = await (await fetch(SB_URL() + '/rest/v1/students?id=eq.' + studentId + '&select=id,class_code', { headers: SB_HEAD() })).json();
     if (!Array.isArray(st) || !st.length) return bad(res, 403, 'Không tìm thấy học sinh');
+    const speed = SPEED_BY_CLASS[st[0].class_code] || DEFAULT_SPEED;
 
     const text = String(b.text || '').trim();
     if (!text) return bad(res, 400, 'Thiếu text');
@@ -34,7 +38,7 @@ module.exports = async function handler(req, res) {
     const r = await fetch('https://api.elevenlabs.io/v1/text-to-speech/' + VOICE_ID, {
       method: 'POST',
       headers: { 'xi-api-key': process.env.ELEVENLABS_API_KEY, 'content-type': 'application/json', accept: 'audio/mpeg' },
-      body: JSON.stringify({ text, model_id: MODEL_ID })
+      body: JSON.stringify({ text, model_id: MODEL_ID, voice_settings: { stability: 0.6, similarity_boost: 0.75, speed } })
     });
     if (!r.ok) return bad(res, 502, 'ElevenLabs lỗi ' + r.status + ': ' + (await r.text()).slice(0, 200));
 
