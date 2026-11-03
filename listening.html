@@ -53,30 +53,44 @@ const MAX_PLAYS = 2;
 const TEST = {
   id: 'listening-demo-1', title: 'Listening Practice Test 1',
   parts: [
-    { part: 1, intro: 'You will hear a phone call to a sports centre about swimming lessons.',
+    { part: 1, intro: 'You will hear a man phoning a community garden about volunteering. First, you have some time to look at questions 1 to 10.',
       instr: 'Complete the form below. Write ONE WORD AND/OR A NUMBER for each answer.', type: 'gap',
+      heading: 'Hillside Community Garden: Volunteer Form',
       lines: [
-        { speaker: 'A', text: 'Good morning, Riverside Sports Centre. How can I help you?' },
-        { speaker: 'B', text: 'Hi. I would like to book swimming lessons for my daughter.' },
-        { speaker: 'A', text: 'Of course. Can I have her name, please?' },
-        { speaker: 'B', text: 'Yes. Her first name is Emma, and her surname is Clarke. That is C, L, A, R, K, E.' },
-        { speaker: 'A', text: 'Thank you. And how old is she?' },
-        { speaker: 'B', text: 'She is eight. She turned eight last month.' },
-        { speaker: 'A', text: 'Great. We have a beginners class on Friday afternoons, but it is full. There is also one on Saturday mornings.' },
-        { speaker: 'B', text: 'Saturday is better for us. What time does it start?' },
-        { speaker: 'A', text: 'It starts at half past nine and finishes at ten fifteen.' },
-        { speaker: 'B', text: 'Perfect. How much does it cost?' },
-        { speaker: 'A', text: 'It is forty-five pounds for a course of six lessons.' },
-        { speaker: 'B', text: 'And what does she need to bring?' },
-        { speaker: 'A', text: 'Just a swimming costume and a towel. Goggles are optional.' }
+        { speaker: 'A', text: 'Hello, Hillside Community Garden, Sarah speaking.' },
+        { speaker: 'B', text: 'Oh, hi. I saw your poster in the library, and I am interested in volunteering.' },
+        { speaker: 'A', text: 'Lovely. Let me take a few details. What is your name?' },
+        { speaker: 'B', text: 'It is Daniel Fenwick.' },
+        { speaker: 'A', text: 'Could you spell your surname for me?' },
+        { speaker: 'B', text: 'Sure. F, E, N, W, I, C, K.' },
+        { speaker: 'A', text: 'Thank you. And what is your address, Daniel?' },
+        { speaker: 'B', text: 'It is twenty-seven Maple Road. Oh, sorry, I have just moved. It is thirty-seven now, but still Maple Road.' },
+        { speaker: 'A', text: 'No problem. Which days would suit you? We meet on Wednesdays and at weekends.' },
+        { speaker: 'B', text: 'Wednesdays are difficult because of my job, and I play football on Saturdays. So Sunday would be best.' },
+        { speaker: 'A', text: 'Fine. Our Sunday sessions run from ten until one.' },
+        { speaker: 'B', text: 'Great. Do I need to bring any tools?' },
+        { speaker: 'A', text: 'No, we provide all the tools. But please bring your own gloves. And you will need to wear strong boots, because the ground gets very muddy.' },
+        { speaker: 'B', text: 'OK. What kind of work would I be doing?' },
+        { speaker: 'A', text: 'We were going to plant beans this month, but it is still too cold. So on your first day, you will help us plant potatoes.' },
+        { speaker: 'A', text: 'There is also a small fee for insurance. It used to be ten pounds, but this year it is twelve pounds.' },
+        { speaker: 'B', text: 'That is fine. Can I pay in cash?' },
+        { speaker: 'A', text: 'Most people do, but we are trying to reduce cash, so we ask new members to pay online.' },
+        { speaker: 'B', text: 'No problem. Where should I meet you on the first day? In the car park?' },
+        { speaker: 'A', text: 'The car park is usually full on Sundays. It is easier to meet at the main gate.' },
+        { speaker: 'B', text: 'And I will probably come by bus.' },
+        { speaker: 'A', text: 'Then take the number fourteen and get off outside the bakery on Hill Street. The garden is just behind it.' }
       ],
       qs: [
-        { n: 1, text: 'Child’s surname: ______', answer: ['clarke'] },
-        { n: 2, text: 'Age: ______', answer: ['8', 'eight'] },
-        { n: 3, text: 'Day of the class: ______', answer: ['saturday', 'saturdays'] },
-        { n: 4, text: 'Start time: ______', answer: ['9.30', '9:30', 'half past nine', '930', '9.30am', '9:30am', '9.30 am', '9:30 am'] },
-        { n: 5, text: 'Price for six lessons: £______', answer: ['45', 'forty-five', 'forty five', '£45'] },
-        { n: 6, text: 'Bring a swimming costume and a ______', answer: ['towel'] }
+        { n: 1, text: 'Name: Daniel ______', answer: ['fenwick'] },
+        { n: 2, text: 'Address: ______ Maple Road', answer: ['37', 'thirty-seven', 'thirty seven'] },
+        { n: 3, text: 'Preferred day: ______', answer: ['sunday', 'sundays'] },
+        { n: 4, text: 'Bring your own ______', answer: ['gloves'] },
+        { n: 5, text: 'Wear strong ______', answer: ['boots'] },
+        { n: 6, text: 'First task: planting ______', answer: ['potatoes', 'potato'] },
+        { n: 7, text: 'Insurance fee: £______ per year', answer: ['12', 'twelve', '£12'] },
+        { n: 8, text: 'Payment method: ______', answer: ['online'] },
+        { n: 9, text: 'First day: meet at the main ______', answer: ['gate'] },
+        { n: 10, text: 'Bus: get off outside the ______ on Hill Street', answer: ['bakery'] }
       ] },
     { part: 2, intro: 'You will hear a guide talking to visitors at a museum.',
       instr: 'Choose the correct letter, A, B or C.', type: 'mcq',
@@ -89,10 +103,10 @@ const TEST = {
         { speaker: 'B', text: 'The tour takes about fifty minutes, and it finishes in the garden, where you can see a model of the old harbour.' }
       ],
       qs: [
-        { n: 7, text: 'What was the building before it became a museum?', opts: ['a school', 'a railway station', 'a hospital'], answer: 1 },
-        { n: 8, text: 'What time does the cafe close?', opts: ['at four o’clock', 'at five o’clock', 'at three o’clock'], answer: 0 },
-        { n: 9, text: 'Where are visitors not allowed to take photos?', opts: ['on the ground floor', 'on the first floor', 'on the second floor'], answer: 2 },
-        { n: 10, text: 'Where does the tour finish?', opts: ['in the cafe', 'in the garden', 'in the shop'], answer: 1 }
+        { n: 11, text: 'What was the building before it became a museum?', opts: ['a school', 'a railway station', 'a hospital'], answer: 1 },
+        { n: 12, text: 'What time does the cafe close?', opts: ['at four o’clock', 'at five o’clock', 'at three o’clock'], answer: 0 },
+        { n: 13, text: 'Where are visitors not allowed to take photos?', opts: ['on the ground floor', 'on the first floor', 'on the second floor'], answer: 2 },
+        { n: 14, text: 'Where does the tour finish?', opts: ['in the cafe', 'in the garden', 'in the shop'], answer: 1 }
       ] }
   ]
 };
@@ -122,7 +136,7 @@ function render() {
     '<div class="main"><div class="player"><div>' + esc(p.intro) + '</div>' +
     '<div style="margin-top:10px"><button class="btn" id="play" onclick="playPart()" ' + (used >= MAX_PLAYS ? 'disabled' : '') + '>▶ Nghe (' + used + '/' + MAX_PLAYS + ')</button></div>' +
     '<audio id="aud" style="display:none"></audio><div class="msg" id="pmsg">Mỗi phần được nghe tối đa ' + MAX_PLAYS + ' lần. Đọc câu hỏi trước khi bấm nghe.</div></div>' +
-    '<div class="q-instr">' + esc(p.instr) + '</div>' + qs + '</div>';
+    '<div class="q-instr">' + esc(p.instr) + '</div>' + (p.heading ? '<div style="font-weight:700;margin:0 0 12px">' + esc(p.heading) + '</div>' : '') + qs + '</div>';
   renderNav();
 }
 function renderNav() {

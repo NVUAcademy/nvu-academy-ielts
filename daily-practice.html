@@ -51,6 +51,8 @@ body::before { content: ''; position: fixed; inset: 0; pointer-events: none;
 .step-head h2 { margin-bottom: 0; font-size: 22px; }
 .mins { font-size: 13px; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
 .instr { font-size: 16px; line-height: 1.65; color: #5a4a38; margin: 10px 0 14px; }
+.passage { font-size: 17px; line-height: 1.75; color: #2f2638; background: #fffaf0; border: 1px solid rgba(176,141,87,.45); border-left: 4px solid #b08d57; border-radius: 12px; padding: 14px 16px; margin: 0 0 16px; white-space: pre-line; }
+.passage.missing { color: #b05468; background: #fdf0f2; border-left-color: #b05468; font-size: 15px; }
 .audio-box { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; }
 .audio-box .lab { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 6px; }
 audio { width: 100%; }
@@ -284,8 +286,19 @@ function audioHtml(key) {
   return `<div class="audio-box"><div class="lab">🎧 ${esc(a.label)}</div><audio controls preload="metadata" src="${esc(a.src)}"></audio></div>`;
 }
 
+/* Đoạn văn của bài đọc: trường passage, hoặc phần sau "Text:" trong instructions. Tách ra để hiện trong khung riêng */
+function passageOf(st) {
+  if (st.passage) return { instr: st.instructions, text: st.passage };
+  if (st.passage_source) return { instr: st.instructions, text: '📖 Đoạn văn nằm trong tài liệu: ' + st.passage_source + '. Em mở tài liệu đó ra để đọc trước khi làm.' };
+  const m = String(st.instructions || '').match(/\s*(?:Text|Đoạn văn):\s*([\s\S]+)$/i);
+  return m ? { instr: st.instructions.slice(0, m.index), text: m[1] } : { instr: st.instructions, text: '' };
+}
+/* Bài đọc mà không có đoạn văn ở đâu cả (kể cả context, đã hiện riêng ở dưới) thì báo cho học sinh */
+const needsPassage = st => (st.kind === 'fill' || st.kind === 'mcq') && !st.context && /read the text|reading/i.test((st.title || '') + ' ' + (st.instructions || ''));
+
 function stepHtml(st) {
   let body = '';
+  const p = passageOf(st);
   if (st.context && (st.kind === 'fill' || st.kind === 'mcq')) body += `<div class="ctx">${st.context.map(esc).join('<br>')}</div>`;
   if (st.kind === 'fill') body += st.items.map(it => fillRow(it)).join('');
   else if (st.kind === 'mcq') {
@@ -299,15 +312,33 @@ function stepHtml(st) {
   } else if (st.kind === 'open') body += st.open.map(openBox).join('');
   else if (st.kind === 'voice') body += `<div class="lines">${st.lines.map(esc).join('<br>')}</div>` + recorderHtml() + `<div class="sub" style="margin-top:10px;font-size:17px">${esc(st.note || '')}</div>`;
   return `<div class="card"><div class="step-head"><h2>${esc(st.title)}</h2><span class="mins">${st.minutes} phút</span></div>
-    <div class="instr">${esc(st.instructions)}</div>${audioHtml(st.audio)}${body}</div>`;
+    <div class="instr">${esc(p.instr)}</div>${p.text ? `<div class="passage">${esc(p.text)}</div>` : needsPassage(st) ? `<div class="passage missing">Bài đọc này đang thiếu đoạn văn. Em chụp màn hình báo thầy nhé, thầy sẽ sửa và không tính điểm phần này.</div>` : ''}${audioHtml(st.audio)}${body}</div>`;
 }
 
 function fillRow(it) {
   return `<div class="row"><span class="lab">${esc(it.label)}</span>${it.prefix ? `<span class="pre">${esc(it.prefix)}</span>` : ''}${it.fields.map((f, i) =>
     `${i > 0 ? `<span class="join">${esc(it.joiner || '')}</span>` : ''}<input type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${esc(f.placeholder || '')}" value="${esc(answers[`${it.id}_${i}`] || '')}" oninput="setAns('${it.id}_${i}', this.value)">${f.suffix ? `<span class="suf">${esc(f.suffix)}</span>` : ''}`).join('')}</div>`;
 }
+/* Ô viết có cờ "ai": học sinh bấm "Gửi AI chấm", sửa rồi gửi lại được */
+const AI_ITEMS = {};
 function openBox(o) {
-  return `<div class="q"><div class="qt"><b>${esc(o.q)}</b></div><textarea oninput="setAns('${o.id}', this.value)">${esc(answers[o.id] || '')}</textarea></div>`;
+  const aiPart = o.ai ? `<div style="margin-top:8px"><button class="btn small" onclick="sendAiItem('${o.id}')">Gửi AI chấm</button></div><div id="aiBox_${o.id}"></div>` : '';
+  if (o.ai) AI_ITEMS[o.id] = o;
+  return `<div class="q"><div class="qt"><b>${esc(o.q)}</b></div><textarea oninput="setAns('${o.id}', this.value)">${esc(answers[o.id] || '')}</textarea>${aiPart}</div>`;
+}
+async function sendAiItem(id) {
+  const o = AI_ITEMS[id], box = document.getElementById('aiBox_' + id);
+  if (!o || !box || !student) return;
+  const text = (answers[id] || '').trim();
+  if (text.split(/\s+/).filter(Boolean).length < 5) { box.innerHTML = '<p class="sub">Bài còn quá ngắn để chấm (dưới 5 từ).</p>'; return; }
+  box.innerHTML = '<p class="sub">AI đang đọc bài viết của em… (khoảng 15 đến 30 giây)</p>';
+  try {
+    const r = await fetch('/api/writing-feedback', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ student_id: student.id, practice_id: P.id, item_id: id, date: P.date, text, prompt: o.ai.task, task_type: o.ai.type, level: o.ai.level, min_words: o.ai.min_words, criteria: o.ai.criteria }) });
+    const j = await r.json(); if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
+    box.innerHTML = writingFbHtml(j.feedback) + '<p class="sub" style="font-size:15px;margin-top:8px">Em sửa bài theo nhận xét rồi bấm "Gửi AI chấm" để chấm lại.</p>';
+  } catch (e) {
+    box.innerHTML = `<p class="sub" style="font-size:16px">Chưa chấm được (${esc(e.message)}). Em thử lại sau.</p>`;
+  }
 }
 function setAns(id, v, rerender) {
   answers[id] = v; lsSet(draftKey(), JSON.stringify(answers)); draftPush();

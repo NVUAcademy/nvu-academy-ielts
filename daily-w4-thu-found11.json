@@ -249,19 +249,9 @@
       "id": "s4",
       "title": "Step 4 · Reading: Hoa",
       "minutes": 12,
-      "instructions": "Read the text, then answer True or False.",
+      "instructions": "Read the text, then answer True or False. Text: Hoa is a busy student. She wakes up at six and makes breakfast for her brother. She goes to school by bike. In the evening she studies English. On Sunday she does the laundry and makes the bed.",
       "kind": "mcq",
       "items": [
-        {
-          "id": "s4_1",
-          "q": "Text: Hoa is a busy student. She wakes up at six and makes breakfast for her brother. She goes to school by bike. In the evening she studies English. On Sunday she does the laundry and makes the bed.",
-          "options": {
-            "A": "True",
-            "B": "False"
-          },
-          "answer": "A",
-          "explain": "Hoa wakes up at six, so this is true."
-        },
         {
           "id": "s4_2",
           "q": "1. Hoa makes dinner for her brother.",

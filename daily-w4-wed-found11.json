@@ -244,20 +244,9 @@
       "id": "s5",
       "title": "Step 5 · Reading: Ben's Sunday",
       "minutes": 12,
-      "instructions": "Read the text, then write True, False or Not Given.",
+      "instructions": "Read the text, then write True, False or Not Given. Text: Ben does not work on Sunday. He makes the bed at eight and does the laundry at nine. He likes running in the park. In the evening he cooks dinner for his family.",
       "kind": "mcq",
       "items": [
-        {
-          "id": "s5_1",
-          "q": "Text: Ben does not work on Sunday. He makes the bed at eight and does the laundry at nine. He likes running in the park. In the evening he cooks dinner for his family.",
-          "options": {
-            "A": "True",
-            "B": "False",
-            "C": "Not Given"
-          },
-          "answer": "B",
-          "explain": "Ben does not work on Sunday, so the statement 'Ben works on Sunday' is false. Use: Ben doesn't work on Sunday."
-        },
         {
           "id": "s5_2",
           "q": "1. Ben makes the bed in the morning.",
