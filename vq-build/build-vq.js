@@ -169,10 +169,13 @@ function saveProg(){ if(S.profile) ls.set('prog:'+nameKey(S.profile.name), S.pro
 function sayAloud(text){
   const w=String(text).trim().toLowerCase();
   if(!/^[a-z]+$/.test(w)) return sayAloudTTS(text);
-  const fail=()=>sayAloudTTS(text);
+  let started=false;
+  const fail=()=>{ if(started) return; started=true; sayAloudTTS(text); };
   try{ if(wordAudio) wordAudio.pause(); }catch{}
   const a=new Audio('https://www.oxfordlearnersdictionaries.com/media/english/us_pron/'+w[0]+'/'+w.slice(0,3)+'/'+w.slice(0,5)+'/'+w+'__us_1.mp3');
-  a.onerror=fail; wordAudio=a;
+  a.onerror=fail; a.onplaying=()=>{ started=true; }; wordAudio=a;
+  /* mp3 tải chậm hoặc treo (hay gặp trên điện thoại) thì không có lỗi nào, nên tự chuyển sang giọng máy sau 2,5 giây */
+  setTimeout(fail, 2500);
   const p=a.play(); if(p&&p.catch) p.catch(fail);
 }
 function sayAloudTTS(text){`, 'sayAloud');
