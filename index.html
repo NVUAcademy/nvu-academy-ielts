@@ -272,7 +272,7 @@ async function loadToday() {
     ]);
     const [sch, sc, qr] = await Promise.all([
       db.from('schedule').select('day, practice_id, vocab, note').eq('class_code', student.classCode).gte('day', fromIso).lte('day', today),
-      db.from('daily_scores').select('practice_date, practice_id, section, score, max_score').eq('student_id', student.id),
+      db.from('daily_scores').select('practice_date, practice_id, section, score, max_score, teacher_comment').eq('student_id', student.id),
       db.from('weekly_quiz_results').select('week_number, total_score, max_score').eq('student_id', student.id)
     ]);
     const byId = {}; idx.forEach(p => byId[p.id] = p);
@@ -300,9 +300,14 @@ async function loadToday() {
       const r = isDone(it);
       html += `<a class="task" href="${link(it)}"><div class="ic" style="background:var(--pink)">📅</div><div class="tt"><b>Daily Practice · ${esc(it.p.title)}</b><span>${esc(it.p.subtitle || '')}</span></div>${r ? `<span class="pill done">Đã làm ${r.score}/${r.max_score}</span>` : '<span class="pill todo">Chưa làm</span>'}</a>`;
     });
-    if (replies.length) {
-      html += '<div class="sec-label">Nhận xét giọng nói từ trợ giảng</div>';
-      replies.forEach(x => {
+    /* Nhận xét chữ của trợ giảng/giáo viên (lưu ở daily_scores) cũng hiện ở mục này, không có ghi âm */
+    const cut14 = new Date(Date.now() - 14 * 86400000).toISOString().slice(0, 10);
+    const textItems = (sc.data || []).filter(r => r.teacher_comment && r.practice_date >= cut14)
+      .map(r => ({ practice_id: r.practice_id, date: r.practice_date, comment: r.teacher_comment, url: null }));
+    const allReplies = replies.concat(textItems).sort((a, b) => String(b.date).localeCompare(String(a.date)));
+    if (allReplies.length) {
+      html += '<div class="sec-label">Nhận xét từ trợ giảng</div>';
+      allReplies.forEach(x => {
         const t = (byId[x.practice_id] && byId[x.practice_id].title) || 'Bài luyện tập';
         html += `<div class="task" style="flex-wrap:wrap"><div class="ic" style="background:var(--lilac)">🎧</div><div class="tt"><b>${esc(t)}</b><span>${esc(x.date)}</span></div>${x.comment ? `<div style="width:100%;margin-top:8px;font-size:16px;white-space:pre-line">${esc(x.comment)}</div>` : ''}${x.url ? `<audio controls preload="none" src="${esc(x.url)}" style="width:100%;margin-top:8px"></audio>` : ''}</div>`;
       });
