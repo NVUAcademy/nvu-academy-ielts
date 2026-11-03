@@ -98,8 +98,17 @@ function pcmToWav(pcm, rate) {
 }
 async function speakGeminiChunk(lines) {
   const script = lines.map(l => 'Speaker' + (l.speaker === 'B' ? '2' : '1') + ': ' + l.text.replace(/\[\/?slow\]/g, '')).join('\n');
-  const prompt = 'Read this as a natural phone conversation with clear, expressive intonation and natural rhythm. ' +
-    'Pronounce IELTS as "eye-elts". When spelling letters or reading numbers, digits or addresses, slow down and pause briefly between each part.\n\n' + script;
+  const prompt = '## AUDIO PROFILE\n' +
+    'Two speakers on a British phone call. Speaker1 is Nadia, a young woman calling to ask about courses. ' +
+    'Speaker2 is a male receptionist at Greenfield Language Club.\n\n' +
+    '## THE SCENE\n' +
+    'A phone call to the reception of a language club to ask about evening IELTS courses. Polite, friendly, everyday tone.\n\n' +
+    "## DIRECTOR'S NOTES\n" +
+    'Style: natural conversation, warm and clear, with rising intonation on questions.\n' +
+    'Pace: slow and clear. Slow down further when spelling letters, reading phone numbers, names, addresses, room numbers and prices. ' +
+    'Pause briefly between groups of digits and between spelled letters.\n' +
+    'Pronunciation: IELTS is said as "eye-elts".\n\n' +
+    '## TRANSCRIPT\n' + script;
   const r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent', {
     method: 'POST',
     headers: { 'x-goog-api-key': process.env.GEMINI_API_KEY, 'content-type': 'application/json' },
