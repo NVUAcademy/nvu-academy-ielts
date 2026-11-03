@@ -125,14 +125,18 @@ muted: #8B7355           /* nâu nhạt */
 
 ## 7. VIỆC CẦN LÀM TIẾP ⏳
 
+### Đã xong (cập nhật 2026-11-03)
+- [x] **Daily Practice pages** (Thứ 2–Thứ 5): Vocab + Grammar + Listening có timer (`daily-practice.html`)
+- [x] **Weekly Quiz page**: /30 điểm, 4 parts A B C D (`weekly-quiz.html`)
+- [x] **Teacher Dashboard**: điểm, error log, quản lý học sinh (`teacher-dashboard.html`; có mục Trợ giảng)
+- [x] **Bảng xếp hạng** (`ranking.html`)
+- [x] **Reading** (`reading.html`) và **Listening** trong luyện đề/daily practice, có lịch sử làm bài
+- [x] **Đăng nhập giáo viên và trợ giảng** dùng bảng `staff_emails` (bảng `teachers` không cần dữ liệu)
+
 ### Ưu tiên cao
-- [ ] **Daily Practice pages** (Thứ 2–Thứ 5): Vocab + Grammar + Listening có timer
-- [ ] **Weekly Quiz page**: /30 điểm, 4 parts A B C D
-- [ ] **Teacher Dashboard**: xem điểm, error log, quản lý học sinh
-- [ ] **Tạo tài khoản teacher** trong Supabase Auth cho Mr. Nam
+- [ ] **Tạo tài khoản teacher** trong Supabase Auth cho Mr. Nam (chưa kiểm tra lại)
 
 ### Ưu tiên trung
-- [ ] **Bảng xếp hạng** (ranking real-time từ Supabase)
 - [ ] **AI Writing checker** (cần Claude API key)
 - [ ] **AI Speaking coach** (cần OpenAI Whisper API key)
 
