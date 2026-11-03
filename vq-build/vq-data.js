@@ -96,7 +96,7 @@ const PRE = [
   'machinery|máy móc|Modern machinery makes the process much faster.|W2 · Processes & food|noun|[modern] machinery',
   'sequence|trình tự, thứ tự|The diagram shows the sequence of steps.|W2 · Processes & food|noun|the [correct] sequence',
   'subsequently|sau đó|The juice is filtered and subsequently bottled.|W2 · Processes & food|adverb|[and] subsequently',
-  'consist of|gồm có|The process consists of six stages.|W2 · Processes & food|phrasal verb|consist of [six stages]',
+  'consist of|gồm có|The lessons consist of six short stages.|W2 · Processes & food|phrasal verb|consist of [six stages]',
   'harvest|thu hoạch|The oranges are harvested by hand.|W2 · Processes & food|verb|harvest [crops]',
 
   /* Day 2 · Thứ Ba 3/11: hỏi thông tin và đăng ký (w2-tue-ielts13) */
