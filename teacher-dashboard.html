@@ -169,9 +169,11 @@
     }
 
     table { width: 100%; border-collapse: collapse; }
-    /* Bảng học sinh rộng hơn màn hình điện thoại: cho cuộn ngang trong khung của nó */
-    #students-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    #students-table table { min-width: 760px; }
+    /* Bảng rộng hơn màn hình điện thoại: khung chứa bảng được cuộn ngang (chỉ trên điện thoại) */
+    @media (max-width: 900px) {
+      div:has(> table) { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      div:has(> table) > table { min-width: 640px; }
+    }
     th {
       padding: 12px 16px;
       text-align: left;
