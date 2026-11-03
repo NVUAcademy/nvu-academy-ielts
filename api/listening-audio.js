@@ -38,11 +38,26 @@ async function signedUrl(path) {
 const AZURE_VOICES = { A: 'en-GB-SoniaNeural', B: 'en-GB-RyanNeural' };
 const useAzure = () => !!process.env.AZURE_SPEECH_KEY;
 const xmlEsc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+/* Chuyển transcript thành nội dung SSML cho Azure: ngắt nhịp tự nhiên, đọc chậm phần đánh vần, số và đoạn [slow]...[/slow] */
+function azureBody(text) {
+  let s = xmlEsc(text);
+  s = s.replace(/IELTS/g, '<phoneme alphabet="ipa" ph="ˈaɪ.ɛlts">IELTS</phoneme>');
+  s = s.replace(/\[slow\]([\s\S]*?)\[\/slow\]/g, (m, t) => `<prosody rate="-25%">${t}</prosody>`);
+  /* Đánh vần từng chữ: H-A-R-T-L-E-Y → đọc chậm, nghỉ giữa các chữ */
+  s = s.replace(/\b[A-Za-z](?:-[A-Za-z]){2,}\b/g, m => `<prosody rate="-25%">${m.split('-').join('<break time="150ms"/>')}</prosody>`);
+  /* Dãy số (số điện thoại, mã): đọc chậm, nghỉ giữa các nhóm */
+  s = s.replace(/\b\d(?:[\d ]){3,}\d\b/g, m => `<prosody rate="-20%">${m.split(' ').join('<break time="200ms"/>')}</prosody>`);
+  /* Ngắt nhịp tự nhiên */
+  s = s.replace(/([,;:])\s/g, '$1<break time="200ms"/> ');
+  s = s.replace(/([.?!])\s/g, '$1<break time="400ms"/> ');
+  return s;
+}
+
 async function speakAzure(text, speaker, speed) {
   const region = process.env.AZURE_SPEECH_REGION;
   if (!region) throw new Error('Thiếu AZURE_SPEECH_REGION trên Vercel (ví dụ southeastasia)');
   const pct = Math.round((speed - 1) * 100);
-  const ssml = `<speak version="1.0" xml:lang="en-GB"><voice name="${AZURE_VOICES[speaker]}"><prosody rate="${pct}%">${xmlEsc(text).replace(/IELTS/g, '<phoneme alphabet="ipa" ph="ˈaɪ.ɛlts">IELTS</phoneme>')}</prosody></voice></speak>`;
+  const ssml = `<speak version="1.0" xml:lang="en-GB"><voice name="${AZURE_VOICES[speaker]}"><prosody rate="${pct}%">${azureBody(text)}</prosody></voice></speak>`;
   const r = await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
     method: 'POST',
     headers: { 'Ocp-Apim-Subscription-Key': process.env.AZURE_SPEECH_KEY, 'Content-Type': 'application/ssml+xml', 'X-Microsoft-OutputFormat': 'audio-24khz-96kbitrate-mono-mp3', 'User-Agent': 'nvu-academy' },
@@ -52,7 +67,7 @@ async function speakAzure(text, speaker, speed) {
   return Buffer.from(await r.arrayBuffer());
 }
 function speak(text, speaker, speed) {
-  return useAzure() ? speakAzure(text, speaker, speed) : speakEleven(text.replace(/IELTS/g, 'eye elts'), VOICES[speaker], speed);
+  return useAzure() ? speakAzure(text, speaker, speed) : speakEleven(text.replace(/\[\/?slow\]/g, '').replace(/IELTS/g, 'eye elts'), VOICES[speaker], speed);
 }
 
 async function speakEleven(text, voice, speed) {
@@ -90,7 +105,7 @@ module.exports = async function handler(req, res) {
     if (lines.reduce((n, l) => n + l.text.length, 0) > MAX_TOTAL) return bad(res, 400, 'Đoạn quá dài (tối đa ' + MAX_TOTAL + ' ký tự)');
 
     /* Cùng nội dung và tốc độ thì dùng lại file đã tạo */
-    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: useAzure() ? AZURE_VOICES : VOICES, m: useAzure() ? 'azure' : MODEL_ID, pv: 2 })).digest('hex').slice(0, 32);
+    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: useAzure() ? AZURE_VOICES : VOICES, m: useAzure() ? 'azure' : MODEL_ID, pv: 3 })).digest('hex').slice(0, 32);
     const path = 'listening/' + hash + '.mp3';
     const cached = await signedUrl(path);
     if (cached) return res.status(200).json({ ok: true, url: cached, cached: true });

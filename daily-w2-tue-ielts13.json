@@ -47,11 +47,11 @@
         },
         {
           "speaker": "A",
-          "text": "Yes, it’s zero seven four one two, eight five nine, six three zero."
+          "text": "Yes, it’s [slow]zero seven four one two, eight five nine, six three zero[/slow]."
         },
         {
           "speaker": "B",
-          "text": "Let me check: zero seven four one two, eight five nine, six three zero. Perfect."
+          "text": "Let me check: [slow]zero seven four one two, eight five nine, six three zero[/slow]. Perfect."
         },
         {
           "speaker": "A",
@@ -91,7 +91,7 @@
         },
         {
           "speaker": "B",
-          "text": "It was forty pounds a month last year, but now it’s forty-five."
+          "text": "It was forty pounds a month last year, but now it’s [slow]forty-five.[/slow]"
         },
         {
           "speaker": "A",
@@ -107,11 +107,11 @@
         },
         {
           "speaker": "B",
-          "text": "In Room twelve, on the second floor."
+          "text": "[slow]In Room twelve, on the second floor.[/slow]"
         },
         {
           "speaker": "A",
-          "text": "Twelve, second floor. What should I bring on the first day?"
+          "text": "[slow]Twelve, second floor.[/slow] What should I bring on the first day?"
         },
         {
           "speaker": "B",
