@@ -41,6 +41,8 @@ const xmlEsc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').repla
 /* Chuyển transcript thành nội dung SSML cho Azure: ngắt nhịp tự nhiên, đọc chậm phần đánh vần, số và đoạn [slow]...[/slow] */
 function azureBody(text) {
   let s = xmlEsc(text);
+  /* Câu hỏi lên giọng ở cuối */
+  s = s.replace(/([^.?!]*\?)/g, '<prosody pitch="+12%">$1</prosody>');
   s = s.replace(/IELTS/g, '<phoneme alphabet="ipa" ph="ˈaɪ.ɛlts">IELTS</phoneme>');
   s = s.replace(/\[slow\]([\s\S]*?)\[\/slow\]/g, (m, t) => `<prosody rate="-25%">${t}</prosody>`);
   /* Đánh vần từng chữ: H-A-R-T-L-E-Y → đọc chậm, nghỉ giữa các chữ */
@@ -57,7 +59,10 @@ async function speakAzure(text, speaker, speed) {
   const region = process.env.AZURE_SPEECH_REGION;
   if (!region) throw new Error('Thiếu AZURE_SPEECH_REGION trên Vercel (ví dụ southeastasia)');
   const pct = Math.round((speed - 1) * 100);
-  const ssml = `<speak version="1.0" xml:lang="en-GB"><voice name="${AZURE_VOICES[speaker]}"><prosody rate="${pct}%">${azureBody(text)}</prosody></voice></speak>`;
+  /* Giọng nam (B) nói kiểu trò chuyện tự nhiên; giọng nữ (A) không có kiểu này nên giữ mặc định */
+  const style = speaker === 'B' ? '<mstts:express-as style="chat">' : '';
+  const endStyle = speaker === 'B' ? '</mstts:express-as>' : '';
+  const ssml = `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="https://www.w3.org/2001/mstts" xml:lang="en-GB"><voice name="${AZURE_VOICES[speaker]}">${style}<prosody rate="${pct}%">${azureBody(text)}</prosody>${endStyle}</voice></speak>`;
   const r = await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
     method: 'POST',
     headers: { 'Ocp-Apim-Subscription-Key': process.env.AZURE_SPEECH_KEY, 'Content-Type': 'application/ssml+xml', 'X-Microsoft-OutputFormat': 'audio-24khz-96kbitrate-mono-mp3', 'User-Agent': 'nvu-academy' },
@@ -105,7 +110,7 @@ module.exports = async function handler(req, res) {
     if (lines.reduce((n, l) => n + l.text.length, 0) > MAX_TOTAL) return bad(res, 400, 'Đoạn quá dài (tối đa ' + MAX_TOTAL + ' ký tự)');
 
     /* Cùng nội dung và tốc độ thì dùng lại file đã tạo */
-    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: useAzure() ? AZURE_VOICES : VOICES, m: useAzure() ? 'azure' : MODEL_ID, pv: 3 })).digest('hex').slice(0, 32);
+    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: useAzure() ? AZURE_VOICES : VOICES, m: useAzure() ? 'azure' : MODEL_ID, pv: 4 })).digest('hex').slice(0, 32);
     const path = 'listening/' + hash + '.mp3';
     const cached = await signedUrl(path);
     if (cached) return res.status(200).json({ ok: true, url: cached, cached: true });
