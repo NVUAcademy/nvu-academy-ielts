@@ -24,7 +24,7 @@
       "items": [
         {
           "id": "s1_1",
-          "label": "The journey to work takes forty minutes. It is my ____. (commute)",
+          "label": "The journey to work takes forty minutes. It is my ____. (hint: travel regularly between home and work)",
           "fields": [
             {
               "answer": "commute"
@@ -33,7 +33,7 @@
         },
         {
           "id": "s1_2",
-          "label": "I eat my sandwich at my desk during my ____. (lunch break)",
+          "label": "I eat my sandwich at my desk during my ____. (hint: the short break you have at midday)",
           "fields": [
             {
               "answer": "lunch break"
@@ -42,7 +42,7 @@
         },
         {
           "id": "s1_3",
-          "label": "Do not ____ late for class. (be late for)",
+          "label": "Do not ____ late for class. (hint: arrive after the time)",
           "fields": [
             {
               "answer": "be late for",
@@ -54,7 +54,7 @@
         },
         {
           "id": "s1_4",
-          "label": "I go to ____ at half past ten. (bedtime)",
+          "label": "I go to ____ at half past ten. (hint: the time you go to sleep)",
           "fields": [
             {
               "answer": "bedtime"
@@ -63,7 +63,7 @@
         },
         {
           "id": "s1_5",
-          "label": "It is a ____ eight. (quarter to)",
+          "label": "It is a ____ eight. (hint: 15 minutes before the hour)",
           "fields": [
             {
               "answer": "quarter to"

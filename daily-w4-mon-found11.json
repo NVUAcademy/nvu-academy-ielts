@@ -33,7 +33,7 @@
         },
         {
           "id": "s1_2",
-          "label": "Please ____ before nine. (clock in)",
+          "label": "Please ____ before nine. (hint: record your start time at work)",
           "fields": [
             {
               "answer": "clock in"
@@ -54,7 +54,7 @@
         },
         {
           "id": "s1_4",
-          "label": "Sunday is my ____. (day off)",
+          "label": "Sunday is my ____. (hint: a day when you do not work)",
           "fields": [
             {
               "answer": "day off"
@@ -63,7 +63,7 @@
         },
         {
           "id": "s1_5",
-          "label": "My daily ____ is quite simple. (routine)",
+          "label": "My daily ____ is quite simple. (hint: the things you do regularly every day)",
           "fields": [
             {
               "answer": "routine"

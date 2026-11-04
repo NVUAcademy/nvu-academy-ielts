@@ -36,7 +36,7 @@
         },
         {
           "id": "s1_2",
-          "label": "I want to ____ fit by swimming. (keep)",
+          "label": "I want to ____ fit by swimming. (hint: continue to stay in a certain condition)",
           "fields": [
             {
               "answer": "keep",
@@ -48,7 +48,7 @@
         },
         {
           "id": "s1_3",
-          "label": "My ____ is quite simple. (routine)",
+          "label": "My ____ is quite simple. (hint: the things you do regularly every day)",
           "fields": [
             {
               "answer": "routine"
@@ -81,7 +81,7 @@
         },
         {
           "id": "s1_6",
-          "label": "It is a ____ eight. (quarter to)",
+          "label": "It is a ____ eight. (hint: 15 minutes before the hour)",
           "fields": [
             {
               "answer": "quarter to"
@@ -90,7 +90,7 @@
         },
         {
           "id": "s1_7",
-          "label": "I ____ the bed before breakfast. (make)",
+          "label": "I ____ the bed before breakfast. (hint: tidy up the bed)",
           "fields": [
             {
               "answer": "make",

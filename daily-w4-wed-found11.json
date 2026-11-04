@@ -140,7 +140,7 @@
       "items": [
         {
           "id": "s3_1",
-          "label": "I ____ work on Sunday. (don't)",
+          "label": "I ____ work on Sunday. (do / don't)",
           "fields": [
             {
               "answer": "don't",
@@ -152,7 +152,7 @@
         },
         {
           "id": "s3_2",
-          "label": "____ you start work early? (Do)",
+          "label": "____ you start work early? (do / does)",
           "fields": [
             {
               "answer": "Do"
@@ -161,7 +161,7 @@
         },
         {
           "id": "s3_3",
-          "label": "They ____ have lunch at home. (don't)",
+          "label": "They ____ have lunch at home. (do / don't)",
           "fields": [
             {
               "answer": "don't",
@@ -173,7 +173,7 @@
         },
         {
           "id": "s3_4",
-          "label": "____ we finish at five? (Do)",
+          "label": "____ we finish at five? (do / does)",
           "fields": [
             {
               "answer": "Do"
@@ -182,7 +182,7 @@
         },
         {
           "id": "s3_5",
-          "label": "She ____ like cold coffee. (doesn't)",
+          "label": "She ____ like cold coffee. (does / doesn't)",
           "fields": [
             {
               "answer": "doesn't",
