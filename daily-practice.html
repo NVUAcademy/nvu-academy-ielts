@@ -210,6 +210,8 @@ async function openPractice(meta) {
   try { answers = JSON.parse(lsGet(draftKey()) || '{}'); } catch (e) { answers = {}; }
   await draftPull();
   renderIntro();
+  /* Từ trang chủ, "Ghi âm lại" mở thẳng phần ghi âm của bài đã nộp */
+  if (existing && new URLSearchParams(location.search).get('redo') === '1') reviewSubmitted();
 }
 const draftKey = () => `nvu_daily_draft_${P.id}_${student ? student.id : 'teacher'}`;
 
