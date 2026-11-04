@@ -145,8 +145,8 @@
       "id": "s2",
       "title": "Step 2 · Listening: Fiddy Farm map, Q15–20",
       "minutes": 15,
-      "instructions": "Listen once, then listen once more. Do not read the answers first. Look at the Fiddy Farm map (image below). Write the letter of the correct place for each item. Start at \"You are here\", next to New Barn.",
-      "kind": "mcq",
+      "instructions": "Listen once, then listen once more. Do not read the answers first. Look at the Fiddy Farm map (image below). Type the letter (A to I) of the correct place for each item. Start at \"You are here\", next to New Barn.",
+      "kind": "fill",
       "audio": "fiddy",
       "images": [
         "images/map_fiddy_farm.png"
@@ -154,99 +154,57 @@
       "items": [
         {
           "id": "s2_1",
-          "q": "15. Scarecrow",
-          "options": {
-            "A": "A",
-            "B": "B",
-            "C": "C",
-            "D": "D",
-            "E": "E",
-            "F": "F",
-            "G": "G",
-            "H": "H",
-            "I": "I"
-          },
-          "answer": "F"
+          "label": "15. Scarecrow ______",
+          "fields": [
+            {
+              "answer": "F"
+            }
+          ]
         },
         {
           "id": "s2_2",
-          "q": "16. Maze",
-          "options": {
-            "A": "A",
-            "B": "B",
-            "C": "C",
-            "D": "D",
-            "E": "E",
-            "F": "F",
-            "G": "G",
-            "H": "H",
-            "I": "I"
-          },
-          "answer": "G"
+          "label": "16. Maze ______",
+          "fields": [
+            {
+              "answer": "G"
+            }
+          ]
         },
         {
           "id": "s2_3",
-          "q": "17. Café",
-          "options": {
-            "A": "A",
-            "B": "B",
-            "C": "C",
-            "D": "D",
-            "E": "E",
-            "F": "F",
-            "G": "G",
-            "H": "H",
-            "I": "I"
-          },
-          "answer": "D"
+          "label": "17. Café ______",
+          "fields": [
+            {
+              "answer": "D"
+            }
+          ]
         },
         {
           "id": "s2_4",
-          "q": "18. Black Barn",
-          "options": {
-            "A": "A",
-            "B": "B",
-            "C": "C",
-            "D": "D",
-            "E": "E",
-            "F": "F",
-            "G": "G",
-            "H": "H",
-            "I": "I"
-          },
-          "answer": "H"
+          "label": "18. Black Barn ______",
+          "fields": [
+            {
+              "answer": "H"
+            }
+          ]
         },
         {
           "id": "s2_5",
-          "q": "19. Covered picnic area",
-          "options": {
-            "A": "A",
-            "B": "B",
-            "C": "C",
-            "D": "D",
-            "E": "E",
-            "F": "F",
-            "G": "G",
-            "H": "H",
-            "I": "I"
-          },
-          "answer": "C"
+          "label": "19. Covered picnic area ______",
+          "fields": [
+            {
+              "answer": "C"
+            }
+          ]
         },
         {
           "id": "s2_6",
-          "q": "20. Fiddy House",
-          "options": {
-            "A": "A",
-            "B": "B",
-            "C": "C",
-            "D": "D",
-            "E": "E",
-            "F": "F",
-            "G": "G",
-            "H": "H",
-            "I": "I"
-          },
-          "answer": "A"
+          "label": "20. Fiddy House ______",
+          "fields": [
+            {
+              "answer": "A"
+            }
+          ]
         }
       ]
     },

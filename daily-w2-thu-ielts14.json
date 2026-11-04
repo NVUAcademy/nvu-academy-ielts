@@ -36,69 +36,49 @@
       "id": "s2",
       "title": "Step 1 · Theatre",
       "minutes": 12,
-      "instructions": "Start in the foyer. Pay attention to the water cooler and the double doors (image: images/map_theatre.png). Listen once and choose letters A to G.",
-      "kind": "mcq",
+      "instructions": "Start in the foyer. Pay attention to the water cooler and the double doors (image: images/map_theatre.png). Listen once and type the letter (A to G) of the correct room for each item.",
+      "kind": "fill",
       "audio": "theatre",
       "image": "images/map_theatre.png",
       "items": [
         {
           "id": "s2_1",
-          "q": "17. box office",
-          "options": {
-            "A": "A",
-            "B": "B",
-            "C": "C",
-            "D": "D",
-            "E": "E",
-            "F": "F",
-            "G": "G"
-          },
-          "answer": "G",
+          "label": "17. box office ______",
+          "fields": [
+            {
+              "answer": "G"
+            }
+          ],
           "explain": "Bằng chứng: next door, with a separate entrance from the road. Bẫy: box office không nằm ở chỗ công chúng nghĩ."
         },
         {
           "id": "s2_2",
-          "q": "18. theatre manager's office",
-          "options": {
-            "A": "A",
-            "B": "B",
-            "C": "C",
-            "D": "D",
-            "E": "E",
-            "F": "F",
-            "G": "G"
-          },
-          "answer": "D",
+          "label": "18. theatre manager's office ______",
+          "fields": [
+            {
+              "answer": "D"
+            }
+          ],
           "explain": "Bằng chứng: rẽ phải, end of the corridor, door on the left."
         },
         {
           "id": "s2_3",
-          "q": "19. lighting box",
-          "options": {
-            "A": "A",
-            "B": "B",
-            "C": "C",
-            "D": "D",
-            "E": "E",
-            "F": "F",
-            "G": "G"
-          },
-          "answer": "B",
+          "label": "19. lighting box ______",
+          "fields": [
+            {
+              "answer": "B"
+            }
+          ],
           "explain": "Bằng chứng: rẽ trái, rẽ phải ở water cooler, rẽ phải lần nữa, phòng thứ hai."
         },
         {
           "id": "s2_4",
-          "q": "20. artistic director's office",
-          "options": {
-            "A": "A",
-            "B": "B",
-            "C": "C",
-            "D": "D",
-            "E": "E",
-            "F": "F",
-            "G": "G"
-          },
-          "answer": "F",
+          "label": "20. artistic director's office ______",
+          "fields": [
+            {
+              "answer": "F"
+            }
+          ],
           "explain": "Bằng chứng: rẽ phải, the first room on the right-hand side."
         }
       ],
