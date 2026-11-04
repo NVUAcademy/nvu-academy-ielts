@@ -26,9 +26,9 @@
   "steps": [
     {
       "id": "s1",
-      "title": "Step 1 · Vocabulary: 12 words from Lesson 3",
+      "title": "Step 1 · Vocabulary: 6 words from Lesson 3",
       "minutes": 15,
-      "instructions": "Learn the 12 words, then fill in the English word that matches each Vietnamese meaning. Spell each one correctly.",
+      "instructions": "Learn the 6 words, then fill in the English word that matches each Vietnamese meaning. Spell each one correctly.",
       "kind": "fill",
       "items": [
         {
@@ -82,60 +82,6 @@
           "fields": [
             {
               "answer": "beat"
-            }
-          ]
-        },
-        {
-          "id": "s1_7",
-          "label": "7. thi đấu = ______",
-          "fields": [
-            {
-              "answer": "compete"
-            }
-          ]
-        },
-        {
-          "id": "s1_8",
-          "label": "8. tập luyện = ______",
-          "fields": [
-            {
-              "answer": "train"
-            }
-          ]
-        },
-        {
-          "id": "s1_9",
-          "label": "9. cổ vũ, ủng hộ = ______",
-          "fields": [
-            {
-              "answer": "support"
-            }
-          ]
-        },
-        {
-          "id": "s1_10",
-          "label": "10. giành quyền tham dự = ______",
-          "fields": [
-            {
-              "answer": "qualify"
-            }
-          ]
-        },
-        {
-          "id": "s1_11",
-          "label": "11. đại diện = ______",
-          "fields": [
-            {
-              "answer": "represent"
-            }
-          ]
-        },
-        {
-          "id": "s1_12",
-          "label": "12. cản phá (bóng) = ______",
-          "fields": [
-            {
-              "answer": "tackle"
             }
           ]
         }
@@ -270,7 +216,7 @@
       "id": "s4",
       "title": "Step 4 · Vocabulary drills",
       "minutes": 20,
-      "instructions": "Fill in the gaps or choose the right word. Use the 12 words from Step 1.",
+      "instructions": "Fill in the gaps or choose the right word. Use the 6 words from Step 1, and the map words in items 5–7.",
       "kind": "fill",
       "items": [
         {
@@ -302,16 +248,7 @@
         },
         {
           "id": "s4_4",
-          "label": "4. Only the best players (qualify / quality / qualified) for the tournament. ______",
-          "fields": [
-            {
-              "answer": "qualify"
-            }
-          ]
-        },
-        {
-          "id": "s4_5",
-          "label": "5. Go straight at the ______ and take the third exit.",
+          "label": "4. Go straight at the ______ and take the third exit.",
           "fields": [
             {
               "answer": "roundabout"
@@ -319,8 +256,8 @@
           ]
         },
         {
-          "id": "s4_6",
-          "label": "6. The road crosses the motorway on a ______.",
+          "id": "s4_5",
+          "label": "5. The road crosses the motorway on a ______.",
           "fields": [
             {
               "answer": "flyover"
@@ -328,29 +265,11 @@
           ]
         },
         {
-          "id": "s4_7",
-          "label": "7. Turn right at the ______ with Station Road.",
+          "id": "s4_6",
+          "label": "6. Turn right at the ______ with Station Road.",
           "fields": [
             {
               "answer": "junction"
-            }
-          ]
-        },
-        {
-          "id": "s4_8",
-          "label": "8. Athletes from many countries ______ at the Olympics.",
-          "fields": [
-            {
-              "answer": "compete"
-            }
-          ]
-        },
-        {
-          "id": "s4_9",
-          "label": "9. She was proud to ______ her country.",
-          "fields": [
-            {
-              "answer": "represent"
             }
           ]
         }
