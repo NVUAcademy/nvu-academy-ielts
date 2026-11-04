@@ -26,9 +26,9 @@
   "steps": [
     {
       "id": "s1",
-      "title": "Step 1 · Vocabulary: 6 words from Lesson 3",
+      "title": "Step 1 · Vocabulary: 5 words from Lesson 3",
       "minutes": 15,
-      "instructions": "Learn the 6 words, then fill in the English word that matches each Vietnamese meaning. Spell each one correctly.",
+      "instructions": "Learn the 5 words, then fill in the English word that matches each Vietnamese meaning. Spell each one correctly.",
       "kind": "fill",
       "items": [
         {
@@ -73,15 +73,6 @@
           "fields": [
             {
               "answer": "be in charge of"
-            }
-          ]
-        },
-        {
-          "id": "s1_6",
-          "label": "6. đánh bại = ______",
-          "fields": [
-            {
-              "answer": "beat"
             }
           ]
         }
@@ -216,7 +207,7 @@
       "id": "s4",
       "title": "Step 4 · Vocabulary drills",
       "minutes": 20,
-      "instructions": "Fill in the gaps or choose the right word. Use the 6 words from Step 1, and the map words in items 5–7.",
+      "instructions": "Fill in the gaps or choose the right word. Use the 5 words from Step 1, and the map words in items 4–6.",
       "kind": "fill",
       "items": [
         {
@@ -239,16 +230,7 @@
         },
         {
           "id": "s4_3",
-          "label": "3. She (beat / won / defeated to) her sister in the final. ______",
-          "fields": [
-            {
-              "answer": "beat"
-            }
-          ]
-        },
-        {
-          "id": "s4_4",
-          "label": "4. Go straight at the ______ and take the third exit.",
+          "label": "3. Go straight at the ______ and take the third exit.",
           "fields": [
             {
               "answer": "roundabout"
@@ -256,8 +238,8 @@
           ]
         },
         {
-          "id": "s4_5",
-          "label": "5. The road crosses the motorway on a ______.",
+          "id": "s4_4",
+          "label": "4. The road crosses the motorway on a ______.",
           "fields": [
             {
               "answer": "flyover"
@@ -265,8 +247,8 @@
           ]
         },
         {
-          "id": "s4_6",
-          "label": "6. Turn right at the ______ with Station Road.",
+          "id": "s4_5",
+          "label": "5. Turn right at the ______ with Station Road.",
           "fields": [
             {
               "answer": "junction"
