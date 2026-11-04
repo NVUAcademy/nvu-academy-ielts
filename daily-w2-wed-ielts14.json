@@ -1,0 +1,403 @@
+{
+  "id": "w2-wed-ielts14",
+  "title": "Wednesday Daily Practice",
+  "subtitle": "Review Lesson 3: map words, sports verbs, Track 12 and Speaking Part 1",
+  "theme": "Lesson 3 · Leisure and Recreation",
+  "source": "Daily Practice tuần 2 (print/I3/Daily_Practice_Week2_source.md), bài I3 Leisure and Recreation",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 2,
+  "day": "wednesday",
+  "date": "2026-11-04",
+  "section": "vocabulary",
+  "minutes": 75,
+  "intro": "Work through 5 steps, about 75 minutes. You need Track 12 and Track 11 (sent by the teacher on Zalo at 7:00). The map for Step 2 is in the Week 2 Daily Practice PDF. Deadline 00:00 tonight. Complete and on time earns 20 Meow; late or half done earns 10 Meow. Do not look at the answers before you finish.",
+  "audio": {
+    "t12": {
+      "label": "Audio · Track 12 (Unit 2, Exercise 3, page 40)",
+      "src": "audio/Wed_Track12.mp3"
+    },
+    "t11": {
+      "label": "Audio · Track 11 (Unit 2, Exercise 2, page 39)",
+      "src": "audio/Wed_Track11.mp3"
+    }
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocabulary: 12 words from Lesson 3",
+      "minutes": 15,
+      "instructions": "Learn the 12 words, then fill in the English word that matches each Vietnamese meaning. Spell each one correctly.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. vòng xuyến = ______",
+          "fields": [
+            {
+              "answer": "roundabout"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. ngã ba, chỗ giao đường = ______",
+          "fields": [
+            {
+              "answer": "junction"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. cầu vượt = ______",
+          "fields": [
+            {
+              "answer": "flyover"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. lắp đặt, chuẩn bị = ______",
+          "fields": [
+            {
+              "answer": "set up"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. phụ trách = ______",
+          "fields": [
+            {
+              "answer": "be in charge of"
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "6. đánh bại = ______",
+          "fields": [
+            {
+              "answer": "beat"
+            }
+          ]
+        },
+        {
+          "id": "s1_7",
+          "label": "7. thi đấu = ______",
+          "fields": [
+            {
+              "answer": "compete"
+            }
+          ]
+        },
+        {
+          "id": "s1_8",
+          "label": "8. tập luyện = ______",
+          "fields": [
+            {
+              "answer": "train"
+            }
+          ]
+        },
+        {
+          "id": "s1_9",
+          "label": "9. cổ vũ, ủng hộ = ______",
+          "fields": [
+            {
+              "answer": "support"
+            }
+          ]
+        },
+        {
+          "id": "s1_10",
+          "label": "10. giành quyền tham dự = ______",
+          "fields": [
+            {
+              "answer": "qualify"
+            }
+          ]
+        },
+        {
+          "id": "s1_11",
+          "label": "11. đại diện = ______",
+          "fields": [
+            {
+              "answer": "represent"
+            }
+          ]
+        },
+        {
+          "id": "s1_12",
+          "label": "12. cản phá (bóng) = ______",
+          "fields": [
+            {
+              "answer": "tackle"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Listening: Track 12, label the map",
+      "minutes": 15,
+      "instructions": "Listen to Track 12 once, without stopping. Look at the map in the PDF (start at South Hinton Sports Centre). Choose the letter of the place in each box, in the order of the route. A roundabout · B junction · C traffic lights · D crossroads · E flyover · F bend.",
+      "kind": "mcq",
+      "audio": "t12",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "1. First box on the route",
+          "options": {
+            "A": "roundabout",
+            "B": "junction",
+            "C": "traffic lights",
+            "D": "crossroads",
+            "E": "flyover",
+            "F": "bend"
+          },
+          "answer": "A",
+          "explain": "Rẽ trái ra Lily Road, đi khoảng hai trăm mét: roundabout."
+        },
+        {
+          "id": "s2_2",
+          "q": "2. Second box on the route",
+          "options": {
+            "A": "roundabout",
+            "B": "junction",
+            "C": "traffic lights",
+            "D": "crossroads",
+            "E": "flyover",
+            "F": "bend"
+          },
+          "answer": "D",
+          "explain": "Đi thẳng qua vòng xuyến thì tới crossroads."
+        },
+        {
+          "id": "s2_3",
+          "q": "3. Third box on the route",
+          "options": {
+            "A": "roundabout",
+            "B": "junction",
+            "C": "traffic lights",
+            "D": "crossroads",
+            "E": "flyover",
+            "F": "bend"
+          },
+          "answer": "E",
+          "explain": "Lên cầu vượt qua đường cao tốc: flyover."
+        },
+        {
+          "id": "s2_4",
+          "q": "4. Fourth box on the route",
+          "options": {
+            "A": "roundabout",
+            "B": "junction",
+            "C": "traffic lights",
+            "D": "crossroads",
+            "E": "flyover",
+            "F": "bend"
+          },
+          "answer": "B",
+          "explain": "Sau flyover là junction với Bramley Road."
+        },
+        {
+          "id": "s2_5",
+          "q": "5. Fifth box on the route",
+          "options": {
+            "A": "roundabout",
+            "B": "junction",
+            "C": "traffic lights",
+            "D": "crossroads",
+            "E": "flyover",
+            "F": "bend"
+          },
+          "answer": "F",
+          "explain": "Đi khoảng 500 m rồi rẽ trái theo đoạn cong: bend."
+        },
+        {
+          "id": "s2_6",
+          "q": "6. Sixth box on the route",
+          "options": {
+            "A": "roundabout",
+            "B": "junction",
+            "C": "traffic lights",
+            "D": "crossroads",
+            "E": "flyover",
+            "F": "bend"
+          },
+          "answer": "C",
+          "explain": "Sau trạm xăng, chỗ rẽ đi Hinton ở traffic lights."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Dictation: Track 11",
+      "minutes": 10,
+      "instructions": "Listen to Track 11 one sentence at a time and rewrite sentences 1, 3, 4 and 6. You may listen again as often as you like. Check the small words (a, the, it) and the spelling of flyover, roundabout and junction.",
+      "kind": "fill",
+      "audio": "t11",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. ______",
+          "fields": [
+            {
+              "answer": "Stay in the middle lane so that you can go over the motorway.",
+              "accept": [
+                "Stay in the middle lane so that you can go over the motorway"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2. ______",
+          "fields": [
+            {
+              "answer": "Go round and take the third exit on the right.",
+              "accept": [
+                "Go round and take the third exit on the right"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3. ______",
+          "fields": [
+            {
+              "answer": "Slow down here because it goes to the left quite sharply.",
+              "accept": [
+                "Slow down here because it goes to the left quite sharply"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "4. ______",
+          "fields": [
+            {
+              "answer": "When you get to the end of this road, take the left turn.",
+              "accept": [
+                "When you get to the end of this road, take the left turn"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Vocabulary drills",
+      "minutes": 20,
+      "instructions": "Fill in the gaps or choose the right word. Use the 12 words from Step 1.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s4_1",
+          "label": "1. We (set up / set in / set on) the tables in the hall. ______",
+          "fields": [
+            {
+              "answer": "set up"
+            }
+          ]
+        },
+        {
+          "id": "s4_2",
+          "label": "2. He is (in charge / on charge / at charge) of the team. ______",
+          "fields": [
+            {
+              "answer": "in charge"
+            }
+          ]
+        },
+        {
+          "id": "s4_3",
+          "label": "3. She (beat / won / defeated to) her sister in the final. ______",
+          "fields": [
+            {
+              "answer": "beat"
+            }
+          ]
+        },
+        {
+          "id": "s4_4",
+          "label": "4. Only the best players (qualify / quality / qualified) for the tournament. ______",
+          "fields": [
+            {
+              "answer": "qualify"
+            }
+          ]
+        },
+        {
+          "id": "s4_5",
+          "label": "5. Go straight at the ______ and take the third exit.",
+          "fields": [
+            {
+              "answer": "roundabout"
+            }
+          ]
+        },
+        {
+          "id": "s4_6",
+          "label": "6. The road crosses the motorway on a ______.",
+          "fields": [
+            {
+              "answer": "flyover"
+            }
+          ]
+        },
+        {
+          "id": "s4_7",
+          "label": "7. Turn right at the ______ with Station Road.",
+          "fields": [
+            {
+              "answer": "junction"
+            }
+          ]
+        },
+        {
+          "id": "s4_8",
+          "label": "8. Athletes from many countries ______ at the Olympics.",
+          "fields": [
+            {
+              "answer": "compete"
+            }
+          ]
+        },
+        {
+          "id": "s4_9",
+          "label": "9. She was proud to ______ her country.",
+          "fields": [
+            {
+              "answer": "represent"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Speaking Part 1 voice note",
+      "minutes": 15,
+      "instructions": "Answer all 3 questions in one voice note, about 30 seconds per question, following the Answer, Reason, Example, Contrast pattern. Use at least 3 words from Step 1. At the end of the voice note, read this sentence aloud (stress: THINK, ROWing, GREAT, STAY, FIT, HEALTHy): I think that rowing is a great sport, if you want to stay fit and healthy.",
+      "kind": "voice",
+      "lines": [
+        "1. Do you like sport?",
+        "2. How often do you exercise?",
+        "3. Did you play sport when you were a child?",
+        "4. Đọc: I think that rowing is a great sport, if you want to stay fit and healthy."
+      ],
+      "note": "Thầy sẽ nghe và nhận xét 4 bước Answer, Reason, Example, Contrast, cách dùng từ mới và trọng âm câu."
+    }
+  ],
+  "send_today": "Hoàn thành 5 bước trên web, chụp ảnh map ở Step 2 gửi lên Zalo. Voice note ở Step 5 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "vocabulary"
+}

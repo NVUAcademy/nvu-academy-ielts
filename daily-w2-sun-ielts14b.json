@@ -1,0 +1,46 @@
+{
+  "id": "w2-sun-ielts14b",
+  "title": "Sunday Daily Practice",
+  "subtitle": "Class day: light practice with comparison phrases and Part 1",
+  "theme": "Lesson 4 · class day",
+  "source": "Daily Practice tuần 2 (print/I3/Daily_Practice_Week2_source.md), bài I3 Leisure and Recreation",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 2,
+  "day": "sunday",
+  "date": "2026-11-08",
+  "section": "vocabulary",
+  "minutes": 30,
+  "intro": "Sunday is a class day, so this is a light task, about 30 minutes. Before class (5 minutes, not submitted): read aloud the 6 comparison phrases from Friday once, then reread your rewritten Introduction and Overview. After class, do the 2 steps below. Deadline 23:00 the same day. Complete and on time earns 20 Meow; late or half done earns 10 Meow. Do not look at the answers before you finish.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Three sentences",
+      "minutes": 15,
+      "instructions": "Write 3 sentences comparing two things in your life (two sports, two cities, two weekends). Use 3 DIFFERENT phrases from Friday's 6: considerably higher than, slightly lower than, twice as much as, the highest proportion of, whereas, by far the most popular.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s1_1",
+          "q": "3 câu của em",
+          "model": "Football is by far the most popular sport in my class. Hanoi is considerably more crowded than Hue. I study at home on weekdays, whereas I play sport at weekends."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Speaking Part 1 voice note",
+      "minutes": 15,
+      "instructions": "Answer the question in one voice note of about 40 seconds, following the Answer, Reason, Example, Contrast pattern. Use at least 2 vocabulary words from this week.",
+      "kind": "voice",
+      "lines": [
+        "Do you prefer team sports or individual sports?"
+      ],
+      "note": "Thầy sẽ nghe và nhận xét 4 bước Answer, Reason, Example, Contrast."
+    }
+  ],
+  "send_today": "Hoàn thành 2 bước trên web. Voice note ở Step 2 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "vocabulary"
+}

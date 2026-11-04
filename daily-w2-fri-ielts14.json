@@ -1,0 +1,101 @@
+{
+  "id": "w2-fri-ielts14",
+  "title": "Friday Daily Practice",
+  "subtitle": "Preview Sunday: comparing charts",
+  "theme": "Lesson 4 preview",
+  "source": "Daily Practice tuần 2 (print/I3/Daily_Practice_Week2_source.md), bài I3 Leisure and Recreation",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 2,
+  "day": "friday",
+  "date": "2026-11-06",
+  "section": "vocabulary",
+  "minutes": 15,
+  "intro": "Today you take Weekly Quiz 2, sent privately by the teacher on Zalo at 7:00 (about 60 minutes). The web only has 2 preparation steps for Sunday, about 15 minutes. Deadline 00:00 tonight. Complete and on time earns 20 Meow; late or half done earns 10 Meow. Do not look at the answers before you finish.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Six phrases for comparing charts",
+      "minutes": 5,
+      "instructions": "Learn the 6 phrases, then fill in the English phrase that matches each meaning. For 'while', accept both whereas and while.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. cao hơn đáng kể so với = ______",
+          "fields": [
+            {
+              "answer": "considerably higher than"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. thấp hơn một chút so với = ______",
+          "fields": [
+            {
+              "answer": "slightly lower than"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. gấp đôi = ______",
+          "fields": [
+            {
+              "answer": "twice as much as"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. tỉ lệ cao nhất của = ______",
+          "fields": [
+            {
+              "answer": "the highest proportion of"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. trong khi = ______",
+          "fields": [
+            {
+              "answer": "whereas",
+              "accept": [
+                "while"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "6. phổ biến nhất với khoảng cách xa = ______",
+          "fields": [
+            {
+              "answer": "by far the most popular"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · One sentence for each phrase",
+      "minutes": 10,
+      "instructions": "Write one sentence about Vietnam or your own city for each phrase in Step 1. Type all 6 sentences in the box below.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s2_1",
+          "q": "6 câu của em (mỗi cụm 1 câu)",
+          "model": "Rents in Hanoi are considerably higher than rents in Hue. The price of coffee is slightly lower than the price of tea. Petrol is twice as much as water here. Young people have the highest proportion of phone users. Hanoi is crowded whereas my village is quiet. Football is by far the most popular sport in Vietnam."
+        }
+      ]
+    }
+  ],
+  "send_today": "Hoàn thành 2 bước trên web. Bài quiz chụp ảnh gửi lên Zalo theo hướng dẫn của thầy.",
+  "error_type": "vocabulary"
+}

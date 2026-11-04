@@ -1,0 +1,160 @@
+{
+  "id": "w2-sat-ielts14",
+  "title": "Saturday Daily Practice",
+  "subtitle": "Rewrite Intro + Overview, past tenses and Speaking Part 1",
+  "theme": "Lesson 3 · Leisure and Recreation",
+  "source": "Daily Practice tuần 2 (print/I3/Daily_Practice_Week2_source.md), bài I3 Leisure and Recreation",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 2,
+  "day": "saturday",
+  "date": "2026-11-07",
+  "section": "speaking",
+  "minutes": 85,
+  "intro": "Work through 4 steps, about 85 minutes. You need Track 18 (sent by the teacher on Zalo at 7:00). Step 1 uses the teacher's feedback on the Writing you did on Monday. Deadline 00:00 tonight. Complete and on time earns 20 Meow; late or half done earns 10 Meow. Do not look at the answers before you finish.",
+  "audio": {
+    "t18": {
+      "label": "Audio · Track 18 (Unit 2, Exercise 8, page 45)",
+      "src": "audio/Sat_Track18.mp3"
+    }
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Rewrite Introduction + Overview",
+      "minutes": 30,
+      "instructions": "Read the teacher's feedback on your Monday Writing. Rewrite the Introduction and Overview for ONE chart and fix every error the teacher marked. Check: the Introduction has all 5 points (what, who, where, when, unit); the Overview has one trend and one difference, with no figures.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s1_1",
+          "q": "Introduction và Overview viết lại",
+          "model": "The line graph illustrates the number of users of five communication services worldwide over a ten-year period, commencing from 1998. Overall, there was a considerable increase in the number of mobile phone users, with the most dramatic rise being seen in mobile phones. Additionally, fixed-line phones consistently had the highest figures at the start.",
+          "ai": {
+            "type": "Viết lại Introduction và Overview cho Task 1 theo nhận xét của giáo viên",
+            "level": "Intermediate (B1 đến B2)",
+            "min_words": 60,
+            "task": "Rewrite the Introduction and Overview of your Task 1 answer from Monday. Fix every comment from your teacher. The Introduction needs the five pieces (what, who, where, when, unit). The Overview needs one trend and one difference, with no numbers.",
+            "criteria": [
+              "Introduction có đủ 5 ý và viết lại bằng từ khác đề bài",
+              "Overview bắt đầu bằng Overall và có một xu hướng, một sự khác biệt",
+              "không có số liệu trong Overview",
+              "sửa các lỗi giáo viên đã nhận xét",
+              "ngữ pháp và chính tả đúng"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Past simple or past continuous?",
+      "minutes": 15,
+      "instructions": "Fill in the correct form of the verb (one phrase). For question 5, fill in only the first blank.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. Last weekend, I (played / was playing) football with my cousins. ______",
+          "fields": [
+            {
+              "answer": "played"
+            }
+          ],
+          "explain": "Hành động đã kết thúc: past simple."
+        },
+        {
+          "id": "s2_2",
+          "label": "2. While we (trained / were training), it started to rain. ______",
+          "fields": [
+            {
+              "answer": "were training"
+            }
+          ],
+          "explain": "While + hành động đang diễn ra: past continuous."
+        },
+        {
+          "id": "s2_3",
+          "label": "3. She (was winning / won) the match in two sets. ______",
+          "fields": [
+            {
+              "answer": "won"
+            }
+          ],
+          "explain": "Kết quả đã xong: past simple."
+        },
+        {
+          "id": "s2_4",
+          "label": "4. I (watched / was watching) the final when the lights went out. ______",
+          "fields": [
+            {
+              "answer": "was watching"
+            }
+          ],
+          "explain": "Đang xem thì mất điện: past continuous."
+        },
+        {
+          "id": "s2_5",
+          "label": "5. He (broke / was breaking) his leg while he (played / was playing) basketball. ______",
+          "fields": [
+            {
+              "answer": "broke"
+            }
+          ],
+          "explain": "Cặp: broke ... was playing."
+        },
+        {
+          "id": "s2_6",
+          "label": "6. At 7 p.m. yesterday, I (jogged / was jogging) in the park. ______",
+          "fields": [
+            {
+              "answer": "was jogging"
+            }
+          ],
+          "explain": "Thời điểm cụ thể trong quá khứ: past continuous."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Shadowing: Track 18",
+      "minutes": 10,
+      "instructions": "Listen to Track 18 and shadow it 3 times: read along with the text, listen and read together, then without looking at the text. Stress the content words. Then answer the questions.",
+      "kind": "mcq",
+      "audio": "t18",
+      "items": [
+        {
+          "id": "s3_1",
+          "q": "Which words are stressed in: I ran in the London marathon last year?",
+          "options": {
+            "A": "ran, London, marathon, last, year",
+            "B": "I, in, the, last",
+            "C": "all words equally"
+          },
+          "answer": "A",
+          "explain": "Từ nội dung (động từ, danh từ, tính từ) được nhấn; từ chức năng (I, in, the) đọc nhẹ."
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Speaking Part 1 voice note",
+      "minutes": 30,
+      "instructions": "Answer all 6 questions in one voice note of about 3 minutes. For each question: Answer, Reason, Example (past), Contrast. Use at least 4 words from Wednesday's lesson. At the end of the voice note, read the 2 shadowing sentences: Last weekend, I was going to go to the gym, but I decided not to bother. I ran in the London marathon last year. I thought I was never going to make it to the end!",
+      "kind": "voice",
+      "lines": [
+        "1. What sports are popular in your country?",
+        "2. Do you prefer to play sport or watch it?",
+        "3. Did you play sport at school?",
+        "4. What do you do in your free time?",
+        "5. Would you like to try a new sport?",
+        "6. Is sport important for young people?",
+        "7. Đọc 2 câu shadowing ở trên."
+      ],
+      "note": "Thầy sẽ nghe và nhận xét 4 bước, thì quá khứ và trọng âm."
+    }
+  ],
+  "send_today": "Bài viết ở Step 1 và voice note ở Step 4 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "grammar"
+}

@@ -1,0 +1,419 @@
+{
+  "id": "w2-thu-ielts14",
+  "title": "Thursday Daily Practice",
+  "subtitle": "Listening: four map-labelling tasks under exam conditions",
+  "theme": "Lesson 3 · Leisure and Recreation",
+  "source": "Daily Practice tuần 2 (print/I3/Daily_Practice_Week2_source.md), bài I3 Leisure and Recreation",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 2,
+  "day": "thursday",
+  "date": "2026-11-05",
+  "section": "listening",
+  "minutes": 70,
+  "intro": "Work through 6 steps, about 70 minutes. You need 4 audio files (sent by the teacher on Zalo at 7:00). The maps for Steps 1 to 4 are in the Week 2 Daily Practice PDF (Thursday pages) and in the images folder. Listen to each file once, as in a real exam. Deadline 00:00 tonight. Complete and on time earns 20 Meow; late or half done earns 10 Meow. Do not look at the answers before you finish.",
+  "audio": {
+    "farm": {
+      "label": "Audio · Fiddy Farm (Cambridge 11, Test 1, Section 2, Q15–20)",
+      "src": "audio/Thu_Fiddy_Farm.mp3"
+    },
+    "theatre": {
+      "label": "Audio · Theatre (Cambridge 11, Test 2, Section 2, Q17–20)",
+      "src": "audio/Thu_Theatre.mp3"
+    },
+    "rec": {
+      "label": "Audio · Recreation ground (Cambridge 16, Test 4, Part 2, Q15–20)",
+      "src": "audio/Thu_Recreation_ground.mp3"
+    },
+    "newb": {
+      "label": "Audio · Newbridge (Improve your IELTS, page 45, Track 1.28)",
+      "src": "audio/Thu_Newbridge.mp3"
+    }
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Fiddy Farm",
+      "minutes": 18,
+      "instructions": "Study the map for 1 minute (the picture in the PDF, or images/map_fiddy_farm.png). Start at 'You are here', next to New Barn. Listen once and choose letters A to I.",
+      "kind": "mcq",
+      "audio": "farm",
+      "image": "images/map_fiddy_farm.png",
+      "items": [
+        {
+          "id": "s1_1",
+          "q": "15. Scarecrow",
+          "options": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
+          },
+          "answer": "F",
+          "explain": "Bằng chứng: in the corner beside the main path."
+        },
+        {
+          "id": "s1_2",
+          "q": "16. Maze",
+          "options": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
+          },
+          "answer": "G",
+          "explain": "Bằng chứng: opposite the New Barn."
+        },
+        {
+          "id": "s1_3",
+          "q": "17. Café",
+          "options": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
+          },
+          "answer": "D",
+          "explain": "Bằng chứng: turn right just before the bridge, ở khúc cua đầu tiên. Bẫy: Café và Black Barn đều ở first bend nhưng đi từ hai đầu ngược nhau."
+        },
+        {
+          "id": "s1_4",
+          "q": "18. Black Barn",
+          "options": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
+          },
+          "answer": "H",
+          "explain": "Bằng chứng: by the New Barn, where the path first bends."
+        },
+        {
+          "id": "s1_5",
+          "q": "19. Covered picnic area",
+          "options": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
+          },
+          "answer": "C",
+          "explain": "Bằng chứng: just after you cross the bridge, on the right."
+        },
+        {
+          "id": "s1_6",
+          "q": "20. Fiddy House",
+          "options": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
+          },
+          "answer": "A",
+          "explain": "Bằng chứng: footpath to the left of the farmyard."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Theatre",
+      "minutes": 12,
+      "instructions": "Start in the foyer. Pay attention to the water cooler and the double doors (image: images/map_theatre.png). Listen once and choose letters A to G.",
+      "kind": "mcq",
+      "audio": "theatre",
+      "image": "images/map_theatre.png",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "17. box office",
+          "options": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G"
+          },
+          "answer": "G",
+          "explain": "Bằng chứng: next door, with a separate entrance from the road. Bẫy: box office không nằm ở chỗ công chúng nghĩ."
+        },
+        {
+          "id": "s2_2",
+          "q": "18. theatre manager's office",
+          "options": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G"
+          },
+          "answer": "D",
+          "explain": "Bằng chứng: rẽ phải, end of the corridor, door on the left."
+        },
+        {
+          "id": "s2_3",
+          "q": "19. lighting box",
+          "options": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G"
+          },
+          "answer": "B",
+          "explain": "Bằng chứng: rẽ trái, rẽ phải ở water cooler, rẽ phải lần nữa, phòng thứ hai."
+        },
+        {
+          "id": "s2_4",
+          "q": "20. artistic director's office",
+          "options": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G"
+          },
+          "answer": "F",
+          "explain": "Bằng chứng: rẽ phải, the first room on the right-hand side."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Recreation ground",
+      "minutes": 20,
+      "instructions": "The map after the changes suggested in the recording (image: images/map_recreation_ground.png). Pay attention to compass directions and changes of plan. Listen once and choose letters A to I.",
+      "kind": "mcq",
+      "audio": "rec",
+      "image": "images/map_recreation_ground.png",
+      "items": [
+        {
+          "id": "s3_1",
+          "q": "15. New car park",
+          "options": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
+          },
+          "answer": "C",
+          "explain": "Bằng chứng: opposite side of the hall, right next to it. Bẫy: xe hiện đỗ ở phía đông tòa nhà, bãi mới ở phía đối diện."
+        },
+        {
+          "id": "s3_2",
+          "q": "16. New cricket pitch",
+          "options": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
+          },
+          "answer": "F",
+          "explain": "Bằng chứng: to the east, beyond the trees."
+        },
+        {
+          "id": "s3_3",
+          "q": "17. Children's playground",
+          "options": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
+          },
+          "answer": "A",
+          "explain": "Bằng chứng: footpath from the hall, alongside the river."
+        },
+        {
+          "id": "s3_4",
+          "q": "18. Skateboard ramp",
+          "options": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
+          },
+          "answer": "I",
+          "explain": "Bằng chứng: in the southeast corner near the road."
+        },
+        {
+          "id": "s3_5",
+          "q": "19. Pavilion",
+          "options": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
+          },
+          "answer": "E",
+          "explain": "Bằng chứng: to the left of the line of trees."
+        },
+        {
+          "id": "s3_6",
+          "q": "20. Notice board",
+          "options": {
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
+          },
+          "answer": "H",
+          "explain": "Bằng chứng: directly on people's right từ phía đường."
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Newbridge",
+      "minutes": 10,
+      "instructions": "Start where you cross the bridge into High Street (image: images/map_newbridge.png). Example already done: A High Street. Listen once and choose letters A to H. A High Street · B tennis courts · C car park · D The Towers · E The Heights · F railway station · G town hall · H bus station.",
+      "kind": "mcq",
+      "audio": "newb",
+      "image": "images/map_newbridge.png",
+      "items": [
+        {
+          "id": "s4_1",
+          "q": "1. Gap 1 on the map",
+          "options": {
+            "A": "High Street",
+            "B": "tennis courts",
+            "C": "car park",
+            "D": "The Towers",
+            "E": "The Heights",
+            "F": "railway station",
+            "G": "town hall",
+            "H": "bus station"
+          },
+          "answer": "G",
+          "explain": "town hall ở next to the supermarket. Bẫy: future car park (C), old tennis courts (B)."
+        },
+        {
+          "id": "s4_2",
+          "q": "2. Gap 2 on the map",
+          "options": {
+            "A": "High Street",
+            "B": "tennis courts",
+            "C": "car park",
+            "D": "The Towers",
+            "E": "The Heights",
+            "F": "railway station",
+            "G": "town hall",
+            "H": "bus station"
+          },
+          "answer": "F",
+          "explain": "railway station ở opposite the supermarket."
+        },
+        {
+          "id": "s4_3",
+          "q": "3. Gap 3 on the map",
+          "options": {
+            "A": "High Street",
+            "B": "tennis courts",
+            "C": "car park",
+            "D": "The Towers",
+            "E": "The Heights",
+            "F": "railway station",
+            "G": "town hall",
+            "H": "bus station"
+          },
+          "answer": "D",
+          "explain": "The Towers ở nearer the High Street. Bẫy: The Heights ở xa hơn (E)."
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Trap tracker",
+      "minutes": 5,
+      "instructions": "Write one sentence for each trap you fell into. If you did not fall into any trap, write one sentence about a place the speaker mentions that is not the answer, using the pattern: ... is wrong because ...",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s5_1",
+          "q": "Câu về bẫy hoặc địa điểm bị loại",
+          "model": "The Heights is wrong because the speaker says it is further from the High Street than The Towers."
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Step 6 · Reflection voice note",
+      "minutes": 5,
+      "instructions": "Record a voice note of about 1 minute in English: which direction words helped you most today, and why.",
+      "kind": "voice",
+      "lines": [
+        "Which direction words helped you most today? Why?"
+      ],
+      "note": "Thầy sẽ nghe và nhận xét cách dùng từ chỉ hướng và cách giải thích của em."
+    }
+  ],
+  "send_today": "Hoàn thành 6 bước trên web, chụp ảnh các map đã điền gửi lên Zalo. Voice note ở Step 6 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "listening"
+}
