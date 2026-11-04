@@ -307,7 +307,7 @@ async function loadTts(key, btn) {
 function passageOf(st) {
   if (st.passage) return { instr: st.instructions, text: st.passage };
   if (st.passage_source) return { instr: st.instructions, text: '📖 Đoạn văn nằm trong tài liệu: ' + st.passage_source + '. Em mở tài liệu đó ra để đọc trước khi làm.' };
-  const m = String(st.instructions || '').match(/\s*(?:Text|Đoạn văn):\s*([\s\S]+)$/i);
+  const m = String(st.instructions || '').match(/\s*(?:Text|Passage|Đoạn văn):\s*([\s\S]+)$/i);
   return m ? { instr: st.instructions.slice(0, m.index), text: m[1] } : { instr: st.instructions, text: '' };
 }
 /* Bài đọc mà không có đoạn văn ở đâu cả (kể cả context, đã hiện riêng ở dưới) thì báo cho học sinh */
