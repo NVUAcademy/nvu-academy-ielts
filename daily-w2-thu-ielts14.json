@@ -143,6 +143,9 @@
           "answer": "A",
           "explain": "Bằng chứng: footpath to the left of the farmyard."
         }
+      ],
+      "images": [
+        "images/map_fiddy_farm.png"
       ]
     },
     {
@@ -214,6 +217,9 @@
           "answer": "F",
           "explain": "Bằng chứng: rẽ phải, the first room on the right-hand side."
         }
+      ],
+      "images": [
+        "images/map_theatre.png"
       ]
     },
     {
@@ -327,6 +333,9 @@
           "answer": "H",
           "explain": "Bằng chứng: directly on people's right từ phía đường."
         }
+      ],
+      "images": [
+        "images/map_recreation_ground.png"
       ]
     },
     {
@@ -386,6 +395,9 @@
           "answer": "D",
           "explain": "The Towers ở nearer the High Street. Bẫy: The Heights ở xa hơn (E)."
         }
+      ],
+      "images": [
+        "images/map_newbridge.png"
       ]
     },
     {
