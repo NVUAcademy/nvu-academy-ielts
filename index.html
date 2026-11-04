@@ -94,6 +94,8 @@ body[data-bg="rain"] { background:linear-gradient(180deg,#E3EAF0,#C9DBE6 70%,#B9
 .drop { position:absolute; top:-40px; width:1.5px; height:34px; background:linear-gradient(transparent,rgba(255,255,255,.75)); animation:rain linear infinite; }
 @keyframes rain { to { transform:translateY(115vh); } }
 .bgvid { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.bgvid.asme { transform:translateY(17%); }
+#bgfx { overflow:hidden; }
 .vidshade { position:absolute; inset:0; background:color-mix(in srgb, var(--bg) 22%, transparent); }
 body[data-vid] header, body[data-vid] .hero { background:color-mix(in srgb, var(--bg) 72%, transparent); border-radius:var(--r); }
 body[data-vid] .hero { margin-top:20px; padding:36px 16px 28px; }
@@ -175,11 +177,38 @@ body[data-vid] footer { background:color-mix(in srgb, var(--bg) 72%, transparent
 <div class="bgpanel" id="bgpanel"></div>
 
 <script>
+/* Fade của video nền: vào 500ms, ra 500ms khi còn 0,55 giây, rồi lặp lại (theo mẫu Asme) */
+function startFadeLoop(v) {
+  let raf = null, fadingOut = false;
+  const cur = () => parseFloat(v.style.opacity) || 0;
+  const anim = (from, to, dur, cb) => {
+    if (raf) cancelAnimationFrame(raf);
+    const t0 = performance.now();
+    const step = now => {
+      const k = Math.min(1, (now - t0) / dur);
+      v.style.opacity = from + (to - from) * k;
+      if (k < 1) raf = requestAnimationFrame(step); else { raf = null; if (cb) cb(); }
+    };
+    raf = requestAnimationFrame(step);
+  };
+  const fadeIn = () => { fadingOut = false; anim(cur(), 1, 500); };
+  v.style.opacity = 0;
+  v.addEventListener('loadeddata', fadeIn, { once: true });
+  v.addEventListener('timeupdate', () => {
+    if (!fadingOut && v.duration && v.duration - v.currentTime <= 0.55) { fadingOut = true; anim(cur(), 0, 500); }
+  });
+  v.addEventListener('ended', () => {
+    if (raf) cancelAnimationFrame(raf); raf = null;
+    v.style.opacity = 0;
+    setTimeout(() => { v.currentTime = 0; v.play().catch(() => {}); fadeIn(); }, 100);
+  });
+}
 /* Background picker */
 const BGS = [
   { id: 'cream',  name: '🤍 Cream (mặc định)' },
   { id: 'aurora', name: '🌈 Aurora chuyển màu' },
   { id: 'sakura', name: '🌸 Sakura rơi' },
+  { id: 'v-asme', name: '🎬 Video: Nền điện ảnh (mặc định)', video: 'https://dnbpvnx065n7k.cloudfront.net/media/b3b77e2c-b100-489e-923b-767f06383023.mp4', theme: 'dark', fade: true },
   { id: 'v-starry', name: '🌌 Video: Đêm sao Van Gogh', video: 'backgrounds/bg-starry-night.mp4', theme: 'dark' },
   { id: 'rain',   name: '🌧️ Mưa nhẹ' },
   { id: 'v-swamp',  name: '🐈‍⬛ Video: Mèo đầm lầy', video: 'backgrounds/bg-swamp-cat.mp4', theme: 'dark' },
@@ -197,8 +226,9 @@ function applyBg(id) {
   if (def.video) {
     document.body.setAttribute('data-vid', '1');
     const v = document.createElement('video');
-    v.className = 'bgvid'; v.src = def.video; v.autoplay = true; v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'auto';
+    v.className = 'bgvid' + (def.fade ? ' asme' : ''); v.src = def.video; v.autoplay = true; v.muted = true; v.loop = !def.fade; v.playsInline = true; v.setAttribute('playsinline', ''); v.preload = 'auto';
     fx.appendChild(v);
+    if (def.fade) startFadeLoop(v);
     const p = v.play(); if (p && p.catch) p.catch(() => {});
     const sh = document.createElement('div'); sh.className = 'vidshade'; fx.appendChild(sh);
   }
@@ -214,7 +244,7 @@ function applyBg(id) {
   p.innerHTML = '<b>Chọn nền</b>' + BGS.map(b => `<button class="bgopt" data-id="${b.id}">${b.name}</button>`).join('');
   p.addEventListener('click', e => { const t = e.target.closest('.bgopt'); if (t) applyBg(t.dataset.id); });
   document.getElementById('bgbtn').addEventListener('click', () => p.classList.toggle('open'));
-  let saved = 'v-autumn'; try { saved = localStorage.getItem('nvu_bg2') || 'v-autumn'; } catch (e) {}
+  let saved = 'v-asme'; try { saved = localStorage.getItem('nvu_bg2') || 'v-asme'; } catch (e) {}
   applyBg(saved);
 })();
 
