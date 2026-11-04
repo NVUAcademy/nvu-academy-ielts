@@ -12,11 +12,11 @@
   "date": "2026-11-04",
   "section": "vocabulary",
   "minutes": 75,
-  "intro": "Work through 5 steps, about 75 minutes. You need Track 12 and Track 11 (sent by the teacher on Zalo at 7:00). The map for Step 2 is in the Week 2 Daily Practice PDF. Deadline 00:00 tonight. Complete and on time earns 20 Meow; late or half done earns 10 Meow. Do not look at the answers before you finish.",
+  "intro": "Work through 5 steps, about 75 minutes. You need the Fiddy Farm audio (sent by the teacher on Zalo at 7:00) and Track 11. Deadline 00:00 tonight. Complete and on time earns 20 Meow; late or half done earns 10 Meow. Do not look at the answers before you finish.",
   "audio": {
-    "t12": {
-      "label": "Audio · Track 12 (Unit 2, Exercise 3, page 40)",
-      "src": "audio/Wed_Track12.mp3"
+    "fiddy": {
+      "label": "Audio · Fiddy Farm (Practice 6, Cambridge 11 Test 1, Section 2)",
+      "src": "audio/Thu_Fiddy_Farm.mp3"
     },
     "t11": {
       "label": "Audio · Track 11 (Unit 2, Exercise 2, page 39)",
@@ -143,99 +143,111 @@
     },
     {
       "id": "s2",
-      "title": "Step 2 · Listening: Track 12, label the map",
+      "title": "Step 2 · Listening: Fiddy Farm map, Q15–20",
       "minutes": 15,
-      "instructions": "Listen to Track 12 once, without stopping. Look at the map in the PDF (start at South Hinton Sports Centre). Choose the letter of the place in each box, in the order of the route. A roundabout · B junction · C traffic lights · D crossroads · E flyover · F bend.",
+      "instructions": "Listen once, then listen once more. Do not read the answers first. Look at the Fiddy Farm map (image below). Write the letter of the correct place for each item. Start at \"You are here\", next to New Barn.",
       "kind": "mcq",
-      "audio": "t12",
+      "audio": "fiddy",
+      "images": [
+        "images/map_fiddy_farm.png"
+      ],
       "items": [
         {
           "id": "s2_1",
-          "q": "1. First box on the route",
+          "q": "15. Scarecrow",
           "options": {
-            "A": "roundabout",
-            "B": "junction",
-            "C": "traffic lights",
-            "D": "crossroads",
-            "E": "flyover",
-            "F": "bend"
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
           },
-          "answer": "A",
-          "explain": "Rẽ trái ra Lily Road, đi khoảng hai trăm mét: roundabout."
+          "answer": "F"
         },
         {
           "id": "s2_2",
-          "q": "2. Second box on the route",
+          "q": "16. Maze",
           "options": {
-            "A": "roundabout",
-            "B": "junction",
-            "C": "traffic lights",
-            "D": "crossroads",
-            "E": "flyover",
-            "F": "bend"
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
           },
-          "answer": "D",
-          "explain": "Đi thẳng qua vòng xuyến thì tới crossroads."
+          "answer": "G"
         },
         {
           "id": "s2_3",
-          "q": "3. Third box on the route",
+          "q": "17. Café",
           "options": {
-            "A": "roundabout",
-            "B": "junction",
-            "C": "traffic lights",
-            "D": "crossroads",
-            "E": "flyover",
-            "F": "bend"
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
           },
-          "answer": "E",
-          "explain": "Lên cầu vượt qua đường cao tốc: flyover."
+          "answer": "D"
         },
         {
           "id": "s2_4",
-          "q": "4. Fourth box on the route",
+          "q": "18. Black Barn",
           "options": {
-            "A": "roundabout",
-            "B": "junction",
-            "C": "traffic lights",
-            "D": "crossroads",
-            "E": "flyover",
-            "F": "bend"
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
           },
-          "answer": "B",
-          "explain": "Sau flyover là junction với Bramley Road."
+          "answer": "H"
         },
         {
           "id": "s2_5",
-          "q": "5. Fifth box on the route",
+          "q": "19. Covered picnic area",
           "options": {
-            "A": "roundabout",
-            "B": "junction",
-            "C": "traffic lights",
-            "D": "crossroads",
-            "E": "flyover",
-            "F": "bend"
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
           },
-          "answer": "F",
-          "explain": "Đi khoảng 500 m rồi rẽ trái theo đoạn cong: bend."
+          "answer": "C"
         },
         {
           "id": "s2_6",
-          "q": "6. Sixth box on the route",
+          "q": "20. Fiddy House",
           "options": {
-            "A": "roundabout",
-            "B": "junction",
-            "C": "traffic lights",
-            "D": "crossroads",
-            "E": "flyover",
-            "F": "bend"
+            "A": "A",
+            "B": "B",
+            "C": "C",
+            "D": "D",
+            "E": "E",
+            "F": "F",
+            "G": "G",
+            "H": "H",
+            "I": "I"
           },
-          "answer": "C",
-          "explain": "Sau trạm xăng, chỗ rẽ đi Hinton ở traffic lights."
+          "answer": "A"
         }
-      ],
-      "images": [
-        "images/map_wed_hinton.png"
       ]
     },
     {
