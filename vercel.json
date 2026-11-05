@@ -2,6 +2,14 @@
   "functions": {
     "api/*.js": { "maxDuration": 60 }
   },
+  "rewrites": [
+    { "source": "/api/draft", "destination": "/api/student-data?res=draft" },
+    { "source": "/api/review-error", "destination": "/api/student-data?res=review-error" },
+    { "source": "/api/skill-history", "destination": "/api/student-data?res=skill-history" },
+    { "source": "/api/vq-progress", "destination": "/api/student-data?res=vq-progress" },
+    { "source": "/api/submit-daily", "destination": "/api/student-data?res=submit-daily" },
+    { "source": "/api/submit-weekly", "destination": "/api/student-data?res=submit-weekly" }
+  ],
   "crons": [
     { "path": "/api/export-recordings?days=3", "schedule": "30 16 * * *" },
     { "path": "/api/export-recordings?task=report", "schedule": "30 17 * * *" },
