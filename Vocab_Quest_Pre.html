@@ -627,6 +627,7 @@ function makeSoundQ(used=[]){
 let ttsVoice=null;
 let wordAudio=null;
 let exAudio=null; const exCache={};
+const SILENT_WAV='data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YQAAAAA=';
 /* Câu ví dụ: đọc bằng giọng thật (cùng máy chủ với phần nghe, được lưu cache). Lỗi thì dùng giọng máy của trình duyệt.
    twice=true: đọc hai lần, lần hai sau khi lần đầu đọc xong */
 function repeatSpeech(text){
@@ -639,9 +640,12 @@ function sayExample(text, twice){
   if(!/^[0-9a-f-]{36}$/i.test(sid)) return fallback();
   try{ if(exAudio) exAudio.pause(); }catch{}
   try{ if(window.speechSynthesis) speechSynthesis.cancel(); }catch{}
+  /* Mở khóa trình phát ngay lúc học sinh bấm (trình duyệt chỉ cho phát khi vừa có thao tác bấm) */
+  const el=exAudio||(exAudio=new Audio());
+  try{ el.src=SILENT_WAV; el.play().catch(()=>{}); }catch{}
   const key=String(text);
   let rep=!!twice;
-  const play=url=>{ const a=new Audio(url); exAudio=a; a.onended=()=>{ if(rep){ rep=false; setTimeout(()=>play(url),700); } }; a.play().catch(fallback); };
+  const play=url=>{ const a=exAudio||(exAudio=new Audio()); a.onended=()=>{ if(rep){ rep=false; setTimeout(()=>play(url),700); } }; a.src=url; a.play().catch(fallback); };
   if(exCache[key]) return play(exCache[key]);
   toast('Đang tạo giọng đọc, chờ vài giây…');
   fetch('/api/listening-audio',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({student_id:sid,lines:[{speaker:'A',text:key}]})})
