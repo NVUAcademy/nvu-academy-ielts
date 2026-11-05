@@ -13,7 +13,33 @@
   "section": "grammar",
   "minutes": 58,
   "intro": "Weekly test /19 has 4 parts (Vocabulary 5, Grammar 5, Reading 4, Writing 5), done in 45 minutes, without notes or a dictionary. Then step 5 prepares for Speaking (15 minutes). In total 5 steps, about 60 minutes. Deadline 23:30 the same day: complete and on time earns 20 Meow; late or half done earns 10 Meow.",
-  "audio": {},
+  "audio": {
+    "vocab": {
+      "label": "Audio · Vocabulary sentences (read aloud)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "My commute to work takes an hour."
+        },
+        {
+          "speaker": "A",
+          "text": "Do not procrastinate: start your essay now!"
+        },
+        {
+          "speaker": "A",
+          "text": "A good coach can nurture a young player's talent."
+        },
+        {
+          "speaker": "A",
+          "text": "The bus is packed with students at 7 a.m."
+        },
+        {
+          "speaker": "A",
+          "text": "My family is very supportive of my decision to study abroad."
+        }
+      ]
+    }
+  },
   "steps": [
     {
       "id": "s1",
@@ -67,7 +93,8 @@
             }
           ]
         }
-      ]
+      ],
+      "audio": "vocab"
     },
     {
       "id": "s2",

@@ -13,7 +13,33 @@
   "section": "vocabulary",
   "minutes": 15,
   "intro": "P1 class from 17:00 to 19:00. Warm up for 15 minutes only, and bring a pen and notes to class. Deadline 23:30 the same day: complete and on time earns 10 Meow (class); late or half done earns 5 Meow. Do not look at the answers before you finish.",
-  "audio": {},
+  "audio": {
+    "vocab": {
+      "label": "Audio · Vocabulary sentences (read aloud)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "I need to prioritise my tasks: exams come first, then essays."
+        },
+        {
+          "speaker": "A",
+          "text": "Cooking helps me unwind after a busy week."
+        },
+        {
+          "speaker": "A",
+          "text": "Our class was packed with new students this term."
+        },
+        {
+          "speaker": "A",
+          "text": "She is juggling three jobs at the moment."
+        },
+        {
+          "speaker": "A",
+          "text": "We finished everything today. It was a very productive day."
+        }
+      ]
+    }
+  },
   "steps": [
     {
       "id": "s1",
@@ -71,7 +97,8 @@
             }
           ]
         }
-      ]
+      ],
+      "audio": "vocab"
     },
     {
       "id": "s2",

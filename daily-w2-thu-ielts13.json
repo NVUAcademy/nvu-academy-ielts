@@ -13,7 +13,33 @@
   "section": "vocabulary",
   "minutes": 15,
   "intro": "P2 class from 19:30 to 21:30. Warm up with 2 steps only, 15 minutes; bring a pen and notes to class. Deadline 23:30 the same day: complete and on time earns 10 Meow (class); late or half done earns 5 Meow. Do not look at the answers before you finish.",
-  "audio": {},
+  "audio": {
+    "vocab": {
+      "label": "Audio · Vocabulary sentences (read aloud)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "Exam week is always hectic: I have three tests in two days."
+        },
+        {
+          "speaker": "A",
+          "text": "I read English news every morning to keep up with what happens in the world."
+        },
+        {
+          "speaker": "A",
+          "text": "Finishing my first 150-word essay gave me a sense of achievement."
+        },
+        {
+          "speaker": "A",
+          "text": "My commute is short because I live near the campus."
+        },
+        {
+          "speaker": "A",
+          "text": "He often procrastinates until the night before the deadline."
+        }
+      ]
+    }
+  },
   "steps": [
     {
       "id": "s1",
@@ -68,7 +94,8 @@
           ],
           "explain": "Chủ ngữ He + hiện tại đơn: thêm -s."
         }
-      ]
+      ],
+      "audio": "vocab"
     },
     {
       "id": "s2",

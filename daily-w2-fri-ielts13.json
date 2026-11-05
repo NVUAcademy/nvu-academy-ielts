@@ -17,6 +17,51 @@
     "shadow": {
       "label": "Shadowing · Daily practice Friday 30/10",
       "src": "audio/Shadowing_Daily_Practice_Fri_30_10.wav"
+    },
+    "vocab": {
+      "label": "Audio · Vocabulary sentences (read aloud)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "My weekdays are hectic because I have classes from morning to night."
+        },
+        {
+          "speaker": "A",
+          "text": "My commute to university takes forty minutes by bus."
+        },
+        {
+          "speaker": "A",
+          "text": "After the exam, I usually unwind by watching a film."
+        },
+        {
+          "speaker": "A",
+          "text": "My sister juggles a baby and her online classes."
+        },
+        {
+          "speaker": "A",
+          "text": "If you want a high band, you must prioritise speaking practice over games."
+        },
+        {
+          "speaker": "A",
+          "text": "I tend to procrastinate when I have a long essay to write."
+        },
+        {
+          "speaker": "A",
+          "text": "Yesterday was a very productive day: I finished all my homework."
+        },
+        {
+          "speaker": "A",
+          "text": "When I finished my first marathon, I felt a sense of achievement."
+        },
+        {
+          "speaker": "A",
+          "text": "The cinema was packed with people on opening night."
+        },
+        {
+          "speaker": "A",
+          "text": "The teacher speaks so fast that I cannot keep up with her."
+        }
+      ]
     }
   },
   "steps": [
@@ -121,7 +166,8 @@
             }
           ]
         }
-      ]
+      ],
+      "audio": "vocab"
     },
     {
       "id": "s2",
