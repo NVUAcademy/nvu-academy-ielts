@@ -166,7 +166,7 @@ async function saveReading(raw, total, band) {
   if (!box) return;
   box.insertAdjacentHTML('beforeend', '<h3 style="margin-top:24px">Lịch sử làm bài đọc</h3><div id="rhist">Đang tải…</div>');
   try {
-    const j = await (await fetch('/api/skill-history?student_id=' + encodeURIComponent(student.id) + '&skill=reading')).json();
+    const j = await (await fetch('/api/student-data?res=skill-history&student_id=' + encodeURIComponent(student.id) + '&skill=reading')).json();
     const rows = (j && j.data) || [];
     document.getElementById('rhist').innerHTML = rows.length ? rows.map(r => '<div style="padding:6px 0;border-top:1px solid #ddd">' +
       new Date(r.created_at).toLocaleString('vi-VN') + ' · ' + r.score + ' / ' + r.max_score + ' · band ' + r.band + '</div>').join('') : 'Chưa có bài nào.';

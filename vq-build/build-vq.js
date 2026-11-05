@@ -123,7 +123,7 @@ function mergeProg(a,b){ const out={...b,...a}; out.days={...(b.days||{})};
   for(const [d,v] of Object.entries(a.daily||{})){ const r=out.daily[d]; out.daily[d]= r ? {xp:Math.max(r.xp,v.xp),pts:Math.max(r.pts,v.pts),battles:Math.max(r.battles||0,v.battles||0),wins:Math.max(r.wins||0,v.wins||0)} : v; }
   return out; }
 async function syncPull(){ if(!LOGIN||!S.prog||!S.profile) return; try{
-  const {data}=await (await fetch('/api/vq-progress?student_id='+encodeURIComponent(LOGIN.id)+'&game_id='+encodeURIComponent(CFG.id))).json();
+  const {data}=await (await fetch('/api/student-data?res=vq-progress&student_id='+encodeURIComponent(LOGIN.id)+'&game_id='+encodeURIComponent(CFG.id))).json();
   if(data&&data.prog){ S.prog=mergeProg(S.prog,data.prog); ls.set('prog:'+nameKey(S.profile.name), S.prog); render(); }
   syncPush(); }catch(e){} }
 function saveProg(){ if(S.profile) ls.set('prog:'+nameKey(S.profile.name), S.prog); syncPush(); }`, 'saveProg');

@@ -215,7 +215,7 @@ async function saveListening(raw, total, band) {
   if (!box) return;
   box.insertAdjacentHTML('beforeend', '<h3 style="margin-top:24px">Lịch sử làm bài nghe</h3><div id="lhist">Đang tải…</div>');
   try {
-    const j = await (await fetch('/api/skill-history?student_id=' + encodeURIComponent(student.id) + '&skill=listening')).json();
+    const j = await (await fetch('/api/student-data?res=skill-history&student_id=' + encodeURIComponent(student.id) + '&skill=listening')).json();
     const rows = (j && j.data) || [];
     document.getElementById('lhist').innerHTML = rows.length ? rows.map(r => '<div style="padding:6px 0;border-top:1px solid #ddd">' +
       new Date(r.created_at).toLocaleString('vi-VN') + ' · ' + r.score + ' / ' + r.max_score + ' · band ' + r.band + '</div>').join('') : 'Chưa có bài nào.';

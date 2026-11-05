@@ -224,11 +224,11 @@ function draftPush() {
 async function draftPull() {
   if (!student || isTeacher) return;
   try {
-    const { data } = (await (await fetch('/api/draft?' + new URLSearchParams({ student_id: student.id, practice_id: P.id, practice_date: P.date }))).json()).data || {};
+    const { data } = (await (await fetch('/api/student-data?res=draft&' + new URLSearchParams({ student_id: student.id, practice_id: P.id, practice_date: P.date }))).json()).data || {};
     if (data && data.answers && Object.keys(data.answers).length) { answers = { ...data.answers, ...answers }; lsSet(draftKey(), JSON.stringify(answers)); }
   } catch (e) {}
 }
-async function draftDel() { if (!student || isTeacher) return; clearTimeout(draftT); try { await fetch('/api/draft?' + new URLSearchParams({ student_id: student.id, practice_id: P.id, practice_date: P.date }), { method: 'DELETE' }); } catch (e) {} }
+async function draftDel() { if (!student || isTeacher) return; clearTimeout(draftT); try { await fetch('/api/student-data?res=draft&' + new URLSearchParams({ student_id: student.id, practice_id: P.id, practice_date: P.date }), { method: 'DELETE' }); } catch (e) {} }
 window.addEventListener('beforeunload', e => { if (inProgress) { e.preventDefault(); e.returnValue = ''; } });
 
 /* Xem lại bài đã nộp (điểm, câu sai, đáp án, nhận xét của thầy) */
