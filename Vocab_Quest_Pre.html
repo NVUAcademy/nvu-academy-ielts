@@ -626,9 +626,24 @@ function makeSoundQ(used=[]){
 }
 let ttsVoice=null;
 let wordAudio=null;
+let exAudio=null; const exCache={};
+/* Câu ví dụ: đọc bằng giọng thật (cùng máy chủ với phần nghe, được lưu cache). Lỗi thì dùng giọng máy của trình duyệt */
+function sayExample(text){
+  const sid=(LOGIN&&LOGIN.id)||'';
+  if(!/^[0-9a-f-]{36}$/i.test(sid)) return sayAloudTTS(text);
+  try{ if(exAudio) exAudio.pause(); }catch{}
+  try{ if(window.speechSynthesis) speechSynthesis.cancel(); }catch{}
+  const key=String(text);
+  const play=url=>{ const a=new Audio(url); exAudio=a; a.play().catch(()=>sayAloudTTS(text)); };
+  if(exCache[key]) return play(exCache[key]);
+  toast('Đang tạo giọng đọc, chờ vài giây…');
+  fetch('/api/listening-audio',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({student_id:sid,lines:[{speaker:'A',text:key}]})})
+    .then(r=>r.json()).then(j=>{ if(!j.ok) throw new Error(j.error||'loi'); exCache[key]=j.url; play(j.url); })
+    .catch(()=>sayAloudTTS(text));
+}
 function sayAloud(text){
   const w=String(text).trim().toLowerCase();
-  if(!/^[a-z]+$/.test(w)) return sayAloudTTS(text);
+  if(!/^[a-z]+$/.test(w)) return sayExample(text);
   let started=false;
   const fail=()=>{ if(started) return; started=true; sayAloudTTS(text); };
   try{ if(wordAudio) wordAudio.pause(); }catch{}
