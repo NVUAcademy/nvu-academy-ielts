@@ -92,6 +92,7 @@ input[type=text]:focus, textarea:focus { border-color: var(--accent); background
   <div id="app"></div>
 </div>
 
+<script src="violation-guard.js"></script>
 <script>
 const SUPABASE_URL = 'https://sxnxbbosfyapmmkrhcdj.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_OMyiSjOVcKOfRdZO9JwSZg_8XogOYkZ';
@@ -224,11 +225,19 @@ function draftPush() {
 async function draftPull() {
   if (!student || isTeacher) return;
   try {
-    const { data } = (await (await fetch('/api/draft?' + new URLSearchParams({ student_id: student.id, practice_id: P.id, practice_date: P.date }))).json()).data || {};
-    if (data && data.answers && Object.keys(data.answers).length) { answers = { ...data.answers, ...answers }; lsSet(draftKey(), JSON.stringify(answers)); }
+    const row = (await (await fetch('/api/draft?' + new URLSearchParams({ student_id: student.id, practice_id: P.id, practice_date: P.date }))).json()).data;
+    if (row && row.answers) {
+      answers = { ...row.answers, ...answers };
+      if (row.answers._v) answers._v = row.answers._v; else delete answers._v;
+      lsSet(draftKey(), JSON.stringify(answers));
+    }
   } catch (e) {}
 }
 async function draftDel() { if (!student || isTeacher) return; clearTimeout(draftT); try { await fetch('/api/draft?' + new URLSearchParams({ student_id: student.id, practice_id: P.id, practice_date: P.date }), { method: 'DELETE' }); } catch (e) {} }
+function sendDraftNow() {
+  if (!student || isTeacher) return;
+  try { fetch('/api/draft', { method: 'POST', keepalive: true, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ student_id: student.id, practice_id: P.id, practice_date: P.date, answers }) }); } catch (e) {}
+}
 window.addEventListener('beforeunload', e => { if (inProgress) { e.preventDefault(); e.returnValue = ''; } });
 
 /* Xem lại bài đã nộp (điểm, câu sai, đáp án, nhận xét của thầy) */
@@ -259,6 +268,8 @@ function renderIntro() {
 
 function startPractice() {
   totalSec = 0; inProgress = true;
+  ViolationGuard.init({ isActive: () => inProgress && !!student && !isTeacher, answers: () => answers, persist: () => lsSet(draftKey(), JSON.stringify(answers)), sendNow: () => sendDraftNow() });
+  ViolationGuard.render();
   totalTimer = setInterval(() => { totalSec++; const e = $('tt'); if (e) e.textContent = fmt(totalSec); }, 1000);
   renderPractice();
 }
@@ -360,6 +371,7 @@ async function sendAiItem(id) {
   }
 }
 function setAns(id, v, rerender) {
+  if (ViolationGuard.isLocked()) return;
   answers[id] = v; lsSet(draftKey(), JSON.stringify(answers)); draftPush();
   if (rerender) renderPractice(); else { const e = $('prog'); if (e) e.textContent = filledCount(); }
 }
@@ -415,6 +427,7 @@ async function toggleRec() {
 
 /* ---------- submit ---------- */
 async function submitPractice() {
+  if (ViolationGuard.isLocked()) { alert('Bài đã bị khóa vì rời bài làm quá 3 lần. Hãy báo giáo viên.'); return; }
   const items = closedItems();
   const blanks = items.filter(({ it, kind }) => kind === 'mcq' ? !answers[it.id] : it.fields.some((f, i) => !(answers[`${it.id}_${i}`] || '').trim())).length;
   if (blanks && !confirm(`Còn ${blanks} câu chưa điền. Vẫn nộp bài?`)) return;
@@ -512,7 +525,7 @@ async function save(res, score) {
       error_content: givenText(r.it, r.kind), correct_answer: correctText(r.it, r.kind),
       context: `${r.step.title}: ${r.kind === 'mcq' ? r.it.q : r.it.label}`
     })) : [];
-    const sr = await fetch('/api/submit-daily', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...core, practice_id: P.id, answers, voice_path: voicePath, errors }) });
+    const sr = await fetch('/api/submit-daily', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...core, practice_id: P.id, answers: ViolationGuard.clean(answers), voice_path: voicePath, errors }) });
     const sj = await sr.json(); if (!sj.ok) throw new Error(sj.error || 'Lỗi không rõ');
     lsDel(draftKey()); draftDel();
     existing = { score, max_score: res.length, answers, time_taken_seconds: totalSec };

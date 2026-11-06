@@ -191,6 +191,7 @@ input[type=text]:focus, textarea:focus { border-color: var(--accent); background
   <div id="app"></div>
 </div>
 
+<script src="violation-guard.js"></script>
 <script>
 const SUPABASE_URL = 'https://sxnxbbosfyapmmkrhcdj.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_OMyiSjOVcKOfRdZO9JwSZg_8XogOYkZ';
@@ -327,6 +328,7 @@ function renderIntro() {
 /* ---------- quiz ---------- */
 async function startQuiz() {
   started = true;
+  ViolationGuard.init({ isActive: () => started && !quizSubmitted && !!student && !isTeacher, answers: () => answers, persist: () => lsSet(draftKey(), JSON.stringify(answers)), sendNow: () => quizSendNow() });
   answers = {};
   try { answers = JSON.parse(lsGet(draftKey()) || '{}'); } catch (e) {}
   await quizDraftPull();
@@ -346,9 +348,17 @@ function quizDraftPush() {
 async function quizDraftPull() {
   if (!student || isTeacher) return;
   try {
-    const { data } = (await (await fetch('/api/draft?' + new URLSearchParams({ student_id: student.id, practice_id: QD().practice_id, practice_date: QD().practice_date }))).json()).data || {};
-    if (data && data.answers && Object.keys(data.answers).length) { answers = { ...data.answers, ...answers }; lsSet(draftKey(), JSON.stringify(answers)); }
+    const row = (await (await fetch('/api/draft?' + new URLSearchParams({ student_id: student.id, practice_id: QD().practice_id, practice_date: QD().practice_date }))).json()).data;
+    if (row && row.answers) {
+      answers = { ...row.answers, ...answers };
+      if (row.answers._v) answers._v = row.answers._v; else delete answers._v;
+      lsSet(draftKey(), JSON.stringify(answers));
+    }
   } catch (e) {}
+}
+function quizSendNow() {
+  if (!student || isTeacher) return;
+  try { fetch('/api/draft', { method: 'POST', keepalive: true, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ student_id: student.id, ...QD(), answers }) }); } catch (e) {}
 }
 async function quizDraftDel() { if (!student || isTeacher) return; clearTimeout(quizDraftT); try { await fetch('/api/draft?' + new URLSearchParams({ student_id: student.id, practice_id: QD().practice_id, practice_date: QD().practice_date }), { method: 'DELETE' }); } catch (e) {} }
 window.addEventListener('beforeunload', e => { if (started && !quizSubmitted) { e.preventDefault(); e.returnValue = ''; } });
@@ -426,6 +436,7 @@ function qHtml(q, p) {
 }
 
 function setAns(id, val, rerender) {
+  if (ViolationGuard.isLocked()) return;
   answers[id] = val;
   saveDraft();
   if (rerender) renderQuiz();
@@ -454,6 +465,7 @@ function pausePart() { clearInterval(partTimer); partTimer = null; partRunning =
 
 /* ---------- submit ---------- */
 async function submitQuiz() {
+  if (ViolationGuard.isLocked()) { alert('Bài đã bị khóa vì rời bài làm quá 3 lần. Hãy báo giáo viên.'); return; }
   const blanks = ['A','B','C'].reduce((n, p) => n + partQuestions(p).filter(q => !(answers[q.id] || '').trim()).length, 0);
   if (blanks && !confirm(`Còn ${blanks} câu chưa trả lời. Vẫn nộp bài?`)) return;
   if (!blanks && !confirm('Nộp bài ngay? Bạn không thể sửa sau khi nộp.')) return;
@@ -481,7 +493,7 @@ async function saveResult(res) {
       correct_answer: w.q.type === 'mcq' ? `${w.q.answer}. ${w.q.options[w.q.answer]}` : w.q.answer,
       context: w.q.q
     })) : [];
-    const sr = await fetch('/api/submit-weekly', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...core, quiz_id: quiz.id, answers, part_seconds: { ...partSec, total: totalSec }, errors }) });
+    const sr = await fetch('/api/submit-weekly', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...core, quiz_id: quiz.id, answers: ViolationGuard.clean(answers), part_seconds: { ...partSec, total: totalSec }, errors }) });
     const sj = await sr.json(); if (!sj.ok) throw new Error(sj.error || 'Lỗi không rõ');
     lsDel(draftKey()); quizDraftDel(); quizSubmitted = true;
     existing = core;
