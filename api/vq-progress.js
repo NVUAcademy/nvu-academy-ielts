@@ -9,6 +9,7 @@ const SB_HEAD = () => {
 };
 const sb = (path, opts) => fetch(SB_URL() + path, { ...opts, headers: { ...SB_HEAD(), ...(opts && opts.headers) } });
 const bad = (res, code, msg) => res.status(code).json({ ok: false, error: msg });
+const str = (v, max) => String(v == null ? '' : v).slice(0, max);
 const isInt = (v, max) => Number.isInteger(v) && v >= 0 && v <= max;
 const XP_PER_LV = 120; /* giữ đúng với vq-build/build-vq.js */
 
@@ -34,6 +35,18 @@ module.exports = async function handler(req, res) {
     const st = await (await sb('/rest/v1/students?id=eq.' + studentId + '&select=id')).json();
     if (!Array.isArray(st)) return bad(res, 500, 'Supabase từ chối khóa dịch vụ');
     if (!st.length) return bad(res, 403, 'Không tìm thấy học sinh');
+
+    /* Nhật ký hoạt động (đăng nhập, thời gian luyện tập) cho trang thống kê của giáo viên */
+    if (b.kind === 'activity') {
+      if (req.method !== 'POST') return bad(res, 405, 'POST only');
+      const kind = b.activity_kind === 'practice' ? 'practice' : (b.activity_kind === 'login' ? 'login' : '');
+      if (!kind) return bad(res, 400, 'activity_kind không hợp lệ');
+      const seconds = Number.isInteger(b.seconds) && b.seconds >= 0 && b.seconds <= 36000 ? b.seconds : 0;
+      const label = str(b.label, 80);
+      const ins = await sb('/rest/v1/activity_log', { method: 'POST', headers: { 'content-type': 'application/json', Prefer: 'return=minimal' }, body: JSON.stringify({ student_id: studentId, kind, seconds, label: label || null }) });
+      if (!ins.ok) return bad(res, 500, 'Không ghi được nhật ký: ' + (await ins.text()).slice(0, 160));
+      return res.status(200).json({ ok: true });
+    }
 
     const gameId = String(b.game_id || '').slice(0, 60);
     if (!gameId) return bad(res, 400, 'Thiếu game_id');
