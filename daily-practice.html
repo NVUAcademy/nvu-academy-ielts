@@ -333,7 +333,15 @@ function audioHtml(key) {
   const a = P.audio[key];
   /* Bài có transcript (lines) thì tạo audio bằng ElevenLabs khi học sinh bấm nghe; file đã tạo được lưu lại */
   if (a.lines) return `<div class="audio-box"><div class="lab">🎧 ${esc(a.label)}</div><button class="btn small" onclick="loadTts('${esc(key)}', this)">▶ Nghe</button><audio controls preload="none" style="display:none;width:100%;margin-top:8px"></audio><div class="meta" style="font-size:13px"></div></div>`;
-  return `<div class="audio-box"><div class="lab">🎧 ${esc(a.label)}</div><audio controls preload="metadata" src="${esc(a.src)}"></audio></div>`;
+  return `<div class="audio-box"><div class="lab">🎧 ${esc(a.label)}</div><audio controls preload="metadata" src="${esc(a.src)}" onerror="audioMissing(this)"></audio></div>`;
+}
+/* File audio chưa có trên máy chủ: thay trình phát hỏng bằng thông báo, bài vẫn làm tiếp được */
+function audioMissing(el) {
+  const m = document.createElement('div');
+  m.className = 'meta';
+  m.style.fontSize = '14px';
+  m.textContent = 'Audio bài này chưa có. Em làm phần còn lại và báo thầy để nghe sau.';
+  el.replaceWith(m);
 }
 
 async function loadTts(key, btn) {

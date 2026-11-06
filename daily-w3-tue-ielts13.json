@@ -1,0 +1,200 @@
+{
+  "id": "w3-tue-ielts13",
+  "title": "Tuesday Daily Practice",
+  "subtitle": "Reading practice test: green roofs (True / False / Not Given and short answers)",
+  "theme": "P2 · Reading practice",
+  "source": "Mindset L1 Unit 2 (P1 Listening+Speaking, P2 Reading) - bài tự soạn, không trùng handout P1, P2 và Trial 1, 2",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 3,
+  "day": "tuesday",
+  "date": "2026-11-10",
+  "section": "reading",
+  "minutes": 55,
+  "intro": "Làm lần lượt 4 bước, khoảng 55 phút. Làm trong 35 phút đầu như đi thi: không tra từ điển, không xem lại đáp án. Phần còn lại ghi sổ lỗi và nói tóm tắt. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Boost (không bắt buộc): đọc một bài ngắn trên BBC Learning English và gạch chân 5 từ khóa.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Skim, then True, False or Not Given",
+      "minutes": 20,
+      "instructions": "Skim 1 phút để làm câu 1. Sau đó đọc kỹ và làm câu 2 đến 6. Không tra từ điển. Đoạn văn: In many cities, roofs are empty spaces that are rarely used. Today, a growing number of buildings have green roofs, which are covered with soil and plants. The idea is not new: people in northern Europe covered their roofs with grass hundreds of years ago to keep their homes warm. Modern green roofs, however, are designed to solve city problems. First, plants take in heat from the sun, so a building with a green roof can be up to 5 degrees cooler in summer. Second, the soil absorbs rainwater, which reduces the risk of floods after heavy storms. Third, green roofs give birds and insects a place to live in areas with few parks. Green roofs also have disadvantages. They cost about twice as much as ordinary roofs to build, and they need to be checked regularly for leaks. In some cities, the local government pays part of the cost. In one German city, for example, owners receive money if they plant a green roof on a new building. Some owners grow vegetables on their roofs, and a few even keep bees. Some researchers believe that if just one in ten buildings had a green roof, the air in a large city would be noticeably cleaner.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s1_1",
+          "q": "1. What is the passage mainly about?",
+          "options": {
+            "A": "the advantages and disadvantages of green roofs",
+            "B": "how to grow vegetables in a small garden",
+            "C": "the history of houses in northern Europe"
+          },
+          "answer": "A",
+          "explain": "Skim: câu đầu giới thiệu green roofs, đoạn 1 nêu lợi ích, đoạn 2 nêu bất lợi. B và C chỉ là chi tiết."
+        },
+        {
+          "id": "s1_2",
+          "q": "2. People first used green roofs in the twenty-first century.",
+          "options": {
+            "A": "True",
+            "B": "False",
+            "C": "Not Given"
+          },
+          "answer": "B",
+          "explain": "Evidence: hundreds of years ago."
+        },
+        {
+          "id": "s1_3",
+          "q": "3. Plants on a roof can help to make a building cooler in summer.",
+          "options": {
+            "A": "True",
+            "B": "False",
+            "C": "Not Given"
+          },
+          "answer": "A",
+          "explain": "Evidence: a building with a green roof can be up to 5 degrees cooler in summer."
+        },
+        {
+          "id": "s1_4",
+          "q": "4. Green roofs are cheaper to build than ordinary roofs.",
+          "options": {
+            "A": "True",
+            "B": "False",
+            "C": "Not Given"
+          },
+          "answer": "B",
+          "explain": "Evidence: cost about twice as much."
+        },
+        {
+          "id": "s1_5",
+          "q": "5. Most green roofs in Europe are used to grow vegetables.",
+          "options": {
+            "A": "True",
+            "B": "False",
+            "C": "Not Given"
+          },
+          "answer": "C",
+          "explain": "Bài chỉ nói some owners grow vegetables, không nói đa số hay ở châu Âu."
+        },
+        {
+          "id": "s1_6",
+          "q": "6. Green roofs have to be checked for leaks from time to time.",
+          "options": {
+            "A": "True",
+            "B": "False",
+            "C": "Not Given"
+          },
+          "answer": "A",
+          "explain": "checked regularly = from time to time."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Short answers",
+      "minutes": 15,
+      "instructions": "Viết KHÔNG QUÁ HAI TỪ VÀ/HOẶC MỘT SỐ, lấy đúng từ trong bài. Dùng lại đoạn văn: In many cities, roofs are empty spaces that are rarely used. Today, a growing number of buildings have green roofs, which are covered with soil and plants. The idea is not new: people in northern Europe covered their roofs with grass hundreds of years ago to keep their homes warm. Modern green roofs, however, are designed to solve city problems. First, plants take in heat from the sun, so a building with a green roof can be up to 5 degrees cooler in summer. Second, the soil absorbs rainwater, which reduces the risk of floods after heavy storms. Third, green roofs give birds and insects a place to live in areas with few parks. Green roofs also have disadvantages. They cost about twice as much as ordinary roofs to build, and they need to be checked regularly for leaks. In some cities, the local government pays part of the cost. In one German city, for example, owners receive money if they plant a green roof on a new building. Some owners grow vegetables on their roofs, and a few even keep bees. Some researchers believe that if just one in ten buildings had a green roof, the air in a large city would be noticeably cleaner.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. Where did people cover roofs with grass hundreds of years ago? ______",
+          "fields": [
+            {
+              "answer": "northern Europe"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. By how many degrees can a building with a green roof be cooler in summer? ______",
+          "fields": [
+            {
+              "answer": "5",
+              "accept": [
+                "5 degrees",
+                "up to 5",
+                "five"
+              ]
+            }
+          ],
+          "explain": "Bẫy: one in ten và twice là số khác."
+        },
+        {
+          "id": "s2_3",
+          "label": "3. What does the soil absorb? ______",
+          "fields": [
+            {
+              "answer": "rainwater"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. Compared with an ordinary roof, a green roof costs about ______ as much.",
+          "fields": [
+            {
+              "answer": "twice",
+              "accept": [
+                "two times",
+                "2 times"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. What do a few owners keep on their roofs? ______",
+          "fields": [
+            {
+              "answer": "bees",
+              "accept": [
+                "bee"
+              ]
+            }
+          ],
+          "explain": "Bẫy: vegetables là việc some owners làm, không phải keep."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Error log",
+      "minutes": 10,
+      "instructions": "Với mỗi câu sai ở bước 1 và 2, ghi số câu, dạng bài (skim, scan, True/False/Not Given, short answer) và lý do: không hiểu từ · bẫy số · Not Given hay False · viết sai từ · hết giờ · other. Cuối cùng viết một câu: Next time I will ... Nếu em đúng hết, ghi một kỹ thuật em thấy hiệu quả nhất.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s3_1",
+          "q": "Error log của em",
+          "model": "Q5: Not Given. I chose False because I thought vegetables were not common. Next time I will look for evidence in the text, and if there is none I will choose Not Given.",
+          "ai": {
+            "type": "Bài viết ngắn Pre-IELTS (A2 đến B1)",
+            "level": "Pre-IELTS (A2 đến B1)",
+            "min_words": 20,
+            "task": "Write your error log: question number, question type and reason for each mistake, then one sentence beginning Next time I will.",
+            "criteria": [
+              "ghi đúng số câu và dạng bài",
+              "nêu lý do cụ thể, không chỉ viết em bất cẩn",
+              "có câu Next time I will ... rõ ràng"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Speaking: summarise",
+      "minutes": 10,
+      "instructions": "Ghi âm 30 giây: tóm tắt đoạn văn bằng 3 câu bằng lời của em (không đọc lại bài). Nói rõ một lợi ích và một bất lợi của green roofs.",
+      "kind": "voice",
+      "lines": [
+        "Tóm tắt bài green roofs bằng 3 câu: nói một lợi ích và một bất lợi."
+      ],
+      "note": "Thầy sẽ nghe cách em diễn đạt lại bằng từ khác và âm cuối."
+    }
+  ],
+  "send_today": "Hoàn thành 4 bước trên web. Voice note ở bước 4 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "reading"
+}

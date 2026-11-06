@@ -1,0 +1,277 @@
+{
+  "id": "w3-sat-ielts13",
+  "title": "Saturday Daily Practice",
+  "subtitle": "Reading: True, False, Not Given, plus a short process write-up",
+  "theme": "P2 · Places & buildings (Reading)",
+  "source": "Mindset L1 Unit 2 (P1 Listening+Speaking, P2 Reading) - bài tự soạn, không trùng handout P1, P2 và Trial 1, 2",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 3,
+  "day": "saturday",
+  "date": "2026-11-07",
+  "section": "reading",
+  "minutes": 55,
+  "intro": "Làm lần lượt 6 bước, khoảng 55 phút. Bài đọc hôm nay dùng dạng True / False / Not Given. Phần viết ở bước 5 là quy trình đã học ở Trial 2, chưa phải phần Writing mới của P2. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Bài viết em gõ thẳng vào ô trên web, thầy chấm.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Guess the meaning from context",
+      "minutes": 8,
+      "instructions": "Chọn nghĩa đúng của từ in nghiêng trong bài. Đoạn văn: Night markets are a popular part of life in many Asian cities. In Taiwan, the first night markets appeared more than a century ago, when sellers set up simple stalls near temples after dark. Today, Taipei alone has more than fifteen well-known night markets, and many of them attract over 20,000 visitors on a Saturday. Most stalls sell cheap street food, such as grilled squid and fried chicken, but clothes, phone cases and toys are also common. Many locals say that the markets are cheaper than restaurants, and they enjoy meeting friends there after work. Visitors, however, sometimes complain about the crowds and the smell of cooking oil. To improve safety, the city government now checks every food stall twice a year. Some markets also provide free maps in English and Korean, but only a few offer signs in Japanese. Experts believe that night markets will keep growing because young people prefer experiences to shopping in malls.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s1_1",
+          "q": "1. ‘sellers set up simple stalls’: set up means …",
+          "options": {
+            "A": "prepare and put in place",
+            "B": "take away",
+            "C": "pay for"
+          },
+          "answer": "A",
+          "explain": "set up a stall = dựng sạp. Đoán qua cả câu: simple stalls near temples."
+        },
+        {
+          "id": "s1_2",
+          "q": "2. ‘Many locals say …’: locals are …",
+          "options": {
+            "A": "tourists from other countries",
+            "B": "people who live in the area",
+            "C": "people who sell food"
+          },
+          "answer": "B",
+          "explain": "locals đối lập với visitors ở câu sau."
+        },
+        {
+          "id": "s1_3",
+          "q": "3. ‘Visitors sometimes complain about the crowds’: complain means …",
+          "options": {
+            "A": "say you are not happy about something",
+            "B": "take photos of something",
+            "C": "ask for help"
+          },
+          "answer": "A",
+          "explain": "however báo hiệu ý tiêu cực."
+        },
+        {
+          "id": "s1_4",
+          "q": "4. ‘many of them attract over 20,000 visitors’: attract means …",
+          "options": {
+            "A": "make people want to come",
+            "B": "send people away",
+            "C": "count people"
+          },
+          "answer": "A"
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · True, False or Not Given",
+      "minutes": 12,
+      "instructions": "Đọc lại đoạn văn và chọn True, False hoặc Not Given. Not Given nghĩa là bài không nói tới, không được đoán. Đoạn văn: Night markets are a popular part of life in many Asian cities. In Taiwan, the first night markets appeared more than a century ago, when sellers set up simple stalls near temples after dark. Today, Taipei alone has more than fifteen well-known night markets, and many of them attract over 20,000 visitors on a Saturday. Most stalls sell cheap street food, such as grilled squid and fried chicken, but clothes, phone cases and toys are also common. Many locals say that the markets are cheaper than restaurants, and they enjoy meeting friends there after work. Visitors, however, sometimes complain about the crowds and the smell of cooking oil. To improve safety, the city government now checks every food stall twice a year. Some markets also provide free maps in English and Korean, but only a few offer signs in Japanese. Experts believe that night markets will keep growing because young people prefer experiences to shopping in malls.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "1. The first night markets in Taiwan appeared near temples.",
+          "options": {
+            "A": "True",
+            "B": "False",
+            "C": "Not Given"
+          },
+          "answer": "A",
+          "explain": "Evidence: set up simple stalls near temples after dark."
+        },
+        {
+          "id": "s2_2",
+          "q": "2. Taipei has fewer than fifteen well-known night markets.",
+          "options": {
+            "A": "True",
+            "B": "False",
+            "C": "Not Given"
+          },
+          "answer": "B",
+          "explain": "Bài viết more than fifteen. Ngược lại với fewer than."
+        },
+        {
+          "id": "s2_3",
+          "q": "3. Most visitors to night markets are tourists.",
+          "options": {
+            "A": "True",
+            "B": "False",
+            "C": "Not Given"
+          },
+          "answer": "C",
+          "explain": "Bài có nhắc visitors và locals nhưng không nói đa số là ai."
+        },
+        {
+          "id": "s2_4",
+          "q": "4. Food at night markets costs more than food in restaurants.",
+          "options": {
+            "A": "True",
+            "B": "False",
+            "C": "Not Given"
+          },
+          "answer": "B",
+          "explain": "Bài viết cheaper than restaurants."
+        },
+        {
+          "id": "s2_5",
+          "q": "5. Every food stall is checked twice a year.",
+          "options": {
+            "A": "True",
+            "B": "False",
+            "C": "Not Given"
+          },
+          "answer": "A",
+          "explain": "Evidence: checks every food stall twice a year."
+        },
+        {
+          "id": "s2_6",
+          "q": "6. The city government plans to build more night markets.",
+          "options": {
+            "A": "True",
+            "B": "False",
+            "C": "Not Given"
+          },
+          "answer": "C",
+          "explain": "Bài chỉ nói chính quyền kiểm tra sạp, không nói xây thêm chợ."
+        },
+        {
+          "id": "s2_7",
+          "q": "7. Experts think night markets will continue to grow.",
+          "options": {
+            "A": "True",
+            "B": "False",
+            "C": "Not Given"
+          },
+          "answer": "A",
+          "explain": "will keep growing = will continue to grow."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Sentence completion and paraphrase",
+      "minutes": 10,
+      "instructions": "Câu 1 đến 4: viết KHÔNG QUÁ HAI TỪ VÀ/HOẶC MỘT SỐ, lấy đúng từ trong bài. Dùng lại đoạn văn: Night markets are a popular part of life in many Asian cities. In Taiwan, the first night markets appeared more than a century ago, when sellers set up simple stalls near temples after dark. Today, Taipei alone has more than fifteen well-known night markets, and many of them attract over 20,000 visitors on a Saturday. Most stalls sell cheap street food, such as grilled squid and fried chicken, but clothes, phone cases and toys are also common. Many locals say that the markets are cheaper than restaurants, and they enjoy meeting friends there after work. Visitors, however, sometimes complain about the crowds and the smell of cooking oil. To improve safety, the city government now checks every food stall twice a year. Some markets also provide free maps in English and Korean, but only a few offer signs in Japanese. Experts believe that night markets will keep growing because young people prefer experiences to shopping in malls.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. Sellers first set up stalls near temples ______.",
+          "fields": [
+            {
+              "answer": "after dark"
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2. Many markets attract more than ______ visitors on a Saturday.",
+          "fields": [
+            {
+              "answer": "20,000",
+              "accept": [
+                "20000",
+                "over 20,000"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3. Popular snacks include grilled squid and fried ______.",
+          "fields": [
+            {
+              "answer": "chicken"
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "4. Some visitors complain about the crowds and the ______ of cooking oil.",
+          "fields": [
+            {
+              "answer": "smell"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Find the paraphrase",
+      "minutes": 5,
+      "instructions": "Chọn câu có cùng nghĩa với câu trong bài.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s4_1",
+          "q": "1. ‘Many locals say that the markets are cheaper than restaurants.’",
+          "options": {
+            "A": "Local people think eating at the markets costs less than eating in restaurants.",
+            "B": "Restaurants are cheaper than the markets according to local people.",
+            "C": "Many tourists say the markets are more expensive than restaurants."
+          },
+          "answer": "A",
+          "explain": "cheaper than = costs less than; locals = local people."
+        },
+        {
+          "id": "s4_2",
+          "q": "2. ‘Young people prefer experiences to shopping in malls.’",
+          "options": {
+            "A": "Young people like doing activities more than visiting shopping centres.",
+            "B": "Young people never go to shopping malls.",
+            "C": "Young people prefer to shop online."
+          },
+          "answer": "A",
+          "explain": "prefer A to B = like A more than B. B và C đi quá xa so với bài."
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Write: how plastic bottles are recycled",
+      "minutes": 15,
+      "instructions": "Dùng kiến thức quy trình đã học ở buổi trước (bị động hiện tại đơn và từ nối trình tự). Notes: 1 used bottles are collected from street bins · 2 bottles are sorted by colour · 3 bottles are washed and cut into small pieces · 4 pieces are melted at a high temperature · 5 melted plastic is made into thin threads, which are used for clothes. Viết 60 đến 80 từ: 1 câu mở đầu (The diagram shows how …), 1 câu tổng quan nêu số giai đoạn, rồi các bước với First, Next, Then, After that, Finally. Em tự viết lại bằng lời của mình, không chép nguyên các notes.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s5_1",
+          "q": "Bài viết của em (60 đến 80 từ)",
+          "model": "The diagram shows how plastic bottles are recycled. The process consists of five stages, from collecting the bottles to making clothes. First, used bottles are collected from street bins. Next, they are sorted by colour. Then the bottles are washed and cut into small pieces. After that, the pieces are melted at a high temperature. Finally, the melted plastic is made into thin threads, which are used for clothes.",
+          "ai": {
+            "type": "Bài viết ngắn Pre-IELTS (A2 đến B1)",
+            "level": "Pre-IELTS (A2 đến B1)",
+            "min_words": 55,
+            "task": "Write 60 to 80 words describing how plastic bottles are recycled. Use an introduction, a one-sentence overview, the present simple passive and sequencing words.",
+            "criteria": [
+              "có câu mở đầu diễn đạt lại đề (The diagram shows how …)",
+              "có câu tổng quan nêu số giai đoạn, bước đầu và bước cuối",
+              "bị động hiện tại đơn đúng (is / are + V3)",
+              "dùng từ nối trình tự (First, Next, Then, After that, Finally)",
+              "các bước đúng thứ tự, không chép nguyên notes, không thêm số liệu"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Step 6 · Read aloud",
+      "minutes": 5,
+      "instructions": "Đọc to câu mở đầu và câu tổng quan của em, một lần. Nói rõ các đuôi -ed và -s.",
+      "kind": "voice",
+      "lines": [
+        "Đọc to câu mở đầu và câu tổng quan trong bài viết của em, một lần."
+      ],
+      "note": "Thầy sẽ nghe đuôi -ed, -s và nhịp đọc."
+    }
+  ],
+  "send_today": "Hoàn thành 6 bước trên web. Voice note ở bước 6 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "reading"
+}

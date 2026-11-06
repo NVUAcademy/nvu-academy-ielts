@@ -1,0 +1,87 @@
+{
+  "id": "w3-thu-ielts13",
+  "title": "Thursday Daily Practice",
+  "subtitle": "Class warm-up: say the week's new words and read your test writing aloud",
+  "theme": "Warm-up for class",
+  "source": "Mindset L1 Unit 2 (P1 Listening+Speaking, P2 Reading) - bài tự soạn, không trùng handout P1, P2 và Trial 1, 2",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 3,
+  "day": "thursday",
+  "date": "2026-11-12",
+  "section": "vocabulary",
+  "minutes": 15,
+  "intro": "Hôm nay là ngày học. Chỉ làm khởi động 2 bước, 15 phút, mang bút và ghi chú đến lớp. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 10 Meow (ngày học), muộn hoặc làm một nửa được 5 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocabulary recall",
+      "minutes": 5,
+      "instructions": "Điền từ trong khung: instructor · campus · affordable · converted · sustainable. Đổi dạng từ nếu cần.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. Our ______ taught us how to drive in two weeks.",
+          "fields": [
+            {
+              "answer": "instructor"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. The university ______ has a large library and two cafés.",
+          "fields": [
+            {
+              "answer": "campus"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. Rents here are not ______ for most students.",
+          "fields": [
+            {
+              "answer": "affordable"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. The factory was ______ into a shopping centre.",
+          "fields": [
+            {
+              "answer": "converted"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. Cycling is a ______ way to travel in a big city.",
+          "fields": [
+            {
+              "answer": "sustainable"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Speaking warm-up and voice note",
+      "minutes": 10,
+      "instructions": "Nói to 5 từ mới của tuần này, mỗi từ kèm một ví dụ của em. Sau đó đọc to bài viết ở phần Writing của bài kiểm tra hôm qua, một lần. Ghi âm 1 voice note.",
+      "kind": "voice",
+      "lines": [
+        "1. Nói 5 từ mới của tuần này, mỗi từ một ví dụ của em.",
+        "2. Đọc to bài viết của bài kiểm tra hôm qua, một lần."
+      ],
+      "note": "Thầy sẽ nghe phát âm, đuôi -ed và nhịp đọc."
+    }
+  ],
+  "send_today": "Hoàn thành 2 bước trên web. Voice note ở Step 2 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "vocabulary"
+}

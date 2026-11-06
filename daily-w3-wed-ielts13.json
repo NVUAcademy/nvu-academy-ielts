@@ -1,0 +1,234 @@
+{
+  "id": "w3-wed-ielts13",
+  "title": "Wednesday Daily Practice",
+  "subtitle": "Weekly test /19 and Speaking preparation",
+  "theme": "P1 and P2 · Weekly test",
+  "source": "Mindset L1 Unit 2 (P1 Listening+Speaking, P2 Reading) - bài tự soạn, không trùng handout P1, P2 và Trial 1, 2",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 3,
+  "day": "wednesday",
+  "date": "2026-11-11",
+  "section": "grammar",
+  "minutes": 60,
+  "intro": "Kiểm tra tuần /19 gồm 4 phần (Vocabulary 5, Grammar 5, Reading 4, Writing 5), làm trong 40 phút, không xem ghi chú, không tra từ điển. Sau đó là bước 5 chuẩn bị Speaking (15 phút). Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Section 1 · Vocabulary /5",
+      "minutes": 6,
+      "instructions": "Điền từ trong khung: sign up · available · residential · demolished · hire. Đổi dạng từ nếu cần. Không xem ghi chú.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. Please ______ for the swimming course at reception.",
+          "fields": [
+            {
+              "answer": "sign up"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. There are no rooms ______ on that date.",
+          "fields": [
+            {
+              "answer": "available"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. Noisy factories are not allowed in a ______ area.",
+          "fields": [
+            {
+              "answer": "residential"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. The old stadium will be ______ next year and a park will be built.",
+          "fields": [
+            {
+              "answer": "demolished"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. We decided to ______ bikes and explore the island.",
+          "fields": [
+            {
+              "answer": "hire"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Section 2 · Grammar /5",
+      "minutes": 8,
+      "instructions": "Chia động từ trong ngoặc ở present perfect, past simple hoặc bị động hiện tại đơn.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. The number of cafés in my neighbourhood ______ (rise) a lot since 2018.",
+          "fields": [
+            {
+              "answer": "has risen"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. The market ______ (open) in 2005.",
+          "fields": [
+            {
+              "answer": "opened"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. Rice ______ (export) to many countries.",
+          "fields": [
+            {
+              "answer": "is exported"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. I ______ (not visit) the old quarter yet.",
+          "fields": [
+            {
+              "answer": "haven't visited",
+              "accept": [
+                "have not visited",
+                "haven’t visited"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. Cars ______ (not allow) in this street.",
+          "fields": [
+            {
+              "answer": "are not allowed",
+              "accept": [
+                "aren't allowed",
+                "aren’t allowed"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Section 3 · Reading /4",
+      "minutes": 10,
+      "instructions": "Viết KHÔNG QUÁ HAI TỪ VÀ/HOẶC MỘT SỐ, lấy từ trong bài. Đoạn văn: The Lakeside Swimming Pool opened in March after two years of building work. It is 50 metres long and has eight lanes, so competitions can be held there. Adults pay 40,000 dong per visit, but children under twelve swim free on Sundays. The pool also offers lessons for beginners every Tuesday evening. There is no car park, so visitors are asked to come by bicycle or by bus.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. How long is the pool? ______",
+          "fields": [
+            {
+              "answer": "50 metres",
+              "accept": [
+                "50 m",
+                "50",
+                "50 meters"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2. When can children under twelve swim for free? ______",
+          "fields": [
+            {
+              "answer": "Sundays",
+              "accept": [
+                "on Sundays",
+                "Sunday"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3. When are the lessons for beginners? ______",
+          "fields": [
+            {
+              "answer": "Tuesday evening",
+              "accept": [
+                "Tuesday evenings",
+                "every Tuesday evening",
+                "on Tuesday evenings"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "4. Visitors cannot park because there is no ______.",
+          "fields": [
+            {
+              "answer": "car park"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Section 4 · Writing /5",
+      "minutes": 15,
+      "instructions": "Viết 4 đến 5 câu về việc thị trấn hoặc khu em sống đã thay đổi thế nào trong 10 năm qua. Dùng present perfect và past simple, và ít nhất 1 từ trong danh sách: expand · convert · affordable · facilities · demolish.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s4_1",
+          "q": "Bài viết của em (4 đến 5 câu)",
+          "model": "My town looks very different from ten years ago. Back then, there were many small wooden houses, but now most of them have been replaced by tall buildings. A large shopping centre opened in 2019, and it has attracted many young people. The town has also expanded, so more families can find affordable homes.",
+          "ai": {
+            "type": "Bài viết ngắn Pre-IELTS (A2 đến B1)",
+            "level": "Pre-IELTS (A2 đến B1)",
+            "min_words": 45,
+            "task": "Write 4 to 5 sentences about how your town or neighbourhood has changed in the last ten years. Use the present perfect and the past simple and at least one word from the list.",
+            "criteria": [
+              "dùng present perfect đúng (has / have + V3)",
+              "dùng past simple đúng với mốc thời gian đã xong",
+              "dùng ít nhất 1 từ trong danh sách đúng nghĩa",
+              "4 đến 5 câu rõ ràng, có chủ ngữ và động từ",
+              "viết hoa chữ đầu câu, có dấu chấm"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Speaking preparation · voice note",
+      "minutes": 15,
+      "instructions": "Chuẩn bị cho buổi học ngày mai. Ghi âm 40 giây trả lời câu hỏi: Do you prefer living in a big city or in a small town? Dùng 3 bước: trả lời thẳng, lý do, ví dụ cụ thể. Cố gắng dùng một cụm chỉ vị trí hoặc một cặp tính từ.",
+      "kind": "voice",
+      "lines": [
+        "Do you prefer living in a big city or in a small town? Why?"
+      ],
+      "note": "Thầy sẽ nghe cấu trúc 3 bước, thì động từ và âm cuối."
+    }
+  ],
+  "send_today": "Hoàn thành 5 bước trên web. Bài viết và voice note sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "grammar"
+}

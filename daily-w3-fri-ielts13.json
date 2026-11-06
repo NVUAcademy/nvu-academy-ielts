@@ -1,0 +1,313 @@
+{
+  "id": "w3-fri-ielts13",
+  "title": "Friday Daily Practice",
+  "subtitle": "Reading: skim, scan and paraphrase, plus short own-words writing",
+  "theme": "P2 · Places & buildings (Reading)",
+  "source": "Mindset L1 Unit 2 (P1 Listening+Speaking, P2 Reading) - bài tự soạn, không trùng handout P1, P2 và Trial 1, 2",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 3,
+  "day": "friday",
+  "date": "2026-11-06",
+  "section": "reading",
+  "minutes": 55,
+  "intro": "Làm lần lượt 5 bước, khoảng 55 phút. Bài hôm nay luyện lại 4 kỹ thuật đọc của buổi P2 (skim, scan, paraphrase, sentence completion) với bài đọc mới. Phần viết chỉ là viết lại câu và viết 3 câu ngắn; thầy chưa dạy phần Writing Task 1 của P2 nên em chưa cần viết dạng đó. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Bài viết ở bước 4 em gõ thẳng vào ô trên web, thầy chấm.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocabulary from P2",
+      "minutes": 8,
+      "instructions": "Điền từ trong khung: accommodation · demolish · facilities · housing shortage · relocate · residential. Đổi dạng từ nếu cần.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. The company provides free ______ for staff who move to another city.",
+          "fields": [
+            {
+              "answer": "accommodation"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. The firm plans to ______ its head office to a cheaper area.",
+          "fields": [
+            {
+              "answer": "relocate",
+              "accept": [
+                "relocates"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. Because of the ______, rents in the city rose by 20% in three years.",
+          "fields": [
+            {
+              "answer": "housing shortage"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. The hotel has excellent leisure ______, including a pool and a gym.",
+          "fields": [
+            {
+              "answer": "facilities"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. Shops are not allowed in this quiet ______ street.",
+          "fields": [
+            {
+              "answer": "residential"
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "6. The council will ______ the unsafe bridge next month.",
+          "fields": [
+            {
+              "answer": "demolish"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Skim, then find the paraphrase",
+      "minutes": 12,
+      "instructions": "Skim 1 phút để trả lời câu 1, rồi đọc kỹ để làm câu 2 đến 4. Đáp án đúng KHÔNG dùng lại nguyên từ trong bài, mà diễn đạt cùng ý bằng từ khác. Đoạn văn: In 2019, the town of Halden opened a small library inside its railway station. Before that, the town's only library was two kilometres from the centre, and fewer than 400 people visited it each week. The new library, called the Platform Library, is open from 6 a.m. to 10 p.m., so commuters can borrow a book on their way to work. It holds about 5,000 books, and readers can also use free Wi-Fi and a quiet study corner with eight desks. Within a year, weekly visitors had risen to almost 1,500. The library is run by six volunteers, who are mostly retired teachers. Not everyone is happy, however. Some passengers say the platform is too noisy for reading, and the station manager has asked the volunteers to keep the area clear during rush hour. In spite of this, the council plans to open a second branch in a bus station next year, where a coffee stall will also be built.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "1. What is the passage mainly about?",
+          "options": {
+            "A": "how a town used a railway station to bring people closer to books",
+            "B": "why railway stations are too noisy for passengers",
+            "C": "how retired teachers learn to work as volunteers"
+          },
+          "answer": "A",
+          "explain": "Skim: tiêu đề ý chính là thư viện mới đặt trong nhà ga. B và C chỉ là chi tiết nhỏ."
+        },
+        {
+          "id": "s2_2",
+          "q": "2. Which sentence means the same as: ‘Within a year, weekly visitors had risen to almost 1,500.’?",
+          "options": {
+            "A": "After twelve months, nearly 1,500 people were coming each week.",
+            "B": "After twelve months, exactly 1,500 people had come in total.",
+            "C": "After 1,500 days, the number of visitors had gone up."
+          },
+          "answer": "A",
+          "explain": "within a year = after twelve months; almost = nearly. B sai vì exactly và in total. C sai vì days."
+        },
+        {
+          "id": "s2_3",
+          "q": "3. Which sentence means the same as: ‘The library is run by six volunteers, who are mostly retired teachers.’?",
+          "options": {
+            "A": "Most of the six people who manage the library used to be teachers.",
+            "B": "Six teachers work at the library because they need extra money.",
+            "C": "The library is managed by retired teachers and six paid staff."
+          },
+          "answer": "A",
+          "explain": "is run by = manage; mostly = most of; retired teachers = used to be teachers. B và C thêm thông tin không có trong bài."
+        },
+        {
+          "id": "s2_4",
+          "q": "4. Which sentence means the same as: ‘Some passengers say the platform is too noisy for reading.’?",
+          "options": {
+            "A": "A few travellers think it is hard to read on the platform because of the noise.",
+            "B": "Some passengers say reading on the platform makes too much noise.",
+            "C": "All travellers think the platform is too quiet for reading."
+          },
+          "answer": "A",
+          "explain": "passengers = travellers; too noisy = hard because of the noise. B đảo nghĩa, C sai (quiet) và sai (all)."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Scan and sentence completion",
+      "minutes": 15,
+      "instructions": "Câu 1 đến 4: scan, tìm từ khóa (năm, số, giờ). Câu 5 đến 8: viết KHÔNG QUÁ HAI TỪ VÀ/HOẶC MỘT SỐ, lấy đúng từ trong bài. Dùng lại đoạn văn: In 2019, the town of Halden opened a small library inside its railway station. Before that, the town's only library was two kilometres from the centre, and fewer than 400 people visited it each week. The new library, called the Platform Library, is open from 6 a.m. to 10 p.m., so commuters can borrow a book on their way to work. It holds about 5,000 books, and readers can also use free Wi-Fi and a quiet study corner with eight desks. Within a year, weekly visitors had risen to almost 1,500. The library is run by six volunteers, who are mostly retired teachers. Not everyone is happy, however. Some passengers say the platform is too noisy for reading, and the station manager has asked the volunteers to keep the area clear during rush hour. In spite of this, the council plans to open a second branch in a bus station next year, where a coffee stall will also be built.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. In which year did the Platform Library open? ______",
+          "fields": [
+            {
+              "answer": "2019"
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2. About how many books does it hold? ______",
+          "fields": [
+            {
+              "answer": "5,000",
+              "accept": [
+                "5000",
+                "about 5,000",
+                "about 5000"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3. How many desks are in the study corner? ______",
+          "fields": [
+            {
+              "answer": "eight",
+              "accept": [
+                "8"
+              ]
+            }
+          ],
+          "explain": "Bẫy: 6 a.m., six volunteers, 400, 1,500 là các số khác trong bài."
+        },
+        {
+          "id": "s3_4",
+          "label": "4. At what time does the library close? ______",
+          "fields": [
+            {
+              "answer": "10 p.m.",
+              "accept": [
+                "10pm",
+                "10 pm",
+                "10 p.m",
+                "10.00 p.m.",
+                "ten p.m.",
+                "22:00",
+                "10"
+              ]
+            }
+          ],
+          "explain": "Bẫy: 6 a.m. là giờ mở cửa."
+        },
+        {
+          "id": "s3_5",
+          "label": "5. Readers can use free ______ in the library.",
+          "fields": [
+            {
+              "answer": "Wi-Fi",
+              "accept": [
+                "wifi",
+                "WiFi",
+                "wi-fi",
+                "Wi-fi"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_6",
+          "label": "6. The library is looked after by six ______.",
+          "fields": [
+            {
+              "answer": "volunteers",
+              "accept": [
+                "volunteers"
+              ]
+            }
+          ],
+          "explain": "Bẫy: retired teachers là mô tả của volunteers."
+        },
+        {
+          "id": "s3_7",
+          "label": "7. The council will build a coffee stall in a ______ next year.",
+          "fields": [
+            {
+              "answer": "bus station",
+              "accept": [
+                "a bus station"
+              ]
+            }
+          ],
+          "explain": "Bẫy: railway station là nơi thư viện đầu tiên."
+        },
+        {
+          "id": "s3_8",
+          "label": "8. The station manager wants the area to be ______ during rush hour.",
+          "fields": [
+            {
+              "answer": "clear",
+              "accept": [
+                "kept clear"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Write: use your own words",
+      "minutes": 15,
+      "instructions": "Phần viết nhỏ, chỉ dùng thì hiện tại đơn và quá khứ đơn. (a) Viết lại 3 câu sau bằng từ khác, giữ nguyên nghĩa, không chép quá 3 từ liên tiếp: 1. The new library is open from 6 a.m. to 10 p.m. 2. Readers can also use free Wi-Fi and a quiet study corner. 3. The council plans to open a second branch next year. (b) Viết 3 câu về một nơi công cộng gần nhà em (thư viện, công viên, chợ) và dùng ít nhất 2 từ: facilities · affordable · expand · relocate · residential.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s4_1",
+          "q": "(a) 3 câu viết lại của em",
+          "model": "1. The library opens early in the morning and closes late at night. 2. Visitors can connect to the internet for free and sit in a calm area to study. 3. Next year, the local authority intends to start another library.",
+          "ai": {
+            "type": "Bài viết ngắn Pre-IELTS (A2 đến B1)",
+            "level": "Pre-IELTS (A2 đến B1)",
+            "min_words": 25,
+            "task": "Rewrite the three sentences in your own words. Keep the meaning, change the words and the grammar where you can.",
+            "criteria": [
+              "giữ đúng nghĩa của câu gốc",
+              "dùng từ đồng nghĩa hoặc đổi dạng từ, không chép quá 3 từ liên tiếp",
+              "ngữ pháp đúng, thì đúng",
+              "không thêm thông tin mới"
+            ]
+          }
+        },
+        {
+          "id": "s4_2",
+          "q": "(b) 3 câu về một nơi công cộng",
+          "model": "The market near my house is affordable because the vegetables are fresh and cheap. It has good facilities, such as a car park and clean toilets. Last year the local government expanded it, so now there are more stalls.",
+          "ai": {
+            "type": "Bài viết ngắn Pre-IELTS (A2 đến B1)",
+            "level": "Pre-IELTS (A2 đến B1)",
+            "min_words": 30,
+            "task": "Write 3 sentences about a public place near your home. Use the present simple or the past simple and at least 2 words from the list.",
+            "criteria": [
+              "đúng 3 câu, mỗi câu có chủ ngữ và động từ",
+              "dùng ít nhất 2 từ trong danh sách đúng nghĩa",
+              "thì hiện tại đơn và quá khứ đơn đúng",
+              "viết hoa chữ đầu câu, có dấu chấm"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Read aloud",
+      "minutes": 5,
+      "instructions": "Đọc to 3 câu, mỗi câu hai lần: lần đầu chậm, lần sau tốc độ tự nhiên. Chú ý âm cuối /s/, /z/ và đuôi -ed.",
+      "kind": "voice",
+      "lines": [
+        "1. The new library is open from six in the morning to ten at night.",
+        "2. Within a year, weekly visitors had risen to almost fifteen hundred.",
+        "3. The council plans to open a second branch next year."
+      ],
+      "note": "Thầy sẽ nghe âm cuối /s/ /z/, đuôi -ed và nhịp đọc."
+    }
+  ],
+  "send_today": "Hoàn thành 5 bước trên web. Voice note ở bước 5 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "reading"
+}

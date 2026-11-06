@@ -1,0 +1,426 @@
+{
+  "id": "w3-sun-ielts13",
+  "title": "Sunday Daily Practice",
+  "subtitle": "Listening and Speaking review of P1: booking form, locations, tenses, -ed endings",
+  "theme": "P1 · Places & buildings (Listening + Speaking)",
+  "source": "Mindset L1 Unit 2 (P1 Listening+Speaking, P2 Reading) - bài tự soạn, không trùng handout P1, P2 và Trial 1, 2",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 3,
+  "day": "sunday",
+  "date": "2026-11-08",
+  "section": "listening",
+  "minutes": 55,
+  "intro": "Làm lần lượt 6 bước, khoảng 55 phút. Bài hôm nay luyện lại phần Nghe và Nói của P1 bằng bài nghe mới. Nghe tối đa 2 lần, không đọc trước đáp án. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Boost (không bắt buộc): nghe BBC 6 Minute English và ghi 5 con số hoặc ngày tháng em nghe được.",
+  "audio": {
+    "call": {
+      "label": "Audio A · Old Quarter Heritage Walks",
+      "src": "audio/IELTS13_W3_Sun_ListeningA.mp3"
+    },
+    "street": {
+      "label": "Audio B · Willow Lane",
+      "src": "audio/IELTS13_W3_Sun_ListeningB.mp3"
+    }
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocabulary from P1",
+      "minutes": 5,
+      "instructions": "Điền từ trong khung: harbour · instructor · sign up · included · hire. Đổi dạng từ nếu cần.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. The ferry leaves the ______ at eight o'clock.",
+          "fields": [
+            {
+              "answer": "harbour"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. Our swimming ______ is very patient with beginners.",
+          "fields": [
+            {
+              "answer": "instructor"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. You must ______ before Friday if you want a place on the trip.",
+          "fields": [
+            {
+              "answer": "sign up"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. Is breakfast ______ in the price of the room?",
+          "fields": [
+            {
+              "answer": "included"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. You can ______ a boat by the hour at the lake.",
+          "fields": [
+            {
+              "answer": "hire"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Listening A: booking a walking tour",
+      "minutes": 15,
+      "instructions": "Nghe 1 lần, rồi nghe thêm 1 lần. Không đọc trước đáp án. Viết KHÔNG QUÁ HAI TỪ VÀ/HOẶC MỘT SỐ cho mỗi chỗ trống. Bốn bước đã học: đọc giới hạn từ, đoán loại đáp án, chờ người nói sửa lại, kiểm tra chính tả. Old Quarter Heritage Walks · Booking form. (Bài tự soạn để luyện, không phải đề thi thật.)",
+      "kind": "fill",
+      "audio": "call",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. Tour day: ______",
+          "fields": [
+            {
+              "answer": "Saturday",
+              "accept": [
+                "saturday"
+              ]
+            }
+          ],
+          "explain": "Bẫy: Wednesday được nói trước, sau đó người gọi đổi sang Saturday."
+        },
+        {
+          "id": "s2_2",
+          "label": "2. Date: ______ November",
+          "fields": [
+            {
+              "answer": "21",
+              "accept": [
+                "21st",
+                "twenty-first",
+                "twenty first"
+              ]
+            }
+          ],
+          "explain": "Bẫy: ngày 14 là ngày người gọi đi vắng, ngày đúng là 21."
+        },
+        {
+          "id": "s2_3",
+          "label": "3. Surname: ______",
+          "fields": [
+            {
+              "answer": "Kowalski",
+              "accept": [
+                "kowalski"
+              ]
+            }
+          ],
+          "explain": "Nghe người gọi đánh vần từng chữ cái."
+        },
+        {
+          "id": "s2_4",
+          "label": "4. Number of tickets: ______",
+          "fields": [
+            {
+              "answer": "5",
+              "accept": [
+                "five"
+              ]
+            }
+          ],
+          "explain": "Bẫy: Four được nói trước, rồi sửa thành five."
+        },
+        {
+          "id": "s2_5",
+          "label": "5. Student ticket: £ ______",
+          "fields": [
+            {
+              "answer": "8",
+              "accept": [
+                "eight"
+              ]
+            }
+          ],
+          "explain": "Bẫy: 12 là giá người lớn."
+        },
+        {
+          "id": "s2_6",
+          "label": "6. Meeting point: outside the ______ on Linden Road",
+          "fields": [
+            {
+              "answer": "post office",
+              "accept": [
+                "main post office"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_7",
+          "label": "7. Start time: ______ a.m.",
+          "fields": [
+            {
+              "answer": "10.30",
+              "accept": [
+                "10:30",
+                "10 30",
+                "10.30 a.m.",
+                "10:30 am",
+                "ten thirty",
+                "half past ten"
+              ]
+            }
+          ],
+          "explain": "Bẫy: 10 là giờ bắt đầu cũ, đã đổi sang 10.30."
+        },
+        {
+          "id": "s2_8",
+          "label": "8. Bring: ______",
+          "fields": [
+            {
+              "answer": "comfortable shoes",
+              "accept": [
+                "shoes",
+                "walking shoes"
+              ]
+            }
+          ],
+          "explain": "Bẫy: camera chỉ là tùy chọn, không cần thiết."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Listening B: describing a street",
+      "minutes": 10,
+      "instructions": "Nghe 2 lần và điền mỗi chỗ trống một cụm trong khung: behind · in front of · next to · on the corner of · opposite · to the end of. Mỗi cụm dùng một lần. (Bài tự soạn để luyện.) Văn bản: I live on Willow Lane, a quiet street in the north of the city. At the start of the lane there is a small bakery, and (1) ____ it you can find a florist. Directly (2) ____ the florist is the post office. If you walk (3) ____ the street, you'll see a park with a pond, and (4) ____ the park there is a tall old church. My favourite place is a café (5) ____ Willow Lane and Mill Road. It has a lovely garden, and (6) ____ the café there are always lots of bicycles.",
+      "kind": "fill",
+      "audio": "street",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. ______ it you can find a florist.",
+          "fields": [
+            {
+              "answer": "next to"
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2. Directly ______ the florist is the post office.",
+          "fields": [
+            {
+              "answer": "opposite"
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3. If you walk ______ the street, you'll see a park.",
+          "fields": [
+            {
+              "answer": "to the end of"
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "4. ______ the park there is a tall old church.",
+          "fields": [
+            {
+              "answer": "behind"
+            }
+          ]
+        },
+        {
+          "id": "s3_5",
+          "label": "5. My favourite place is a café ______ Willow Lane and Mill Road.",
+          "fields": [
+            {
+              "answer": "on the corner of"
+            }
+          ]
+        },
+        {
+          "id": "s3_6",
+          "label": "6. ______ the café there are always lots of bicycles.",
+          "fields": [
+            {
+              "answer": "in front of"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Grammar: present perfect or past simple?",
+      "minutes": 5,
+      "instructions": "Chọn dạng đúng. Nhớ: có since, for, so far, recently, không có mốc thời gian cụ thể thì dùng present perfect; có mốc đã xong (in 2016, last summer, when I was a kid) thì dùng past simple.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s4_1",
+          "q": "1. Our neighbourhood ______ much quieter since the factory closed.",
+          "options": {
+            "A": "has become",
+            "B": "became"
+          },
+          "answer": "A",
+          "explain": "since + mốc thời gian, tình trạng kéo dài đến bây giờ."
+        },
+        {
+          "id": "s4_2",
+          "q": "2. The old cinema ______ in 2016.",
+          "options": {
+            "A": "has closed",
+            "B": "closed"
+          },
+          "answer": "B",
+          "explain": "in 2016 là mốc đã xong."
+        },
+        {
+          "id": "s4_3",
+          "q": "3. I ______ in this neighbourhood for five years.",
+          "options": {
+            "A": "live",
+            "B": "have lived"
+          },
+          "answer": "B",
+          "explain": "for five years + vẫn đang sống."
+        },
+        {
+          "id": "s4_4",
+          "q": "4. Last summer, they ______ a new playground near the school.",
+          "options": {
+            "A": "built",
+            "B": "have built"
+          },
+          "answer": "A",
+          "explain": "last summer là mốc đã xong."
+        },
+        {
+          "id": "s4_5",
+          "q": "5. So far this year, three cafés ______ near my house.",
+          "options": {
+            "A": "opened",
+            "B": "have opened"
+          },
+          "answer": "B",
+          "explain": "so far this year chưa kết thúc."
+        },
+        {
+          "id": "s4_6",
+          "q": "6. When I was a kid, I ______ to school by bike.",
+          "options": {
+            "A": "rode",
+            "B": "have ridden"
+          },
+          "answer": "A",
+          "explain": "when I was a kid là quá khứ đã xong."
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Pronunciation: the -ed ending",
+      "minutes": 5,
+      "instructions": "Chọn âm đuôi -ed: A /t/ · B /d/ · C /ɪd/. Đọc to từng từ để kiểm tra.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s5_1",
+          "q": "1. stopped",
+          "options": {
+            "A": "/t/",
+            "B": "/d/",
+            "C": "/ɪd/"
+          },
+          "answer": "A",
+          "explain": "p là âm vô thanh nên -ed đọc /t/."
+        },
+        {
+          "id": "s5_2",
+          "q": "2. opened",
+          "options": {
+            "A": "/t/",
+            "B": "/d/",
+            "C": "/ɪd/"
+          },
+          "answer": "B",
+          "explain": "n là âm hữu thanh nên -ed đọc /d/."
+        },
+        {
+          "id": "s5_3",
+          "q": "3. wanted",
+          "options": {
+            "A": "/t/",
+            "B": "/d/",
+            "C": "/ɪd/"
+          },
+          "answer": "C",
+          "explain": "tận cùng bằng t nên -ed đọc /ɪd/."
+        },
+        {
+          "id": "s5_4",
+          "q": "4. finished",
+          "options": {
+            "A": "/t/",
+            "B": "/d/",
+            "C": "/ɪd/"
+          },
+          "answer": "A",
+          "explain": "sh là âm vô thanh nên -ed đọc /t/."
+        },
+        {
+          "id": "s5_5",
+          "q": "5. repaired",
+          "options": {
+            "A": "/t/",
+            "B": "/d/",
+            "C": "/ɪd/"
+          },
+          "answer": "B",
+          "explain": "tận cùng bằng nguyên âm nên -ed đọc /d/."
+        },
+        {
+          "id": "s5_6",
+          "q": "6. decided",
+          "options": {
+            "A": "/t/",
+            "B": "/d/",
+            "C": "/ɪd/"
+          },
+          "answer": "C",
+          "explain": "tận cùng bằng d nên -ed đọc /ɪd/."
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Step 6 · Speaking Part 1: voice note",
+      "minutes": 15,
+      "instructions": "Trả lời 3 câu hỏi, mỗi câu 30 đến 40 giây, trong một voice note. Dùng 3 bước: trả lời thẳng, đưa lý do (because, so, which), thêm ví dụ cụ thể (một địa điểm, một năm hoặc một con số). Cố gắng dùng một cụm chỉ vị trí, một cặp tính từ và một động từ -ed đọc đúng.",
+      "kind": "voice",
+      "lines": [
+        "1. What kind of buildings are there near your home?",
+        "2. Do you prefer living in a quiet area or a busy area? Why?",
+        "3. What is one place in your town that tourists should visit, and what can they do there?"
+      ],
+      "note": "Thầy sẽ nghe cấu trúc 3 bước, thì động từ, đuôi -ed và âm cuối."
+    }
+  ],
+  "send_today": "Hoàn thành 6 bước trên web. Voice note ở bước 6 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "listening"
+}

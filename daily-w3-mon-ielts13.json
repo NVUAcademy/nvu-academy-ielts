@@ -1,0 +1,249 @@
+{
+  "id": "w3-mon-ielts13",
+  "title": "Monday Daily Practice",
+  "subtitle": "Review: P1 and P2 words, present perfect, present passive, and a short neighbourhood write-up",
+  "theme": "P1 and P2 · Review",
+  "source": "Mindset L1 Unit 2 (P1 Listening+Speaking, P2 Reading) - bài tự soạn, không trùng handout P1, P2 và Trial 1, 2",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 3,
+  "day": "monday",
+  "date": "2026-11-09",
+  "section": "grammar",
+  "minutes": 55,
+  "intro": "Làm lần lượt 5 bước, khoảng 55 phút. Hôm nay ôn từ vựng và ngữ pháp của P1 và P2. Bài viết ở bước 4 chỉ là đoạn ngắn về khu em sống, chưa phải bài Writing Task 1. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Bài viết em gõ thẳng vào ô trên web, thầy chấm.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocabulary from P1 and P2",
+      "minutes": 8,
+      "instructions": "Điền từ trong khung: orientation · convert · sustainable · experienced · traditional · expand. Đổi dạng từ nếu cần.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. Take part in the ______ day to meet the teachers and see the library.",
+          "fields": [
+            {
+              "answer": "orientation"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. The company wants to ______ its business to three more countries.",
+          "fields": [
+            {
+              "answer": "expand"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. An ______ guide led us safely through the cave.",
+          "fields": [
+            {
+              "answer": "experienced"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. We should choose ______ materials that do not harm nature.",
+          "fields": [
+            {
+              "answer": "sustainable"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. My grandmother cooks ______ dishes from her village.",
+          "fields": [
+            {
+              "answer": "traditional"
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "6. The council wants to ______ the old factory into a museum.",
+          "fields": [
+            {
+              "answer": "convert"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Grammar: present perfect or past simple",
+      "minutes": 10,
+      "instructions": "Chia động từ trong ngoặc ở present perfect hoặc past simple.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. I ______ (live) in this flat since 2019.",
+          "fields": [
+            {
+              "answer": "have lived",
+              "accept": [
+                "'ve lived",
+                "’ve lived"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. The mall ______ (open) in March last year.",
+          "fields": [
+            {
+              "answer": "opened"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. We ______ (not see) our old neighbours since we moved.",
+          "fields": [
+            {
+              "answer": "haven't seen",
+              "accept": [
+                "have not seen",
+                "haven’t seen"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. They ______ (build) the bridge in 2012.",
+          "fields": [
+            {
+              "answer": "built"
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. The streets ______ (become) much cleaner since 2020.",
+          "fields": [
+            {
+              "answer": "have become"
+            }
+          ]
+        },
+        {
+          "id": "s2_6",
+          "label": "6. Last weekend I ______ (visit) an old temple.",
+          "fields": [
+            {
+              "answer": "visited"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Grammar: present passive",
+      "minutes": 7,
+      "instructions": "Chia động từ trong ngoặc ở bị động hiện tại đơn (is / are + V3).",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. Bricks ______ (make) from clay.",
+          "fields": [
+            {
+              "answer": "are made"
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2. Fresh fish ______ (sell) at the market every morning.",
+          "fields": [
+            {
+              "answer": "is sold"
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3. Solar panels ______ (use) to produce electricity.",
+          "fields": [
+            {
+              "answer": "are used"
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "4. The streets ______ (clean) every night.",
+          "fields": [
+            {
+              "answer": "are cleaned"
+            }
+          ]
+        },
+        {
+          "id": "s3_5",
+          "label": "5. Tea ______ (grow) in the hills.",
+          "fields": [
+            {
+              "answer": "is grown"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Write: my neighbourhood",
+      "minutes": 20,
+      "instructions": "Viết 50 đến 60 từ giới thiệu khu em sống. Dùng ít nhất 2 cụm chỉ vị trí (next to, opposite, behind, on the corner of, in front of), 1 câu present perfect về một thay đổi gần đây, và 2 từ trong danh sách: traditional · convert · expand · experienced · sustainable.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s4_1",
+          "q": "Bài viết của em (50 đến 60 từ)",
+          "model": "I live in a quiet neighbourhood in the north of Thanh Hoa. My house is next to a small market, and opposite it there is a primary school. Many traditional shops have been replaced by cafes, and the area has become much busier since 2019. Last year a local company converted an empty warehouse into a gym.",
+          "ai": {
+            "type": "Bài viết ngắn Pre-IELTS (A2 đến B1)",
+            "level": "Pre-IELTS (A2 đến B1)",
+            "min_words": 45,
+            "task": "Write 50 to 60 words about your neighbourhood. Use at least two location phrases, one present perfect sentence and two words from the list.",
+            "criteria": [
+              "dùng ít nhất 2 cụm chỉ vị trí đúng",
+              "có ít nhất 1 câu present perfect đúng (has / have + V3)",
+              "dùng 2 từ trong danh sách đúng nghĩa",
+              "past simple và present simple đúng",
+              "viết hoa chữ đầu câu, có dấu chấm"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Shadowing",
+      "minutes": 5,
+      "instructions": "Đọc to 3 câu, mỗi câu hai lần: lần đầu chậm, lần sau tốc độ tự nhiên. Chú ý đuôi -ed.",
+      "kind": "voice",
+      "lines": [
+        "1. The old cinema was closed in 2016.",
+        "2. My neighbourhood has become much busier since 2019.",
+        "3. A new playground was opened behind the school."
+      ],
+      "note": "Thầy sẽ nghe đuôi -ed, âm cuối và nhịp đọc."
+    }
+  ],
+  "send_today": "Hoàn thành 5 bước trên web. Voice note ở bước 5 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
+  "error_type": "grammar"
+}
