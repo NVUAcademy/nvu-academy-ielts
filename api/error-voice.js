@@ -100,8 +100,8 @@ module.exports = async function handler(req, res) {
     const audioOk = a.status === 'Success' && a.words.length > 0;
     /* Câu từ 3 từ trở lên được phép 1 từ chưa tốt; câu ngắn phải đọc đúng hết */
     const allowedWeak = a.words.length >= 3 ? 1 : 0;
-    /* Từ mới (vocabMode): đạt khi điểm phát âm từ 70; lỗi sai thì dùng quy tắc cũ */
-    const correct = vocabMode ? (audioOk && (a.pron || 0) >= 70) : (audioOk && weak.length <= allowedWeak);
+    /* Từ mới (vocabMode): đạt khi điểm phát âm từ 60; lỗi sai thì dùng quy tắc cũ */
+    const correct = vocabMode ? (audioOk && (a.pron || 0) >= 60) : (audioOk && weak.length <= allowedWeak);
     const verdict = correct ? 'ok' : 'retry';
     const problems = [];
     if (!audioOk) problems.push('Không nghe rõ giọng đọc. Em ghi lại ở nơi yên tĩnh và đưa micro gần miệng hơn.');
