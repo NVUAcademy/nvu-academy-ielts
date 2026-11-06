@@ -1,0 +1,330 @@
+{
+  "class_codes": [
+    "FOUNDATION12"
+  ],
+  "week_number": 1,
+  "source": "Foundation 12 Daily Practice · Week 1 (student booklet + teacher answer key)",
+  "id": "w1-sat-found12",
+  "title": "Saturday Daily Practice · Review Session 2",
+  "subtitle": "Words about me + four new sounds (EPIU 3.1, 3.3, 4.1, 4.2)",
+  "day": "saturday",
+  "date": "2026-11-07",
+  "section": "pronunciation",
+  "minutes": 60,
+  "error_type": "pronunciation",
+  "intro": "Review Session 2. Work alone for about 60 minutes. Send one photo of exercises 3B–3F and one voice note (3H).",
+  "send_today": "Send: 1 photo of 3B–3F + 1 voice note (3H), by 23:00 today.",
+  "audio": {
+    "a18": {
+      "label": "Audio A18 · EPIU 3.1",
+      "src": "audio/EPIU_A18.mp3"
+    },
+    "a20": {
+      "label": "Audio A20 · EPIU 3.3",
+      "src": "audio/EPIU_A20.mp3"
+    },
+    "a26": {
+      "label": "Audio A26 · EPIU 4.1",
+      "src": "audio/EPIU_A26.mp3"
+    },
+    "a27": {
+      "label": "Audio A27 · EPIU 4.2",
+      "src": "audio/EPIU_A27.mp3"
+    }
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "title": "3B · Which word is it?",
+      "minutes": 5,
+      "instructions": "Write the word that matches each definition.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. The place where you study after high school. ______",
+          "fields": [
+            {
+              "answer": "university"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. A part of a university, for example Medicine or English. ______",
+          "fields": [
+            {
+              "answer": "faculty"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. Vietnamese, British or Korean: it is your … ______",
+          "fields": [
+            {
+              "answer": "nationality"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. A student in the same class as you. ______",
+          "fields": [
+            {
+              "answer": "classmate"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. To tell people someone's name when they meet for the first time. ______",
+          "fields": [
+            {
+              "answer": "introduce"
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "6. Your main subject at university. ______",
+          "fields": [
+            {
+              "answer": "major"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "3C · Complete the sentences",
+      "minutes": 6,
+      "instructions": "Use each word once: hometown · surname · hobby · ambition · lecturer · province · describe · freshman",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. My ______ is Lê, and my first name is Hoa.",
+          "fields": [
+            {
+              "answer": "surname"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. Our ______ teaches us English on Wednesdays.",
+          "fields": [
+            {
+              "answer": "lecturer"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. My ______ is Sầm Sơn. It's near the sea.",
+          "fields": [
+            {
+              "answer": "hometown"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. I'm a ______. This is my first year at university.",
+          "fields": [
+            {
+              "answer": "freshman"
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. Nghệ An is a big ______ in the centre of Việt Nam.",
+          "fields": [
+            {
+              "answer": "province"
+            }
+          ]
+        },
+        {
+          "id": "s2_6",
+          "label": "6. My ______ is to become a nurse.",
+          "fields": [
+            {
+              "answer": "ambition"
+            }
+          ]
+        },
+        {
+          "id": "s2_7",
+          "label": "7. Can you ______ your best friend?",
+          "fields": [
+            {
+              "answer": "describe"
+            }
+          ]
+        },
+        {
+          "id": "s2_8",
+          "label": "8. My ______ is playing the guitar.",
+          "fields": [
+            {
+              "answer": "hobby"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "3D · Where is the stress?",
+      "minutes": 4,
+      "instructions": "Say each word and clap. Write it in the right column: classmate · lecturer · ambition · university · surname · introduce · nationality · major. Stress on the 1st syllable: classmate, lecturer, surname, major. Stress on another syllable: ambition, university, introduce, nationality.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s3_q",
+          "q": "Write each word in the right column (1st syllable / another syllable)."
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "3E · Four new sounds: sort the words",
+      "minutes": 5,
+      "instructions": "/uː/ = round lips, long (food) · /ʊ/ = lips a little round, short (book) · /ɑː/ = open wide, long (car) · /ʌ/ = half open, quick (cup). Write each word in the right column: moon · put · start · son · June · full · class · love · room · cook · glass · come",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s4_q",
+          "q": "Sort the 12 words into /uː/ · /ʊ/ · /ɑː/ · /ʌ/."
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "3F · Odd one out",
+      "minutes": 4,
+      "instructions": "Type the word with a different vowel sound.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s5_1",
+          "label": "1. food · blue · book · school → ______",
+          "fields": [
+            {
+              "answer": "book"
+            }
+          ]
+        },
+        {
+          "id": "s5_2",
+          "label": "2. cup · bus · put · sun → ______",
+          "fields": [
+            {
+              "answer": "put"
+            }
+          ]
+        },
+        {
+          "id": "s5_3",
+          "label": "3. car · father · money · park → ______",
+          "fields": [
+            {
+              "answer": "money"
+            }
+          ]
+        },
+        {
+          "id": "s5_4",
+          "label": "4. good · look · foot · two → ______",
+          "fields": [
+            {
+              "answer": "two"
+            }
+          ]
+        },
+        {
+          "id": "s5_5",
+          "label": "5. mother · brother · much · start → ______",
+          "fields": [
+            {
+              "answer": "start"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "EPIU 3.1 · Circle the words with /uː/",
+      "minutes": 4,
+      "instructions": "Play Audio A18, then circle the nine /uː/ words: food · four · June · look · news · room · school · soup · spoon · sugar · town · Tuesday · two. Listen and repeat.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s6_q",
+          "q": "Type the nine /uː/ words."
+        }
+      ],
+      "audio": "a18"
+    },
+    {
+      "id": "s7",
+      "title": "EPIU 3.3 · Circle the words with /ʊ/",
+      "minutes": 4,
+      "instructions": "Play Audio A20, then circle the six /ʊ/ words: book · cookery · cough · could · good · looking · lunch · soon · sugar · thought · through. Listen and repeat.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s7_q",
+          "q": "Type the six /ʊ/ words."
+        }
+      ],
+      "audio": "a20"
+    },
+    {
+      "id": "s8",
+      "title": "EPIU 4.1 · Words with /ɑː/",
+      "minutes": 4,
+      "instructions": "Play Audio A26, then write the words in the correct column: garden · March · part · talk · warm · watch. Play A26 again and repeat every word.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s8_q",
+          "q": "/ɑː/: artist, garden, March, part · other: square, talk, warm, watch (check your answers after class)."
+        }
+      ],
+      "audio": "a26"
+    },
+    {
+      "id": "s9",
+      "title": "EPIU 4.2 · Words with /ʌ/",
+      "minutes": 4,
+      "instructions": "Play Audio A27, then write the words in the correct column: fun · home · lots · money · mother · push. Play A27 again and repeat every word.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s9_q",
+          "q": "/ʌ/: country, fun, money, mother · other: business, home, lots, push"
+        }
+      ],
+      "audio": "a27"
+    },
+    {
+      "id": "s10",
+      "title": "3H · Voice note",
+      "minutes": 8,
+      "kind": "voice",
+      "lines": [
+        "My classmate is a freshman from Thanh Hóa province.",
+        "Our lecturer is in the Faculty of English.",
+        "Look at the blue moon in June.",
+        "My mother and my brother love the park."
+      ],
+      "note": "Read the 15 words in 3A once, then read these 4 sentences 3 times and record them."
+    }
+  ]
+}

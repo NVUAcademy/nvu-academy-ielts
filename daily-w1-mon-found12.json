@@ -1,0 +1,149 @@
+{
+  "class_codes": [
+    "FOUNDATION12"
+  ],
+  "week_number": 1,
+  "source": "Foundation 12 Daily Practice · Week 1 (student booklet + teacher answer key)",
+  "id": "w1-mon-found12",
+  "title": "Monday Daily Practice · Speaking",
+  "subtitle": "Shadowing, spelling, three-sentence answers, introduce a classmate",
+  "day": "monday",
+  "date": "2026-11-09",
+  "section": "speaking",
+  "minutes": 60,
+  "error_type": "speaking",
+  "intro": "Speaking practice. Work alone for about 60 minutes. Send photos of 5C, 5D and 5E and voice notes for 5D and 5E.",
+  "send_today": "Send: photo of 5C–5E + voice notes (5D answers, then 5E paragraph), by 23:00 today.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "5A · Shadowing",
+      "minutes": 12,
+      "kind": "voice",
+      "lines": [
+        "How do you pronounce this word?",
+        "I want to improve my accent.",
+        "My hometown is in Thanh Hóa province.",
+        "I'm a freshman at a university in Thanh Hóa.",
+        "My ambition is to become a doctor.",
+        "Let me introduce my classmate."
+      ],
+      "note": "Shadowing: listen 2 times, then say the sentence with the audio 3 times. Same speed, stress and pauses. Bold = stressed syllable."
+    },
+    {
+      "id": "s2",
+      "title": "5B · Letter sounds",
+      "minutes": 8,
+      "instructions": "Say each letter group aloud 2 times: /eɪ/ A H J K · /iː/ B C D E G P T V · /e/ F L M N S X Z · /aɪ/ I Y · /əʊ/ O · /uː/ Q U W · /ɑː/ R. Then spell aloud your surname, first name, hometown and major.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s2_q",
+          "q": "Spell your surname, first name, hometown and major."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "5C · Questions and answers",
+      "minutes": 5,
+      "instructions": "Write the letter of the matching answer (a–f).",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. What's your surname? ______",
+          "fields": [
+            {
+              "answer": "c"
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2. Where are you from? ______",
+          "fields": [
+            {
+              "answer": "e"
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3. What's your major? ______",
+          "fields": [
+            {
+              "answer": "b"
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "4. What's your hobby? ______",
+          "fields": [
+            {
+              "answer": "f"
+            }
+          ]
+        },
+        {
+          "id": "s3_5",
+          "label": "5. What's your ambition? ______",
+          "fields": [
+            {
+              "answer": "d"
+            }
+          ]
+        },
+        {
+          "id": "s3_6",
+          "label": "6. How old are you? ______",
+          "fields": [
+            {
+              "answer": "a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "5D · Three-sentence answers",
+      "minutes": 15,
+      "instructions": "In IELTS Speaking, a good answer = answer + reason + example. Write 3 sentences for each question, read them aloud 3 times, then record (voice note).",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s4_1",
+          "q": "1. Where's your hometown? What is it like?"
+        },
+        {
+          "id": "s4_2",
+          "q": "2. What's your major? Is it difficult?"
+        },
+        {
+          "id": "s4_3",
+          "q": "3. What's your hobby?"
+        },
+        {
+          "id": "s4_4",
+          "q": "4. What's your ambition?"
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "5E · Introduce a classmate",
+      "minutes": 12,
+      "instructions": "Use your notes from the class survey. Write 6 sentences (he's/she's, his/her), read them aloud 3 times, then record (voice note).",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s5_q",
+          "q": "This is ______. He's / She's from ______. His / Her major is ______. He's / She's (not) a freshman. His / Her hobby is ______. His / Her ambition is to become a ______."
+        }
+      ]
+    }
+  ]
+}

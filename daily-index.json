@@ -285,6 +285,97 @@
         "IELTS14"
       ],
       "section": "vocabulary"
+    },
+    {
+      "id": "w1-thu-found12",
+      "file": "daily-w1-thu-found12.json",
+      "title": "Class day warm-up",
+      "subtitle": "Session 2 · warm-up with the 12 words from Session 1",
+      "day": "thursday",
+      "date": "2026-11-05",
+      "week_number": 1,
+      "section": "pronunciation",
+      "class_codes": [
+        "FOUNDATION12"
+      ]
+    },
+    {
+      "id": "w1-fri-found12",
+      "file": "daily-w1-fri-found12.json",
+      "title": "Friday Daily Practice · Review Session 1",
+      "subtitle": "Words, letters and sounds (EPIU 1.2–1.4)",
+      "day": "friday",
+      "date": "2026-11-06",
+      "week_number": 1,
+      "section": "pronunciation",
+      "class_codes": [
+        "FOUNDATION12"
+      ]
+    },
+    {
+      "id": "w1-sat-found12",
+      "file": "daily-w1-sat-found12.json",
+      "title": "Saturday Daily Practice · Review Session 2",
+      "subtitle": "Words about me + four new sounds (EPIU 3.1, 3.3, 4.1, 4.2)",
+      "day": "saturday",
+      "date": "2026-11-07",
+      "week_number": 1,
+      "section": "pronunciation",
+      "class_codes": [
+        "FOUNDATION12"
+      ]
+    },
+    {
+      "id": "w1-sun-found12",
+      "file": "daily-w1-sun-found12.json",
+      "title": "Sunday Daily Practice · Mixed practice",
+      "subtitle": "/iː/ and /ɪ/, EPIU 2.1–2.4, to be, writing",
+      "day": "sunday",
+      "date": "2026-11-08",
+      "week_number": 1,
+      "section": "pronunciation",
+      "class_codes": [
+        "FOUNDATION12"
+      ]
+    },
+    {
+      "id": "w1-mon-found12",
+      "file": "daily-w1-mon-found12.json",
+      "title": "Monday Daily Practice · Speaking",
+      "subtitle": "Shadowing, spelling, three-sentence answers, introduce a classmate",
+      "day": "monday",
+      "date": "2026-11-09",
+      "week_number": 1,
+      "section": "speaking",
+      "class_codes": [
+        "FOUNDATION12"
+      ]
+    },
+    {
+      "id": "w1-tue-found12",
+      "file": "daily-w1-tue-found12.json",
+      "title": "Tuesday · Weekly test /19",
+      "subtitle": "Weekly test (60 minutes, no notes)",
+      "day": "tuesday",
+      "date": "2026-11-10",
+      "week_number": 1,
+      "section": "weekly_test",
+      "class_codes": [
+        "FOUNDATION12"
+      ]
+    },
+    {
+      "id": "w1-wed-found12",
+      "file": "daily-w1-wed-found12.json",
+      "title": "Class day warm-up",
+      "subtitle": "Session 3 · warm-up with the 27 words and the alphabet",
+      "day": "wednesday",
+      "date": "2026-11-11",
+      "week_number": 1,
+      "section": "pronunciation",
+      "class_codes": [
+        "FOUNDATION12"
+      ]
     }
   ]
 }

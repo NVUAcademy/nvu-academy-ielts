@@ -1,0 +1,526 @@
+{
+  "class_codes": [
+    "FOUNDATION12"
+  ],
+  "week_number": 1,
+  "source": "Foundation 12 Daily Practice · Week 1 (student booklet + teacher answer key)",
+  "id": "w1-fri-found12",
+  "title": "Friday Daily Practice · Review Session 1",
+  "subtitle": "Words, letters and sounds (EPIU 1.2–1.4)",
+  "day": "friday",
+  "date": "2026-11-06",
+  "section": "pronunciation",
+  "minutes": 60,
+  "error_type": "pronunciation",
+  "intro": "Review Session 1. Work alone for about 60 minutes. Send one photo of exercises 2B–2F and one voice note (2H).",
+  "send_today": "Send: 1 photo of 2B–2F + 1 voice note (2H), by 23:00 today.",
+  "audio": {
+    "a6": {
+      "label": "Audio A6 · EPIU 1.2",
+      "src": "audio/EPIU_A06.mp3"
+    },
+    "a7": {
+      "label": "Audio A7 · EPIU 1.3",
+      "src": "audio/EPIU_A07.mp3"
+    },
+    "a8": {
+      "label": "Audio A8 · EPIU 1.4",
+      "src": "audio/EPIU_A08.mp3"
+    }
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "title": "2B · Write the English word",
+      "minutes": 5,
+      "instructions": "Write the English word for each Vietnamese meaning.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. lỗi → ______",
+          "fields": [
+            {
+              "answer": "mistake"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. phát âm → ______",
+          "fields": [
+            {
+              "answer": "pronounce"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. nguyên âm → ______",
+          "fields": [
+            {
+              "answer": "vowel"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. cải thiện → ______",
+          "fields": [
+            {
+              "answer": "improve"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. vần với → ______",
+          "fields": [
+            {
+              "answer": "rhyme"
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "6. giọng → ______",
+          "fields": [
+            {
+              "answer": "accent"
+            }
+          ]
+        },
+        {
+          "id": "s1_7",
+          "label": "7. trôi chảy → ______",
+          "fields": [
+            {
+              "answer": "fluent"
+            }
+          ]
+        },
+        {
+          "id": "s1_8",
+          "label": "8. ký hiệu → ______",
+          "fields": [
+            {
+              "answer": "symbol"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "2C · Complete the sentences",
+      "minutes": 6,
+      "instructions": "Use each word once: syllables · silent · stress · consonant · rhyme · pronounce",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. “Dog” starts and ends with a ______ sound.",
+          "fields": [
+            {
+              "answer": "consonant"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. In “hotel”, the ______ is on the second syllable.",
+          "fields": [
+            {
+              "answer": "stress"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. “Night” and “light” ______.",
+          "fields": [
+            {
+              "answer": "rhyme"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. The “w” in “write” is ______.",
+          "fields": [
+            {
+              "answer": "silent"
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. “Computer” has three ______.",
+          "fields": [
+            {
+              "answer": "syllables"
+            }
+          ]
+        },
+        {
+          "id": "s2_6",
+          "label": "6. How do you ______ “Wednesday”?",
+          "fields": [
+            {
+              "answer": "pronounce"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "2E · Silent letters",
+      "minutes": 3,
+      "instructions": "Write the letter we do not say.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. knife → ______",
+          "fields": [
+            {
+              "answer": "k"
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2. lamb → ______",
+          "fields": [
+            {
+              "answer": "b"
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3. sign → ______",
+          "fields": [
+            {
+              "answer": "g"
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "4. answer → ______",
+          "fields": [
+            {
+              "answer": "w"
+            }
+          ]
+        },
+        {
+          "id": "s3_5",
+          "label": "5. walk → ______",
+          "fields": [
+            {
+              "answer": "l"
+            }
+          ]
+        },
+        {
+          "id": "s3_6",
+          "label": "6. autumn → ______",
+          "fields": [
+            {
+              "answer": "n"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "2F · Same sound, different spelling",
+      "minutes": 4,
+      "instructions": "Match the words that sound the same. Write the letter of the matching word (a–f).",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s4_1",
+          "label": "1. week → ______",
+          "fields": [
+            {
+              "answer": "d"
+            }
+          ]
+        },
+        {
+          "id": "s4_2",
+          "label": "2. sun → ______",
+          "fields": [
+            {
+              "answer": "a"
+            }
+          ]
+        },
+        {
+          "id": "s4_3",
+          "label": "3. eight → ______",
+          "fields": [
+            {
+              "answer": "c"
+            }
+          ]
+        },
+        {
+          "id": "s4_4",
+          "label": "4. buy → ______",
+          "fields": [
+            {
+              "answer": "f"
+            }
+          ]
+        },
+        {
+          "id": "s4_5",
+          "label": "5. flower → ______",
+          "fields": [
+            {
+              "answer": "b"
+            }
+          ]
+        },
+        {
+          "id": "s4_6",
+          "label": "6. one → ______",
+          "fields": [
+            {
+              "answer": "e"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "EPIU 1.2 · Write the normal spelling",
+      "minutes": 6,
+      "instructions": "Write each word in normal spelling. Then play Audio A6, listen and repeat.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s5_1",
+          "label": "1. /bɪg/ → ______",
+          "fields": [
+            {
+              "answer": "big"
+            }
+          ]
+        },
+        {
+          "id": "s5_2",
+          "label": "2. /dres/ → ______",
+          "fields": [
+            {
+              "answer": "dress"
+            }
+          ]
+        },
+        {
+          "id": "s5_3",
+          "label": "3. /frend/ → ______",
+          "fields": [
+            {
+              "answer": "friend"
+            }
+          ]
+        },
+        {
+          "id": "s5_4",
+          "label": "4. /gɪv/ → ______",
+          "fields": [
+            {
+              "answer": "give"
+            }
+          ]
+        },
+        {
+          "id": "s5_5",
+          "label": "5. /help/ → ______",
+          "fields": [
+            {
+              "answer": "help"
+            }
+          ]
+        },
+        {
+          "id": "s5_6",
+          "label": "6. /nekst/ → ______",
+          "fields": [
+            {
+              "answer": "next"
+            }
+          ]
+        },
+        {
+          "id": "s5_7",
+          "label": "7. /ˈveri/ → ______",
+          "fields": [
+            {
+              "answer": "very"
+            }
+          ]
+        },
+        {
+          "id": "s5_8",
+          "label": "8. /wel/ → ______",
+          "fields": [
+            {
+              "answer": "well"
+            }
+          ]
+        }
+      ],
+      "audio": "a6"
+    },
+    {
+      "id": "s6",
+      "title": "EPIU 1.3 · Odd vowel sound",
+      "minutes": 4,
+      "instructions": "Circle the word with a different vowel sound. Type that word. Then play Audio A7, listen and repeat.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s6_1",
+          "label": "1. give · time · sit · think · rich → ______",
+          "fields": [
+            {
+              "answer": "time"
+            }
+          ]
+        },
+        {
+          "id": "s6_2",
+          "label": "2. apple · bad · wash · catch · bank → ______",
+          "fields": [
+            {
+              "answer": "wash"
+            }
+          ]
+        },
+        {
+          "id": "s6_3",
+          "label": "3. much · bus · sun · push · up → ______",
+          "fields": [
+            {
+              "answer": "push"
+            }
+          ]
+        },
+        {
+          "id": "s6_4",
+          "label": "4. many · maths · man · hat · flat → ______",
+          "fields": [
+            {
+              "answer": "many"
+            }
+          ]
+        }
+      ],
+      "audio": "a7"
+    },
+    {
+      "id": "s7",
+      "title": "EPIU 1.4 · Rhymes",
+      "minutes": 6,
+      "instructions": "Write a word that rhymes. Use the letters given. Then play Audio A8, listen and repeat every word.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s7_1",
+          "label": "1. key → tr _ _ ______",
+          "fields": [
+            {
+              "answer": "tree"
+            }
+          ]
+        },
+        {
+          "id": "s7_2",
+          "label": "2. blue → sh _ _ ______",
+          "fields": [
+            {
+              "answer": "shoe"
+            }
+          ]
+        },
+        {
+          "id": "s7_3",
+          "label": "3. not → w _ _ _ ______",
+          "fields": [
+            {
+              "answer": "what"
+            }
+          ]
+        },
+        {
+          "id": "s7_4",
+          "label": "4. one → r _ _ ______",
+          "fields": [
+            {
+              "answer": "run"
+            }
+          ]
+        },
+        {
+          "id": "s7_5",
+          "label": "5. date → w _ _ _ ______",
+          "fields": [
+            {
+              "answer": "wait"
+            }
+          ]
+        },
+        {
+          "id": "s7_6",
+          "label": "6. lie → w _ _ ______",
+          "fields": [
+            {
+              "answer": "why"
+            }
+          ]
+        },
+        {
+          "id": "s7_7",
+          "label": "7. so → sh _ _ ______",
+          "fields": [
+            {
+              "answer": "show"
+            }
+          ]
+        },
+        {
+          "id": "s7_8",
+          "label": "8. beer → n _ _ _ ______",
+          "fields": [
+            {
+              "answer": "near"
+            }
+          ]
+        }
+      ],
+      "audio": "a8"
+    },
+    {
+      "id": "s8",
+      "title": "2H · Voice note",
+      "minutes": 8,
+      "kind": "voice",
+      "lines": [
+        "How do you pronounce this word?",
+        "The “k” in “knife” is silent.",
+        "“Banana” has three syllables.",
+        "I want to improve my accent."
+      ],
+      "note": "Read the 12 words once, then read these 4 sentences 3 times and record them. Stress: pronounce, improve."
+    }
+  ]
+}
