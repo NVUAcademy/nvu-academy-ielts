@@ -41,7 +41,7 @@ async function azureAssess(wavBuf, referenceText) {
   /* Điểm tổng: lấy PronScore nếu có; nếu Azure không trả về thì lấy trung bình điểm chính xác của các từ */
   const wordAvg = words.length ? Math.round(words.reduce((s, w) => s + w.score, 0) / words.length) : 0;
   const pron = Math.round(pa(n).PronScore || 0) || wordAvg;
-  return { heard: words.map(w => w.word).join(' '), words, pron, status: 'Success' };
+  return { heard: words.map(w => w.word).join(' '), words, pron, pron_raw: Math.round(pa(n).PronScore || 0), status: 'Success' };
 }
 
 module.exports = async function handler(req, res) {
@@ -111,6 +111,8 @@ module.exports = async function handler(req, res) {
     });
     const clean = {
       audio_ok: audioOk, correct, heard: a.heard.slice(0, 200), score: a.pron,
+      /* Chẩn đoán: điểm từng từ và điểm tổng Azure trả về (để kiểm tra khi điểm bất thường) */
+      word_scores: (a.words || []).slice(0, 12).map(w => [w.word, w.score]), pron_raw: a.pron_raw,
       problems,
       feedback: verdict === 'ok' ? 'Em đọc đúng rồi, phát âm tốt!' : 'Em ghi lại nhé, đọc chậm và rõ từng âm.'
     };
