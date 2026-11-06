@@ -163,8 +163,11 @@ module.exports = async function handler(req, res) {
     if (lines.reduce((n, l) => n + l.text.length, 0) > MAX_TOTAL) return bad(res, 400, 'Đoạn quá dài (tối đa ' + MAX_TOTAL + ' ký tự)');
 
     /* Cùng nội dung và tốc độ thì dùng lại file đã tạo */
-    const gem = useGemini();
-    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: useAzure() ? AZURE_VOICES : VOICES, m: gem ? 'gemini' : useAzure() ? 'azure' : MODEL_ID, pv: 9 })).digest('hex').slice(0, 32);
+    /* provider: 'azure' từ trang flashcard (giọng nữ Sonia), không ảnh hưởng phần Listening */
+    const forceAzure = b.provider === 'azure' && !!process.env.AZURE_SPEECH_KEY;
+    const azure = forceAzure || useAzure();
+    const gem = !forceAzure && useGemini();
+    const hash = crypto.createHash('sha256').update(JSON.stringify({ lines, speed, v: azure ? AZURE_VOICES : VOICES, m: gem ? 'gemini' : azure ? 'azure' : MODEL_ID, pv: 9 })).digest('hex').slice(0, 32);
     const path = 'listening/' + hash + (gem ? '.wav' : '.mp3');
     const cached = await signedUrl(path);
     if (cached) return res.status(200).json({ ok: true, url: cached, cached: true });
@@ -176,7 +179,7 @@ module.exports = async function handler(req, res) {
     } else {
       const parts = [];
       for (let i = 0; i < lines.length; i += CONCURRENCY)
-        parts.push(...await Promise.all(lines.slice(i, i + CONCURRENCY).map(l => speak(l.text, l.speaker, speed))));
+        parts.push(...await Promise.all(lines.slice(i, i + CONCURRENCY).map(l => azure ? speakAzure(l.text, l.speaker, speed) : speak(l.text, l.speaker, speed))));
       audio = Buffer.concat(parts); contentType = 'audio/mpeg';
     }
     const up = await sb('/storage/v1/object/' + BUCKET + '/' + path, {

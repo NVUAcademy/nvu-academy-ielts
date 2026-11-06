@@ -644,13 +644,13 @@ function sayExample(text, twice){
   const play=url=>{ const a=new Audio(url); exAudio=a; a.onended=()=>{ if(rep){ rep=false; setTimeout(()=>play(url),700); } }; a.play().catch(fallback); };
   if(exCache[key]) return play(exCache[key]);
   toast('Đang tạo giọng đọc, chờ vài giây…');
-  fetch('/api/listening-audio',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({student_id:sid,lines:[{speaker:'A',text:key}]})})
+  fetch('/api/listening-audio',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({student_id:sid,provider:'azure',lines:[{speaker:'A',text:key}]})})
     .then(r=>r.json()).then(j=>{ if(!j.ok) throw new Error(j.error||'loi'); exCache[key]=j.url; play(j.url); })
     .catch(fallback);
 }
 function sayAloud(text){
   const w=String(text).trim().toLowerCase();
-  if(!/^[a-z]+$/.test(w)) return sayExample(text);
+  return sayExample(text);
   let started=false;
   const fail=()=>{ if(started) return; started=true; sayAloudTTS(text); };
   try{ if(wordAudio) wordAudio.pause(); }catch{}
@@ -668,7 +668,7 @@ function sayAloudTTS(text){
 }
 const qKey = q => q.sound ? String(q.ans) : q.id;
 try{ if(window.speechSynthesis) speechSynthesis.onvoiceschanged=()=>{ ttsVoice=null; }; }catch{}
-function sayTwice(text){ if(!/^[a-z]+$/.test(String(text).trim().toLowerCase())) return sayExample(text,true); sayAloud(text); try{ const ss=speechSynthesis; let started=false; const iv=setInterval(()=>{ if(ss.speaking) started=true; else if(started){ clearInterval(iv); setTimeout(()=>sayAloud(text),1800); } },150); setTimeout(()=>clearInterval(iv),8000); }catch{} }
+function sayTwice(text){ return sayExample(text,true); sayAloud(text); try{ const ss=speechSynthesis; let started=false; const iv=setInterval(()=>{ if(ss.speaking) started=true; else if(started){ clearInterval(iv); setTimeout(()=>sayAloud(text),1800); } },150); setTimeout(()=>clearInterval(iv),8000); }catch{} }
 const sayBtn = (text, label='🔊', title='Listen') => text ? `<button class="say-btn" data-a="say" data-t="${esc(text)}" aria-label="${esc(title)}: ${esc(text)}" title="${esc(title)}">${label}</button>` : '';
 
 
