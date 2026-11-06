@@ -574,6 +574,8 @@
           classCode: existing.class_code,
           avatar: existing.avatar_emoji || selectedAvatar
         }));
+        /* Ghi lượt đăng nhập cho trang thống kê (lỗi mạng thì bỏ qua) */
+        fetch('/api/vq-progress', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ kind: 'activity', activity_kind: 'login', student_id: existing.id }) }).catch(() => {});
 
         succEl.textContent = `Chào mừng ${name}! Đang vào lớp học...`;
         succEl.style.display = 'block';

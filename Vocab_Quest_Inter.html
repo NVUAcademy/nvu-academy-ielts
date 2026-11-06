@@ -1261,5 +1261,18 @@ try{ if(window.speechSynthesis) speechSynthesis.getVoices(); }catch{}
 
 boot();
 
+
+/* Thời gian học từ vựng: chỉ tính khi trang đang mở và đang hiện (không tính khi chuyển tab) */
+(function () {
+  if (!LOGIN || !LOGIN.id) return;
+  let acc = 0, last = Date.now();
+  setInterval(() => { const now = Date.now(); if (!document.hidden) acc += Math.min(now - last, 15000); last = now; }, 5000);
+  function flush() {
+    const s = Math.round(acc / 1000); if (s <= 0) return; acc = 0;
+    try { fetch('/api/vq-progress', { method: 'POST', keepalive: true, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ kind: 'activity', activity_kind: 'practice', student_id: LOGIN.id, seconds: Math.min(s, 36000), label: 'vocab:' + CFG.id }) }); } catch (e) {}
+  }
+  document.addEventListener('visibilitychange', () => { if (document.hidden) flush(); });
+  window.addEventListener('pagehide', flush);
+})();
 </script>
 </body></html>
