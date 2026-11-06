@@ -202,9 +202,11 @@ async function submitPractice() {
 /* ---------- Luyện phát âm cho lỗi âm: đọc lại đáp án, AI nghe và nhận xét ---------- */
 const isSound = e => ['pronunciation', 'listening'].includes(e.error_type) && !isMcq(e);
 let recRef = null;
+let vState = { tries: 0, ok: 0 };
 function setupVoice(e) {
   document.getElementById('nextBtn').disabled = true;
-  document.getElementById('vbox').innerHTML = `<div style="margin-top:14px;padding:14px 16px;border-radius:14px;background:var(--soft)"><div class="rv-tag">Luyện phát âm</div><div style="margin:6px 0 12px;font-size:17px">Đọc to: <b>${esc(e.correct_answer)}</b></div><div id="vmsg" class="meta"></div><button class="btn" id="recBtn" onclick="toggleRec()">🎙 Ghi âm</button></div>`;
+  vState = { tries: 0, ok: 0 };
+  document.getElementById('vbox').innerHTML = `<div style="margin-top:14px;padding:14px 16px;border-radius:14px;background:var(--soft)"><div class="rv-tag">Luyện phát âm</div><div style="margin:6px 0 12px;font-size:17px">Đọc to: <b>${esc(e.correct_answer)}</b></div><div id="vprog" class="meta">Lần 1/3 (cần đọc đúng 2/3 lần)</div><div id="vmsg" class="meta"></div><button class="btn" id="recBtn" onclick="toggleRec()">🎙 Ghi lần 1</button></div>`;
 }
 async function toWav16k(blob) {
   const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -256,12 +258,18 @@ async function submitVoice(blob, e) {
     const j = await r.json();
     if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
     const extra = j.problems && j.problems.length ? '<br>• ' + j.problems.map(esc).join('<br>• ') : '';
-    if (j.verdict === 'ok') {
-      msg.innerHTML = `<div class="fb ok">✓ Phát âm ổn rồi! ${esc(j.feedback)}${extra}</div>`;
-      btn.style.display = 'none'; document.getElementById('nextBtn').disabled = false;
+    vState.tries++; if (j.verdict === 'ok') vState.ok++;
+    const left = 3 - vState.tries, prog = document.getElementById('vprog');
+    if (vState.ok >= 2) {
+      msg.innerHTML = `<div class="fb ok">✓ Đạt! Em đọc đúng ${vState.ok}/${vState.tries} lần. ${esc(j.feedback)}${extra}</div>`;
+      if (prog) prog.textContent = 'Hoàn thành'; btn.style.display = 'none'; document.getElementById('nextBtn').disabled = false;
+    } else if (vState.ok + left < 2) {
+      msg.innerHTML = `<div class="fb no">Em đã đọc ${vState.tries} lần, chưa đủ 2 lần đúng. Thầy sẽ nghe lại. ${esc(j.feedback)}${extra}</div>`;
+      if (prog) prog.textContent = 'Đã đủ 3 lần'; btn.style.display = 'none'; document.getElementById('nextBtn').disabled = false;
     } else {
-      msg.innerHTML = `<div class="fb no">Chưa ổn, em ghi lại nhé. ${esc(j.feedback)}${extra}</div>`;
-      btn.style.display = ''; btn.textContent = '🎙 Ghi âm lại';
+      msg.innerHTML = `<div class="fb ${j.verdict === 'ok' ? 'ok' : 'no'}">${j.verdict === 'ok' ? 'Đúng lần này.' : 'Chưa ổn lần này.'} ${esc(j.feedback)}${extra}</div>`;
+      if (prog) prog.textContent = `Lần ${vState.tries + 1}/3 (cần đọc đúng 2/3 lần; đã đúng ${vState.ok})`;
+      btn.style.display = ''; btn.textContent = `🎙 Ghi lần ${vState.tries + 1}`;
     }
   } catch (err) {
     msg.innerHTML = `<div class="fb no">${esc(err.message)}</div>`;
