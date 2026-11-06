@@ -561,13 +561,21 @@
           return;
         }
 
+        /* Chỉ cho vào khi học sinh đã đăng ký Gmail với thầy (kiểm tra trong database) */
+        const { data: registered } = await db.rpc('student_login_check', { p_name: existing.full_name, p_class: classCode });
+        if (!registered || !registered.length) {
+          showErr('student', 'Học sinh "' + existing.full_name + '" chưa đăng ký Gmail với thầy. Em nhắn thầy để thêm Gmail, rồi đăng nhập lại nhé.');
+          return;
+        }
+
         localStorage.setItem('nvu_student', JSON.stringify({
           id: existing.id,
           name: existing.full_name,
           classCode: existing.class_code,
           avatar: existing.avatar_emoji || selectedAvatar
         }));
-        logLogin(existing.id, 'name');
+        /* Ghi lượt đăng nhập cho trang thống kê (lỗi mạng thì bỏ qua) */
+        fetch('/api/vq-progress', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ kind: 'activity', activity_kind: 'login', student_id: existing.id }) }).catch(() => {});
 
         succEl.textContent = `Chào mừng ${name}! Đang vào lớp học...`;
         succEl.style.display = 'block';
@@ -632,10 +640,6 @@
       if (error) showErr('student', 'Không mở được đăng nhập Google: ' + error.message);
     }
 
-    /* Ghi lịch sử đăng nhập của học sinh; lỗi ở đây không chặn việc vào học */
-    function logLogin(id, method) {
-      try { fetch('/api/login-log', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ student_id: id, method }), keepalive: true }).catch(() => {}); } catch (e) {}
-    }
     async function finishGoogle() {
       showPanel('student');
       const succEl = document.getElementById('student-success');
@@ -652,7 +656,8 @@
       }
       const s = data[0];
       localStorage.setItem('nvu_student', JSON.stringify({ id: s.id, name: s.full_name, classCode: s.class_code, avatar: s.avatar_emoji || '🎓' }));
-      logLogin(s.id, 'google');
+      /* Ghi lượt đăng nhập cho trang thống kê của giáo viên (lỗi mạng thì bỏ qua) */
+      fetch('/api/vq-progress', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ kind: 'activity', activity_kind: 'login', student_id: s.id }) }).catch(() => {});
       succEl.textContent = 'Chào mừng ' + s.full_name + '! Đang vào lớp học...'; succEl.style.display = 'block';
       setTimeout(() => { window.location.href = 'index.html'; }, 1000);
     }
@@ -695,6 +700,13 @@
       if (!isStaff) {
         const email = session.user.email; await db.auth.signOut(); okEl.style.display = 'none';
         showErr('teacher', 'Gmail ' + email + ' chưa có trong danh sách giáo viên và trợ giảng. Nhờ thầy Nam thêm email này.');
+        return;
+      }
+      /* Trang giáo viên chỉ dành cho vai trò teacher. Trợ giảng phải đăng nhập ở trang trợ giảng. */
+      const { data: me } = await db.from('staff_emails').select('role').eq('email', String(session.user.email).toLowerCase()).maybeSingle();
+      if (!me || me.role !== 'teacher') {
+        const email = session.user.email; await db.auth.signOut(); okEl.style.display = 'none';
+        showErr('teacher', 'Gmail ' + email + ' không có quyền vào trang giáo viên. Trợ giảng vui lòng đăng nhập ở trang trợ giảng.');
         return;
       }
       localStorage.setItem('nvu_teacher', JSON.stringify({ id: session.user.id, email: session.user.email }));

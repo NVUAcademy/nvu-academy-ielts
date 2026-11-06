@@ -169,6 +169,11 @@
     }
 
     table { width: 100%; border-collapse: collapse; }
+    /* Bảng rộng hơn màn hình điện thoại: khung chứa bảng được cuộn ngang (chỉ trên điện thoại) */
+    @media (max-width: 900px) {
+      div:has(> table) { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      div:has(> table) > table { min-width: 640px; }
+    }
     th {
       padding: 12px 16px;
       text-align: left;
@@ -313,13 +318,13 @@
       <span class="nav-icon">💬</span>
       <span>Nhắc Zalo</span>
     </div>
+    <div class="nav-item" onclick="showTab('time')">
+      <span class="nav-icon">⏱</span>
+      <span>Thời gian & đăng nhập</span>
+    </div>
     <div class="nav-item" onclick="showTab('ranking')">
       <span class="nav-icon">🏆</span>
       <span>Xếp hạng</span>
-    </div>
-    <div class="nav-item" onclick="showTab('logins')">
-      <span class="nav-icon">🔑</span>
-      <span>Lượt đăng nhập</span>
     </div>
   </nav>
 
@@ -758,20 +763,11 @@
   </div>
 
   <!-- RANKING TAB -->
-  <div id="tab-logins" class="tab-panel">
-    <div class="section-head"><h2>Lượt đăng nhập</h2></div>
-    <div class="section-sub">200 lần đăng nhập gần nhất của học sinh. Mục "Tên" đăng nhập bằng tên, "Google" đăng nhập bằng Gmail.</div>
-    <div style="margin:12px 0">
-      <select class="filter" id="class-filter-logins" onchange="loadLogins()">
-        <option value="">Tất cả lớp</option>
-        <option value="FOUNDATION11">Foundation 11</option>
-        <option value="FOUNDATION12">Foundation 12</option>
-        <option value="IELTS13">IELTS 13</option>
-        <option value="IELTS14">IELTS 14</option>
-        <option value="LYTHUYET3">Lý thuyết 3</option>
-      </select>
-    </div>
-    <div id="logins-table"></div>
+  <div id="tab-time" class="tab-panel">
+    <div class="page-head"><h1>Thời gian & đăng nhập</h1><p class="sub">30 ngày gần nhất. Thời gian làm Daily Practice và bài kiểm tra tuần, số lượt đăng nhập.</p></div>
+    <div class="toolbar"><select class="filter" id="class-filter-time" onchange="loadTime()"><option value="">Tất cả lớp</option><option value="FOUNDATION11">Foundation 11</option><option value="FOUNDATION12">Foundation 12</option><option value="IELTS13">IELTS 13</option><option value="IELTS14">IELTS 14</option></select></div>
+    <div id="time-totals" class="sub" style="margin:8px 0"></div>
+    <div class="table-wrap"><table><thead><tr><th>Học sinh</th><th>Lớp</th><th>Lượt đăng nhập</th><th>Làm bài (phút)</th><th>Số bài làm</th><th>Challenge (%)</th></tr></thead><tbody id="time-body"><tr><td colspan="6">Đang tải…</td></tr></tbody></table></div>
   </div>
   <div id="tab-ranking" class="tab-panel">
     <div class="page-header">
@@ -796,6 +792,12 @@
 
 <script src="meow.js"></script>
 <script>
+  /* Ô nhận xét tự giãn theo nội dung, không cần kéo */
+  function autoSize(t) { t.style.height = 'auto'; t.style.height = Math.max(120, t.scrollHeight + 4) + 'px'; }
+  const isCommentBox = el => el.tagName === 'TEXTAREA' && ((el.id || '').startsWith('cm-') || (el.id || '').startsWith('sbc-'));
+  document.addEventListener('input', e => { if (isCommentBox(e.target)) autoSize(e.target); });
+  /* Ô nhận xét hiện ra là đã đủ cao theo nội dung có sẵn, không chờ gõ */
+  new MutationObserver(() => document.querySelectorAll('textarea').forEach(t => { if (isCommentBox(t) && !t.dataset.sized && t.offsetParent !== null) { autoSize(t); t.dataset.sized = '1'; } })).observe(document.body, { childList: true, subtree: true });
   const SUPABASE_URL = 'https://sxnxbbosfyapmmkrhcdj.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_OMyiSjOVcKOfRdZO9JwSZg_8XogOYkZ';
   const { createClient } = supabase;
@@ -813,6 +815,12 @@
     if (!isStaff) {
       await db.auth.signOut(); localStorage.removeItem('nvu_teacher');
       window.location.href = 'login.html';
+      return;
+    }
+    /* Trang này chỉ dành cho giáo viên; trợ giảng được chuyển sang trang trợ giảng */
+    const { data: me } = await db.from('staff_emails').select('role').eq('email', String(session.user.email).toLowerCase()).maybeSingle();
+    if (!me || me.role !== 'teacher') {
+      window.location.href = 'tro-giang.html';
       return;
     }
     loadAll();
@@ -880,13 +888,41 @@
     return new Date(d.setDate(diff)).toISOString().split('T')[0];
   }
 
+  /* Điểm, streak, hoạt động cuối của từng học sinh, tính từ daily_scores và weekly_quiz_results.
+     (Cột total_score / streak_days trong bảng students không được cập nhật nên không dùng.) */
+  async function studentStats(rows) {
+    const [d, q] = await Promise.all([
+      db.from('daily_scores').select('student_id, practice_date, score'),
+      db.from('weekly_quiz_results').select('student_id, total_score'),
+    ]);
+    const acc = {};
+    rows.forEach(r => { acc[r.id] = { total: 0, days: new Set(), last: null }; });
+    (d.data || []).forEach(x => {
+      const a = acc[x.student_id]; if (!a) return;
+      a.total += x.score || 0; a.days.add(x.practice_date);
+      if (!a.last || x.practice_date > a.last) a.last = x.practice_date;
+    });
+    (q.data || []).forEach(x => { const a = acc[x.student_id]; if (a) a.total += x.total_score || 0; });
+    const iso = dt => dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0');
+    const out = {};
+    rows.forEach(r => {
+      const a = acc[r.id];
+      let streak = 0; const day = new Date();
+      if (!a.days.has(iso(day))) day.setDate(day.getDate() - 1);
+      while (a.days.has(iso(day))) { streak++; day.setDate(day.getDate() - 1); }
+      out[r.id] = { total_score: a.total, streak_days: streak, last_active: a.last };
+    });
+    return out;
+  }
+
   async function loadOverviewRanking() {
     const classCode = document.getElementById('class-filter-overview').value;
-    let query = db.from('students').select('id, full_name, class_code, avatar_emoji, total_score')
-      .order('total_score', { ascending: false }).limit(10);
+    let query = db.from('students').select('id, full_name, class_code, avatar_emoji');
     if (classCode) query = query.eq('class_code', classCode);
     const { data } = await query;
-    renderRankingTable('overview-ranking', data);
+    const st = await studentStats(data || []);
+    const ranked = (data || []).map(s => ({ ...s, ...st[s.id] })).sort((a, b) => b.total_score - a.total_score).slice(0, 10);
+    renderRankingTable('overview-ranking', ranked);
   }
 
   async function loadStudents() {
@@ -902,11 +938,14 @@
 
     const em = await db.from('student_emails').select('student_id, email');
     const emailOf = {}; (em.data || []).forEach(r => { emailOf[r.student_id] = r.email; });
+    const st = await studentStats(data);
+    data.forEach(s => Object.assign(s, st[s.id]));
+    studentNames = {}; (data || []).forEach(s => { studentNames[s.id] = s.full_name; });
 
     document.getElementById('students-table').innerHTML = `
       <table>
         <thead><tr>
-          <th>#</th><th>Học sinh</th><th>Lớp</th><th>Email Google (để đăng nhập)</th><th>Điểm tổng</th><th>Streak</th><th>Hoạt động cuối</th>
+          <th>#</th><th>Học sinh</th><th>Lớp</th><th>Email Google (để đăng nhập)</th><th>Điểm tổng</th><th>Streak</th><th>Hoạt động cuối</th><th>Xóa</th>
         </tr></thead>
         <tbody>
           ${data.map((s, i) => `<tr>
@@ -917,9 +956,23 @@
             <td><strong>${s.total_score || 0}</strong></td>
             <td>${s.streak_days || 0} ngày 🔥</td>
             <td style="color:var(--muted)">${s.last_active ? new Date(s.last_active).toLocaleDateString('vi-VN') : '—'}</td>
+            <td><button class="btn-sm" style="color:var(--red)" onclick="deleteStudent('${s.id}')">Xóa</button><div id="sd-${s.id}" style="font-size:11px;min-height:13px"></div></td>
           </tr>`).join('')}
         </tbody>
       </table>`;
+  }
+
+  let studentNames = {};
+  /* Xóa tài khoản học sinh (kèm toàn bộ bài làm, nhận xét, nhật ký lỗi của học sinh đó) */
+  async function deleteStudent(id) {
+    const name = studentNames[id] || 'học sinh này';
+    if (!confirm('Xóa tài khoản "' + name + '"?\nToàn bộ bài làm, nhận xét và nhật ký lỗi của học sinh này sẽ bị xóa, KHÔNG khôi phục được.')) return;
+    const el = document.getElementById('sd-' + id);
+    el.style.color = 'var(--muted)'; el.textContent = 'Đang xóa...';
+    const { data, error } = await db.from('students').delete().eq('id', id).select('id');
+    if (error) { el.style.color = 'var(--red)'; el.textContent = 'Không xóa được: ' + error.message; return; }
+    if (!data || !data.length) { el.style.color = 'var(--red)'; el.textContent = 'Không xóa được (chưa có quyền xóa học sinh)'; return; }
+    loadStudents();
   }
 
   async function saveStudentEmail(id, input) {
@@ -1200,13 +1253,35 @@
     }, 60000);
   }
 
+  async function loadTime() {
+    const cls = (document.getElementById('class-filter-time') || {}).value || '';
+    const since = new Date(Date.now() - 30 * 86400000).toISOString();
+    const [st, acts, scores] = await Promise.all([
+      db.from('students').select('id, full_name, class_code'),
+      db.from('activity_log').select('student_id, kind, seconds, created_at, label').gte('created_at', since),
+      db.from('daily_scores').select('student_id, time_taken_seconds, practice_date').gte('practice_date', since.slice(0, 10))
+    ]);
+    const body = document.getElementById('time-body');
+    if (st.error || acts.error || scores.error) { body.innerHTML = '<tr><td colspan="6">Không tải được dữ liệu: ' + esc((st.error || acts.error || scores.error).message) + '</td></tr>'; return; }
+    const per = {};
+    (st.data || []).forEach(s => { per[s.id] = { name: s.full_name, cls: s.class_code, logins: 0, sec: 0, n: 0 }; });
+    (acts.data || []).forEach(a => { const r = per[a.student_id]; if (!r) return; if (a.kind === 'login') r.logins++; else if (String(a.label || '').startsWith('challenge|')) { const p = a.label.split('|'); r.chD = (r.chD || 0) + (+p[2] || 0); r.chT = (r.chT || 0) + (+p[3] || 0); } else r.sec += a.seconds || 0; });
+    (scores.data || []).forEach(x => { const r = per[x.student_id]; if (!r) return; r.sec += x.time_taken_seconds || 0; r.n++; });
+    const rows = Object.values(per).filter(r => (r.logins || r.sec || r.n || r.chT) && (!cls || r.cls === cls)).sort((a, b) => b.sec - a.sec);
+    const pct = (d, t) => t ? Math.round(100 * (d || 0) / t) + '%' : '—';
+    const byClass = {};
+    rows.forEach(r => { const c = byClass[r.cls] || (byClass[r.cls] = { logins: 0, sec: 0, n: 0, chD: 0, chT: 0 }); c.logins += r.logins; c.sec += r.sec; c.n += r.n; c.chD += r.chD || 0; c.chT += r.chT || 0; });
+    document.getElementById('time-totals').innerHTML = Object.entries(byClass).map(([k, c]) => `<b>${esc(k)}</b>: ${c.logins} lượt đăng nhập · ${Math.round(c.sec / 60)} phút · ${c.n} bài · Challenge ${pct(c.chD, c.chT)}`).join(' &nbsp;|&nbsp; ') || 'Chưa có dữ liệu.';
+    body.innerHTML = rows.length ? rows.map(r => `<tr><td>${esc(r.name)}</td><td>${esc(r.cls)}</td><td>${r.logins}</td><td>${Math.round(r.sec / 60)}</td><td>${r.n}</td><td>${pct(r.chD, r.chT)}</td></tr>`).join('') : '<tr><td colspan="6">Chưa có dữ liệu.</td></tr>';
+  }
   async function loadRanking() {
     const classCode = document.getElementById('class-filter-ranking').value;
-    let query = db.from('students').select('id, full_name, class_code, avatar_emoji, total_score, streak_days')
-      .order('total_score', { ascending: false });
+    let query = db.from('students').select('id, full_name, class_code, avatar_emoji');
     if (classCode) query = query.eq('class_code', classCode);
     const { data } = await query;
-    renderRankingTable('ranking-table', data);
+    const st = await studentStats(data || []);
+    const ranked = (data || []).map(s => ({ ...s, ...st[s.id] })).sort((a, b) => b.total_score - a.total_score);
+    renderRankingTable('ranking-table', ranked);
   }
 
   function renderRankingTable(elId, data) {
@@ -1771,7 +1846,7 @@
             <div style="font-size:13px;color:var(--muted)">${esc(r.title)}</div><div style="font-size:11px;color:var(--muted);font-family:monospace">${esc(recName(r))}</div>${ai}</div>
           <div id="au-${esc(r.key)}"><button class="btn-sm" onclick="playRec('${esc(r.key)}')">▶ Nghe</button></div>
         </div>
-        <div style="display:flex;gap:8px;margin-top:8px"><textarea id="cm-${esc(r.key)}" class="zl-text" rows="2" style="font-size:14px" placeholder="Nhận xét của thầy hoặc trợ giảng (1 điểm khen, tối đa 2 lỗi, 1 việc luyện tiếp)">${esc(r.comment)}</textarea>
+        <div style="display:flex;gap:8px;margin-top:8px"><textarea id="cm-${esc(r.key)}" class="zl-text" rows="5" style="font-size:16px;min-height:120px" placeholder="Nhận xét của thầy hoặc trợ giảng (1 điểm khen, tối đa 2 lỗi, 1 việc luyện tiếp)">${esc(r.comment)}</textarea>
           <button class="btn-sm" onclick="saveRecComment('${esc(r.key)}')" style="align-self:flex-start">Lưu</button></div>
         <div id="cs-${esc(r.key)}" style="font-size:12px;color:var(--green);min-height:14px"></div></div>`;
     });
@@ -1890,7 +1965,7 @@
       });
     } catch (e) {}
     if (r.voice_path) h += `<div id="sbv-${r.id}" style="margin:8px 0"><button class="btn-sm" onclick="playSub('${r.id}')">▶ Nghe ghi âm</button></div>`;
-    h += `<div style="display:flex;gap:8px;margin-top:8px"><textarea id="sbc-${r.id}" class="zl-text" rows="2" style="font-size:14px" placeholder="Nhận xét (1 điểm khen, tối đa 2 lỗi, 1 việc luyện tiếp)">${esc(r.teacher_comment || '')}</textarea><button class="btn-sm" onclick="saveSubComment('${r.id}')" style="align-self:flex-start">Lưu</button></div><div id="sbs-${r.id}" style="font-size:12px;min-height:14px"></div></div>`;
+    h += `<div style="display:flex;gap:8px;margin-top:8px"><textarea id="sbc-${r.id}" class="zl-text" rows="5" style="font-size:16px;min-height:120px" placeholder="Nhận xét (1 điểm khen, tối đa 2 lỗi, 1 việc luyện tiếp)">${esc(r.teacher_comment || '')}</textarea><button class="btn-sm" onclick="saveSubComment('${r.id}')" style="align-self:flex-start">Lưu</button></div><div id="sbs-${r.id}" style="font-size:12px;min-height:14px"></div></div>`;
     box.innerHTML = h;
   }
   async function playSub(id) {
@@ -1927,24 +2002,6 @@
   }
 
 
-  /* Lượt đăng nhập của học sinh, lấy từ /api/login-log (cần đăng nhập giáo viên hoặc trợ giảng) */
-  async function loadLogins() {
-    const el = document.getElementById('logins-table');
-    el.innerHTML = emptyState('Đang tải…');
-    const { data: { session } } = await db.auth.getSession();
-    if (!session) { el.innerHTML = emptyState('Phiên đăng nhập đã hết, hãy đăng nhập lại.'); return; }
-    const classCode = document.getElementById('class-filter-logins').value;
-    try {
-      const r = await fetch('/api/login-log' + (classCode ? '?class_code=' + encodeURIComponent(classCode) : ''), { headers: { Authorization: 'Bearer ' + session.access_token } });
-      const j = await r.json();
-      if (!j.ok) { el.innerHTML = emptyState('Lỗi: ' + j.error); return; }
-      if (!j.data.length) { el.innerHTML = emptyState('Chưa có lượt đăng nhập nào'); return; }
-      el.innerHTML = '<table><thead><tr><th>Thời gian</th><th>Học sinh</th><th>Lớp</th><th>Cách đăng nhập</th></tr></thead><tbody>' +
-        j.data.map(x => '<tr><td>' + new Date(x.logged_at).toLocaleString('vi-VN') + '</td><td>' + x.name + '</td><td>' + x.class_code + '</td><td>' + (x.method === 'google' ? 'Google' : 'Tên') + '</td></tr>').join('') +
-        '</tbody></table>';
-    } catch (e) { el.innerHTML = emptyState('Lỗi: ' + e.message); }
-  }
-
   function showTab(tab) {
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -1954,6 +2011,7 @@
     if (tab === 'students') loadStudents();
     else if (tab === 'scores') loadScores();
     else if (tab === 'errors') loadErrors();
+    else if (tab === 'time') loadTime();
     else if (tab === 'zalo') loadZalo();
     else if (tab === 'schedule') loadSchedule();
     else if (tab === 'library') loadLibrary();
@@ -1962,7 +2020,6 @@
     else if (tab === 'meow') loadMeow();
     else if (tab === 'attendance') loadAttendance();
     else if (tab === 'ranking') loadRanking();
-    else if (tab === 'logins') loadLogins();
   }
 
   async function signOut() {
