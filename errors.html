@@ -69,6 +69,10 @@ async function load() {
   const { data, error } = await db.from('error_logs').select('*').eq('student_id', student.id).order('created_at', { ascending: false }).limit(2000);
   if (error) { document.getElementById('view').innerHTML = `<div class="card empty">Không tải được: ${esc(error.message)}</div>`; return; }
   errs = data || [];
+  /* Lỗi làm hôm nay và chưa sửa được xếp lên đầu */
+  const td = isoToday();
+  const todayFirst = e => (e.practice_date === td && !e.is_resolved) ? 0 : 1;
+  errs.sort((a, b) => todayFirst(a) - todayFirst(b));
   stats(); show(tab);
 }
 function stats() {

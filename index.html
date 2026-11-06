@@ -361,6 +361,8 @@ async function loadToday() {
     }
     try {
       const { count: openErr } = await db.from('error_logs').select('id', { count: 'exact', head: true }).eq('student_id', student.id).eq('is_resolved', false);
+      const { count: todayErr } = await db.from('error_logs').select('id', { count: 'exact', head: true }).eq('student_id', student.id).eq('is_resolved', false).eq('practice_date', isoToday());
+      if (todayErr) html += `<a class="task" href="errors.html"><div class="ic" style="background:var(--pink)">⚠️</div><div class="tt"><b>Hôm nay cần sửa</b><span>${todayErr} lỗi làm hôm nay, sửa ngay trong ngày để nhớ lâu</span></div><span class="pill todo">Sửa ngay</span></a>`;
       if (openErr) html += `<a class="task" href="errors.html"><div class="ic" style="background:var(--peach)">🧩</div><div class="tt"><b>Ôn lỗi sai</b><span>${openErr} câu cần ôn, mỗi lượt khoảng 5 phút</span></div><span class="pill todo">Ôn ngay</span></a>`;
     } catch (e) {}
     if (!todays.length && !quizToday) html += '<div class="empty">Hôm nay chưa có bài Daily Practice. Hãy học từ vựng nhé!</div>';
