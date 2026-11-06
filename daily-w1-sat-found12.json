@@ -34,6 +34,16 @@
   },
   "steps": [
     {
+      "id": "s0",
+      "title": "3A · Say the 15 words",
+      "minutes": 8,
+      "kind": "voice",
+      "lines": [
+        "university · faculty · major · freshman · lecturer · classmate · hometown · province · nationality · surname · first name · hobby · ambition · introduce · describe"
+      ],
+      "note": "Read each word aloud 3 times. Bold = the stressed syllable."
+    },
+    {
       "id": "s1",
       "title": "3B · Which word is it?",
       "minutes": 5,
@@ -325,6 +335,89 @@
         "My mother and my brother love the park."
       ],
       "note": "Read the 15 words in 3A once, then read these 4 sentences 3 times and record them."
+    },
+    {
+      "id": "ch_a",
+      "title": "★ Challenge A · What's the question?",
+      "minutes": 6,
+      "instructions": "Optional. Write the question for each answer.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "ch_a_1",
+          "label": "1. “It's Nguyễn.” → ______",
+          "fields": [
+            {
+              "answer": "What's your surname?",
+              "accept": [
+                "What is your surname"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch_a_2",
+          "label": "2. “I'm Vietnamese.” → ______",
+          "fields": [
+            {
+              "answer": "What's your nationality?",
+              "accept": [
+                "What is your nationality"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch_a_3",
+          "label": "3. “It's Nursing.” → ______",
+          "fields": [
+            {
+              "answer": "What's your major?",
+              "accept": [
+                "What is your major"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch_a_4",
+          "label": "4. “It's Thanh Hóa.” → ______",
+          "fields": [
+            {
+              "answer": "Where's your hometown?",
+              "accept": [
+                "Where is your hometown",
+                "Where are you from"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch_a_5",
+          "label": "5. “To become a teacher.” → ______",
+          "fields": [
+            {
+              "answer": "What's your ambition?",
+              "accept": [
+                "What is your ambition"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ch_b",
+      "title": "★ Challenge B · Answer about you",
+      "minutes": 6,
+      "instructions": "Optional. Answer the 5 questions about you. Say each answer aloud 2 times.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "ch_b_q",
+          "q": "Answer: 1. What's your surname? 2. What's your nationality? 3. What's your major? 4. Where's your hometown? 5. What's your ambition?"
+        }
+      ]
     }
   ]
 }

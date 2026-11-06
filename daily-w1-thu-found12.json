@@ -35,6 +35,31 @@
         "sheep / ship · heat / hit · deep / dip · reach / rich · feel / fill"
       ],
       "note": "Smile for long /iː/, relax for short /ɪ/."
+    },
+    {
+      "id": "s3",
+      "title": "1C · Get ready to introduce yourself",
+      "minutes": 7,
+      "instructions": "Complete the sentences, then say them aloud 2 times.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s3_1",
+          "q": "1. Hello, my name is ________. You spell it ________."
+        },
+        {
+          "id": "s3_2",
+          "q": "2. I'm from ________."
+        },
+        {
+          "id": "s3_3",
+          "q": "3. I want to learn English because ________."
+        },
+        {
+          "id": "s3_4",
+          "q": "4. One English sound that is difficult for me is ________."
+        }
+      ]
     }
   ]
 }

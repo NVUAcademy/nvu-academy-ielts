@@ -30,6 +30,16 @@
   },
   "steps": [
     {
+      "id": "s0",
+      "title": "2A · Say the 12 words",
+      "minutes": 8,
+      "kind": "voice",
+      "lines": [
+        "pronounce · vowel · consonant · syllable · silent · stress · rhyme · symbol · accent · fluent · mistake · improve"
+      ],
+      "note": "Read each word aloud 3 times. Then cover the Vietnamese and say the meaning."
+    },
+    {
       "id": "s1",
       "title": "2B · Write the English word",
       "minutes": 5,
@@ -168,6 +178,111 @@
           "fields": [
             {
               "answer": "pronounce"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2d",
+      "title": "2D · Letters and sounds",
+      "minutes": 6,
+      "instructions": "Say each word slowly. Count the letters and the sounds. Write letters / sounds.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2d_1",
+          "label": "tree (letters / sounds)",
+          "fields": [
+            {
+              "answer": "4"
+            },
+            {
+              "answer": "3"
+            }
+          ]
+        },
+        {
+          "id": "s2d_2",
+          "label": "cheese",
+          "fields": [
+            {
+              "answer": "6"
+            },
+            {
+              "answer": "3"
+            }
+          ]
+        },
+        {
+          "id": "s2d_3",
+          "label": "knock",
+          "fields": [
+            {
+              "answer": "5"
+            },
+            {
+              "answer": "3"
+            }
+          ]
+        },
+        {
+          "id": "s2d_4",
+          "label": "duck",
+          "fields": [
+            {
+              "answer": "4"
+            },
+            {
+              "answer": "3"
+            }
+          ]
+        },
+        {
+          "id": "s2d_5",
+          "label": "queen",
+          "fields": [
+            {
+              "answer": "5"
+            },
+            {
+              "answer": "4"
+            }
+          ]
+        },
+        {
+          "id": "s2d_6",
+          "label": "photo",
+          "fields": [
+            {
+              "answer": "5"
+            },
+            {
+              "answer": "4"
+            }
+          ]
+        },
+        {
+          "id": "s2d_7",
+          "label": "wrong",
+          "fields": [
+            {
+              "answer": "5"
+            },
+            {
+              "answer": "3"
+            }
+          ]
+        },
+        {
+          "id": "s2d_8",
+          "label": "taxi",
+          "fields": [
+            {
+              "answer": "4"
+            },
+            {
+              "answer": "5"
             }
           ]
         }
@@ -521,6 +636,129 @@
         "I want to improve my accent."
       ],
       "note": "Read the 12 words once, then read these 4 sentences 3 times and record them. Stress: pronounce, improve."
+    },
+    {
+      "id": "ch_a",
+      "title": "★ Challenge A · Word forms",
+      "minutes": 8,
+      "instructions": "Optional. Write the correct form of the word in brackets.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "ch_a_1",
+          "label": "1. Your ______ is getting better. (pronounce)",
+          "fields": [
+            {
+              "answer": "pronunciation"
+            }
+          ]
+        },
+        {
+          "id": "ch_a_2",
+          "label": "2. She can speak French ______. (fluent)",
+          "fields": [
+            {
+              "answer": "fluently"
+            }
+          ]
+        },
+        {
+          "id": "ch_a_3",
+          "label": "3. I can see a big ______ in your speaking this month. (improve)",
+          "fields": [
+            {
+              "answer": "improvement"
+            }
+          ]
+        },
+        {
+          "id": "ch_a_4",
+          "label": "4. We need ______ in the exam room. (silent)",
+          "fields": [
+            {
+              "answer": "silence"
+            }
+          ]
+        },
+        {
+          "id": "ch_a_5",
+          "label": "5. In speaking, ______ is more important than perfect grammar. (fluent)",
+          "fields": [
+            {
+              "answer": "fluency"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ch_b",
+      "title": "★ Challenge B · Find and fix",
+      "minutes": 7,
+      "instructions": "Optional. Each sentence has one mistake. Write the correct sentence.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "ch_b_1",
+          "label": "1. I want to improvement my English. → ______",
+          "fields": [
+            {
+              "answer": "I want to improve my English.",
+              "accept": [
+                "I want to improve my English"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch_b_2",
+          "label": "2. How do you pronunciation “thumb”? → ______",
+          "fields": [
+            {
+              "answer": "How do you pronounce “thumb”?",
+              "accept": [
+                "How do you pronounce thumb"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch_b_3",
+          "label": "3. She speaks English very fluent. → ______",
+          "fields": [
+            {
+              "answer": "She speaks English very fluently.",
+              "accept": [
+                "She speaks English very fluently"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch_b_4",
+          "label": "4. “Banana” has three syllable. → ______",
+          "fields": [
+            {
+              "answer": "“Banana” has three syllables.",
+              "accept": [
+                "Banana has three syllables"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch_b_5",
+          "label": "5. The “k” in “knee” are silent. → ______",
+          "fields": [
+            {
+              "answer": "The “k” in “knee” is silent.",
+              "accept": [
+                "The k in knee is silent"
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -34,6 +34,16 @@
   },
   "steps": [
     {
+      "id": "s0",
+      "title": "4A · Warm-up pairs",
+      "minutes": 3,
+      "kind": "voice",
+      "lines": [
+        "beat / bit · heat / hit · deep / dip · reach / rich · wheel / will · green / grin"
+      ],
+      "note": "Say each pair 3 times. Smile for the long sound, relax for the short sound."
+    },
+    {
       "id": "s1",
       "title": "4B · Long or short?",
       "minutes": 4,
@@ -701,6 +711,64 @@
         {
           "id": "s11_q",
           "q": "Write 6–8 sentences about yourself."
+        }
+      ]
+    },
+    {
+      "id": "ch_a",
+      "title": "★ Challenge A · Spelling and sounds",
+      "minutes": 6,
+      "instructions": "Optional. Sort by spelling. All these words have long /iː/.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "ch_a_q",
+          "q": "ee: free, queen, street · ea: leaf, meal, cream, heat · other spellings: field, key, piece, these, people"
+        }
+      ]
+    },
+    {
+      "id": "ch_b",
+      "title": "★ Challenge B · Odd one out",
+      "minutes": 4,
+      "instructions": "Optional. Type the word with a different vowel sound.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "ch_b_1",
+          "label": "1. green · bean · fit · tea → ______",
+          "fields": [
+            {
+              "answer": "fit"
+            }
+          ]
+        },
+        {
+          "id": "ch_b_2",
+          "label": "2. list · kick · meat · fish → ______",
+          "fields": [
+            {
+              "answer": "meat"
+            }
+          ]
+        },
+        {
+          "id": "ch_b_3",
+          "label": "3. busy · city · film · queen → ______",
+          "fields": [
+            {
+              "answer": "queen"
+            }
+          ]
+        },
+        {
+          "id": "ch_b_4",
+          "label": "4. key · field · sit · these → ______",
+          "fields": [
+            {
+              "answer": "sit"
+            }
+          ]
         }
       ]
     }

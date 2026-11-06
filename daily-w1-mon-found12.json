@@ -144,6 +144,16 @@
           "q": "This is ______. He's / She's from ______. His / Her major is ______. He's / She's (not) a freshman. His / Her hobby is ______. His / Her ambition is to become a ______."
         }
       ]
+    },
+    {
+      "id": "ch_a",
+      "title": "★ Challenge · 45-second introduction, take 2",
+      "minutes": 15,
+      "kind": "voice",
+      "lines": [
+        "Say your introduction without reading (use the Session 2 handout, Part 6). Record two takes and send the better one in the group."
+      ],
+      "note": "Optional. Record two takes and send the better one."
     }
   ]
 }
