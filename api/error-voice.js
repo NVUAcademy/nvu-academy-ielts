@@ -8,7 +8,7 @@
 const DAILY_LIMIT = parseInt(process.env.VOICE_DAILY_LIMIT || '30', 10);
 const MAX_B64 = 1200 * 1024; /* khoảng 18 giây WAV 16 kHz mono */
 const MIN_B64 = 2000;
-const PASS = 75; /* điểm từng từ tối thiểu để tính là đọc đúng */
+const PASS = 60; /* điểm từng từ tối thiểu để tính là đọc đúng */
 
 const SB_URL = () => (process.env.SUPABASE_URL || '').replace(/\/$/, '');
 const SB_HEAD = () => {
@@ -89,7 +89,9 @@ module.exports = async function handler(req, res) {
     const a = await azureAssess(wav, target);
     const weak = a.words.filter(w => w.score < PASS || (w.error && w.error !== 'None'));
     const audioOk = a.status === 'Success' && a.words.length > 0;
-    const correct = audioOk && weak.length === 0;
+    /* Câu từ 3 từ trở lên được phép 1 từ chưa tốt; câu ngắn phải đọc đúng hết */
+    const allowedWeak = a.words.length >= 3 ? 1 : 0;
+    const correct = audioOk && weak.length <= allowedWeak;
     const verdict = correct ? 'ok' : 'retry';
     const problems = [];
     if (!audioOk) problems.push('Không nghe rõ giọng đọc. Em ghi lại ở nơi yên tĩnh và đưa micro gần miệng hơn.');
