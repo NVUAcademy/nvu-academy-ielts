@@ -57,9 +57,18 @@
       opts = o;
       if (inited) return;
       inited = true;
+      /* Chỉ tính khi trang bị ẩn từ 30 giây trở lên (tắt màn hình tạm thời không bị tính).
+         Đóng trình duyệt (pagehide) tính ngay. */
+      var hideTimer = null;
       document.addEventListener('visibilitychange', function () {
-        if (document.visibilityState === 'hidden') onHidden(); else render();
+        clearTimeout(hideTimer);
+        if (document.visibilityState === 'hidden') {
+          hideTimer = setTimeout(function () { if (document.visibilityState === 'hidden') onHidden(); }, 30000);
+        } else {
+          render();
+        }
       });
+      window.addEventListener('pagehide', function () { clearTimeout(hideTimer); onHidden(); });
       document.addEventListener('paste', function (e) {
         if (opts && opts.isActive() && e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName)) e.preventDefault();
       });
