@@ -767,7 +767,7 @@
     <div class="page-head"><h1>Thời gian & đăng nhập</h1><p class="sub">30 ngày gần nhất. Thời gian làm Daily Practice và bài kiểm tra tuần, số lượt đăng nhập.</p></div>
     <div class="toolbar"><select class="filter" id="class-filter-time" onchange="loadTime()"><option value="">Tất cả lớp</option><option value="FOUNDATION11">Foundation 11</option><option value="FOUNDATION12">Foundation 12</option><option value="IELTS13">IELTS 13</option><option value="IELTS14">IELTS 14</option></select></div>
     <div id="time-totals" class="sub" style="margin:8px 0"></div>
-    <div class="table-wrap"><table><thead><tr><th>Học sinh</th><th>Lớp</th><th>Lượt đăng nhập</th><th>Làm bài (phút)</th><th>Số bài làm</th></tr></thead><tbody id="time-body"><tr><td colspan="5">Đang tải…</td></tr></tbody></table></div>
+    <div class="table-wrap"><table><thead><tr><th>Học sinh</th><th>Lớp</th><th>Lượt đăng nhập</th><th>Làm bài (phút)</th><th>Số bài làm</th><th>Challenge (%)</th></tr></thead><tbody id="time-body"><tr><td colspan="6">Đang tải…</td></tr></tbody></table></div>
   </div>
   <div id="tab-ranking" class="tab-panel">
     <div class="page-header">
@@ -1258,20 +1258,21 @@
     const since = new Date(Date.now() - 30 * 86400000).toISOString();
     const [st, acts, scores] = await Promise.all([
       db.from('students').select('id, full_name, class_code'),
-      db.from('activity_log').select('student_id, kind, seconds, created_at').gte('created_at', since),
+      db.from('activity_log').select('student_id, kind, seconds, created_at, label').gte('created_at', since),
       db.from('daily_scores').select('student_id, time_taken_seconds, practice_date').gte('practice_date', since.slice(0, 10))
     ]);
     const body = document.getElementById('time-body');
-    if (st.error || acts.error || scores.error) { body.innerHTML = '<tr><td colspan="5">Không tải được dữ liệu: ' + esc((st.error || acts.error || scores.error).message) + '</td></tr>'; return; }
+    if (st.error || acts.error || scores.error) { body.innerHTML = '<tr><td colspan="6">Không tải được dữ liệu: ' + esc((st.error || acts.error || scores.error).message) + '</td></tr>'; return; }
     const per = {};
     (st.data || []).forEach(s => { per[s.id] = { name: s.full_name, cls: s.class_code, logins: 0, sec: 0, n: 0 }; });
-    (acts.data || []).forEach(a => { const r = per[a.student_id]; if (!r) return; if (a.kind === 'login') r.logins++; else r.sec += a.seconds || 0; });
+    (acts.data || []).forEach(a => { const r = per[a.student_id]; if (!r) return; if (a.kind === 'login') r.logins++; else if (String(a.label || '').startsWith('challenge|')) { const p = a.label.split('|'); r.chD = (r.chD || 0) + (+p[2] || 0); r.chT = (r.chT || 0) + (+p[3] || 0); } else r.sec += a.seconds || 0; });
     (scores.data || []).forEach(x => { const r = per[x.student_id]; if (!r) return; r.sec += x.time_taken_seconds || 0; r.n++; });
-    const rows = Object.values(per).filter(r => (r.logins || r.sec || r.n) && (!cls || r.cls === cls)).sort((a, b) => b.sec - a.sec);
+    const rows = Object.values(per).filter(r => (r.logins || r.sec || r.n || r.chT) && (!cls || r.cls === cls)).sort((a, b) => b.sec - a.sec);
+    const pct = (d, t) => t ? Math.round(100 * (d || 0) / t) + '%' : '—';
     const byClass = {};
-    rows.forEach(r => { const c = byClass[r.cls] || (byClass[r.cls] = { logins: 0, sec: 0, n: 0 }); c.logins += r.logins; c.sec += r.sec; c.n += r.n; });
-    document.getElementById('time-totals').innerHTML = Object.entries(byClass).map(([k, c]) => `<b>${esc(k)}</b>: ${c.logins} lượt đăng nhập · ${Math.round(c.sec / 60)} phút · ${c.n} bài`).join(' &nbsp;|&nbsp; ') || 'Chưa có dữ liệu.';
-    body.innerHTML = rows.length ? rows.map(r => `<tr><td>${esc(r.name)}</td><td>${esc(r.cls)}</td><td>${r.logins}</td><td>${Math.round(r.sec / 60)}</td><td>${r.n}</td></tr>`).join('') : '<tr><td colspan="5">Chưa có dữ liệu.</td></tr>';
+    rows.forEach(r => { const c = byClass[r.cls] || (byClass[r.cls] = { logins: 0, sec: 0, n: 0, chD: 0, chT: 0 }); c.logins += r.logins; c.sec += r.sec; c.n += r.n; c.chD += r.chD || 0; c.chT += r.chT || 0; });
+    document.getElementById('time-totals').innerHTML = Object.entries(byClass).map(([k, c]) => `<b>${esc(k)}</b>: ${c.logins} lượt đăng nhập · ${Math.round(c.sec / 60)} phút · ${c.n} bài · Challenge ${pct(c.chD, c.chT)}`).join(' &nbsp;|&nbsp; ') || 'Chưa có dữ liệu.';
+    body.innerHTML = rows.length ? rows.map(r => `<tr><td>${esc(r.name)}</td><td>${esc(r.cls)}</td><td>${r.logins}</td><td>${Math.round(r.sec / 60)}</td><td>${r.n}</td><td>${pct(r.chD, r.chT)}</td></tr>`).join('') : '<tr><td colspan="6">Chưa có dữ liệu.</td></tr>';
   }
   async function loadRanking() {
     const classCode = document.getElementById('class-filter-ranking').value;

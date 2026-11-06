@@ -266,6 +266,19 @@ function renderIntro() {
     <div style="text-align:center"><a href="daily-practice.html" style="color:var(--accent);font-size:14px">← Danh sách bài</a></div>`;
 }
 
+/* Ghi tỉ lệ làm phần Challenge (tùy chọn) để giáo viên theo dõi */
+function logChallenge(){
+  if (!student || isTeacher) return;
+  const chs = (P.steps || []).filter(s => /^ch_/.test(s.id) || /Challenge/.test(s.title || ''));
+  let total = 0, done = 0;
+  chs.forEach(st => {
+    if (st.kind === 'fill') st.items.forEach(it => { total++; if (it.fields.every((f, i) => (answers[it.id + '_' + i] || '').trim())) done++; });
+    else if (st.kind === 'open') (st.open || []).forEach(o => { total++; if ((answers[o.id] || '').trim()) done++; });
+    else if (st.kind === 'voice') { total++; if (recBlob) done++; }
+  });
+  if (!total) return;
+  try { fetch('/api/vq-progress', { method: 'POST', keepalive: true, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ kind: 'activity', activity_kind: 'practice', student_id: student.id, seconds: 0, label: 'challenge|' + P.id + '|' + done + '|' + total }) }).catch(() => {}); } catch (e) {}
+}
 /* Làm lại bài đã nộp: điền sẵn đáp án cũ, nộp lại sẽ cập nhật điểm */
 function redoPractice() {
   if (!existing || !student) return;
@@ -446,6 +459,7 @@ async function submitPractice() {
   const score = res.filter(r => r.ok).length;
   renderResult(res, score, 'saving');
   renderResult(res, score, await save(res, score));
+  logChallenge();
   runAi();
   runWritingAi();
 }
