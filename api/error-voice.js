@@ -38,7 +38,10 @@ async function azureAssess(wavBuf, referenceText) {
     word: w.Word, score: Math.round(pa(w).AccuracyScore || 0), error: pa(w).ErrorType || 'None',
     weak: (w.Phonemes || []).filter(p => (pa(p).AccuracyScore || 0) < 60).map(p => p.Phoneme)
   }));
-  return { heard: words.map(w => w.word).join(' '), words, pron: Math.round(pa(n).PronScore || 0), status: 'Success' };
+  /* Điểm tổng: lấy PronScore nếu có; nếu Azure không trả về thì lấy trung bình điểm chính xác của các từ */
+  const wordAvg = words.length ? Math.round(words.reduce((s, w) => s + w.score, 0) / words.length) : 0;
+  const pron = Math.round(pa(n).PronScore || 0) || wordAvg;
+  return { heard: words.map(w => w.word).join(' '), words, pron, status: 'Success' };
 }
 
 module.exports = async function handler(req, res) {
