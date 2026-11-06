@@ -477,7 +477,8 @@ async function submitPractice() {
   const blanks = items.filter(({ it, kind }) => kind === 'mcq' ? !answers[it.id] : it.fields.some((f, i) => !(answers[`${it.id}_${i}`] || '').trim())).length;
   if (blanks && !confirm(`Còn ${blanks} câu chưa điền. Vẫn nộp bài?`)) return;
   if (recorder && recorder.state === 'recording') { alert('Hãy bấm Dừng ghi âm trước khi nộp bài.'); return; }
-  if (!recBlob && !confirm('Bạn chưa ghi âm voice note (Step 7). Vẫn nộp bài?')) return;
+  const hasVoice = (P.steps || []).some(s => s.kind === 'voice');
+  if (hasVoice && !recBlob && !confirm('Bạn chưa ghi âm voice note. Vẫn nộp bài?')) return;
   clearInterval(totalTimer); inProgress = false;
   const res = items.map(x => ({ ...x, ok: itemOk(x.it, x.kind) }));
   const score = res.filter(r => r.ok).length;
