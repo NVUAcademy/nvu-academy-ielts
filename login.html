@@ -654,6 +654,8 @@
       }
       const s = data[0];
       localStorage.setItem('nvu_student', JSON.stringify({ id: s.id, name: s.full_name, classCode: s.class_code, avatar: s.avatar_emoji || '🎓' }));
+      /* Ghi lượt đăng nhập cho trang thống kê của giáo viên (lỗi mạng thì bỏ qua) */
+      fetch('/api/vq-progress', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ kind: 'activity', activity_kind: 'login', student_id: s.id }) }).catch(() => {});
       succEl.textContent = 'Chào mừng ' + s.full_name + '! Đang vào lớp học...'; succEl.style.display = 'block';
       setTimeout(() => { window.location.href = 'index.html'; }, 1000);
     }
