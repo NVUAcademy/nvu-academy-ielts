@@ -266,6 +266,20 @@ function renderIntro() {
     <div style="text-align:center"><a href="daily-practice.html" style="color:var(--accent);font-size:14px">← Danh sách bài</a></div>`;
 }
 
+/* Tài khoản bắt buộc làm phần Challenge trước khi nộp bài */
+const CHALLENGE_REQUIRED_NAME = 'phan dang cat';
+function noDiacritics(s) { return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase().replace(/\s+/g, ' ').trim(); }
+function challengeMissing() {
+  if (!student || isTeacher || noDiacritics(student.name) !== CHALLENGE_REQUIRED_NAME) return 0;
+  const chs = (P.steps || []).filter(s => /^ch_/.test(s.id) || /Challenge/.test(s.title || ''));
+  let missing = 0;
+  chs.forEach(st => {
+    if (st.kind === 'fill') st.items.forEach(it => { if (!it.fields.every((f, i) => (answers[it.id + '_' + i] || '').trim())) missing++; });
+    else if (st.kind === 'open') (st.open || []).forEach(o => { if (!(answers[o.id] || '').trim()) missing++; });
+    else if (st.kind === 'voice') { if (!recBlob) missing++; }
+  });
+  return missing;
+}
 /* Ghi tỉ lệ làm phần Challenge (tùy chọn) để giáo viên theo dõi */
 function logChallenge(){
   if (!student || isTeacher) return;
@@ -449,6 +463,8 @@ async function toggleRec() {
 /* ---------- submit ---------- */
 async function submitPractice() {
   if (ViolationGuard.isLocked()) { alert('Bài đã bị khóa vì rời bài làm quá 3 lần. Hãy báo giáo viên.'); return; }
+  const cm = challengeMissing();
+  if (cm) { alert('Em cần làm hết phần ★ Challenge trước khi nộp bài (còn ' + cm + ' phần).'); return; }
   const items = closedItems();
   const blanks = items.filter(({ it, kind }) => kind === 'mcq' ? !answers[it.id] : it.fields.some((f, i) => !(answers[`${it.id}_${i}`] || '').trim())).length;
   if (blanks && !confirm(`Còn ${blanks} câu chưa điền. Vẫn nộp bài?`)) return;
