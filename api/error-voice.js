@@ -5,7 +5,7 @@
    Biến môi trường: AZURE_SPEECH_KEY, AZURE_SPEECH_REGION, SUPABASE_URL, SUPABASE_SERVICE_KEY
    Tuỳ chọn: VOICE_DAILY_LIMIT (mặc định 30 lượt/ngày) */
 
-const DAILY_LIMIT = parseInt(process.env.VOICE_DAILY_LIMIT || '30', 10);
+const DAILY_LIMIT = parseInt(process.env.VOICE_DAILY_LIMIT || '80', 10);
 const MAX_B64 = 1200 * 1024; /* khoảng 18 giây WAV 16 kHz mono */
 const MIN_B64 = 2000;
 const PASS = 60; /* điểm từng từ tối thiểu để tính là đọc đúng */
@@ -54,7 +54,8 @@ module.exports = async function handler(req, res) {
     const studentId = String(b.student_id || '');
     const errorId = String(b.error_id || '');
     if (!UUID.test(studentId)) return bad(res, 400, 'student_id không hợp lệ');
-    if (!UUID.test(errorId)) return bad(res, 400, 'error_id không hợp lệ');
+    const vocabMode = !errorId && typeof b.target === 'string' && b.target.trim().length > 0;
+    if (!vocabMode && !UUID.test(errorId)) return bad(res, 400, 'error_id không hợp lệ');
 
     const audio = String(b.audio || '');
     if (!/^[A-Za-z0-9+/=]+$/.test(audio)) return bad(res, 400, 'Âm thanh không hợp lệ');
@@ -66,10 +67,15 @@ module.exports = async function handler(req, res) {
     if (!st.length) return bad(res, 403, 'Không tìm thấy học sinh');
 
     /* Lấy đáp án mẫu từ chính lỗi này và chỉ cho đúng học sinh sở hữu lỗi */
-    const owned = await (await sb('/rest/v1/error_logs?select=id,correct_answer&id=eq.' + errorId + '&student_id=eq.' + studentId)).json();
-    if (!Array.isArray(owned) || !owned.length) return bad(res, 403, 'Lỗi này không thuộc học sinh này');
-    const target = String(owned[0].correct_answer || '').trim().slice(0, 200);
-    if (!target) return bad(res, 400, 'Lỗi này chưa có đáp án mẫu để luyện');
+    let target;
+    if (vocabMode) {
+      target = String(b.target).trim().slice(0, 60);
+    } else {
+      const owned = await (await sb('/rest/v1/error_logs?select=id,correct_answer&id=eq.' + errorId + '&student_id=eq.' + studentId)).json();
+      if (!Array.isArray(owned) || !owned.length) return bad(res, 403, 'Lỗi này không thuộc học sinh này');
+      target = String(owned[0].correct_answer || '').trim().slice(0, 200);
+      if (!target) return bad(res, 400, 'Lỗi này chưa có đáp án mẫu để luyện');
+    }
 
     /* Giới hạn số lượt mỗi ngày (giờ Việt Nam) */
     const vn = new Date(Date.now() + 7 * 3600e3);
@@ -91,7 +97,8 @@ module.exports = async function handler(req, res) {
     const audioOk = a.status === 'Success' && a.words.length > 0;
     /* Câu từ 3 từ trở lên được phép 1 từ chưa tốt; câu ngắn phải đọc đúng hết */
     const allowedWeak = a.words.length >= 3 ? 1 : 0;
-    const correct = audioOk && weak.length <= allowedWeak;
+    /* Từ mới (vocabMode): đạt khi điểm phát âm từ 70; lỗi sai thì dùng quy tắc cũ */
+    const correct = vocabMode ? (audioOk && (a.pron || 0) >= 70) : (audioOk && weak.length <= allowedWeak);
     const verdict = correct ? 'ok' : 'retry';
     const problems = [];
     if (!audioOk) problems.push('Không nghe rõ giọng đọc. Em ghi lại ở nơi yên tĩnh và đưa micro gần miệng hơn.');
@@ -107,7 +114,7 @@ module.exports = async function handler(req, res) {
 
     const ins = await sb('/rest/v1/error_voice_attempts', {
       method: 'POST', headers: { 'content-type': 'application/json', Prefer: 'return=minimal' },
-      body: JSON.stringify({ student_id: studentId, error_id: errorId, target, path, verdict, result: clean })
+      body: JSON.stringify({ student_id: studentId, error_id: vocabMode ? null : errorId, target, path, verdict, result: clean })
     });
     if (!ins.ok) return bad(res, 500, 'Không ghi được lượt luyện: ' + (await ins.text()).slice(0, 160));
 

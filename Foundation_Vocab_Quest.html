@@ -902,6 +902,50 @@ function wordsView(){
 
 /* ---------- 1. learn ---------- */
 function learnStart(){ const ws=dayWords(); S.play={kind:'learn', i:0, flip:false, flipped:new Set()}; S.view='learn'; }
+/* Đọc to từ mới: ghi âm, Azure chấm. Đạt khi phát âm từ 70 điểm trở lên mới được sang từ tiếp theo */
+async function toWav16kVQ(blob){
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const buf = await ctx.decodeAudioData(await blob.arrayBuffer()); ctx.close();
+  const off = new OfflineAudioContext(1, Math.ceil(buf.duration * 16000), 16000);
+  const src = off.createBufferSource(); src.buffer = buf; src.connect(off.destination); src.start();
+  const pcm = (await off.startRendering()).getChannelData(0);
+  let peak = 0; for (const v of pcm) peak = Math.max(peak, Math.abs(v));
+  const data = new DataView(new ArrayBuffer(44 + pcm.length * 2)), put = (o, s) => { for (let i = 0; i < s.length; i++) data.setUint8(o + i, s.charCodeAt(i)); };
+  put(0, 'RIFF'); data.setUint32(4, 36 + pcm.length * 2, true); put(8, 'WAVE'); put(12, 'fmt ');
+  data.setUint32(16, 16, true); data.setUint16(20, 1, true); data.setUint16(22, 1, true); data.setUint32(24, 16000, true);
+  data.setUint32(28, 32000, true); data.setUint16(32, 2, true); data.setUint16(34, 16, true); put(36, 'data'); data.setUint32(40, pcm.length * 2, true);
+  for (let i = 0; i < pcm.length; i++) { const s = Math.max(-1, Math.min(1, pcm[i])); data.setInt16(44 + i * 2, s < 0 ? s * 0x8000 : s * 0x7fff, true); }
+  return { wav: new Blob([data.buffer], { type: 'audio/wav' }), seconds: pcm.length / 16000, peak };
+}
+async function learnRecord(){
+  const p = S.play, v = dayWords()[p.i];
+  if (!v) return;
+  if (!LOGIN) { p.msgI = p.i; p.msg = 'Cần đăng nhập tài khoản học sinh để ghi âm.'; render(); return; }
+  if (p.recRef) { p.recRef.stop(); return; }
+  let stream;
+  try { stream = await navigator.mediaDevices.getUserMedia({ audio: true }); }
+  catch (err) { p.msgI = p.i; p.msg = 'Không dùng được micro: ' + err.message; render(); return; }
+  const chunks = [], rec = new MediaRecorder(stream, MediaRecorder.isTypeSupported('audio/webm') ? { mimeType: 'audio/webm' } : undefined);
+  let tmr = null;
+  rec.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
+  rec.onstop = async () => {
+    clearTimeout(tmr); stream.getTracks().forEach(t => t.stop()); p.recRef = null;
+    p.msgI = p.i; p.msg = 'Đang chấm…'; render();
+    try {
+      const { wav, seconds, peak } = await toWav16kVQ(new Blob(chunks, { type: rec.mimeType || 'audio/webm' }));
+      if (seconds < 0.4 || peak < 0.02) throw new Error('Đọc to hơn chút nhé.');
+      const bin = new Uint8Array(await wav.arrayBuffer()); let s = '';
+      for (let i = 0; i < bin.length; i += 0x8000) s += String.fromCharCode.apply(null, bin.subarray(i, i + 0x8000));
+      const r = await fetch('/api/error-voice', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ student_id: LOGIN.id, target: v.word, audio: btoa(s) }) });
+      const j = await r.json(); if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
+      if (j.verdict === 'ok') { p.read = p.read || new Set(); p.read.add(p.i); p.msg = '✓ Đọc đúng! (' + Math.round(j.score || 0) + ' điểm)'; }
+      else p.msg = 'Chưa đạt (' + Math.round(j.score || 0) + '/70). ' + ((j.problems && j.problems[0]) || 'Đọc chậm và rõ từng âm, rồi thử lại.');
+    } catch (err) { p.msg = err.message; }
+    render();
+  };
+  p.recRef = rec; rec.start(); p.msgI = p.i; p.msg = 'Đang ghi… đọc từ này, tự dừng sau 6 giây.'; render();
+  tmr = setTimeout(() => { if (rec.state !== 'inactive') rec.stop(); }, 6000);
+}
 function learnView(){
   const p=S.play, ws=dayWords(), v=ws[p.i];
   const last=p.i===ws.length-1;
@@ -911,7 +955,8 @@ function learnView(){
   <div class="flash ${p.flip?'flipped':''}" data-a="flip" role="button" tabindex="0" aria-label="Lật thẻ"><div class="flash-in">
     <div class="face"><span class="w">${esc(v.word)}</span>${posChip(v.pos)}<div class="say-row">${sayBtn(v.word,'🔊 Nghe','Nghe từ')}<button class="say-btn" data-a="say2" data-t="${esc(v.word)}" title="Nghe hai lần và đọc theo">🔁 Đọc theo</button></div></div>
     <div class="face back">${posChip(v.pos)}<b style="font-size:20px">${esc(v.meaning)}</b>${v.example?`<i>${esc(v.example)}</i>`:''}${v.colloc?`<span class="small">🔗 <b>${esc(colPlain(v))}</b></span>`:''}<div class="say-row">${sayBtn(v.word,'🔊 Từ','Nghe từ')}${v.example?sayBtn(v.example,'🔊 Câu','Nghe câu'):''}</div></div></div></div>
-  <div class="row" style="justify-content:center"><button class="btn" data-a="l-prev" ${p.i===0?'disabled':''}>← Trước</button><button class="btn primary" data-a="l-next" ${p.flipped.has(p.i)?'':'disabled'}>${last?'Hoàn thành ✓':'Từ tiếp →'}</button></div>
+  <div class="row" style="justify-content:center;flex-direction:column;align-items:center"><button class="btn ${p.read&&p.read.has(p.i)?'':'primary'}" data-a="l-rec" ${p.read&&p.read.has(p.i)?'disabled':''}>${p.read&&p.read.has(p.i)?'✓ Đã đọc đúng':(p.recRef?'⏹ Dừng':'🎙 Đọc to từ này (cần đạt 70 điểm)')}</button><p class="small" style="text-align:center">${p.msgI===p.i?esc(p.msg||''):''}</p></div>
+  <div class="row" style="justify-content:center"><button class="btn" data-a="l-prev" ${p.i===0?'disabled':''}>← Trước</button><button class="btn primary" data-a="l-next" ${p.flipped.has(p.i)&&p.read&&p.read.has(p.i)?'':'disabled'}>${last?'Hoàn thành ✓':'Từ tiếp →'}</button></div>
   ${p.flipped.has(p.i)?'':'<p class="small muted" style="text-align:center">Lật thẻ để xem nghĩa trước khi sang từ tiếp theo.</p>'}`,'mint')}`;
 }
 
@@ -1168,6 +1213,7 @@ document.addEventListener('click', async ev=>{
     case 'copy': { const ok=await copyText(zaloText()); toast(ok?'Đã sao chép! Dán vào Zalo cùng ảnh chụp màn hình.':'Không sao chép được. Hãy chụp màn hình phiếu.'); return; }
     case 'flip': S.play.flip=!S.play.flip; if(S.play.flip) S.play.flipped.add(S.play.i); break;
     case 'l-prev': S.play.i=Math.max(0,S.play.i-1); S.play.flip=false; break;
+    case 'l-rec': learnRecord(); break;
     case 'l-next': { const p=S.play, ws=dayWords(); if(p.i>=ws.length-1){ recordStage('learn',{score:ws.length,max:0}); nextStageAfter('learn'); return; } p.i++; p.flip=false; break; }
     case 'q-ans': { const q=S.play, c=q.qs[q.i]; if(q.ans) return; q.ans=v; if(v===c.id) q.score++; else { q.wrong.push(c.id); addMiss(c.id); } break; }
     case 'q-next': { const q=S.play; q.i++; q.ans=null; if(q.i>=q.qs.length){ const nd=needFor(q.kind); if(q.score>=nd.need) recordStage(q.kind,{score:q.score,max:q.qs.length}); } break; }
