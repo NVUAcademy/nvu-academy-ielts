@@ -33,7 +33,8 @@ async function azureAssess(wavBuf, referenceText) {
   const j = await r.json();
   if (j.RecognitionStatus && j.RecognitionStatus !== 'Success') return { heard: '', words: [], pron: 0, status: j.RecognitionStatus };
   const n = (j.NBest || [])[0] || {};
-  const pa = o => (o && o.PronunciationAssessment) || {};
+  /* Azure có thể trả điểm trong mục con PronunciationAssessment, hoặc trực tiếp trên từ/âm (AccuracyScore, PronScore). Đọc được cả hai. */
+  const pa = o => (o && (o.PronunciationAssessment || o)) || {};
   const words = (n.Words || []).map(w => ({
     word: w.Word, score: Math.round(pa(w).AccuracyScore || 0), error: pa(w).ErrorType || 'None',
     weak: (w.Phonemes || []).filter(p => (pa(p).AccuracyScore || 0) < 60).map(p => p.Phoneme)
