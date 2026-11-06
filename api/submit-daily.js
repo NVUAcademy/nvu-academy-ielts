@@ -71,14 +71,18 @@ module.exports = async function handler(req, res) {
     if (JSON.stringify(answers).length > 50000) return bad(res, 400, 'Bài làm quá dài');
 
     /* Đã có bài này chưa: nếu có thì không ghi lỗi sai lần thứ hai */
-    const existing = await (await sb(`/rest/v1/daily_scores?select=id&student_id=eq.${studentId}&practice_date=eq.${practiceDate}&section=eq.${encodeURIComponent(section)}`)).json();
+    const existing = await (await sb(`/rest/v1/daily_scores?select=id,answers&student_id=eq.${studentId}&practice_date=eq.${practiceDate}&section=eq.${encodeURIComponent(section)}`)).json();
     const alreadySaved = Array.isArray(existing) && existing.length > 0;
+    /* Lần làm thứ mấy: lưu trong answers._attempts (không đổi cấu trúc bảng) */
+    const attempt = alreadySaved ? ((Number(existing[0].answers && existing[0].answers._attempts) || 1) + 1) : 1;
 
     const core = {
       student_id: studentId, practice_date: practiceDate, day_of_week: str(b.day_of_week, 20), section,
       score, max_score: maxScore, time_taken_seconds: isInt(b.time_taken_seconds) ? b.time_taken_seconds : null
     };
-    const row = { ...core, answers, practice_id: practiceId, voice_path: voicePath };
+    answers._attempts = attempt;
+    const row = { ...core, answers, practice_id: practiceId };
+    if (voicePath) row.voice_path = voicePath; /* làm lại không có ghi âm mới thì giữ ghi âm cũ */
     let up = await sb('/rest/v1/daily_scores?on_conflict=student_id,practice_date,section', {
       method: 'POST', headers: { 'content-type': 'application/json', Prefer: 'resolution=merge-duplicates,return=minimal' }, body: JSON.stringify(row)
     });
@@ -89,7 +93,8 @@ module.exports = async function handler(req, res) {
     }
     if (!up.ok) return bad(res, 500, 'Không lưu được điểm: ' + (await up.text()).slice(0, 160));
 
-    if (!alreadySaved && Array.isArray(b.errors) && b.errors.length) {
+    /* Lần đầu ghi đủ lỗi; từ lần thứ 3 trở đi ghi lại các câu còn sai để học sinh luyện thêm */
+    if ((attempt === 1 || attempt >= 3) && Array.isArray(b.errors) && b.errors.length) {
       const rows = b.errors.slice(0, 60).map(e => ({
         student_id: studentId, error_type: str(e.error_type, 40) || 'listening',
         error_content: str(e.error_content, 500), correct_answer: str(e.correct_answer, 500),

@@ -266,6 +266,14 @@ function renderIntro() {
     <div style="text-align:center"><a href="daily-practice.html" style="color:var(--accent);font-size:14px">← Danh sách bài</a></div>`;
 }
 
+/* Làm lại bài đã nộp: điền sẵn đáp án cũ, nộp lại sẽ cập nhật điểm */
+function redoPractice() {
+  if (!existing || !student) return;
+  const a = { ...(existing.answers || {}) };
+  delete a._attempts; delete a._v;
+  answers = a; lsSet(draftKey(), JSON.stringify(answers));
+  startPractice();
+}
 function startPractice() {
   totalSec = 0; inProgress = true;
   ViolationGuard.init({ isActive: () => inProgress && !!student && !isTeacher, answers: () => answers, persist: () => lsSet(draftKey(), JSON.stringify(answers)), sendNow: () => sendDraftNow() });
@@ -520,11 +528,11 @@ async function save(res, score) {
       student_id: student.id, practice_date: P.date, day_of_week: P.day, section: P.section,
       score, max_score: res.length, time_taken_seconds: totalSec
     };
-    const errors = !existing ? res.filter(r => !r.ok).map(r => ({
+    const errors = res.filter(r => !r.ok).map(r => ({
       error_type: P.error_type || 'listening',
       error_content: givenText(r.it, r.kind), correct_answer: correctText(r.it, r.kind),
       context: `${r.step.title}: ${r.kind === 'mcq' ? r.it.q : r.it.label}`
-    })) : [];
+    }));
     const sr = await fetch('/api/submit-daily', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...core, practice_id: P.id, answers: ViolationGuard.clean(answers), voice_path: voicePath, errors }) });
     const sj = await sr.json(); if (!sj.ok) throw new Error(sj.error || 'Lỗi không rõ');
     lsDel(draftKey()); draftDel();
@@ -535,8 +543,8 @@ async function save(res, score) {
 
 function renderResult(res, score, status) {
   const msg = status === 'saving' ? '<div class="saved">Đang lưu…</div>'
-    : status === 'ok' ? '<div class="saved ok">✓ Đã lưu điểm, lỗi sai và voice note. Thầy sẽ nghe và nhận xét.</div>'
-    : status === 'review' ? `<div class="saved ok">Đây là bài em đã nộp trước đó.</div>${existing && existing.teacher_comment ? `<div class="review" style="white-space:pre-line"><b>Nhận xét của thầy:</b> ${esc(existing.teacher_comment)}</div>` : ''}${P && P.steps && P.steps.some(s => s.kind === 'voice') ? `<div class="review"><b>Ghi âm lại theo nhận xét của thầy</b>${recorderHtml()}<button class="btn" style="margin-top:8px" onclick="resendVoice()">Gửi bản ghi âm mới cho thầy</button><div id="resendmsg" class="meta" style="margin-top:6px"></div></div>` : ''}`
+    : status === 'ok' ? '<div class="saved ok">✓ Đã lưu điểm, lỗi sai và voice note. Thầy sẽ nghe và nhận xét.</div><button class="btn" style="margin:8px 0" onclick="redoPractice()">Làm lại bài</button>'
+    : status === 'review' ? `<div class="saved ok">Đây là bài em đã nộp trước đó.</div><button class="btn" style="margin:8px 0" onclick="redoPractice()">Làm lại bài</button>${existing && existing.teacher_comment ? `<div class="review" style="white-space:pre-line"><b>Nhận xét của thầy:</b> ${esc(existing.teacher_comment)}</div>` : ''}${P && P.steps && P.steps.some(s => s.kind === 'voice') ? `<div class="review"><b>Ghi âm lại theo nhận xét của thầy</b>${recorderHtml()}<button class="btn" style="margin-top:8px" onclick="resendVoice()">Gửi bản ghi âm mới cho thầy</button><div id="resendmsg" class="meta" style="margin-top:6px"></div></div>` : ''}`
     : status === 'teacher' ? '<div class="saved">Chế độ giáo viên xem thử: không lưu.</div>'
     : status.startsWith('ok-novoice') ? `<div class="saved err">Đã lưu điểm nhưng chưa gửi được voice note (${esc(status.slice(11))}). Hãy gửi voice note cho thầy qua Zalo.</div>`
     : `<div class="saved err">Không lưu được: ${esc(status.slice(4))}. Hãy chụp màn hình điểm gửi thầy.</div>`;
