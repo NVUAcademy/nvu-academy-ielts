@@ -1,0 +1,40 @@
+{
+  "class_codes": [
+    "FOUNDATION12"
+  ],
+  "week_number": 1,
+  "source": "Foundation 12 Daily Practice · Week 1 (student booklet + teacher answer key)",
+  "id": "w1-thu-found12",
+  "title": "Class day warm-up",
+  "subtitle": "Session 2 · warm-up with the 12 words from Session 1",
+  "day": "thursday",
+  "date": "2026-11-05",
+  "section": "pronunciation",
+  "minutes": 15,
+  "error_type": "pronunciation",
+  "intro": "Class day. This is a 15-minute warm-up only. Do not submit anything.",
+  "send_today": "Warm-up only. Do not submit.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Say the 12 words",
+      "minutes": 5,
+      "kind": "voice",
+      "lines": [
+        "pronounce · vowel · consonant · syllable · silent · stress · rhyme · symbol · accent · fluent · mistake · improve"
+      ],
+      "note": "Bold = the stressed syllable: pro-NOUNCE, VOW-el, CON-so-nant, SYL-la-ble."
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Long and short sounds",
+      "minutes": 3,
+      "kind": "voice",
+      "lines": [
+        "sheep / ship · heat / hit · deep / dip · reach / rich · feel / fill"
+      ],
+      "note": "Smile for long /iː/, relax for short /ɪ/."
+    }
+  ]
+}

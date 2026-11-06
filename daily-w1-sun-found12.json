@@ -1,0 +1,708 @@
+{
+  "class_codes": [
+    "FOUNDATION12"
+  ],
+  "week_number": 1,
+  "source": "Foundation 12 Daily Practice · Week 1 (student booklet + teacher answer key)",
+  "id": "w1-sun-found12",
+  "title": "Sunday Daily Practice · Mixed practice",
+  "subtitle": "/iː/ and /ɪ/, EPIU 2.1–2.4, to be, writing",
+  "day": "sunday",
+  "date": "2026-11-08",
+  "section": "pronunciation",
+  "minutes": 60,
+  "error_type": "pronunciation",
+  "intro": "Mixed practice. Work alone for about 60 minutes. Send photos of 4B, 4C, 4F, 4G, 4H and 4I and one voice note (4D).",
+  "send_today": "Send: photos of 4B, 4C, 4F, 4G, 4H, 4I + 1 voice note (4D), by 23:00 today.",
+  "audio": {
+    "a11": {
+      "label": "Audio A11 · EPIU 2.1",
+      "src": "audio/EPIU_A11.mp3"
+    },
+    "a12": {
+      "label": "Audio A12 · EPIU 2.2",
+      "src": "audio/EPIU_A12.mp3"
+    },
+    "a13": {
+      "label": "Audio A13 · EPIU 2.3",
+      "src": "audio/EPIU_A13.mp3"
+    },
+    "a14": {
+      "label": "Audio A14 · EPIU 2.4",
+      "src": "audio/EPIU_A14.mp3"
+    }
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "title": "4B · Long or short?",
+      "minutes": 4,
+      "instructions": "Write L (long /iː/) or S (short /ɪ/).",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "field ______",
+          "fields": [
+            {
+              "answer": "L"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "list ______",
+          "fields": [
+            {
+              "answer": "S"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "team ______",
+          "fields": [
+            {
+              "answer": "L"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "kitchen ______",
+          "fields": [
+            {
+              "answer": "S"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "key ______",
+          "fields": [
+            {
+              "answer": "L"
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "river ______",
+          "fields": [
+            {
+              "answer": "S"
+            }
+          ]
+        },
+        {
+          "id": "s1_7",
+          "label": "meal ______",
+          "fields": [
+            {
+              "answer": "L"
+            }
+          ]
+        },
+        {
+          "id": "s1_8",
+          "label": "women ______",
+          "fields": [
+            {
+              "answer": "S"
+            }
+          ]
+        },
+        {
+          "id": "s1_9",
+          "label": "piece ______",
+          "fields": [
+            {
+              "answer": "L"
+            }
+          ]
+        },
+        {
+          "id": "s1_10",
+          "label": "English ______",
+          "fields": [
+            {
+              "answer": "S"
+            }
+          ]
+        },
+        {
+          "id": "s1_11",
+          "label": "speak ______",
+          "fields": [
+            {
+              "answer": "L"
+            }
+          ]
+        },
+        {
+          "id": "s1_12",
+          "label": "since ______",
+          "fields": [
+            {
+              "answer": "S"
+            }
+          ]
+        },
+        {
+          "id": "s1_13",
+          "label": "cream ______",
+          "fields": [
+            {
+              "answer": "L"
+            }
+          ]
+        },
+        {
+          "id": "s1_14",
+          "label": "film ______",
+          "fields": [
+            {
+              "answer": "S"
+            }
+          ]
+        },
+        {
+          "id": "s1_15",
+          "label": "leaf ______",
+          "fields": [
+            {
+              "answer": "L"
+            }
+          ]
+        },
+        {
+          "id": "s1_16",
+          "label": "pretty ______",
+          "fields": [
+            {
+              "answer": "S"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "4C · Choose the right word",
+      "minutes": 5,
+      "instructions": "Type the correct word.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. Don't (heat / hit) your brother! ______",
+          "fields": [
+            {
+              "answer": "hit"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. Please (heat / hit) the soup for two minutes. ______",
+          "fields": [
+            {
+              "answer": "heat"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. The river is very (deep / dip) here. ______",
+          "fields": [
+            {
+              "answer": "deep"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. My uncle is very (reach / rich). He has three cars. ______",
+          "fields": [
+            {
+              "answer": "rich"
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. Can you (reach / rich) the top shelf? ______",
+          "fields": [
+            {
+              "answer": "reach"
+            }
+          ]
+        },
+        {
+          "id": "s2_6",
+          "label": "6. A bicycle has two (wheels / wills). ______",
+          "fields": [
+            {
+              "answer": "wheels"
+            }
+          ]
+        },
+        {
+          "id": "s2_7",
+          "label": "7. I'd like a little (beat / bit) of sugar, please. ______",
+          "fields": [
+            {
+              "answer": "bit"
+            }
+          ]
+        },
+        {
+          "id": "s2_8",
+          "label": "8. The trees in the park are (green / grin). ______",
+          "fields": [
+            {
+              "answer": "green"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "4D · Read aloud and record",
+      "minutes": 6,
+      "kind": "voice",
+      "lines": [
+        "Please pass me the green tea.",
+        "This film is six minutes long.",
+        "The rich man has a big ship.",
+        "Keep the key in this little bag.",
+        "Steve speaks English with his sister."
+      ],
+      "note": "Underline the long /iː/ sounds and circle the short /ɪ/ sounds. Read each sentence 3 times, then record all 5."
+    },
+    {
+      "id": "s4",
+      "title": "EPIU 2.1 · Fill the dialogues",
+      "minutes": 4,
+      "instructions": "Play Audio A11 to check. Then listen and repeat. (The secret one is done for you.)",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s4_1",
+          "label": "1. A: What shall we do this ______? B: Let's stay at home and watch ______.",
+          "fields": [
+            {
+              "answer": "evening"
+            },
+            {
+              "answer": "TV"
+            }
+          ]
+        },
+        {
+          "id": "s4_2",
+          "label": "2. A: Let me read that ______ B: No – it's a secret! (done for you: email)",
+          "fields": [
+            {
+              "answer": "email"
+            }
+          ]
+        },
+        {
+          "id": "s4_3",
+          "label": "3. A: You know my friend ______? B: Yes. Well, he's joined the ______!",
+          "fields": [
+            {
+              "answer": "Steve"
+            },
+            {
+              "answer": "police"
+            }
+          ]
+        }
+      ],
+      "audio": "a11"
+    },
+    {
+      "id": "s5",
+      "title": "EPIU 2.2 · Find the /ɪ/ words",
+      "minutes": 4,
+      "instructions": "Write the /ɪ/ word from each clue. Play Audio A12 to check, then listen and repeat.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s5_1",
+          "label": "1. You can use a ______ to go up and down in a building.",
+          "fields": [
+            {
+              "answer": "lift"
+            }
+          ]
+        },
+        {
+          "id": "s5_2",
+          "label": "2. There are sixty seconds in a ______.",
+          "fields": [
+            {
+              "answer": "minute"
+            }
+          ]
+        },
+        {
+          "id": "s5_3",
+          "label": "3. A ______ is a book of words to help you with your English.",
+          "fields": [
+            {
+              "answer": "dictionary"
+            }
+          ]
+        },
+        {
+          "id": "s5_4",
+          "label": "4. It's too warm in here – open the ______.",
+          "fields": [
+            {
+              "answer": "window"
+            }
+          ]
+        },
+        {
+          "id": "s5_5",
+          "label": "5. Would you like a ______ with your coffee?",
+          "fields": [
+            {
+              "answer": "biscuit"
+            }
+          ]
+        },
+        {
+          "id": "s5_6",
+          "label": "6. Birds and planes have ______.",
+          "fields": [
+            {
+              "answer": "wings"
+            }
+          ]
+        },
+        {
+          "id": "s5_7",
+          "label": "7. You can see yourself in a ______.",
+          "fields": [
+            {
+              "answer": "mirror"
+            }
+          ]
+        },
+        {
+          "id": "s5_8",
+          "label": "8. Don't drop ______ – put it in a bin!",
+          "fields": [
+            {
+              "answer": "litter"
+            }
+          ]
+        }
+      ],
+      "audio": "a12"
+    },
+    {
+      "id": "s6",
+      "title": "EPIU 2.3 · Long /iː/ and short /ɪ/",
+      "minutes": 4,
+      "instructions": "Play Audio A13 to check. Circle all /iː/ sounds and underline all /ɪ/ sounds (some words have both). Listen and repeat. Words: big · busy · dinner · give · green · in · listen · meet · office · people · pizza · please · repeat · six · tea · three",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s6_q",
+          "q": "/iː/: green, meet, people, pizza, please, repeat, tea, three · /ɪ/: big, busy, dinner, give, in, listen, office, repeat, six"
+        }
+      ],
+      "audio": "a13"
+    },
+    {
+      "id": "s7",
+      "title": "EPIU 2.4 · Match the sentences",
+      "minutes": 3,
+      "instructions": "Write the letter of the matching ending (a–f). Play Audio A14 to check, then listen and repeat.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s7_1",
+          "label": "1. We're always busy ______",
+          "fields": [
+            {
+              "answer": "d"
+            }
+          ]
+        },
+        {
+          "id": "s7_2",
+          "label": "2. Would you like tea ______",
+          "fields": [
+            {
+              "answer": "e"
+            }
+          ]
+        },
+        {
+          "id": "s7_3",
+          "label": "3. Give me that big ______",
+          "fields": [
+            {
+              "answer": "f"
+            }
+          ]
+        },
+        {
+          "id": "s7_4",
+          "label": "4. There were only three ______",
+          "fields": [
+            {
+              "answer": "b"
+            }
+          ]
+        },
+        {
+          "id": "s7_5",
+          "label": "5. Listen and ______",
+          "fields": [
+            {
+              "answer": "a"
+            }
+          ]
+        },
+        {
+          "id": "s7_6",
+          "label": "6. Let's meet at ______",
+          "fields": [
+            {
+              "answer": "c"
+            }
+          ]
+        }
+      ],
+      "audio": "a14"
+    },
+    {
+      "id": "s8",
+      "title": "4F · am, is or are?",
+      "minutes": 4,
+      "instructions": "Type am, is or are.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s8_1",
+          "label": "1. My roommate ______ from Hải Phòng.",
+          "fields": [
+            {
+              "answer": "is"
+            }
+          ]
+        },
+        {
+          "id": "s8_2",
+          "label": "2. We ______ freshmen.",
+          "fields": [
+            {
+              "answer": "are"
+            }
+          ]
+        },
+        {
+          "id": "s8_3",
+          "label": "3. I ______ in the Faculty of Nursing.",
+          "fields": [
+            {
+              "answer": "am"
+            }
+          ]
+        },
+        {
+          "id": "s8_4",
+          "label": "4. Thanh Hóa ______ a big province.",
+          "fields": [
+            {
+              "answer": "is"
+            }
+          ]
+        },
+        {
+          "id": "s8_5",
+          "label": "5. My parents ______ teachers.",
+          "fields": [
+            {
+              "answer": "are"
+            }
+          ]
+        },
+        {
+          "id": "s8_6",
+          "label": "6. English ______ my favourite subject.",
+          "fields": [
+            {
+              "answer": "is"
+            }
+          ]
+        },
+        {
+          "id": "s8_7",
+          "label": "7. You and Lan ______ classmates.",
+          "fields": [
+            {
+              "answer": "are"
+            }
+          ]
+        },
+        {
+          "id": "s8_8",
+          "label": "8. The lecturers ______ very kind.",
+          "fields": [
+            {
+              "answer": "are"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "title": "4G · Negatives and questions",
+      "minutes": 5,
+      "instructions": "Make the sentences negative. Use short forms (isn't, aren't, I'm not).",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s9_1",
+          "label": "1. She is a lecturer. → ______",
+          "fields": [
+            {
+              "answer": "She isn't a lecturer.",
+              "accept": [
+                "She isn't a lecturer"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s9_2",
+          "label": "2. I am a freshman. → ______",
+          "fields": [
+            {
+              "answer": "I'm not a freshman.",
+              "accept": [
+                "I am not a freshman"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s9_3",
+          "label": "3. They are from Huế. → ______",
+          "fields": [
+            {
+              "answer": "They aren't from Huế.",
+              "accept": [
+                "They are not from Huế"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "title": "4H · Find the mistake",
+      "minutes": 5,
+      "instructions": "Each sentence has one mistake. Write the correct sentence.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s10_1",
+          "label": "1. My sister nurse. → ______",
+          "fields": [
+            {
+              "answer": "My sister is a nurse.",
+              "accept": [
+                "My sister is a nurse"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s10_2",
+          "label": "2. I am student. → ______",
+          "fields": [
+            {
+              "answer": "I am a student.",
+              "accept": [
+                "I am a student"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s10_3",
+          "label": "3. They is my classmates. → ______",
+          "fields": [
+            {
+              "answer": "They are my classmates.",
+              "accept": [
+                "They are my classmates"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s10_4",
+          "label": "4. Is you a freshman? → ______",
+          "fields": [
+            {
+              "answer": "Are you a freshman?",
+              "accept": [
+                "Are you a freshman"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s10_5",
+          "label": "5. “Are you from Huế?” “Yes, I'm.” → ______",
+          "fields": [
+            {
+              "answer": "Yes, I am.",
+              "accept": [
+                "Yes, I am"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s10_6",
+          "label": "6. I am agree with you. → ______",
+          "fields": [
+            {
+              "answer": "I agree with you.",
+              "accept": [
+                "I agree with you"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "title": "4I · Write about you",
+      "minutes": 12,
+      "instructions": "Write 6–8 sentences. Use at least 3 words from Session 2 (hometown, major, ambition …) and 2 words from Session 1 (accent, fluent, improve, mistake …). Check: a verb in every sentence, capital letters, a full stop at the end.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s11_q",
+          "q": "Write 6–8 sentences about yourself."
+        }
+      ]
+    }
+  ]
+}

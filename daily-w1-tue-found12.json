@@ -1,0 +1,293 @@
+{
+  "class_codes": [
+    "FOUNDATION12"
+  ],
+  "week_number": 1,
+  "source": "Foundation 12 Daily Practice · Week 1 (student booklet + teacher answer key)",
+  "id": "w1-tue-found12",
+  "title": "Tuesday · Weekly test /19",
+  "subtitle": "Weekly test (60 minutes, no notes)",
+  "day": "tuesday",
+  "date": "2026-11-10",
+  "section": "weekly_test",
+  "minutes": 60,
+  "error_type": "test",
+  "intro": "Weekly test, 19 points. Close this booklet and the handouts. Work alone. Answers are sent by the teacher at 23:00.",
+  "send_today": "Send: photo of the test, the After-the-test table and your reflection, plus 1 voice note (6C).",
+  "audio": {
+    "a11": {
+      "label": "Audio A11 · EPIU 2.1 (re-listen)",
+      "src": "audio/EPIU_A11.mp3"
+    },
+    "a18": {
+      "label": "Audio A18 · EPIU 3.1 (re-listen)",
+      "src": "audio/EPIU_A18.mp3"
+    }
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Part 1 · Write the word (6 points)",
+      "minutes": 8,
+      "instructions": "Write the word for each clue.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. A, E, I, O and U are these letters. ______",
+          "fields": [
+            {
+              "answer": "vowels",
+              "accept": [
+                "vowel"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. To get better. ______",
+          "fields": [
+            {
+              "answer": "improve"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. The “k” in “knife” is … ______",
+          "fields": [
+            {
+              "answer": "silent"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. Your family name, for example Nguyễn or Trần. ______",
+          "fields": [
+            {
+              "answer": "surname"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. A student in the first year at university. ______",
+          "fields": [
+            {
+              "answer": "freshman"
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "6. A big dream for your future. ______",
+          "fields": [
+            {
+              "answer": "ambition"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Part 2 · Odd one out (5 points)",
+      "minutes": 5,
+      "instructions": "Type the word with a different vowel sound.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. sheep · team · fish · key → ______",
+          "fields": [
+            {
+              "answer": "fish"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. sit · film · meat · busy → ______",
+          "fields": [
+            {
+              "answer": "meat"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. food · blue · good · June → ______",
+          "fields": [
+            {
+              "answer": "good"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. car · bus · cup · love → ______",
+          "fields": [
+            {
+              "answer": "car"
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. park · heart · father · son → ______",
+          "fields": [
+            {
+              "answer": "son"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Part 3 · How many sounds? (3 points)",
+      "minutes": 3,
+      "instructions": "Write the number of sounds in each word.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "phone → ______",
+          "fields": [
+            {
+              "answer": "3"
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "school → ______",
+          "fields": [
+            {
+              "answer": "4"
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "knee → ______",
+          "fields": [
+            {
+              "answer": "2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Part 4 · to be (5 points)",
+      "minutes": 5,
+      "instructions": "Fill in the gap or correct the sentence.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s4_1",
+          "label": "1. My classmates ______ from Nghệ An.",
+          "fields": [
+            {
+              "answer": "are"
+            }
+          ]
+        },
+        {
+          "id": "s4_2",
+          "label": "2. “Are you a freshman?” “Yes, I ______.”",
+          "fields": [
+            {
+              "answer": "am"
+            }
+          ]
+        },
+        {
+          "id": "s4_3",
+          "label": "3. She ______ a lecturer. (negative)",
+          "fields": [
+            {
+              "answer": "isn't",
+              "accept": [
+                "is not"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s4_4",
+          "label": "4. ______ your hometown big?",
+          "fields": [
+            {
+              "answer": "Is"
+            }
+          ]
+        },
+        {
+          "id": "s4_5",
+          "label": "5. Correct it: I am agree with you. → ______",
+          "fields": [
+            {
+              "answer": "I agree with you.",
+              "accept": [
+                "I agree with you"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "6C · Sound challenge",
+      "minutes": 8,
+      "kind": "voice",
+      "lines": [
+        "Please keep your teeth clean.",
+        "Six sick sheep sleep in a big ship.",
+        "Look at the blue moon in June.",
+        "My brother's car is in the park."
+      ],
+      "note": "Read each line 3 times, faster each time. Record the best one of each and send."
+    },
+    {
+      "id": "s6",
+      "title": "6D · EPIU – listen again",
+      "minutes": 8,
+      "instructions": "Play Audio A11 and A18 again and say each answer before you hear it. Did you get more right than last time?",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s6_q",
+          "q": "Write your score for EPIU 2.1 and 3.1 (compared with last time)."
+        }
+      ],
+      "audio": "a11"
+    },
+    {
+      "id": "s7",
+      "title": "6E · My week",
+      "minutes": 5,
+      "instructions": "Write in English or Vietnamese.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s7_1",
+          "q": "This week I'm proud of: ______"
+        },
+        {
+          "id": "s7_2",
+          "q": "The hardest part was: ______"
+        },
+        {
+          "id": "s7_3",
+          "q": "1 question for my teacher: ______"
+        }
+      ]
+    }
+  ]
+}

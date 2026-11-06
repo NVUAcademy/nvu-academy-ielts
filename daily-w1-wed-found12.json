@@ -1,0 +1,53 @@
+{
+  "class_codes": [
+    "FOUNDATION12"
+  ],
+  "week_number": 1,
+  "source": "Foundation 12 Daily Practice · Week 1 (student booklet + teacher answer key)",
+  "id": "w1-wed-found12",
+  "title": "Class day warm-up",
+  "subtitle": "Session 3 · warm-up with the 27 words and the alphabet",
+  "day": "wednesday",
+  "date": "2026-11-11",
+  "section": "pronunciation",
+  "minutes": 15,
+  "error_type": "pronunciation",
+  "intro": "Class day. This is a 15-minute warm-up only. Do not submit anything.",
+  "send_today": "Warm-up only. Do not submit.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "7A · Say the 27 words",
+      "minutes": 5,
+      "kind": "voice",
+      "lines": [
+        "Read the 12 words from 1A and the 15 words from 3A aloud once. Then say which 3 words are still difficult."
+      ],
+      "note": "Write the 3 difficult words in your notebook."
+    },
+    {
+      "id": "s2",
+      "title": "7B · The alphabet",
+      "minutes": 5,
+      "kind": "voice",
+      "lines": [
+        "Say the 7 letter groups in 5B once. Then spell your full name aloud 2 times."
+      ],
+      "note": "Say “double” for two letters the same."
+    },
+    {
+      "id": "s3",
+      "title": "7C · Look at your test",
+      "minutes": 5,
+      "instructions": "Read your teacher's comments on your Tuesday test. Write 2 mistakes you will not make again.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s3_q",
+          "q": "Write 2 mistakes you will not make again."
+        }
+      ]
+    }
+  ]
+}
