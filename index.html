@@ -302,7 +302,7 @@ async function loadToday() {
     ]);
     const [sch, sc, qr] = await Promise.all([
       db.from('schedule').select('day, practice_id, vocab, note').eq('class_code', student.classCode).gte('day', fromIso).lte('day', today),
-      db.from('daily_scores').select('practice_date, practice_id, section, score, max_score, teacher_comment').eq('student_id', student.id),
+      db.from('daily_scores').select('practice_date, practice_id, section, score, max_score, teacher_comment, voice_path').eq('student_id', student.id),
       db.from('weekly_quiz_results').select('week_number, total_score, max_score').eq('student_id', student.id)
     ]);
     const byId = {}; idx.forEach(p => byId[p.id] = p);
@@ -346,12 +346,27 @@ async function loadToday() {
       return { practice_id: pid, date, comment: textOf[k], url: null };
     });
     const allReplies = replies.concat(textItems).sort((a, b) => String(b.date).localeCompare(String(a.date)));
+    /* Yêu cầu ghi âm lại của thầy hiện thành việc cần làm ở đầu mục "Hôm nay".
+       Tự ẩn khi học sinh đã gửi bản ghi mới (tên file ghi âm có mốc thời gian sau lúc em thấy yêu cầu lần đầu) hoặc bấm "Đã gửi xong". */
+    const rrCards = allReplies.filter(x => x.practice_id && RR_RE.test(x.comment || '')).map(x => {
+      let h = 0; for (const ch of String(x.comment)) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+      const key = `nvu_rr|${student.id}|${x.practice_id}|${x.date}|${h}`;
+      let st = null; try { st = JSON.parse(localStorage.getItem(key) || 'null'); } catch (e) {}
+      if (st && st.done) return '';
+      if (!st) { st = { seen: Date.now() }; try { localStorage.setItem(key, JSON.stringify(st)); } catch (e) {} }
+      const row = (sc.data || []).find(r => r.practice_id === x.practice_id && r.practice_date === x.date);
+      const m = row && row.voice_path && /-(\d{10,})\.[a-z0-9]+$/i.exec(row.voice_path);
+      if (m && +m[1] > st.seen) return '';
+      const t = (byId[x.practice_id] && byId[x.practice_id].title) || 'Bài luyện tập';
+      return `<div class="task" data-rr="${esc(key)}" style="flex-wrap:wrap"><div class="ic" style="background:var(--pink)">🎙</div><div class="tt"><b>Cần ghi âm lại · ${esc(t)}</b><span>${esc(x.date)} · thầy đã ghi yêu cầu ở mục nhận xét bên dưới</span></div><span class="pill late">Cần làm</span><div style="width:100%;margin-top:8px;display:flex;gap:8px;flex-wrap:wrap"><a class="btn small" href="daily-practice.html?p=${esc(x.practice_id)}&d=${esc(x.date)}&redo=1">🎙 Ghi âm lại</a><button class="btn small" type="button" onclick="rrDone(this)">Đã gửi xong</button></div></div>`;
+    }).join('');
+    if (rrCards) html = html.replace('<div class="sec-label">Hôm nay</div>', '<div class="sec-label">Hôm nay</div>' + rrCards);
     if (allReplies.length) {
       /* Lớp IELTS 13 và IELTS 14: nhận xét do thầy viết nên ghi là "Nhận xét của thầy"; các lớp khác giữ "Nhận xét từ trợ giảng" */
       html += '<div class="sec-label">' + (['IELTS13', 'IELTS14'].includes(student.classCode) ? 'Nhận xét của thầy' : 'Nhận xét từ trợ giảng') + '</div>';
       allReplies.forEach(x => {
         const t = (byId[x.practice_id] && byId[x.practice_id].title) || 'Bài luyện tập';
-        html += `<div class="task" style="flex-wrap:wrap"><div class="ic" style="background:var(--lilac)">🎧</div><div class="tt"><b>${esc(t)}</b><span>${esc(x.date)}</span></div>${x.comment ? `<div style="width:100%;margin-top:8px;font-size:16px;white-space:pre-line">${esc(x.comment)}</div>` : ''}${x.url ? `<audio controls preload="none" src="${esc(x.url)}" style="width:100%;margin-top:8px"></audio>` : ''}${x.practice_id && (x.url || /ghi âm lại/i.test(x.comment || '')) ? `<a class="btn small" style="margin-top:8px" href="daily-practice.html?p=${esc(x.practice_id)}&d=${esc(x.date)}&redo=1">🎙 Ghi âm lại</a>` : ''}</div>`;
+        html += `<div class="task" style="flex-wrap:wrap"><div class="ic" style="background:var(--lilac)">🎧</div><div class="tt"><b>${esc(t)}</b><span>${esc(x.date)}</span></div>${x.comment ? `<div style="width:100%;margin-top:8px;font-size:16px;white-space:pre-line">${esc(x.comment)}</div>` : ''}${x.url ? `<audio controls preload="none" src="${esc(x.url)}" style="width:100%;margin-top:8px"></audio>` : ''}${x.practice_id && (x.url || RR_RE.test(x.comment || '')) ? `<a class="btn small" style="margin-top:8px" href="daily-practice.html?p=${esc(x.practice_id)}&d=${esc(x.date)}&redo=1">🎙 Ghi âm lại</a>` : ''}</div>`;
       });
     }
     const _qd = new Date(), _qiso = _qd.getFullYear() + '-' + String(_qd.getMonth() + 1).padStart(2, '0') + '-' + String(_qd.getDate()).padStart(2, '0');
@@ -379,6 +394,14 @@ async function loadToday() {
   } catch (e) {
     body.innerHTML = `<div class="empty">Chưa tải được danh sách việc hôm nay (${esc(e.message)}).</div>`;
   }
+}
+/* Nhận xét nào nhờ học sinh ghi âm lại hoặc gửi lại voice note thì có nút và thẻ việc cần làm */
+const RR_RE = /ghi âm lại|bản ghi âm mới|chưa nhận được voice note/i;
+/* Học sinh bấm "Đã gửi xong" trên thẻ yêu cầu ghi âm lại: ẩn thẻ trên máy này */
+function rrDone(btn) {
+  const card = btn.closest('[data-rr]'); if (!card) return;
+  try { localStorage.setItem(card.dataset.rr, JSON.stringify({ done: true })); } catch (e) {}
+  card.remove();
 }
 /* Ví Meow */
 async function loadWallet() {
