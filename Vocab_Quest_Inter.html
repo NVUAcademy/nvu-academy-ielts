@@ -797,6 +797,7 @@ const allDone = dr => STAGE_DEFS.every(s=>stageOK(dr,s.k));
 const dayDone = (w,d) => !!(S.prog.days[dayKey(w,d)] && S.prog.days[dayKey(w,d)].fin);
 function dayLock(w,d){ // returns '' if open, otherwise a message
   if(OPEN_ALL || d===1) return '';
+  if(S.prog && S.prog.unlock && S.prog.unlock[dayKey(w,d)]) return '';   // giáo viên mở riêng ngày này cho học sinh này (prog.unlock trong vocab_progress)
   const prev=S.prog.days[dayKey(w,d-1)];
   if(!prev || !prev.fin) return `Hoàn thành Day ${d-1} trước`;
   if(CFG.lockByDate && prev.fin.date===today()) return 'Mở vào ngày mai';
