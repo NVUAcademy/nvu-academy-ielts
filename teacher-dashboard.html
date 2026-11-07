@@ -1921,7 +1921,7 @@ Nếu nghe lại vẫn im lặng, em kiểm tra quyền Micro của trình duy�
     const dailyPaths = new Set(RC.rows.filter(r => r.src === 'daily').map(r => r.path));
     const todo = RC.rows.filter(r => rcSilent(r) && !(r.comment || '').includes(SIL_MARK) && (r.src === 'daily' || !dailyPaths.has(r.path)));
     if (!todo.length) { alert('Không còn bản im lặng nào chưa được yêu cầu ghi lại.'); return; }
-    if (!confirm(`Gửi yêu cầu ghi âm lại cho ${todo.length} bản im lặng?\n\n` + todo.map(r => `• ${r.student} (${r.title}, ${r.date.slice(8, 10)}/${r.date.slice(5, 7)})`).join('\n') + '\n\nNội dung hiện ở trang của học sinh, mục "Nhận xét từ trợ giảng".')) return;
+    if (!confirm(`Gửi yêu cầu ghi âm lại cho ${todo.length} bản im lặng?\n\n` + todo.map(r => `• ${r.student} (${r.title}, ${r.date.slice(8, 10)}/${r.date.slice(5, 7)})`).join('\n') + '\n\nNội dung hiện ở trang chủ của học sinh, mục "Nhận xét của thầy" (lớp IELTS 13, IELTS 14) hoặc "Nhận xét từ trợ giảng" (lớp khác).')) return;
     const st = document.getElementById('rc-status'); let ok = 0, fail = 0;
     for (const r of todo) {
       const text = r.comment ? r.comment + '\n\n' + SIL_MSG(r) : SIL_MSG(r);
