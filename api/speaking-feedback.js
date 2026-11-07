@@ -254,7 +254,7 @@ module.exports = async function handler(req, res) {
   if (action !== 'history' && !AI_CLASSES.includes(String(st[0].class_code).toUpperCase())) return bad(res, 403, 'Lớp của em chưa mở tính năng AI chấm nói. Thầy sẽ nghe và nhận xét trực tiếp.');
 
   if (action === 'history') {
-    const rows = await (await sb('/rest/v1/speaking_submissions?student_id=eq.' + studentId + '&order=submitted_at.desc&limit=30&select=id,question,transcript,overall_band,feedback_json,submitted_at,attempt,teacher_comment,approved')).json();
+    const rows = await (await sb('/rest/v1/speaking_submissions?student_id=eq.' + studentId + '&order=submitted_at.desc&limit=30&select=id,question,transcript,overall_band,feedback_json,submitted_at,attempt,teacher_comment,approved,audio_url')).json();
     return res.status(200).json({ ok: true, items: rows });
   }
 

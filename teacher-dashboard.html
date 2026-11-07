@@ -584,6 +584,7 @@
           <button class="btn-sm" style="background:#5a8a5a;color:#fff;border-color:#5a8a5a" onclick="zipRecordings()">⬇ Tải ZIP</button>
           <button class="btn-sm" style="background:#4a7ab0;color:#fff;border-color:#4a7ab0" onclick="exportToDrive()">☁ Đẩy lên Drive</button>
           <a class="btn-sm" id="drive-link" href="#" target="_blank" rel="noopener" style="display:none;text-decoration:none">📁 Mở thư mục Drive</a>
+          <button class="btn-sm" id="ai-batch-btn" style="background:#8b6bb0;color:#fff;border-color:#8b6bb0" onclick="aiRegradeAll()" title="Chấm AI các bản ghi Daily của IELTS 13 và IELTS 14 chưa có nhận xét; kết quả lưu và gửi cho đúng học sinh">🤖 Chấm AI những bản chưa có</button>
         </div>
         <span class="section-sub" id="rc-status"></span>
       </div>
@@ -1794,6 +1795,7 @@
   /* ---------- Ghi âm của học sinh (nghe, nhận xét, xuất ZIP) ---------- */
   let RC = { rows: [], index: null };
   const RC_DOW = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+  const RC_AI_CLS = ['IELTS13', 'IELTS14'];   /* các lớp đang mở AI chấm nói (khớp biến AI_CLASSES trên máy chủ) */
   function asciiName(s) { return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-+|-+$/g, ''); }
   function recName(r) {
     const d = new Date(r.date + 'T00:00:00'), ext = (r.path.split('.').pop() || 'wav').toLowerCase();
@@ -1812,15 +1814,22 @@
     try { if (!RC.index) RC.index = (await (await fetch('daily-index.json', { cache: 'no-cache' })).json()).practices || []; } catch (e) { RC.index = []; }
     const titleOf = id => { const p = (RC.index || []).find(x => x.id === id); return p ? p.title : (id || 'Daily Practice'); };
     const [a, b] = await Promise.all([
-      db.from('daily_scores').select('id, practice_date, practice_id, voice_path, teacher_comment, score, max_score, students!inner(full_name, class_code)')
+      db.from('daily_scores').select('id, student_id, practice_date, practice_id, voice_path, teacher_comment, score, max_score, students!inner(full_name, class_code)')
         .not('voice_path', 'is', null).eq('students.class_code', cls).gte('practice_date', from.value).lte('practice_date', to.value).order('practice_date', { ascending: false }),
       db.from('speaking_submissions').select('id, audio_url, question, submitted_at, feedback_json, overall_band, teacher_comment, students!inner(full_name, class_code)')
         .eq('students.class_code', cls).gte('submitted_at', from.value + 'T00:00:00').lte('submitted_at', addDays(to.value, 1) + 'T00:00:00').order('submitted_at', { ascending: false })
     ]);
     const err = a.error || b.error;
     if (err) { list.innerHTML = emptyState('Không tải được: ' + esc(err.message)); return; }
+    /* Nhận xét AI đã có cho các bản ghi Daily (khớp theo đường dẫn file, không phụ thuộc khoảng ngày) */
+    const aiByPath = {}, paths = (a.data || []).map(r => r.voice_path).filter(Boolean);
+    for (let i = 0; i < paths.length; i += 25) {
+      const { data: aiRows } = await db.from('speaking_submissions').select('audio_url, overall_band, feedback_json').in('audio_url', paths.slice(i, i + 25));
+      (aiRows || []).forEach(x => { if (x.feedback_json) aiByPath[x.audio_url] = x; });
+    }
+    const aiFrom = x => { if (!x) return null; const fb = x.feedback_json || {}; return { band: x.overall_band, pron: fb.azure ? fb.azure.pronunciation : null, summary: fb.summary }; };
     const rows = [];
-    (a.data || []).forEach(r => rows.push({ key: 'd' + r.id, src: 'daily', id: r.id, student: r.students.full_name, cls, date: r.practice_date, title: titleOf(r.practice_id), path: r.voice_path, comment: r.teacher_comment || '', ai: null, score: r.score != null ? `${r.score}/${r.max_score}` : '' }));
+    (a.data || []).forEach(r => rows.push({ key: 'd' + r.id, src: 'daily', id: r.id, sid: r.student_id, practice_id: r.practice_id, student: r.students.full_name, cls, date: r.practice_date, title: titleOf(r.practice_id), path: r.voice_path, comment: r.teacher_comment || '', ai: aiFrom(aiByPath[r.voice_path]), score: r.score != null ? `${r.score}/${r.max_score}` : '' }));
     (b.data || []).forEach(r => {
       if (!r.audio_url) return;
       const fb = r.feedback_json || {}, ld = new Date(r.submitted_at), date = isoOf(ld);
@@ -1835,11 +1844,14 @@
     const rows = RC.rows.filter(r => !src || r.src === src);
     const list = document.getElementById('rc-list');
     document.getElementById('rc-status').textContent = `${rows.length} bản ghi`;
+    aiBatchLabel();
     if (!rows.length) { list.innerHTML = emptyState('Chưa có bản ghi nào trong khoảng này'); return; }
     let html = '', cur = '';
     rows.forEach(r => {
       if (r.date !== cur) { cur = r.date; const d = new Date(r.date + 'T00:00:00'); html += `<div style="padding:10px 24px;background:rgba(139,115,85,.08);font-weight:700;font-size:14px">${RC_DOW[d.getDay()]} ${r.date.slice(8, 10)}/${r.date.slice(5, 7)}/${r.date.slice(0, 4)}</div>`; }
-      const ai = r.ai ? `<div style="font-size:12px;color:var(--muted);margin-top:4px">AI: band ${r.ai.band ?? '–'}${r.ai.pron != null ? ' · phát âm ' + r.ai.pron : ''}${r.ai.summary ? '<br>' + esc(r.ai.summary) : ''}</div>` : '';
+      const aiTxt = r.ai ? `AI: band ${r.ai.band ?? '–'}${r.ai.pron != null ? ' · phát âm ' + r.ai.pron : ''}${r.ai.summary ? '<br>' + esc(r.ai.summary) : ''}`
+        : (r.src === 'daily' && RC_AI_CLS.includes(r.cls) ? `AI: chưa có <button class="btn-sm" onclick="aiRegrade('${esc(r.key)}')">🤖 Chấm AI</button>` : '');
+      const ai = `<div id="ai-${esc(r.key)}" style="font-size:12px;color:var(--muted);margin-top:4px">${aiTxt}</div>`;
       html += `<div style="padding:12px 24px;border-bottom:1px solid rgba(139,115,85,.12)">
         <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between">
           <div><strong>${esc(r.student)}</strong> <span class="badge badge-gold">${r.src === 'daily' ? 'Daily' : 'Speaking'}</span> ${r.score ? `<span class="badge badge-green">${esc(r.score)}</span>` : ''}
@@ -1851,6 +1863,59 @@
         <div id="cs-${esc(r.key)}" style="font-size:12px;color:var(--green);min-height:14px"></div></div>`;
     });
     list.innerHTML = html;
+  }
+
+  /* ---------- Chấm AI lại cho bản ghi chưa có nhận xét (kết quả lưu cho đúng học sinh của bản ghi) ---------- */
+  const aiNeeds = r => r.src === 'daily' && !r.ai && RC_AI_CLS.includes(r.cls);
+  function aiBatchLabel() {
+    const btn = document.getElementById('ai-batch-btn'); if (!btn || RC.batch) return;
+    const n = RC.rows.filter(aiNeeds).length;
+    btn.textContent = `🤖 Chấm AI những bản chưa có (${n})`; btn.disabled = n === 0;
+  }
+  async function aiPayload(r) {
+    /* Giống trang học sinh: chỉ so khớp với văn bản mẫu khi bước ghi âm là đọc theo mẫu; câu hỏi Speaking thì chấm như nói tự do */
+    let target = '', title = 'Daily Practice voice note';
+    const p = await sbPractice(r.practice_id).catch(() => null);
+    const st = p && (p.steps || []).find(x => x.kind === 'voice');
+    if (st) {
+      title = st.title || title;
+      const lines = st.lines || [], qs = lines.filter(l => /\?\s*$/.test(String(l).trim())).length;
+      if (lines.length && qs * 2 < lines.length) target = lines.map(l => l.replace(/^[^:]{1,20}:\s*/, '')).join(' ');
+    }
+    return { action: 'feedback', student_id: r.sid, voice_path: r.path, task_type: target ? 'mixed' : 'free', prompt: title, target_text: target || null };
+  }
+  async function aiRegrade(key) {
+    const r = RC.rows.find(x => x.key === key); if (!r || r.aiBusy) return false;
+    const el = document.getElementById('ai-' + key); r.aiBusy = true;
+    if (el) el.textContent = 'AI: đang chấm… (có thể mất tới 1 phút)';
+    try {
+      const res = await fetch('/api/speaking-feedback', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(await aiPayload(r)) });
+      const j = await res.json().catch(() => ({ ok: false, error: 'Máy chủ không trả về kết quả (có thể quá thời gian)' }));
+      if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
+      const f = j.feedback || {}, b = f.band || {};
+      r.ai = { band: b.overall, pron: f.azure ? f.azure.pronunciation : null, summary: f.summary };
+      if (el) el.innerHTML = `AI: band ${r.ai.band ?? '–'}${r.ai.pron != null ? ' · phát âm ' + r.ai.pron : ''}${r.ai.summary ? '<br>' + esc(r.ai.summary) : ''} <span style="color:var(--green)">✓ đã gửi cho học sinh</span>`;
+      return true;
+    } catch (e) {
+      if (el) el.innerHTML = `AI: <span style="color:var(--red)">lỗi: ${esc(e.message)}</span> <button class="btn-sm" onclick="aiRegrade('${esc(key)}')">Thử lại</button>`;
+      return false;
+    } finally { r.aiBusy = false; aiBatchLabel(); }
+  }
+  window.addEventListener('beforeunload', e => { if (RC.batch) { e.preventDefault(); e.returnValue = ''; } });
+  async function aiRegradeAll() {
+    if (RC.batch) { RC.batch.stop = true; return; }   /* bấm lần nữa = dừng sau các bản đang chấm */
+    const todo = RC.rows.filter(r => aiNeeds(r) && !r.aiBusy);
+    if (!todo.length) { alert('Không còn bản ghi nào chưa có nhận xét AI.'); return; }
+    if (!confirm(`Chấm AI ${todo.length} bản ghi?\n\n• Mỗi bản tốn phí AI và mất khoảng 15 đến 60 giây.\n• Giữ trang này mở đến khi xong.\n• Kết quả được lưu và gửi cho đúng học sinh của từng bản ghi.`)) return;
+    const btn = document.getElementById('ai-batch-btn'), st = document.getElementById('rc-status');
+    const batch = RC.batch = { stop: false }; let done = 0, fail = 0, next = 0;
+    const show = () => { btn.textContent = `■ Dừng (${done + fail}/${todo.length})`; st.textContent = `Đang chấm AI: ${done} xong, ${fail} lỗi, còn ${todo.length - done - fail}`; };
+    show();
+    const worker = async () => { while (!batch.stop && next < todo.length) { const r = todo[next++]; (await aiRegrade(r.key)) ? done++ : fail++; show(); } };
+    await Promise.all([worker(), worker()]);
+    RC.batch = null;
+    st.textContent = `Chấm AI xong: ${done} bản thành công, ${fail} lỗi${batch.stop ? ' (đã dừng, còn ' + (todo.length - done - fail) + ' bản chưa chấm)' : ''}`;
+    aiBatchLabel();
   }
 
   async function playRec(key) {
