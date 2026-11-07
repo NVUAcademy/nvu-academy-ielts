@@ -1,7 +1,7 @@
 {
   "id": "w2-sat-ielts14",
   "title": "Saturday Daily Practice",
-  "subtitle": "Rewrite Intro + Overview, past tenses and Speaking Part 1",
+  "subtitle": "Rewrite Introduction, past tenses and Speaking Part 1",
   "theme": "Lesson 3 · Leisure and Recreation",
   "source": "Daily Practice tuần 2 (print/I3/Daily_Practice_Week2_source.md), bài I3 Leisure and Recreation",
   "class_codes": [
@@ -22,24 +22,22 @@
   "steps": [
     {
       "id": "s1",
-      "title": "Step 1 · Rewrite Introduction + Overview",
+      "title": "Step 1 · Rewrite Introduction",
       "minutes": 30,
-      "instructions": "Read the teacher's feedback on your Monday Writing. Rewrite the Introduction and Overview for ONE chart and fix every error the teacher marked. Check: the Introduction has all 5 points (what, who, where, when, unit); the Overview has one trend and one difference, with no figures.",
+      "instructions": "Read the teacher's feedback on your Monday Writing. Rewrite the Introduction for ONE chart and fix every error the teacher marked. Check: the Introduction has all 5 points (what, who, where, when, unit).",
       "kind": "open",
       "open": [
         {
           "id": "s1_1",
-          "q": "Introduction và Overview viết lại",
-          "model": "The line graph illustrates the number of users of five communication services worldwide over a ten-year period, commencing from 1998. Overall, there was a considerable increase in the number of mobile phone users, with the most dramatic rise being seen in mobile phones. Additionally, fixed-line phones consistently had the highest figures at the start.",
+          "q": "Introduction viết lại",
+          "model": "The line graph illustrates the number of users of five communication services worldwide over a ten-year period, commencing from 1998.",
           "ai": {
-            "type": "Viết lại Introduction và Overview cho Task 1 theo nhận xét của giáo viên",
+            "type": "Viết lại Introduction cho Task 1 theo nhận xét của giáo viên",
             "level": "Intermediate (B1 đến B2)",
-            "min_words": 60,
-            "task": "Rewrite the Introduction and Overview of your Task 1 answer from Monday. Fix every comment from your teacher. The Introduction needs the five pieces (what, who, where, when, unit). The Overview needs one trend and one difference, with no numbers.",
+            "min_words": 20,
+            "task": "Rewrite the Introduction of your Task 1 answer from Monday. Fix every comment from your teacher. The Introduction needs the five pieces (what, who, where, when, unit).",
             "criteria": [
               "Introduction có đủ 5 ý và viết lại bằng từ khác đề bài",
-              "Overview bắt đầu bằng Overall và có một xu hướng, một sự khác biệt",
-              "không có số liệu trong Overview",
               "sửa các lỗi giáo viên đã nhận xét",
               "ngữ pháp và chính tả đúng"
             ]
