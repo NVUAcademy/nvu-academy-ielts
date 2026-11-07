@@ -210,6 +210,7 @@ async function openPractice(meta) {
   }
   try { answers = JSON.parse(lsGet(draftKey()) || '{}'); } catch (e) { answers = {}; }
   await draftPull();
+  if (student && !isTeacher && (P.steps || []).some(s => s.kind === 'voice')) { const b = await RecStore.get(recKey()); if (b) recBlob = b; }
   renderIntro();
   /* Từ trang chủ, "Ghi âm lại" mở thẳng phần ghi âm của bài đã nộp */
   if (existing && new URLSearchParams(location.search).get('redo') === '1') reviewSubmitted();
@@ -238,7 +239,8 @@ function sendDraftNow() {
   if (!student || isTeacher) return;
   try { fetch('/api/draft', { method: 'POST', keepalive: true, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ student_id: student.id, practice_id: P.id, practice_date: P.date, answers }) }); } catch (e) {}
 }
-window.addEventListener('beforeunload', e => { if (inProgress) { e.preventDefault(); e.returnValue = ''; } });
+let uploading = false;
+window.addEventListener('beforeunload', e => { if (inProgress || uploading) { e.preventDefault(); e.returnValue = ''; } });
 
 /* Xem lại bài đã nộp (điểm, câu sai, đáp án, nhận xét của thầy) */
 function reviewSubmitted() {
@@ -420,28 +422,39 @@ function setAns(id, v, rerender) {
 }
 
 /* ---------- recorder ---------- */
+/* Chờ tối đa ms mili giây; quá hạn thì báo lỗi rõ ràng thay vì treo */
+const withTimeout = (p, ms, msg) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error(msg)), ms))]);
+/* Lưu tạm bản ghi âm trong máy (IndexedDB) để tải lại trang không bị mất; xóa sau khi gửi thành công */
+const recKey = () => `${student ? student.id : 'teacher'}|${P.id}`;
+const RecStore = {
+  open() { return new Promise((res, rej) => { const r = indexedDB.open('nvu-rec', 1); r.onupgradeneeded = () => r.result.createObjectStore('rec'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); },
+  async put(k, blob) { try { const d = await this.open(); await new Promise((res, rej) => { const t = d.transaction('rec', 'readwrite'); t.objectStore('rec').put(blob, k); t.oncomplete = res; t.onerror = () => rej(t.error); }); d.close(); } catch (e) {} },
+  async get(k) { try { const d = await this.open(); const v = await new Promise((res, rej) => { const q = d.transaction('rec').objectStore('rec').get(k); q.onsuccess = () => res(q.result || null); q.onerror = () => rej(q.error); }); d.close(); return v; } catch (e) { return null; } },
+  async del(k) { try { const d = await this.open(); await new Promise((res, rej) => { const t = d.transaction('rec', 'readwrite'); t.objectStore('rec').delete(k); t.oncomplete = res; t.onerror = () => rej(t.error); }); d.close(); } catch (e) {} }
+};
 /* Gửi bản ghi âm mới cho bài đã nộp (giữ nguyên điểm và nhận xét) */
 async function resendVoice() {
   const msg = document.getElementById('resendmsg');
   if (!recBlob) { msg.textContent = 'Chưa có bản ghi âm mới. Bấm "● Ghi âm" trước.'; return; }
-  msg.textContent = 'Đang gửi…';
+  msg.textContent = 'Đang gửi… đừng đóng hoặc tải lại trang.'; uploading = true;
   try {
     let upBlob = recBlob; try { upBlob = await blobToWav16k(recBlob); } catch (e) {}
     const ext = upBlob.type === 'audio/wav' ? 'wav' : (/mp4/.test(upBlob.type) ? 'm4a' : 'webm');
     const voicePath = `daily/${student.id}/${P.id}-${Date.now()}.${ext}`;
-    const { error: ue } = await db.storage.from('voice-notes').upload(voicePath, upBlob, { contentType: upBlob.type, upsert: false });
+    const { error: ue } = await withTimeout(db.storage.from('voice-notes').upload(voicePath, upBlob, { contentType: upBlob.type, upsert: false }), 90000, 'quá thời gian chờ, mạng đang chậm. Em thử gửi lại');
     if (ue) throw new Error(ue.message);
     const r = await fetch('/api/submit-daily', { method: 'POST', headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ voice_only: true, student_id: student.id, practice_id: P.id, practice_date: P.date, section: P.section, voice_path: voicePath }) });
     const j = await r.json(); if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
-    recBlob = null;
+    recBlob = null; RecStore.del(recKey());
     msg.textContent = '✓ Đã gửi bản ghi âm mới. Thầy sẽ nghe lại.';
-  } catch (e) { msg.textContent = 'Chưa gửi được: ' + e.message; }
+  } catch (e) { msg.textContent = 'Chưa gửi được: ' + e.message + '. Bản ghi vẫn còn trên máy, em bấm gửi lại nhé.'; }
+  finally { uploading = false; }
 }
 
 function recorderHtml() {
   return `<div class="recbox" id="recbox"><button class="btn rec small" id="recbtn" onclick="toggleRec()">● Ghi âm</button>
-    <div class="status" id="recstatus">${recBlob ? 'Đã có bản ghi. Nghe lại bên dưới hoặc ghi lại.' : 'Chưa có bản ghi. Round 3 + 1 phút nói về loại số khó nhất.'}</div>
+    <div class="status" id="recstatus">${recBlob ? 'Đã có bản ghi. Nghe lại bên dưới hoặc ghi lại.' : 'Chưa có bản ghi. Bấm "● Ghi âm" rồi nói theo hướng dẫn của bước này.'}</div>
     <audio controls id="recplay" style="${recBlob ? '' : 'display:none'}" ${recBlob ? `src="${URL.createObjectURL(recBlob)}"` : ''}></audio></div>`;
 }
 async function toggleRec() {
@@ -458,6 +471,7 @@ async function toggleRec() {
     clearInterval(recTimer);
     recStream.getTracks().forEach(t => t.stop());
     recBlob = new Blob(recChunks, { type: recorder.mimeType || mime || 'audio/webm' });
+    RecStore.put(recKey(), recBlob);
     btn.textContent = '● Ghi lại'; btn.classList.add('rec');
     st.textContent = `Đã ghi ${fmt(recSec)}. Nghe lại bên dưới.`;
     const pl = $('recplay'); pl.src = URL.createObjectURL(recBlob); pl.style.display = '';
@@ -557,11 +571,15 @@ async function save(res, score) {
   try {
     let voicePath = null;
     if (recBlob) {
+      uploading = true;
       let upBlob = recBlob; try { upBlob = await blobToWav16k(recBlob); } catch (e) {}
       const ext = upBlob.type === 'audio/wav' ? 'wav' : (/mp4/.test(upBlob.type) ? 'm4a' : 'webm');
       voicePath = `daily/${student.id}/${P.id}-${Date.now()}.${ext}`;
-      const { error: ue } = await db.storage.from('voice-notes').upload(voicePath, upBlob, { contentType: upBlob.type, upsert: false });
-      if (ue) { voicePath = null; var voiceErr = ue.message; } else { window._lastVoice = voicePath; }
+      let ue = null;
+      try { ({ error: ue } = await withTimeout(db.storage.from('voice-notes').upload(voicePath, upBlob, { contentType: upBlob.type, upsert: false }), 90000, 'quá thời gian chờ, mạng đang chậm')); }
+      catch (e) { ue = e; }
+      if (ue) { voicePath = null; var voiceErr = ue.message; } else { window._lastVoice = voicePath; RecStore.del(recKey()); }
+      uploading = false;
     }
     const core = {
       student_id: student.id, practice_date: P.date, day_of_week: P.day, section: P.section,
@@ -577,15 +595,15 @@ async function save(res, score) {
     lsDel(draftKey()); draftDel();
     existing = { score, max_score: res.length, answers, time_taken_seconds: totalSec };
     return voiceErr ? 'ok-novoice:' + voiceErr : 'ok';
-  } catch (e) { return 'err:' + e.message; }
+  } catch (e) { uploading = false; return 'err:' + e.message; }
 }
 
 function renderResult(res, score, status) {
-  const msg = status === 'saving' ? '<div class="saved">Đang lưu…</div>'
+  const msg = status === 'saving' ? `<div class="saved">${recBlob ? 'Đang gửi voice note và lưu bài… Đừng đóng hoặc tải lại trang (có thể mất tới 1 phút nếu mạng chậm).' : 'Đang lưu…'}</div>`
     : status === 'ok' ? '<div class="saved ok">✓ Đã lưu điểm, lỗi sai và voice note. Thầy sẽ nghe và nhận xét.</div><button class="btn" style="margin:8px 0" onclick="redoPractice()">Làm lại bài</button>'
     : status === 'review' ? `<div class="saved ok">Đây là bài em đã nộp trước đó.</div><button class="btn" style="margin:8px 0" onclick="redoPractice()">Làm lại bài</button>${existing && existing.teacher_comment ? `<div class="review" style="white-space:pre-line"><b>Nhận xét của thầy:</b> ${esc(existing.teacher_comment)}</div>` : ''}${P && P.steps && P.steps.some(s => s.kind === 'voice') ? `<div class="review"><b>Ghi âm lại theo nhận xét của thầy</b>${recorderHtml()}<button class="btn" style="margin-top:8px" onclick="resendVoice()">Gửi bản ghi âm mới cho thầy</button><div id="resendmsg" class="meta" style="margin-top:6px"></div></div>` : ''}`
     : status === 'teacher' ? '<div class="saved">Chế độ giáo viên xem thử: không lưu.</div>'
-    : status.startsWith('ok-novoice') ? `<div class="saved err">Đã lưu điểm nhưng chưa gửi được voice note (${esc(status.slice(11))}). Hãy gửi voice note cho thầy qua Zalo.</div>`
+    : status.startsWith('ok-novoice') ? `<div class="saved err">Đã lưu điểm nhưng chưa gửi được voice note (${esc(status.slice(11))}). Bản ghi vẫn còn trên máy: em bấm nút bên dưới để gửi lại, hoặc gửi thầy qua Zalo.</div><div class="review"><b>Gửi lại voice note</b>${recorderHtml()}<button class="btn" style="margin-top:8px" onclick="resendVoice()">Gửi bản ghi âm cho thầy</button><div id="resendmsg" class="meta" style="margin-top:6px"></div></div>`
     : `<div class="saved err">Không lưu được: ${esc(status.slice(4))}. Hãy chụp màn hình điểm gửi thầy.</div>`;
   const wrong = res.filter(r => !r.ok).map(r => `<div class="review"><b>${esc(r.step.title.split(' · ')[0])} · ${esc(r.kind === 'mcq' ? r.it.q : r.it.label)}</b><br>
     Bạn trả lời: <span class="bad">${esc(givenText(r.it, r.kind))}</span> · Đáp án: <span class="good">${esc(correctText(r.it, r.kind))}</span>
