@@ -11,6 +11,7 @@ const CLAUDE_MODEL = process.env.CLAUDE_MODEL || 'claude-sonnet-5-5';
 const WHISPER_MODEL = process.env.WHISPER_MODEL || 'whisper-1';
 const DAILY_LIMIT = parseInt(process.env.DAILY_LIMIT || '8', 10);
 const MAX_AUDIO_BYTES = 12 * 1024 * 1024;
+const AI_MAX_SEC = 120;   /* bản ghi dài (tối đa 5 phút): AI chỉ nghe 120 giây đầu để kịp trong 60 giây của Vercel; thầy vẫn nghe toàn bộ */
 
 const SB_URL = () => (process.env.SUPABASE_URL || '').replace(/\/$/, '');
 /* Khóa kiểu mới (sb_secret_...) không phải JWT nên chỉ gửi header apikey; khóa service_role cũ (JWT) vẫn cần Bearer */
@@ -230,11 +231,14 @@ module.exports = async function handler(req, res) {
     const fr = await sb('/storage/v1/object/voice-notes/' + path.split('/').map(encodeURIComponent).join('/'));
     if (!fr.ok) return bad(res, 404, 'Không tải được file ghi âm');
     const buf = Buffer.from(await fr.arrayBuffer());
-    if (buf.length > MAX_AUDIO_BYTES) return bad(res, 413, 'File ghi âm quá dài, hãy ghi dưới 2 phút');
+    if (buf.length > MAX_AUDIO_BYTES) return bad(res, 413, 'File ghi âm quá dài, hãy ghi dưới 5 phút');
     const ext = (path.split('.').pop() || 'webm').toLowerCase();
+    const totalSeconds = Math.round(Math.max(0, buf.length - 44) / 32000);
+    const aiBuf = buf.length > 32000 * AI_MAX_SEC + 44 ? (wavTrim(buf, AI_MAX_SEC) || buf) : buf;
+    const truncated = aiBuf !== buf;
 
     /* 2. Chuyển thành chữ */
-    const w = await transcribe(buf, 'voice.' + ext, fr.headers.get('content-type'));
+    const w = await transcribe(aiBuf, 'voice.' + ext, fr.headers.get('content-type'));
     const transcript = (w.text || '').trim();
     if (words(transcript).length < 3) return bad(res, 422, 'Không nghe rõ giọng nói. Em ghi âm lại ở nơi yên tĩnh hơn nhé.');
 
@@ -256,7 +260,7 @@ module.exports = async function handler(req, res) {
     if (process.env.AZURE_SPEECH_KEY && process.env.AZURE_SPEECH_REGION) {
       try {
         const ref = task_type !== 'free' && b.target_text ? b.target_text : words(transcript).slice(0, 80).join(' ');
-        azure = await azureAssess(buf, ref);
+        azure = await azureAssess(aiBuf, ref);
       } catch (e) { azureError = String(e.message || e).slice(0, 200); }
     }
 
@@ -266,6 +270,7 @@ module.exports = async function handler(req, res) {
     fb.azure = azure; if (azureError) fb.azure_error = azureError;
     if (azure && !(fb.focus_words || []).length) fb.focus_words = azure.weak_words.map(x => x.word).slice(0, 6);
     fb.fluency = fluency;
+    if (truncated) { fb.truncated = true; fb.total_seconds = totalSeconds; }
     fb.diffs = align ? align.diffs.filter(x => task_type !== 'mixed' || x.type !== 'extra').slice(0, 25) : [];
 
     /* 5. Lưu */
