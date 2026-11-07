@@ -102,6 +102,23 @@ function wavSlice(buf, startSec, maxSec) {
 }
 const wavTrim = (buf, maxSec) => wavSlice(buf, 0, maxSec);
 
+/* Mức âm lượng của file WAV 16-bit (0..1): đỉnh và RMS. Null nếu không phải WAV 16-bit đọc được. */
+function wavLevel(buf) {
+  if (buf.length < 44 || buf.toString('ascii', 0, 4) !== 'RIFF' || buf.toString('ascii', 8, 12) !== 'WAVE') return null;
+  let p = 12, ds = -1, dl = 0, bits = 0;
+  while (p + 8 <= buf.length) {
+    const id = buf.toString('ascii', p, p + 4), size = buf.readUInt32LE(p + 4);
+    if (id === 'fmt ') bits = buf.readUInt16LE(p + 22);
+    if (id === 'data') { ds = p + 8; dl = Math.min(size, buf.length - ds); break; }
+    p += 8 + size + (size % 2);
+  }
+  if (ds < 0 || bits !== 16 || dl < 2) return null;
+  let peak = 0, sum = 0; const n = Math.floor(dl / 2);
+  for (let i = 0; i < n; i++) { const v = Math.abs(buf.readInt16LE(ds + i * 2)); if (v > peak) peak = v; sum += v * v; }
+  return { peak: peak / 32768, rms: Math.sqrt(sum / n) / 32768 };
+}
+const isSilentLevel = lv => !!lv && lv.peak < 0.02;   /* cùng ngưỡng với wav.js: đỉnh dưới 0,02 (~ -34 dBFS) là không có giọng nói */
+
 /* Chia bản ghi WAV 16 kHz mono thành các đoạn ~CHUNK_SEC giây, cắt ở chỗ im lặng nhất gần mốc để không chẻ đôi một từ.
    Trả về null nếu không phải WAV 16 kHz mono 16-bit hoặc bản ghi ngắn (chép lời một lần như cũ). */
 function planChunks(buf) {
@@ -275,6 +292,8 @@ module.exports = async function handler(req, res) {
     const buf = Buffer.from(await fr.arrayBuffer());
     if (buf.length > MAX_AUDIO_BYTES) return bad(res, 413, 'File ghi âm quá dài, hãy ghi dưới 5 phút');
     const ext = (path.split('.').pop() || 'webm').toLowerCase();
+    /* Bản ghi im lặng: không gửi cho Whisper (Whisper hay tự bịa câu như "Thank you for watching"), yêu cầu ghi lại */
+    if (isSilentLevel(wavLevel(buf))) return res.status(422).json({ ok: false, silent: true, error: 'Không nghe thấy tiếng trong bản ghi. Em kiểm tra micro (cho phép trình duyệt dùng micro, đưa micro gần miệng hơn) rồi ghi âm lại nhé.' });
     const deadline = Date.now() + BUDGET_MS;
 
     /* 2. Chuyển thành chữ */
@@ -332,4 +351,4 @@ module.exports = async function handler(req, res) {
   }
 };
 
-module.exports._test = { alignWords, fluencyStats, words, wavTrim, wavSlice, planChunks };
+module.exports._test = { alignWords, fluencyStats, words, wavTrim, wavSlice, planChunks, wavLevel, isSilentLevel };

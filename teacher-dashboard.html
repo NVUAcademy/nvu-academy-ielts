@@ -585,6 +585,8 @@
           <button class="btn-sm" style="background:#4a7ab0;color:#fff;border-color:#4a7ab0" onclick="exportToDrive()">☁ Đẩy lên Drive</button>
           <a class="btn-sm" id="drive-link" href="#" target="_blank" rel="noopener" style="display:none;text-decoration:none">📁 Mở thư mục Drive</a>
           <button class="btn-sm" id="ai-batch-btn" style="background:#8b6bb0;color:#fff;border-color:#8b6bb0" onclick="aiRegradeAll()" title="Chấm AI các bản ghi Daily của IELTS 13 và IELTS 14 chưa có nhận xét; kết quả lưu và gửi cho đúng học sinh">🤖 Chấm AI những bản chưa có</button>
+          <button class="btn-sm" id="sil-scan-btn" style="background:#b06a4a;color:#fff;border-color:#b06a4a" onclick="scanSilence()" title="Tải từng bản ghi trong danh sách và đo âm lượng để tìm file im lặng">🔇 Tìm bản ghi im lặng</button>
+          <button class="btn-sm" id="sil-req-btn" style="display:none;background:#b04a4a;color:#fff;border-color:#b04a4a" onclick="requestRerecord()">📣 Yêu cầu ghi âm lại</button>
         </div>
         <span class="section-sub" id="rc-status"></span>
       </div>
@@ -792,6 +794,7 @@
 </div>
 
 <script src="meow.js"></script>
+<script src="wav.js"></script>
 <script>
   /* Ô nhận xét tự giãn theo nội dung, không cần kéo */
   function autoSize(t) { t.style.height = 'auto'; t.style.height = Math.max(120, t.scrollHeight + 4) + 'px'; }
@@ -1844,7 +1847,7 @@
     const rows = RC.rows.filter(r => !src || r.src === src);
     const list = document.getElementById('rc-list');
     document.getElementById('rc-status').textContent = `${rows.length} bản ghi`;
-    aiBatchLabel();
+    aiBatchLabel(); silButtons();
     if (!rows.length) { list.innerHTML = emptyState('Chưa có bản ghi nào trong khoảng này'); return; }
     let html = '', cur = '';
     rows.forEach(r => {
@@ -1855,7 +1858,7 @@
       html += `<div style="padding:12px 24px;border-bottom:1px solid rgba(139,115,85,.12)">
         <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between">
           <div><strong>${esc(r.student)}</strong> <span class="badge badge-gold">${r.src === 'daily' ? 'Daily' : 'Speaking'}</span> ${r.score ? `<span class="badge badge-green">${esc(r.score)}</span>` : ''}
-            <div style="font-size:13px;color:var(--muted)">${esc(r.title)}</div><div style="font-size:11px;color:var(--muted);font-family:monospace">${esc(recName(r))}</div>${ai}</div>
+            <div style="font-size:13px;color:var(--muted)">${esc(r.title)}</div><div style="font-size:11px;color:var(--muted);font-family:monospace">${esc(recName(r))}</div><div id="lv-${esc(r.key)}" style="margin-top:3px">${levelBadge(r)}</div>${ai}</div>
           <div id="au-${esc(r.key)}"><button class="btn-sm" onclick="playRec('${esc(r.key)}')">▶ Nghe</button></div>
         </div>
         <div style="display:flex;gap:8px;margin-top:8px"><textarea id="cm-${esc(r.key)}" class="zl-text" rows="5" style="font-size:16px;min-height:120px" placeholder="Nhận xét của thầy hoặc trợ giảng (1 điểm khen, tối đa 2 lỗi, 1 việc luyện tiếp)">${esc(r.comment)}</textarea>
@@ -1863,6 +1866,75 @@
         <div id="cs-${esc(r.key)}" style="font-size:12px;color:var(--green);min-height:14px"></div></div>`;
     });
     list.innerHTML = html;
+  }
+
+  /* ---------- Tìm bản ghi im lặng và yêu cầu học sinh ghi âm lại ---------- */
+  const SIL_MSG = (r) => `Thầy mở voice note của em (${r.title}, ${r.date.slice(8, 10)}/${r.date.slice(5, 7)}) nhưng không nghe thấy tiếng gì. Em ghi âm lại giúp thầy nhé:
+1. Mở bài, bấm "Ghi âm lại", nếu trình duyệt hỏi quyền dùng micro thì chọn Cho phép.
+2. Ghi thử vài giây rồi bấm nghe lại để chắc chắn nghe được giọng mình.
+3. Ghi âm đầy đủ, bấm "Gửi bản ghi âm mới cho thầy" và chờ hiện "Đã gửi" rồi mới thoát.
+Nếu nghe lại vẫn im lặng, em kiểm tra quyền Micro của trình duyệt trong Cài đặt điện thoại hoặc thử bằng trình duyệt khác.`;
+  const SIL_MARK = 'không nghe thấy tiếng gì';
+  const rcSilent = r => !!(r.level && r.level.silent);
+  function levelBadge(r) {
+    if (!r.level) return '';
+    if (r.level.fail) return '<span style="font-size:12px;color:var(--muted)">⚠ không đọc được file để đo</span>';
+    const db = r.level.peak > 0 ? Math.round(20 * Math.log10(r.level.peak)) : -99;
+    if (r.level.silent) return `<span class="badge" style="background:#b04a4a;color:#fff">🔇 im lặng</span> <span style="font-size:12px;color:var(--muted)">đỉnh ${db} dB${r.comment && r.comment.includes(SIL_MARK) ? ' · đã yêu cầu ghi lại' : ''}</span>`;
+    return `<span style="font-size:12px;color:var(--muted)">🔊 đỉnh ${db} dB</span>`;
+  }
+  function silButtons() {
+    const n = RC.rows.filter(r => rcSilent(r) && !(r.comment || '').includes(SIL_MARK)).length, btn = document.getElementById('sil-req-btn');
+    if (btn) { btn.style.display = RC.rows.some(rcSilent) ? '' : 'none'; btn.textContent = `📣 Yêu cầu ghi âm lại (${n})`; btn.disabled = n === 0; }
+  }
+  async function scanSilence() {
+    if (RC.scan) { RC.scan.stop = true; return; }
+    const todo = RC.rows.filter(r => !r.level);
+    if (!todo.length) { alert(RC.rows.length ? 'Các bản ghi trong danh sách đã được đo.' : 'Chưa có bản ghi nào trong danh sách.'); return; }
+    const btn = document.getElementById('sil-scan-btn'), st = document.getElementById('rc-status');
+    const scan = RC.scan = { stop: false }; const byPath = {}; let done = 0, next = 0;
+    const show = () => { btn.textContent = `■ Dừng (${done}/${todo.length})`; st.textContent = `Đang đo âm lượng: ${done}/${todo.length}`; };
+    show();
+    const worker = async () => {
+      while (!scan.stop && next < todo.length) {
+        const r = todo[next++];
+        if (!byPath[r.path]) {
+          byPath[r.path] = (async () => {
+            const { data, error } = await db.storage.from('voice-notes').download(r.path);
+            if (error || !data) return { fail: true };
+            const lv = await blobLevel(data);
+            return lv ? { peak: lv.peak, rms: lv.rms, silent: isSilentLevel(lv) } : { fail: true };
+          })();
+        }
+        r.level = await byPath[r.path]; done++;
+        const el = document.getElementById('lv-' + r.key); if (el) el.innerHTML = levelBadge(r);
+        show();
+      }
+    };
+    await Promise.all([worker(), worker()]);
+    RC.scan = null;
+    const bad = RC.rows.filter(rcSilent).length;
+    st.textContent = `Đã đo ${done} bản ghi: ${bad} bản im lặng${scan.stop ? ' (đã dừng)' : ''}`;
+    btn.textContent = '🔇 Tìm bản ghi im lặng'; silButtons();
+  }
+  async function requestRerecord() {
+    const dailyPaths = new Set(RC.rows.filter(r => r.src === 'daily').map(r => r.path));
+    const todo = RC.rows.filter(r => rcSilent(r) && !(r.comment || '').includes(SIL_MARK) && (r.src === 'daily' || !dailyPaths.has(r.path)));
+    if (!todo.length) { alert('Không còn bản im lặng nào chưa được yêu cầu ghi lại.'); return; }
+    if (!confirm(`Gửi yêu cầu ghi âm lại cho ${todo.length} bản im lặng?\n\n` + todo.map(r => `• ${r.student} (${r.title}, ${r.date.slice(8, 10)}/${r.date.slice(5, 7)})`).join('\n') + '\n\nNội dung hiện ở trang của học sinh, mục "Nhận xét từ trợ giảng".')) return;
+    const st = document.getElementById('rc-status'); let ok = 0, fail = 0;
+    for (const r of todo) {
+      const text = r.comment ? r.comment + '\n\n' + SIL_MSG(r) : SIL_MSG(r);
+      const t = r.src === 'daily' ? 'daily_scores' : 'speaking_submissions';
+      const patch = r.src === 'daily' ? { teacher_comment: text } : { teacher_comment: text, approved: true };
+      const { error } = await db.from(t).update(patch).eq('id', r.id);
+      if (error) { fail++; continue; }
+      ok++; r.comment = text;
+      const ta = document.getElementById('cm-' + r.key); if (ta) ta.value = text;
+      const el = document.getElementById('lv-' + r.key); if (el) el.innerHTML = levelBadge(r);
+    }
+    st.textContent = `Đã gửi yêu cầu ghi âm lại: ${ok} bản${fail ? ', ' + fail + ' lỗi' : ''}`;
+    silButtons();
   }
 
   /* ---------- Chấm AI lại cho bản ghi chưa có nhận xét (kết quả lưu cho đúng học sinh của bản ghi) ---------- */

@@ -18,3 +18,31 @@ async function blobToWav16k(blob) {
   for (let i = 0; i < data.length; i++) { const s = Math.max(-1, Math.min(1, data[i])); view.setInt16(44 + i * 2, s < 0 ? s * 0x8000 : s * 0x7fff, true); }
   return new Blob([view], { type: 'audio/wav' });
 }
+
+/* Phát hiện bản ghi im lặng (micro bị chặn, tắt tiếng, ghi nhầm): đo đỉnh và RMS của âm thanh (0..1).
+   Im lặng = đỉnh dưới 0,02 (khoảng -34 dBFS): giọng nói thật, kể cả nói nhỏ hoặc xa micro, luôn có đỉnh cao hơn mức này.
+   Trả null nếu trình duyệt không giải mã được (khi đó không chặn gì). */
+const SILENT_PEAK = 0.02;
+async function blobLevel(blob) {
+  try {
+    const arr = await blob.arrayBuffer();
+    const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+    let audio;
+    if (OAC) {
+      const off = new OAC(1, 16000, 16000);
+      audio = await new Promise((res, rej) => { const p = off.decodeAudioData(arr, res, rej); if (p && p.then) p.then(res, rej); });
+    } else {
+      const AC = window.AudioContext || window.webkitAudioContext, ctx = new AC();
+      audio = await new Promise((res, rej) => ctx.decodeAudioData(arr, res, rej));
+      if (ctx.close) ctx.close();
+    }
+    let peak = 0, sum = 0, n = 0;
+    for (let c = 0; c < audio.numberOfChannels; c++) {
+      const d = audio.getChannelData(c);
+      for (let i = 0; i < d.length; i++) { const v = Math.abs(d[i]); if (v > peak) peak = v; sum += v * v; }
+      n += d.length;
+    }
+    return n ? { peak, rms: Math.sqrt(sum / n) } : null;
+  } catch (e) { return null; }
+}
+const isSilentLevel = lv => !!lv && lv.peak < SILENT_PEAK;

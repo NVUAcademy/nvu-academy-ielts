@@ -477,6 +477,15 @@ async function toggleRec() {
     btn.textContent = '● Ghi lại'; btn.classList.add('rec');
     st.textContent = recSec >= REC_MAX_SEC ? `Đã ghi ${fmt(recSec)} (đủ 5 phút nên tự dừng). Nghe lại bên dưới.` : `Đã ghi ${fmt(recSec)}. Nghe lại bên dưới.`;
     const pl = $('recplay'); pl.src = URL.createObjectURL(recBlob); pl.style.display = '';
+    /* Bản ghi im lặng (micro bị chặn hoặc tắt tiếng): bỏ bản ghi và yêu cầu ghi lại ngay, không để nộp file trống */
+    const mine = recBlob;
+    blobLevel(mine).then(lv => {
+      if (recBlob !== mine || !isSilentLevel(lv)) return;
+      recBlob = null; RecStore.del(recKey());
+      const s2 = $('recstatus'), p2 = $('recplay');
+      if (s2) s2.textContent = '⚠️ Không thu được tiếng trong bản ghi (gần như im lặng). Em cho phép trình duyệt dùng micro, đưa micro gần miệng hơn rồi bấm "● Ghi lại".';
+      if (p2) { p2.removeAttribute('src'); p2.style.display = 'none'; }
+    });
   };
   recSec = 0; recorder.start();
   btn.textContent = '■ Dừng';
