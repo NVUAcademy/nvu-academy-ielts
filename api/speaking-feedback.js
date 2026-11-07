@@ -11,7 +11,8 @@ const CLAUDE_MODEL = process.env.CLAUDE_MODEL || 'claude-sonnet-5-5';
 const WHISPER_MODEL = process.env.WHISPER_MODEL || 'whisper-1';
 const DAILY_LIMIT = parseInt(process.env.DAILY_LIMIT || '8', 10);
 const MAX_AUDIO_BYTES = 12 * 1024 * 1024;
-const AI_MAX_SEC = 120;   /* bản ghi dài (tối đa 5 phút): AI chỉ nghe 120 giây đầu để kịp trong 60 giây của Vercel; thầy vẫn nghe toàn bộ */
+const CHUNK_SEC = 60;       /* bản ghi dài được cắt thành các đoạn ~60 giây để chép lời song song (kịp trong 60 giây của Vercel) */
+const BUDGET_MS = 52000;    /* tổng thời gian dành cho một lượt chấm (Vercel cho tối đa 60 giây, chừa thời gian tải file và lưu kết quả) */
 
 const SB_URL = () => (process.env.SUPABASE_URL || '').replace(/\/$/, '');
 /* Khóa kiểu mới (sb_secret_...) không phải JWT nên chỉ gửi header apikey; khóa service_role cũ (JWT) vẫn cần Bearer */
@@ -74,7 +75,7 @@ async function transcribe(buf, filename, mime) {
 /* ---------- Azure Pronunciation Assessment (tuỳ chọn, bật khi có AZURE_SPEECH_KEY và AZURE_SPEECH_REGION) ---------- */
 const AZURE_MAX_SEC = 30;   /* REST chỉ chấm được đoạn ngắn: lấy tối đa 30 giây đầu */
 
-function wavTrim(buf, maxSec) {
+function wavSlice(buf, startSec, maxSec) {
   if (buf.length < 44 || buf.toString('ascii', 0, 4) !== 'RIFF' || buf.toString('ascii', 8, 12) !== 'WAVE') return null;
   let p = 12, dataStart = -1, dataLen = 0;
   while (p + 8 <= buf.length) {
@@ -91,22 +92,63 @@ function wavTrim(buf, maxSec) {
     q += 8 + size + (size % 2);
   }
   if ((tag !== 1 && tag !== 0xFFFE) || rate !== 16000 || ch !== 1 || bits !== 16) return null;
-  const take = Math.min(dataLen, rate * 2 * maxSec) & ~1;
+  const startByte = Math.min(dataLen, Math.round(startSec * rate * 2)) & ~1;
+  const take = Math.min(dataLen - startByte, Math.round(rate * 2 * maxSec)) & ~1;
   const head = Buffer.alloc(44);
   head.write('RIFF', 0, 'ascii'); head.writeUInt32LE(36 + take, 4); head.write('WAVE', 8, 'ascii'); head.write('fmt ', 12, 'ascii');
   head.writeUInt32LE(16, 16); head.writeUInt16LE(1, 20); head.writeUInt16LE(1, 22); head.writeUInt32LE(16000, 24); head.writeUInt32LE(32000, 28); head.writeUInt16LE(2, 32); head.writeUInt16LE(16, 34);
   head.write('data', 36, 'ascii'); head.writeUInt32LE(take, 40);
-  return Buffer.concat([head, buf.subarray(dataStart, dataStart + take)]);
+  return Buffer.concat([head, buf.subarray(dataStart + startByte, dataStart + startByte + take)]);
+}
+const wavTrim = (buf, maxSec) => wavSlice(buf, 0, maxSec);
+
+/* Chia bản ghi WAV 16 kHz mono thành các đoạn ~CHUNK_SEC giây, cắt ở chỗ im lặng nhất gần mốc để không chẻ đôi một từ.
+   Trả về null nếu không phải WAV 16 kHz mono 16-bit hoặc bản ghi ngắn (chép lời một lần như cũ). */
+function planChunks(buf) {
+  const probe = wavSlice(buf, 0, 0.02); if (!probe) return null;
+  let p = 12, dataStart = -1, dataLen = 0;
+  while (p + 8 <= buf.length) { const id = buf.toString('ascii', p, p + 4), size = buf.readUInt32LE(p + 4); if (id === 'data') { dataStart = p + 8; dataLen = Math.min(size, buf.length - dataStart); break; } p += 8 + size + (size % 2); }
+  const total = dataLen / 32000;
+  if (dataStart < 0 || total <= CHUNK_SEC + 15) return null;
+  const energy = (t) => { let s = 0; const a = dataStart + (Math.round(t * 16000) * 2), n = 320; for (let i = 0; i < n; i++) { const o = a + i * 2; if (o + 2 > buf.length) break; const v = buf.readInt16LE(o); s += v * v; } return s; };
+  const cuts = [0];
+  for (let t = CHUNK_SEC; t < total - 15; t += CHUNK_SEC) {
+    const mid = cuts[cuts.length - 1] + CHUNK_SEC, pos = [], en = [];
+    for (let c = mid - 4; c <= mid + 4; c += 0.02) { pos.push(c); en.push(energy(c)); }
+    /* tìm quãng im lặng nhất quanh mốc rồi cắt ở giữa quãng đó */
+    const mn = Math.min(...en), lim = mn * 1.2 + 1; let k = en.indexOf(mn), a = k, b = k;
+    while (a > 0 && en[a - 1] <= lim) a--;
+    while (b < en.length - 1 && en[b + 1] <= lim) b++;
+    const best = pos[Math.round((a + b) / 2)];
+    cuts.push(best); t = best;
+  }
+  cuts.push(total);
+  return cuts.slice(0, -1).map((s, i) => ({ start: s, dur: cuts[i + 1] - s }));
 }
 
-async function azureAssess(wavBuf, referenceText) {
+/* Chép lời cả bản ghi: bản dài thì cắt đoạn rồi chạy song song, ghép lại với mốc thời gian đúng */
+async function transcribeAll(buf, ext, mime) {
+  const plan = planChunks(buf);
+  if (!plan) return transcribe(buf, 'voice.' + ext, mime);
+  const parts = await Promise.all(plan.map(c => transcribe(wavSlice(buf, c.start, c.dur), 'voice.wav', 'audio/wav')));
+  const shift = (arr, off) => (arr || []).map(x => ({ ...x, start: (x.start || 0) + off, end: (x.end || 0) + off }));
+  return {
+    text: parts.map(x => x.text || '').join(' ').replace(/\s+/g, ' ').trim(),
+    words: parts.flatMap((x, i) => shift(x.words, plan[i].start)),
+    segments: parts.flatMap((x, i) => shift(x.segments, plan[i].start)),
+    duration: parts.reduce((s, x, i) => s + (x.duration || plan[i].dur), 0),
+    chunks: plan.length
+  };
+}
+
+async function azureAssess(wavBuf, referenceText, timeoutMs) {
   const region = process.env.AZURE_SPEECH_REGION, key = process.env.AZURE_SPEECH_KEY;
   const clip = wavTrim(wavBuf, AZURE_MAX_SEC);
   if (!clip) throw new Error('file không phải WAV 16 kHz');
   const cfg = { GradingSystem: 'HundredMark', Granularity: 'Phoneme', Dimension: 'Comprehensive', EnableMiscue: !!referenceText, EnableProsodyAssessment: true, PhonemeAlphabet: 'IPA' };
   if (referenceText) cfg.ReferenceText = referenceText;
   const url = `https://${region}.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US&format=detailed`;
-  const r = await fetch(url, { method: 'POST', headers: { 'Ocp-Apim-Subscription-Key': key, 'Content-Type': 'audio/wav; codecs=audio/pcm; samplerate=16000', Accept: 'application/json', 'Pronunciation-Assessment': Buffer.from(JSON.stringify(cfg)).toString('base64') }, body: clip, signal: AbortSignal.timeout(28000) }).catch(e => { throw new Error('Azure: ' + (e.name === 'TimeoutError' ? 'quá thời gian chờ (28 giây). Region đang dùng: "' + region + '", kiểm tra lại AZURE_SPEECH_REGION và mạng của dịch vụ Speech' : (e.cause && e.cause.code ? e.cause.code + ' ' : '') + e.message)); });
+  const r = await fetch(url, { method: 'POST', headers: { 'Ocp-Apim-Subscription-Key': key, 'Content-Type': 'audio/wav; codecs=audio/pcm; samplerate=16000', Accept: 'application/json', 'Pronunciation-Assessment': Buffer.from(JSON.stringify(cfg)).toString('base64') }, body: clip, signal: AbortSignal.timeout(timeoutMs || 28000) }).catch(e => { throw new Error('Azure: ' + (e.name === 'TimeoutError' ? 'quá thời gian chờ (28 giây). Region đang dùng: "' + region + '", kiểm tra lại AZURE_SPEECH_REGION và mạng của dịch vụ Speech' : (e.cause && e.cause.code ? e.cause.code + ' ' : '') + e.message)); });
   if (!r.ok) throw new Error('Azure: ' + r.status + ' ' + (await r.text()).slice(0, 200));
   const j = await r.json();
   if (j.RecognitionStatus && j.RecognitionStatus !== 'Success') throw new Error('Azure không nhận ra giọng nói (' + j.RecognitionStatus + ')');
@@ -233,12 +275,10 @@ module.exports = async function handler(req, res) {
     const buf = Buffer.from(await fr.arrayBuffer());
     if (buf.length > MAX_AUDIO_BYTES) return bad(res, 413, 'File ghi âm quá dài, hãy ghi dưới 5 phút');
     const ext = (path.split('.').pop() || 'webm').toLowerCase();
-    const totalSeconds = Math.round(Math.max(0, buf.length - 44) / 32000);
-    const aiBuf = buf.length > 32000 * AI_MAX_SEC + 44 ? (wavTrim(buf, AI_MAX_SEC) || buf) : buf;
-    const truncated = aiBuf !== buf;
+    const deadline = Date.now() + BUDGET_MS;
 
     /* 2. Chuyển thành chữ */
-    const w = await transcribe(aiBuf, 'voice.' + ext, fr.headers.get('content-type'));
+    const w = await transcribeAll(buf, ext, fr.headers.get('content-type'));
     const transcript = (w.text || '').trim();
     if (words(transcript).length < 3) return bad(res, 422, 'Không nghe rõ giọng nói. Em ghi âm lại ở nơi yên tĩnh hơn nhé.');
 
@@ -260,7 +300,11 @@ module.exports = async function handler(req, res) {
     if (process.env.AZURE_SPEECH_KEY && process.env.AZURE_SPEECH_REGION) {
       try {
         const ref = task_type !== 'free' && b.target_text ? b.target_text : words(transcript).slice(0, 80).join(' ');
-        azure = await azureAssess(aiBuf, ref);
+        /* Azure chỉ chấm 30 giây đầu (giới hạn của REST). Bản ghi dài: chừa ít nhất 32 giây cho Claude, không đủ thời gian thì bỏ qua Azure.
+           Bản ghi ngắn giữ nguyên như cũ (tối đa 28 giây). */
+        const left = deadline - Date.now() - 32000;
+        if (w.chunks && left < 6000) azureError = 'Bỏ qua điểm Azure vì bản ghi dài, hết thời gian xử lý';
+        else azure = await azureAssess(buf, ref, w.chunks ? Math.min(28000, left) : 28000);
       } catch (e) { azureError = String(e.message || e).slice(0, 200); }
     }
 
@@ -270,7 +314,7 @@ module.exports = async function handler(req, res) {
     fb.azure = azure; if (azureError) fb.azure_error = azureError;
     if (azure && !(fb.focus_words || []).length) fb.focus_words = azure.weak_words.map(x => x.word).slice(0, 6);
     fb.fluency = fluency;
-    if (truncated) { fb.truncated = true; fb.total_seconds = totalSeconds; }
+    if (w.chunks) fb.chunks = w.chunks;
     fb.diffs = align ? align.diffs.filter(x => task_type !== 'mixed' || x.type !== 'extra').slice(0, 25) : [];
 
     /* 5. Lưu */
@@ -288,4 +332,4 @@ module.exports = async function handler(req, res) {
   }
 };
 
-module.exports._test = { alignWords, fluencyStats, words, wavTrim };
+module.exports._test = { alignWords, fluencyStats, words, wavTrim, wavSlice, planChunks };

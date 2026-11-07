@@ -447,7 +447,7 @@ async function resendVoice() {
     const r = await fetch('/api/submit-daily', { method: 'POST', headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ voice_only: true, student_id: student.id, practice_id: P.id, practice_date: P.date, section: P.section, voice_path: voicePath }) });
     const j = await r.json(); if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
-    recBlob = null; RecStore.del(recKey());
+    recBlob = null; RecStore.del(recKey()); if (existing) existing.voice_path = voicePath;
     msg.textContent = '✓ Đã gửi bản ghi âm mới. Thầy sẽ nghe lại.';
   } catch (e) { msg.textContent = 'Chưa gửi được: ' + e.message + '. Bản ghi vẫn còn trên máy, em bấm gửi lại nhé.'; }
   finally { uploading = false; }
@@ -559,7 +559,6 @@ async function runAi() {
       ${(f.fix || []).map(x => `<div class="review"><b>${esc(x.point)}</b><br>Ví dụ: ${esc(x.example)}<br><span class="ex">${esc(x.how)}</span></div>`).join('')}
       ${(f.focus_words || []).length ? `<div class="review">Từ nên đọc lại: ${f.focus_words.map(w => `<span class="word">${esc(w)}</span>`).join('')}</div>` : ''}
       <div class="review"><b>Việc tiếp theo:</b> ${esc(f.next_step)}</div>
-      ${f.truncated ? `<div class="review">Bài nói dài ${fmt(f.total_seconds)} nên AI chỉ nghe 2 phút đầu. Thầy sẽ nghe toàn bộ.</div>` : ''}
       ${f.azure ? `<div class="review">Điểm phát âm Azure: <b>${f.azure.pronunciation}</b>/100 (chính xác ${f.azure.accuracy}, lưu loát ${f.azure.fluency})${(f.azure.weak_words || []).length ? '<br>Từ cần sửa: ' + f.azure.weak_words.map(w => `<span class="word">${esc(w.word)} ${w.score}</span>`).join('') : ''}</div>` : ''}
       <p class="sub" style="font-size:15px;margin-top:8px">Band ước lượng: Fluency ${b.fluency ?? '–'} · Từ vựng ${b.lexical ?? '–'} · Ngữ pháp ${b.grammar ?? '–'} · Phát âm ${b.pronunciation_estimate ?? '–'} (chỉ để tham khảo, thầy Nam sẽ nghe và nhận xét thêm).</p>
       <div style="margin-top:12px"><a class="btn small" href="speaking.html" style="text-decoration:none">Luyện đọc lại các từ cần sửa →</a></div>`;
@@ -567,6 +566,8 @@ async function runAi() {
     box.innerHTML = `<h2>Nhận xét AI về bài nói</h2><p class="sub" style="font-size:16px">Chưa có nhận xét tự động (${esc(e.message)}). Thầy Nam sẽ nghe voice note và nhận xét cho em.</p><button class="btn small" onclick="retryAi(this)">Chấm lại bằng AI</button>`;
   }
 }
+/* Bài đã nộp nhưng AI chưa chấm được (hoặc lỗi): chấm lại bản ghi đã lưu, không cần ghi âm lại */
+function regradeAi(btn) { if (!existing || !existing.voice_path || !student) return; if (btn) btn.disabled = true; window._lastVoice = existing.voice_path; runAi(); }
 function retryAi(btn) { const card = btn.closest('.card'); if (card) card.remove(); runAi(); }
 
 async function save(res, score) {
@@ -604,7 +605,7 @@ async function save(res, score) {
 function renderResult(res, score, status) {
   const msg = status === 'saving' ? `<div class="saved">${recBlob ? 'Đang gửi voice note và lưu bài… Đừng đóng hoặc tải lại trang (có thể mất tới 1 phút nếu mạng chậm).' : 'Đang lưu…'}</div>`
     : status === 'ok' ? '<div class="saved ok">✓ Đã lưu điểm, lỗi sai và voice note. Thầy sẽ nghe và nhận xét.</div><button class="btn" style="margin:8px 0" onclick="redoPractice()">Làm lại bài</button>'
-    : status === 'review' ? `<div class="saved ok">Đây là bài em đã nộp trước đó.</div><button class="btn" style="margin:8px 0" onclick="redoPractice()">Làm lại bài</button>${existing && existing.teacher_comment ? `<div class="review" style="white-space:pre-line"><b>Nhận xét của thầy:</b> ${esc(existing.teacher_comment)}</div>` : ''}${P && P.steps && P.steps.some(s => s.kind === 'voice') ? `<div class="review"><b>Ghi âm lại theo nhận xét của thầy</b>${recorderHtml()}<button class="btn" style="margin-top:8px" onclick="resendVoice()">Gửi bản ghi âm mới cho thầy</button><div id="resendmsg" class="meta" style="margin-top:6px"></div></div>` : ''}`
+    : status === 'review' ? `<div class="saved ok">Đây là bài em đã nộp trước đó.</div><button class="btn" style="margin:8px 0" onclick="redoPractice()">Làm lại bài</button>${student && existing && existing.voice_path ? ' <button class="btn" style="margin:8px 0" onclick="regradeAi(this)">Chấm bài nói bằng AI</button>' : ''}${existing && existing.teacher_comment ? `<div class="review" style="white-space:pre-line"><b>Nhận xét của thầy:</b> ${esc(existing.teacher_comment)}</div>` : ''}${P && P.steps && P.steps.some(s => s.kind === 'voice') ? `<div class="review"><b>Ghi âm lại theo nhận xét của thầy</b>${recorderHtml()}<button class="btn" style="margin-top:8px" onclick="resendVoice()">Gửi bản ghi âm mới cho thầy</button><div id="resendmsg" class="meta" style="margin-top:6px"></div></div>` : ''}`
     : status === 'teacher' ? '<div class="saved">Chế độ giáo viên xem thử: không lưu.</div>'
     : status.startsWith('ok-novoice') ? `<div class="saved err">Đã lưu điểm nhưng chưa gửi được voice note (${esc(status.slice(11))}). Bản ghi vẫn còn trên máy: em bấm nút bên dưới để gửi lại, hoặc gửi thầy qua Zalo.</div><div class="review"><b>Gửi lại voice note</b>${recorderHtml()}<button class="btn" style="margin-top:8px" onclick="resendVoice()">Gửi bản ghi âm cho thầy</button><div id="resendmsg" class="meta" style="margin-top:6px"></div></div>`
     : `<div class="saved err">Không lưu được: ${esc(status.slice(4))}. Hãy chụp màn hình điểm gửi thầy.</div>`;
