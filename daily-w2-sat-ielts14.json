@@ -99,7 +99,17 @@
           "label": "5. He (broke / was breaking) his leg while he (played / was playing) basketball. ______",
           "fields": [
             {
-              "answer": "broke"
+              "answer": "broke",
+              "accept": [
+                "broke / was playing",
+                "broke, was playing",
+                "broke was playing",
+                "broke - was playing",
+                "broke and was playing",
+                "broke ... was playing",
+                "broke + was playing",
+                "broke & was playing"
+              ]
             }
           ],
           "explain": "Cặp: broke ... was playing."
