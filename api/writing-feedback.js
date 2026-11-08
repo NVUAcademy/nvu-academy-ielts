@@ -1,7 +1,7 @@
 /* AI chấm bài viết ngắn của học sinh (Pre-IELTS, Intermediate). Trả lời tiếng Việt, ví dụ tiếng Anh.
-   Biến môi trường: ANTHROPIC_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_KEY (đã có)
+   Biến môi trường: OPENAI_API_KEY (chấm bằng OpenAI), SUPABASE_URL, SUPABASE_SERVICE_KEY (đã có)
    Tuỳ chọn: CLAUDE_MODEL, AI_CLASSES (mặc định IELTS13,IELTS14), WRITING_LIMIT (số bài viết AI chấm mỗi ngày, mặc định 12) */
-const CLAUDE_MODEL = process.env.CLAUDE_MODEL || 'claude-sonnet-5-5';
+const OPENAI_CHAT_MODEL = process.env.OPENAI_CHAT_MODEL || 'gpt-4o-mini';   /* nhận xét bài viết dùng OpenAI (cùng key với Whisper) */
 const AI_CLASSES = (process.env.AI_CLASSES || 'IELTS13,IELTS14,FOUNDATION11').split(',').map(s => s.trim().toUpperCase()).filter(Boolean);
 const LIMIT = Math.max(1, parseInt(process.env.WRITING_LIMIT || '12', 10) || 4);
 
@@ -31,16 +31,16 @@ async function askClaude(user, retry) {
   catch (e) { if (!retry && /JSON/i.test(String(e.message))) return askClaude(user, true); throw e; }
 }
 async function askClaudeOnce(user) {
-  const r = await fetch('https://api.anthropic.com/v1/messages', {
+  const r = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
-    headers: { 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-    body: JSON.stringify({ model: CLAUDE_MODEL, max_tokens: 3000, system: SYSTEM, messages: [{ role: 'user', content: user }] })
+    headers: { Authorization: 'Bearer ' + process.env.OPENAI_API_KEY, 'content-type': 'application/json' },
+    body: JSON.stringify({ model: OPENAI_CHAT_MODEL, max_tokens: 3000, response_format: { type: 'json_object' }, messages: [{ role: 'system', content: SYSTEM }, { role: 'user', content: user }] })
   });
-  if (!r.ok) throw new Error('Claude: ' + r.status + ' ' + (await r.text()).slice(0, 300));
+  if (!r.ok) throw new Error('OpenAI: ' + r.status + ' ' + (await r.text()).slice(0, 300));
   const j = await r.json();
-  const text = (j.content || []).map(c => c.text || '').join('');
+  const text = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || '';
   const m = text.match(/\{[\s\S]*\}/);
-  if (!m) throw new Error('Claude không trả về JSON');
+  if (!m) throw new Error('AI không trả về JSON');
   return parseClaudeJson(m[0]);
 }
 
@@ -56,7 +56,7 @@ module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'content-type');
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return bad(res, 405, 'POST only');
-  for (const k of ['ANTHROPIC_API_KEY', 'SUPABASE_URL', 'SUPABASE_SERVICE_KEY'])
+  for (const k of ['OPENAI_API_KEY', 'SUPABASE_URL', 'SUPABASE_SERVICE_KEY'])
     if (!process.env[k]) return bad(res, 500, 'Thiếu biến môi trường ' + k + ' trên Vercel');
 
   try {

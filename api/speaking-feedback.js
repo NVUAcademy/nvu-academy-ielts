@@ -7,7 +7,7 @@
      ANTHROPIC_API_KEY, OPENAI_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_KEY
    Tuỳ chọn: CLAUDE_MODEL (mặc định claude-sonnet-5-5), WHISPER_MODEL (mặc định whisper-1), DAILY_LIMIT (mặc định 8) */
 
-const CLAUDE_MODEL = process.env.CLAUDE_MODEL || 'claude-sonnet-5-5';
+const OPENAI_CHAT_MODEL = process.env.OPENAI_CHAT_MODEL || 'gpt-4o-mini';   /* nhận xét bài nói dùng OpenAI (cùng key với Whisper) */
 const WHISPER_MODEL = process.env.WHISPER_MODEL || 'whisper-1';
 const DAILY_LIMIT = parseInt(process.env.DAILY_LIMIT || '8', 10);
 const MAX_AUDIO_BYTES = 12 * 1024 * 1024;
@@ -186,16 +186,16 @@ async function azureAssess(wavBuf, referenceText, timeoutMs) {
 }
 
 async function askClaude(system, user) {
-  const r = await fetch('https://api.anthropic.com/v1/messages', {
+  const r = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
-    headers: { 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-    body: JSON.stringify({ model: CLAUDE_MODEL, max_tokens: 3000, system, messages: [{ role: 'user', content: user }] }), signal: AbortSignal.timeout(30000)
-  }).catch(e => { throw new Error('Claude: ' + (e.name === 'TimeoutError' ? 'quá thời gian chờ (30 giây)' : e.message)); });
-  if (!r.ok) throw new Error('Claude: ' + r.status + ' ' + (await r.text()).slice(0, 300));
+    headers: { Authorization: 'Bearer ' + process.env.OPENAI_API_KEY, 'content-type': 'application/json' },
+    body: JSON.stringify({ model: OPENAI_CHAT_MODEL, max_tokens: 3000, response_format: { type: 'json_object' }, messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }), signal: AbortSignal.timeout(30000)
+  }).catch(e => { throw new Error('OpenAI: ' + (e.name === 'TimeoutError' ? 'quá thời gian chờ (30 giây)' : e.message)); });
+  if (!r.ok) throw new Error('OpenAI: ' + r.status + ' ' + (await r.text()).slice(0, 300));
   const j = await r.json();
-  const text = (j.content || []).map(c => c.text || '').join('');
+  const text = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || '';
   const m = text.match(/\{[\s\S]*\}/);
-  if (!m) throw new Error('Claude không trả về JSON');
+  if (!m) throw new Error('AI không trả về JSON');
   return parseClaudeJson(m[0]);
 }
 
@@ -254,7 +254,7 @@ module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'content-type');
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return bad(res, 405, 'POST only');
-  for (const k of ['ANTHROPIC_API_KEY', 'OPENAI_API_KEY', 'SUPABASE_URL', 'SUPABASE_SERVICE_KEY'])
+  for (const k of ['OPENAI_API_KEY', 'SUPABASE_URL', 'SUPABASE_SERVICE_KEY'])
     if (!process.env[k]) return bad(res, 500, 'Thiếu biến môi trường ' + k + ' trên Vercel');
 
   const b = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
