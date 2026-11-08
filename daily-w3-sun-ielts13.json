@@ -16,11 +16,109 @@
   "audio": {
     "call": {
       "label": "Audio A · Old Quarter Heritage Walks",
-      "src": "audio/IELTS13_W3_Sun_ListeningA.mp3"
+      "lines": [
+        {
+          "speaker": "B",
+          "text": "Good afternoon, Old Quarter Heritage Walks. How can I help you?"
+        },
+        {
+          "speaker": "A",
+          "text": "Hi. I'd like to book a place on one of your walking tours, please."
+        },
+        {
+          "speaker": "B",
+          "text": "Of course. We run tours on Wednesdays and Saturdays. Which would you prefer?"
+        },
+        {
+          "speaker": "A",
+          "text": "Wednesday, please... oh, wait. I have a class on Wednesdays. Saturday would be better."
+        },
+        {
+          "speaker": "B",
+          "text": "No problem. The next Saturday tour is on the fourteenth of November."
+        },
+        {
+          "speaker": "A",
+          "text": "I'm afraid I'm away on the fourteenth. Is there one the week after?"
+        },
+        {
+          "speaker": "B",
+          "text": "Yes, there's one on the twenty-first, and there are still some places left."
+        },
+        {
+          "speaker": "A",
+          "text": "Great. The twenty-first, then."
+        },
+        {
+          "speaker": "B",
+          "text": "And could I have your surname, please?"
+        },
+        {
+          "speaker": "A",
+          "text": "It's Kowalski."
+        },
+        {
+          "speaker": "B",
+          "text": "Could you spell that for me?"
+        },
+        {
+          "speaker": "A",
+          "text": "K... O... W... A... L... S... K... I."
+        },
+        {
+          "speaker": "B",
+          "text": "Thank you, Mr Kowalski. How many tickets do you need?"
+        },
+        {
+          "speaker": "A",
+          "text": "Four, please. Oh, sorry, make it five. My brother has just decided to come with us."
+        },
+        {
+          "speaker": "B",
+          "text": "Five tickets, then. Are you all adults?"
+        },
+        {
+          "speaker": "A",
+          "text": "Four adults and one student. I'm a student at the university."
+        },
+        {
+          "speaker": "B",
+          "text": "Right. Adult tickets are twelve pounds each, but students pay only eight pounds."
+        },
+        {
+          "speaker": "A",
+          "text": "That's good. And where do we meet?"
+        },
+        {
+          "speaker": "B",
+          "text": "Outside the main post office on Linden Road. The tour starts at ten thirty. It used to start at ten, but we changed it last month."
+        },
+        {
+          "speaker": "A",
+          "text": "Ten thirty. Got it. Do I need to bring anything?"
+        },
+        {
+          "speaker": "B",
+          "text": "Just comfortable shoes, because you'll walk for about two hours. You can bring a camera too, but that's not necessary."
+        },
+        {
+          "speaker": "A",
+          "text": "Thanks very much."
+        },
+        {
+          "speaker": "B",
+          "text": "You're welcome. See you on the twenty-first."
+        }
+      ]
     },
     "street": {
       "label": "Audio B · Willow Lane",
-      "src": "audio/IELTS13_W3_Sun_ListeningB.mp3"
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "I live on Willow Lane, a quiet street in the north of the city. At the start of the lane there is a small bakery, and next to it you can find a florist. Directly opposite the florist is the post office. If you walk to the end of the street, you'll see a park with a pond, and behind the park there is a tall old church. My favourite place is a café on the corner of Willow Lane and Mill Road. It has a lovely garden, and in front of the café there are always lots of bicycles."
+        }
+      ]
     }
   },
   "steps": [
