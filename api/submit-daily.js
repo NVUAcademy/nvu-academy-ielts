@@ -58,7 +58,8 @@ module.exports = async function handler(req, res) {
     const maxScore = b.max_score;
     const score = b.score;
     if (!section || !practiceId) return bad(res, 400, 'Thiếu thông tin bài tập');
-    if (!isInt(maxScore) || maxScore < 1 || maxScore > 60) return bad(res, 400, 'max_score không hợp lệ');
+    /* max_score 0: bài không có phần chấm tự động (chỉ viết và ghi âm, như bài Sunday Class day) */
+    if (!isInt(maxScore) || maxScore > 60) return bad(res, 400, 'max_score không hợp lệ');
     if (!isInt(score) || score > maxScore) return bad(res, 400, 'score không hợp lệ');
 
     /* Đường dẫn voice phải nằm trong thư mục của chính học sinh này */
