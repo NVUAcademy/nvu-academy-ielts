@@ -135,9 +135,19 @@ async function sendAll(id) {
   try {
     const body = { student_id: r.student_id, practice_id: r.practice_id, practice_date: r.practice_date, section: r.section, comment };
     if (rec) { body.mime = rec.blob.type; body.audio = await blobToB64(rec.blob); }
-    const res = await fetch('/api/voice-reply', {
+    /* Lấy phiên đăng nhập mới mỗi lần gửi: token lấy lúc mở trang hết hạn sau khoảng 1 giờ, các lần gửi sau đó bị từ chối
+       với thông báo "Chỉ trợ giảng hoặc giáo viên được gửi nhận xét". getSession() tự làm mới token khi cần. */
+    const { data: { session: fresh } } = await db.auth.getSession();
+    if (!fresh) throw new Error('Phiên đăng nhập đã hết hạn. Chép nhận xét ra chỗ khác, tải lại trang rồi đăng nhập lại');
+    session = fresh;
+    const send = () => fetch('/api/voice-reply', {
       method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + session.access_token }, body: JSON.stringify(body)
     });
+    let res = await send();
+    if (res.status === 403) { /* thử làm mới token một lần rồi gửi lại */
+      const { data: rf } = await db.auth.refreshSession();
+      if (rf && rf.session) { session = rf.session; res = await send(); }
+    }
     const j = await res.json();
     if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
     msg.innerHTML = '<span class="ok">✓ Đã gửi cho học sinh. Nhận xét vẫn được giữ trên trang này.</span>';
