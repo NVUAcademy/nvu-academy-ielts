@@ -1,9 +1,10 @@
 /* AI chấm bài viết ngắn của học sinh (Pre-IELTS, Intermediate). Trả lời tiếng Việt, ví dụ tiếng Anh.
    Biến môi trường: OPENAI_API_KEY (chấm bằng OpenAI), SUPABASE_URL, SUPABASE_SERVICE_KEY (đã có)
-   Tuỳ chọn: CLAUDE_MODEL, AI_CLASSES (mặc định IELTS13,IELTS14), WRITING_LIMIT (số bài viết AI chấm mỗi ngày, mặc định 6) */
+   Tuỳ chọn: CLAUDE_MODEL, AI_CLASSES (mặc định IELTS13,IELTS14), giới hạn 6 lượt chấm viết mỗi ngày (cố định trong code) */
 const OPENAI_CHAT_MODEL = process.env.OPENAI_CHAT_MODEL || 'gpt-4o-mini';   /* nhận xét bài viết dùng OpenAI (cùng key với Whisper) */
 const AI_CLASSES = (process.env.AI_CLASSES || 'IELTS13,IELTS14,FOUNDATION11').split(',').map(s => s.trim().toUpperCase()).filter(Boolean);
-const LIMIT = Math.max(1, parseInt(process.env.WRITING_LIMIT || '6', 10) || 6);
+/* Cố định 6 lượt chấm viết mỗi học sinh mỗi ngày; không đọc biến môi trường WRITING_LIMIT nữa để không bị giá trị cũ trên Vercel ghi đè */
+const LIMIT = 6;
 
 const SB_URL = () => (process.env.SUPABASE_URL || '').replace(/\/$/, '');
 const SB_HEAD = () => {
