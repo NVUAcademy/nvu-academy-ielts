@@ -366,7 +366,7 @@ async function loadToday() {
       html += '<div class="sec-label">' + (['IELTS13', 'IELTS14'].includes(student.classCode) ? 'Nhận xét của thầy' : 'Nhận xét từ trợ giảng') + '</div>';
       allReplies.forEach(x => {
         const t = (byId[x.practice_id] && byId[x.practice_id].title) || 'Bài luyện tập';
-        html += `<div class="task" style="flex-wrap:wrap"><div class="ic" style="background:var(--lilac)">🎧</div><div class="tt"><b>${esc(t)}</b><span>${esc(x.date)}</span></div>${x.comment ? `<div style="width:100%;margin-top:8px;font-size:16px;white-space:pre-line">${esc(x.comment)}</div>` : ''}${x.url ? `<audio controls preload="none" src="${esc(x.url)}" style="width:100%;margin-top:8px"></audio>` : ''}${x.practice_id && (x.url || RR_RE.test(x.comment || '')) ? `<a class="btn small" style="margin-top:8px" href="daily-practice.html?p=${esc(x.practice_id)}&d=${esc(x.date)}&redo=1">🎙 Ghi âm lại</a>` : ''}</div>`;
+        html += `<div class="task" style="flex-wrap:wrap"><div class="ic" style="background:var(--lilac)">🎧</div><div class="tt"><b>${esc(t)}</b><span>${esc(x.date)}</span></div>${x.comment ? `<div style="width:100%;margin-top:8px;font-size:16px;white-space:pre-line">${esc(x.comment)}</div>` : ''}${x.url ? `<audio controls preload="none" src="${esc(x.url)}" style="width:100%;margin-top:8px"></audio>` : (x.has_audio ? '<div class="meta" style="margin-top:8px">Chưa mở được file ghi âm. Em tải lại trang; nếu vẫn không nghe được, em báo thầy.</div>' : '')}${x.practice_id && (x.url || RR_RE.test(x.comment || '')) ? `<a class="btn small" style="margin-top:8px" href="daily-practice.html?p=${esc(x.practice_id)}&d=${esc(x.date)}&redo=1">🎙 Ghi âm lại</a>` : ''}</div>`;
       });
     }
     const _qd = new Date(), _qiso = _qd.getFullYear() + '-' + String(_qd.getMonth() + 1).padStart(2, '0') + '-' + String(_qd.getDate()).padStart(2, '0');
@@ -396,7 +396,7 @@ async function loadToday() {
   }
 }
 /* Nhận xét nào nhờ học sinh ghi âm lại hoặc gửi lại voice note thì có nút và thẻ việc cần làm */
-const RR_RE = /ghi âm lại|bản ghi âm mới|chưa nhận được voice note/i;
+const RR_RE = /ghi âm lại|ghi âm thêm|ghi lại (và )?gửi|bản ghi âm mới|chưa nhận được voice note/i;
 /* Học sinh bấm "Đã gửi xong" trên thẻ yêu cầu ghi âm lại: ẩn thẻ trên máy này */
 function rrDone(btn) {
   const card = btn.closest('[data-rr]'); if (!card) return;

@@ -32,10 +32,16 @@ const cutoff = () => new Date(Date.now() - 14 * 86400000).toISOString().slice(0,
 
 /* Tạo link nghe có hạn 1 giờ cho file ghi âm */
 async function signedUrl(path) {
-  const s = await (await sb('/storage/v1/object/sign/voice-notes/' + path.split('/').map(encodeURIComponent).join('/'), {
+  const r = await sb('/storage/v1/object/sign/voice-notes/' + path.split('/').map(encodeURIComponent).join('/'), {
     method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ expiresIn: 3600 })
-  })).json();
-  return s.signedURL ? SB_URL() + '/storage/v1' + s.signedURL : null;
+  });
+  const s = await r.json().catch(() => ({}));
+  if (!s.signedURL) {
+    /* Ghi lại lỗi để xem trong nhật ký Vercel (chỉ giữ 1 giờ). Không ghi nội dung nhạy cảm, chỉ mã lỗi và đường dẫn file */
+    console.error('voice-reply: không ký được link nghe', r.status, path, String(s.message || s.error || '').slice(0, 160));
+    return null;
+  }
+  return SB_URL() + '/storage/v1' + s.signedURL;
 }
 
 module.exports = async function handler(req, res) {
@@ -59,7 +65,8 @@ module.exports = async function handler(req, res) {
       const replies = [];
       for (const r of Array.isArray(rows) ? rows : []) {
         const url = r.path ? await signedUrl(r.path) : null;
-        replies.push({ id: r.id, practice_id: r.practice_id, date: r.practice_date, section: r.section, created_at: r.created_at, comment: r.comment || '', url });
+        /* has_audio: bản ghi có file nhưng chưa tạo được link (url = null) thì trang học sinh báo lỗi thay vì im lặng */
+        replies.push({ id: r.id, practice_id: r.practice_id, date: r.practice_date, section: r.section, created_at: r.created_at, comment: r.comment || '', url, has_audio: !!r.path });
       }
       return res.status(200).json({ ok: true, replies });
     }
