@@ -1,6 +1,6 @@
 /* Nhận xét của trợ giảng gửi cho học sinh (tro-giang.html và index.html).
    POST (trợ giảng/giáo viên): kiểm tra đăng nhập và có trong staff_emails, lưu nhận xét và/hoặc file ghi âm.
-   GET (học sinh): trả về các nhận xét 14 ngày gần nhất, kèm link nghe có hạn 1 giờ nếu có ghi âm.
+   GET (học sinh): trả về các nhận xét 60 ngày gần nhất (tối đa 50), kèm link nghe có hạn 1 giờ nếu có ghi âm.
    Biến môi trường: SUPABASE_URL, SUPABASE_SERVICE_KEY (đã có) */
 
 const SB_URL = () => (process.env.SUPABASE_URL || '').replace(/\/$/, '');
@@ -28,7 +28,9 @@ async function staffEmail(req) {
   return Array.isArray(rows) && rows.length ? email : null;
 }
 
-const cutoff = () => new Date(Date.now() - 14 * 86400000).toISOString().slice(0, 10);
+/* Học sinh thấy phản hồi của trợ giảng trong 60 ngày gần nhất (tính theo ngày của bài tập); file ghi âm gốc không bị xóa */
+const KEEP_DAYS = 60;
+const cutoff = () => new Date(Date.now() - KEEP_DAYS * 86400000).toISOString().slice(0, 10);
 
 /* Tạo link nghe có hạn 1 giờ cho file ghi âm */
 async function signedUrl(path) {
