@@ -1,0 +1,194 @@
+{
+  "id": "w4-sat-ielts13",
+  "title": "Saturday Daily Practice",
+  "subtitle": "Rewrite your overview, bar chart Writing, vocabulary, and a short reading for Sunday",
+  "theme": "P2 · Writing revision and reading prep",
+  "source": "Bài tự soạn, biểu đồ mới",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 4,
+  "day": "saturday",
+  "date": "2026-11-14",
+  "section": "writing",
+  "minutes": 60,
+  "intro": "Làm lần lượt 4 bước, khoảng 60 phút. Bước 1 viết lại bài Writing của Thứ 2 theo góp ý. Bước 2 viết một biểu đồ mới. Bước 4 chuẩn bị cho buổi Chủ nhật. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow.",
+  "send_today": "Hoàn thành 4 bước trên web. Bài Writing ở bước 1 và 2 được thầy chấm.",
+  "error_type": "writing",
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Viết lại intro và overview (Ma River)",
+      "minutes": 20,
+      "instructions": "Viết lại intro và overview của bài Ma River theo góp ý của thầy. Không viết lại theo bản mẫu, chỉ sửa đúng lỗi thầy đã ghi.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s1_1",
+          "q": "Viết lại bài Ma River (bài 1 từ Thứ 2). Ghi lỗi đã sửa.",
+          "model": "Ghi lại 2 lỗi thầy đã góp ý và viết câu đã sửa. Ví dụ: Overall, there was a significant increase in housing, while a considerable decline was seen in farmland."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Writing: intro + overview cho biểu đồ bar",
+      "minutes": 25,
+      "instructions": "Đọc biểu đồ 1 phút. Viết intro và overview. Overview 2 câu, không số liệu. Ảnh ở dưới hướng dẫn.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s2_1",
+          "q": "Biểu đồ (ngang): nơi học sinh học nhiều nhất, 2024.",
+          "model": "Intro: The given bar chart illustrates the proportion of students who study in four different places in 2024. Overview: Overall, the library was the most popular place to study, while the campus lab was the least popular. It is also clear that the figures for home were the second highest, but the figures for the café were considerably lower."
+        }
+      ],
+      "images": [
+        {
+          "src": "images/w3-sat-bar.png",
+          "alt": "Bar chart: where students study most, 2024"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Vocabulary: pick up, master, progress",
+      "minutes": 10,
+      "instructions": "Điền từ trong khung: pick up · master · make progress · get the hang of · give up · determined · confident · from scratch. Đổi dạng từ nếu cần.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. I want to ______ a new language this year.",
+          "fields": [
+            {
+              "answer": "pick up",
+              "accept": [
+                "pick up",
+                "learn"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2. It took me a month to ______ the new software.",
+          "fields": [
+            {
+              "answer": "master",
+              "accept": [
+                "get the hang of"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3. I can see that I am starting to ______ in English.",
+          "fields": [
+            {
+              "answer": "make progress",
+              "accept": [
+                "make progress"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "4. Do not ______ if the first test is hard.",
+          "fields": [
+            {
+              "answer": "give up",
+              "accept": [
+                "give up"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_5",
+          "label": "5. She is very ______ to pass the exam.",
+          "fields": [
+            {
+              "answer": "determined",
+              "accept": [
+                "determined"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_6",
+          "label": "6. I feel more ______ after I practise every day.",
+          "fields": [
+            {
+              "answer": "confident",
+              "accept": [
+                "confident"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_7",
+          "label": "7. He started learning to swim ______ at the age of 30.",
+          "fields": [
+            {
+              "answer": "from scratch",
+              "accept": [
+                "from scratch"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_8",
+          "label": "8. Learning a language is hard, but I can ______ it step by step.",
+          "fields": [
+            {
+              "answer": "get the hang of",
+              "accept": [
+                "master"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Đọc trước: chủ đề Chủ nhật (studying abroad)",
+      "minutes": 15,
+      "instructions": "Đọc đoạn ngắn, rồi chọn đáp án. Đây là chuẩn bị cho buổi Chủ nhật 15/11.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s4_1",
+          "q": "1. What do many students find difficult when they study abroad?",
+          "options": {
+            "A": "the food",
+            "B": "the language",
+            "C": "the weather",
+            "D": "the fees"
+          },
+          "answer": "B",
+          "explain": "Đoạn: the language is often the biggest challenge."
+        },
+        {
+          "id": "s4_2",
+          "q": "2. What can students do to adapt faster?",
+          "options": {
+            "A": "stay in their rooms",
+            "B": "join clubs",
+            "C": "avoid classes",
+            "D": "change country"
+          },
+          "answer": "B",
+          "explain": "Đoạn: joining clubs helps them meet people."
+        }
+      ],
+      "passage": "Many students who study abroad find the language to be the biggest challenge. At first they may feel homesick. However, joining clubs and activities helps them meet people and adapt faster."
+    }
+  ]
+}

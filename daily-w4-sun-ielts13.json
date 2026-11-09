@@ -1,0 +1,100 @@
+{
+  "id": "w4-sun-ielts13",
+  "title": "Sunday Daily Practice",
+  "subtitle": "Class day warm-up: recall and read your overview aloud",
+  "theme": "Class warm-up",
+  "source": "Từ vựng tự soạn",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 4,
+  "day": "sunday",
+  "date": "2026-11-15",
+  "section": "warmup",
+  "minutes": 15,
+  "intro": "Hôm nay là ngày học. Chỉ làm khởi động 2 bước, 15 phút, mang bút và ghi chú đến lớp. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 10 Meow (ngày học), muộn hoặc làm một nửa được 5 Meow.",
+  "send_today": "Hoàn thành 2 bước trên web. Voice note được gửi tự động khi bấm Nộp bài.",
+  "error_type": "warmup",
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocabulary recall",
+      "minutes": 6,
+      "instructions": "Điền từ trong khung: take up · trial and error · self-taught · in the end · proud of · keep trying. Đổi dạng từ nếu cần.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. I learned to cook by ______ and mistakes.",
+          "fields": [
+            {
+              "answer": "trial and error",
+              "accept": [
+                "trial and error"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. He is a ______ musician. He never had a teacher.",
+          "fields": [
+            {
+              "answer": "self-taught",
+              "accept": [
+                "self-taught"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. I was ______ of my first English essay.",
+          "fields": [
+            {
+              "answer": "proud of",
+              "accept": [
+                "proud of"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. ______ I passed the test after many months.",
+          "fields": [
+            {
+              "answer": "in the end",
+              "accept": [
+                "in the end"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. Please ______ practising, even if it is hard.",
+          "fields": [
+            {
+              "answer": "keep trying",
+              "accept": [
+                "keep trying"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Đọc to 2 câu overview",
+      "minutes": 9,
+      "instructions": "Đọc to 2 câu overview bạn đã sửa trong bài Thứ 7. Không nộp bài viết hôm nay.",
+      "kind": "voice",
+      "lines": [
+        "Đọc to 2 câu overview đã sửa."
+      ],
+      "note": "Thầy nghe nhịp đọc và âm cuối của -ed."
+    }
+  ]
+}

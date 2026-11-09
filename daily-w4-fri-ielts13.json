@@ -1,0 +1,178 @@
+{
+  "id": "w4-fri-ielts13",
+  "title": "Friday Daily Practice",
+  "subtitle": "Review Thursday's Listening and Speaking: work words and Part 1",
+  "theme": "P3 · Listening and Speaking review",
+  "source": "Ôn Unit 3 (Mindset L1 tr.54 và tr.58), từ vựng tự soạn",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 4,
+  "day": "friday",
+  "date": "2026-11-13",
+  "section": "speaking",
+  "minutes": 60,
+  "intro": "Làm lần lượt 4 bước, khoảng 60 phút. Hôm nay ôn buổi Thứ 5 (Listening và Speaking Unit 3). Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow.",
+  "send_today": "Hoàn thành 4 bước trên web. Các voice note được gửi tự động khi bấm Nộp bài.",
+  "error_type": "speaking",
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Work words",
+      "minutes": 8,
+      "instructions": "Điền từ trong khung: colleague · salary · career · workload · job satisfaction · work-life balance · rewarding · demanding. Đổi dạng từ nếu cần.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. My ______ helped me finish the report on time.",
+          "fields": [
+            {
+              "answer": "colleague",
+              "accept": [
+                "colleagues"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. The new job pays a higher ______.",
+          "fields": [
+            {
+              "answer": "salary",
+              "accept": [
+                "salaries"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. A teacher's ______ can be very ______ because it helps people learn.",
+          "fields": [
+            {
+              "answer": "career",
+              "accept": [
+                "career"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. My ______ is heavy this week: five reports and two meetings.",
+          "fields": [
+            {
+              "answer": "workload"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. She has high ______ because she likes her team.",
+          "fields": [
+            {
+              "answer": "job satisfaction",
+              "accept": [
+                "job satisfaction"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "6. Working in a hospital is ______ but it is very tiring.",
+          "fields": [
+            {
+              "answer": "demanding",
+              "accept": [
+                "demanding"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_7",
+          "label": "7. Many people want good ______ between work and family life.",
+          "fields": [
+            {
+              "answer": "work-life balance",
+              "accept": [
+                "work-life balance"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_8",
+          "label": "8. Teaching is a ______ job because you see students improve.",
+          "fields": [
+            {
+              "answer": "rewarding",
+              "accept": [
+                "rewarding"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Listening review: Unit 3",
+      "minutes": 20,
+      "instructions": "Nghe lại track Unit 3 đã học trên lớp, rồi chọn đáp án. Không xem lại bảng ghi trên lớp. Nếu chưa có audio trên web, bước này được thầy gửi thêm.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "1. What does the speaker do for work?",
+          "options": {
+            "A": "a nurse",
+            "B": "a teacher",
+            "C": "an engineer",
+            "D": "a cook"
+          },
+          "answer": "B",
+          "explain": "Xem lại track trên lớp: the speaker teaches English."
+        },
+        {
+          "id": "s2_2",
+          "q": "2. How does the speaker feel about the job?",
+          "options": {
+            "A": "bored",
+            "B": "satisfied",
+            "C": "worried",
+            "D": "tired"
+          },
+          "answer": "B",
+          "explain": "Chú ý từ satisfaction trong bài nghe."
+        }
+      ],
+      "passage": "Thầy sẽ gửi audio track Unit 3 cho bước này. Các câu hỏi dựa trên nội dung đã học trên lớp."
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Speaking Part 1: shadowing",
+      "minutes": 15,
+      "instructions": "Nghe câu mẫu, rồi nói theo (shadowing) 4 lần. Chú ý âm cuối và nối âm.",
+      "kind": "voice",
+      "lines": [
+        "I work as a teacher, and I really enjoy it. The workload is heavy, but the job is rewarding."
+      ],
+      "note": "Thầy nghe nhịp và âm cuối của enjoy, heavy, rewarding."
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Speaking Part 1: voice note",
+      "minutes": 15,
+      "instructions": "Ghi âm 4 câu về công việc hoặc học tập, mỗi câu 2 đến 3 câu. Dùng ít nhất 2 từ vừa học.",
+      "kind": "voice",
+      "lines": [
+        "Trả lời 4 câu Part 1 về công việc hoặc học tập."
+      ],
+      "note": "Thầy nghe cách em dùng từ mới và âm cuối."
+    }
+  ]
+}

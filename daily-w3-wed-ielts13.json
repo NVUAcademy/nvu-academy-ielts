@@ -2,18 +2,19 @@
   "id": "w3-wed-ielts13",
   "title": "Wednesday Daily Practice",
   "subtitle": "Weekly test /19 and Speaking preparation",
-  "theme": "P1 and P2 · Weekly test",
-  "source": "Mindset L1 Unit 2 (P1 Listening+Speaking, P2 Reading) - bài tự soạn, không trùng handout P1, P2 và Trial 1, 2",
+  "theme": "Weekly test",
+  "source": "Bài tự soạn, biểu đồ mới (không trùng Writing 4 và handout P2)",
   "class_codes": [
     "IELTS13"
   ],
   "week_number": 3,
   "day": "wednesday",
   "date": "2026-11-11",
-  "section": "grammar",
+  "section": "test",
   "minutes": 60,
-  "intro": "Kiểm tra tuần /19 gồm 4 phần (Vocabulary 5, Grammar 5, Reading 4, Writing 5), làm trong 40 phút, không xem ghi chú, không tra từ điển. Sau đó là bước 5 chuẩn bị Speaking (15 phút). Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow.",
-  "audio": {},
+  "intro": "Kiểm tra tuần /19 gồm 4 phần, làm trong 40 phút, không xem ghi chú, không tra từ điển. Sau đó là bước chuẩn bị Speaking (15 phút). Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow.",
+  "send_today": "Hoàn thành bài kiểm tra trên web. Bài Writing và voice note được thầy chấm.",
+  "error_type": "test",
   "steps": [
     {
       "id": "s1",
@@ -27,7 +28,10 @@
           "label": "1. Please ______ for the swimming course at reception.",
           "fields": [
             {
-              "answer": "sign up"
+              "answer": "sign up",
+              "accept": [
+                "signed up"
+              ]
             }
           ]
         },
@@ -63,7 +67,10 @@
           "label": "5. We decided to ______ bikes and explore the island.",
           "fields": [
             {
-              "answer": "hire"
+              "answer": "hire",
+              "accept": [
+                "hired"
+              ]
             }
           ]
         }
@@ -72,59 +79,66 @@
     {
       "id": "s2",
       "title": "Section 2 · Grammar /5",
-      "minutes": 8,
-      "instructions": "Chia động từ trong ngoặc ở present perfect, past simple hoặc bị động hiện tại đơn.",
+      "minutes": 6,
+      "instructions": "Điền dạng đúng của động từ trong ngoặc: quá khứ đơn hoặc bị động quá khứ đơn.",
       "kind": "fill",
       "items": [
         {
           "id": "s2_1",
-          "label": "1. The number of cafés in my neighbourhood ______ (rise) a lot since 2018.",
+          "label": "1. The old market ______ (demolish) in 2018.",
           "fields": [
             {
-              "answer": "has risen"
+              "answer": "was demolished",
+              "accept": [
+                "demolished"
+              ]
             }
           ]
         },
         {
           "id": "s2_2",
-          "label": "2. The market ______ (open) in 2005.",
+          "label": "2. Most houses here ______ (build) before 1990.",
           "fields": [
             {
-              "answer": "opened"
+              "answer": "were built",
+              "accept": [
+                "built"
+              ]
             }
           ]
         },
         {
           "id": "s2_3",
-          "label": "3. Rice ______ (export) to many countries.",
+          "label": "3. The park ______ (open) last summer.",
           "fields": [
             {
-              "answer": "is exported"
+              "answer": "opened",
+              "accept": [
+                "was opened"
+              ]
             }
           ]
         },
         {
           "id": "s2_4",
-          "label": "4. I ______ (not visit) the old quarter yet.",
+          "label": "4. The factory ______ (convert) into a museum in 2015.",
           "fields": [
             {
-              "answer": "haven't visited",
+              "answer": "was converted",
               "accept": [
-                "have not visited",
-                "haven’t visited"
+                "converted"
               ]
             }
           ]
         },
         {
           "id": "s2_5",
-          "label": "5. Cars ______ (not allow) in this street.",
+          "label": "5. Houseboats ______ (be) cheaper than houses in the past.",
           "fields": [
             {
-              "answer": "are not allowed",
+              "answer": "were",
               "accept": [
-                "aren't allowed",
-                "aren’t allowed"
+                "were"
               ]
             }
           ]
@@ -134,86 +148,87 @@
     {
       "id": "s3",
       "title": "Section 3 · Reading /4",
-      "minutes": 10,
-      "instructions": "Viết KHÔNG QUÁ HAI TỪ VÀ/HOẶC MỘT SỐ, lấy từ trong bài. Đoạn văn: The Lakeside Swimming Pool opened in March after two years of building work. It is 50 metres long and has eight lanes, so competitions can be held there. Adults pay 40,000 dong per visit, but children under twelve swim free on Sundays. The pool also offers lessons for beginners every Tuesday evening. There is no car park, so visitors are asked to come by bicycle or by bus.",
-      "kind": "fill",
+      "minutes": 8,
+      "instructions": "Đọc đoạn ngắn rồi chọn A, B, C hoặc D. Không tra từ điển.",
+      "kind": "mcq",
       "items": [
         {
           "id": "s3_1",
-          "label": "1. How long is the pool? ______",
-          "fields": [
-            {
-              "answer": "50 metres",
-              "accept": [
-                "50 m",
-                "50",
-                "50 meters"
-              ]
-            }
-          ]
+          "q": "1. What is the main purpose of the language centre's new course?",
+          "options": {
+            "A": "to train teachers",
+            "B": "to help adults study at night",
+            "C": "to prepare students for a test",
+            "D": "to build a new campus"
+          },
+          "answer": "C",
+          "explain": "Đoạn: The course prepares students for the IELTS test."
         },
         {
           "id": "s3_2",
-          "label": "2. When can children under twelve swim for free? ______",
-          "fields": [
-            {
-              "answer": "Sundays",
-              "accept": [
-                "on Sundays",
-                "Sunday"
-              ]
-            }
-          ]
+          "q": "2. Why did the centre change its opening hours?",
+          "options": {
+            "A": "many students work during the day",
+            "B": "the teachers asked for more holidays",
+            "C": "the building was closed",
+            "D": "the bus stopped"
+          },
+          "answer": "A",
+          "explain": "Đoạn: Many students work during the day, so classes now start at 18:00."
         },
         {
           "id": "s3_3",
-          "label": "3. When are the lessons for beginners? ______",
-          "fields": [
-            {
-              "answer": "Tuesday evening",
-              "accept": [
-                "Tuesday evenings",
-                "every Tuesday evening",
-                "on Tuesday evenings"
-              ]
-            }
-          ]
+          "q": "3. How many students joined the course in its first month?",
+          "options": {
+            "A": "twelve",
+            "B": "twenty",
+            "C": "thirty",
+            "D": "forty"
+          },
+          "answer": "B",
+          "explain": "Đoạn: twenty students joined in the first month."
         },
         {
           "id": "s3_4",
-          "label": "4. Visitors cannot park because there is no ______.",
-          "fields": [
-            {
-              "answer": "car park"
-            }
-          ]
+          "q": "4. What do students receive at the end?",
+          "options": {
+            "A": "a certificate",
+            "B": "a scholarship",
+            "C": "a free laptop",
+            "D": "a new job"
+          },
+          "answer": "A",
+          "explain": "Đoạn: students receive a certificate at the end."
         }
-      ]
+      ],
+      "passage": "The language centre has opened a new course for adults. The course prepares students for the IELTS test. Many students work during the day, so classes now start at 18:00. In its first month, twenty students joined. At the end of the course, students receive a certificate."
     },
     {
       "id": "s4",
-      "title": "Section 4 · Writing /5",
-      "minutes": 15,
-      "instructions": "Viết 4 đến 5 câu về việc thị trấn hoặc khu em sống đã thay đổi thế nào trong 10 năm qua. Dùng present perfect và past simple, và ít nhất 1 từ trong danh sách: expand · convert · affordable · facilities · demolish.",
+      "title": "Section 4 · Writing /5: intro + overview cho 2 biểu đồ",
+      "minutes": 25,
+      "instructions": "Viết intro và overview cho 2 biểu đồ (ảnh bên dưới). Overview 2 câu, không số liệu. Không xem công thức trong lúc viết.",
       "kind": "open",
       "open": [
         {
           "id": "s4_1",
-          "q": "Bài viết của em (4 đến 5 câu)",
-          "model": "My town looks very different from ten years ago. Back then, there were many small wooden houses, but now most of them have been replaced by tall buildings. A large shopping centre opened in 2019, and it has attracted many young people. The town has also expanded, so more families can find affordable homes.",
-          "ai": {
-            "type": "Bài viết ngắn Pre-IELTS (A2 đến B1)",
-            "level": "Pre-IELTS (A2 đến B1)",
-            "min_words": 45,
-            "task": "Write 4 to 5 sentences about how your town or neighbourhood has changed in the last ten years. Use the present perfect and the past simple and at least one word from the list.",
-            "criteria": [
-              "dùng present perfect đúng (has / have + V3)",
-              "dùng past simple đúng với mốc thời gian đã xong",
-              "dùng ít nhất 1 từ trong danh sách đúng nghĩa",
-              "4 đến 5 câu rõ ràng, có chủ ngữ và động từ",
-              "viết hoa chữ đầu câu, có dấu chấm"
-            ]
-          }
+          "q": "Biểu đồ 1 (tròn): cách học sinh đi học, 2012 và 2022.",
+          "model": "Intro: The given pie charts illustrate how students travelled to school in two years, 2012 and 2022. Overview: Overall, there was a decrease in the proportion of students who travelled by motorbike and by bus, while an increase was seen in the figures for bicycles and walking. It is also clear that motorbike consistently had the highest figures in both years."
+        },
+        {
+          "id": "s4_2",
+          "q": "Biểu đồ 2 (đường): khách đến hai điểm du lịch, 2015–2023.",
+          "model": "Intro: The given line graph compares the number of visitors to a national park and a beach resort over a nine-year period, commencing from 2015. Overview: Overall, there was a decline in the number of visitors to the beach resort, while an increase was seen in the national park. It is also clear that the beach resort consistently had the highest figures, although both places fell sharply in 2020."
+        }
+      ],
+      "images": [
+        {
+          "src": "images/w3-wed-pie.png",
+          "alt": "Pie charts: how students travelled to school, 2012 and 2022"
+        },
+        {
+          "src": "images/w3-wed-line.png",
+          "alt": "Line graph: visitors to a national park and a beach resort, 2015 to 2023"
         }
       ]
     },
@@ -221,14 +236,12 @@
       "id": "s5",
       "title": "Speaking preparation · voice note",
       "minutes": 15,
-      "instructions": "Chuẩn bị cho buổi học ngày mai. Ghi âm 40 giây trả lời câu hỏi: Do you prefer living in a big city or in a small town? Dùng 3 bước: trả lời thẳng, lý do, ví dụ cụ thể. Cố gắng dùng một cụm chỉ vị trí hoặc một cặp tính từ.",
+      "instructions": "Ghi âm 1 phút: trả lời 3 câu hỏi về công việc và học tập: What do you study or do? Do you enjoy it? What job would you like in the future?",
       "kind": "voice",
       "lines": [
-        "Do you prefer living in a big city or in a small town? Why?"
+        "Trả lời 3 câu Part 1 về học tập hoặc công việc."
       ],
-      "note": "Thầy sẽ nghe cấu trúc 3 bước, thì động từ và âm cuối."
+      "note": "Thầy nghe phát âm và cách nối câu. Không cần học thuộc."
     }
-  ],
-  "send_today": "Hoàn thành 5 bước trên web. Bài viết và voice note sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
-  "error_type": "grammar"
+  ]
 }

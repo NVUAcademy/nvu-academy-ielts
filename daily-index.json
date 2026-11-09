@@ -429,7 +429,7 @@
       "id": "w3-tue-ielts13",
       "file": "daily-w3-tue-ielts13.json",
       "title": "Tuesday Daily Practice",
-      "subtitle": "Reading practice test: green roofs (True / False / Not Given and short answers)",
+      "subtitle": "Reading practice test: green roofs (TRUE / FALSE / NOT GIVEN and summary)",
       "day": "tuesday",
       "date": "2026-11-10",
       "week_number": 3,
@@ -441,7 +441,7 @@
       "id": "w3-wed-ielts13",
       "file": "daily-w3-wed-ielts13.json",
       "title": "Wednesday Daily Practice",
-      "subtitle": "Weekly test /19 and Speaking preparation",
+      "subtitle": "Writing: pie and line chart overviews, plus vocabulary test",
       "day": "wednesday",
       "date": "2026-11-11",
       "week_number": 3,
@@ -457,6 +457,42 @@
       "day": "thursday",
       "date": "2026-11-12",
       "week_number": 3,
+      "class_codes": [
+        "IELTS13"
+      ]
+    },
+    {
+      "id": "w4-fri-ielts13",
+      "file": "daily-w4-fri-ielts13.json",
+      "title": "Friday Daily Practice",
+      "subtitle": "Listening review of P3: work words, shadowing, Part 1",
+      "day": "friday",
+      "date": "2026-11-13",
+      "week_number": 4,
+      "class_codes": [
+        "IELTS13"
+      ]
+    },
+    {
+      "id": "w4-sat-ielts13",
+      "file": "daily-w4-sat-ielts13.json",
+      "title": "Saturday Daily Practice",
+      "subtitle": "Writing: bar chart overview and Reading prep for P4",
+      "day": "saturday",
+      "date": "2026-11-14",
+      "week_number": 4,
+      "class_codes": [
+        "IELTS13"
+      ]
+    },
+    {
+      "id": "w4-sun-ielts13",
+      "file": "daily-w4-sun-ielts13.json",
+      "title": "Sunday Daily Practice",
+      "subtitle": "Warm-up for P4 Reading and Writing, plus speaking",
+      "day": "sunday",
+      "date": "2026-11-15",
+      "week_number": 4,
       "class_codes": [
         "IELTS13"
       ]
