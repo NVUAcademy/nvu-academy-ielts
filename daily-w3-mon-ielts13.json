@@ -1,78 +1,125 @@
 {
   "id": "w3-mon-ielts13",
   "title": "Monday Daily Practice",
-  "subtitle": "Review: P1 and P2 words, present perfect, present passive, and a short neighbourhood write-up",
-  "theme": "P1 and P2 · Review",
-  "source": "Mindset L1 Unit 2 (P1 Listening+Speaking, P2 Reading) - bài tự soạn, không trùng handout P1, P2 và Trial 1, 2",
+  "subtitle": "Trend words, passive, and intro + overview for 3 charts",
+  "theme": "P2 · Writing: maps and charts",
+  "source": "Bài tự soạn, biểu đồ mới (không trùng Writing 4 và handout P2)",
   "class_codes": [
     "IELTS13"
   ],
   "week_number": 3,
   "day": "monday",
   "date": "2026-11-09",
-  "section": "grammar",
-  "minutes": 55,
-  "intro": "Làm lần lượt 5 bước, khoảng 55 phút. Hôm nay ôn từ vựng và ngữ pháp của P1 và P2. Bài viết ở bước 4 chỉ là đoạn ngắn về khu em sống, chưa phải bài Writing Task 1. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Bài viết em gõ thẳng vào ô trên web, thầy chấm.",
-  "audio": {},
+  "section": "writing",
+  "minutes": 60,
+  "intro": "Làm lần lượt 4 bước, khoảng 60 phút. Bước 3 là bài Writing của tuần: intro và overview cho 3 biểu đồ, có công thức và ảnh. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow.",
+  "send_today": "Hoàn thành 4 bước trên web. Bài Writing ở bước 3 được thầy chấm, voice note ở bước 4 được gửi tự động khi bấm Nộp bài.",
+  "error_type": "writing",
   "steps": [
     {
       "id": "s1",
-      "title": "Step 1 · Vocabulary from P1 and P2",
+      "title": "Step 1 · Trend words",
       "minutes": 8,
-      "instructions": "Điền từ trong khung: orientation · convert · sustainable · experienced · traditional · expand. Đổi dạng từ nếu cần.",
+      "instructions": "Điền từ trong khung: surge · plunge · recover · rocket · plateau · bottom out · steep decline · marginal change. Đổi dạng từ nếu cần.",
       "kind": "fill",
       "items": [
         {
           "id": "s1_1",
-          "label": "1. Take part in the ______ day to meet the teachers and see the library.",
+          "label": "1. After the new bus line opened, the number of passengers began to ______.",
           "fields": [
             {
-              "answer": "orientation"
+              "answer": "surge",
+              "accept": [
+                "surges",
+                "surged"
+              ]
             }
           ]
         },
         {
           "id": "s1_2",
-          "label": "2. The company wants to ______ its business to three more countries.",
+          "label": "2. Shares ______ by 30% in one week after the bad news.",
           "fields": [
             {
-              "answer": "expand"
+              "answer": "plunge",
+              "accept": [
+                "plunged",
+                "plunges"
+              ]
             }
           ]
         },
         {
           "id": "s1_3",
-          "label": "3. An ______ guide led us safely through the cave.",
+          "label": "3. Visitors fell after the flood, but the number began to ______ slowly.",
           "fields": [
             {
-              "answer": "experienced"
+              "answer": "recover",
+              "accept": [
+                "recovered",
+                "recovers"
+              ]
             }
           ]
         },
         {
           "id": "s1_4",
-          "label": "4. We should choose ______ materials that do not harm nature.",
+          "label": "4. Prices ______ in 2021, then fell back in 2022.",
           "fields": [
             {
-              "answer": "sustainable"
+              "answer": "rocket",
+              "accept": [
+                "rocketed",
+                "rockets"
+              ]
             }
           ]
         },
         {
           "id": "s1_5",
-          "label": "5. My grandmother cooks ______ dishes from her village.",
+          "label": "5. Sales stayed at a ______ for about a year before they rose again.",
           "fields": [
             {
-              "answer": "traditional"
+              "answer": "plateau",
+              "accept": [
+                "plateaus"
+              ]
             }
           ]
         },
         {
           "id": "s1_6",
-          "label": "6. The council wants to ______ the old factory into a museum.",
+          "label": "6. Unemployment ______ in 2020 and then started to fall.",
           "fields": [
             {
-              "answer": "convert"
+              "answer": "bottom out",
+              "accept": [
+                "bottomed out"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_7",
+          "label": "7. There was a ______ in the number of students after the school closed.",
+          "fields": [
+            {
+              "answer": "steep decline",
+              "accept": [
+                "sharp decline"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_8",
+          "label": "8. The rent went up only a little. It was a ______.",
+          "fields": [
+            {
+              "answer": "marginal change",
+              "accept": [
+                "slight change"
+              ]
             }
           ]
         }
@@ -80,70 +127,68 @@
     },
     {
       "id": "s2",
-      "title": "Step 2 · Grammar: present perfect or past simple",
+      "title": "Step 2 · Passive: was / were + V3 (past simple)",
       "minutes": 10,
-      "instructions": "Chia động từ trong ngoặc ở present perfect hoặc past simple.",
+      "instructions": "Viết lại câu bằng bị động quá khứ đơn. Điền đúng V3 của động từ trong ngoặc. Ví dụ: The council built a bridge. → A bridge was built by the council.",
       "kind": "fill",
       "items": [
         {
           "id": "s2_1",
-          "label": "1. I ______ (live) in this flat since 2019.",
+          "label": "1. The council opened a new park in 2019. → A new park ______ in 2019. (open)",
           "fields": [
             {
-              "answer": "have lived",
+              "answer": "was opened",
               "accept": [
-                "'ve lived",
-                "’ve lived"
+                "was open"
               ]
             }
           ]
         },
         {
           "id": "s2_2",
-          "label": "2. The mall ______ (open) in March last year.",
+          "label": "2. Farmers grew rice on these fields for 50 years. → Rice ______ on these fields for 50 years. (grow)",
           "fields": [
             {
-              "answer": "opened"
+              "answer": "was grown",
+              "accept": [
+                "was grown"
+              ]
             }
           ]
         },
         {
           "id": "s2_3",
-          "label": "3. We ______ (not see) our old neighbours since we moved.",
+          "label": "3. The company converted the old warehouse into flats. → The old warehouse ______ into flats. (convert)",
           "fields": [
             {
-              "answer": "haven't seen",
+              "answer": "was converted",
               "accept": [
-                "have not seen",
-                "haven’t seen"
+                "was converted"
               ]
             }
           ]
         },
         {
           "id": "s2_4",
-          "label": "4. They ______ (build) the bridge in 2012.",
+          "label": "4. Workers demolished the market in 2018. → The market ______ in 2018. (demolish)",
           "fields": [
             {
-              "answer": "built"
+              "answer": "was demolished",
+              "accept": [
+                "was demolished"
+              ]
             }
           ]
         },
         {
           "id": "s2_5",
-          "label": "5. The streets ______ (become) much cleaner since 2020.",
+          "label": "5. The city expanded the school in 2022. → The school ______ in 2022. (expand)",
           "fields": [
             {
-              "answer": "have become"
-            }
-          ]
-        },
-        {
-          "id": "s2_6",
-          "label": "6. Last weekend I ______ (visit) an old temple.",
-          "fields": [
-            {
-              "answer": "visited"
+              "answer": "was expanded",
+              "accept": [
+                "was expanded"
+              ]
             }
           ]
         }
@@ -151,99 +196,52 @@
     },
     {
       "id": "s3",
-      "title": "Step 3 · Grammar: present passive",
-      "minutes": 7,
-      "instructions": "Chia động từ trong ngoặc ở bị động hiện tại đơn (is / are + V3).",
-      "kind": "fill",
-      "items": [
+      "title": "Step 3 · Writing: intro + overview cho 3 biểu đồ",
+      "minutes": 39,
+      "instructions": "Đọc công thức trước khi viết. Mỗi biểu đồ viết 1 intro và 1 overview (2 câu, không số liệu). Overview: câu 1 nêu xu hướng chính, câu 2 nêu khác biệt. Không viết lại từng số trong overview. Ảnh hiển thị ngay dưới hướng dẫn của từng biểu đồ.",
+      "kind": "open",
+      "open": [
         {
           "id": "s3_1",
-          "label": "1. Bricks ______ (make) from clay.",
-          "fields": [
-            {
-              "answer": "are made"
-            }
-          ]
+          "q": "Biểu đồ 1 (đường): học viên 3 khóa tiếng Anh, 2016–2023. Viết intro và overview.",
+          "model": "Intro: The given line graph illustrates the number of students enrolled in three English courses at a language centre over an eight-year period, commencing from 2016. Overview: Overall, there was an increase in the number of beginner students, while a steady decline was seen in advanced students, with the most dramatic rise being seen in the beginner course. It is also clear that intermediate students consistently had the highest figures until 2019, although beginners overtook them from 2020 onwards."
         },
         {
           "id": "s3_2",
-          "label": "2. Fresh fish ______ (sell) at the market every morning.",
-          "fields": [
-            {
-              "answer": "is sold"
-            }
-          ]
+          "q": "Biểu đồ 2 (cột): tiền thuê phòng 4 khu, 2015 và 2025. Viết intro và overview.",
+          "model": "Intro: The given bar chart compares the average monthly rent for a one-bedroom flat in four districts over a ten-year period, commencing from 2015. Overview: Overall, there was an increase in rent in all four districts, with the most dramatic rise being seen in Riverside. It is also clear that Central consistently had the highest rent throughout the period."
         },
         {
           "id": "s3_3",
-          "label": "3. Solar panels ______ (use) to produce electricity.",
-          "fields": [
-            {
-              "answer": "are used"
-            }
-          ]
+          "q": "Biểu đồ 3 (bảng): xe bán ra của 3 hãng, 2019–2023. Viết intro và overview.",
+          "model": "Intro: The given table illustrates the number of cars sold by three car brands over a five-year period, commencing from 2019. Overview: Overall, there was an increase in the number of cars sold by Vinamotor and Sun Motors, while a steady decline was seen in Hanoi Auto. It is also clear that Vinamotor consistently had the highest figures throughout the period, although Sun Motors rose the most."
+        }
+      ],
+      "images": [
+        {
+          "src": "images/w3-mon-line.png",
+          "alt": "Line graph: students enrolled in three English courses, 2016 to 2023"
         },
         {
-          "id": "s3_4",
-          "label": "4. The streets ______ (clean) every night.",
-          "fields": [
-            {
-              "answer": "are cleaned"
-            }
-          ]
+          "src": "images/w3-mon-bar.png",
+          "alt": "Bar chart: average monthly rent in four districts, 2015 and 2025"
         },
         {
-          "id": "s3_5",
-          "label": "5. Tea ______ (grow) in the hills.",
-          "fields": [
-            {
-              "answer": "is grown"
-            }
-          ]
+          "src": "images/w3-mon-table.png",
+          "alt": "Table: number of cars sold by three brands, 2019 to 2023"
         }
       ]
     },
     {
       "id": "s4",
-      "title": "Step 4 · Write: my neighbourhood",
-      "minutes": 20,
-      "instructions": "Viết 50 đến 60 từ giới thiệu khu em sống. Dùng ít nhất 2 cụm chỉ vị trí (next to, opposite, behind, on the corner of, in front of), 1 câu present perfect về một thay đổi gần đây, và 2 từ trong danh sách: traditional · convert · expand · experienced · sustainable.",
-      "kind": "open",
-      "open": [
-        {
-          "id": "s4_1",
-          "q": "Bài viết của em (50 đến 60 từ)",
-          "model": "I live in a quiet neighbourhood in the north of Thanh Hoa. My house is next to a small market, and opposite it there is a primary school. Many traditional shops have been replaced by cafes, and the area has become much busier since 2019. Last year a local company converted an empty warehouse into a gym.",
-          "ai": {
-            "type": "Bài viết ngắn Pre-IELTS (A2 đến B1)",
-            "level": "Pre-IELTS (A2 đến B1)",
-            "min_words": 45,
-            "task": "Write 50 to 60 words about your neighbourhood. Use at least two location phrases, one present perfect sentence and two words from the list.",
-            "criteria": [
-              "dùng ít nhất 2 cụm chỉ vị trí đúng",
-              "có ít nhất 1 câu present perfect đúng (has / have + V3)",
-              "dùng 2 từ trong danh sách đúng nghĩa",
-              "past simple và present simple đúng",
-              "viết hoa chữ đầu câu, có dấu chấm"
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "s5",
-      "title": "Step 5 · Shadowing",
+      "title": "Step 4 · Đọc to một overview",
       "minutes": 5,
-      "instructions": "Đọc to 3 câu, mỗi câu hai lần: lần đầu chậm, lần sau tốc độ tự nhiên. Chú ý đuôi -ed.",
+      "instructions": "Ghi âm 20 giây: đọc to overview của biểu đồ 1, không nhìn giấy.",
       "kind": "voice",
       "lines": [
-        "1. The old cinema was closed in 2016.",
-        "2. My neighbourhood has become much busier since 2019.",
-        "3. A new playground was opened behind the school."
+        "Đọc to overview biểu đồ 1."
       ],
-      "note": "Thầy sẽ nghe đuôi -ed, âm cuối và nhịp đọc."
+      "note": "Thầy nghe nhịp đọc và âm cuối của was, were, -ed."
     }
-  ],
-  "send_today": "Hoàn thành 5 bước trên web. Voice note ở bước 5 sẽ được gửi tự động cho thầy khi bấm Nộp bài.",
-  "error_type": "grammar"
+  ]
 }
