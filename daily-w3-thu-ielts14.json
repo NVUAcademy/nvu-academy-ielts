@@ -1,7 +1,7 @@
 {
   "id": "w3-thu-ielts14",
   "title": "Thursday Daily Practice",
-  "subtitle": "Media and opinion words, a trap tracker and a voice note",
+  "subtitle": "Media and opinion words, Track 20 listening MCQ, a trap tracker and a voice note",
   "theme": "Lesson 5 · The News and Media",
   "source": "Kế hoạch tuần 3 (đã duyệt). Listening: Cambridge IELTS 16, Test 2 Part 3 (câu 21-24), đáp án lấy từ sách (Listening answer key, trang 123).",
   "class_codes": [
@@ -11,9 +11,14 @@
   "day": "thursday",
   "date": "2026-11-12",
   "section": "listening",
-  "minutes": 35,
-  "intro": "Làm lần lượt 3 bước, khoảng 35 phút. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
-  "audio": {},
+  "minutes": 47,
+  "intro": "Làm lần lượt 4 bước, khoảng 47 phút. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {
+    "track20": {
+      "label": "Mindset Level 2 · Track 20 · Discussions 1–3",
+      "src": "audio/Mindset_L2_20.mp3"
+    }
+  },
   "steps": [
     {
       "id": "s1",
@@ -106,7 +111,61 @@
     },
     {
       "id": "s2",
-      "title": "Step 2 · Trap tracker (12 min)",
+      "title": "Step 2 · Listening: attitude in discussions (12 min)",
+      "minutes": 12,
+      "instructions": "Nghe Track 20 (ba cuộc thảo luận ngắn: Discussion 1, 2, 3). Chọn A, B hoặc C cho mỗi câu. Nghe tối đa 2 lần rồi mới xem đáp án.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "1. In Discussion 1, speaker A feels",
+          "options": {
+            "A": "hopeful about the government's plans.",
+            "B": "pessimistic about the economy.",
+            "C": "uninterested in politics."
+          },
+          "answer": "B",
+          "explain": "Đáp án B. Người A nói chính phủ sẽ tiếp tục làm tình hình kinh tế tệ hơn."
+        },
+        {
+          "id": "s2_2",
+          "q": "2. In Discussion 1, speaker B",
+          "options": {
+            "A": "hopes that people will vote for a change.",
+            "B": "is sure the government will win.",
+            "C": "is worried about rising prices."
+          },
+          "answer": "A",
+          "explain": "Đáp án A. Người B nói mọi người đã chán và sẵn sàng bỏ phiếu cho thay đổi, và hy vọng như vậy."
+        },
+        {
+          "id": "s2_3",
+          "q": "3. In Discussion 2, speaker A thinks the film",
+          "options": {
+            "A": "relies too much on science fiction.",
+            "B": "has weak characters.",
+            "C": "has well-developed characters."
+          },
+          "answer": "C",
+          "explain": "Đáp án C. Người A khen cách các nhân vật được xây dựng tốt."
+        },
+        {
+          "id": "s2_4",
+          "q": "4. In Discussion 3, speaker A sees the robot football competition as",
+          "options": {
+            "A": "an unfair match.",
+            "B": "a possible money-making business.",
+            "C": "a boring programme."
+          },
+          "answer": "B",
+          "explain": "Đáp án B. Người A nói có thể thấy nó trở thành một ngành kinh doanh sinh lời."
+        }
+      ],
+      "audio": "track20"
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Trap tracker (12 min)",
       "minutes": 12,
       "instructions": "Viết 1 câu theo mẫu cho một bẫy em đã mắc hôm nay ở Step 2. Nếu không mắc bẫy nào, viết 1 câu về đáp án bị loại theo mẫu: option B is wrong because the speaker...",
       "kind": "open",
@@ -119,8 +178,8 @@
       ]
     },
     {
-      "id": "s3",
-      "title": "Step 3 · Part 1 voice note (15 min)",
+      "id": "s4",
+      "title": "Step 4 · Part 1 voice note (15 min)",
       "minutes": 15,
       "instructions": "Trả lời câu hỏi trong 1 voice note khoảng 1 phút, theo 3 bước Answer, Reason, Example. Dùng ít nhất 2 cụm thái độ của thứ Tư và 1 từ của Step 1.",
       "kind": "voice",

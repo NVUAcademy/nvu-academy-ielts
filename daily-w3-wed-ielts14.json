@@ -11,12 +11,16 @@
   "day": "wednesday",
   "date": "2026-11-11",
   "section": "listening",
-  "minutes": 60,
-  "intro": "Làm lần lượt 4 bước, khoảng 60 phút. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "minutes": 67,
+  "intro": "Làm lần lượt 5 bước, khoảng 67 phút. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
   "audio": {
-    "p3": {
-      "label": "Cambridge IELTS 16 · Test 2 · Part 3",
+    "part3": {
+      "label": "Cambridge IELTS 16 · Test 2 · Part 3 (câu 21–24)",
       "src": "audio/Thu_Cam16_T2_P3.mp3"
+    },
+    "track21": {
+      "label": "Mindset Level 2 · Track 21 · Topic 1 (Speaker 1)",
+      "src": "audio/Mindset_L2_21.mp3"
     }
   },
   "steps": [
@@ -181,7 +185,7 @@
           "explain": "Đáp án C. Bài tập trước, cả hai đều gặp khó khăn với tự đánh giá (self-assessment)."
         }
       ],
-      "audio": "p3"
+      "audio": "part3"
     },
     {
       "id": "s3",
@@ -314,7 +318,97 @@
     },
     {
       "id": "s4",
-      "title": "Step 4 · Part 1 voice note (20 min)",
+      "title": "Step 4 · Dictation (7 min)",
+      "minutes": 7,
+      "instructions": "Nghe đoạn đầu của Track 21 (Topic 1, Speaker 1, bài Modern art). Nghe 2 đến 3 lần rồi điền từ còn thiếu vào mỗi câu. Chỉ điền một từ cho mỗi chỗ trống. Điền theo đúng thứ tự nghe.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s4_1",
+          "label": "1. I don't really have much of an ______ about it.",
+          "fields": [
+            {
+              "answer": "opinion"
+            }
+          ],
+          "explain": "opinion = ý kiến."
+        },
+        {
+          "id": "s4_2",
+          "label": "2. As far as I'm ______, if it appeals to someone, that's fine.",
+          "fields": [
+            {
+              "answer": "concerned"
+            }
+          ],
+          "explain": "as far as I'm concerned = theo tôi thấy."
+        },
+        {
+          "id": "s4_3",
+          "label": "3. If it ______ to someone, that's fine.",
+          "fields": [
+            {
+              "answer": "appeals"
+            }
+          ],
+          "explain": "appeal to = hấp dẫn, được ai thích."
+        },
+        {
+          "id": "s4_4",
+          "label": "4. If it doesn't, then why should anyone ______ about that?",
+          "fields": [
+            {
+              "answer": "complain"
+            }
+          ],
+          "explain": "complain about = phàn nàn về."
+        },
+        {
+          "id": "s4_5",
+          "label": "5. Personally, I like ______ of it, but I'm not really bothered.",
+          "fields": [
+            {
+              "answer": "some"
+            }
+          ],
+          "explain": "some of it = một phần của nó."
+        },
+        {
+          "id": "s4_6",
+          "label": "6. I like some of it, but I'm not really ______.",
+          "fields": [
+            {
+              "answer": "bothered"
+            }
+          ],
+          "explain": "not really bothered = không bận tâm lắm."
+        },
+        {
+          "id": "s4_7",
+          "label": "7. I can ______ it or leave it.",
+          "fields": [
+            {
+              "answer": "take"
+            }
+          ],
+          "explain": "take it or leave it = sao cũng được."
+        },
+        {
+          "id": "s4_8",
+          "label": "8. I can take it or ______ it.",
+          "fields": [
+            {
+              "answer": "leave"
+            }
+          ],
+          "explain": "take it or leave it = sao cũng được."
+        }
+      ],
+      "audio": "track21"
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Part 1 voice note (20 min)",
       "minutes": 20,
       "instructions": "Trả lời 4 câu trong 1 voice note khoảng 3 phút. Dùng 3 bước Answer, Reason, Example. Ở ít nhất 2 câu, dùng một cụm thái độ của Step 2 và một từ của Step 1.",
       "kind": "voice",
