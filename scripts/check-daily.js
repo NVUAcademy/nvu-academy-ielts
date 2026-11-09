@@ -6,6 +6,7 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = path.join(__dirname, '..');
+const MCQ = require('../mcq-multi.js');
 
 const errors = [];
 const err = (file, where, msg) => errors.push(file + ' · ' + where + ': ' + msg);
@@ -30,7 +31,16 @@ for (const f of files) {
     for (const it of st.items || []) {
       const label = it.q || it.label || it.id;
       if (/^\s*Text:/i.test(label)) err(f, where, 'đoạn văn bị đặt nhầm thành câu hỏi (' + it.id + '), chuyển lên instructions');
-      if (st.kind === 'mcq' && it.options && !(it.answer in it.options)) err(f, where, 'đáp án "' + it.answer + '" không có trong lựa chọn (' + it.id + ')');
+      if (st.kind === 'mcq' && it.options) {
+        /* answer: "B" (một đáp án) hoặc ["B","C"] / "B, C" kèm "multi": 2 (chọn nhiều). Số multi phải khớp số đáp án. */
+        const ans = MCQ.letters(it.answer), n = MCQ.need(it);
+        if (!ans.length) err(f, where, 'câu mcq không có đáp án (' + it.id + ')');
+        for (const k of ans) if (!(k in it.options)) err(f, where, 'đáp án "' + k + '" không có trong lựa chọn (' + it.id + ')');
+        if ('multi' in it && !(Number.isInteger(it.multi) && it.multi >= 1)) err(f, where, '"multi" phải là số nguyên từ 1 trở lên (' + it.id + ')');
+        if (n && ans.length !== n) err(f, where, '"multi": ' + n + ' nhưng answer có ' + ans.length + ' đáp án (' + it.id + ')');
+        if (!n && ans.length > 1) err(f, where, 'answer có ' + ans.length + ' đáp án nhưng thiếu "multi": ' + ans.length + ' (' + it.id + ')');
+        if (n && n >= Object.keys(it.options).length) err(f, where, '"multi": ' + n + ' không nhỏ hơn số lựa chọn (' + it.id + ')');
+      }
       if (st.kind === 'fill' && (!it.fields || !it.fields.length || it.fields.some(x => !x || !String(x.answer || '').trim()))) err(f, where, 'câu điền thiếu đáp án (' + it.id + ')');
     }
   }

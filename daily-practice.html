@@ -85,6 +85,7 @@ input[type=text]:focus, textarea:focus { border-color: var(--accent); background
 </style>
 <script src="theme.js"></script>
 <script src="wav.js"></script>
+<script src="mcq-multi.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -133,7 +134,7 @@ function fieldOk(f, given) {
   return [f.answer, ...(f.accept || [])].some(a => sameVal(a, given));
 }
 function itemOk(it, kind) {
-  if (kind === 'mcq') return (answers[it.id] || '') === it.answer;
+  if (kind === 'mcq') return MCQ.same(answers[it.id], it.answer);
   return it.fields.every((f, i) => fieldOk(f, answers[`${it.id}_${i}`] || ''));
 }
 function closedItems() {
@@ -144,12 +145,12 @@ function closedItems() {
   return out;
 }
 function givenText(it, kind) {
-  if (kind === 'mcq') return answers[it.id] ? `${answers[it.id]}. ${it.options[answers[it.id]] || ''}` : '(blank)';
+  if (kind === 'mcq') return MCQ.need(it) ? (MCQ.text(answers[it.id]) || '(blank)') : answers[it.id] ? `${answers[it.id]}. ${it.options[answers[it.id]] || ''}` : '(blank)';
   const parts = it.fields.map((f, i) => (answers[`${it.id}_${i}`] || '').trim());
   return parts.every(x => !x) ? '(blank)' : parts.join(it.joiner ? ` ${it.joiner} ` : ' ');
 }
 function correctText(it, kind) {
-  if (kind === 'mcq') return `${it.answer}. ${it.options[it.answer]}`;
+  if (kind === 'mcq') return MCQ.need(it) ? MCQ.text(it.answer) : `${MCQ.letters(it.answer)[0] || it.answer}. ${it.options[MCQ.letters(it.answer)[0] || it.answer]}`;
   return it.fields.map(f => `${f.answer}${f.suffix ? ' ' + f.suffix : ''}`).join(it.joiner ? ` ${it.joiner} ` : ' ');
 }
 
@@ -317,7 +318,7 @@ function filledCount() {
   let n = 0, t = 0;
   closedItems().forEach(({ it, kind }) => {
     t++;
-    if (kind === 'mcq' ? answers[it.id] : it.fields.every((f, i) => (answers[`${it.id}_${i}`] || '').trim())) n++;
+    if (kind === 'mcq' ? MCQ.done(it, answers[it.id]) : it.fields.every((f, i) => (answers[`${it.id}_${i}`] || '').trim())) n++;
   });
   return `${n}/${t} câu`;
 }
@@ -379,8 +380,7 @@ function stepHtml(st) {
   if (st.context && (st.kind === 'fill' || st.kind === 'mcq')) body += `<div class="ctx">${st.context.map(esc).join('<br>')}</div>`;
   if (st.kind === 'fill') body += st.items.map(it => fillRow(it)).join('');
   else if (st.kind === 'mcq') {
-    body += st.items.map(it => `<div class="q"><div class="qt">${esc(it.q)}</div>${Object.entries(it.options).map(([k, t]) =>
-      `<label class="opt ${answers[it.id] === k ? 'sel' : ''}"><input type="radio" name="${it.id}" ${answers[it.id] === k ? 'checked' : ''} onchange="setAns('${it.id}','${k}',true)"><span><b>${k}.</b> ${esc(t)}</span></label>`).join('')}</div>`).join('');
+    body += st.items.map(it => MCQ.itemHtml(it, answers[it.id], esc)).join('');
     body += (st.open || []).map(openBox).join('');
   } else if (st.kind === 'open-with-context') {
     body += `<div class="words">${st.words.map(w => `<span class="word">${esc(w)}</span>`).join('')}</div>`;
@@ -421,6 +421,12 @@ function setAns(id, v, rerender) {
   if (ViolationGuard.isLocked()) return;
   answers[id] = v; lsSet(draftKey(), JSON.stringify(answers)); draftPush();
   if (rerender) renderPractice(); else { const e = $('prog'); if (e) e.textContent = filledCount(); }
+}
+
+/* MCQ chọn nhiều đáp án: bật hoặc tắt một đáp án; đã đủ N thì không thêm được (xem mcq-multi.js) */
+function toggleMulti(id, k, n) {
+  if (ViolationGuard.isLocked()) return;
+  setAns(id, MCQ.toggle(answers[id], k, n), true);
 }
 
 /* ---------- recorder ---------- */
@@ -499,7 +505,7 @@ async function submitPractice() {
   const cm = challengeMissing();
   if (cm) { alert('Em cần làm hết phần ★ Challenge trước khi nộp bài (còn ' + cm + ' phần).'); return; }
   const items = closedItems();
-  const blanks = items.filter(({ it, kind }) => kind === 'mcq' ? !answers[it.id] : it.fields.some((f, i) => !(answers[`${it.id}_${i}`] || '').trim())).length;
+  const blanks = items.filter(({ it, kind }) => kind === 'mcq' ? !MCQ.done(it, answers[it.id]) : it.fields.some((f, i) => !(answers[`${it.id}_${i}`] || '').trim())).length;
   if (blanks && !confirm(`Còn ${blanks} câu chưa điền. Vẫn nộp bài?`)) return;
   if (recorder && recorder.state === 'recording') { alert('Hãy bấm Dừng ghi âm trước khi nộp bài.'); return; }
   const hasVoice = (P.steps || []).some(s => s.kind === 'voice');

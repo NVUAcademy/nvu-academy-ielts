@@ -795,6 +795,7 @@
 
 <script src="meow.js"></script>
 <script src="wav.js"></script>
+<script src="mcq-multi.js"></script>
 <script>
   /* Ô nhận xét tự giãn theo nội dung, không cần kéo */
   function autoSize(t) { t.style.height = 'auto'; t.style.height = Math.max(120, t.scrollHeight + 4) + 'px'; }
@@ -2085,7 +2086,7 @@ Nếu nghe lại vẫn im lặng, em kiểm tra quyền Micro của trình duy�
     let h = '<div style="margin-top:8px;padding:10px 14px;background:#faf6ee;border-radius:10px">';
     P.steps.forEach(st => {
       let body = '';
-      if (st.kind === 'mcq') st.items.forEach(it => { const g = A[it.id]; body += line((g || '') === it.answer, it.q, g ? g + '. ' + (it.options[g] || '') : '', it.answer + '. ' + it.options[it.answer]); });
+      if (st.kind === 'mcq') st.items.forEach(it => { const g = A[it.id], multi = MCQ.need(it), ak = MCQ.letters(it.answer)[0] || it.answer; body += line(MCQ.same(g, it.answer), it.q, multi ? MCQ.text(g) : g ? g + '. ' + (it.options[g] || '') : '', multi ? MCQ.text(it.answer) : ak + '. ' + it.options[ak]); });
       else if (st.kind === 'fill') st.items.forEach(it => { const gs = it.fields.map((f, i) => (A[`${it.id}_${i}`] || '').trim()), j = it.joiner ? ' ' + it.joiner + ' ' : ' '; body += line(it.fields.every((f, i) => sbSolve.field(f, gs[i])), it.label, gs.every(x => !x) ? '' : gs.join(j), it.fields.map(f => f.answer).join(j)); });
       (st.open || []).forEach(o => { body += `<div style="padding:6px 10px;margin:4px 0;background:#fff;border-left:3px solid #b08d57;font-size:13.5px"><b>${esc(o.q)}</b><br>${A[o.id] ? esc(A[o.id]).replace(/\n/g, '<br>') : '<i>(bỏ trống)</i>'}${o.model ? `<div style="color:var(--muted);font-size:12px;margin-top:4px">Mẫu: ${esc(o.model)}</div>` : ''}</div>`; });
       if (body) h += `<div style="margin:8px 0"><div style="font-weight:700;font-size:13px;color:var(--muted)">${esc(st.title)}</div>${body}</div>`;
