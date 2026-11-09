@@ -150,3 +150,55 @@ test('trang: filledCount chỉ tính câu nhiều đáp án khi chọn đủ N',
 test('trang: phần giải thích dùng chung cho mọi mcq, hiện explain sau khi nộp', () => {
   assert.match(page, /r\.it\.explain \? `<br><span class="ex">\$\{esc\(r\.it\.explain\)\}<\/span>` : ''/);
 });
+
+/* ---------- quiz tuần (weekly-quiz.html) ---------- */
+const wpage = fs.readFileSync(path.join(__dirname, '..', 'weekly-quiz.html'), 'utf8');
+function wgrab(name) {
+  const i = wpage.indexOf('function ' + name + '(');
+  assert.ok(i >= 0, 'weekly-quiz.html không có hàm ' + name);
+  let depth = 0, j = wpage.indexOf('{', i);
+  for (let k = j; k < wpage.length; k++) { if (wpage[k] === '{') depth++; else if (wpage[k] === '}' && --depth === 0) return wpage.slice(i, k + 1); }
+  throw new Error('thiếu } của ' + name);
+}
+const WQ = { id: 'q7', type: 'mcq', q: 'Choose TWO.', options: { A: 'a', B: 'b', C: 'c', D: 'd' }, answer: ['B', 'C'], multi: 2, explain: 'B và C' };
+const WQ1 = { id: 'q8', type: 'mcq', q: 'Choose one.', options: { A: 'a', B: 'b' }, answer: 'B' };
+function weeklyCtx(answers, qs) {
+  const ctx = { MCQ, answers, esc, norm: s => String(s || '').toLowerCase().trim(), quiz: { parts: { A: { questions: qs } } }, partQuestions: null };
+  ctx.partQuestions = () => qs;
+  vm.createContext(ctx);
+  vm.runInContext([wgrab('isCorrect'), wgrab('partDone'), wgrab('qHtml')].join('\n'), ctx);
+  return ctx;
+}
+test('quiz tuần: chọn đúng thứ tự khác, thiếu một, thừa một', () => {
+  const c = weeklyCtx({}, [WQ]);
+  assert.equal(c.isCorrect(WQ, 'C,B'), true);
+  assert.equal(c.isCorrect(WQ, 'c, b'), true);
+  assert.equal(c.isCorrect(WQ, 'B'), false);
+  assert.equal(c.isCorrect(WQ, 'B,C,D'), false);
+  assert.equal(c.isCorrect(WQ, ''), false);
+});
+test('quiz tuần: câu một đáp án và answer dạng chuỗi "B, C" của file cũ', () => {
+  const c = weeklyCtx({}, [WQ1]);
+  assert.equal(c.isCorrect(WQ1, 'B'), true);
+  assert.equal(c.isCorrect(WQ1, 'A'), false);
+  assert.equal(c.isCorrect({ ...WQ, answer: 'B, C' }, 'C,B'), true);
+});
+test('quiz tuần: partDone chỉ tính xong khi chọn đủ N', () => {
+  assert.equal(weeklyCtx({ q7: 'B' }, [WQ]).partDone('A'), false);
+  assert.equal(weeklyCtx({ q7: 'B,C' }, [WQ]).partDone('A'), true);
+  assert.equal(weeklyCtx({ q8: 'B' }, [WQ1]).partDone('A'), true);
+});
+test('quiz tuần: giao diện checkbox và dòng "Chọn 2 đáp án", đủ 2 thì khóa ô còn lại; câu một đáp án vẫn là radio', () => {
+  const multi = weeklyCtx({ q7: 'B,C' }, [WQ]).qHtml(WQ, 'A');
+  assert.match(multi, /Chọn 2 đáp án/);
+  assert.equal((multi.match(/type="checkbox"/g) || []).length, 4);
+  assert.doesNotMatch(multi, /type="radio"/);
+  assert.equal((multi.match(/disabled/g) || []).length, 2);
+  const single = weeklyCtx({ q8: 'B' }, [WQ1]).qHtml(WQ1, 'A');
+  assert.equal((single.match(/type="radio"/g) || []).length, 2);
+  assert.doesNotMatch(single, /checkbox|Chọn \d/);
+});
+test('quiz tuần: hiển thị đáp án đúng dạng "B, C" và explain sau khi nộp', () => {
+  assert.match(wpage, /MCQ\.need\(q\) \? esc\(MCQ\.text\(q\.answer\)\)/);
+  assert.match(wpage, /q\.explain \? `<br><span class="ex">\$\{esc\(q\.explain\)\}<\/span>` : ''/);
+});

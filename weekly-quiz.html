@@ -181,6 +181,7 @@ input[type=text]:focus, textarea:focus { border-color: var(--accent); background
 </style>
 <script src="theme.js"></script>
 <script src="wav.js"></script>
+<script src="mcq-multi.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -233,7 +234,7 @@ function norm(s) {
     .trim();
 }
 function isCorrect(q, given) {
-  if (q.type === 'mcq') return String(given || '').toUpperCase() === q.answer;
+  if (q.type === 'mcq') return MCQ.same(given, q.answer);
   const g = norm(given);
   if (!g) return false;
   const pool = [q.answer, ...(q.accept || [])].map(norm);
@@ -374,7 +375,7 @@ function renderQuiz() {
     ${partHtml(activePart)}`;
 }
 function partDone(p) {
-  return partQuestions(p).every(q => (answers[q.id] || '').trim() !== '');
+  return partQuestions(p).every(q => q.type === 'mcq' ? MCQ.done(q, answers[q.id]) : (answers[q.id] || '').trim() !== '');
 }
 
 function partHtml(p) {
@@ -414,9 +415,7 @@ function qHtml(q, p) {
   let input;
   const v = answers[q.id] || '';
   if (q.type === 'mcq') {
-    input = `<div class="opts">${Object.entries(q.options).map(([k, t]) =>
-      `<label class="opt ${v === k ? 'sel' : ''}"><input type="radio" name="${q.id}" value="${k}" ${v === k ? 'checked' : ''}
-        onchange="setAns('${q.id}','${k}',true)"><span><b>${k}.</b> ${esc(t)}</span></label>`).join('')}</div>`;
+    input = `${MCQ.hintHtml(q)}<div class="opts">${MCQ.optionsHtml(q, v, esc)}</div>`;
   } else if (q.type === 'open') {
     input = `<textarea placeholder="${esc(q.placeholder || '')}" oninput="setAns('${q.id}',this.value)">${esc(v)}</textarea>`;
     if (q.id === 'q30') {
@@ -440,6 +439,11 @@ function setAns(id, val, rerender) {
   answers[id] = val;
   saveDraft();
   if (rerender) renderQuiz();
+}
+/* MCQ chọn nhiều đáp án: bật hoặc tắt một đáp án; đã đủ N thì không thêm được (xem mcq-multi.js) */
+function toggleMulti(id, k, n) {
+  if (ViolationGuard.isLocked()) return;
+  setAns(id, MCQ.toggle(answers[id], k, n), true);
 }
 function gotoPart(p) {
   pausePart();
@@ -466,7 +470,7 @@ function pausePart() { clearInterval(partTimer); partTimer = null; partRunning =
 /* ---------- submit ---------- */
 async function submitQuiz() {
   if (ViolationGuard.isLocked()) { alert('Bài đã bị khóa vì rời bài làm quá 3 lần. Hãy báo giáo viên.'); return; }
-  const blanks = ['A','B','C'].reduce((n, p) => n + partQuestions(p).filter(q => !(answers[q.id] || '').trim()).length, 0);
+  const blanks = ['A','B','C'].reduce((n, p) => n + partQuestions(p).filter(q => q.type === 'mcq' ? !MCQ.done(q, answers[q.id]) : !(answers[q.id] || '').trim()).length, 0);
   if (blanks && !confirm(`Còn ${blanks} câu chưa trả lời. Vẫn nộp bài?`)) return;
   if (!blanks && !confirm('Nộp bài ngay? Bạn không thể sửa sau khi nộp.')) return;
   pausePart();
@@ -489,8 +493,8 @@ async function saveResult(res) {
   try {
     const errors = !existing ? res.wrong.map(w => ({
       error_type: PART_TYPE[w.part],
-      error_content: (w.given || '').trim() ? (w.q.type === 'mcq' ? `${w.given}. ${w.q.options[w.given] || ''}` : w.given.trim()) : '(blank)',
-      correct_answer: w.q.type === 'mcq' ? `${w.q.answer}. ${w.q.options[w.q.answer]}` : w.q.answer,
+      error_content: (w.given || '').trim() ? (w.q.type === 'mcq' ? (MCQ.need(w.q) ? MCQ.text(w.given) : `${w.given}. ${w.q.options[w.given] || ''}`) : w.given.trim()) : '(blank)',
+      correct_answer: w.q.type === 'mcq' ? (MCQ.need(w.q) ? MCQ.text(w.q.answer) : `${MCQ.letters(w.q.answer)[0] || w.q.answer}. ${w.q.options[MCQ.letters(w.q.answer)[0] || w.q.answer]}`) : w.q.answer,
       context: w.q.q
     })) : [];
     const sr = await fetch('/api/submit-weekly', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...core, quiz_id: quiz.id, answers: ViolationGuard.clean(answers), part_seconds: { ...partSec, total: totalSec }, errors }) });
@@ -553,8 +557,9 @@ function renderResult(res, status) {
 
   const wrongHtml = res.wrong.map(w => {
     const q = w.q;
-    const given = (w.given || '').trim() ? (q.type === 'mcq' ? `${esc(w.given)}. ${esc(q.options[w.given] || '')}` : esc(w.given)) : '<i>(bỏ trống)</i>';
-    const right = q.type === 'mcq' ? `${esc(q.answer)}. ${esc(q.options[q.answer])}` : esc(q.answer);
+    const ak = q.type === 'mcq' ? (MCQ.letters(q.answer)[0] || q.answer) : '';
+    const given = (w.given || '').trim() ? (q.type === 'mcq' ? (MCQ.need(q) ? esc(MCQ.text(w.given)) : `${esc(w.given)}. ${esc(q.options[w.given] || '')}`) : esc(w.given)) : '<i>(bỏ trống)</i>';
+    const right = q.type === 'mcq' ? (MCQ.need(q) ? esc(MCQ.text(q.answer)) : `${esc(ak)}. ${esc(q.options[ak])}`) : esc(q.answer);
     return `<div class="review-item"><b>${q.id.replace('q','')}.</b> ${esc(q.q)}<br>
       Bạn trả lời: <span class="bad">${given}</span> · Đáp án: <span class="good">${right}</span>
       ${q.explain ? `<br><span class="ex">${esc(q.explain)}</span>` : ''}</div>`;

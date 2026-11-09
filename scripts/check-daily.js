@@ -16,6 +16,18 @@ const passageOf = st => st.passage || st.passage_source || (Array.isArray(st.con
   (String(st.instructions || '').match(/\s*(?:Text|Đoạn văn):\s*([\s\S]+)$/i) || [])[1] || '';
 const needsPassage = st => (st.kind === 'fill' || st.kind === 'mcq') && /read the text|reading/i.test((st.title || '') + ' ' + (st.instructions || ''));
 
+/* Kiểm tra một câu mcq (Daily Practice hoặc quiz tuần).
+   answer: "B" (một đáp án) hoặc ["B","C"] / "B, C" kèm "multi": 2 (chọn nhiều). Số multi phải khớp số đáp án. */
+function checkMcq(f, where, it) {
+    const ans = MCQ.letters(it.answer), n = MCQ.need(it);
+    if (!ans.length) err(f, where, 'câu mcq không có đáp án (' + it.id + ')');
+    for (const k of ans) if (!(k in it.options)) err(f, where, 'đáp án "' + k + '" không có trong lựa chọn (' + it.id + ')');
+    if ('multi' in it && !(Number.isInteger(it.multi) && it.multi >= 1)) err(f, where, '"multi" phải là số nguyên từ 1 trở lên (' + it.id + ')');
+    if (n && ans.length !== n) err(f, where, '"multi": ' + n + ' nhưng answer có ' + ans.length + ' đáp án (' + it.id + ')');
+    if (!n && ans.length > 1) err(f, where, 'answer có ' + ans.length + ' đáp án nhưng thiếu "multi": ' + ans.length + ' (' + it.id + ')');
+    if (n && n >= Object.keys(it.options).length) err(f, where, '"multi": ' + n + ' không nhỏ hơn số lựa chọn (' + it.id + ')');
+}
+
 const files = fs.readdirSync(ROOT).filter(f => /^daily-.*\.json$/.test(f) && f !== 'daily-index.json');
 for (const f of files) {
   let j;
@@ -31,18 +43,21 @@ for (const f of files) {
     for (const it of st.items || []) {
       const label = it.q || it.label || it.id;
       if (/^\s*Text:/i.test(label)) err(f, where, 'đoạn văn bị đặt nhầm thành câu hỏi (' + it.id + '), chuyển lên instructions');
-      if (st.kind === 'mcq' && it.options) {
-        /* answer: "B" (một đáp án) hoặc ["B","C"] / "B, C" kèm "multi": 2 (chọn nhiều). Số multi phải khớp số đáp án. */
-        const ans = MCQ.letters(it.answer), n = MCQ.need(it);
-        if (!ans.length) err(f, where, 'câu mcq không có đáp án (' + it.id + ')');
-        for (const k of ans) if (!(k in it.options)) err(f, where, 'đáp án "' + k + '" không có trong lựa chọn (' + it.id + ')');
-        if ('multi' in it && !(Number.isInteger(it.multi) && it.multi >= 1)) err(f, where, '"multi" phải là số nguyên từ 1 trở lên (' + it.id + ')');
-        if (n && ans.length !== n) err(f, where, '"multi": ' + n + ' nhưng answer có ' + ans.length + ' đáp án (' + it.id + ')');
-        if (!n && ans.length > 1) err(f, where, 'answer có ' + ans.length + ' đáp án nhưng thiếu "multi": ' + ans.length + ' (' + it.id + ')');
-        if (n && n >= Object.keys(it.options).length) err(f, where, '"multi": ' + n + ' không nhỏ hơn số lựa chọn (' + it.id + ')');
-      }
+      if (st.kind === 'mcq' && it.options) checkMcq(f, where, it);
       if (st.kind === 'fill' && (!it.fields || !it.fields.length || it.fields.some(x => !x || !String(x.answer || '').trim()))) err(f, where, 'câu điền thiếu đáp án (' + it.id + ')');
     }
+  }
+}
+
+/* Quiz tuần: quiz-week*.json ở gốc và quizzes/*.json (cấu trúc quiz.parts.{A,B,C,D}.questions) */
+const quizFiles = [...fs.readdirSync(ROOT).filter(f => /^quiz-.*\.json$/.test(f)),
+  ...(fs.existsSync(path.join(ROOT, 'quizzes')) ? fs.readdirSync(path.join(ROOT, 'quizzes')).filter(f => /\.json$/.test(f)).map(f => 'quizzes/' + f) : [])];
+for (const f of quizFiles) {
+  let j;
+  try { j = JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8').replace(/^\uFEFF/, '')); }
+  catch (e) { err(f, 'file', 'JSON lỗi: ' + e.message); continue; }
+  for (const [part, pd] of Object.entries((j.quiz && j.quiz.parts) || {})) {
+    for (const q of pd.questions || []) if (q.type === 'mcq' && q.options) checkMcq(f, 'Part ' + part, q);
   }
 }
 
@@ -51,6 +66,6 @@ try {
   for (const e of Array.isArray(idx) ? idx : idx.items || []) if (e.file && !fs.existsSync(path.join(ROOT, e.file))) err('daily-index.json', e.id || e.file, 'trỏ tới file không tồn tại ' + e.file);
 } catch (e) { err('daily-index.json', 'file', 'JSON lỗi: ' + e.message); }
 
-console.log('Đã kiểm tra ' + files.length + ' file daily.');
+console.log('Đã kiểm tra ' + files.length + ' file daily và ' + quizFiles.length + ' file quiz tuần.');
 if (errors.length) { console.log('Có ' + errors.length + ' lỗi:\n- ' + errors.join('\n- ')); process.exit(1); }
 console.log('Không có lỗi.');
