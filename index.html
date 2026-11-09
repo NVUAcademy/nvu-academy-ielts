@@ -318,7 +318,11 @@ async function loadToday() {
     const link = it => `daily-practice.html?p=${esc(it.p.id)}&d=${esc(it.day)}`;
 
     let replies = [];
-    try { replies = ((await fetch('/api/voice-reply?student_id=' + encodeURIComponent(student.id)).then(r => r.json())).replies) || []; } catch (e) {}
+    /* repErr: không tải được danh sách phản hồi của trợ giảng (lỗi mạng hoặc máy chủ). Khi đó trang chỉ còn nhận xét chữ,
+       nên báo cho học sinh biết thay vì im lặng (không có trình phát và không có nút Ghi âm lại). */
+    let repErr = false;
+    try { const rj = await fetch('/api/voice-reply?student_id=' + encodeURIComponent(student.id)).then(r => r.json()); if (!rj || rj.ok === false) repErr = true; replies = (rj && rj.replies) || []; } catch (e) { repErr = true; }
+    if (repErr) console.error('voice-reply: không tải được danh sách phản hồi của trợ giảng');
     /* Chuỗi học: số ngày liên tiếp có làm bài (tính từ hôm nay, hoặc từ hôm qua nếu hôm nay chưa làm) */
     const iso = x => x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0');
     const dayKeys = new Set((sc.data || []).map(r => r.practice_date));
@@ -364,6 +368,7 @@ async function loadToday() {
     if (allReplies.length) {
       /* Lớp IELTS 13 và IELTS 14: nhận xét do thầy viết nên ghi là "Nhận xét của thầy"; các lớp khác giữ "Nhận xét từ trợ giảng" */
       html += '<div class="sec-label">' + (['IELTS13', 'IELTS14'].includes(student.classCode) ? 'Nhận xét của thầy' : 'Nhận xét từ trợ giảng') + '</div>';
+      if (repErr) html += '<div class="task" style="flex-wrap:wrap"><div class="ic" style="background:var(--peach)">⚠️</div><div class="tt"><b>Chưa tải được file ghi âm của trợ giảng</b><span>Em tải lại trang (hoặc đóng hẳn rồi mở lại). Nếu vẫn không thấy, báo thầy.</span></div></div>';
       allReplies.forEach(x => {
         const t = (byId[x.practice_id] && byId[x.practice_id].title) || 'Bài luyện tập';
         html += `<div class="task" style="flex-wrap:wrap"><div class="ic" style="background:var(--lilac)">🎧</div><div class="tt"><b>${esc(t)}</b><span>${esc(x.date)}</span></div>${x.comment ? `<div style="width:100%;margin-top:8px;font-size:16px;white-space:pre-line">${esc(x.comment)}</div>` : ''}${x.url ? `<audio controls preload="none" src="${esc(x.url)}" style="width:100%;margin-top:8px"></audio>` : (x.has_audio ? '<div class="meta" style="margin-top:8px">Chưa mở được file ghi âm. Em tải lại trang; nếu vẫn không nghe được, em báo thầy.</div>' : '')}${x.practice_id && (x.url || RR_RE.test(x.comment || '')) ? `<a class="btn small" style="margin-top:8px" href="daily-practice.html?p=${esc(x.practice_id)}&d=${esc(x.date)}&redo=1">🎙 Ghi âm lại</a>` : ''}</div>`;
