@@ -389,7 +389,7 @@ function stepHtml(st) {
   } else if (st.kind === 'open') body += st.open.map(openBox).join('');
   else if (st.kind === 'voice') body += `<div class="lines">${st.lines.map(esc).join('<br>')}</div>` + recorderHtml() + `<div class="sub" style="margin-top:10px;font-size:17px">${esc(st.note || '')}</div>`;
   return `<div class="card"><div class="step-head"><h2>${esc(st.title)}</h2><span class="mins">${st.minutes} phút</span></div>
-    <div class="instr">${esc(p.instr)}</div>${(st.images || []).map(src => `<img src="${esc(src)}" alt="Bản đồ" loading="lazy" style="display:block;max-width:100%;border-radius:12px;margin:12px 0">`).join('')}${p.text ? `<div class="passage">${esc(p.text)}</div>` : needsPassage(st) ? `<div class="passage missing">Bài đọc này đang thiếu đoạn văn. Em chụp màn hình báo thầy nhé, thầy sẽ sửa và không tính điểm phần này.</div>` : ''}${audioHtml(st.audio)}${body}</div>`;
+    <div class="instr">${esc(p.instr)}</div>${(st.images || []).map(im => { const src = typeof im === 'string' ? im : im.src, alt = typeof im === 'string' ? 'Hình minh họa' : (im.alt || 'Hình minh họa'); return `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" style="display:block;max-width:100%;border-radius:12px;margin:12px 0">`; }).join('')}${p.text ? `<div class="passage">${esc(p.text)}</div>` : needsPassage(st) ? `<div class="passage missing">Bài đọc này đang thiếu đoạn văn. Em chụp màn hình báo thầy nhé, thầy sẽ sửa và không tính điểm phần này.</div>` : ''}${audioHtml(st.audio)}${body}</div>`;
 }
 
 function fillRow(it) {
