@@ -130,6 +130,12 @@
             ]
           }
         }
+      ],
+      "images": [
+        {
+          "src": "images/tue_w3_pie_france.png",
+          "alt": "Pie charts: energy production in France, 1995 and 2005"
+        }
       ]
     },
     {

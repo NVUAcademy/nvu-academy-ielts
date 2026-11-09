@@ -41,6 +41,12 @@
             ]
           }
         }
+      ],
+      "images": [
+        {
+          "src": "images/mon_w3_line_dairy.png",
+          "alt": "Line graph: consumption of four dairy products per person in the USA, 1970 to 2010"
+        }
       ]
     },
     {

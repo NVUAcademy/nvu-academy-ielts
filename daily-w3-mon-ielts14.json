@@ -158,6 +158,12 @@
             ]
           }
         }
+      ],
+      "images": [
+        {
+          "src": "images/i4_books.png",
+          "alt": "Line graph: money spent on books in Germany, France, Italy and Austria, 1995 to 2005"
+        }
       ]
     },
     {
@@ -185,6 +191,12 @@
               "1 đến 2 câu, ngữ pháp đúng"
             ]
           }
+        }
+      ],
+      "images": [
+        {
+          "src": "images/i4_forest.png",
+          "alt": "Line graph: production of paper and packaging, wood pulp and sawn-wood in the UK, 1980 to 2000"
         }
       ]
     },
@@ -214,6 +226,12 @@
             ]
           }
         }
+      ],
+      "images": [
+        {
+          "src": "images/mon_w3_line_dairy.png",
+          "alt": "Line graph: consumption of four dairy products per person in the USA, 1970 to 2010"
+        }
       ]
     },
     {
@@ -241,6 +259,12 @@
               "mạo từ, số ít số nhiều và chính tả đúng"
             ]
           }
+        }
+      ],
+      "images": [
+        {
+          "src": "images/mon_w3_bar_wind.png",
+          "alt": "Bar chart: electricity generated from wind power in four countries, 1985 to 2000"
         }
       ]
     },

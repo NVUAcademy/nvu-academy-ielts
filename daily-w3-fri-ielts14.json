@@ -286,6 +286,12 @@
             ]
           }
         }
+      ],
+      "images": [
+        {
+          "src": "images/i4_books.png",
+          "alt": "Line graph: money spent on books in Germany, France, Italy and Austria, 1995 to 2005"
+        }
       ]
     },
     {
