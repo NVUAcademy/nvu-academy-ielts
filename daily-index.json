@@ -460,6 +460,90 @@
       "class_codes": [
         "IELTS13"
       ]
-    }
+    },
+    {
+        "id": "w5-mon-found11",
+        "file": "daily-w5-mon-found11.json",
+        "title": "Monday Daily Practice",
+        "subtitle": "Class day B7: warm-up with the Lesson 7 words",
+        "day": "monday",
+        "date": "2026-11-09",
+        "week_number": 5,
+        "class_codes": [
+              "FOUNDATION11"
+        ]
+  },
+    {
+        "id": "w5-tue-found11",
+        "file": "daily-w5-tue-found11.json",
+        "title": "Tuesday Daily Practice",
+        "subtitle": "Review B7: new words, he/she -s, doesn't and Does, how often",
+        "day": "tuesday",
+        "date": "2026-11-10",
+        "week_number": 5,
+        "class_codes": [
+              "FOUNDATION11"
+        ]
+  },
+    {
+        "id": "w5-wed-found11",
+        "file": "daily-w5-wed-found11.json",
+        "title": "Wednesday Daily Practice",
+        "subtitle": "Mixed practice: Lesson 7 words, -s and -es, find the mistake, write about a classmate",
+        "day": "wednesday",
+        "date": "2026-11-11",
+        "week_number": 5,
+        "class_codes": [
+              "FOUNDATION11"
+        ]
+  },
+    {
+        "id": "w5-thu-found11",
+        "file": "daily-w5-thu-found11.json",
+        "title": "Thursday Daily Practice",
+        "subtitle": "Speaking: shadow Hoa, interview a family member, get ready for B8",
+        "day": "thursday",
+        "date": "2026-11-12",
+        "week_number": 5,
+        "class_codes": [
+              "FOUNDATION11"
+        ]
+  },
+    {
+        "id": "w5-fri-found11",
+        "file": "daily-w5-fri-found11.json",
+        "title": "Friday Daily Practice: weekly test /19",
+        "subtitle": "Weekly test on Lesson 7 (45 minutes, no notes)",
+        "day": "friday",
+        "date": "2026-11-13",
+        "week_number": 5,
+        "class_codes": [
+              "FOUNDATION11"
+        ]
+  },
+    {
+        "id": "w5-sat-found11",
+        "file": "daily-w5-sat-found11.json",
+        "title": "Saturday Daily Practice: class day warm-up",
+        "subtitle": "Class day B8: warm-up with the student life words before the Phase A test",
+        "day": "saturday",
+        "date": "2026-11-14",
+        "week_number": 5,
+        "class_codes": [
+              "FOUNDATION11"
+        ]
+  },
+    {
+        "id": "w5-sun-found11",
+        "file": "daily-w5-sun-found11.json",
+        "title": "Sunday Daily Practice",
+        "subtitle": "Review B8: student life words, -s and -es, vowel pairs, write about your university",
+        "day": "sunday",
+        "date": "2026-11-15",
+        "week_number": 5,
+        "class_codes": [
+              "FOUNDATION11"
+        ]
+  }
   ]
 }

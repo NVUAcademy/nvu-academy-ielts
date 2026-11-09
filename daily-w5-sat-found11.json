@@ -1,0 +1,89 @@
+{
+  "id": "w5-sat-found11",
+  "title": "Saturday Daily Practice: class day warm-up",
+  "subtitle": "Class day B8: warm-up with the student life words before the Phase A test",
+  "theme": "Lesson 8 · Putting it all together",
+  "source": "Foundation 11 lesson plan, week 5 (B7 Other people's habits, B8 Putting it all together + Phase A test), Sat 14 Nov (class day B8, Phase A test)",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 5,
+  "day": "saturday",
+  "date": "2026-11-14",
+  "section": "vocabulary",
+  "minutes": 15,
+  "intro": "Class day. This is a 15-minute warm-up only. Do not submit. Tonight you have the Phase A test (30 minutes), so come on time.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Word recall",
+      "minutes": 8,
+      "instructions": "Fill in each gap with a Lesson 8 word from Thursday. The first letter is given.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. I'm a first-year student. I'm a f____.",
+          "fields": [
+            {
+              "answer": "freshman"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. We eat lunch in the c____ at noon.",
+          "fields": [
+            {
+              "answer": "cafeteria"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. She got a s____, so she doesn't pay the tuition fee.",
+          "fields": [
+            {
+              "answer": "scholarship"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. I live in a hall of r____ near the library.",
+          "fields": [
+            {
+              "answer": "residence"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. Our s____ group meets every Tuesday evening.",
+          "fields": [
+            {
+              "answer": "study"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Say it aloud",
+      "minutes": 7,
+      "instructions": "Say the 8 words and the 3 sentences aloud. You do not need to send it today.",
+      "kind": "voice",
+      "lines": [
+        "campus · scholarship · tuition fee · freshman · cafeteria · group project · hall of residence · study group",
+        "1. I'm a freshman.",
+        "2. We work on a group project.",
+        "3. Our cafeteria opens at 7."
+      ],
+      "note": "Stress: CAM-pus, SCHOL-ar-ship, caf-e-TER-i-a, FRESH-man."
+    }
+  ],
+  "send_today": "Warm-up only. Do not submit.",
+  "error_type": "vocabulary"
+}

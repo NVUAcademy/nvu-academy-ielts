@@ -1,0 +1,285 @@
+{
+  "id": "w5-fri-found11",
+  "title": "Friday Daily Practice: weekly test /19",
+  "subtitle": "Weekly test on Lesson 7 (45 minutes, no notes)",
+  "theme": "Week 5 · Weekly test",
+  "source": "Foundation 11 lesson plan, week 5 (B7 Other people's habits, B8 Putting it all together + Phase A test), Fri 13 Nov (weekly test)",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 5,
+  "day": "friday",
+  "date": "2026-11-13",
+  "section": "test",
+  "minutes": 45,
+  "intro": "Weekly test /19, about 45 minutes, no notes, no phone dictionary. Steps 1 to 4 are the test. Step 5 is a voice note. Deadline: 23:00 the same day. Step 3 has an audio: press Listen.",
+  "audio": {
+    "a1": {
+      "label": "Audio 1 · What time? (Lan and Minh)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "What time do you wake up?"
+        },
+        {
+          "speaker": "B",
+          "text": "I wake up at half past six."
+        },
+        {
+          "speaker": "A",
+          "text": "What time does your bus leave?"
+        },
+        {
+          "speaker": "B",
+          "text": "It leaves at quarter to eight."
+        },
+        {
+          "speaker": "A",
+          "text": "What time do you start work?"
+        },
+        {
+          "speaker": "B",
+          "text": "I start work at nine o'clock."
+        },
+        {
+          "speaker": "A",
+          "text": "What time do you have lunch?"
+        },
+        {
+          "speaker": "B",
+          "text": "I have lunch at quarter past twelve."
+        }
+      ]
+    }
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Test A: words /5",
+      "minutes": 8,
+      "instructions": "Fill in each gap with a Lesson 7 word. Change the form if needed.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. She goes to bed at 1 a.m. every night. She is a night ____.",
+          "fields": [
+            {
+              "answer": "owl"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. I never eat in the morning. I always ____ breakfast.",
+          "fields": [
+            {
+              "answer": "skip"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. My dad cuts the grass. He ____ the lawn every Saturday.",
+          "fields": [
+            {
+              "answer": "mows"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. He works too much. Be careful, he can ____ out.",
+          "fields": [
+            {
+              "answer": "burn"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. Please ____ these bottles. Put them in the green bin.",
+          "fields": [
+            {
+              "answer": "recycle"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Test B: grammar /6",
+      "minutes": 10,
+      "instructions": "Write the correct form. Use doesn't or Does where you see (not) or (?).",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. My sister ____ English at night. (study)",
+          "fields": [
+            {
+              "answer": "studies"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. He ____ his bike every week. (fix)",
+          "fields": [
+            {
+              "answer": "fixes"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. She ____ a new phone. (have)",
+          "fields": [
+            {
+              "answer": "has"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. My brother ____ coffee. (not / like)",
+          "fields": [
+            {
+              "answer": "doesn't like",
+              "accept": [
+                "does not like"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. ____ your mum cook every day? (?)",
+          "fields": [
+            {
+              "answer": "Does",
+              "accept": [
+                "does"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_6",
+          "label": "6. How often ____ he go to the gym? (?)",
+          "fields": [
+            {
+              "answer": "does",
+              "accept": [
+                "Does"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Test C: listening /4",
+      "minutes": 10,
+      "instructions": "Listen to Lan and Minh. Write the 4 times you hear in numbers (for example 6:30). You can listen two times.",
+      "kind": "fill",
+      "audio": "a1",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. Lan wakes up at ____.",
+          "fields": [
+            {
+              "answer": "6:30",
+              "accept": [
+                "6.30",
+                "half past six"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2. Her bus leaves at ____.",
+          "fields": [
+            {
+              "answer": "7:45",
+              "accept": [
+                "7.45",
+                "quarter to eight"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3. She starts work at ____.",
+          "fields": [
+            {
+              "answer": "9:00",
+              "accept": [
+                "9",
+                "9.00",
+                "nine o'clock",
+                "nine"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "4. She has lunch at ____.",
+          "fields": [
+            {
+              "answer": "12:15",
+              "accept": [
+                "12.15",
+                "quarter past twelve"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Test D: writing /4",
+      "minutes": 12,
+      "instructions": "Write 3 sentences about your friend's habits and 1 question with How often. Type it in the box on the website.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s4_1",
+          "q": "My friend's habits",
+          "model": "My friend Nam is an early bird. He usually goes running at six. He doesn't skip breakfast. How often does he go to the gym?",
+          "ai": {
+            "type": "Three sentences and one question about a friend's habits",
+            "level": "Foundation (A1 to A2)",
+            "min_words": 20,
+            "task": "Write 3 sentences about a friend's habits and 1 How often question. 1 point for each correct sentence.",
+            "criteria": [
+              "3 correct sentences with he or she and the -s / -es / -ies ending (1 point each)",
+              "1 correct question: How often does he/she + base verb? (1 point)",
+              "capital letters, full stops and a question mark"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Voice note",
+      "minutes": 5,
+      "instructions": "Read your 4 sentences from Step 4 aloud. Record one voice note.",
+      "kind": "voice",
+      "lines": [
+        "Read your 4 sentences from Step 4 aloud, slowly."
+      ],
+      "note": "Not scored. Teacher listens for the -s endings."
+    }
+  ],
+  "send_today": "Test on the website. Press Submit when you finish. Voice note in step 5 is sent to the teacher.",
+  "error_type": "grammar"
+}

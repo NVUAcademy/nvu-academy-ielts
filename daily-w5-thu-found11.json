@@ -1,0 +1,231 @@
+{
+  "id": "w5-thu-found11",
+  "title": "Thursday Daily Practice",
+  "subtitle": "Speaking: shadow Hoa, interview a family member, get ready for B8",
+  "theme": "Speaking · Getting ready for B8",
+  "source": "Foundation 11 lesson plan, week 5 (B7 Other people's habits, B8 Putting it all together + Phase A test), Thu 12 Nov (speaking, prepare B8)",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 5,
+  "day": "thursday",
+  "date": "2026-11-12",
+  "section": "speaking",
+  "minutes": 60,
+  "intro": "Five steps, about 60 minutes. Deadline: 23:00 the same day. Steps 1 and 5 are voice notes. Step 2 is writing: type it in the box on the website.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Shadowing: Hoa's routine",
+      "minutes": 12,
+      "instructions": "Read each line, then say it again without looking. Do it 3 times. The third time, say every line a little faster. Record the third time.",
+      "kind": "voice",
+      "lines": [
+        "1. My friend Hoa is a very busy student.",
+        "2. She wakes up at six o'clock.",
+        "3. She makes breakfast for her little brother.",
+        "4. Then she goes to school by bike.",
+        "5. In the evening, she studies English and watches a short video.",
+        "6. She usually goes to bed at half past ten.",
+        "7. On Sunday, she does the laundry and cleans her room.",
+        "8. She likes her routine because it keeps her healthy."
+      ],
+      "note": "Teacher listens for the -s endings and smooth sentences, not word by word."
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Interview a family member",
+      "minutes": 12,
+      "instructions": "Ask one person in your family these 5 questions. Write their answers in full sentences with he or she. Type them in the box on the website.\n1. What time does he/she wake up?\n2. Does he/she cook?\n3. How often does he/she exercise?\n4. Where does he/she work or study?\n5. Why does he/she like his/her routine?",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s2_1",
+          "q": "Answers from my family member",
+          "model": "My mum wakes up at half past five. Yes, she cooks every day. She sometimes goes for a walk, twice a week. She works at a bank. She likes her routine because it is simple.",
+          "ai": {
+            "type": "Five answers about another person's routine",
+            "level": "Foundation (A1 to A2)",
+            "min_words": 30,
+            "task": "Write 5 answers in full sentences about a family member, using he or she with the -s ending.",
+            "criteria": [
+              "5 full sentences that answer the 5 questions",
+              "correct -s / -es endings with he or she",
+              "a frequency word or phrase in answer 3 (always, twice a week...)",
+              "because in answer 5"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Lesson 8 words: student life",
+      "minutes": 10,
+      "instructions": "These are Saturday's new words. Choose the best meaning.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s3_1",
+          "q": "1. campus",
+          "options": {
+            "A": "the land and buildings of a university",
+            "B": "a big shop",
+            "C": "a bus station"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s3_2",
+          "q": "2. scholarship",
+          "options": {
+            "A": "a test at the end of the year",
+            "B": "money a school gives a good student for studying",
+            "C": "a kind of ship"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s3_3",
+          "q": "3. tuition fee",
+          "options": {
+            "A": "money you pay for your lessons or course",
+            "B": "money you get from a job",
+            "C": "a free class"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s3_4",
+          "q": "4. freshman",
+          "options": {
+            "A": "a teacher",
+            "B": "a new cook",
+            "C": "a first-year student"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s3_5",
+          "q": "5. cafeteria",
+          "options": {
+            "A": "a room for sleeping",
+            "B": "a place where students buy and eat food",
+            "C": "a library"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s3_6",
+          "q": "6. group project",
+          "options": {
+            "A": "work you do alone",
+            "B": "work that a few students do together",
+            "C": "a group of friends on holiday"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s3_7",
+          "q": "7. hall of residence",
+          "options": {
+            "A": "a building where university students live",
+            "B": "a sports hall",
+            "C": "a concert hall"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s3_8",
+          "q": "8. study group",
+          "options": {
+            "A": "a group of students who meet to study together",
+            "B": "a class for teachers",
+            "C": "a football team"
+          },
+          "answer": "A"
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Web words from Wednesday",
+      "minutes": 6,
+      "instructions": "Fill in each gap with one of Wednesday's 20 words on the website.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s4_1",
+          "label": "1. My mum has a special ____ for chicken soup. (r)",
+          "fields": [
+            {
+              "answer": "recipe"
+            }
+          ]
+        },
+        {
+          "id": "s4_2",
+          "label": "2. ____ the potatoes before you cook them. (p)",
+          "fields": [
+            {
+              "answer": "Peel",
+              "accept": [
+                "peel"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s4_3",
+          "label": "3. ____ the soup with a spoon. (s)",
+          "fields": [
+            {
+              "answer": "Stir",
+              "accept": [
+                "stir"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s4_4",
+          "label": "4. I eat the ____ from dinner for lunch. (l)",
+          "fields": [
+            {
+              "answer": "leftovers",
+              "accept": [
+                "leftover"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s4_5",
+          "label": "5. My cousin doesn't eat meat. He is a ____. (v)",
+          "fields": [
+            {
+              "answer": "vegetarian"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Speaking Part 1",
+      "minutes": 15,
+      "instructions": "Answer the 4 questions. Give 2 or 3 sentences for each answer. Practise first, then record one voice note of about 1 minute.",
+      "kind": "voice",
+      "lines": [
+        "1. Do you live near your school or campus?",
+        "2. What do you do at weekends?",
+        "3. How often do you cook?",
+        "4. Do you like sport? Why or why not?"
+      ],
+      "note": "Teacher listens for full answers (answer + reason or example) and correct do / does."
+    }
+  ],
+  "send_today": "Five steps on the website. Voice notes in steps 1 and 5 are sent to the teacher when you press Submit.",
+  "error_type": "speaking"
+}

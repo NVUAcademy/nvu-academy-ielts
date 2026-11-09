@@ -1,0 +1,334 @@
+{
+  "id": "w5-sun-found11",
+  "title": "Sunday Daily Practice",
+  "subtitle": "Review B8: student life words, -s and -es, vowel pairs, write about your university",
+  "theme": "Lesson 8 · Putting it all together",
+  "source": "Foundation 11 lesson plan, week 5 (B7 Other people's habits, B8 Putting it all together + Phase A test), Sun 15 Nov (review B8)",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 5,
+  "day": "sunday",
+  "date": "2026-11-15",
+  "section": "vocabulary",
+  "minutes": 60,
+  "intro": "Seven steps, about 60 minutes. Deadline: 23:00 the same day. Step 6 is writing: type it in the box on the website. Steps 3 and 7 are voice notes. Book work: do EPIU 42.2 again in your book and send a photo in the Zalo group.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Lesson 8 words",
+      "minutes": 10,
+      "instructions": "Fill in each gap with a Lesson 8 word.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. The university ____ is very big. It has ten buildings and a lake.",
+          "fields": [
+            {
+              "answer": "campus"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. She is a good student, so she won a ____.",
+          "fields": [
+            {
+              "answer": "scholarship"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. The ____ for this English course is 5 million dong.",
+          "fields": [
+            {
+              "answer": "tuition fee",
+              "accept": [
+                "tuition fees"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. He is a ____. It is his first year at university.",
+          "fields": [
+            {
+              "answer": "freshman"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. We buy cheap noodles in the ____.",
+          "fields": [
+            {
+              "answer": "cafeteria"
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "6. Four of us are working on a ____ about recycling.",
+          "fields": [
+            {
+              "answer": "group project"
+            }
+          ]
+        },
+        {
+          "id": "s1_7",
+          "label": "7. I don't live at home. I live in a ____ on campus.",
+          "fields": [
+            {
+              "answer": "hall of residence"
+            }
+          ]
+        },
+        {
+          "id": "s1_8",
+          "label": "8. We meet in a ____ before every test.",
+          "fields": [
+            {
+              "answer": "study group"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · -s and -es review",
+      "minutes": 8,
+      "instructions": "Write the he / she / it form.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. go → he ____",
+          "fields": [
+            {
+              "answer": "goes"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. watch → she ____",
+          "fields": [
+            {
+              "answer": "watches"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. study → he ____",
+          "fields": [
+            {
+              "answer": "studies"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. fix → it ____",
+          "fields": [
+            {
+              "answer": "fixes"
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. do → she ____",
+          "fields": [
+            {
+              "answer": "does"
+            }
+          ]
+        },
+        {
+          "id": "s2_6",
+          "label": "6. have → he ____",
+          "fields": [
+            {
+              "answer": "has"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Sounds: vowel pairs",
+      "minutes": 8,
+      "instructions": "Say each pair aloud 3 times. Make the two words sound different. Record one voice note.",
+      "kind": "voice",
+      "lines": [
+        "ship / sheep",
+        "pull / pool",
+        "thin / think",
+        "pen / pan",
+        "cut / cart",
+        "late / light"
+      ],
+      "note": "Teacher listens for short /ɪ/ vs long /iː/, /ʊ/ vs /uː/, /e/ vs /æ/, /ʌ/ vs /ɑː/, /eɪ/ vs /aɪ/, and the /ŋk/ in think."
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Grammar: how often",
+      "minutes": 10,
+      "instructions": "Choose the correct answer.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s4_1",
+          "q": "1. ____ does she go to the study group? — Twice a week.",
+          "options": {
+            "A": "How often",
+            "B": "What time",
+            "C": "Where"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s4_2",
+          "q": "2. Which sentence is correct?",
+          "options": {
+            "A": "He goes sometimes to the cafeteria.",
+            "B": "He sometimes goes to the cafeteria.",
+            "C": "Sometimes he go to the cafeteria."
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s4_3",
+          "q": "3. Which sentence is correct?",
+          "options": {
+            "A": "She is always on time.",
+            "B": "She always is on time.",
+            "C": "Always she on time is."
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s4_4",
+          "q": "4. I go to the library ____. (Monday, Wednesday, Friday)",
+          "options": {
+            "A": "once a week",
+            "B": "three times a week",
+            "C": "twice a month"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s4_5",
+          "q": "5. Which question is correct?",
+          "options": {
+            "A": "How often do your friend study?",
+            "B": "How often does your friend study?",
+            "C": "How often does your friend studies?"
+          },
+          "answer": "B"
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Web words from Friday and Saturday",
+      "minutes": 6,
+      "instructions": "Fill in each gap with a word from Friday's or Saturday's list on the website.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s5_1",
+          "label": "1. The weather ____ says it will rain tomorrow. (f)",
+          "fields": [
+            {
+              "answer": "forecast"
+            }
+          ]
+        },
+        {
+          "id": "s5_2",
+          "label": "2. It is very ____ in Hà Nội in August. The air is wet. (h)",
+          "fields": [
+            {
+              "answer": "humid"
+            }
+          ]
+        },
+        {
+          "id": "s5_3",
+          "label": "3. My ____ helps me with my reports at work. (c)",
+          "fields": [
+            {
+              "answer": "colleague"
+            }
+          ]
+        },
+        {
+          "id": "s5_4",
+          "label": "4. She got a ____ and now she is the manager. (p)",
+          "fields": [
+            {
+              "answer": "promotion"
+            }
+          ]
+        },
+        {
+          "id": "s5_5",
+          "label": "5. He works ____ on busy days and goes home at 10 p.m. (o)",
+          "fields": [
+            {
+              "answer": "overtime"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Step 6 · Writing: my university",
+      "minutes": 12,
+      "instructions": "Write about 40 words about your university or a friend's university. Use at least 3 Lesson 8 words. Type it in the box on the website.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s6_1",
+          "q": "My university",
+          "model": "I am a freshman at a university in Hà Nội. The campus is big and green. I live in a hall of residence. I usually eat lunch in the cafeteria. I meet my study group twice a week.",
+          "ai": {
+            "type": "Short paragraph about a university",
+            "level": "Foundation (A1 to A2)",
+            "min_words": 35,
+            "task": "Write about 40 words about your (or a friend's) university with at least 3 Lesson 8 words.",
+            "criteria": [
+              "about 40 words",
+              "at least 3 Lesson 8 words used correctly",
+              "present simple correct (I / he / she)",
+              "capital letters and full stops"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "title": "Step 7 · Voice note",
+      "minutes": 6,
+      "instructions": "Read your paragraph from Step 6 aloud once. Record one voice note.",
+      "kind": "voice",
+      "lines": [
+        "Read your paragraph from Step 6 aloud, slowly."
+      ],
+      "note": "Teacher listens for word stress in the Lesson 8 words."
+    }
+  ],
+  "send_today": "Seven steps on the website. Voice notes are sent to the teacher when you press Submit. Photo of EPIU 42.2 in the Zalo group: Done + name + Sunday.",
+  "error_type": "vocabulary"
+}

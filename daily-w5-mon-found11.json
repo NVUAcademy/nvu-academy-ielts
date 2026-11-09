@@ -1,0 +1,94 @@
+{
+  "id": "w5-mon-found11",
+  "title": "Monday Daily Practice",
+  "subtitle": "Class day B7: warm-up with the Lesson 7 words",
+  "theme": "Lesson 7 · Other people's habits",
+  "source": "Foundation 11 lesson plan, week 5 (B7 Other people's habits, B8 Putting it all together + Phase A test), Mon 9 Nov (class day B7)",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 5,
+  "day": "monday",
+  "date": "2026-11-09",
+  "section": "vocabulary",
+  "minutes": 15,
+  "intro": "Class day. This is a 15-minute warm-up only. Do not submit. Bring your notes to class tonight.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Guess the meaning",
+      "minutes": 8,
+      "instructions": "These are tonight's new words. Choose the best meaning. It is OK to guess.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s1_1",
+          "q": "1. be a night owl",
+          "options": {
+            "A": "a person who likes to stay awake late at night",
+            "B": "a person who works on a farm",
+            "C": "a person who is afraid of the dark"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s1_2",
+          "q": "2. be an early bird",
+          "options": {
+            "A": "a person who eats a lot in the morning",
+            "B": "a person who gets up very early",
+            "C": "a person who keeps birds"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s1_3",
+          "q": "3. skip breakfast",
+          "options": {
+            "A": "eat a big breakfast",
+            "B": "cook breakfast for the family",
+            "C": "not eat breakfast"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s1_4",
+          "q": "4. burn out",
+          "options": {
+            "A": "feel very tired and stressed from too much work",
+            "B": "cook food for too long",
+            "C": "turn off the light"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s1_5",
+          "q": "5. be addicted to (something)",
+          "options": {
+            "A": "not like something",
+            "B": "cannot stop using or doing something",
+            "C": "be good at something"
+          },
+          "answer": "B"
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Say it aloud",
+      "minutes": 7,
+      "instructions": "Say the 10 new words and the 3 sentences aloud. You do not need to send it today.",
+      "kind": "voice",
+      "lines": [
+        "be a night owl · be an early bird · stay up late · skip (breakfast) · recycle · mow the lawn · meditate · burn out · be addicted to · stay in bed",
+        "1. She usually goes running.",
+        "2. He doesn't like coffee.",
+        "3. Does she stay up late?"
+      ],
+      "note": "Teacher listens for the -s ending in goes and the stress: MED-i-tate, RE-cy-cle, ad-DIC-ted."
+    }
+  ],
+  "send_today": "Warm-up only. Do not submit.",
+  "error_type": "vocabulary"
+}

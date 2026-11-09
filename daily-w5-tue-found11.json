@@ -1,0 +1,344 @@
+{
+  "id": "w5-tue-found11",
+  "title": "Tuesday Daily Practice",
+  "subtitle": "Review B7: new words, he/she -s, doesn't and Does, how often",
+  "theme": "Lesson 7 · Other people's habits",
+  "source": "Foundation 11 lesson plan, week 5 (B7 Other people's habits, B8 Putting it all together + Phase A test), Tue 10 Nov (review B7)",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 5,
+  "day": "tuesday",
+  "date": "2026-11-10",
+  "section": "grammar",
+  "minutes": 60,
+  "intro": "Six steps, about 60 minutes. Deadline: 23:00 the same day. Step 5 is writing: type it in the box on the website. Step 6 is a voice note. Book work: do EPIU 42.1 and 42.2 in your book and send a photo in the Zalo group.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Lesson 7 words",
+      "minutes": 8,
+      "instructions": "Choose the correct word or phrase.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s1_1",
+          "q": "1. My grandpa goes to bed at 9 p.m. and gets up at 4 a.m. He is ____.",
+          "options": {
+            "A": "a night owl",
+            "B": "an early bird",
+            "C": "addicted to"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s1_2",
+          "q": "2. I ____ breakfast because I am never hungry in the morning.",
+          "options": {
+            "A": "skip",
+            "B": "recycle",
+            "C": "meditate"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s1_3",
+          "q": "3. Every Saturday my dad ____ in the garden. The grass is short now.",
+          "options": {
+            "A": "stays in bed",
+            "B": "mows the lawn",
+            "C": "burns out"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s1_4",
+          "q": "4. She sits quietly and ____ for ten minutes every morning.",
+          "options": {
+            "A": "meditates",
+            "B": "stays up late",
+            "C": "skips"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s1_5",
+          "q": "5. We ____ paper and plastic bottles at home.",
+          "options": {
+            "A": "burn out",
+            "B": "recycle",
+            "C": "mow"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s1_6",
+          "q": "6. He plays games on his phone for 8 hours a day. He is ____ his phone.",
+          "options": {
+            "A": "an early bird for",
+            "B": "addicted to",
+            "C": "a night owl to"
+          },
+          "answer": "B"
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Web words from Monday",
+      "minutes": 6,
+      "instructions": "Fill in each gap with one of Monday's 20 words on the website.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. I have a ____ on Sunday. I get up at ten. (l)",
+          "fields": [
+            {
+              "answer": "lie-in",
+              "accept": [
+                "lie in"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. I hit ____ three times, so I am late. (s)",
+          "fields": [
+            {
+              "answer": "snooze"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. She is always ____. She is never late for class. (p)",
+          "fields": [
+            {
+              "answer": "punctual"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. I ____ and missed the bus this morning. (o)",
+          "fields": [
+            {
+              "answer": "overslept"
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. Please ____ up your desk before you leave. (t)",
+          "fields": [
+            {
+              "answer": "tidy"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Grammar: he, she, it",
+      "minutes": 12,
+      "instructions": "Write the correct form of the verb. Use doesn't or Does where you see (not) or (?).",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. Hoa ____ up at six o'clock. (wake)",
+          "fields": [
+            {
+              "answer": "wakes"
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2. My brother ____ English every evening. (study)",
+          "fields": [
+            {
+              "answer": "studies"
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3. She ____ a short video before bed. (watch)",
+          "fields": [
+            {
+              "answer": "watches"
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "4. He ____ a shower in the morning. (have)",
+          "fields": [
+            {
+              "answer": "has"
+            }
+          ]
+        },
+        {
+          "id": "s3_5",
+          "label": "5. My mum ____ coffee. (not / drink)",
+          "fields": [
+            {
+              "answer": "doesn't drink",
+              "accept": [
+                "does not drink"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_6",
+          "label": "6. Lan ____ breakfast. (not / skip)",
+          "fields": [
+            {
+              "answer": "doesn't skip",
+              "accept": [
+                "does not skip"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_7",
+          "label": "7. ____ your dad mow the lawn on Sunday? (?)",
+          "fields": [
+            {
+              "answer": "Does",
+              "accept": [
+                "does"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_8",
+          "label": "8. What time ____ she go to bed? (?)",
+          "fields": [
+            {
+              "answer": "does",
+              "accept": [
+                "Does"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Grammar: always, usually, never",
+      "minutes": 8,
+      "instructions": "Choose the correct sentence.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s4_1",
+          "q": "1. Which sentence is correct?",
+          "options": {
+            "A": "She usually goes running.",
+            "B": "She goes usually running.",
+            "C": "Usually she running goes."
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s4_2",
+          "q": "2. Which sentence is correct?",
+          "options": {
+            "A": "He never is late.",
+            "B": "He is never late.",
+            "C": "Never he is late."
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s4_3",
+          "q": "3. Which sentence is correct?",
+          "options": {
+            "A": "I always stay up late on Friday.",
+            "B": "I stay always up late on Friday.",
+            "C": "I stay up late always on Friday."
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s4_4",
+          "q": "4. Which question is correct?",
+          "options": {
+            "A": "How often she cooks?",
+            "B": "How often does she cook?",
+            "C": "How often does she cooks?"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s4_5",
+          "q": "5. How often does he mow the lawn? — ____",
+          "options": {
+            "A": "Once a week.",
+            "B": "At once week.",
+            "C": "One week."
+          },
+          "answer": "A"
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Writing: one person at home",
+      "minutes": 15,
+      "instructions": "Write 5 sentences about the habits of one person in your family. You must use: 2 Lesson 7 words, 1 sentence with doesn't, 1 sentence with always, usually, often, sometimes or never. Type it in the box on the website.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s5_1",
+          "q": "One person in my family",
+          "model": "My dad is an early bird. He always wakes up at five. He meditates for ten minutes. He doesn't skip breakfast. On Sunday, he mows the lawn.",
+          "ai": {
+            "type": "Short paragraph about another person's habits",
+            "level": "Foundation (A1 to A2)",
+            "min_words": 30,
+            "task": "Write 5 sentences about one family member's habits with 2 Lesson 7 words, 1 sentence with doesn't and 1 frequency adverb.",
+            "criteria": [
+              "5 complete sentences with a capital letter and a full stop",
+              "uses he or she with the -s / -es / -ies ending correctly",
+              "has at least 1 correct sentence with doesn't + base verb",
+              "uses a frequency adverb in the correct position",
+              "uses at least two Lesson 7 words"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Step 6 · Voice note: Hoa's routine",
+      "minutes": 7,
+      "instructions": "Read Hoa's routine aloud 3 times, slowly. Record one voice note.",
+      "kind": "voice",
+      "lines": [
+        "1. My friend Hoa is a very busy student.",
+        "2. She wakes up at six o'clock.",
+        "3. She makes breakfast for her little brother.",
+        "4. Then she goes to school by bike.",
+        "5. In the evening, she studies English and watches a short video.",
+        "6. She usually goes to bed at half past ten.",
+        "7. On Sunday, she does the laundry and cleans her room.",
+        "8. She likes her routine because it keeps her healthy."
+      ],
+      "note": "Teacher listens for the endings: wakes /s/, makes /s/, goes /z/, studies /z/, watches /ɪz/, does /z/."
+    }
+  ],
+  "send_today": "Six steps on the website. Voice note in step 6 is sent to the teacher when you press Submit. Photo of EPIU 42.1 and 42.2 in the Zalo group: Done + name + Tuesday.",
+  "error_type": "grammar"
+}

@@ -1,0 +1,376 @@
+{
+  "id": "w5-wed-found11",
+  "title": "Wednesday Daily Practice",
+  "subtitle": "Mixed practice: Lesson 7 words, -s and -es, find the mistake, write about a classmate",
+  "theme": "Lesson 7 · Other people's habits",
+  "source": "Foundation 11 lesson plan, week 5 (B7 Other people's habits, B8 Putting it all together + Phase A test), Wed 11 Nov (mixed practice)",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 5,
+  "day": "wednesday",
+  "date": "2026-11-11",
+  "section": "grammar",
+  "minutes": 60,
+  "intro": "Six steps, about 60 minutes. Deadline: 23:00 the same day. Step 5 is writing: type it in the box on the website. Step 6 is a voice note.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Lesson 7 words",
+      "minutes": 10,
+      "instructions": "Fill in each gap with a Lesson 7 word. Change the form if needed (is, are, -s).",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. My dad goes to bed at 2 a.m. He ____. (be a night owl)",
+          "fields": [
+            {
+              "answer": "is a night owl"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. The grass is very long. I ____ on Sunday morning. (mow the lawn)",
+          "fields": [
+            {
+              "answer": "mow the lawn"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. She drinks five cups a day. She ____ coffee. (be addicted to)",
+          "fields": [
+            {
+              "answer": "is addicted to"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. Take a rest! If you work 14 hours a day, you ____. (burn out)",
+          "fields": [
+            {
+              "answer": "burn out",
+              "accept": [
+                "will burn out"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. We get up at 5 a.m. every day. We ____. (be an early bird)",
+          "fields": [
+            {
+              "answer": "are early birds"
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "6. I sit quietly and ____ before work. (meditate)",
+          "fields": [
+            {
+              "answer": "meditate"
+            }
+          ]
+        },
+        {
+          "id": "s1_7",
+          "label": "7. Many students ____ on Saturday night and watch films. (stay up late)",
+          "fields": [
+            {
+              "answer": "stay up late"
+            }
+          ]
+        },
+        {
+          "id": "s1_8",
+          "label": "8. Please ____ the plastic bottles. Don't throw them away. (recycle)",
+          "fields": [
+            {
+              "answer": "recycle"
+            }
+          ]
+        },
+        {
+          "id": "s1_9",
+          "label": "9. I am never hungry in the morning, so I often ____ breakfast. (skip)",
+          "fields": [
+            {
+              "answer": "skip"
+            }
+          ]
+        },
+        {
+          "id": "s1_10",
+          "label": "10. On Sunday, she ____ until 10 a.m. (stay in bed)",
+          "fields": [
+            {
+              "answer": "stays in bed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · -s, -es, -ies",
+      "minutes": 8,
+      "instructions": "Write the verb with he, she or it.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. She ____ TV at night. (watch)",
+          "fields": [
+            {
+              "answer": "watches"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. He ____ to bed at 11. (go)",
+          "fields": [
+            {
+              "answer": "goes"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. My sister ____ English. (study)",
+          "fields": [
+            {
+              "answer": "studies"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. My brother ____ yoga. (do)",
+          "fields": [
+            {
+              "answer": "does"
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. He ____ a shower at 7. (have)",
+          "fields": [
+            {
+              "answer": "has"
+            }
+          ]
+        },
+        {
+          "id": "s2_6",
+          "label": "6. She ____ the car on Saturday. (wash)",
+          "fields": [
+            {
+              "answer": "washes"
+            }
+          ]
+        },
+        {
+          "id": "s2_7",
+          "label": "7. He ____ his bike. (fix)",
+          "fields": [
+            {
+              "answer": "fixes"
+            }
+          ]
+        },
+        {
+          "id": "s2_8",
+          "label": "8. My mum ____ new food. (try)",
+          "fields": [
+            {
+              "answer": "tries"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Find the mistake",
+      "minutes": 10,
+      "instructions": "Each sentence has one mistake. Write the correct sentence.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. She don't like tea.",
+          "fields": [
+            {
+              "answer": "She doesn't like tea.",
+              "accept": [
+                "She does not like tea."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2. He go to school at 7.",
+          "fields": [
+            {
+              "answer": "He goes to school at 7.",
+              "accept": [
+                "He goes to school at seven."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3. Does she works here?",
+          "fields": [
+            {
+              "answer": "Does she work here?"
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "4. My brother doesn't watchs TV.",
+          "fields": [
+            {
+              "answer": "My brother doesn't watch TV.",
+              "accept": [
+                "My brother does not watch TV."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_5",
+          "label": "5. She haves a new bike.",
+          "fields": [
+            {
+              "answer": "She has a new bike."
+            }
+          ]
+        },
+        {
+          "id": "s3_6",
+          "label": "6. How often he cooks?",
+          "fields": [
+            {
+              "answer": "How often does he cook?"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Web words from Tuesday",
+      "minutes": 6,
+      "instructions": "Fill in each gap with one of Tuesday's 20 words on the website.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s4_1",
+          "label": "1. He ____ old coins. He has 300 coins now. (c)",
+          "fields": [
+            {
+              "answer": "collects",
+              "accept": [
+                "collect"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s4_2",
+          "label": "2. My uncle and I play ____ every week. (c)",
+          "fields": [
+            {
+              "answer": "chess"
+            }
+          ]
+        },
+        {
+          "id": "s4_3",
+          "label": "3. She does a ____ in the newspaper every day. (c)",
+          "fields": [
+            {
+              "answer": "crossword"
+            }
+          ]
+        },
+        {
+          "id": "s4_4",
+          "label": "4. She is ____ in her book. She doesn't hear me. (a)",
+          "fields": [
+            {
+              "answer": "absorbed"
+            }
+          ]
+        },
+        {
+          "id": "s4_5",
+          "label": "5. I feel ____ when the wifi is slow. (f)",
+          "fields": [
+            {
+              "answer": "frustrated"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Writing: a classmate",
+      "minutes": 15,
+      "instructions": "Write about 40 words about the habits of one classmate. Use he or she, 1 frequency adverb (always, usually, often, sometimes, never) and 1 sentence with doesn't. Type it in the box on the website.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s5_1",
+          "q": "My classmate's habits",
+          "model": "My classmate Linh is a night owl. She usually stays up late and studies English. She doesn't skip breakfast. She goes to the gym twice a week. On Sunday, she stays in bed until nine.",
+          "ai": {
+            "type": "Short paragraph about a classmate's habits",
+            "level": "Foundation (A1 to A2)",
+            "min_words": 35,
+            "task": "Write about 40 words about a classmate's habits with 1 frequency adverb and 1 sentence with doesn't.",
+            "criteria": [
+              "about 40 words",
+              "he or she verbs with the correct -s / -es / -ies ending",
+              "1 correct sentence with doesn't + base verb",
+              "frequency adverb in the correct position",
+              "uses Lesson 7 words"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Step 6 · Voice note",
+      "minutes": 7,
+      "instructions": "Read the 6 correct sentences from Step 3 aloud. Record one voice note.",
+      "kind": "voice",
+      "lines": [
+        "1. She doesn't like tea.",
+        "2. He goes to school at 7.",
+        "3. Does she work here?",
+        "4. My brother doesn't watch TV.",
+        "5. She has a new bike.",
+        "6. How often does he cook?"
+      ],
+      "note": "Teacher listens for doesn't /ˈdʌznt/, goes /z/ and the rising tone in the questions."
+    }
+  ],
+  "send_today": "Six steps on the website. Voice note in step 6 is sent to the teacher when you press Submit.",
+  "error_type": "grammar"
+}
