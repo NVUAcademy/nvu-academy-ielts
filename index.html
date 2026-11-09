@@ -321,7 +321,7 @@ async function loadToday() {
     /* repErr: không tải được danh sách phản hồi của trợ giảng (lỗi mạng hoặc máy chủ). Khi đó trang chỉ còn nhận xét chữ,
        nên báo cho học sinh biết thay vì im lặng (không có trình phát và không có nút Ghi âm lại). */
     let repErr = false;
-    try { const rj = await fetch('/api/voice-reply?student_id=' + encodeURIComponent(student.id)).then(r => r.json()); if (!rj || rj.ok === false) repErr = true; replies = (rj && rj.replies) || []; } catch (e) { repErr = true; }
+    try { const rj = await fetch('/api/voice-reply?student_id=' + encodeURIComponent(student.id), { cache: 'no-store' }).then(r => r.json()); if (!rj || rj.ok === false) repErr = true; replies = (rj && rj.replies) || []; } catch (e) { repErr = true; }
     if (repErr) console.error('voice-reply: không tải được danh sách phản hồi của trợ giảng');
     /* Chuỗi học: số ngày liên tiếp có làm bài (tính từ hôm nay, hoặc từ hôm qua nếu hôm nay chưa làm) */
     const iso = x => x.getFullYear() + '-' + String(x.getMonth() + 1).padStart(2, '0') + '-' + String(x.getDate()).padStart(2, '0');
@@ -402,6 +402,10 @@ async function loadToday() {
 }
 /* Nhận xét nào nhờ học sinh ghi âm lại hoặc gửi lại voice note thì có nút và thẻ việc cần làm */
 const RR_RE = /ghi âm lại|ghi âm thêm|ghi lại (và )?gửi|bản ghi âm mới|chưa nhận được voice note/i;
+/* Trang mở sẵn từ lâu (iPad và điện thoại giữ tab hàng giờ) hiện dữ liệu cũ: chưa có file ghi âm mới của trợ giảng, nút mới.
+   Khi học sinh quay lại tab sau hơn 10 phút thì tự tải lại để lấy dữ liệu mới nhất. */
+const _pageLoadedAt = Date.now();
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && Date.now() - _pageLoadedAt > 10 * 60 * 1000) location.reload(); });
 /* Học sinh bấm "Đã gửi xong" trên thẻ yêu cầu ghi âm lại: ẩn thẻ trên máy này */
 function rrDone(btn) {
   const card = btn.closest('[data-rr]'); if (!card) return;

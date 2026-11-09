@@ -57,6 +57,7 @@ module.exports = async function handler(req, res) {
 
   try {
     if (req.method === 'GET') {
+      res.setHeader('Cache-Control', 'no-store');
       const q = Object.fromEntries(new URL(req.url, 'http://localhost').searchParams);
       const studentId = String(q.student_id || '');
       if (!UUID.test(studentId)) return bad(res, 400, 'student_id không hợp lệ');
