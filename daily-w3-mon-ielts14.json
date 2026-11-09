@@ -1,0 +1,398 @@
+{
+  "id": "w3-mon-ielts14",
+  "title": "Monday Daily Practice",
+  "subtitle": "Review Lesson 4: Introduction + Overview, Reading MCQ and Listening MCQ",
+  "theme": "Lesson 4 · Overview (charts with years)",
+  "source": "Kế hoạch Daily Practice tuần 3 (phần Thứ 2 9/11, anh Nam đã duyệt), handout I4. Biểu đồ line và bar: số liệu bài tập do giáo viên đặt. Bài đọc tự viết. Listening: L5 Exercise Two (print/L5).",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 3,
+  "day": "monday",
+  "date": "2026-11-09",
+  "section": "writing",
+  "minutes": 87,
+  "intro": "Làm lần lượt 8 bước, khoảng 90 phút. Hôm nay ôn bài Chủ nhật: chỉ viết Introduction và Overview, KHÔNG viết thân bài. Step 4 (biểu đồ line) là bài Writing của tuần, thầy chấm kỹ. Step 8 cần nghe 1 file audio (thầy gửi trên Zalo lúc 7:00, cũng có trong bài trên web). Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {
+    "pottery": {
+      "label": "Audio · Edelman Pottery (L5 Exercise Two, Questions 1–6)",
+      "src": "audio/Mon_Pottery_MCQ.mp3"
+    }
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocabulary Day 10: trend words",
+      "minutes": 10,
+      "instructions": "Đây là 10 trong 20 từ mới của Day 10 trên Vocab Quest. Điền dạng đúng của một từ trong khung vào mỗi câu (chia thì cho đúng). Mỗi từ dùng một lần. Khung từ: soar · plummet · dip · rebound · stagnate · triple · halve · exceed · outnumber · hover around",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. Club membership ______: it went from 200 to exactly 600 in one year. ______",
+          "fields": [
+            {
+              "answer": "tripled"
+            }
+          ],
+          "explain": "triple = tăng gấp ba. Quá khứ đơn vì có in one year (đã xong)."
+        },
+        {
+          "id": "s1_2",
+          "label": "2. After the factory closed, the town's population ______ from 50,000 to 12,000 in five years. ______",
+          "fields": [
+            {
+              "answer": "plummeted"
+            }
+          ],
+          "explain": "plummet = lao dốc, giảm rất mạnh và nhanh."
+        },
+        {
+          "id": "s1_3",
+          "label": "3. Bike sales ______ from 400 to 3,500 within two years. ______",
+          "fields": [
+            {
+              "answer": "soared"
+            }
+          ],
+          "explain": "soar = tăng vọt, tăng rất mạnh và nhanh."
+        },
+        {
+          "id": "s1_4",
+          "label": "4. Visitor numbers ______ slightly in 2020, then quickly went back up. ______",
+          "fields": [
+            {
+              "answer": "dipped"
+            }
+          ],
+          "explain": "dip = giảm nhẹ trong thời gian ngắn rồi tăng lại."
+        },
+        {
+          "id": "s1_5",
+          "label": "5. After falling sharply in 2009, house prices ______ and returned to their old level by 2012. ______",
+          "fields": [
+            {
+              "answer": "rebounded"
+            }
+          ],
+          "explain": "rebound = phục hồi, tăng trở lại sau khi giảm."
+        },
+        {
+          "id": "s1_6",
+          "label": "6. Wages ______ for ten years: they did not grow at all. ______",
+          "fields": [
+            {
+              "answer": "stagnated",
+              "accept": [
+                "had stagnated"
+              ]
+            }
+          ],
+          "explain": "stagnate = đình trệ, không tăng trưởng."
+        },
+        {
+          "id": "s1_7",
+          "label": "7. Thanks to the new law, the percentage of smokers ______ from 40% to 20% between 2000 and 2010. ______",
+          "fields": [
+            {
+              "answer": "halved"
+            }
+          ],
+          "explain": "halve = giảm một nửa. Quá khứ đơn vì có mốc thời gian đã qua."
+        },
+        {
+          "id": "s1_8",
+          "label": "8. In 2015, online sales ______ shop sales for the first time. ______",
+          "fields": [
+            {
+              "answer": "exceeded"
+            }
+          ],
+          "explain": "exceed = vượt quá (dùng cho số lượng, doanh số)."
+        },
+        {
+          "id": "s1_9",
+          "label": "9. Today, female students ______ male students at this university by three to two. ______",
+          "fields": [
+            {
+              "answer": "outnumber"
+            }
+          ],
+          "explain": "outnumber = đông hơn về số lượng (dùng cho người, vật đếm được). Hiện tại đơn vì có Today; chủ ngữ số nhiều nên không thêm -s."
+        },
+        {
+          "id": "s1_10",
+          "label": "10. Last week, the temperature ______ 30 degrees every day, never much higher or lower. ______",
+          "fields": [
+            {
+              "answer": "hovered around"
+            }
+          ],
+          "explain": "hover around = dao động quanh một mức."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Overview: Money spent on books",
+      "minutes": 5,
+      "instructions": "Ôn bài Chủ nhật. Đây là biểu đồ số 2 trong handout I4 (chưa viết trên lớp). Chỉ viết Overview, 1 đến 2 câu, theo công thức: Overall, there was an increase / a decline in [what], with the most dramatic rise / fall being seen in [who]. Additionally / Despite that, [who] consistently had the highest / lowest figures. Không ghi số liệu.",
+      "kind": "open",
+      "image": "images/i4_books.png",
+      "open": [
+        {
+          "id": "s2_1",
+          "q": "Overview: Money spent on books",
+          "model": "Overall, there was an increase in the amount of money spent on books in all four countries, with the most dramatic rise being seen in Austria. Additionally, Germany consistently had the highest figures.",
+          "ai": {
+            "type": "Overview cho Task 1 line graph",
+            "level": "Intermediate (B1 đến B2)",
+            "min_words": 20,
+            "task": "Write the Overview (1 to 2 sentences) for the line graph about money spent on books in Germany, France, Italy and Austria from 1995 to 2005. Give the general trend, the biggest change and one difference. Do not use numbers.",
+            "criteria": [
+              "bắt đầu bằng Overall",
+              "có một xu hướng chung và chỉ ra thay đổi lớn nhất",
+              "có một sự khác biệt (cao nhất, thấp nhất hoặc vượt lên)",
+              "không có số liệu và năm cụ thể",
+              "1 đến 2 câu, ngữ pháp đúng"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Overview: Forest industry in the UK",
+      "minutes": 5,
+      "instructions": "Biểu đồ số 8 trong handout I4. Chỉ viết Overview. Chú ý: có đường tăng và có đường giảm, nên Overview cần nói cả hai.",
+      "kind": "open",
+      "image": "images/i4_forest.png",
+      "open": [
+        {
+          "id": "s3_1",
+          "q": "Overview: Forest industry in the UK",
+          "model": "Overall, the production of paper and packaging increased, while the production of sawn wood and wood pulp declined, with the most dramatic fall being seen in sawn wood. Additionally, paper and packaging consistently had the highest figures.",
+          "ai": {
+            "type": "Overview cho Task 1 line graph",
+            "level": "Intermediate (B1 đến B2)",
+            "min_words": 20,
+            "task": "Write the Overview (1 to 2 sentences) for the line graph about the production of paper and packaging, wood pulp and sawn wood in the UK from 1980 to 2000. Mention the line that rises and the lines that fall, the biggest change and one difference. Do not use numbers.",
+            "criteria": [
+              "bắt đầu bằng Overall",
+              "có một xu hướng chung và chỉ ra thay đổi lớn nhất",
+              "có một sự khác biệt (cao nhất, thấp nhất hoặc vượt lên)",
+              "không có số liệu và năm cụ thể",
+              "1 đến 2 câu, ngữ pháp đúng"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Writing of the week: line graph (Introduction + Overview)",
+      "minutes": 15,
+      "instructions": "Bài thầy chấm kỹ. Đề bài: The line graph below shows the amount of four dairy products consumed per person in the USA between 1970 and 2010. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Biểu đồ dùng số liệu bài tập. Làm theo 3 bước của Chủ nhật: (1) gạch what, who, where, when, unit; (2) viết Introduction theo công thức The given [chart] illustrates / compares [noun phrase, with the place] over a [X]-year period, commencing from [year]; (3) viết Overview. Không viết thân bài.",
+      "kind": "open",
+      "image": "images/mon_w3_line_dairy.png",
+      "open": [
+        {
+          "id": "s4_1",
+          "q": "Introduction + Overview (line graph)",
+          "model": "The given line graph illustrates the amount of cheese, yoghurt and two types of ice cream eaten per person in the USA, measured in pounds, over a forty-year period, commencing from 1970. Overall, there was an increase in the consumption of cheese and yoghurt, with the most dramatic rise being seen in cheese, while full-fat ice cream declined and low-fat ice cream remained almost unchanged. Additionally, cheese overtook full-fat ice cream to become the most popular product.",
+          "ai": {
+            "type": "Introduction + Overview cho Task 1 line graph (bài chấm kỹ của tuần)",
+            "level": "Intermediate (B1 đến B2)",
+            "min_words": 60,
+            "task": "The line graph below shows the amount of four dairy products consumed per person in the USA between 1970 and 2010. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write ONLY the Introduction and the Overview (no body paragraphs).",
+            "criteria": [
+              "Introduction đủ 5 ý (what, who, where, when, unit) và viết lại bằng từ khác đề bài, theo công thức The given ... illustrates / compares ... over a ...-year period, commencing from ...",
+              "Overview bắt đầu bằng Overall, có xu hướng chung và thay đổi lớn nhất",
+              "Overview có một sự khác biệt (cao nhất, thấp nhất hoặc vượt lên)",
+              "không có số liệu trong Overview, không viết thân bài",
+              "mạo từ, số ít số nhiều và chính tả đúng"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Bar chart (Introduction + Overview)",
+      "minutes": 15,
+      "instructions": "Đề bài: The bar chart below shows the amount of electricity generated from wind power in four countries in 1985, 1990, 1995 and 2000. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Biểu đồ dùng số liệu bài tập. Làm 3 bước như Step 4. Gợi ý: với bar chart có các năm, đọc theo từng nước (màu cột) để thấy xu hướng. Không viết thân bài.",
+      "kind": "open",
+      "image": "images/mon_w3_bar_wind.png",
+      "open": [
+        {
+          "id": "s5_1",
+          "q": "Introduction + Overview (bar chart)",
+          "model": "The given bar chart compares the amount of electricity produced from wind power in India, Denmark, Germany and the United States, measured in megawatts, over a fifteen-year period, commencing from 1985. Overall, there was an increase in wind power production in all four countries, with the most dramatic rise being seen in Germany. Despite that, the United States consistently had the highest figures, while India had the lowest.",
+          "ai": {
+            "type": "Introduction + Overview cho Task 1 bar chart",
+            "level": "Intermediate (B1 đến B2)",
+            "min_words": 60,
+            "task": "The bar chart below shows the amount of electricity generated from wind power in four countries in 1985, 1990, 1995 and 2000. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write ONLY the Introduction and the Overview (no body paragraphs).",
+            "criteria": [
+              "Introduction đủ 5 ý (what, who, where, when, unit) và viết lại bằng từ khác đề bài, theo công thức The given ... illustrates / compares ... over a ...-year period, commencing from ...",
+              "Overview bắt đầu bằng Overall, có xu hướng chung và thay đổi lớn nhất",
+              "Overview có một sự khác biệt (cao nhất, thấp nhất hoặc vượt lên)",
+              "không có số liệu trong Overview, không viết thân bài",
+              "mạo từ, số ít số nhiều và chính tả đúng"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Step 6 · Self-check and Error Log",
+      "minutes": 10,
+      "instructions": "5 phút: đọc lại bài Step 4 và Step 5, kiểm tra từng ý: Introduction có đủ what, who, where, when, unit chưa? Có chép nguyên đề không? Overview có Overall, có xu hướng, thay đổi lớn nhất và một sự khác biệt chưa? Có lỡ ghi số liệu không? Sửa ngay nếu thiếu. 5 phút: ghi 2 lỗi em hay mắc vào Error Log, mỗi lỗi theo mẫu: Lỗi · Câu sai · Câu đúng.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s6_1",
+          "q": "2 lỗi em hay mắc (Lỗi · Câu sai · Câu đúng)",
+          "model": "1. Thiếu đơn vị trong Introduction · The given line graph illustrates the consumption of dairy products in the USA. · The given line graph illustrates the consumption of dairy products per person in the USA, measured in pounds. 2. Có số liệu trong Overview · Overall, cheese rose to 33 pounds. · Overall, there was an increase in the consumption of cheese."
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "title": "Step 7 · Reading: Multiple choice",
+      "minutes": 15,
+      "instructions": "Đọc bài và chọn A, B, C hoặc D cho 4 câu. Làm đủ 3 bước như trên lớp: (1) gạch keyword trong câu hỏi, (2) tìm đoạn chứa ý, (3) loại distractor. Sau khi chọn, ghi ra giấy câu trong bài làm bằng chứng cho mỗi câu (chụp ảnh gửi Zalo).",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s7_1",
+          "q": "1. According to paragraph B, the runs attract people who do not usually exercise because",
+          "options": {
+            "A": "the winners receive small prizes.",
+            "B": "participants are not pressured to be fast.",
+            "C": "a volunteer trains each new runner.",
+            "D": "the distance is shorter than in other races."
+          },
+          "answer": "B",
+          "explain": "Bằng chứng (đoạn B): there are no prizes and no one is told to go faster. Walking is allowed. A sai: bài nói no prizes. C sai: tail walker chỉ đi cùng người cuối, không huấn luyện. D: bài không so sánh quãng đường."
+        },
+        {
+          "id": "s7_2",
+          "q": "2. What does the writer say about the first run in 2004?",
+          "options": {
+            "A": "It took place in a small village.",
+            "B": "It attracted more than a thousand runners.",
+            "C": "Very few people joined in.",
+            "D": "It was organised by a running club."
+          },
+          "answer": "C",
+          "explain": "Bằng chứng (đoạn A): only thirteen people took part. A sai: in a city park. B là bẫy: hơn một nghìn người là các sự kiện lớn nhất HIỆN NAY. D sai: nobody has to be a member of a club, sự kiện do volunteers tổ chức."
+        },
+        {
+          "id": "s7_3",
+          "q": "3. Why do some doctors recommend the runs?",
+          "options": {
+            "A": "They help patients lose weight quickly.",
+            "B": "They give lonely people a free, regular social activity.",
+            "C": "They are safer than running alone.",
+            "D": "Patients can meet their doctors at the café."
+          },
+          "answer": "B",
+          "explain": "Bằng chứng (đoạn C): recommend the runs to patients who feel lonely, because the events offer a regular routine and a friendly group without any cost. Paraphrase: without any cost = free, a friendly group = social. A, C không có trong bài. D là bẫy: café có trong bài nhưng không liên quan bác sĩ."
+        },
+        {
+          "id": "s7_4",
+          "q": "4. What happened when a town council suggested charging runners a fee?",
+          "options": {
+            "A": "The organisers paid for the repairs.",
+            "B": "The event moved to another town.",
+            "C": "The fee was introduced for one year.",
+            "D": "The plan was abandoned and the route was changed."
+          },
+          "answer": "D",
+          "explain": "Bằng chứng (đoạn D): The idea was dropped after strong protests, and the organisers agreed to change the route instead. Paraphrase: dropped = abandoned. B là bẫy: đổi đường chạy (route), không đổi thị trấn. C sai: phí không được áp dụng."
+        }
+      ],
+      "passage": "Free Saturday Runs: Why Parks Are Busy at 7 a.m.\n\nA. Every Saturday morning in hundreds of towns, groups of people meet in a local park to run five kilometres together. The events are free, they are organised by volunteers, and nobody has to be a member of a club. When the first run of this kind started in a city park in 2004, only thirteen people took part. Today the biggest events attract more than a thousand runners each week.\n\nB. Organisers say the secret is that the runs are not races. A volunteer records each person's time, but there are no prizes and no one is told to go faster. Walking is allowed, and in most events the last person is accompanied by a volunteer called the 'tail walker', so nobody finishes alone. As a result, the runs have attracted many people who had never exercised before. One survey found that a quarter of new participants described themselves as 'inactive' when they joined.\n\nC. For many participants, the social side matters more than fitness. After the run, groups often go to a nearby café, and regular runners say that they have made new friends of different ages. Doctors in some areas have started to recommend the runs to patients who feel lonely, because the events offer a regular routine and a friendly group without any cost.\n\nD. However, the success of the runs has caused some problems. In a few small parks, local residents have complained that hundreds of runners damage the grass and make paths too crowded for other visitors. In one case, a town council suggested charging a fee for each runner to pay for repairs. The idea was dropped after strong protests, and the organisers agreed to change the route instead.\n\nE. Volunteers are essential to every event, and most of them are runners themselves. Each week, about twenty-five people are needed to mark the course, record times and welcome newcomers. Organisers say that many people who arrive as runners later choose to volunteer, and some say they enjoy volunteering even more than running."
+    },
+    {
+      "id": "s8",
+      "title": "Step 8 · Listening: Multiple choice (one answer)",
+      "minutes": 12,
+      "instructions": "Ôn dạng MCQ một đáp án và 3 bẫy đã học: đúng nhưng không trả lời câu hỏi, bị phủ định, nhắc tới tất cả các lựa chọn. Đọc 6 câu hỏi trong 1 phút, gạch keyword trong câu hỏi và mọi lựa chọn. Bối cảnh: Heather nói chuyện với một nhóm khách tham quan xưởng gốm Edelman Pottery. Nghe MỘT lần, không dừng, chọn A, B hoặc C.",
+      "kind": "mcq",
+      "audio": "pottery",
+      "items": [
+        {
+          "id": "s8_1",
+          "q": "1. Heather says pottery differs from other art forms because",
+          "options": {
+            "A": "it lasts longer in the ground.",
+            "B": "it is practised by more people.",
+            "C": "it can be repaired more easily."
+          },
+          "answer": "A",
+          "explain": "Bằng chứng: pottery stands the test of time; baskets and pictures do not survive in the earth like pots. A đúng."
+        },
+        {
+          "id": "s8_2",
+          "q": "2. Archaeologists sometimes identify the use of ancient pottery from",
+          "options": {
+            "A": "the clay it was made with.",
+            "B": "the marks that are on it.",
+            "C": "the basic shape of it."
+          },
+          "answer": "B",
+          "explain": "Bằng chứng: archaeologists can tell ... by examining the impressions on the clay, the scratches from tools. Đây là dấu vết trên đồ gốm. Bẫy: shape of an artifact may have been lost (C)."
+        },
+        {
+          "id": "s8_3",
+          "q": "3. Some people join Heather's pottery class because they want to",
+          "options": {
+            "A": "create an item that looks very old.",
+            "B": "find something that they are good at.",
+            "C": "make something that will outlive them."
+          },
+          "answer": "C",
+          "explain": "Bằng chứng: like our ancestors, they hope that something they create will also last longer than they do. C đúng."
+        },
+        {
+          "id": "s8_4",
+          "q": "4. What does Heather value most about being a potter?",
+          "options": {
+            "A": "its calming effect",
+            "B": "its messy nature",
+            "C": "its physical benefits"
+          },
+          "answer": "A",
+          "explain": "Bằng chứng: what I love most is the concentration ... That focus takes you away from the stresses of everyday life. Đáp án A: calming effect. Bẫy: messy (B) và sức khỏe cơ tay (C) được nhắc tới nhưng không phải điều cô thích nhất."
+        },
+        {
+          "id": "s8_5",
+          "q": "5. Most of the visitors to Edelman Pottery",
+          "options": {
+            "A": "bring friends to join courses.",
+            "B": "have never made a pot before.",
+            "C": "try to learn techniques too quickly."
+          },
+          "answer": "B",
+          "explain": "Bằng chứng: Like nearly everyone who comes here, I am sure this is the first time you will have tried the art. B đúng. Bẫy: bring friends (A) không được nhắc."
+        },
+        {
+          "id": "s8_6",
+          "q": "6. Heather reminds her visitors that they should",
+          "options": {
+            "A": "put on their aprons.",
+            "B": "change their clothes.",
+            "C": "take off their jewellery."
+          },
+          "answer": "C",
+          "explain": "Bằng chứng: please remove any watches, necklaces, etc. C: take off their jewellery. Bẫy: aprons (A) sẽ được cấp sau, không phải điều cần làm trước."
+        }
+      ]
+    }
+  ],
+  "send_today": "Bài viết ở Step 2 đến Step 6 và đáp án Step 1, 7, 8 sẽ được gửi tự động cho thầy khi bấm Nộp bài. Bài thầy chấm kỹ là Step 4 (line graph). Chụp ảnh tờ ghi bằng chứng của Step 7 gửi lên Zalo. Hôm nay không có voice note.",
+  "error_type": "writing"
+}

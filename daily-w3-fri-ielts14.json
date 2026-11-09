@@ -1,0 +1,308 @@
+{
+  "id": "w3-fri-ielts14",
+  "title": "Friday Daily Practice",
+  "subtitle": "Weekly quiz 3 (30 points) and a short preparation for Tuesday",
+  "theme": "Lesson 5 · The News and Media",
+  "source": "Kế hoạch tuần 3 (đã duyệt). Quiz soạn theo Day 10 đến 13, bị động và Intro + Overview của I4. Thang 19 điểm theo quy định project. Phần viết do thầy chấm.",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 3,
+  "day": "friday",
+  "date": "2026-11-13",
+  "section": "writing",
+  "minutes": 80,
+  "intro": "Làm lần lượt 5 bước, khoảng 80 phút. Quiz 30 điểm: 8 từ, 5 bị động, 8 thái độ, 9 Overview (thầy chấm). Phần quiz làm trong 65 phút, không xem tài liệu. Bước 5 là chuẩn bị cho lớp Thứ 3, không tính điểm. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Quiz A: words (8 points, 8 min)",
+      "minutes": 8,
+      "instructions": "Điền đúng từ vào mỗi câu, mỗi câu 1 điểm. Khung từ: tripled · plummeted · outnumber · public opinion · credibility · go viral · current affairs · biased",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. Club membership ______ from 200 to 600 in one year.",
+          "fields": [
+            {
+              "answer": "tripled"
+            }
+          ],
+          "explain": "1 điểm."
+        },
+        {
+          "id": "s1_2",
+          "label": "2. The town's population ______ after the factory closed.",
+          "fields": [
+            {
+              "answer": "plummeted"
+            }
+          ],
+          "explain": "1 điểm."
+        },
+        {
+          "id": "s1_3",
+          "label": "3. Female students ______ male students at this university.",
+          "fields": [
+            {
+              "answer": "outnumber"
+            }
+          ],
+          "explain": "1 điểm."
+        },
+        {
+          "id": "s1_4",
+          "label": "4. The media has a strong influence on ______.",
+          "fields": [
+            {
+              "answer": "public opinion"
+            }
+          ],
+          "explain": "1 điểm."
+        },
+        {
+          "id": "s1_5",
+          "label": "5. The newspaper lost its ______ after the scandal.",
+          "fields": [
+            {
+              "answer": "credibility"
+            }
+          ],
+          "explain": "1 điểm."
+        },
+        {
+          "id": "s1_6",
+          "label": "6. Funny videos often ______ overnight.",
+          "fields": [
+            {
+              "answer": "go viral"
+            }
+          ],
+          "explain": "1 điểm."
+        },
+        {
+          "id": "s1_7",
+          "label": "7. I watch a ______ programme every evening.",
+          "fields": [
+            {
+              "answer": "current affairs"
+            }
+          ],
+          "explain": "1 điểm."
+        },
+        {
+          "id": "s1_8",
+          "label": "8. Some news reports are clearly ______, so read them carefully.",
+          "fields": [
+            {
+              "answer": "biased"
+            }
+          ],
+          "explain": "1 điểm."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Quiz B: passive voice (5 points, 7 min)",
+      "minutes": 7,
+      "instructions": "Viết lại câu sau ở dạng bị động. Dùng đúng thì, mỗi câu 1 điểm.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. Journalists wrote the report last week. → The report ______ last week.",
+          "fields": [
+            {
+              "answer": "was written"
+            }
+          ],
+          "explain": "1 điểm. Quá khứ đơn bị động."
+        },
+        {
+          "id": "s2_2",
+          "label": "2. The editor will publish the story tomorrow. → The story ______ tomorrow.",
+          "fields": [
+            {
+              "answer": "will be published"
+            }
+          ],
+          "explain": "1 điểm. Tương lai bị động."
+        },
+        {
+          "id": "s2_3",
+          "label": "3. Someone has shared the photo online. → The photo ______ online.",
+          "fields": [
+            {
+              "answer": "has been shared"
+            }
+          ],
+          "explain": "1 điểm. Hiện tại hoàn thành bị động."
+        },
+        {
+          "id": "s2_4",
+          "label": "4. The engineer checked the machine yesterday. → The machine ______ yesterday.",
+          "fields": [
+            {
+              "answer": "was checked"
+            }
+          ],
+          "explain": "1 điểm. Quá khứ đơn bị động."
+        },
+        {
+          "id": "s2_5",
+          "label": "5. Someone will fix the router tomorrow. → The router ______ tomorrow.",
+          "fields": [
+            {
+              "answer": "will be fixed"
+            }
+          ],
+          "explain": "1 điểm. Tương lai bị động."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Quiz C: attitude (8 points, 35 min)",
+      "minutes": 35,
+      "instructions": "Đọc mỗi câu nói, chọn A, B hoặc C cho thái độ của người nói. Mỗi câu 1 điểm.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s3_1",
+          "q": "C1. Speaker: 'Honestly, I have no idea whether this story is true.' The speaker is",
+          "options": {
+            "A": "certain",
+            "B": "angry",
+            "C": "uncertain"
+          },
+          "answer": "C",
+          "explain": "Have no idea whether = không chắc."
+        },
+        {
+          "id": "s3_2",
+          "q": "C2. Speaker: 'I'm happy to give it a go, even though it might fail.' The speaker is",
+          "options": {
+            "A": "open to trying",
+            "B": "reluctant",
+            "C": "bored"
+          },
+          "answer": "A",
+          "explain": "Give it a go = thử xem sao, tích cực."
+        },
+        {
+          "id": "s3_3",
+          "q": "C3. Speaker: 'It makes no difference to me which paper I read.' The speaker is",
+          "options": {
+            "A": "concerned",
+            "B": "indifferent",
+            "C": "excited"
+          },
+          "answer": "B",
+          "explain": "Makes no difference = không quan tâm."
+        },
+        {
+          "id": "s3_4",
+          "q": "C4. Speaker: 'That is completely unfair, and the paper should correct it.' The speaker is",
+          "options": {
+            "A": "annoyed",
+            "B": "pleased",
+            "C": "neutral"
+          },
+          "answer": "A",
+          "explain": "Completely unfair và should correct = khó chịu."
+        },
+        {
+          "id": "s3_5",
+          "q": "C5. Speaker: 'I'm sure the report is accurate, since it came from a reliable source.' The speaker is",
+          "options": {
+            "A": "doubtful",
+            "B": "bored",
+            "C": "confident"
+          },
+          "answer": "C",
+          "explain": "I'm sure = tự tin."
+        },
+        {
+          "id": "s3_6",
+          "q": "C6. Speaker: 'Frankly, I'd rather not comment until we have more facts.' The speaker is",
+          "options": {
+            "A": "eager",
+            "B": "cautious",
+            "C": "furious"
+          },
+          "answer": "B",
+          "explain": "Rather not comment until = thận trọng."
+        },
+        {
+          "id": "s3_7",
+          "q": "C7. Speaker: 'That is a brilliant idea, and I'd love to help.' The speaker is",
+          "options": {
+            "A": "enthusiastic",
+            "B": "reluctant",
+            "C": "neutral"
+          },
+          "answer": "A",
+          "explain": "Brilliant, would love to = nhiệt tình."
+        },
+        {
+          "id": "s3_8",
+          "q": "C8. Speaker: 'Honestly, the story is ridiculous, and nobody believes it.' The speaker is",
+          "options": {
+            "A": "approving",
+            "B": "uncertain",
+            "C": "dismissive"
+          },
+          "answer": "C",
+          "explain": "Ridiculous, nobody believes = coi nhẹ, bác bỏ."
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Quiz D: Overview (9 points, 15 min)",
+      "minutes": 15,
+      "instructions": "Viết Overview (1 đến 2 câu) cho biểu đồ Money spent on books (handout I4). Không ghi số liệu. Thầy chấm theo 5 tiêu chí, tổng 9 điểm.",
+      "kind": "open",
+      "image": "images/i4_books.png",
+      "open": [
+        {
+          "id": "s4_1",
+          "q": "Overview: Money spent on books (9 điểm)",
+          "model": "Overall, there was an increase in the amount of money spent on books in all four countries, with the most dramatic rise being seen in Austria. Additionally, Germany consistently had the highest figures.",
+          "ai": {
+            "type": "Overview cho Task 1 line graph (quiz)",
+            "level": "Intermediate (B1 đến B2)",
+            "min_words": 20,
+            "task": "Write the Overview (1 to 2 sentences) for the line graph about money spent on books in Germany, France, Italy and Austria from 1995 to 2005. No numbers.",
+            "criteria": [
+              "bắt đầu bằng Overall và có một xu hướng",
+              "có thay đổi lớn nhất",
+              "có một sự khác biệt (cao nhất, thấp nhất hoặc vượt lên)",
+              "không có số liệu",
+              "ngữ pháp và chính tả đúng"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Preparation for Tuesday (15 min, không tính điểm)",
+      "minutes": 15,
+      "instructions": "Chuẩn bị cho lớp Thứ 3. Đọc 3 biểu đồ trong handout I4 (Parliament, Crimes, Money spent on books). Với mỗi biểu đồ, ghi xu hướng chính. Không viết đoạn văn.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s5_1",
+          "q": "Xu hướng chính của 3 biểu đồ (ghi ngắn)",
+          "model": "Parliament: rise steadily. Crimes: car theft rose then fell, house burglary fell. Books: most countries rose, Austria rose sharply."
+        }
+      ]
+    }
+  ],
+  "send_today": "Ảnh bài quiz (ghi điểm tự đoán) gửi lên Zalo. Không voice note, trừ khi quiz có phần nói.",
+  "error_type": "grammar"
+}

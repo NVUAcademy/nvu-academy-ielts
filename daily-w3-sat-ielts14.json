@@ -1,0 +1,132 @@
+{
+  "id": "w3-sat-ielts14",
+  "title": "Saturday Daily Practice",
+  "subtitle": "Rewrite Monday's Introduction and Overview, passive voice and a Part 1 voice note",
+  "theme": "Lesson 5 · The News and Media",
+  "source": "Kế hoạch tuần 3 (đã duyệt). Bài viết lại dựa trên bài Thứ 2 và góp ý của thầy.",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 3,
+  "day": "saturday",
+  "date": "2026-11-14",
+  "section": "writing",
+  "minutes": 55,
+  "intro": "Làm lần lượt 4 bước, khoảng 55 phút. Bước 1 dùng góp ý thầy đã gửi cho bài Thứ 2. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Rewrite Introduction + Overview (30 min)",
+      "minutes": 30,
+      "instructions": "Đọc góp ý của thầy cho bài Thứ 2. Viết lại Introduction và Overview cho biểu đồ line về sản phẩm sữa ở Mỹ, sửa mọi lỗi thầy ghi. Không viết thân bài và không ghi số liệu trong Overview.",
+      "kind": "open",
+      "image": "images/mon_w3_line_dairy.png",
+      "open": [
+        {
+          "id": "s1_1",
+          "q": "Introduction + Overview viết lại (line graph về sữa)",
+          "model": "The given line graph illustrates the amount of four dairy products eaten per person in the USA, measured in pounds, over a forty-year period, commencing from 1970. Overall, there was a considerable increase in the consumption of cheese and yoghurt, with the most dramatic rise being seen in cheese. Additionally, full-fat ice cream declined steadily and cheese consistently had the highest figures.",
+          "ai": {
+            "type": "Viết lại Introduction và Overview theo góp ý giáo viên",
+            "level": "Intermediate (B1 đến B2)",
+            "min_words": 60,
+            "task": "Rewrite the Introduction and the Overview of your Monday line graph answer. Fix every comment from your teacher. Write ONLY the Introduction and the Overview.",
+            "criteria": [
+              "bắt đầu bằng Overall và có một xu hướng hoặc một thay đổi lớn nhất",
+              "có một sự khác biệt (cao nhất, thấp nhất hoặc vượt lên)",
+              "không có số liệu trong Overview",
+              "Introduction đủ 5 ý (what, who, where, when, unit)",
+              "mạo từ, số ít số nhiều và chính tả đúng"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Passive voice (10 min)",
+      "minutes": 10,
+      "instructions": "Điền dạng bị động đúng của động từ trong ngoặc, dùng thì như trong câu gốc. Mỗi ô một cụm từ.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. The team builds the engine. → The engine ______ by the team.",
+          "fields": [
+            {
+              "answer": "is built"
+            }
+          ],
+          "explain": "Hiện tại đơn bị động: is/are + V3."
+        },
+        {
+          "id": "s2_2",
+          "label": "2. They sold 300 tickets yesterday. → 300 tickets ______ yesterday.",
+          "fields": [
+            {
+              "answer": "were sold"
+            }
+          ],
+          "explain": "Quá khứ đơn bị động: was/were + V3."
+        },
+        {
+          "id": "s2_3",
+          "label": "3. Workers will pack the boxes tomorrow. → The boxes ______ tomorrow.",
+          "fields": [
+            {
+              "answer": "will be packed"
+            }
+          ],
+          "explain": "Tương lai bị động: will be + V3."
+        },
+        {
+          "id": "s2_4",
+          "label": "4. The engineer has checked the machine. → The machine ______.",
+          "fields": [
+            {
+              "answer": "has been checked"
+            }
+          ],
+          "explain": "Hiện tại hoàn thành bị động: has/have been + V3."
+        },
+        {
+          "id": "s2_5",
+          "label": "5. The printer prints the report. → The report ______.",
+          "fields": [
+            {
+              "answer": "is printed"
+            }
+          ],
+          "explain": "Hiện tại đơn bị động."
+        },
+        {
+          "id": "s2_6",
+          "label": "6. Someone stole my bag. → My bag ______.",
+          "fields": [
+            {
+              "answer": "was stolen"
+            }
+          ],
+          "explain": "Quá khứ đơn bị động."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Part 1 voice note (15 min)",
+      "minutes": 15,
+      "instructions": "Trả lời 4 câu trong 1 voice note khoảng 2 phút, theo 3 bước Answer, Reason, Example. Dùng ít nhất 2 cụm thái độ và 2 từ về truyền thông của tuần này.",
+      "kind": "voice",
+      "lines": [
+        "1. Do you read books or news on your phone?",
+        "2. Do you think newspapers will disappear in the future? Why?",
+        "3. Which is more reliable, a newspaper or social media? Why?",
+        "4. Has the way you get news changed in the last five years?"
+      ],
+      "note": "Thầy sẽ nghe và nhận xét cấu trúc Answer, Reason, Example và cách dùng từ của tuần."
+    }
+  ],
+  "send_today": "Ảnh bài viết lại Step 1 và ảnh Step 2 gửi lên Zalo, cùng voice note Step 3.",
+  "error_type": "writing"
+}

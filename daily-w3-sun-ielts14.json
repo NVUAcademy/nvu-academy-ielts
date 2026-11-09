@@ -1,0 +1,226 @@
+{
+  "id": "w3-sun-ielts14",
+  "title": "Sunday Daily Practice",
+  "subtitle": "Matching information reading and a Part 1 voice note (no class this week)",
+  "theme": "Lesson 5 · The News and Media",
+  "source": "Bài đọc tự viết (không chép sách). Lớp I6 dời sang Thứ 3 17/11.",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 3,
+  "day": "sunday",
+  "date": "2026-11-15",
+  "section": "reading",
+  "minutes": 60,
+  "intro": "Hôm nay không có lớp. Làm lần lượt 4 bước, khoảng 60 phút. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {
+    "p2": {
+      "label": "Cambridge IELTS 16 · Test 2 · Part 2",
+      "src": "audio/Sun_Cam16_T2_P2.mp3"
+    }
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocabulary Day 15 (10 min)",
+      "minutes": 10,
+      "instructions": "Điền đúng từ vào mỗi câu. Mỗi từ dùng một lần. Khung từ: paywall · free of charge · bookmark · podcast · pop-up advert · streaming service · broadband · comment section",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. The article is behind a ______, so you need to pay to read it.",
+          "fields": [
+            {
+              "answer": "paywall"
+            }
+          ],
+          "explain": "paywall = hàng rào trả tiền, phải trả phí mới đọc được."
+        },
+        {
+          "id": "s1_2",
+          "label": "2. The newspaper's app is ______ for the first month.",
+          "fields": [
+            {
+              "answer": "free of charge"
+            }
+          ],
+          "explain": "free of charge = miễn phí."
+        },
+        {
+          "id": "s1_3",
+          "label": "3. I ______ the article so that I can read it later.",
+          "fields": [
+            {
+              "answer": "bookmarked"
+            }
+          ],
+          "explain": "bookmark = lưu vào mục yêu thích (quá khứ/hiện tại tùy câu)."
+        },
+        {
+          "id": "s1_4",
+          "label": "4. Many people listen to a news ______ while they drive.",
+          "fields": [
+            {
+              "answer": "podcast"
+            }
+          ],
+          "explain": "podcast = chương trình âm thanh phát theo tập."
+        },
+        {
+          "id": "s1_5",
+          "label": "5. A ______ appeared on the screen and covered the article.",
+          "fields": [
+            {
+              "answer": "pop-up advert"
+            }
+          ],
+          "explain": "pop-up advert = quảng cáo bật lên."
+        },
+        {
+          "id": "s1_6",
+          "label": "6. Our family pays for a ______ so we can watch films at home.",
+          "fields": [
+            {
+              "answer": "streaming service"
+            }
+          ],
+          "explain": "streaming service = dịch vụ xem trực tuyến."
+        },
+        {
+          "id": "s1_7",
+          "label": "7. The internet is slow because our ______ is weak.",
+          "fields": [
+            {
+              "answer": "broadband"
+            }
+          ],
+          "explain": "broadband = đường truyền internet băng rộng."
+        },
+        {
+          "id": "s1_8",
+          "label": "8. Readers often write their opinions in the ______ under an article.",
+          "fields": [
+            {
+              "answer": "comment section"
+            }
+          ],
+          "explain": "comment section = phần bình luận dưới bài viết."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Reading: matching information (25 min)",
+      "minutes": 25,
+      "instructions": "Read the passage below and answer the questions. Write the letter A to E for each question. Time yourself: 8 minutes for 5 questions.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. the idea that news reaches people of every age, but in different ways  ______",
+          "fields": [
+            {
+              "answer": "A"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn A, whatever their age ... rarely arrives in a newspaper."
+        },
+        {
+          "id": "s2_2",
+          "label": "2. a warning that a story can spread before anyone checks it  ______",
+          "fields": [
+            {
+              "answer": "E"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn E, experts warn ... before anyone checks whether it is true."
+        },
+        {
+          "id": "s2_3",
+          "label": "3. a group of readers who still prefer a printed paper  ______",
+          "fields": [
+            {
+              "answer": "D"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn D, Older readers ... printed newspaper."
+        },
+        {
+          "id": "s2_4",
+          "label": "4. information about the reasons why young people read news on their phones  ______",
+          "fields": [
+            {
+              "answer": "B"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn B, Three reasons: the phone is always with them, alerts, a short article."
+        },
+        {
+          "id": "s2_5",
+          "label": "5. a description of how young people come across stories without looking for them  ______",
+          "fields": [
+            {
+              "answer": "C"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn C, encounter stories by chance. Bẫy: đoạn B cũng có short article, nhưng không nói về việc tình cờ."
+        }
+      ],
+      "passage": "A. Most people, whatever their age, want to know what is happening in their town and in the world. For young people, however, the news rarely arrives in a newspaper. It comes through a phone, often while they are waiting for a bus or walking to class.\n\nB. Young adults usually read news on their phones for three reasons. First, the phone is always with them. Second, news apps send an alert when something important happens. Third, a short article with a clear headline is quicker to read than a long newspaper feature.\n\nC. Many young people say that they do not actively look for the news. Instead, they encounter stories by chance, when a friend shares a link or a video appears in their social media feed. Some of them say this is a good way to learn, because they see topics they would never have chosen.\n\nD. Older readers still have their habits. Many of them read a printed newspaper with breakfast and do not trust stories that appear only online. Some younger people have started to do the same, because a paper copy helps them focus and avoids the distraction of their phones.\n\nE. However, experts warn that the speed of social media has a cost. A story can spread to millions of people before anyone checks whether it is true. Teachers therefore encourage students to compare at least two sources before they share a story with their friends."
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Part 1 voice note (10 min)",
+      "minutes": 10,
+      "instructions": "Trả lời 3 câu trong 1 voice note khoảng 2 phút, theo 3 bước Answer, Reason, Example. Dùng ít nhất 2 từ của Step 1.",
+      "kind": "voice",
+      "lines": [
+        "1. Do you pay for any news or music service? Why?",
+        "2. Do you read news on your phone or on paper?",
+        "3. Do you think young people read less news than older people? Why?"
+      ],
+      "note": "Thầy sẽ nghe và nhận xét cấu trúc Answer, Reason, Example và cách dùng từ."
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Error Log (5 min)",
+      "minutes": 5,
+      "instructions": "Ghi lỗi em hay mắc ở Step 2. Viết theo mẫu: Lỗi · Câu sai · Câu đúng.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s4_1",
+          "q": "Lỗi em hay mắc (Lỗi · Câu sai · Câu đúng)",
+          "model": "Paragraph confusion · The article is about phones. · Paragraph B says that news apps send alerts, so the answer is B, not C."
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Choose TWO answers (10 min)",
+      "minutes": 10,
+      "instructions": "Nghe Cambridge 16 Test 2 Part 2 (file audio ở trên). Câu 19–20: chọn HAI đáp án đúng cho câu hỏi. Đáp án có thể theo thứ tự bất kỳ. Nghe xong mới xem đáp án.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s5_1",
+          "q": "19–20. Which TWO optional after-school lessons are new?",
+          "options": {
+            "A": "swimming",
+            "B": "piano",
+            "C": "acting",
+            "D": "cycling",
+            "E": "theatre sound and lighting"
+          },
+          "answer": "B, C",
+          "multi": 2,
+          "explain": "Đáp án B và C (hai đáp án đúng, thứ tự không quan trọng). Đây là dạng chọn hai đáp án, tìm hai lớp mới trong danh sách."
+        }
+      ],
+      "audio": "p2"
+    }
+  ],
+  "send_today": "Ảnh Step 1 và Step 2 gửi lên Zalo, cùng voice note Step 3.",
+  "error_type": "reading"
+}

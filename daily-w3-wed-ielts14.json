@@ -1,0 +1,332 @@
+{
+  "id": "w3-wed-ielts14",
+  "title": "Wednesday Daily Practice",
+  "subtitle": "Social media words, Cambridge 16 Test 2 Part 3 listening MCQ, attitude phrases and a voice note",
+  "theme": "Lesson 5 · The News and Media",
+  "source": "Kế hoạch tuần 3 (đã duyệt) và sườn I5 (đã duyệt). Dictation sẽ thêm sau khi thầy gửi track ngoài Tracks 22 đến 28.",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 3,
+  "day": "wednesday",
+  "date": "2026-11-11",
+  "section": "listening",
+  "minutes": 60,
+  "intro": "Làm lần lượt 4 bước, khoảng 60 phút. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {
+    "p3": {
+      "label": "Cambridge IELTS 16 · Test 2 · Part 3",
+      "src": "audio/Thu_Cam16_T2_P3.mp3"
+    }
+  },
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Social media words (10 min)",
+      "minutes": 10,
+      "instructions": "Điền đúng từ vào mỗi câu, dùng đúng dạng từ. Mỗi từ dùng một lần. Khung từ: go viral · fake news · misinformation · influencer · scroll through · addictive · privacy · verify · echo chamber · clickbait",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. Funny videos often ______ overnight.",
+          "fields": [
+            {
+              "answer": "go viral"
+            }
+          ],
+          "explain": "go viral = lan truyền rất nhanh trên mạng."
+        },
+        {
+          "id": "s1_2",
+          "label": "2. ______ spreads faster than the truth online.",
+          "fields": [
+            {
+              "answer": "Fake news"
+            }
+          ],
+          "explain": "fake news = tin giả."
+        },
+        {
+          "id": "s1_3",
+          "label": "3. The government is trying to tackle ______ on social media.",
+          "fields": [
+            {
+              "answer": "misinformation"
+            }
+          ],
+          "explain": "misinformation = thông tin sai lệch, không cố ý."
+        },
+        {
+          "id": "s1_4",
+          "label": "4. Many brands pay an ______ to promote their products.",
+          "fields": [
+            {
+              "answer": "influencer"
+            }
+          ],
+          "explain": "influencer = người có ảnh hưởng trên mạng."
+        },
+        {
+          "id": "s1_5",
+          "label": "5. Many people ______ their phones before going to bed.",
+          "fields": [
+            {
+              "answer": "scroll through"
+            }
+          ],
+          "explain": "scroll through = lướt qua (màn hình, bài viết)."
+        },
+        {
+          "id": "s1_6",
+          "label": "6. Social media apps are designed to be ______.",
+          "fields": [
+            {
+              "answer": "addictive"
+            }
+          ],
+          "explain": "addictive = gây nghiện."
+        },
+        {
+          "id": "s1_7",
+          "label": "7. Users should protect their ______ when they post online.",
+          "fields": [
+            {
+              "answer": "privacy"
+            }
+          ],
+          "explain": "privacy = quyền riêng tư."
+        },
+        {
+          "id": "s1_8",
+          "label": "8. Readers should ______ information before they share it.",
+          "fields": [
+            {
+              "answer": "verify"
+            }
+          ],
+          "explain": "verify = xác minh."
+        },
+        {
+          "id": "s1_9",
+          "label": "9. Social media can trap people in an ______, where they only hear their own opinions.",
+          "fields": [
+            {
+              "answer": "echo chamber"
+            }
+          ],
+          "explain": "echo chamber = buồng vang, chỉ nghe ý kiến giống mình."
+        },
+        {
+          "id": "s1_10",
+          "label": "10. Many websites rely on ______ to attract readers.",
+          "fields": [
+            {
+              "answer": "clickbait"
+            }
+          ],
+          "explain": "clickbait = tiêu đề câu view, gây tò mò để kéo người đọc."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Listening Part 3 (15 min)",
+      "minutes": 15,
+      "instructions": "Nghe Cambridge 16 Test 2 Part 3 (file audio ở trên) và chọn A, B hoặc C cho mỗi câu 21-24. Nghe xong mới xem đáp án. Câu hỏi về thái độ và ý kiến của hai sinh viên.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "21. Luke read that one reason why we often forget dreams is that",
+          "options": {
+            "A": "our memories cannot cope with too much information.",
+            "B": "we might otherwise be confused about what is real.",
+            "C": "we do not think they are important."
+          },
+          "answer": "B",
+          "explain": "Đáp án B. Câu nói về lý do ta hay quên mơ: nếu nhớ hết thì ta dễ nhầm lẫn giữa thật và mơ."
+        },
+        {
+          "id": "s2_2",
+          "q": "22. What do Luke and Susie agree about dreams predicting the future?",
+          "options": {
+            "A": "It may just be due to chance.",
+            "B": "It only happens with certain types of event.",
+            "C": "It happens more often than some people think."
+          },
+          "answer": "A",
+          "explain": "Đáp án A. Cả hai đồng ý rằng mơ đoán đúng tương lai có thể chỉ là ngẫu nhiên."
+        },
+        {
+          "id": "s2_3",
+          "q": "23. Susie says that a study on pre-school children having a short nap in the day",
+          "options": {
+            "A": "had controversial results.",
+            "B": "used faulty research methodology.",
+            "C": "failed to reach any clear conclusions."
+          },
+          "answer": "C",
+          "explain": "Đáp án C. Susie nói nghiên cứu không đi đến kết luận rõ ràng nào."
+        },
+        {
+          "id": "s2_4",
+          "q": "24. In their last assignment, both students had problems with",
+          "options": {
+            "A": "statistical analysis.",
+            "B": "making an action plan.",
+            "C": "self-assessment."
+          },
+          "answer": "C",
+          "explain": "Đáp án C. Bài tập trước, cả hai đều gặp khó khăn với tự đánh giá (self-assessment)."
+        }
+      ],
+      "audio": "p3"
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Attitude phrases (15 min)",
+      "minutes": 15,
+      "instructions": "Đọc 12 cụm sau. Với mỗi cụm viết P (positive), N (negative) hoặc Neu (neutral) vào ô trống. Trước khi điền, đọc to từng cụm 1 lần.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. I'm not convinced. ______",
+          "fields": [
+            {
+              "answer": "N"
+            }
+          ],
+          "explain": "Không tin, hoài nghi: negative."
+        },
+        {
+          "id": "s2_2",
+          "label": "2. It's worth a try. ______",
+          "fields": [
+            {
+              "answer": "P"
+            }
+          ],
+          "explain": "Đáng thử: positive."
+        },
+        {
+          "id": "s2_3",
+          "label": "3. I couldn't care less. ______",
+          "fields": [
+            {
+              "answer": "N"
+            }
+          ],
+          "explain": "Chẳng quan tâm: negative."
+        },
+        {
+          "id": "s2_4",
+          "label": "4. That sounds promising. ______",
+          "fields": [
+            {
+              "answer": "P"
+            }
+          ],
+          "explain": "Có triển vọng: positive."
+        },
+        {
+          "id": "s2_5",
+          "label": "5. I have no strong feelings about it. ______",
+          "fields": [
+            {
+              "answer": "Neu"
+            }
+          ],
+          "explain": "Không có ý kiến mạnh: neutral."
+        },
+        {
+          "id": "s2_6",
+          "label": "6. It's a bit disappointing. ______",
+          "fields": [
+            {
+              "answer": "N"
+            }
+          ],
+          "explain": "Hơi thất vọng: negative."
+        },
+        {
+          "id": "s2_7",
+          "label": "7. I'm happy with that. ______",
+          "fields": [
+            {
+              "answer": "P"
+            }
+          ],
+          "explain": "Hài lòng: positive."
+        },
+        {
+          "id": "s2_8",
+          "label": "8. It's hard to say. ______",
+          "fields": [
+            {
+              "answer": "Neu"
+            }
+          ],
+          "explain": "Khó nói: neutral."
+        },
+        {
+          "id": "s2_9",
+          "label": "9. That's absolutely ridiculous. ______",
+          "fields": [
+            {
+              "answer": "N"
+            }
+          ],
+          "explain": "Thật vô lý: negative."
+        },
+        {
+          "id": "s2_10",
+          "label": "10. I'm inclined to agree. ______",
+          "fields": [
+            {
+              "answer": "P"
+            }
+          ],
+          "explain": "Có xu hướng đồng ý: positive, nhẹ nhàng."
+        },
+        {
+          "id": "s2_11",
+          "label": "11. It makes no difference to me. ______",
+          "fields": [
+            {
+              "answer": "Neu"
+            }
+          ],
+          "explain": "Không ảnh hưởng gì đến tôi: neutral."
+        },
+        {
+          "id": "s2_12",
+          "label": "12. I'm not sure what to think. ______",
+          "fields": [
+            {
+              "answer": "Neu"
+            }
+          ],
+          "explain": "Chưa biết nghĩ gì: neutral."
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Part 1 voice note (20 min)",
+      "minutes": 20,
+      "instructions": "Trả lời 4 câu trong 1 voice note khoảng 3 phút. Dùng 3 bước Answer, Reason, Example. Ở ít nhất 2 câu, dùng một cụm thái độ của Step 2 và một từ của Step 1.",
+      "kind": "voice",
+      "lines": [
+        "1. Do you use social media every day?",
+        "2. Do you think social media is good for young people?",
+        "3. Have you ever seen fake news online?",
+        "4. Do you trust what you read on social media? Why?"
+      ],
+      "note": "Thầy sẽ nghe và nhận xét cách dùng cụm thái độ, từ của Step 1 và cấu trúc Answer, Reason, Example."
+    }
+  ],
+  "send_today": "Voice note Step 3 gửi lên Zalo. Không cần ảnh.",
+  "error_type": "vocabulary"
+}

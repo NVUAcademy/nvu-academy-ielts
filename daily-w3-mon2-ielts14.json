@@ -1,0 +1,151 @@
+{
+  "id": "w3-mon2-ielts14",
+  "title": "Monday Daily Practice",
+  "subtitle": "Day 16 vocabulary from Sunday's passage, a reading check and a voice note",
+  "theme": "Lesson 6 · Body paragraphs and matching information",
+  "source": "Bài đọc tự viết hôm Chủ nhật. Từ Day 16 lấy từ bài đọc đó.",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 3,
+  "day": "monday",
+  "date": "2026-11-16",
+  "section": "reading",
+  "minutes": 45,
+  "intro": "Hôm nay không có lớp, lớp sẽ là Thứ 3 17/11 19:30. Làm lần lượt 4 bước, khoảng 45 phút. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocabulary Day 16 (10 min)",
+      "minutes": 10,
+      "instructions": "Điền đúng từ vào mỗi câu, dùng đúng dạng từ. Khung từ: alert · actively · by chance · therefore · avoid · warn · compare sources · fact-check",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. Your phone may send an ______ when a message arrives.",
+          "fields": [
+            {
+              "answer": "alert"
+            }
+          ],
+          "explain": "alert = thông báo khẩn."
+        },
+        {
+          "id": "s1_2",
+          "label": "2. Many people do not ______ look for news; they just see it.",
+          "fields": [
+            {
+              "answer": "actively"
+            }
+          ],
+          "explain": "actively = chủ động."
+        },
+        {
+          "id": "s1_3",
+          "label": "3. I found the article ______ while I was searching for something else.",
+          "fields": [
+            {
+              "answer": "by chance"
+            }
+          ],
+          "explain": "by chance = tình cờ."
+        },
+        {
+          "id": "s1_4",
+          "label": "4. The story was false; ______, we did not share it.",
+          "fields": [
+            {
+              "answer": "therefore"
+            }
+          ],
+          "explain": "therefore = do đó."
+        },
+        {
+          "id": "s1_5",
+          "label": "5. You should ______ scrolling before bed to sleep better.",
+          "fields": [
+            {
+              "answer": "avoid"
+            }
+          ],
+          "explain": "avoid + V-ing = tránh làm gì."
+        },
+        {
+          "id": "s1_6",
+          "label": "6. Experts ______ that fake news can spread very fast.",
+          "fields": [
+            {
+              "answer": "warn"
+            }
+          ],
+          "explain": "warn that = cảnh báo rằng."
+        },
+        {
+          "id": "s1_7",
+          "label": "7. Before you believe a story, ______ at least two sources.",
+          "fields": [
+            {
+              "answer": "compare sources"
+            }
+          ],
+          "explain": "compare sources = so sánh các nguồn tin."
+        },
+        {
+          "id": "s1_8",
+          "label": "8. Teachers ask students to ______ every claim before they share it.",
+          "fields": [
+            {
+              "answer": "fact-check"
+            }
+          ],
+          "explain": "fact-check = kiểm chứng thông tin."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Trap check on Sunday's passage (15 min)",
+      "minutes": 15,
+      "instructions": "Đọc lại bài đọc Chủ nhật. Với câu hỏi số 3 (đoạn C), viết một câu 'Đoạn ... is wrong because ...' cho đáp án bị loại (ví dụ đoạn B). Sau đó viết một bẫy em đã mắc hôm Chủ nhật.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s2_1",
+          "q": "1 câu về đáp án bị loại và 1 bẫy em đã mắc",
+          "model": "Paragraph B is wrong because it talks about why people use phones, not about stories they find by chance."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Part 1 voice note (15 min)",
+      "minutes": 15,
+      "instructions": "Trả lời 3 câu trong 1 voice note khoảng 2 phút, theo 3 bước Answer, Reason, Example. Dùng ít nhất 3 từ của Step 1.",
+      "kind": "voice",
+      "lines": [
+        "1. Do you often find news by chance? Give an example.",
+        "2. Do you think it is important to fact-check? Why?",
+        "3. Which is harder to avoid, advertising or fake news? Why?"
+      ],
+      "note": "Thầy sẽ nghe và nhận xét cách dùng từ của Step 1 và cấu trúc Answer, Reason, Example."
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Error Log (5 min)",
+      "minutes": 5,
+      "instructions": "Ghi 1 lỗi em hay mắc trong tuần này. Viết theo mẫu: Lỗi · Câu sai · Câu đúng.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s4_1",
+          "q": "Lỗi em hay mắc (Lỗi · Câu sai · Câu đúng)",
+          "model": "Article form · The news is spread quick. · The news spreads quickly."
+        }
+      ]
+    }
+  ],
+  "send_today": "Ảnh Step 1 và Step 2 gửi lên Zalo, cùng voice note Step 3.",
+  "error_type": "vocabulary"
+}

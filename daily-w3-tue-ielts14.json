@@ -1,0 +1,151 @@
+{
+  "id": "w3-tue-ielts14",
+  "title": "Tuesday Daily Practice",
+  "subtitle": "Class day: news vocabulary, a pie chart and a Part 1 voice note",
+  "theme": "Lesson 5 · The News and Media",
+  "source": "Kế hoạch tuần 3 (đã duyệt) và sườn I5 (đã duyệt). Biểu đồ pie: số liệu từ đề gốc. Không dùng lại Track 22 đến 28.",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 3,
+  "day": "tuesday",
+  "date": "2026-11-10",
+  "section": "speaking",
+  "minutes": 28,
+  "intro": "Hôm nay có lớp (19:30). Làm trước giờ học 20 phút, sau giờ học 10 phút. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · News words (8 min, trước giờ học)",
+      "minutes": 8,
+      "instructions": "Điền đúng từ vào mỗi câu, dùng đúng dạng từ. Mỗi từ dùng một lần. Khung từ: current affairs · headline · broadcast · coverage · journalist · broadsheet · biased · eyewitness",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. I watch a ______ programme every evening.",
+          "fields": [
+            {
+              "answer": "current affairs"
+            }
+          ],
+          "explain": "Current affairs = thời sự, các chương trình về tin tức và vấn đề xã hội."
+        },
+        {
+          "id": "s1_2",
+          "label": "2. The scandal made the ______ for a whole week.",
+          "fields": [
+            {
+              "answer": "headlines"
+            }
+          ],
+          "explain": "make the headlines = lên trang nhất, được đưa tin nhiều."
+        },
+        {
+          "id": "s1_3",
+          "label": "3. The match was ______ live on national television.",
+          "fields": [
+            {
+              "answer": "broadcast"
+            }
+          ],
+          "explain": "broadcast (quá khứ phân từ) = phát sóng, dùng với was/were."
+        },
+        {
+          "id": "s1_4",
+          "label": "4. The election received extensive media ______.",
+          "fields": [
+            {
+              "answer": "coverage"
+            }
+          ],
+          "explain": "coverage = sự đưa tin, mức độ phủ sóng của báo chí."
+        },
+        {
+          "id": "s1_5",
+          "label": "5. The ______ interviewed three witnesses before writing the story.",
+          "fields": [
+            {
+              "answer": "journalist"
+            }
+          ],
+          "explain": "journalist = nhà báo."
+        },
+        {
+          "id": "s1_6",
+          "label": "6. Tabloids focus on celebrities, while a ______ usually covers serious news.",
+          "fields": [
+            {
+              "answer": "broadsheet"
+            }
+          ],
+          "explain": "broadsheet = báo khổ lớn, thường nghiêm túc hơn."
+        },
+        {
+          "id": "s1_7",
+          "label": "7. Some news reports are clearly ______, so read them carefully.",
+          "fields": [
+            {
+              "answer": "biased"
+            }
+          ],
+          "explain": "biased = thiên vị, không khách quan."
+        },
+        {
+          "id": "s1_8",
+          "label": "8. An ______ described the accident to reporters.",
+          "fields": [
+            {
+              "answer": "eyewitness"
+            }
+          ],
+          "explain": "eyewitness = nhân chứng, người đã tận mắt thấy sự việc."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Overview: Energy in France (10 min, trước giờ học)",
+      "minutes": 10,
+      "instructions": "Đọc hai biểu đồ tròn (pie). Viết Introduction và Overview, không viết thân bài, không ghi số liệu trong Overview. Công thức: Overall, there was ... with the most dramatic change being seen in ... Additionally, ... Chỉ tập trung vào 2 năm 1995 và 2005.",
+      "kind": "open",
+      "image": "images/tue_w3_pie_france.png",
+      "open": [
+        {
+          "id": "s2_1",
+          "q": "Introduction + Overview (pie charts)",
+          "model": "The given pie charts illustrate the sources of energy produced in France in 1995 and 2005, measured in percentages. Overall, the share of nuclear power and other sources increased, with the most dramatic rise being seen in nuclear energy. Additionally, petrol experienced the sharpest fall, while coal and gas remained the main sources.",
+          "ai": {
+            "type": "Introduction + Overview cho Task 1 pie chart",
+            "level": "Intermediate (B1 đến B2)",
+            "min_words": 50,
+            "task": "The pie charts below show the sources of energy produced in France in 1995 and 2005. Summarise the information by selecting and reporting the main features, and make comparisons where relevant. Write ONLY the Introduction and the Overview.",
+            "criteria": [
+              "bắt đầu bằng Overall và có một xu hướng hoặc một thay đổi lớn nhất",
+              "có một sự khác biệt (cao nhất, thấp nhất hoặc vượt lên)",
+              "không có số liệu trong Overview",
+              "Introduction đủ 5 ý (what, who, where, when, unit)",
+              "mạo từ, số ít số nhiều và chính tả đúng"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Part 1 voice note (10 min, sau giờ học)",
+      "minutes": 10,
+      "instructions": "Trả lời 3 câu trong 1 voice note khoảng 2 phút. Mỗi câu theo 3 bước: Answer, Reason, Example. Dùng ít nhất 2 từ của Step 1.",
+      "kind": "voice",
+      "lines": [
+        "1. Do you read the news every day? Why or why not?",
+        "2. Which news source do you trust the most?",
+        "3. Do you think people should follow current affairs? Why?"
+      ],
+      "note": "Thầy sẽ nghe và nhận xét cấu trúc Answer, Reason, Example và cách dùng từ của Step 1."
+    }
+  ],
+  "send_today": "Ảnh Step 1 và Step 2 gửi lên Zalo, cùng voice note Step 3. Bấm Nộp bài để tự gửi voice note và bài viết cho thầy.",
+  "error_type": "vocabulary"
+}

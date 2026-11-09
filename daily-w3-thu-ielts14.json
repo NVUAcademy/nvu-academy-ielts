@@ -1,0 +1,135 @@
+{
+  "id": "w3-thu-ielts14",
+  "title": "Thursday Daily Practice",
+  "subtitle": "Media and opinion words, a trap tracker and a voice note",
+  "theme": "Lesson 5 · The News and Media",
+  "source": "Kế hoạch tuần 3 (đã duyệt). Listening: Cambridge IELTS 16, Test 2 Part 3 (câu 21-24), đáp án lấy từ sách (Listening answer key, trang 123).",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 3,
+  "day": "thursday",
+  "date": "2026-11-12",
+  "section": "listening",
+  "minutes": 35,
+  "intro": "Làm lần lượt 3 bước, khoảng 35 phút. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Media and opinion words (8 min)",
+      "minutes": 8,
+      "instructions": "Điền đúng từ vào mỗi câu, dùng đúng dạng từ. Mỗi từ dùng một lần. Khung từ: public opinion · influential · censorship · mislead · exaggerate · credibility · controversial · critical thinking",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. The media has a strong influence on ______.",
+          "fields": [
+            {
+              "answer": "public opinion"
+            }
+          ],
+          "explain": "public opinion = dư luận."
+        },
+        {
+          "id": "s1_2",
+          "label": "2. Some advertisements ______ consumers about what they are buying.",
+          "fields": [
+            {
+              "answer": "mislead"
+            }
+          ],
+          "explain": "mislead = đánh lừa, gây hiểu lầm."
+        },
+        {
+          "id": "s1_3",
+          "label": "3. The report ______ the size of the problem.",
+          "fields": [
+            {
+              "answer": "exaggerated"
+            }
+          ],
+          "explain": "exaggerate (quá khứ) = phóng đại."
+        },
+        {
+          "id": "s1_4",
+          "label": "4. The newspaper lost its ______ after the scandal.",
+          "fields": [
+            {
+              "answer": "credibility"
+            }
+          ],
+          "explain": "credibility = độ tin cậy, uy tín."
+        },
+        {
+          "id": "s1_5",
+          "label": "5. Strict ______ limits what journalists can report.",
+          "fields": [
+            {
+              "answer": "censorship"
+            }
+          ],
+          "explain": "censorship = sự kiểm duyệt."
+        },
+        {
+          "id": "s1_6",
+          "label": "6. The programme covered a ______ topic, so people argued about it.",
+          "fields": [
+            {
+              "answer": "controversial"
+            }
+          ],
+          "explain": "controversial = gây tranh cãi."
+        },
+        {
+          "id": "s1_7",
+          "label": "7. Newspapers used to be more ______ than they are now.",
+          "fields": [
+            {
+              "answer": "influential"
+            }
+          ],
+          "explain": "influential = có ảnh hưởng lớn."
+        },
+        {
+          "id": "s1_8",
+          "label": "8. Schools should teach ______ so that students can spot false stories.",
+          "fields": [
+            {
+              "answer": "critical thinking"
+            }
+          ],
+          "explain": "critical thinking = tư duy phản biện."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Trap tracker (12 min)",
+      "minutes": 12,
+      "instructions": "Viết 1 câu theo mẫu cho một bẫy em đã mắc hôm nay ở Step 2. Nếu không mắc bẫy nào, viết 1 câu về đáp án bị loại theo mẫu: option B is wrong because the speaker...",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s3_1",
+          "q": "Câu về bẫy hoặc đáp án bị loại (Step 2)",
+          "model": "Option A is wrong because the speaker is not hopeful, she says she is not convinced."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Part 1 voice note (15 min)",
+      "minutes": 15,
+      "instructions": "Trả lời câu hỏi trong 1 voice note khoảng 1 phút, theo 3 bước Answer, Reason, Example. Dùng ít nhất 2 cụm thái độ của thứ Tư và 1 từ của Step 1.",
+      "kind": "voice",
+      "lines": [
+        "Do you trust the news you see on social media? Why or why not?"
+      ],
+      "note": "Thầy sẽ nghe và nhận xét cách dùng cụm thái độ và từ về truyền thông."
+    }
+  ],
+  "send_today": "Ảnh Step 1 và Step 2 gửi lên Zalo, cùng voice note Step 4. Bấm Nộp bài để tự gửi voice note và bài viết của Step 3 cho thầy.",
+  "error_type": "listening"
+}

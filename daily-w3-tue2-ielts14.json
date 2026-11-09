@@ -1,0 +1,122 @@
+{
+  "id": "w3-tue2-ielts14",
+  "title": "Tuesday Daily Practice",
+  "subtitle": "Class day: reading and body vocabulary, a short check and a voice note",
+  "theme": "Lesson 6 · Body paragraphs and matching information",
+  "source": "Kế hoạch tuần 3 và sườn I6 (đã chốt). Lớp I6 buổi Thứ 3 17/11 19:30.",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 3,
+  "day": "tuesday",
+  "date": "2026-11-17",
+  "section": "reading",
+  "minutes": 20,
+  "intro": "Hôm nay có lớp 19:30. Làm trước giờ học 10 phút và sau giờ học 10 phút. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Key words before class (10 min)",
+      "minutes": 10,
+      "instructions": "Điền đúng từ vào mỗi câu. Khung từ: skim · scan · opinion · subscription · reliable · daily routine · keep up with · editorial",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. To find the main idea quickly, ______ the first sentence of each paragraph.",
+          "fields": [
+            {
+              "answer": "skim"
+            }
+          ],
+          "explain": "skim = đọc lướt để lấy ý chính."
+        },
+        {
+          "id": "s1_2",
+          "label": "2. To find a number or a name, ______ the text for the keyword.",
+          "fields": [
+            {
+              "answer": "scan"
+            }
+          ],
+          "explain": "scan = đọc quét để tìm thông tin cụ thể."
+        },
+        {
+          "id": "s1_3",
+          "label": "3. Columnists often share their ______ on current events.",
+          "fields": [
+            {
+              "answer": "opinion"
+            }
+          ],
+          "explain": "opinion = ý kiến, quan điểm."
+        },
+        {
+          "id": "s1_4",
+          "label": "4. I pay a monthly ______ to read the online newspaper.",
+          "fields": [
+            {
+              "answer": "subscription"
+            }
+          ],
+          "explain": "subscription = đăng ký trả phí định kỳ."
+        },
+        {
+          "id": "s1_5",
+          "label": "5. Check that the source is ______ before you share the story.",
+          "fields": [
+            {
+              "answer": "reliable"
+            }
+          ],
+          "explain": "reliable = đáng tin cậy."
+        },
+        {
+          "id": "s1_6",
+          "label": "6. Reading the news is part of my ______ before work.",
+          "fields": [
+            {
+              "answer": "daily routine"
+            }
+          ],
+          "explain": "daily routine = thói quen hằng ngày."
+        },
+        {
+          "id": "s1_7",
+          "label": "7. I try to ______ current events so I am not surprised by news.",
+          "fields": [
+            {
+              "answer": "keep up with"
+            }
+          ],
+          "explain": "keep up with = theo kịp, cập nhật."
+        },
+        {
+          "id": "s1_8",
+          "label": "8. The newspaper's ______ this week argues that schools need more funding.",
+          "fields": [
+            {
+              "answer": "editorial"
+            }
+          ],
+          "explain": "editorial = bài xã luận, quan điểm của tòa soạn."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Voice note Part 1 after class (10 min)",
+      "minutes": 10,
+      "instructions": "Sau giờ học, trả lời 2 câu trong 1 voice note khoảng 90 giây, theo 3 bước Answer, Reason, Example. Dùng ít nhất 2 từ của Step 1.",
+      "kind": "voice",
+      "lines": [
+        "1. Do you read the editorial pages of a newspaper? Why or why not?",
+        "2. Do you think an online subscription is worth paying for? Why?"
+      ],
+      "note": "Thầy sẽ nghe và nhận xét cách dùng từ và cấu trúc Answer, Reason, Example."
+    }
+  ],
+  "send_today": "Voice note Step 2 gửi lên Zalo. Ảnh Step 1 không cần gửi.",
+  "error_type": "vocabulary"
+}
