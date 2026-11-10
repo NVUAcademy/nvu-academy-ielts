@@ -375,7 +375,7 @@ async function loadToday() {
         if (seen) return '';
         const t = (byId[row.practice_id] && byId[row.practice_id].title) || 'Bài luyện tập';
         const bd = (x.feedback_json.band || {}).overall;
-        return `<a class="task" href="daily-practice.html?p=${esc(row.practice_id)}&d=${esc(row.practice_date)}" onclick="try{localStorage.setItem('${esc(key)}','1')}catch(e){}"><div class="ic" style="background:var(--mint)">🤖</div><div class="tt"><b>Nhận xét AI về bài nói · ${esc(t)}</b><span>${esc(row.practice_date)}${bd != null ? ' · band ước lượng ' + esc(bd) : ''} · bấm để đọc</span></div><span class="pill todo">Mới</span></a>`;
+        return `<a class="task" href="daily-practice.html?p=${esc(row.practice_id)}&d=${esc(row.practice_date)}&redo=1" onclick="try{localStorage.setItem('${esc(key)}','1')}catch(e){}"><div class="ic" style="background:var(--mint)">🤖</div><div class="tt"><b>Nhận xét AI về bài nói · ${esc(t)}</b><span>${esc(row.practice_date)}${bd != null ? ' · band ước lượng ' + esc(bd) : ''} · bấm để đọc</span></div><span class="pill todo">Mới</span></a>`;
       }).join('');
     } catch (e) {}
     if (aiCards) html = html.replace('<div class="sec-label">Hôm nay</div>', '<div class="sec-label">Hôm nay</div>' + aiCards);
