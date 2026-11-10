@@ -449,7 +449,7 @@ async function resendVoice() {
     let upBlob = recBlob; try { upBlob = await blobToWav16k(recBlob); } catch (e) {}
     const ext = upBlob.type === 'audio/wav' ? 'wav' : (/mp4/.test(upBlob.type) ? 'm4a' : 'webm');
     const voicePath = `daily/${student.id}/${P.id}-${Date.now()}.${ext}`;
-    const { error: ue } = await withTimeout(db.storage.from('voice-notes').upload(voicePath, upBlob, { contentType: upBlob.type, upsert: false }), 90000, 'quá thời gian chờ, mạng đang chậm. Em thử gửi lại');
+    const { error: ue } = await withTimeout(db.storage.from('voice-notes').upload(voicePath, upBlob, { contentType: upBlob.type, upsert: false }), 360000, 'quá thời gian chờ, mạng đang chậm. Em thử gửi lại');
     if (ue) throw new Error(ue.message);
     const r = await fetch('/api/submit-daily', { method: 'POST', headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ voice_only: true, student_id: student.id, practice_id: P.id, practice_date: P.date, section: P.section, voice_path: voicePath }) });
@@ -620,7 +620,7 @@ async function save(res, score) {
       const ext = upBlob.type === 'audio/wav' ? 'wav' : (/mp4/.test(upBlob.type) ? 'm4a' : 'webm');
       voicePath = `daily/${student.id}/${P.id}-${Date.now()}.${ext}`;
       let ue = null;
-      try { ({ error: ue } = await withTimeout(db.storage.from('voice-notes').upload(voicePath, upBlob, { contentType: upBlob.type, upsert: false }), 90000, 'quá thời gian chờ, mạng đang chậm')); }
+      try { ({ error: ue } = await withTimeout(db.storage.from('voice-notes').upload(voicePath, upBlob, { contentType: upBlob.type, upsert: false }), 360000, 'quá thời gian chờ, mạng đang chậm')); }
       catch (e) { ue = e; }
       if (ue) { voicePath = null; var voiceErr = ue.message; } else { window._lastVoice = voicePath; RecStore.del(recKey()); }
       uploading = false;
@@ -643,7 +643,7 @@ async function save(res, score) {
 }
 
 function renderResult(res, score, status) {
-  const msg = status === 'saving' ? `<div class="saved">${recBlob ? 'Đang gửi voice note và lưu bài… Đừng đóng hoặc tải lại trang (có thể mất tới 1 phút nếu mạng chậm).' : 'Đang lưu…'}</div>`
+  const msg = status === 'saving' ? `<div class="saved">${recBlob ? 'Đang gửi voice note và lưu bài… Đừng đóng hoặc tải lại trang (mạng chậm có thể mất tới vài phút, vui lòng chờ).' : 'Đang lưu…'}</div>`
     : status === 'ok' ? '<div class="saved ok">✓ Đã lưu điểm, lỗi sai và voice note. Thầy sẽ nghe và nhận xét.</div><button class="btn" style="margin:8px 0" onclick="redoPractice()">Làm lại bài</button>'
     : status === 'review' ? `<div class="saved ok">Đây là bài em đã nộp trước đó.</div><button class="btn" style="margin:8px 0" onclick="redoPractice()">Làm lại bài</button>${student && existing && existing.voice_path ? ' <button class="btn" style="margin:8px 0" onclick="regradeAi(this)">Chấm bài nói bằng AI</button>' : ''}${existing && existing.teacher_comment ? `<div class="review" style="white-space:pre-line"><b>Nhận xét của thầy:</b> ${esc(existing.teacher_comment)}</div>` : ''}${P && P.steps && P.steps.some(s => s.kind === 'voice') ? `<div class="review"><b>Ghi âm lại theo nhận xét của thầy</b>${recorderHtml()}<button class="btn" style="margin-top:8px" onclick="resendVoice()">Gửi bản ghi âm mới cho thầy</button><div id="resendmsg" class="meta" style="margin-top:6px"></div></div>` : ''}`
     : status === 'teacher' ? '<div class="saved">Chế độ giáo viên xem thử: không lưu.</div>'
