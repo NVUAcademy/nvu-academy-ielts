@@ -368,8 +368,9 @@ async function loadToday() {
     let aiCards = '';
     try {
       const hj = await (await fetch('/api/speaking-feedback', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'history', student_id: student.id }) })).json();
+      const cut3 = iso(new Date(Date.now() - 2 * 86400000));   /* chỉ ghim nhận xét của bài trong 3 ngày gần nhất (hôm nay và 2 ngày trước) */
       const byPath = {}; (sc.data || []).forEach(r => { if (r.voice_path) byPath[r.voice_path] = r; });
-      aiCards = (hj.items || []).filter(x => x.feedback_json && x.audio_url && byPath[x.audio_url] && String(x.submitted_at).slice(0, 10) >= cut14).map(x => {
+      aiCards = (hj.items || []).filter(x => x.feedback_json && x.audio_url && byPath[x.audio_url] && byPath[x.audio_url].practice_date >= cut3).map(x => {
         const row = byPath[x.audio_url], key = `nvu_ai_seen|${student.id}|${x.id}`;
         let seen = false; try { seen = !!localStorage.getItem(key); } catch (e) {}
         if (seen) return '';
