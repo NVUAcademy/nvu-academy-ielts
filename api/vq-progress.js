@@ -64,6 +64,13 @@ module.exports = async function handler(req, res) {
     const points = isInt(b.points, 10000000) ? b.points : 0;
     const daysDone = Object.values(prog.days || {}).filter(d => d && d.fin).length;
 
+    /* prog.unlock (giáo viên mở riêng từng ngày cho từng học sinh, đặt trực tiếp trong cơ sở dữ liệu) do máy chủ giữ.
+       Trang học sinh gửi cả khối prog lên, nếu để nguyên thì lần lưu từ một trang đã mở sẵn sẽ đè mất cờ vừa mở.
+       Nên luôn lấy bản trên máy chủ; học sinh không thêm hay bớt được cờ này. */
+    const cur = await (await sb('/rest/v1/vocab_progress?select=prog&' + key)).json();
+    const serverUnlock = Array.isArray(cur) && cur.length && cur[0].prog && cur[0].prog.unlock;
+    if (serverUnlock && typeof serverUnlock === 'object') prog.unlock = serverUnlock; else delete prog.unlock;
+
     const up = await sb('/rest/v1/vocab_progress?on_conflict=student_id,game_id', {
       method: 'POST', headers: { 'content-type': 'application/json', Prefer: 'resolution=merge-duplicates,return=minimal' },
       body: JSON.stringify({ student_id: studentId, game_id: gameId, xp, points, level: Math.floor(xp / XP_PER_LV) + 1, days_done: daysDone, prog, updated_at: new Date().toISOString() })
