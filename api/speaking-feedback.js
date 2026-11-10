@@ -12,7 +12,7 @@ const WHISPER_MODEL = process.env.WHISPER_MODEL || 'whisper-1';
 const DAILY_LIMIT = parseInt(process.env.DAILY_LIMIT || '8', 10);
 const MAX_AUDIO_BYTES = 12 * 1024 * 1024;
 const CHUNK_SEC = 60;       /* bản ghi dài được cắt thành các đoạn ~60 giây để chép lời song song (kịp trong 60 giây của Vercel) */
-const BUDGET_MS = 52000;    /* tổng thời gian dành cho một lượt chấm (Vercel cho tối đa 60 giây, chừa thời gian tải file và lưu kết quả) */
+const BUDGET_MS = 54000;    /* tổng thời gian dành cho một lượt chấm (Vercel cho tối đa 60 giây, chừa thời gian tải file và lưu kết quả) */
 
 const SB_URL = () => (process.env.SUPABASE_URL || '').replace(/\/$/, '');
 /* Khóa kiểu mới (sb_secret_...) không phải JWT nên chỉ gửi header apikey; khóa service_role cũ (JWT) vẫn cần Bearer */
@@ -189,8 +189,8 @@ async function askClaude(system, user) {
   const r = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + process.env.OPENAI_API_KEY, 'content-type': 'application/json' },
-    body: JSON.stringify({ model: OPENAI_CHAT_MODEL, max_tokens: 3000, response_format: { type: 'json_object' }, messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }), signal: AbortSignal.timeout(30000)
-  }).catch(e => { throw new Error('OpenAI: ' + (e.name === 'TimeoutError' ? 'quá thời gian chờ (30 giây)' : e.message)); });
+    body: JSON.stringify({ model: OPENAI_CHAT_MODEL, max_tokens: 4000, response_format: { type: 'json_object' }, messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }), signal: AbortSignal.timeout(36000)
+  }).catch(e => { throw new Error('OpenAI: ' + (e.name === 'TimeoutError' ? 'quá thời gian chờ (36 giây)' : e.message)); });
   if (!r.ok) throw new Error('OpenAI: ' + r.status + ' ' + (await r.text()).slice(0, 300));
   const j = await r.json();
   const text = (j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || '';
@@ -211,10 +211,10 @@ async function sb(path, opts) {
   return r;
 }
 
-const SYSTEM = `Bạn là giám khảo và huấn luyện viên IELTS Speaking cho học sinh Việt Nam (trình độ A2 đến B2) của thầy Nam. Trả lời bằng tiếng Việt, ngắn gọn, ấm áp, cụ thể; ví dụ và từ cần luyện giữ bằng tiếng Anh.
+const SYSTEM = `Bạn là giám khảo và huấn luyện viên IELTS Speaking cho học sinh Việt Nam (trình độ A2 đến B2) của thầy Nam. Trả lời bằng tiếng Việt, chi tiết, cụ thể, ấm áp, dễ hiểu; ví dụ, câu trích và từ cần luyện giữ bằng tiếng Anh.
 Quy tắc:
 - Bạn nhận được bản chép lời (transcript) từ nhận dạng giọng nói và KHÔNG nghe được âm thanh. Nếu có "Điểm phát âm Azure" thì đó là dữ liệu đáng tin nhất cho phần phát âm: dựa vào điểm từng từ và từng âm (IPA) để chỉ ra từ và âm cần sửa, và dùng nó để định điểm pronunciation. Nếu KHÔNG có dữ liệu Azure, phần phát âm chỉ là ƯỚC LƯỢNG dựa trên từ bị nhận sai so với văn bản mẫu và các lỗi thường gặp của người Việt (âm cuối /s/ /z/ /t/ /d/, /b/ và /p/, /s/ và /ʃ/, trọng âm, ngắt cụm); khi đó không khẳng định chắc chắn, dùng "có thể".
-- Không bịa lỗi. Chỉ nêu từ có trong dữ liệu. Tối đa 2 điểm cần sửa, 1 điểm khen, 1 việc luyện tiếp.
+- Không bịa lỗi. Chỉ nêu từ và câu có trong transcript và dữ liệu. Nhận xét KỸ: 2 đến 3 điểm khen cụ thể (trích câu của học sinh), 3 đến 5 điểm cần sửa (mỗi điểm trích đúng câu trong transcript, nói rõ lỗi gì, viết lại câu đúng và giải thích quy tắc trong 1 đến 2 câu), 3 gợi ý nâng từ vựng, 2 đến 3 việc luyện tiếp làm được trong 10 phút. Nếu transcript quá ngắn thì nhận xét theo những gì có và nói rõ.
 - Điểm band là ước lượng tham khảo (thang 0 đến 9, bước 0.5), ghi rõ chưa phải điểm chính thức.
 - Chỉ trả về một đối tượng JSON, không thêm chữ nào bên ngoài.`;
 
@@ -233,13 +233,16 @@ Khác biệt so với mẫu: ${JSON.stringify((p.align && p.align.diffs || []).f
 
 Trả về JSON đúng dạng:
 {
- "summary": "2 câu tổng quan",
- "praise": "1 điểm khen cụ thể",
- "fix": [{"point":"điểm cần sửa","example":"ví dụ từ bài của em","how":"cách sửa ngắn"}],
+ "summary": "4 đến 5 câu tổng quan: độ dài và mạch ý, mức độ trả lời đúng đề, điểm mạnh chính, điểm yếu chính",
+ "praise": "2 đến 3 điểm khen cụ thể, mỗi điểm trên một dòng, có trích câu hoặc cụm từ của học sinh",
+ "fix": [{"point":"tên lỗi ngắn (ví dụ: dạng động từ sau giới từ)","example":"câu hoặc cụm sai trích đúng từ transcript","corrected":"câu đã sửa đúng","how":"quy tắc và cách nhớ trong 1 đến 2 câu"}],
+ "vocab_upgrades": [{"said":"từ hoặc cụm học sinh dùng (đơn giản hoặc lặp)","better":"từ hoặc cụm tự nhiên hơn, cùng nghĩa, phù hợp trình độ B1 đến B2","why":"vì sao nên đổi"}],
+ "sample_answer": "viết lại 2 đến 3 câu của học sinh thành bản tốt hơn một bậc, giữ nguyên ý của em, câu đúng ngữ pháp và tự nhiên",
+ "band_reason": "2 câu giải thích vì sao ước lượng mức band này",
  "focus_words": ["tối đa 6 từ tiếng Anh nên đọc lại, lấy từ dữ liệu"],
  "focus_sounds": ["tối đa 3 âm cần luyện, ví dụ /b/ và /p/"],
  "criteria": [{"name":"Fluency and Coherence","tip":"1 đến 2 câu gợi ý cải thiện về lưu loát và mạch lạc, dựa trên thống kê lưu loát và cách nối ý"},{"name":"Lexical Resource","tip":"1 đến 2 câu gợi ý về từ vựng: từ nào nên đổi, từ nào nên thêm, dựa trên bài nói"},{"name":"Grammatical Range and Accuracy","tip":"1 đến 2 câu gợi ý về ngữ pháp: lỗi lặp lại và cách dùng cấu trúc đa dạng hơn"},{"name":"Pronunciation","tip":"1 đến 2 câu gợi ý về phát âm, dựa trên điểm Azure và các âm yếu"}],
- "next_step": "1 việc luyện tiếp",
+ "next_step": "2 đến 3 việc luyện tiếp, đánh số 1, 2, 3, mỗi việc làm được trong 10 phút",
  "band": {"fluency": 0, "lexical": 0, "grammar": 0, "pronunciation_estimate": 0, "overall": 0},
  "improved": ${p.previous ? '"nhận xét ngắn so với lần trước"' : 'null'},
  "retry_text": "một câu ngắn (tối đa 25 từ) học sinh nên đọc lại để luyện đúng các âm trên, chứa các từ focus_words"
@@ -321,7 +324,7 @@ module.exports = async function handler(req, res) {
         const ref = task_type !== 'free' && b.target_text ? b.target_text : words(transcript).slice(0, 80).join(' ');
         /* Azure chỉ chấm 30 giây đầu (giới hạn của REST). Bản ghi dài: chừa ít nhất 32 giây cho Claude, không đủ thời gian thì bỏ qua Azure.
            Bản ghi ngắn giữ nguyên như cũ (tối đa 28 giây). */
-        const left = deadline - Date.now() - 32000;
+        const left = deadline - Date.now() - 36000;
         if (w.chunks && left < 6000) azureError = 'Bỏ qua điểm Azure vì bản ghi dài, hết thời gian xử lý';
         else azure = await azureAssess(buf, ref, w.chunks ? Math.min(28000, left) : 28000);
       } catch (e) { azureError = String(e.message || e).slice(0, 200); }

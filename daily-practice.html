@@ -568,12 +568,16 @@ function voiceTarget(st) {
 function speakingFbHtml(f) {
   const b = f.band || {};
   return `<h2>Nhận xét AI về bài nói</h2>${f.accuracy != null ? `<div class="sub" style="font-size:17px">Độ khớp với câu mẫu: <b style="color:var(--ink)">${f.accuracy}%</b></div>` : ''}
-      <p style="margin:10px 0">${esc(f.summary)}</p><div class="review"><span class="good">✓ ${esc(f.praise)}</span></div>
-      ${(f.fix || []).map(x => `<div class="review"><b>${esc(x.point)}</b><br>Ví dụ: ${esc(x.example)}<br><span class="ex">${esc(x.how)}</span></div>`).join('')}
+      <p style="margin:10px 0">${esc(f.summary)}</p><div class="review"><span class="good" style="white-space:pre-line">✓ ${esc(Array.isArray(f.praise) ? f.praise.join('\n✓ ') : f.praise)}</span></div>
+      ${(f.fix || []).map((x, i) => `<div class="review"><b>${i + 1}. ${esc(x.point)}</b><br>Em nói: <i>${esc(x.example)}</i>${x.corrected ? `<br>Nên nói: <span class="good">${esc(x.corrected)}</span>` : ''}<br><span class="ex">${esc(x.how)}</span></div>`).join('')}
+      ${(f.vocab_upgrades || []).length ? `<div class="review"><b>Nâng cấp từ vựng</b>${f.vocab_upgrades.map(v => `<br>• <i>${esc(v.said)}</i> → <span class="good">${esc(v.better)}</span>${v.why ? ` (${esc(v.why)})` : ''}`).join('')}</div>` : ''}
+      ${f.sample_answer ? `<div class="review"><b>Bản nói tốt hơn (theo ý của em)</b><br><span class="good">${esc(f.sample_answer)}</span></div>` : ''}
+      ${(f.criteria || []).length ? `<div class="review"><b>Gợi ý theo 4 tiêu chí IELTS</b>${f.criteria.map(c => `<br><b>${esc(c.name)}:</b> ${esc(c.tip)}`).join('')}</div>` : ''}
+      ${(f.focus_sounds || []).length ? `<div class="review">Âm cần luyện: ${f.focus_sounds.map(w => `<span class="word">${esc(w)}</span>`).join('')}</div>` : ''}
       ${(f.focus_words || []).length ? `<div class="review">Từ nên đọc lại: ${f.focus_words.map(w => `<span class="word">${esc(w)}</span>`).join('')}</div>` : ''}
-      <div class="review"><b>Việc tiếp theo:</b> ${esc(f.next_step)}</div>
+      <div class="review" style="white-space:pre-line"><b>Việc tiếp theo:</b> ${esc(f.next_step)}</div>
       ${f.azure ? `<div class="review">Điểm phát âm Azure: <b>${f.azure.pronunciation}</b>/100 (chính xác ${f.azure.accuracy}, lưu loát ${f.azure.fluency})${(f.azure.weak_words || []).length ? '<br>Từ cần sửa: ' + f.azure.weak_words.map(w => `<span class="word">${esc(w.word)} ${w.score}</span>`).join('') : ''}</div>` : ''}
-      <p class="sub" style="font-size:15px;margin-top:8px">Band ước lượng: Fluency ${b.fluency ?? '–'} · Từ vựng ${b.lexical ?? '–'} · Ngữ pháp ${b.grammar ?? '–'} · Phát âm ${b.pronunciation_estimate ?? '–'} (chỉ để tham khảo, thầy Nam sẽ nghe và nhận xét thêm).</p>
+      <p class="sub" style="font-size:15px;margin-top:8px">Band ước lượng: Fluency ${b.fluency ?? '–'} · Từ vựng ${b.lexical ?? '–'} · Ngữ pháp ${b.grammar ?? '–'} · Phát âm ${b.pronunciation_estimate ?? '–'} ${f.band_reason ? '<br>' + esc(f.band_reason) : ''} (chỉ để tham khảo, thầy Nam sẽ nghe và nhận xét thêm).</p>
       <div style="margin-top:12px"><a class="btn small" href="speaking.html" style="text-decoration:none">Luyện đọc lại các từ cần sửa →</a></div>`;
 }
 /* Xem lại bài đã nộp: hiện nhận xét AI đã lưu cho bản ghi này (nếu có) */
@@ -582,6 +586,7 @@ async function showSavedSpeakingAi() {
   try {
     const j = await (await fetch('/api/speaking-feedback', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'history', student_id: student.id }) })).json();
     const it = (j.items || []).find(x => x.audio_url === existing.voice_path && x.feedback_json); if (!it) return;
+    try { localStorage.setItem(`nvu_ai_seen|${student.id}|${it.id}`, '1'); } catch (e) {}
     const anchor = document.querySelector('.card.arch'); if (!anchor) return;
     const box = document.createElement('div'); box.className = 'card'; box.innerHTML = speakingFbHtml(it.feedback_json);
     anchor.insertAdjacentElement('afterend', box);
