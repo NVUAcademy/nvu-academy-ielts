@@ -5,6 +5,7 @@
 (function () {
   var MAX = 3;
   var opts = null, inited = false;
+  var pageLoadedAt = Date.now();
 
   function state() {
     var a = (opts && opts.answers()) || {};
@@ -39,10 +40,15 @@
       el.style.display = 'none';
     }
   }
-  function onHidden() {
+  /* fromPageHide: lần tính do trang bị đóng hoặc tải lại. Ghi nhớ lần đó để hoàn lại nếu hóa ra chỉ là tải lại trang. */
+  function onHidden(fromPageHide) {
     if (!opts || !opts.isActive()) return;
     var a = opts.answers(), s = state();
     if (s.locked) return;
+    var before = { count: s.count || 0 };
+    if (fromPageHide) {
+      try { localStorage.setItem('nvu_vg_last', JSON.stringify({ k: location.pathname + location.search, t: Date.now(), before: before })); } catch (e) {}
+    }
     s.count = (s.count || 0) + 1;
     s.locked = s.count >= MAX;
     a._v = s;
@@ -68,10 +74,25 @@
           render();
         }
       });
-      window.addEventListener('pagehide', function () { clearTimeout(hideTimer); onHidden(); });
+      window.addEventListener('pagehide', function () { clearTimeout(hideTimer); onHidden(true); });
       document.addEventListener('paste', function (e) {
         if (opts && opts.isActive() && e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName)) e.preventDefault();
       });
+    },
+    /* Nút làm mới trang kích hoạt pagehide giống như đóng trình duyệt nên bị tính là rời bài (học sinh bấm tải lại 3 lần là bị khóa).
+       Gọi hàm này sau khi đã nạp bản nháp: nếu trang vừa được TẢI LẠI (không phải mở mới) trong vòng 60 giây sau lần tính đó
+       thì hoàn lại đúng lần đó. Đóng trình duyệt rồi mở lại vẫn bị tính như cũ. */
+    forgiveReload: function () {
+      try {
+        var raw = localStorage.getItem('nvu_vg_last'); if (!raw) return;
+        localStorage.removeItem('nvu_vg_last');
+        var m = JSON.parse(raw), nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+        if (!nav || nav.type !== 'reload' || m.k !== location.pathname + location.search) return;
+        if (pageLoadedAt < m.t || pageLoadedAt - m.t > 60000) return;
+        var a = opts && opts.answers(); if (!a || !a._v) return;
+        if (m.before && m.before.count > 0) a._v = { count: m.before.count, locked: false }; else delete a._v;
+        opts.persist(); opts.sendNow(); render();
+      } catch (e) {}
     },
     render: render,
     isLocked: function () { return state().locked; },

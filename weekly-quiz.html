@@ -333,6 +333,7 @@ async function startQuiz() {
   answers = {};
   try { answers = JSON.parse(lsGet(draftKey()) || '{}'); } catch (e) {}
   await quizDraftPull();
+  ViolationGuard.forgiveReload();
   totalTimer = setInterval(() => { totalSec++; const e = $('ttotal'); if (e) e.textContent = fmt(totalSec); }, 1000);
   renderQuiz();
 }

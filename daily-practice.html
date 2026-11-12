@@ -309,6 +309,7 @@ function redoPractice() {
 function startPractice() {
   totalSec = 0; inProgress = true;
   ViolationGuard.init({ isActive: () => inProgress && !!student && !isTeacher, answers: () => answers, persist: () => lsSet(draftKey(), JSON.stringify(answers)), sendNow: () => sendDraftNow() });
+  ViolationGuard.forgiveReload();
   ViolationGuard.render();
   totalTimer = setInterval(() => { totalSec++; const e = $('tt'); if (e) e.textContent = fmt(totalSec); }, 1000);
   renderPractice();
@@ -461,16 +462,21 @@ async function resendVoice() {
 }
 
 function recorderHtml() {
-  return `<div class="recbox" id="recbox"><button class="btn rec small" id="recbtn" onclick="toggleRec()">● Ghi âm</button>
-    <div class="status" id="recstatus">${recBlob ? 'Đã có bản ghi. Nghe lại bên dưới hoặc ghi lại.' : 'Chưa có bản ghi. Bấm "● Ghi âm" rồi nói theo hướng dẫn của bước này (tối đa 5 phút).'}</div>
-    <audio controls id="recplay" style="${recBlob ? '' : 'display:none'}" ${recBlob ? `src="${URL.createObjectURL(recBlob)}"` : ''}></audio></div>`;
+  /* Một bài có thể có nhiều bước ghi âm (nhiều ô), nhưng chỉ có MỘT bản ghi cho cả bài: mọi ô luôn hiện cùng trạng thái. */
+  const multi = (P.steps || []).filter(s => s.kind === 'voice').length > 1;
+  return `<div class="recbox"><button class="btn rec small recbtn" onclick="toggleRec()">${recBlob ? '● Ghi lại' : '● Ghi âm'}</button>
+    <div class="status recstatus">${recBlob ? 'Đã có bản ghi. Nghe lại bên dưới hoặc ghi lại.' : 'Chưa có bản ghi. Bấm "● Ghi âm" rồi nói theo hướng dẫn của bước này (tối đa 5 phút).'}</div>
+    <audio controls class="recplay" style="${recBlob ? '' : 'display:none'}" ${recBlob ? `src="${URL.createObjectURL(recBlob)}"` : ''}></audio>${multi ? '<div class="status" style="font-size:13px;margin-top:0">Cả bài chỉ lưu 1 bản ghi âm: bản ghi mới sẽ thay bản cũ, thầy chỉ nghe bản ghi cuối cùng.</div>' : ''}</div>`;
 }
+const recAll = sel => Array.from(document.querySelectorAll(sel));
 async function toggleRec() {
-  const btn = $('recbtn'), st = $('recstatus');
+  /* Cập nhật TẤT CẢ các ô ghi âm trong trang (bài có thể có nhiều bước ghi âm dùng chung một bản ghi) */
+  const setBtn = t => recAll('.recbtn').forEach(b => { b.textContent = t; });
+  const setStatus = h => recAll('.recstatus').forEach(e => { e.innerHTML = h; });
   if (recorder && recorder.state === 'recording') { recorder.stop(); return; }
   try {
     recStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  } catch (e) { st.textContent = 'Không dùng được micro: ' + e.message; return; }
+  } catch (e) { setStatus(esc('Không dùng được micro: ' + e.message)); return; }
   const mime = window.MediaRecorder && MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : (MediaRecorder.isTypeSupported('audio/mp4') ? 'audio/mp4' : '');
   recChunks = [];
   recorder = new MediaRecorder(recStream, mime ? { mimeType: mime } : undefined);
@@ -480,23 +486,22 @@ async function toggleRec() {
     recStream.getTracks().forEach(t => t.stop());
     recBlob = new Blob(recChunks, { type: recorder.mimeType || mime || 'audio/webm' });
     RecStore.put(recKey(), recBlob);
-    btn.textContent = '● Ghi lại'; btn.classList.add('rec');
-    st.textContent = recSec >= REC_MAX_SEC ? `Đã ghi ${fmt(recSec)} (đủ 5 phút nên tự dừng). Nghe lại bên dưới.` : `Đã ghi ${fmt(recSec)}. Nghe lại bên dưới.`;
-    const pl = $('recplay'); pl.src = URL.createObjectURL(recBlob); pl.style.display = '';
+    setBtn('● Ghi lại'); recAll('.recbtn').forEach(b => b.classList.add('rec'));
+    setStatus(recSec >= REC_MAX_SEC ? `Đã ghi ${fmt(recSec)} (đủ 5 phút nên tự dừng). Nghe lại bên dưới.` : `Đã ghi ${fmt(recSec)}. Nghe lại bên dưới.`);
+    recAll('.recplay').forEach(pl => { pl.src = URL.createObjectURL(recBlob); pl.style.display = ''; });
     /* Bản ghi im lặng (micro bị chặn hoặc tắt tiếng): bỏ bản ghi và yêu cầu ghi lại ngay, không để nộp file trống */
     const mine = recBlob;
     blobLevel(mine).then(lv => {
       if (recBlob !== mine || !isSilentLevel(lv)) return;
       recBlob = null; RecStore.del(recKey());
-      const s2 = $('recstatus'), p2 = $('recplay');
-      if (s2) s2.textContent = '⚠️ Không thu được tiếng trong bản ghi (gần như im lặng). Em cho phép trình duyệt dùng micro, đưa micro gần miệng hơn rồi bấm "● Ghi lại".';
-      if (p2) { p2.removeAttribute('src'); p2.style.display = 'none'; }
+      setStatus('⚠️ Không thu được tiếng trong bản ghi (gần như im lặng). Em cho phép trình duyệt dùng micro, đưa micro gần miệng hơn rồi bấm "● Ghi lại".');
+      recAll('.recplay').forEach(p2 => { p2.removeAttribute('src'); p2.style.display = 'none'; });
     });
   };
   recSec = 0; recorder.start();
-  btn.textContent = '■ Dừng';
-  st.innerHTML = '<span class="dot"></span><span id="recsec">00:00</span> / ' + fmt(REC_MAX_SEC);
-  recTimer = setInterval(() => { recSec++; const e = $('recsec'); if (e) e.textContent = fmt(recSec); if (recSec >= REC_MAX_SEC && recorder.state === 'recording') recorder.stop(); }, 1000);
+  setBtn('■ Dừng');
+  setStatus('<span class="dot"></span><span class="recsec">00:00</span> / ' + fmt(REC_MAX_SEC));
+  recTimer = setInterval(() => { recSec++; recAll('.recsec').forEach(e => { e.textContent = fmt(recSec); }); if (recSec >= REC_MAX_SEC && recorder.state === 'recording') recorder.stop(); }, 1000);
 }
 
 /* ---------- submit ---------- */
