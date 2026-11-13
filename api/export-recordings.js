@@ -23,7 +23,7 @@ const ascii = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').repl
 
 function fileName(r) {
   const d = new Date(r.date + 'T00:00:00Z'), ext = (r.path.split('.').pop() || 'wav').toLowerCase();
-  return `${r.date}_${DOW[d.getUTCDay()]}_${ascii(r.cls)}_${ascii(r.student)}_${r.src === 'daily' ? 'Daily' : 'Speaking'}-${ascii(r.title).slice(0, 40)}.${ext}`;
+  return `${r.date}_${DOW[d.getUTCDay()]}_${ascii(r.cls)}_${ascii(r.student)}_${r.src === 'daily' ? 'Daily' : 'Speaking'}-${ascii(r.title).slice(0, 40)}${r.step ? '-' + ascii(r.step) : ''}.${ext}`;
 }
 
 /* ---------- Google ---------- */
@@ -80,7 +80,29 @@ async function collect(cls, from) {
   const out = [];
   const a = await (await sb(`/rest/v1/daily_scores?select=id,practice_date,practice_id,voice_path,students!inner(full_name,class_code)&voice_path=not.is.null&students.class_code=eq.${cls}&practice_date=gte.${from}&order=practice_date.asc`)).json();
   if (!Array.isArray(a)) throw new Error('Supabase daily_scores: ' + JSON.stringify(a).slice(0, 160));
-  a.forEach(r => out.push({ src: 'daily', student: r.students.full_name, cls, date: r.practice_date, title: titles[r.practice_id] || r.practice_id || 'Daily Practice', path: r.voice_path }));
+  /* Bài có nhiều bước ghi âm: mỗi bản ghi theo bước nằm trong answers._voices (lấy riêng; lỗi thì chỉ xuất bản ghi chính) */
+  const voicesById = {};
+  try {
+    const ids = a.map(r => r.id);
+    for (let i = 0; i < ids.length; i += 100) {
+      const part = ids.slice(i, i + 100).join(',');
+      let vr = await (await sb(`/rest/v1/daily_scores?select=id,voices:answers->_voices&id=in.(${part})`)).json();
+      if (!Array.isArray(vr)) { /* cú pháp chọn trường JSON bị từ chối: lấy cả answers rồi tự tách */
+        const full = await (await sb(`/rest/v1/daily_scores?select=id,answers&id=in.(${part})`)).json();
+        vr = Array.isArray(full) ? full.map(x => ({ id: x.id, voices: x.answers && x.answers._voices })) : [];
+      }
+      vr.forEach(x => { if (x.voices && typeof x.voices === 'object') voicesById[x.id] = x.voices; });
+    }
+  } catch (e) {}
+  a.forEach(r => {
+    const title = titles[r.practice_id] || r.practice_id || 'Daily Practice';
+    const base = { src: 'daily', student: r.students.full_name, cls, date: r.practice_date, title, path: r.voice_path };
+    const no = k => parseInt(String(k).replace(/\D/g, ''), 10) || 0;
+    const vs = Object.entries(voicesById[r.id] || {}).filter(([, v]) => v && v.p).sort((x, y) => no(x[0]) - no(y[0]));
+    if (!vs.length) { out.push(base); return; }
+    vs.forEach(([k, v]) => out.push({ ...base, step: k, title: title + ' ' + String(v.t || k).replace(/^Step\s*\d+\s*·\s*/i, ''), path: v.p }));
+    if (r.voice_path && !vs.some(([, v]) => v.p === r.voice_path)) out.push(base);
+  });
   const b = await (await sb(`/rest/v1/speaking_submissions?select=id,audio_url,question,submitted_at,students!inner(full_name,class_code)&students.class_code=eq.${cls}&submitted_at=gte.${from}T00:00:00%2B07:00&order=submitted_at.asc`)).json();
   if (!Array.isArray(b)) throw new Error('Supabase speaking_submissions: ' + JSON.stringify(b).slice(0, 160));
   b.forEach(r => { if (r.audio_url) out.push({ src: 'speaking', student: r.students.full_name, cls, date: vnDate(new Date(r.submitted_at)), title: (r.question || 'Speaking').slice(0, 40), path: r.audio_url }); });

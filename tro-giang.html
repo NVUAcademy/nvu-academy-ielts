@@ -66,13 +66,31 @@ async function load() {
     .gte('practice_date', isoDaysAgo(14)).order('practice_date', { ascending: false }).limit(500);
   if (error) { document.getElementById('list').innerHTML = `<div class="bad">Không tải được: ${esc(error.message)}</div>`; return; }
   rows = data || [];
-  /* Link nghe file ghi âm bài nộp của học sinh (có hạn 1 giờ) */
+  /* Bài có nhiều bước ghi âm: mỗi bản ghi theo bước nằm trong answers._voices (lấy riêng; lỗi thì chỉ hiện bản ghi chính) */
+  for (let i = 0; i < rows.length; i += 100) {
+    try {
+      const ids = rows.slice(i, i + 100).map(r => r.id);
+      let { data: vr, error: ve } = await db.from('daily_scores').select('id, voices:answers->_voices').in('id', ids);
+      if (ve) { ({ data: vr, error: ve } = await db.from('daily_scores').select('id, answers').in('id', ids)); if (!ve) vr = (vr || []).map(x => ({ id: x.id, voices: x.answers && x.answers._voices })); }
+      if (!ve) (vr || []).forEach(x => { const r = rows.find(y => y.id === x.id); if (r && x.voices && typeof x.voices === 'object') r.voices = x.voices; });
+    } catch (e) {}
+  }
+  /* Link nghe các file ghi âm của bài nộp (có hạn 1 giờ): mỗi bước ghi âm một file */
+  const stepNo = k => parseInt(String(k).replace(/\D/g, ''), 10) || 0;
   await Promise.all(rows.map(async r => {
-    if (!r.voice_path) { r.audioUrl = null; return; }
-    const { data: s } = await db.storage.from('voice-notes').createSignedUrl(r.voice_path, 3600);
-    r.audioUrl = s ? s.signedUrl : null;
+    const clips = Object.entries(r.voices || {}).filter(([, v]) => v && v.p).sort((x, y) => stepNo(x[0]) - stepNo(y[0]))
+      .map(([k, v]) => ({ path: v.p, label: v.t ? String(v.t).replace(/^Step\s*\d+\s*·\s*/i, '') : k }));
+    if (r.voice_path && !clips.some(c => c.path === r.voice_path)) clips.unshift({ path: r.voice_path, label: clips.length ? 'Bản ghi chính' : '' });
+    await Promise.all(clips.map(async c => { const { data: s } = await db.storage.from('voice-notes').createSignedUrl(c.path, 3600); c.url = s ? s.signedUrl : null; }));
+    r.clips = clips; r.audioUrl = clips.length ? clips[0].url : null;
   }));
   render();
+}
+
+/* Các bản ghi âm của bài nộp (bài nhiều bước ghi âm có nhiều file, mỗi file kèm tên bước) */
+function clipsHtml(r) {
+  if (!r.clips || !r.clips.length) return '<div class="meta">Bài này không có file ghi âm, chỉ nhận xét chữ.</div>';
+  return r.clips.map(c => (c.label ? `<div class="meta">${esc(c.label)}</div>` : '') + (c.url ? `<audio controls preload="none" src="${esc(c.url)}"></audio>` : '<div class="meta bad">Không mở được file ghi âm của bản này</div>')).join('');
 }
 
 function render() {
@@ -83,7 +101,7 @@ function render() {
       <b>${esc(r.students ? r.students.full_name : '—')}</b> · ${esc(r.students ? r.students.class_code : '')}
       <div class="meta">${esc(r.practice_date)} · ${esc(r.practice_id)} · ${esc(r.section || '')} · ${r.score}/${r.max_score}</div>
       <div class="lbl">Bài nộp của học sinh</div>
-      ${r.voice_path ? (r.audioUrl ? `<audio controls preload="none" src="${esc(r.audioUrl)}"></audio>` : '<div class="meta bad">Không mở được file ghi âm của bài này</div>') : '<div class="meta">Bài này không có file ghi âm, chỉ nhận xét chữ.</div>'}
+      ${clipsHtml(r)}
       <div class="lbl">1 · Nhận xét</div>
       <textarea id="cm-${esc(r.id)}" placeholder="Nhận xét bài làm của học sinh…">${esc(r.teacher_comment || '')}</textarea>
       <div class="lbl">2 · Ghi âm các từ học sinh phát âm sai (để học sinh đọc theo)</div>

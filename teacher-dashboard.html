@@ -1804,7 +1804,7 @@
   function recName(r) {
     const d = new Date(r.date + 'T00:00:00'), ext = (r.path.split('.').pop() || 'wav').toLowerCase();
     const kind = r.src === 'daily' ? 'Daily' : 'Speaking';
-    return `${r.date}_${RC_DOW[d.getDay()]}_${asciiName(r.cls)}_${asciiName(r.student)}_${kind}-${asciiName(r.title).slice(0, 40)}.${ext}`;
+    return `${r.date}_${RC_DOW[d.getDay()]}_${asciiName(r.cls)}_${asciiName(r.student)}_${kind}-${asciiName(r.title).slice(0, 40)}${r.stepId ? '-' + asciiName(r.stepId) : ''}.${ext}`;
   }
 
   async function loadRecordings() {
@@ -1825,15 +1825,37 @@
     ]);
     const err = a.error || b.error;
     if (err) { list.innerHTML = emptyState('Không tải được: ' + esc(err.message)); return; }
+    /* Bài có nhiều bước ghi âm lưu mỗi bản ghi theo bước trong answers._voices (lấy riêng; lỗi thì bỏ qua và chỉ hiện bản ghi chính) */
+    const voicesById = {}, ids = (a.data || []).map(r => r.id);
+    for (let i = 0; i < ids.length; i += 100) {
+      try {
+        let { data: vr, error: ve } = await db.from('daily_scores').select('id, voices:answers->_voices').in('id', ids.slice(i, i + 100));
+        if (ve) { ({ data: vr, error: ve } = await db.from('daily_scores').select('id, answers').in('id', ids.slice(i, i + 100))); if (!ve) vr = (vr || []).map(x => ({ id: x.id, voices: x.answers && x.answers._voices })); }
+        if (!ve) (vr || []).forEach(x => { if (x.voices && typeof x.voices === 'object') voicesById[x.id] = x.voices; });
+      } catch (e) {}
+    }
+    const stepNo = k => parseInt(String(k).replace(/\D/g, ''), 10) || 0, stepLabel = (t, k) => t ? String(t).replace(/^Step\s*\d+\s*·\s*/i, '') : k;
+    const dailyRows = [];
+    (a.data || []).forEach(r => {
+      const base = { key: 'd' + r.id, src: 'daily', id: r.id, sid: r.student_id, practice_id: r.practice_id, student: r.students.full_name, cls, date: r.practice_date, title: titleOf(r.practice_id), path: r.voice_path, comment: r.teacher_comment || '', score: r.score != null ? `${r.score}/${r.max_score}` : '' };
+      const vs = Object.entries(voicesById[r.id] || {}).filter(([, v]) => v && v.p).sort((x, y) => stepNo(x[0]) - stepNo(y[0]));
+      if (!vs.length) { dailyRows.push(base); return; }
+      /* Mỗi bước ghi âm một dòng. Nhận xét chữ chỉ ở dòng của bản ghi chính (cột voice_path), các dòng còn lại dùng chung nhận xét đó. */
+      const lines = vs.map(([stepId, v]) => ({ ...base, key: 'd' + r.id + ':' + stepId, stepId, path: v.p, title: base.title + ' · ' + stepLabel(v.t, stepId) }));
+      if (r.voice_path && !vs.some(([, v]) => v.p === r.voice_path)) lines.unshift({ ...base, key: 'd' + r.id + ':main', title: base.title + ' · bản ghi chính', path: r.voice_path });
+      const main = lines.find(l => l.path === r.voice_path) || lines[0];
+      lines.forEach(l => { if (l !== main) { l.extra = true; Object.defineProperty(l, 'comment', { get: () => main.comment, set: v => { main.comment = v; }, enumerable: true }); } });
+      lines.forEach(l => dailyRows.push(l));
+    });
     /* Nhận xét AI đã có cho các bản ghi Daily (khớp theo đường dẫn file, không phụ thuộc khoảng ngày) */
-    const aiByPath = {}, paths = (a.data || []).map(r => r.voice_path).filter(Boolean);
+    const aiByPath = {}, paths = dailyRows.map(r => r.path).filter(Boolean);
     for (let i = 0; i < paths.length; i += 25) {
       const { data: aiRows } = await db.from('speaking_submissions').select('audio_url, overall_band, feedback_json').in('audio_url', paths.slice(i, i + 25));
       (aiRows || []).forEach(x => { if (x.feedback_json) aiByPath[x.audio_url] = x; });
     }
     const aiFrom = x => { if (!x) return null; const fb = x.feedback_json || {}; return { band: x.overall_band, pron: fb.azure ? fb.azure.pronunciation : null, summary: fb.summary }; };
     const rows = [];
-    (a.data || []).forEach(r => rows.push({ key: 'd' + r.id, src: 'daily', id: r.id, sid: r.student_id, practice_id: r.practice_id, student: r.students.full_name, cls, date: r.practice_date, title: titleOf(r.practice_id), path: r.voice_path, comment: r.teacher_comment || '', ai: aiFrom(aiByPath[r.voice_path]), score: r.score != null ? `${r.score}/${r.max_score}` : '' }));
+    dailyRows.forEach(r => { r.ai = aiFrom(aiByPath[r.path]); rows.push(r); });
     (b.data || []).forEach(r => {
       if (!r.audio_url) return;
       const fb = r.feedback_json || {}, ld = new Date(r.submitted_at), date = isoOf(ld);
@@ -1862,9 +1884,9 @@
             <div style="font-size:13px;color:var(--muted)">${esc(r.title)}</div><div style="font-size:11px;color:var(--muted);font-family:monospace">${esc(recName(r))}</div><div id="lv-${esc(r.key)}" style="margin-top:3px">${levelBadge(r)}</div>${ai}</div>
           <div id="au-${esc(r.key)}"><button class="btn-sm" onclick="playRec('${esc(r.key)}')">▶ Nghe</button></div>
         </div>
-        <div style="display:flex;gap:8px;margin-top:8px"><textarea id="cm-${esc(r.key)}" class="zl-text" rows="5" style="font-size:16px;min-height:120px" placeholder="Nhận xét của thầy hoặc trợ giảng (1 điểm khen, tối đa 2 lỗi, 1 việc luyện tiếp)">${esc(r.comment)}</textarea>
+        ${r.extra ? '<div style="font-size:12px;color:var(--muted);margin-top:6px">Nhận xét chữ của bài này nằm ở dòng bản ghi chính của cùng bài.</div>' : `<div style="display:flex;gap:8px;margin-top:8px"><textarea id="cm-${esc(r.key)}" class="zl-text" rows="5" style="font-size:16px;min-height:120px" placeholder="Nhận xét của thầy hoặc trợ giảng (1 điểm khen, tối đa 2 lỗi, 1 việc luyện tiếp)">${esc(r.comment)}</textarea>
           <button class="btn-sm" onclick="saveRecComment('${esc(r.key)}')" style="align-self:flex-start">Lưu</button></div>
-        <div id="cs-${esc(r.key)}" style="font-size:12px;color:var(--green);min-height:14px"></div></div>`;
+        <div id="cs-${esc(r.key)}" style="font-size:12px;color:var(--green);min-height:14px"></div>`}</div>`;
     });
     list.innerHTML = html;
   }
@@ -1949,7 +1971,7 @@ Nếu nghe lại vẫn im lặng, em kiểm tra quyền Micro của trình duy�
     /* Giống trang học sinh: chỉ so khớp với văn bản mẫu khi bước ghi âm là đọc theo mẫu; câu hỏi Speaking thì chấm như nói tự do */
     let target = '', title = 'Daily Practice voice note';
     const p = await sbPractice(r.practice_id).catch(() => null);
-    const st = p && (p.steps || []).find(x => x.kind === 'voice');
+    const st = p && ((r.stepId && (p.steps || []).find(x => x.id === r.stepId)) || (p.steps || []).find(x => x.kind === 'voice'));
     if (st) {
       title = st.title || title;
       const lines = st.lines || [], qs = lines.filter(l => /\?\s*$/.test(String(l).trim())).length;
@@ -2102,15 +2124,24 @@ Nếu nghe lại vẫn im lặng, em kiểm tra quyền Micro của trình duy�
           <div style="margin-top:4px;color:var(--muted)">Việc tiếp: ${esc(f.next_step || '')}</div></div>`;
       });
     } catch (e) {}
-    if (r.voice_path) h += `<div id="sbv-${r.id}" style="margin:8px 0"><button class="btn-sm" onclick="playSub('${r.id}')">▶ Nghe ghi âm</button></div>`;
+    subClips(r).forEach((c, i) => { h += `<div id="sbv-${r.id}-${i}" style="margin:8px 0"><button class="btn-sm" onclick="playSub('${r.id}', ${i})">▶ ${esc(c.label)}</button></div>`; });
     h += `<div style="display:flex;gap:8px;margin-top:8px"><textarea id="sbc-${r.id}" class="zl-text" rows="5" style="font-size:16px;min-height:120px" placeholder="Nhận xét (1 điểm khen, tối đa 2 lỗi, 1 việc luyện tiếp)">${esc(r.teacher_comment || '')}</textarea><button class="btn-sm" onclick="saveSubComment('${r.id}')" style="align-self:flex-start">Lưu</button></div><div id="sbs-${r.id}" style="font-size:12px;min-height:14px"></div></div>`;
     box.innerHTML = h;
   }
-  async function playSub(id) {
+  /* Các bản ghi của một bài nộp: bài nhiều bước ghi âm có answers._voices (mỗi bước một bản), còn lại chỉ có voice_path */
+  function subClips(r) {
+    const no = k => parseInt(String(k).replace(/\D/g, ''), 10) || 0;
+    const vs = Object.entries((r.answers || {})._voices || {}).filter(([, v]) => v && v.p).sort((x, y) => no(x[0]) - no(y[0]));
+    const clips = vs.map(([k, v]) => ({ path: v.p, label: 'Nghe ghi âm: ' + (v.t ? String(v.t).replace(/^Step\s*\d+\s*·\s*/i, '') : k) }));
+    if (r.voice_path && !clips.some(c => c.path === r.voice_path)) clips.unshift({ path: r.voice_path, label: 'Nghe ghi âm' + (clips.length ? ' (bản ghi chính)' : '') });
+    return clips;
+  }
+  async function playSub(id, i) {
     const r = SUB.rows.find(x => String(x.id) === String(id)); if (!r) return;
-    const { data, error } = await db.storage.from('voice-notes').createSignedUrl(r.voice_path, 3600);
+    const c = subClips(r)[i || 0]; if (!c) return;
+    const { data, error } = await db.storage.from('voice-notes').createSignedUrl(c.path, 3600);
     if (error) { alert('Không mở được bản ghi: ' + error.message); return; }
-    document.getElementById('sbv-' + id).innerHTML = `<audio controls autoplay src="${esc(data.signedUrl)}" style="max-width:320px"></audio>`;
+    document.getElementById('sbv-' + id + '-' + (i || 0)).innerHTML = `<audio controls autoplay src="${esc(data.signedUrl)}" style="max-width:320px"></audio>`;
   }
   async function saveSubComment(id) {
     const r = SUB.rows.find(x => String(x.id) === String(id)); if (!r) return;

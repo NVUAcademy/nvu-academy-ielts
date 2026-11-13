@@ -113,7 +113,7 @@ let P = null;               // current practice
 let answers = {};
 let existing = null;
 let totalSec = 0, totalTimer = null;
-let recorder = null, recChunks = [], recBlob = null, recStream = null, recSec = 0, recTimer = null;
+let recorder = null, recChunks = [], recBlobs = {}, recActive = null, recStream = null, recSec = 0, recTimer = null; /* recBlobs: mã bước ghi âm -> bản ghi */
 const REC_MAX_SEC = 300;   /* ghi âm tối đa 5 phút, đủ thì tự dừng */
 
 /* ---------- marking ---------- */
@@ -212,7 +212,7 @@ async function openPractice(meta) {
   }
   try { answers = JSON.parse(lsGet(draftKey()) || '{}'); } catch (e) { answers = {}; }
   await draftPull();
-  if (student && !isTeacher && (P.steps || []).some(s => s.kind === 'voice')) { const b = await RecStore.get(recKey()); if (b) recBlob = b; }
+  if (student && !isTeacher && voiceSteps().length) await loadRecordings();
   renderIntro();
   /* Từ trang chủ, "Ghi âm lại" mở thẳng phần ghi âm của bài đã nộp */
   if (existing && new URLSearchParams(location.search).get('redo') === '1') reviewSubmitted();
@@ -281,7 +281,7 @@ function challengeMissing() {
   chs.forEach(st => {
     if (st.kind === 'fill') st.items.forEach(it => { if (!it.fields.every((f, i) => (answers[it.id + '_' + i] || '').trim())) missing++; });
     else if (st.kind === 'open') (st.open || []).forEach(o => { if (!(answers[o.id] || '').trim()) missing++; });
-    else if (st.kind === 'voice') { if (!recBlob) missing++; }
+    else if (st.kind === 'voice') { if (!recBlobs[st.id]) missing++; }
   });
   return missing;
 }
@@ -293,7 +293,7 @@ function logChallenge(){
   chs.forEach(st => {
     if (st.kind === 'fill') st.items.forEach(it => { total++; if (it.fields.every((f, i) => (answers[it.id + '_' + i] || '').trim())) done++; });
     else if (st.kind === 'open') (st.open || []).forEach(o => { total++; if ((answers[o.id] || '').trim()) done++; });
-    else if (st.kind === 'voice') { total++; if (recBlob) done++; }
+    else if (st.kind === 'voice') { total++; if (recBlobs[st.id]) done++; }
   });
   if (!total) return;
   try { fetch('/api/vq-progress', { method: 'POST', keepalive: true, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ kind: 'activity', activity_kind: 'practice', student_id: student.id, seconds: 0, label: 'challenge|' + P.id + '|' + done + '|' + total }) }).catch(() => {}); } catch (e) {}
@@ -302,7 +302,7 @@ function logChallenge(){
 function redoPractice() {
   if (!existing || !student) return;
   const a = { ...(existing.answers || {}) };
-  delete a._attempts; delete a._v;
+  delete a._attempts; delete a._v; delete a._voices;
   answers = a; lsSet(draftKey(), JSON.stringify(answers));
   startPractice();
 }
@@ -388,7 +388,7 @@ function stepHtml(st) {
     body += st.context.map((c, i) => `<div class="ctx-q"><b>Q${i + 1}.</b> ${esc(c.q)}${c.options.map(o => `<div class="o">${esc(o)}</div>`).join('')}</div>`).join('');
     body += st.open.map(openBox).join('');
   } else if (st.kind === 'open') body += st.open.map(openBox).join('');
-  else if (st.kind === 'voice') body += `<div class="lines">${st.lines.map(esc).join('<br>')}</div>` + recorderHtml() + `<div class="sub" style="margin-top:10px;font-size:17px">${esc(st.note || '')}</div>`;
+  else if (st.kind === 'voice') body += `<div class="lines">${st.lines.map(esc).join('<br>')}</div>` + recorderHtml(st) + `<div class="sub" style="margin-top:10px;font-size:17px">${esc(st.note || '')}</div>`;
   return `<div class="card"><div class="step-head"><h2>${esc(st.title)}</h2><span class="mins">${st.minutes} phút</span></div>
     <div class="instr">${esc(p.instr)}</div>${(st.images || []).map(im => { const src = typeof im === 'string' ? im : im.src, alt = typeof im === 'string' ? 'Hình minh họa' : (im.alt || 'Hình minh họa'); return `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" style="display:block;max-width:100%;border-radius:12px;margin:12px 0">`; }).join('')}${p.text ? `<div class="passage">${esc(p.text)}</div>` : needsPassage(st) ? `<div class="passage missing">Bài đọc này đang thiếu đoạn văn. Em chụp màn hình báo thầy nhé, thầy sẽ sửa và không tính điểm phần này.</div>` : ''}${audioHtml(st.audio)}${body}</div>`;
 }
@@ -434,7 +434,10 @@ function toggleMulti(id, k, n) {
 /* Chờ tối đa ms mili giây; quá hạn thì báo lỗi rõ ràng thay vì treo */
 const withTimeout = (p, ms, msg) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error(msg)), ms))]);
 /* Lưu tạm bản ghi âm trong máy (IndexedDB) để tải lại trang không bị mất; xóa sau khi gửi thành công */
-const recKey = () => `${student ? student.id : 'teacher'}|${P.id}`;
+const voiceSteps = () => (P.steps || []).filter(s => s.kind === 'voice');
+const recKeyBase = () => `${student ? student.id : 'teacher'}|${P.id}`;
+/* Mỗi bước ghi âm có một bản ghi và một khóa lưu tạm riêng. Bài chỉ có 1 bước ghi âm giữ khóa cũ để không mất bản ghi đang lưu tạm. */
+const recKey = stepId => voiceSteps().length > 1 ? `${recKeyBase()}|${stepId}` : recKeyBase();
 const RecStore = {
   open() { return new Promise((res, rej) => { const r = indexedDB.open('nvu-rec', 1); r.onupgradeneeded = () => r.result.createObjectStore('rec'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); },
   async put(k, blob) { try { const d = await this.open(); await new Promise((res, rej) => { const t = d.transaction('rec', 'readwrite'); t.objectStore('rec').put(blob, k); t.oncomplete = res; t.onerror = () => rej(t.error); }); d.close(); } catch (e) {} },
@@ -442,65 +445,101 @@ const RecStore = {
   async del(k) { try { const d = await this.open(); await new Promise((res, rej) => { const t = d.transaction('rec', 'readwrite'); t.objectStore('rec').delete(k); t.oncomplete = res; t.onerror = () => rej(t.error); }); d.close(); } catch (e) {} }
 };
 /* Gửi bản ghi âm mới cho bài đã nộp (giữ nguyên điểm và nhận xét) */
+async function loadRecordings() {
+  const vs = voiceSteps();
+  for (const st of vs) { const b = await RecStore.get(recKey(st.id)); if (b) recBlobs[st.id] = b; }
+  /* Bản ghi lưu tạm từ trước khi bài tách bản ghi theo bước (khóa cũ không có mã bước) thuộc bước ghi âm cuối cùng */
+  if (vs.length > 1) {
+    const last = vs[vs.length - 1], old = await RecStore.get(recKeyBase());
+    if (old) { if (!recBlobs[last.id]) { recBlobs[last.id] = old; RecStore.put(recKey(last.id), old); } RecStore.del(recKeyBase()); }
+  }
+}
+/* Tải lên mọi bản ghi đang có, mỗi bước ghi âm một file. Trả về { main, mainStep, voices, errs, steps }:
+   main = bản ghi của bước ghi âm đứng cuối trong số vừa tải lên (lưu ở cột voice_path như trước đây);
+   voices = mọi bản ghi theo bước (chỉ khi bài có nhiều bước ghi âm, máy chủ lưu trong answers._voices);
+   steps = các bước đã tải lên được (xóa bản lưu tạm sau khi máy chủ xác nhận). */
+async function uploadRecordings() {
+  const vs = voiceSteps(), multi = vs.length > 1, out = { main: null, mainStep: null, voices: {}, errs: [], steps: [] };
+  for (const st of vs) {
+    const blob = recBlobs[st.id]; if (!blob) continue;
+    let upBlob = blob; try { upBlob = await blobToWav16k(blob); } catch (e) {}
+    const ext = upBlob.type === 'audio/wav' ? 'wav' : (/mp4/.test(upBlob.type) ? 'm4a' : 'webm');
+    const path = `daily/${student.id}/${P.id}-${multi ? st.id + '-' : ''}${Date.now()}.${ext}`;
+    let ue = null;
+    try { ({ error: ue } = await withTimeout(db.storage.from('voice-notes').upload(path, upBlob, { contentType: upBlob.type, upsert: false }), 360000, 'quá thời gian chờ, mạng đang chậm')); }
+    catch (e) { ue = e; }
+    if (ue) { out.errs.push((multi ? st.title + ': ' : '') + ue.message); continue; }
+    out.main = path; out.mainStep = st; out.steps.push(st);
+    if (multi) out.voices[st.id] = { p: path, t: st.title };
+  }
+  return out;
+}
+const commitUploaded = steps => steps.forEach(st => { delete recBlobs[st.id]; RecStore.del(recKey(st.id)); });
+/* Gửi bản ghi âm mới cho bài đã nộp (giữ nguyên điểm và nhận xét). Bài có nhiều bước ghi âm: gửi mọi bản ghi đang có, mỗi bước một file. */
 async function resendVoice() {
   const msg = document.getElementById('resendmsg');
-  if (!recBlob) { msg.textContent = 'Chưa có bản ghi âm mới. Bấm "● Ghi âm" trước.'; return; }
+  if (!Object.keys(recBlobs).length) { msg.textContent = 'Chưa có bản ghi âm mới. Bấm "● Ghi âm" trước.'; return; }
   msg.textContent = 'Đang gửi… đừng đóng hoặc tải lại trang.'; uploading = true;
   try {
-    let upBlob = recBlob; try { upBlob = await blobToWav16k(recBlob); } catch (e) {}
-    const ext = upBlob.type === 'audio/wav' ? 'wav' : (/mp4/.test(upBlob.type) ? 'm4a' : 'webm');
-    const voicePath = `daily/${student.id}/${P.id}-${Date.now()}.${ext}`;
-    const { error: ue } = await withTimeout(db.storage.from('voice-notes').upload(voicePath, upBlob, { contentType: upBlob.type, upsert: false }), 360000, 'quá thời gian chờ, mạng đang chậm. Em thử gửi lại');
-    if (ue) throw new Error(ue.message);
-    const r = await fetch('/api/submit-daily', { method: 'POST', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ voice_only: true, student_id: student.id, practice_id: P.id, practice_date: P.date, section: P.section, voice_path: voicePath }) });
+    const up = await uploadRecordings();
+    if (!up.steps.length) throw new Error(up.errs.join('; ') || 'không tải lên được');
+    const body = { voice_only: true, student_id: student.id, practice_id: P.id, practice_date: P.date, section: P.section, voice_path: up.main };
+    if (Object.keys(up.voices).length) body.voices = up.voices;
+    const r = await fetch('/api/submit-daily', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
     const j = await r.json(); if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
-    recBlob = null; RecStore.del(recKey()); if (existing) existing.voice_path = voicePath;
-    msg.textContent = '✓ Đã gửi bản ghi âm mới. Thầy sẽ nghe lại.';
+    commitUploaded(up.steps); if (existing) existing.voice_path = up.main;
+    msg.textContent = up.errs.length ? '✓ Đã gửi một phần. Còn bản ghi chưa gửi được: ' + up.errs.join('; ') + '. Em bấm gửi lại nhé.' : '✓ Đã gửi bản ghi âm mới. Thầy sẽ nghe lại.';
   } catch (e) { msg.textContent = 'Chưa gửi được: ' + e.message + '. Bản ghi vẫn còn trên máy, em bấm gửi lại nhé.'; }
   finally { uploading = false; }
 }
 
-function recorderHtml() {
-  /* Một bài có thể có nhiều bước ghi âm (nhiều ô), nhưng chỉ có MỘT bản ghi cho cả bài: mọi ô luôn hiện cùng trạng thái. */
-  const multi = (P.steps || []).filter(s => s.kind === 'voice').length > 1;
-  return `<div class="recbox"><button class="btn rec small recbtn" onclick="toggleRec()">${recBlob ? '● Ghi lại' : '● Ghi âm'}</button>
-    <div class="status recstatus">${recBlob ? 'Đã có bản ghi. Nghe lại bên dưới hoặc ghi lại.' : 'Chưa có bản ghi. Bấm "● Ghi âm" rồi nói theo hướng dẫn của bước này (tối đa 5 phút).'}</div>
-    <audio controls class="recplay" style="${recBlob ? '' : 'display:none'}" ${recBlob ? `src="${URL.createObjectURL(recBlob)}"` : ''}></audio>${multi ? '<div class="status" style="font-size:13px;margin-top:0">Cả bài chỉ lưu 1 bản ghi âm: bản ghi mới sẽ thay bản cũ, thầy chỉ nghe bản ghi cuối cùng.</div>' : ''}</div>`;
+const recBox = id => recAll('.recbox').find(b => b.dataset.step === id) || null;
+/* Mỗi bước ghi âm có một ô riêng với bản ghi riêng (data-step = mã bước) */
+function recorderHtml(st) {
+  const id = st.id, has = !!recBlobs[id], on = !!(recorder && recorder.state === 'recording'), mine = on && recActive === id;
+  return `<div class="recbox" data-step="${esc(id)}"><button class="btn rec small recbtn" onclick="toggleRec('${esc(id)}')" ${on && !mine ? 'disabled' : ''}>${mine ? '■ Dừng' : has ? '● Ghi lại' : '● Ghi âm'}</button>
+    <div class="status recstatus">${mine ? `<span class="dot"></span><span class="recsec">${fmt(recSec)}</span> / ${fmt(REC_MAX_SEC)}` : has ? 'Đã có bản ghi. Nghe lại bên dưới hoặc ghi lại.' : 'Chưa có bản ghi. Bấm "● Ghi âm" rồi nói theo hướng dẫn của bước này (tối đa 5 phút).'}</div>
+    <audio controls class="recplay" style="${has ? '' : 'display:none'}" ${has ? `src="${URL.createObjectURL(recBlobs[id])}"` : ''}></audio></div>`;
+}
+/* Tất cả ô ghi âm của bài (dùng khi ghi âm lại sau khi nộp), mỗi ô kèm tên bước nếu bài có nhiều bước ghi âm */
+function allRecordersHtml() {
+  const vs = voiceSteps();
+  return vs.map(st => (vs.length > 1 ? `<div class="sub" style="margin-top:10px"><b>${esc(st.title)}</b></div>` : '') + recorderHtml(st)).join('');
 }
 const recAll = sel => Array.from(document.querySelectorAll(sel));
-async function toggleRec() {
-  /* Cập nhật TẤT CẢ các ô ghi âm trong trang (bài có thể có nhiều bước ghi âm dùng chung một bản ghi) */
-  const setBtn = t => recAll('.recbtn').forEach(b => { b.textContent = t; });
-  const setStatus = h => recAll('.recstatus').forEach(e => { e.innerHTML = h; });
-  if (recorder && recorder.state === 'recording') { recorder.stop(); return; }
+async function toggleRec(stepId) {
+  const box = recBox(stepId); if (!box) return;
+  const ui = fn => { const b = recBox(stepId); if (b) fn(b.querySelector('.recbtn'), b.querySelector('.recstatus'), b.querySelector('.recplay')); };
+  if (recorder && recorder.state === 'recording') { if (recActive === stepId) recorder.stop(); return; } /* đang ghi ở ô khác thì bỏ qua */
   try {
     recStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  } catch (e) { setStatus(esc('Không dùng được micro: ' + e.message)); return; }
+  } catch (e) { ui((b, st) => { st.textContent = 'Không dùng được micro: ' + e.message; }); return; }
   const mime = window.MediaRecorder && MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : (MediaRecorder.isTypeSupported('audio/mp4') ? 'audio/mp4' : '');
-  recChunks = [];
+  recChunks = []; recActive = stepId;
   recorder = new MediaRecorder(recStream, mime ? { mimeType: mime } : undefined);
   recorder.ondataavailable = e => { if (e.data.size) recChunks.push(e.data); };
   recorder.onstop = () => {
     clearInterval(recTimer);
     recStream.getTracks().forEach(t => t.stop());
-    recBlob = new Blob(recChunks, { type: recorder.mimeType || mime || 'audio/webm' });
-    RecStore.put(recKey(), recBlob);
-    setBtn('● Ghi lại'); recAll('.recbtn').forEach(b => b.classList.add('rec'));
-    setStatus(recSec >= REC_MAX_SEC ? `Đã ghi ${fmt(recSec)} (đủ 5 phút nên tự dừng). Nghe lại bên dưới.` : `Đã ghi ${fmt(recSec)}. Nghe lại bên dưới.`);
-    recAll('.recplay').forEach(pl => { pl.src = URL.createObjectURL(recBlob); pl.style.display = ''; });
+    const blob = new Blob(recChunks, { type: recorder.mimeType || mime || 'audio/webm' });
+    recBlobs[stepId] = blob; recActive = null;
+    RecStore.put(recKey(stepId), blob);
+    recAll('.recbtn').forEach(b => { b.disabled = false; });
+    ui((b, st, pl) => {
+      b.textContent = '● Ghi lại'; b.classList.add('rec');
+      st.textContent = recSec >= REC_MAX_SEC ? `Đã ghi ${fmt(recSec)} (đủ 5 phút nên tự dừng). Nghe lại bên dưới.` : `Đã ghi ${fmt(recSec)}. Nghe lại bên dưới.`;
+      pl.src = URL.createObjectURL(blob); pl.style.display = '';
+    });
     /* Bản ghi im lặng (micro bị chặn hoặc tắt tiếng): bỏ bản ghi và yêu cầu ghi lại ngay, không để nộp file trống */
-    const mine = recBlob;
-    blobLevel(mine).then(lv => {
-      if (recBlob !== mine || !isSilentLevel(lv)) return;
-      recBlob = null; RecStore.del(recKey());
-      setStatus('⚠️ Không thu được tiếng trong bản ghi (gần như im lặng). Em cho phép trình duyệt dùng micro, đưa micro gần miệng hơn rồi bấm "● Ghi lại".');
-      recAll('.recplay').forEach(p2 => { p2.removeAttribute('src'); p2.style.display = 'none'; });
+    blobLevel(blob).then(lv => {
+      if (recBlobs[stepId] !== blob || !isSilentLevel(lv)) return;
+      delete recBlobs[stepId]; RecStore.del(recKey(stepId));
+      ui((b, st, pl) => { st.textContent = '⚠️ Không thu được tiếng trong bản ghi (gần như im lặng). Em cho phép trình duyệt dùng micro, đưa micro gần miệng hơn rồi bấm "● Ghi lại".'; pl.removeAttribute('src'); pl.style.display = 'none'; });
     });
   };
   recSec = 0; recorder.start();
-  setBtn('■ Dừng');
-  setStatus('<span class="dot"></span><span class="recsec">00:00</span> / ' + fmt(REC_MAX_SEC));
+  recAll('.recbtn').forEach(b => { if (b !== box.querySelector('.recbtn')) b.disabled = true; }); /* chỉ ghi một bước tại một thời điểm */
+  ui((b, st) => { b.textContent = '■ Dừng'; st.innerHTML = '<span class="dot"></span><span class="recsec">00:00</span> / ' + fmt(REC_MAX_SEC); });
   recTimer = setInterval(() => { recSec++; recAll('.recsec').forEach(e => { e.textContent = fmt(recSec); }); if (recSec >= REC_MAX_SEC && recorder.state === 'recording') recorder.stop(); }, 1000);
 }
 
@@ -513,8 +552,8 @@ async function submitPractice() {
   const blanks = items.filter(({ it, kind }) => kind === 'mcq' ? !MCQ.done(it, answers[it.id]) : it.fields.some((f, i) => !(answers[`${it.id}_${i}`] || '').trim())).length;
   if (blanks && !confirm(`Còn ${blanks} câu chưa điền. Vẫn nộp bài?`)) return;
   if (recorder && recorder.state === 'recording') { alert('Hãy bấm Dừng ghi âm trước khi nộp bài.'); return; }
-  const hasVoice = (P.steps || []).some(s => s.kind === 'voice');
-  if (hasVoice && !recBlob && !confirm('Bạn chưa ghi âm voice note. Vẫn nộp bài?')) return;
+  const vs = voiceSteps(), noVoice = vs.filter(s => !recBlobs[s.id]).length;
+  if (vs.length && noVoice && !confirm(vs.length > 1 ? `Bạn chưa ghi âm ${noVoice}/${vs.length} bước ghi âm. Vẫn nộp bài?` : 'Bạn chưa ghi âm voice note. Vẫn nộp bài?')) return;
   clearInterval(totalTimer); inProgress = false;
   const res = items.map(x => ({ ...x, ok: itemOk(x.it, x.kind) }));
   const score = res.filter(r => r.ok).length;
@@ -601,7 +640,7 @@ async function showSavedSpeakingAi() {
 /* AI nhận xét voice note ngay sau khi nộp bài */
 async function runAi() {
   const vp = window._lastVoice; if (!vp || !student) return;
-  const st = P.steps.find(s => s.kind === 'voice');
+  const st = window._lastVoiceStep || voiceSteps().slice(-1)[0];
   const target = voiceTarget(st);
   const anchor = document.querySelector('.card.arch'); if (!anchor) return;
   const box = document.createElement('div'); box.className = 'card';
@@ -617,24 +656,15 @@ async function runAi() {
   }
 }
 /* Bài đã nộp nhưng AI chưa chấm được (hoặc lỗi): chấm lại bản ghi đã lưu, không cần ghi âm lại */
-function regradeAi(btn) { if (!existing || !existing.voice_path || !student) return; if (btn) btn.disabled = true; window._lastVoice = existing.voice_path; runAi(); }
+function regradeAi(btn) { if (!existing || !existing.voice_path || !student) return; if (btn) btn.disabled = true; window._lastVoice = existing.voice_path; window._lastVoiceStep = voiceSteps().slice(-1)[0]; runAi(); }
 function retryAi(btn) { const card = btn.closest('.card'); if (card) card.remove(); runAi(); }
 
 async function save(res, score) {
   if (!student) return 'teacher';
   try {
-    let voicePath = null;
-    if (recBlob) {
-      uploading = true;
-      let upBlob = recBlob; try { upBlob = await blobToWav16k(recBlob); } catch (e) {}
-      const ext = upBlob.type === 'audio/wav' ? 'wav' : (/mp4/.test(upBlob.type) ? 'm4a' : 'webm');
-      voicePath = `daily/${student.id}/${P.id}-${Date.now()}.${ext}`;
-      let ue = null;
-      try { ({ error: ue } = await withTimeout(db.storage.from('voice-notes').upload(voicePath, upBlob, { contentType: upBlob.type, upsert: false }), 360000, 'quá thời gian chờ, mạng đang chậm')); }
-      catch (e) { ue = e; }
-      if (ue) { voicePath = null; var voiceErr = ue.message; } else { window._lastVoice = voicePath; RecStore.del(recKey()); }
-      uploading = false;
-    }
+    let up = { main: null, mainStep: null, voices: {}, errs: [], steps: [] };
+    if (Object.keys(recBlobs).length) { uploading = true; up = await uploadRecordings(); uploading = false; }
+    const voiceErr = up.errs.join('; ');
     const core = {
       student_id: student.id, practice_date: P.date, day_of_week: P.day, section: P.section,
       score, max_score: res.length, time_taken_seconds: totalSec
@@ -644,8 +674,12 @@ async function save(res, score) {
       error_content: givenText(r.it, r.kind), correct_answer: correctText(r.it, r.kind),
       context: `${r.step.title}: ${r.kind === 'mcq' ? r.it.q : r.it.label}`
     }));
-    const sr = await fetch('/api/submit-daily', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ ...core, practice_id: P.id, answers: ViolationGuard.clean(answers), voice_path: voicePath, errors }) });
+    const body = { ...core, practice_id: P.id, answers: ViolationGuard.clean(answers), voice_path: up.main, errors };
+    if (Object.keys(up.voices).length) body.voices = up.voices;
+    const sr = await fetch('/api/submit-daily', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
     const sj = await sr.json(); if (!sj.ok) throw new Error(sj.error || 'Lỗi không rõ');
+    commitUploaded(up.steps);
+    if (up.main) { window._lastVoice = up.main; window._lastVoiceStep = up.mainStep; }
     lsDel(draftKey()); draftDel();
     existing = { score, max_score: res.length, answers, time_taken_seconds: totalSec };
     return voiceErr ? 'ok-novoice:' + voiceErr : 'ok';
@@ -653,11 +687,11 @@ async function save(res, score) {
 }
 
 function renderResult(res, score, status) {
-  const msg = status === 'saving' ? `<div class="saved">${recBlob ? 'Đang gửi voice note và lưu bài… Đừng đóng hoặc tải lại trang (mạng chậm có thể mất tới vài phút, vui lòng chờ).' : 'Đang lưu…'}</div>`
+  const msg = status === 'saving' ? `<div class="saved">${Object.keys(recBlobs).length ? 'Đang gửi voice note và lưu bài… Đừng đóng hoặc tải lại trang (mạng chậm có thể mất tới vài phút, vui lòng chờ).' : 'Đang lưu…'}</div>`
     : status === 'ok' ? '<div class="saved ok">✓ Đã lưu điểm, lỗi sai và voice note. Thầy sẽ nghe và nhận xét.</div><button class="btn" style="margin:8px 0" onclick="redoPractice()">Làm lại bài</button>'
-    : status === 'review' ? `<div class="saved ok">Đây là bài em đã nộp trước đó.</div><button class="btn" style="margin:8px 0" onclick="redoPractice()">Làm lại bài</button>${student && existing && existing.voice_path ? ' <button class="btn" style="margin:8px 0" onclick="regradeAi(this)">Chấm bài nói bằng AI</button>' : ''}${existing && existing.teacher_comment ? `<div class="review" style="white-space:pre-line"><b>Nhận xét của thầy:</b> ${esc(existing.teacher_comment)}</div>` : ''}${P && P.steps && P.steps.some(s => s.kind === 'voice') ? `<div class="review"><b>Ghi âm lại theo nhận xét của thầy</b>${recorderHtml()}<button class="btn" style="margin-top:8px" onclick="resendVoice()">Gửi bản ghi âm mới cho thầy</button><div id="resendmsg" class="meta" style="margin-top:6px"></div></div>` : ''}`
+    : status === 'review' ? `<div class="saved ok">Đây là bài em đã nộp trước đó.</div><button class="btn" style="margin:8px 0" onclick="redoPractice()">Làm lại bài</button>${student && existing && existing.voice_path ? ' <button class="btn" style="margin:8px 0" onclick="regradeAi(this)">Chấm bài nói bằng AI</button>' : ''}${existing && existing.teacher_comment ? `<div class="review" style="white-space:pre-line"><b>Nhận xét của thầy:</b> ${esc(existing.teacher_comment)}</div>` : ''}${P && P.steps && P.steps.some(s => s.kind === 'voice') ? `<div class="review"><b>Ghi âm lại theo nhận xét của thầy</b>${allRecordersHtml()}<button class="btn" style="margin-top:8px" onclick="resendVoice()">Gửi bản ghi âm mới cho thầy</button><div id="resendmsg" class="meta" style="margin-top:6px"></div></div>` : ''}`
     : status === 'teacher' ? '<div class="saved">Chế độ giáo viên xem thử: không lưu.</div>'
-    : status.startsWith('ok-novoice') ? `<div class="saved err">Đã lưu điểm nhưng chưa gửi được voice note (${esc(status.slice(11))}). Bản ghi vẫn còn trên máy: em bấm nút bên dưới để gửi lại, hoặc gửi thầy qua Zalo.</div><div class="review"><b>Gửi lại voice note</b>${recorderHtml()}<button class="btn" style="margin-top:8px" onclick="resendVoice()">Gửi bản ghi âm cho thầy</button><div id="resendmsg" class="meta" style="margin-top:6px"></div></div>`
+    : status.startsWith('ok-novoice') ? `<div class="saved err">Đã lưu điểm nhưng chưa gửi được voice note (${esc(status.slice(11))}). Bản ghi vẫn còn trên máy: em bấm nút bên dưới để gửi lại, hoặc gửi thầy qua Zalo.</div><div class="review"><b>Gửi lại voice note</b>${allRecordersHtml()}<button class="btn" style="margin-top:8px" onclick="resendVoice()">Gửi bản ghi âm cho thầy</button><div id="resendmsg" class="meta" style="margin-top:6px"></div></div>`
     : `<div class="saved err">Không lưu được: ${esc(status.slice(4))}. Hãy chụp màn hình điểm gửi thầy.</div>`;
   const wrong = res.filter(r => !r.ok).map(r => `<div class="review"><b>${esc(r.step.title.split(' · ')[0])} · ${esc(r.kind === 'mcq' ? r.it.q : r.it.label)}</b><br>
     Bạn trả lời: <span class="bad">${esc(givenText(r.it, r.kind))}</span> · Đáp án: <span class="good">${esc(correctText(r.it, r.kind))}</span>

@@ -8,6 +8,7 @@ const SB_HEAD = () => {
   return k.startsWith('sb_') ? { apikey: k } : { apikey: k, Authorization: 'Bearer ' + k };
 };
 const sb = (path, opts) => fetch(SB_URL() + path, { ...opts, headers: { ...SB_HEAD(), ...(opts && opts.headers) } });
+const { cleanVoices, mergeVoices } = require('../lib/voices.js');
 const bad = (res, code, msg) => res.status(code).json({ ok: false, error: msg });
 const isInt = v => Number.isInteger(v) && v >= 0;
 const str = (v, max) => String(v == null ? '' : v).slice(0, max);
@@ -34,13 +35,27 @@ module.exports = async function handler(req, res) {
     const studentId = String(b.student_id || '');
     if (!/^[0-9a-f-]{36}$/i.test(studentId)) return bad(res, 400, 'student_id không hợp lệ');
 
-    /* Ghi âm lại: chỉ thay file voice của bài đã nộp, giữ nguyên điểm, lỗi và nhận xét */
+    /* Ghi âm lại: chỉ thay file voice của bài đã nộp, giữ nguyên điểm, lỗi và nhận xét.
+       voice_path: bản ghi chính (cột voice_path); voices: bản ghi theo từng bước ghi âm (bài có nhiều bước ghi âm, lưu trong answers._voices). Cần ít nhất một trong hai. */
     if (b.voice_only === true) {
       const pd = String(b.practice_date || ''), pid = str(b.practice_id, 80), sec = str(b.section, 40), vp = str(b.voice_path, 200);
       if (!dateOk(pd) || !pid || !sec) return bad(res, 400, 'Thiếu thông tin bài tập');
-      if (!vp || !vp.startsWith('daily/' + studentId + '/')) return bad(res, 403, 'voice_path không thuộc học sinh này');
-      const up = await sb(`/rest/v1/daily_scores?student_id=eq.${studentId}&practice_date=eq.${pd}&section=eq.${encodeURIComponent(sec)}&practice_id=eq.${encodeURIComponent(pid)}`, {
-        method: 'PATCH', headers: { 'content-type': 'application/json', Prefer: 'return=representation' }, body: JSON.stringify({ voice_path: vp })
+      const cv = cleanVoices(b.voices, studentId);
+      if (cv.error) return bad(res, 403, cv.error);
+      const hasVoices = Object.keys(cv.voices).length > 0;
+      if (!vp && !hasVoices) return bad(res, 400, 'Thiếu bản ghi âm');
+      if (vp && !vp.startsWith('daily/' + studentId + '/')) return bad(res, 403, 'voice_path không thuộc học sinh này');
+      const where = `student_id=eq.${studentId}&practice_date=eq.${pd}&section=eq.${encodeURIComponent(sec)}&practice_id=eq.${encodeURIComponent(pid)}`;
+      const patch = {};
+      if (vp) patch.voice_path = vp;
+      if (hasVoices) {
+        const cur = await (await sb(`/rest/v1/daily_scores?select=id,answers&${where}`)).json().catch(() => []);
+        if (!Array.isArray(cur) || !cur.length) return bad(res, 404, 'Chưa có bài nộp để ghi âm lại');
+        const a0 = cur[0].answers && typeof cur[0].answers === 'object' ? cur[0].answers : {};
+        patch.answers = { ...a0, _voices: mergeVoices(a0._voices, cv.voices) };
+      }
+      const up = await sb(`/rest/v1/daily_scores?${where}`, {
+        method: 'PATCH', headers: { 'content-type': 'application/json', Prefer: 'return=representation' }, body: JSON.stringify(patch)
       });
       const rows = await up.json().catch(() => []);
       if (!up.ok || !Array.isArray(rows) || !rows.length) return bad(res, 404, 'Chưa có bài nộp để ghi âm lại');
@@ -70,6 +85,9 @@ module.exports = async function handler(req, res) {
     }
     const answers = b.answers && typeof b.answers === 'object' && !Array.isArray(b.answers) ? b.answers : {};
     if (JSON.stringify(answers).length > 50000) return bad(res, 400, 'Bài làm quá dài');
+    const cv = cleanVoices(b.voices, studentId);
+    if (cv.error) return bad(res, 403, cv.error);
+    delete answers._voices; /* học sinh không tự ghi được trường này, chỉ nhận qua voices đã kiểm tra */
 
     /* Đã có bài này chưa: nếu có thì không ghi lỗi sai lần thứ hai */
     const existing = await (await sb(`/rest/v1/daily_scores?select=id,answers&student_id=eq.${studentId}&practice_date=eq.${practiceDate}&section=eq.${encodeURIComponent(section)}`)).json();
@@ -82,6 +100,9 @@ module.exports = async function handler(req, res) {
       score, max_score: maxScore, time_taken_seconds: isInt(b.time_taken_seconds) ? b.time_taken_seconds : null
     };
     answers._attempts = attempt;
+    /* Bản ghi theo bước: giữ các bản ghi cũ, bước nào có bản mới thì thay (làm lại không ghi âm thì giữ nguyên) */
+    const merged = mergeVoices(alreadySaved && existing[0].answers ? existing[0].answers._voices : null, cv.voices);
+    if (Object.keys(merged).length) answers._voices = merged;
     const row = { ...core, answers, practice_id: practiceId };
     if (voicePath) row.voice_path = voicePath; /* làm lại không có ghi âm mới thì giữ ghi âm cũ */
     let up = await sb('/rest/v1/daily_scores?on_conflict=student_id,practice_date,section', {
