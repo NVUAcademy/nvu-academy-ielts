@@ -122,35 +122,83 @@
       "id": "s2",
       "title": "Step 2 · Listening review: Unit 3",
       "minutes": 20,
-      "instructions": "Nghe lại track Unit 3 đã học trên lớp, rồi chọn đáp án. Không xem lại bảng ghi trên lớp. Nếu chưa có audio trên web, bước này được thầy gửi thêm.",
+      "instructions": "Listen to the recording twice. It has two parts: a job meeting (Part A) and a phone call about a course (Part B). Choose the correct answer. Do not look at your notes.",
       "kind": "mcq",
       "items": [
         {
           "id": "s2_1",
-          "q": "1. What does the speaker do for work?",
+          "q": "Part A. Anna has got a job as a ...",
           "options": {
-            "A": "a nurse",
-            "B": "a teacher",
-            "C": "an engineer",
-            "D": "a cook"
+            "A": "sales manager",
+            "B": "store assistant",
+            "C": "computer teacher",
+            "D": "receptionist"
           },
           "answer": "B",
-          "explain": "Xem lại track trên lớp: the speaker teaches English."
+          "explain": "Manager: \"delighted that you'll be joining us as a store assistant\"."
         },
         {
           "id": "s2_2",
-          "q": "2. How does the speaker feel about the job?",
+          "q": "Part A. Which section of the store will Anna work in?",
           "options": {
-            "A": "bored",
-            "B": "satisfied",
-            "C": "worried",
-            "D": "tired"
+            "A": "radios and audio",
+            "B": "food and drink",
+            "C": "computing and phones",
+            "D": "clothes"
+          },
+          "answer": "C",
+          "explain": "\"we've decided to put you in the computing and phones section\"."
+        },
+        {
+          "id": "s2_3",
+          "q": "Part A. What is the new name of this area?",
+          "options": {
+            "A": "Sound Station",
+            "B": "Moving Images",
+            "C": "Smart Watches",
+            "D": "Computer World"
           },
           "answer": "B",
-          "explain": "Chú ý từ satisfaction trong bài nghe."
+          "explain": "\"From next week it's going to be known as 'Moving Images'\". Sound Station là tên cũ của khu radio."
+        },
+        {
+          "id": "s2_4",
+          "q": "Part B. What time does the Food Photography course start?",
+          "options": {
+            "A": "9.00",
+            "B": "9.30",
+            "C": "10.30",
+            "D": "4.30"
+          },
+          "answer": "B",
+          "explain": "\"It begins at half past nine and it goes on until four thirty\"."
+        },
+        {
+          "id": "s2_5",
+          "q": "Part B. How long is the course?",
+          "options": {
+            "A": "two hours",
+            "B": "five hours",
+            "C": "seven hours",
+            "D": "twelve hours"
+          },
+          "answer": "C",
+          "explain": "\"it's seven hours long\". Chú ý: số 12 trong bài nói về số người học ở phần trước, không phải thời gian."
+        },
+        {
+          "id": "s2_6",
+          "q": "Part B. What is NOT covered in the course?",
+          "options": {
+            "A": "camera angles",
+            "B": "taking photos of food",
+            "C": "editing pictures on a computer",
+            "D": "practising in a hotel"
+          },
+          "answer": "C",
+          "explain": "Receptionist: \"No, I'm afraid not\" khi học sinh hỏi về chỉnh sửa ảnh trên máy tính."
         }
       ],
-      "passage": "Thầy sẽ gửi audio track Unit 3 cho bước này. Các câu hỏi dựa trên nội dung đã học trên lớp."
+      "audio": "u3"
     },
     {
       "id": "s3",
@@ -174,5 +222,11 @@
       ],
       "note": "Thầy nghe cách em dùng từ mới và âm cuối."
     }
-  ]
+  ],
+  "audio": {
+    "u3": {
+      "label": "Mindset L1 · Unit 3 · Listening (Track 26, rồi Track 28)",
+      "src": "audio/mindset-l1-unit3-listening.mp3"
+    }
+  }
 }
