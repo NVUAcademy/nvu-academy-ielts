@@ -145,7 +145,8 @@ function renderCard() {
     input = `<input type="text" id="ans" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Gõ đáp án của em" onkeydown="if(event.key==='Enter')answer(this.value)"><div style="margin-top:12px"><button class="btn" onclick="answer(document.getElementById('ans').value)">Kiểm tra</button></div>`;
   }
   v.innerHTML = `<div class="card"><div class="prog"><i style="width:${Math.round(rv.i / rv.items.length * 100)}%"></i></div>
-    <div class="rv-tag">${esc(TYPE[e.error_type] || e.error_type)} · câu ${rv.i + 1}/${rv.items.length}</div><div class="rv-q">${esc(e.context || e.correct_answer)}</div>${input}<div id="fb"></div></div>`;
+    <div class="rv-tag">${esc(TYPE[e.error_type] || e.error_type)} · câu ${rv.i + 1}/${rv.items.length}</div><div class="rv-q">${esc(e.context || e.correct_answer)}</div><div id="aud"></div>${input}<div id="fb"></div></div>`;
+  showAudio(e, document.getElementById('aud'));
   const a = document.getElementById('ans'); if (a) a.focus();
 }
 async function answer(val) {
@@ -161,6 +162,42 @@ async function answer(val) {
   if (isSound(e)) setupVoice(e);
 }
 function next() { rv.i++; rv.answered = false; renderCard(); }
+
+/* ---------- Nghe lại audio của câu Listening ----------
+   Câu sai lưu ngày làm bài (practice_date) và context bắt đầu bằng tên bước ("Step 3 · Listening B: describing a street: 5. ...").
+   Từ đó tìm lại bài Daily của lớp trong ngày đó, lấy audio của bước ấy (file mp3, hoặc transcript để web tạo giọng như trong bài). */
+const AUD = { idx: null, pr: {}, lines: {} };
+async function audioFor(e) {
+  if (e.error_type !== 'listening' || !e.context || !e.practice_date) return null;
+  try {
+    if (!AUD.idx) AUD.idx = (await (await fetch('daily-index.json', { cache: 'no-cache' })).json()).practices || [];
+    for (const c of AUD.idx.filter(p => p.date === e.practice_date && (p.class_codes || []).includes(student.classCode))) {
+      if (!AUD.pr[c.id]) AUD.pr[c.id] = await (await fetch(c.file, { cache: 'no-cache' })).json();
+      const P = AUD.pr[c.id], st = (P.steps || []).find(s => s.audio && String(e.context).startsWith(s.title + ':'));
+      if (st && P.audio && P.audio[st.audio]) return { key: c.id + ':' + st.audio, a: P.audio[st.audio] };
+    }
+  } catch (err) {}
+  return null;
+}
+function audioBox(r) {
+  const a = r.a, lab = `<div class="meta" style="margin:0 0 6px">🎧 ${esc(a.label || 'Audio')}</div>`;
+  if (a.lines) { AUD.lines[r.key] = a.lines; return `<div style="margin:10px 0">${lab}<button class="btn" style="padding:8px 20px;font-size:14px" onclick="audPlay('${esc(r.key)}', this)">▶ Nghe lại</button><audio controls style="display:none;width:100%;margin-top:8px"></audio><div class="meta aud-msg"></div></div>`; }
+  return `<div style="margin:10px 0">${lab}<audio controls preload="metadata" style="width:100%" src="${esc(a.src)}"></audio></div>`;
+}
+async function audPlay(key, btn) {
+  const box = btn.parentElement, au = box.querySelector('audio'), msg = box.querySelector('.aud-msg');
+  btn.disabled = true; msg.textContent = 'Đang tạo audio, lần đầu có thể mất vài chục giây…';
+  try {
+    const r = await fetch('/api/listening-audio', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ student_id: student.id, lines: AUD.lines[key] }) });
+    const j = await r.json(); if (!j.ok) throw new Error(j.error || 'Lỗi không rõ');
+    au.src = j.url; au.style.display = 'block'; msg.textContent = ''; btn.style.display = 'none'; au.play().catch(() => {});
+  } catch (err) { msg.textContent = 'Chưa tạo được audio: ' + err.message; btn.disabled = false; }
+}
+async function showAudio(e, target) {
+  if (!target) return;
+  const r = await audioFor(e);
+  if (r && target.isConnected) target.innerHTML = audioBox(r);
+}
 
 /* ---------- Bài luyện tập tạo từ các lỗi đã sai: làm cả bài, nộp rồi chấm ngay ---------- */
 const PRACTICE_N = 15;
@@ -181,9 +218,10 @@ function renderPractice() {
     const input = isMcq(e)
       ? `<select id="pa${i}" style="width:100%;padding:12px;border-radius:14px;border:1px solid var(--line);background:var(--soft);color:var(--ink);font:inherit;font-size:16px"><option value="">— chọn —</option>${[e.correct_answer, e.error_content].filter((x, k, a) => x && a.indexOf(x) === k).sort(() => Math.random() - 0.5).map(o => `<option value="${esc(o)}">${esc(o)}</option>`).join('')}</select>`
       : `<input type="text" id="pa${i}" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Gõ đáp án">`;
-    return `<div class="err"><div class="q">${esc(TYPE[e.error_type] || e.error_type)} · câu ${i + 1}/${pr.items.length}</div><div class="rv-q" style="font-size:18px;margin:6px 0 10px">${esc(e.context || e.correct_answer)}</div>${input}</div>`;
+    return `<div class="err"><div class="q">${esc(TYPE[e.error_type] || e.error_type)} · câu ${i + 1}/${pr.items.length}</div><div class="rv-q" style="font-size:18px;margin:6px 0 10px">${esc(e.context || e.correct_answer)}</div><div id="pau${i}"></div>${input}</div>`;
   }).join('');
   document.getElementById('view').innerHTML = `<div class="card"><div class="rv-tag">Bài luyện từ các lỗi đã sai</div><div class="meta" style="margin:6px 0 10px">${pr.items.length} câu. Làm xong bấm nộp để chấm.</div>${rows}<div style="margin-top:14px"><button class="btn" onclick="submitPractice()">Nộp và chấm</button></div></div>`;
+  pr.items.forEach((e, i) => showAudio(e, document.getElementById('pau' + i)));
 }
 async function submitPractice() {
   let right = 0;

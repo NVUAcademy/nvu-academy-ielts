@@ -52,6 +52,14 @@ body::before { content: ''; position: fixed; inset: 0; pointer-events: none;
 .mins { font-size: 13px; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
 .instr { font-size: 16px; line-height: 1.65; color: #5a4a38; margin: 10px 0 14px; }
 .passage { font-size: 17px; line-height: 1.75; color: #2f2638; background: #fffaf0; border: 1px solid rgba(176,141,87,.45); border-left: 4px solid #b08d57; border-radius: 12px; padding: 14px 16px; margin: 0 0 16px; white-space: pre-line; }
+.card.split .rt { min-width: 0; }
+@media (min-width: 1000px) {
+  .wrap:has(.card.split) { max-width: 1240px; }
+  .card.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 24px; align-items: start; grid-auto-flow: row dense; }
+  .card.split > .step-head, .card.split > .instr, .card.split > img { grid-column: 1 / -1; }
+  .card.split > .passage { grid-column: 1; position: sticky; top: 72px; max-height: calc(100vh - 96px); overflow-y: auto; margin: 0; }
+  .card.split > .rt { grid-column: 2; }
+}
 .passage.missing { color: #b05468; background: #fdf0f2; border-left-color: #b05468; font-size: 15px; }
 .audio-box { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; }
 .audio-box .lab { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 6px; }
@@ -389,8 +397,9 @@ function stepHtml(st) {
     body += st.open.map(openBox).join('');
   } else if (st.kind === 'open') body += st.open.map(openBox).join('');
   else if (st.kind === 'voice') body += `<div class="lines">${st.lines.map(esc).join('<br>')}</div>` + recorderHtml(st) + `<div class="sub" style="margin-top:10px;font-size:17px">${esc(st.note || '')}</div>`;
-  return `<div class="card"><div class="step-head"><h2>${esc(st.title)}</h2><span class="mins">${st.minutes} phút</span></div>
-    <div class="instr">${esc(p.instr)}</div>${(st.images || []).map(im => { const src = typeof im === 'string' ? im : im.src, alt = typeof im === 'string' ? 'Hình minh họa' : (im.alt || 'Hình minh họa'); return `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" style="display:block;max-width:100%;border-radius:12px;margin:12px 0">`; }).join('')}${p.text ? `<div class="passage">${esc(p.text)}</div>` : needsPassage(st) ? `<div class="passage missing">Bài đọc này đang thiếu đoạn văn. Em chụp màn hình báo thầy nhé, thầy sẽ sửa và không tính điểm phần này.</div>` : ''}${audioHtml(st.audio)}${body}</div>`;
+  const split = !!p.text && !st.passage_source;
+  return `<div class="card${split ? ' split' : ''}"><div class="step-head"><h2>${esc(st.title)}</h2><span class="mins">${st.minutes} phút</span></div>
+    <div class="instr">${esc(p.instr)}</div>${(st.images || []).map(im => { const src = typeof im === 'string' ? im : im.src, alt = typeof im === 'string' ? 'Hình minh họa' : (im.alt || 'Hình minh họa'); return `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" style="display:block;max-width:100%;border-radius:12px;margin:12px 0">`; }).join('')}${p.text ? `<div class="passage">${esc(p.text)}</div>` : needsPassage(st) ? `<div class="passage missing">Bài đọc này đang thiếu đoạn văn. Em chụp màn hình báo thầy nhé, thầy sẽ sửa và không tính điểm phần này.</div>` : ''}${split ? '<div class="rt">' : ''}${audioHtml(st.audio)}${body}${split ? '</div>' : ''}</div>`;
 }
 
 function fillRow(it) {
