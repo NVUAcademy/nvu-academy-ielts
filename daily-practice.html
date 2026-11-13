@@ -334,17 +334,24 @@ function filledCount() {
 
 function renderPractice() {
   const keep = window.scrollY;
+  /* Giữ nguyên các khung audio đang có: chọn đáp án vẽ lại cả trang, nếu không giữ thì audio đang nghe bị cắt */
+  const keptAudio = {};
+  document.querySelectorAll('#app .audio-box').forEach(el => { const k = el.dataset.akey; if (k) { const frag = document.createDocumentFragment(); frag.appendChild(el); keptAudio[k] = el; } });
   $('app').innerHTML = head() + `<div class="bar"><div class="bar-inner">
       <div class="timer"><small>Đã làm</small><span id="tt">${fmt(totalSec)}</span> <span class="prog">/ ${P.minutes} phút gợi ý</span></div>
       <div class="prog" id="prog">${filledCount()}</div></div></div>` +
     P.steps.map(stepHtml).join('') +
     `<div class="submit-row"><button class="btn" onclick="submitPractice()">Nộp bài</button></div>`;
+  document.querySelectorAll('#app .audio-box').forEach(el => { const old = keptAudio[el.dataset.akey]; if (old && el.dataset.akey) { el.replaceWith(old); delete keptAudio[el.dataset.akey]; } });
   window.scrollTo(0, keep);
 }
 
 function audioHtml(key) {
   if (!key) return '';
   const a = P.audio[key];
+  return audioHtml0(key, a).replace('<div class="audio-box">', '<div class="audio-box" data-akey="' + esc(key) + '">');
+}
+function audioHtml0(key, a) {
   /* Bài có transcript (lines) thì tạo audio bằng ElevenLabs khi học sinh bấm nghe; file đã tạo được lưu lại */
   if (a.lines) return `<div class="audio-box"><div class="lab">🎧 ${esc(a.label)}</div><button class="btn small" onclick="loadTts('${esc(key)}', this)">▶ Nghe</button><audio controls preload="none" style="display:none;width:100%;margin-top:8px"></audio><div class="meta" style="font-size:13px"></div></div>`;
   return `<div class="audio-box"><div class="lab">🎧 ${esc(a.label)}</div><audio controls preload="metadata" src="${esc(a.src)}" onerror="audioMissing(this)"></audio></div>`;
