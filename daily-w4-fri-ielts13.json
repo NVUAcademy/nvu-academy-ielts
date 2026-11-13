@@ -204,12 +204,13 @@
       "id": "s3",
       "title": "Step 3 · Speaking Part 1: shadowing",
       "minutes": 15,
-      "instructions": "Nghe câu mẫu, rồi nói theo (shadowing) 4 lần. Chú ý âm cuối và nối âm.",
+      "instructions": "First listen to the Part 1 sample (Track 29): notice how the student answers about work and study. Then listen to the model sentence below and shadow it 4 times. Focus on final sounds and linking.",
       "kind": "voice",
       "lines": [
         "I work as a teacher, and I really enjoy it. The workload is heavy, but the job is rewarding."
       ],
-      "note": "Thầy nghe nhịp và âm cuối của enjoy, heavy, rewarding."
+      "note": "Thầy nghe nhịp và âm cuối của enjoy, heavy, rewarding.",
+      "audio": "u3sp"
     },
     {
       "id": "s4",
@@ -227,6 +228,10 @@
     "u3": {
       "label": "Mindset L1 · Unit 3 · Listening (Track 26, rồi Track 28)",
       "src": "audio/mindset-l1-unit3-listening.mp3"
+    },
+    "u3sp": {
+      "label": "Mindset L1 · Unit 3 · Speaking Part 1 mẫu (Track 29)",
+      "src": "audio/mindset-l1-unit3-speaking-p1.mp3"
     }
   }
 }
