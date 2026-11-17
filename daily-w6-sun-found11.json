@@ -1,0 +1,249 @@
+{
+  "id": "w6-sun-found11",
+  "title": "Weekly Test Week 6 /20",
+  "subtitle": "Weekly test on B8 + B9 (20 minutes, no notes)",
+  "theme": "Week 6 · Weekly test",
+  "source": "Foundation 11 lesson plan, week 6 (B8 Putting it all together, B9 Hobbies and free time), 2026-11-22",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 6,
+  "day": "sunday",
+  "date": "2026-11-22",
+  "section": "test",
+  "minutes": 20,
+  "intro": "Weekly test /20, about 20 minutes. No notes, no dictionary. Press Submit when you finish. Deadline: 23:00.",
+  "audio": {},
+  "send_today": "Test on the website. Press Submit when you finish.",
+  "error_type": "vocabulary",
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Part A · Student life /5",
+      "minutes": 5,
+      "instructions": "Fill in each gap. Word bank (one word is not used): hall of residence · scholarship · campus · tuition fee · freshman · group project",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. Mai is a ____. She started university in September.",
+          "fields": [
+            {
+              "answer": "freshman"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. We pay the ____ every year. It is not cheap.",
+          "fields": [
+            {
+              "answer": "tuition fee"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. He has a ____, so his university is free.",
+          "fields": [
+            {
+              "answer": "scholarship"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. My friends and I live in a ____ next to the library.",
+          "fields": [
+            {
+              "answer": "hall of residence"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. Our teacher gives us a ____. We work in teams of four.",
+          "fields": [
+            {
+              "answer": "group project"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Part B · Free time /5",
+      "minutes": 4,
+      "instructions": "Choose A, B or C.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "1. Football is a ____. You play it with ten other people.",
+          "options": {
+            "A": "pastime",
+            "B": "team sport",
+            "C": "kill time"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s2_2",
+          "q": "2. After a long day, I listen to music to ____.",
+          "options": {
+            "A": "unwind",
+            "B": "go hiking",
+            "C": "binge-watch"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s2_3",
+          "q": "3. I'm really ____ K-pop. I listen to it every day.",
+          "options": {
+            "A": "outdoor",
+            "B": "into",
+            "C": "pastime"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s2_4",
+          "q": "4. I waited for the bus and played games to ____.",
+          "options": {
+            "A": "binge-watch",
+            "B": "unwind",
+            "C": "kill time"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s2_5",
+          "q": "5. Camping is an ____ activity.",
+          "options": {
+            "A": "outdoor",
+            "B": "team sport",
+            "C": "pastime"
+          },
+          "answer": "A"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Part C · Sounds /k/ and /g/ /4",
+      "minutes": 4,
+      "instructions": "Say each word aloud. Choose the correct word.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s3_1",
+          "q": "1. Which word starts with /g/?",
+          "options": {
+            "A": "gym",
+            "B": "cook",
+            "C": "golf"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s3_2",
+          "q": "2. Which word starts with /k/?",
+          "options": {
+            "A": "club",
+            "B": "game",
+            "C": "guitar"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s3_3",
+          "q": "3. Which word ends with /g/?",
+          "options": {
+            "A": "back",
+            "B": "bag",
+            "C": "pick"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s3_4",
+          "q": "4. Which word has a /k/ sound?",
+          "options": {
+            "A": "guitar",
+            "B": "go",
+            "C": "hockey"
+          },
+          "answer": "C"
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Part D · Grammar /6",
+      "minutes": 7,
+      "instructions": "Write the correct answer. In 3, write the correct sentence.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s4_1",
+          "label": "1. ____ your brother play a team sport? (Do / Does)",
+          "fields": [
+            {
+              "answer": "Does"
+            }
+          ]
+        },
+        {
+          "id": "s4_2",
+          "label": "2. What ____ you do in your free time? (does / do)",
+          "fields": [
+            {
+              "answer": "do"
+            }
+          ]
+        },
+        {
+          "id": "s4_3",
+          "label": "3. Fix the mistake: Does she likes cooking?",
+          "fields": [
+            {
+              "answer": "Does she like cooking?",
+              "accept": [
+                "Does she like cooking"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s4_4",
+          "label": "4. I enjoy ____ (swim) in the summer.",
+          "fields": [
+            {
+              "answer": "swimming"
+            }
+          ]
+        },
+        {
+          "id": "s4_5",
+          "label": "5. She hates ____ (get) up early.",
+          "fields": [
+            {
+              "answer": "getting"
+            }
+          ]
+        },
+        {
+          "id": "s4_6",
+          "label": "6. We don't mind ____ (wait) for the bus.",
+          "fields": [
+            {
+              "answer": "waiting"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

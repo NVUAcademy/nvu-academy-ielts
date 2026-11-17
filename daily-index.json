@@ -690,6 +690,71 @@
       ]
     },
     {
+      "id": "w6-mon-found11",
+      "file": "daily-w6-mon-found11.json",
+      "title": "Monday Daily Practice",
+      "subtitle": "Class day B8: guess the 8 student life words, say them aloud",
+      "day": "monday",
+      "date": "2026-11-16",
+      "week_number": 6,
+      "section": "vocabulary",
+      "class_codes": [
+        "FOUNDATION11"
+      ]
+    },
+    {
+      "id": "w6-tue-found11",
+      "file": "daily-w6-tue-found11.json",
+      "title": "Tuesday Daily Practice",
+      "subtitle": "Review B8: match, fill in, fix the mistake, 5 new words",
+      "day": "tuesday",
+      "date": "2026-11-17",
+      "week_number": 6,
+      "section": "vocabulary",
+      "class_codes": [
+        "FOUNDATION11"
+      ]
+    },
+    {
+      "id": "w6-wed-found11",
+      "file": "daily-w6-wed-found11.json",
+      "title": "Wednesday Daily Practice",
+      "subtitle": "Mixed practice B8: choose the word, -s endings, quick grammar, 5 new words",
+      "day": "wednesday",
+      "date": "2026-11-18",
+      "week_number": 6,
+      "section": "grammar",
+      "class_codes": [
+        "FOUNDATION11"
+      ]
+    },
+    {
+      "id": "w6-thu-found11",
+      "file": "daily-w6-thu-found11.json",
+      "title": "Thursday Daily Practice",
+      "subtitle": "Speaking B8: write the word, Is / Are / Do / Does, Speaking Part 1",
+      "day": "thursday",
+      "date": "2026-11-19",
+      "week_number": 6,
+      "section": "speaking",
+      "class_codes": [
+        "FOUNDATION11"
+      ]
+    },
+    {
+      "id": "w6-sun-found11",
+      "file": "daily-w6-sun-found11.json",
+      "title": "Weekly Test Week 6 /20",
+      "subtitle": "Weekly test on B8 + B9 (20 minutes, no notes)",
+      "day": "sunday",
+      "date": "2026-11-22",
+      "week_number": 6,
+      "section": "test",
+      "class_codes": [
+        "FOUNDATION11"
+      ]
+    },
+    {
       "id": "w5-mon-ielts14",
       "file": "daily-w5-mon-ielts14.json",
       "title": "Monday Daily Practice",
