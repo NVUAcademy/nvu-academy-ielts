@@ -1,0 +1,400 @@
+{
+ "id": "w5-tue-ielts13",
+ "title": "Tuesday Daily Practice",
+ "subtitle": "Vocab Quest review (P3 words) and Listening: numbers, spelling and a short form",
+ "theme": "Bù tuần 16–22/11 · Listening Section 1 (chuẩn bị P4)",
+ "source": "Daily Practice bù 17/11, soạn mới cho IELTS13; từ ôn lấy từ P3.",
+ "class_codes": [
+  "IELTS13"
+ ],
+ "week_number": 5,
+ "day": "tuesday",
+ "date": "2026-11-17",
+ "section": "listening",
+ "minutes": 16,
+ "intro": "Làm lần lượt các bước, khoảng 16 phút. Hôm nay: Vocab Quest ôn từ của P3 và một kỹ năng: Listening (số, ngày, đánh vần). Hạn nộp 23:59 ngày 17/11 (bài bù, vẫn tính chuỗi ngày và Tiền Meow): đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+ "audio": {
+  "a": {
+   "label": "Audio A · Dictation (8 sentences, each twice; pause the audio to write)",
+   "lines": [
+    {
+     "speaker": "A",
+     "text": "The library opens at eight fifteen."
+    },
+    {
+     "speaker": "A",
+     "text": "The library opens at eight fifteen."
+    },
+    {
+     "speaker": "B",
+     "text": "There are sixteen students in my study group."
+    },
+    {
+     "speaker": "B",
+     "text": "There are sixteen students in my study group."
+    },
+    {
+     "speaker": "A",
+     "text": "The dictionary costs seventy pounds."
+    },
+    {
+     "speaker": "A",
+     "text": "The dictionary costs seventy pounds."
+    },
+    {
+     "speaker": "B",
+     "text": "My student number is four nine double seven two."
+    },
+    {
+     "speaker": "B",
+     "text": "My student number is four nine double seven two."
+    },
+    {
+     "speaker": "A",
+     "text": "The exam is on the twenty-first of May."
+    },
+    {
+     "speaker": "A",
+     "text": "The exam is on the twenty-first of May."
+    },
+    {
+     "speaker": "B",
+     "text": "My teacher's surname is Dawson. D-A-W-S-O-N."
+    },
+    {
+     "speaker": "B",
+     "text": "My teacher's surname is Dawson. D-A-W-S-O-N."
+    },
+    {
+     "speaker": "A",
+     "text": "The group meets on Thursday. Sorry, no, on Friday."
+    },
+    {
+     "speaker": "A",
+     "text": "The group meets on Thursday. Sorry, no, on Friday."
+    },
+    {
+     "speaker": "B",
+     "text": "Room eighteen is on the second floor."
+    },
+    {
+     "speaker": "B",
+     "text": "Room eighteen is on the second floor."
+    }
+   ]
+  },
+  "b": {
+   "label": "Audio B · Hillside Sports Centre (play once)",
+   "lines": [
+    {
+     "speaker": "A",
+     "text": "Good afternoon, Hillside Sports Centre. How can I help?"
+    },
+    {
+     "speaker": "B",
+     "text": "Hi. I'd like to join the swimming class for adults, please."
+    },
+    {
+     "speaker": "A",
+     "text": "Of course. What's your name?"
+    },
+    {
+     "speaker": "B",
+     "text": "Laura Finch. That's F-I-N-C-H."
+    },
+    {
+     "speaker": "A",
+     "text": "Thank you. The class is on Monday evenings… actually, it moved to Wednesday this month."
+    },
+    {
+     "speaker": "B",
+     "text": "What time does it start?"
+    },
+    {
+     "speaker": "A",
+     "text": "It starts at seven fifteen and finishes at eight o'clock."
+    },
+    {
+     "speaker": "B",
+     "text": "And how much is it?"
+    },
+    {
+     "speaker": "A",
+     "text": "It is sixty pounds for the whole term, but students pay only forty."
+    },
+    {
+     "speaker": "B",
+     "text": "Great, I'm a student. Do I need to bring anything?"
+    },
+    {
+     "speaker": "A",
+     "text": "Yes, please bring a swimming cap. You can buy one here for five pounds."
+    }
+   ]
+  }
+ },
+ "send_today": "Hoàn thành các bước trên web. Voice note ở Step 4 được gửi khi bấm Nộp bài.",
+ "error_type": "listening",
+ "steps": [
+  {
+   "id": "s1",
+   "title": "Step 1 · Vocab Quest: fill the gaps (3 min)",
+   "minutes": 3,
+   "kind": "fill",
+   "instructions": "Review words from P3 (10): major in = học chuyên ngành · pursue = theo đuổi · internship = đợt thực tập · hands-on = thực hành, làm trực tiếp · deadline = hạn chót · acquire = tiếp thu, đạt được (kỹ năng) · flexible = linh hoạt · passionate about = đam mê · fulfilling = mang lại cảm giác ý nghĩa, thỏa mãn · overwhelmed = quá tải, choáng ngợp. Fill the gaps with the words in the box. Box: acquire · overwhelmed · deadline · pursue · hands-on · flexible · internship · fulfilling",
+   "items": [
+    {
+     "id": "s1_1",
+     "label": "1. My dream is to ______ a career in medicine.",
+     "fields": [
+      {
+       "answer": "pursue"
+      }
+     ]
+    },
+    {
+     "id": "s1_2",
+     "label": "2. I have a ______ job: I can choose my own working hours.",
+     "fields": [
+      {
+       "answer": "flexible"
+      }
+     ]
+    },
+    {
+     "id": "s1_3",
+     "label": "3. She felt ______ because she had five exams in one week.",
+     "fields": [
+      {
+       "answer": "overwhelmed"
+      }
+     ]
+    },
+    {
+     "id": "s1_4",
+     "label": "4. During my ______, I worked in a hotel for three months.",
+     "fields": [
+      {
+       "answer": "internship"
+      }
+     ]
+    },
+    {
+     "id": "s1_5",
+     "label": "5. Cooking classes are very ______: you make the food yourself.",
+     "fields": [
+      {
+       "answer": "hands-on"
+      }
+     ]
+    },
+    {
+     "id": "s1_6",
+     "label": "6. The ______ for the essay is next Friday.",
+     "fields": [
+      {
+       "answer": "deadline"
+      }
+     ]
+    },
+    {
+     "id": "s1_7",
+     "label": "7. Helping other people is a very ______ experience.",
+     "fields": [
+      {
+       "answer": "fulfilling"
+      }
+     ]
+    },
+    {
+     "id": "s1_8",
+     "label": "8. You can ______ a lot of useful skills at a part-time job.",
+     "fields": [
+      {
+       "answer": "acquire"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s2",
+   "title": "Step 2 · Dictation: numbers, dates and spelling (5 min)",
+   "minutes": 5,
+   "kind": "fill",
+   "audio": "a",
+   "instructions": "Listen to 8 sentences. Each sentence is read twice. Write the missing information. Numbers as digits. Tip: -teen is stressed at the end (six-TEEN), -ty at the start (SEV-enty).",
+   "items": [
+    {
+     "id": "s2_1",
+     "label": "1. The library opens at ______ a.m.",
+     "fields": [
+      {
+       "answer": "8.15",
+       "accept": [
+        "8:15",
+        "08.15",
+        "08:15"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s2_2",
+     "label": "2. There are ______ students in my study group.",
+     "fields": [
+      {
+       "answer": "16",
+       "accept": [
+        "sixteen"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s2_3",
+     "label": "3. The dictionary costs £ ______",
+     "fields": [
+      {
+       "answer": "70",
+       "accept": [
+        "seventy"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s2_4",
+     "label": "4. Student number: ______",
+     "fields": [
+      {
+       "answer": "49772"
+      }
+     ]
+    },
+    {
+     "id": "s2_5",
+     "label": "5. The exam is on the ______ of May.",
+     "fields": [
+      {
+       "answer": "21",
+       "accept": [
+        "21st",
+        "twenty-first"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s2_6",
+     "label": "6. Teacher's surname: ______",
+     "fields": [
+      {
+       "answer": "Dawson",
+       "accept": [
+        "DAWSON"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s2_7",
+     "label": "7. The group meets on ______.",
+     "fields": [
+      {
+       "answer": "Friday"
+      }
+     ]
+    },
+    {
+     "id": "s2_8",
+     "label": "8. Room ______ is on the second floor.",
+     "fields": [
+      {
+       "answer": "18",
+       "accept": [
+        "eighteen"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s3",
+   "title": "Step 3 · Listening: sports centre form (6 min)",
+   "minutes": 6,
+   "kind": "fill",
+   "audio": "b",
+   "instructions": "Before you listen: read the form for 30 seconds and decide the type of word (name / day / time / number / thing). Play the audio ONCE. Write NO MORE THAN TWO WORDS AND/OR A NUMBER. Listen for corrections: the answer is the final information. HILLSIDE SPORTS CENTRE · Adult swimming class.",
+   "items": [
+    {
+     "id": "s3_1",
+     "label": "1. Surname: Ms ______",
+     "fields": [
+      {
+       "answer": "Finch",
+       "accept": [
+        "FINCH"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s3_2",
+     "label": "2. Day: ______ evening",
+     "fields": [
+      {
+       "answer": "Wednesday"
+      }
+     ]
+    },
+    {
+     "id": "s3_3",
+     "label": "3. Class starts at: ______ p.m.",
+     "fields": [
+      {
+       "answer": "7.15",
+       "accept": [
+        "7:15"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s3_4",
+     "label": "4. Price for students: £ ______",
+     "fields": [
+      {
+       "answer": "40",
+       "accept": [
+        "forty"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s3_5",
+     "label": "5. Students must bring a ______",
+     "fields": [
+      {
+       "answer": "swimming cap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s4",
+   "title": "Step 4 · Voice note: numbers (30 s)",
+   "minutes": 1,
+   "kind": "voice",
+   "instructions": "Read these aloud clearly: 13 · 30 · 15 · 50 · 17 · 70. Then read this phone number: 0915 447 280.",
+   "lines": [
+    "Read: 13, 30, 15, 50, 17, 70",
+    "Read: 0915 447 280"
+   ],
+   "note": "Thầy nghe trọng âm -teen / -ty và cách đọc double four."
+  }
+ ]
+}

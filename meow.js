@@ -17,7 +17,10 @@
      Giữ giống DEADLINE_EXTEND trong lib/meow-auto.js. */
   var DEADLINE_EXTEND = { '2026-11-16': '2026-11-17T23:59:59+07:00' };
   /* Hạn nộp Daily Practice của lớp cls cho ngày s: IELTS13 23:30, IELTS14 0:00 hôm sau, lớp khác 23:00 (giờ Việt Nam) */
+  /* Gia hạn riêng theo lớp (giờ Việt Nam). Giữ giống DEADLINE_EXTEND_CLASS trong lib/meow-auto.js. */
+  var DEADLINE_EXTEND_CLASS = { IELTS13: { '2026-11-17': '2026-11-17T23:59:59+07:00' } };
   function deadline(cls, s) {
+    if (DEADLINE_EXTEND_CLASS[cls] && DEADLINE_EXTEND_CLASS[cls][s]) return new Date(DEADLINE_EXTEND_CLASS[cls][s]);
     if (DEADLINE_EXTEND[s]) return new Date(DEADLINE_EXTEND[s]);
     if (cls === 'IELTS13') return new Date(s + 'T23:30:00+07:00');
     if (cls === 'IELTS14') return new Date(addDays(s, 1) + 'T00:00:00+07:00');

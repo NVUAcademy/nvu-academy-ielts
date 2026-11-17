@@ -846,6 +846,32 @@
       ]
     },
     {
+      "id": "w5-mon-ielts13",
+      "file": "daily-w5-mon-ielts13.json",
+      "title": "Monday Daily Practice",
+      "subtitle": "Vocab Quest review (P3 words) and Writing Task 1: line graph intro + overview",
+      "day": "monday",
+      "date": "2026-11-16",
+      "week_number": 5,
+      "section": "writing",
+      "class_codes": [
+        "IELTS13"
+      ]
+    },
+    {
+      "id": "w5-tue-ielts13",
+      "file": "daily-w5-tue-ielts13.json",
+      "title": "Tuesday Daily Practice",
+      "subtitle": "Vocab Quest review (P3 words) and Listening: numbers, spelling and a short form",
+      "day": "tuesday",
+      "date": "2026-11-17",
+      "week_number": 5,
+      "section": "listening",
+      "class_codes": [
+        "IELTS13"
+      ]
+    },
+    {
       "id": "w6-mon-ielts13",
       "file": "daily-w6-mon-ielts13.json",
       "title": "Monday Daily Practice",
