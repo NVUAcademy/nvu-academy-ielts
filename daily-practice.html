@@ -192,13 +192,14 @@ async function renderList(idx) {
   }
   let done = {};
   if (student) {
-    const { data } = await db.from('daily_scores').select('practice_date, section, score, max_score, teacher_comment').eq('student_id', student.id);
-    (data || []).forEach(r => { done[r.practice_date + '|' + r.section] = r; });
+    const { data } = await db.from('daily_scores').select('practice_date, practice_id, section, score, max_score, teacher_comment').eq('student_id', student.id);
+    /* Khớp theo mã bài trước (danh sách bài có thể thiếu section), rồi mới theo section như cũ */
+    (data || []).forEach(r => { done[r.practice_date + '|' + r.section] = r; if (r.practice_id) done[r.practice_date + '#' + r.practice_id] = r; });
   }
   const today = new Date().toISOString().slice(0, 10);
   $('app').innerHTML = `<div class="hero"><div class="eyebrow">Daily Practice</div><h1>Luyện tập <em>hàng ngày</em></h1><div class="theme">Thứ Hai – Thứ Năm</div></div>` +
     (mine.length ? mine.slice().sort((a, b) => b.date.localeCompare(a.date)).map(x => {
-      const r = done[x.date + '|listening'] || done[x.date + '|' + (x.section || '')];
+      const r = done[x.date + '#' + x.id] || done[x.date + '|' + (x.section || '')] || done[x.date + '|listening'];
       const open = isTeacher || x.date <= today;
       return `<div class="card list-item"><div><div class="t">${esc(x.title)}</div><div class="sub">${esc(x.subtitle || '')} · ${esc(x.date)}</div></div>
         <div>${r ? `<span class="badge done">Đã làm ${r.score}/${r.max_score}</span> ` : open ? '<span class="badge todo">Chưa làm</span> ' : '<span class="badge lock">Chưa mở</span> '}
