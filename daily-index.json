@@ -844,6 +844,71 @@
       "class_codes": [
         "IELTS14"
       ]
+    },
+    {
+      "id": "w6-mon-ielts13",
+      "file": "daily-w6-mon-ielts13.json",
+      "title": "Monday Daily Practice",
+      "subtitle": "Vocab Quest (soar, slump, rebound) and Writing Task 1: Graph 2, intro + overview + Body 1",
+      "day": "monday",
+      "date": "2026-11-23",
+      "week_number": 6,
+      "section": "writing",
+      "class_codes": [
+        "IELTS13"
+      ]
+    },
+    {
+      "id": "w6-tue-ielts13",
+      "file": "daily-w6-tue-ielts13.json",
+      "title": "Tuesday Daily Practice",
+      "subtitle": "Vocab Quest (scholarship, closing date, deposit) and Listening Section 1: audio C",
+      "day": "tuesday",
+      "date": "2026-11-24",
+      "week_number": 6,
+      "section": "listening",
+      "class_codes": [
+        "IELTS13"
+      ]
+    },
+    {
+      "id": "w6-wed-ielts13",
+      "file": "daily-w6-wed-ielts13.json",
+      "title": "Wednesday Daily Practice",
+      "subtitle": "Vocab Quest (roughly, just over, the majority of) and Writing: fix-it + rewrite Body 1",
+      "day": "wednesday",
+      "date": "2026-11-25",
+      "week_number": 6,
+      "section": "writing",
+      "class_codes": [
+        "IELTS13"
+      ]
+    },
+    {
+      "id": "w6-thu-ielts13",
+      "file": "daily-w6-thu-ielts13.json",
+      "title": "Thursday Daily Practice",
+      "subtitle": "Class day warm-up: Vocab Quest (contract, wage, overtime) and dictation: audio D",
+      "day": "thursday",
+      "date": "2026-11-26",
+      "week_number": 6,
+      "section": "listening",
+      "class_codes": [
+        "IELTS13"
+      ]
+    },
+    {
+      "id": "w6-fri-ielts13",
+      "file": "daily-w6-fri-ielts13.json",
+      "title": "Friday Daily Practice",
+      "subtitle": "Weekly Quiz (20 marks): vocabulary, Listening (audio E) and Writing line graph",
+      "day": "friday",
+      "date": "2026-11-27",
+      "week_number": 6,
+      "section": "writing",
+      "class_codes": [
+        "IELTS13"
+      ]
     }
   ]
 }

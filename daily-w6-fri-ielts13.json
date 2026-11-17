@@ -1,0 +1,292 @@
+{
+  "id": "w6-fri-ielts13",
+  "title": "Friday Daily Practice",
+  "subtitle": "Weekly Quiz (20 marks): vocabulary, Listening (audio E) and Writing line graph",
+  "theme": "Weekly Quiz P4–P5",
+  "source": "Daily Practice P4–P5 (pre-ielts/p4p5), đáp án theo bản Teacher của thầy.",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 6,
+  "day": "friday",
+  "date": "2026-11-27",
+  "section": "writing",
+  "minutes": 25,
+  "intro": "Quiz tuần 20 điểm, làm trong 25 phút, một mình, không xem tài liệu (A 6 phút, B 8 phút, C 11 phút). Phần A và B web chấm tự động (14 điểm), phần C Writing (6 điểm) thầy chấm. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow.",
+  "audio": {
+    "e": {
+      "label": "Audio E · Campus Bookshop (play once)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "Hello, Campus Bookshop."
+        },
+        {
+          "speaker": "B",
+          "text": "Hi. I saw your advert for a part-time job. Is the vacancy still open?"
+        },
+        {
+          "speaker": "A",
+          "text": "Yes, it is. We're looking for a trainee sales assistant."
+        },
+        {
+          "speaker": "B",
+          "text": "When would I start?"
+        },
+        {
+          "speaker": "A",
+          "text": "On the ninth of December… sorry, I mean the nineteenth. We close for the holiday after that."
+        },
+        {
+          "speaker": "B",
+          "text": "And what are the shifts?"
+        },
+        {
+          "speaker": "A",
+          "text": "On weekdays you'd work from four until nine in the evening. At weekends the shift is shorter, ten until two."
+        },
+        {
+          "speaker": "B",
+          "text": "What's the pay?"
+        },
+        {
+          "speaker": "A",
+          "text": "Eleven pounds fifty an hour… oh wait, that's for full-time staff. For trainees it's nine pounds fifty."
+        },
+        {
+          "speaker": "B",
+          "text": "OK. Who would my supervisor be?"
+        },
+        {
+          "speaker": "A",
+          "text": "Mrs Kowalski. That's K-O-W-A-L-S-K-I."
+        },
+        {
+          "speaker": "B",
+          "text": "Is there anything I need to bring?"
+        },
+        {
+          "speaker": "A",
+          "text": "Please bring a copy of your timetable, so we can plan your shifts. A reference from a teacher is nice, but not necessary."
+        }
+      ]
+    }
+  },
+  "send_today": "Hoàn thành Quiz trên web. Voice note đọc Overview ở Step 5. Thầy chấm phần Writing và gửi điểm sau.",
+  "error_type": "writing",
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Part A: vocabulary 1–7 (7 marks)",
+      "minutes": 5,
+      "kind": "fill",
+      "instructions": "Fill each gap with a word from the box. Two words are extra. Box: overtook · enrol · vacancy · certificate · climbed · levelled off · halved · closing date · shift",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. The restaurant has a part-time ______ for a cook.",
+          "fields": [
+            {
+              "answer": "vacancy"
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. You must ______ before the end of the month to get a discount.",
+          "fields": [
+            {
+              "answer": "enrol"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. She works the night ______ at the hospital.",
+          "fields": [
+            {
+              "answer": "shift"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. The figure ______ at 80% from 2020 onwards.",
+          "fields": [
+            {
+              "answer": "levelled off",
+              "accept": [
+                "leveled off"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. In 2018, online learning ______ evening classes to become the most popular choice.",
+          "fields": [
+            {
+              "answer": "overtook"
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "6. The price of a ticket ______ from £40 to £20.",
+          "fields": [
+            {
+              "answer": "halved"
+            }
+          ]
+        },
+        {
+          "id": "s1_7",
+          "label": "7. The ______ for scholarship applications is 30 January.",
+          "fields": [
+            {
+              "answer": "closing date"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Part A: stress 8 (1 mark)",
+      "minutes": 1,
+      "kind": "mcq",
+      "instructions": "Choose the answer.",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "8. Which syllable of participant is stressed?",
+          "options": {
+            "A": "1st",
+            "B": "2nd",
+            "C": "3rd",
+            "D": "4th"
+          },
+          "answer": "B",
+          "explain": "par-TI-ci-pant."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Part B: Listening 9–14 (6 marks)",
+      "minutes": 8,
+      "kind": "fill",
+      "audio": "e",
+      "instructions": "Read the form for 30 seconds first. Play the audio ONCE. Write NO MORE THAN TWO WORDS AND/OR A NUMBER. CAMPUS BOOKSHOP · Part-time job form.",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "9. Job: trainee ______",
+          "fields": [
+            {
+              "answer": "sales assistant"
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "10. Starts on ______ December",
+          "fields": [
+            {
+              "answer": "19",
+              "accept": [
+                "19th",
+                "nineteenth"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "11. Weekday shift finishes at ______ p.m.",
+          "fields": [
+            {
+              "answer": "9",
+              "accept": [
+                "9.00",
+                "9:00",
+                "nine"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "12. Pay: £ ______ per hour (trainee)",
+          "fields": [
+            {
+              "answer": "9.50",
+              "accept": [
+                "9.5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_5",
+          "label": "13. Supervisor's surname: Mrs ______",
+          "fields": [
+            {
+              "answer": "Kowalski"
+            }
+          ]
+        },
+        {
+          "id": "s3_6",
+          "label": "14. Bring a copy of your ______",
+          "fields": [
+            {
+              "answer": "timetable"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Part C: Writing line graph (6 marks, teacher marks)",
+      "minutes": 11,
+      "kind": "open",
+      "instructions": "The line graph shows the average number of working hours per week of employees in three sectors in one country between 2000 and 2020. Data (2000, 2005, 2010, 2015, 2020): Factory 44, 42, 40, 38, 36 · Office 36, 38, 40, 40, 40 · Retail 28, 30, 36, 42, 46. Write (1) an Intro (1 sentence, paraphrase all 5 parts); (2) an Overview (2 sentences: one trend, one comparison); (3) 1 sentence about Retail with Pattern A or B, data and from…to or at.",
+      "images": [
+        {
+          "src": "images/w6-fri-graph3-ielts13.png",
+          "alt": "Line graph: weekly working hours in Factory, Office and Retail, 2000 to 2020"
+        }
+      ],
+      "open": [
+        {
+          "id": "s4_1",
+          "q": "(1) Intro",
+          "model": "The given line graph illustrates the average weekly working hours of employees in three sectors in a country over a 20-year period, commencing from 2000."
+        },
+        {
+          "id": "s4_2",
+          "q": "(2) Overview",
+          "model": "Overall, there was an increase in the working hours of Retail and Office employees, while a steady decline was seen in Factory, with the most dramatic rise being seen in Retail. It is also clear that Factory had the highest figure at the start, but it was surpassed by both other sectors."
+        },
+        {
+          "id": "s4_3",
+          "q": "(3) One sentence about Retail",
+          "model": "Retail climbed sharply from 28 hours in 2000 to 46 hours in 2020, overtaking Factory in 2015."
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Voice note: read your Overview (30 s)",
+      "minutes": 1,
+      "kind": "voice",
+      "instructions": "Read your Overview aloud, about 30 seconds.",
+      "lines": [
+        "Read your Overview aloud."
+      ],
+      "note": "Thầy nghe âm cuối và thì quá khứ."
+    }
+  ]
+}
