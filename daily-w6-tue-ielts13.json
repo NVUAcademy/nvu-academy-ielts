@@ -77,43 +77,31 @@
   "steps": [
     {
       "id": "s1",
-      "title": "Step 1 · Vocab Quest 1: match the new words (3 min)",
+      "title": "Step 1 · Vocab Quest 1: choose the meaning (3 min)",
       "minutes": 3,
-      "instructions": "New words today (10): scholarship /ˈskɒləʃɪp/ (n) · closing date /ˈkləʊzɪŋ deɪt/ (n) · application form /ˌæplɪˈkeɪʃn fɔːm/ (n) · registration /ˌredʒɪˈstreɪʃn/ (n) · semester /sɪˈmestə/ (n) · lecturer /ˈlektʃərə/ (n) · tutor /ˈtjuːtə/ (n) · attendance /əˈtendəns/ (n) · deposit /dɪˈpɒzɪt/ (n) · curriculum /kəˈrɪkjələm/ (n). Review words (6): enrol = đăng ký học · vacancy = vị trí đang tuyển · shift = ca làm · trainee = người học việc · soar = tăng vọt · remain constant = giữ nguyên, không đổi. Choose the correct meaning (A–J) for each new word.",
+      "instructions": "New words today (10): scholarship /ˈskɒləʃɪp/ (n) · closing date /ˈkləʊzɪŋ deɪt/ (n) · application form /ˌæplɪˈkeɪʃn fɔːm/ (n) · registration /ˌredʒɪˈstreɪʃn/ (n) · semester /sɪˈmestə/ (n) · lecturer /ˈlektʃərə/ (n) · tutor /ˈtjuːtə/ (n) · attendance /əˈtendəns/ (n) · deposit /dɪˈpɒzɪt/ (n) · curriculum /kəˈrɪkjələm/ (n). Review words (6): enrol = đăng ký học · vacancy = vị trí đang tuyển · shift = ca làm · trainee = người học việc · soar = tăng vọt · remain constant = giữ nguyên, không đổi. Choose the correct meaning (A, B, C or D) for each new word.",
       "kind": "mcq",
       "items": [
         {
           "id": "s1_1",
           "q": "1. scholarship",
           "options": {
-            "A": "gia sư, giáo viên hướng dẫn",
-            "B": "giảng viên",
-            "C": "sự đăng ký",
-            "D": "ngày hết hạn đăng ký",
-            "E": "đơn đăng ký",
-            "F": "chương trình học",
-            "G": "tiền đặt cọc",
-            "H": "sự có mặt, đi học",
-            "I": "học bổng",
-            "J": "học kỳ"
+            "A": "học bổng",
+            "B": "chương trình học",
+            "C": "học kỳ",
+            "D": "ngày hết hạn đăng ký"
           },
-          "answer": "I",
+          "answer": "A",
           "explain": "scholarship = học bổng. Collocation: win / apply for a scholarship. Example: She won a scholarship to study in Australia."
         },
         {
           "id": "s1_2",
           "q": "2. closing date",
           "options": {
-            "A": "gia sư, giáo viên hướng dẫn",
+            "A": "đơn đăng ký",
             "B": "giảng viên",
-            "C": "sự đăng ký",
-            "D": "ngày hết hạn đăng ký",
-            "E": "đơn đăng ký",
-            "F": "chương trình học",
-            "G": "tiền đặt cọc",
-            "H": "sự có mặt, đi học",
-            "I": "học bổng",
-            "J": "học kỳ"
+            "C": "chương trình học",
+            "D": "ngày hết hạn đăng ký"
           },
           "answer": "D",
           "explain": "closing date = ngày hết hạn đăng ký. Collocation: the closing date for applications. Example: The closing date for applications is 30 November."
@@ -123,71 +111,47 @@
           "q": "3. application form",
           "options": {
             "A": "gia sư, giáo viên hướng dẫn",
-            "B": "giảng viên",
+            "B": "học bổng",
             "C": "sự đăng ký",
-            "D": "ngày hết hạn đăng ký",
-            "E": "đơn đăng ký",
-            "F": "chương trình học",
-            "G": "tiền đặt cọc",
-            "H": "sự có mặt, đi học",
-            "I": "học bổng",
-            "J": "học kỳ"
+            "D": "đơn đăng ký"
           },
-          "answer": "E",
+          "answer": "D",
           "explain": "application form = đơn đăng ký. Collocation: fill in an application form. Example: Please fill in the application form in capital letters."
         },
         {
           "id": "s1_4",
           "q": "4. registration",
           "options": {
-            "A": "gia sư, giáo viên hướng dẫn",
-            "B": "giảng viên",
-            "C": "sự đăng ký",
-            "D": "ngày hết hạn đăng ký",
-            "E": "đơn đăng ký",
-            "F": "chương trình học",
-            "G": "tiền đặt cọc",
-            "H": "sự có mặt, đi học",
-            "I": "học bổng",
-            "J": "học kỳ"
+            "A": "chương trình học",
+            "B": "sự đăng ký",
+            "C": "sự có mặt, đi học",
+            "D": "tiền đặt cọc"
           },
-          "answer": "C",
+          "answer": "B",
           "explain": "registration = sự đăng ký. Collocation: registration is open. Example: Registration for the course opens in January."
         },
         {
           "id": "s1_5",
           "q": "5. semester",
           "options": {
-            "A": "gia sư, giáo viên hướng dẫn",
-            "B": "giảng viên",
-            "C": "sự đăng ký",
-            "D": "ngày hết hạn đăng ký",
-            "E": "đơn đăng ký",
-            "F": "chương trình học",
-            "G": "tiền đặt cọc",
-            "H": "sự có mặt, đi học",
-            "I": "học bổng",
-            "J": "học kỳ"
+            "A": "chương trình học",
+            "B": "học bổng",
+            "C": "học kỳ",
+            "D": "tiền đặt cọc"
           },
-          "answer": "J",
+          "answer": "C",
           "explain": "semester = học kỳ. Collocation: the first semester. Example: The first semester starts in September."
         },
         {
           "id": "s1_6",
           "q": "6. lecturer",
           "options": {
-            "A": "gia sư, giáo viên hướng dẫn",
-            "B": "giảng viên",
-            "C": "sự đăng ký",
-            "D": "ngày hết hạn đăng ký",
-            "E": "đơn đăng ký",
-            "F": "chương trình học",
-            "G": "tiền đặt cọc",
-            "H": "sự có mặt, đi học",
-            "I": "học bổng",
-            "J": "học kỳ"
+            "A": "ngày hết hạn đăng ký",
+            "B": "sự có mặt, đi học",
+            "C": "giảng viên",
+            "D": "tiền đặt cọc"
           },
-          "answer": "B",
+          "answer": "C",
           "explain": "lecturer = giảng viên. Collocation: a university lecturer. Example: My lecturer gives us a quiz every Friday."
         },
         {
@@ -195,15 +159,9 @@
           "q": "7. tutor",
           "options": {
             "A": "gia sư, giáo viên hướng dẫn",
-            "B": "giảng viên",
-            "C": "sự đăng ký",
-            "D": "ngày hết hạn đăng ký",
-            "E": "đơn đăng ký",
-            "F": "chương trình học",
-            "G": "tiền đặt cọc",
-            "H": "sự có mặt, đi học",
-            "I": "học bổng",
-            "J": "học kỳ"
+            "B": "học kỳ",
+            "C": "sự có mặt, đi học",
+            "D": "tiền đặt cọc"
           },
           "answer": "A",
           "explain": "tutor = gia sư, giáo viên hướng dẫn. Collocation: a private tutor. Example: I have a tutor to help me with my writing."
@@ -213,53 +171,35 @@
           "q": "8. attendance",
           "options": {
             "A": "gia sư, giáo viên hướng dẫn",
-            "B": "giảng viên",
-            "C": "sự đăng ký",
-            "D": "ngày hết hạn đăng ký",
-            "E": "đơn đăng ký",
-            "F": "chương trình học",
-            "G": "tiền đặt cọc",
-            "H": "sự có mặt, đi học",
-            "I": "học bổng",
-            "J": "học kỳ"
+            "B": "sự có mặt, đi học",
+            "C": "ngày hết hạn đăng ký",
+            "D": "tiền đặt cọc"
           },
-          "answer": "H",
+          "answer": "B",
           "explain": "attendance = sự có mặt, đi học. Collocation: good attendance. Example: Attendance at the workshop is compulsory."
         },
         {
           "id": "s1_9",
           "q": "9. deposit",
           "options": {
-            "A": "gia sư, giáo viên hướng dẫn",
-            "B": "giảng viên",
-            "C": "sự đăng ký",
-            "D": "ngày hết hạn đăng ký",
-            "E": "đơn đăng ký",
-            "F": "chương trình học",
-            "G": "tiền đặt cọc",
-            "H": "sự có mặt, đi học",
-            "I": "học bổng",
-            "J": "học kỳ"
+            "A": "tiền đặt cọc",
+            "B": "gia sư, giáo viên hướng dẫn",
+            "C": "giảng viên",
+            "D": "chương trình học"
           },
-          "answer": "G",
+          "answer": "A",
           "explain": "deposit = tiền đặt cọc. Collocation: pay a deposit. Example: You must pay a deposit of £50 to book a place."
         },
         {
           "id": "s1_10",
           "q": "10. curriculum",
           "options": {
-            "A": "gia sư, giáo viên hướng dẫn",
-            "B": "giảng viên",
-            "C": "sự đăng ký",
-            "D": "ngày hết hạn đăng ký",
-            "E": "đơn đăng ký",
-            "F": "chương trình học",
-            "G": "tiền đặt cọc",
-            "H": "sự có mặt, đi học",
-            "I": "học bổng",
-            "J": "học kỳ"
+            "A": "đơn đăng ký",
+            "B": "gia sư, giáo viên hướng dẫn",
+            "C": "học bổng",
+            "D": "chương trình học"
           },
-          "answer": "F",
+          "answer": "D",
           "explain": "curriculum = chương trình học. Collocation: a school curriculum. Example: The curriculum includes maths, science and English."
         }
       ]

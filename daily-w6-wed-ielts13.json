@@ -19,117 +19,81 @@
   "steps": [
     {
       "id": "s1",
-      "title": "Step 1 · Vocab Quest 1: match the new words (3 min)",
+      "title": "Step 1 · Vocab Quest 1: choose the meaning (3 min)",
       "minutes": 3,
-      "instructions": "New words today (10): downward trend /ˈdaʊnwəd trend/ (n) · stabilise /ˈsteɪbəlaɪz/ (v) · roughly /ˈrʌfli/ (adv) · just over /dʒʌst ˈəʊvə/ (phr) · just under /dʒʌst ˈʌndə/ (phr) · the majority of /ðə məˈdʒɒrəti əv/ (phr) · a minority of /ə maɪˈnɒrəti əv/ (phr) · twice as many as /twaɪs əz ˈmeni əz/ (phr) · a third of /ə θɜːd əv/ (phr) · rank /ræŋk/ (v). Review words (6): stand at = ở mức · gradual = dần dần · sharp = mạnh, đột ngột · approximately = khoảng · scholarship = học bổng · semester = học kỳ. Choose the correct meaning (A–J) for each new word.",
+      "instructions": "New words today (10): downward trend /ˈdaʊnwəd trend/ (n) · stabilise /ˈsteɪbəlaɪz/ (v) · roughly /ˈrʌfli/ (adv) · just over /dʒʌst ˈəʊvə/ (phr) · just under /dʒʌst ˈʌndə/ (phr) · the majority of /ðə məˈdʒɒrəti əv/ (phr) · a minority of /ə maɪˈnɒrəti əv/ (phr) · twice as many as /twaɪs əz ˈmeni əz/ (phr) · a third of /ə θɜːd əv/ (phr) · rank /ræŋk/ (v). Review words (6): stand at = ở mức · gradual = dần dần · sharp = mạnh, đột ngột · approximately = khoảng · scholarship = học bổng · semester = học kỳ. Choose the correct meaning (A, B, C or D) for each new word.",
       "kind": "mcq",
       "items": [
         {
           "id": "s1_1",
           "q": "1. downward trend",
           "options": {
-            "A": "nhiều gấp đôi",
-            "B": "xu hướng giảm",
-            "C": "kém một chút",
-            "D": "khoảng, xấp xỉ",
-            "E": "xếp hạng, đứng thứ",
-            "F": "thiểu số",
-            "G": "một phần ba",
-            "H": "đa số",
-            "I": "ổn định lại",
-            "J": "hơn một chút"
+            "A": "xu hướng giảm",
+            "B": "thiểu số",
+            "C": "hơn một chút",
+            "D": "xếp hạng, đứng thứ"
           },
-          "answer": "B",
+          "answer": "A",
           "explain": "downward trend = xu hướng giảm. Collocation: a downward trend in …. Example: There is a downward trend in the number of printed books sold."
         },
         {
           "id": "s1_2",
           "q": "2. stabilise",
           "options": {
-            "A": "nhiều gấp đôi",
-            "B": "xu hướng giảm",
-            "C": "kém một chút",
-            "D": "khoảng, xấp xỉ",
-            "E": "xếp hạng, đứng thứ",
-            "F": "thiểu số",
-            "G": "một phần ba",
-            "H": "đa số",
-            "I": "ổn định lại",
-            "J": "hơn một chút"
+            "A": "xu hướng giảm",
+            "B": "khoảng, xấp xỉ",
+            "C": "đa số",
+            "D": "ổn định lại"
           },
-          "answer": "I",
+          "answer": "D",
           "explain": "stabilise = ổn định lại. Collocation: stabilise at 300. Example: The number of applicants stabilised at about 300 a year."
         },
         {
           "id": "s1_3",
           "q": "3. roughly",
           "options": {
-            "A": "nhiều gấp đôi",
-            "B": "xu hướng giảm",
-            "C": "kém một chút",
-            "D": "khoảng, xấp xỉ",
-            "E": "xếp hạng, đứng thứ",
-            "F": "thiểu số",
-            "G": "một phần ba",
-            "H": "đa số",
-            "I": "ổn định lại",
-            "J": "hơn một chút"
+            "A": "khoảng, xấp xỉ",
+            "B": "kém một chút",
+            "C": "xu hướng giảm",
+            "D": "ổn định lại"
           },
-          "answer": "D",
+          "answer": "A",
           "explain": "roughly = khoảng, xấp xỉ. Collocation: roughly 50%. Example: Roughly 50% of the students came from the city."
         },
         {
           "id": "s1_4",
           "q": "4. just over",
           "options": {
-            "A": "nhiều gấp đôi",
-            "B": "xu hướng giảm",
-            "C": "kém một chút",
-            "D": "khoảng, xấp xỉ",
-            "E": "xếp hạng, đứng thứ",
-            "F": "thiểu số",
-            "G": "một phần ba",
-            "H": "đa số",
-            "I": "ổn định lại",
-            "J": "hơn một chút"
+            "A": "khoảng, xấp xỉ",
+            "B": "hơn một chút",
+            "C": "xếp hạng, đứng thứ",
+            "D": "một phần ba"
           },
-          "answer": "J",
+          "answer": "B",
           "explain": "just over = hơn một chút. Collocation: just over 30%. Example: Just over 30% of adults took an evening course."
         },
         {
           "id": "s1_5",
           "q": "5. just under",
           "options": {
-            "A": "nhiều gấp đôi",
-            "B": "xu hướng giảm",
-            "C": "kém một chút",
-            "D": "khoảng, xấp xỉ",
-            "E": "xếp hạng, đứng thứ",
-            "F": "thiểu số",
-            "G": "một phần ba",
-            "H": "đa số",
-            "I": "ổn định lại",
-            "J": "hơn một chút"
+            "A": "hơn một chút",
+            "B": "ổn định lại",
+            "C": "một phần ba",
+            "D": "kém một chút"
           },
-          "answer": "C",
+          "answer": "D",
           "explain": "just under = kém một chút. Collocation: just under 20%. Example: Just under 20% of workers were unhappy."
         },
         {
           "id": "s1_6",
           "q": "6. the majority of",
           "options": {
-            "A": "nhiều gấp đôi",
-            "B": "xu hướng giảm",
-            "C": "kém một chút",
-            "D": "khoảng, xấp xỉ",
-            "E": "xếp hạng, đứng thứ",
-            "F": "thiểu số",
-            "G": "một phần ba",
-            "H": "đa số",
-            "I": "ổn định lại",
-            "J": "hơn một chút"
+            "A": "đa số",
+            "B": "một phần ba",
+            "C": "hơn một chút",
+            "D": "thiểu số"
           },
-          "answer": "H",
+          "answer": "A",
           "explain": "the majority of = đa số. Collocation: the majority of students. Example: The majority of students walked to class."
         },
         {
@@ -138,70 +102,46 @@
           "options": {
             "A": "nhiều gấp đôi",
             "B": "xu hướng giảm",
-            "C": "kém một chút",
-            "D": "khoảng, xấp xỉ",
-            "E": "xếp hạng, đứng thứ",
-            "F": "thiểu số",
-            "G": "một phần ba",
-            "H": "đa số",
-            "I": "ổn định lại",
-            "J": "hơn một chút"
+            "C": "thiểu số",
+            "D": "một phần ba"
           },
-          "answer": "F",
+          "answer": "C",
           "explain": "a minority of = thiểu số. Collocation: a minority of workers. Example: Only a minority of workers had a long contract."
         },
         {
           "id": "s1_8",
           "q": "8. twice as many as",
           "options": {
-            "A": "nhiều gấp đôi",
-            "B": "xu hướng giảm",
-            "C": "kém một chút",
-            "D": "khoảng, xấp xỉ",
-            "E": "xếp hạng, đứng thứ",
-            "F": "thiểu số",
-            "G": "một phần ba",
-            "H": "đa số",
-            "I": "ổn định lại",
-            "J": "hơn một chút"
+            "A": "ổn định lại",
+            "B": "một phần ba",
+            "C": "hơn một chút",
+            "D": "nhiều gấp đôi"
           },
-          "answer": "A",
+          "answer": "D",
           "explain": "twice as many as = nhiều gấp đôi. Collocation: twice as many … as. Example: Twice as many women as men enrolled on the course."
         },
         {
           "id": "s1_9",
           "q": "9. a third of",
           "options": {
-            "A": "nhiều gấp đôi",
-            "B": "xu hướng giảm",
-            "C": "kém một chút",
-            "D": "khoảng, xấp xỉ",
-            "E": "xếp hạng, đứng thứ",
-            "F": "thiểu số",
-            "G": "một phần ba",
-            "H": "đa số",
-            "I": "ổn định lại",
-            "J": "hơn một chút"
+            "A": "đa số",
+            "B": "một phần ba",
+            "C": "xu hướng giảm",
+            "D": "thiểu số"
           },
-          "answer": "G",
+          "answer": "B",
           "explain": "a third of = một phần ba. Collocation: a third of the class. Example: A third of the class chose online lessons."
         },
         {
           "id": "s1_10",
           "q": "10. rank",
           "options": {
-            "A": "nhiều gấp đôi",
-            "B": "xu hướng giảm",
-            "C": "kém một chút",
-            "D": "khoảng, xấp xỉ",
-            "E": "xếp hạng, đứng thứ",
-            "F": "thiểu số",
-            "G": "một phần ba",
-            "H": "đa số",
-            "I": "ổn định lại",
-            "J": "hơn một chút"
+            "A": "một phần ba",
+            "B": "đa số",
+            "C": "xếp hạng, đứng thứ",
+            "D": "xu hướng giảm"
           },
-          "answer": "E",
+          "answer": "C",
           "explain": "rank = xếp hạng, đứng thứ. Collocation: rank first / second. Example: Retail ranked first for working hours in 2020."
         }
       ]
