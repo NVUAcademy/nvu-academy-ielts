@@ -1,0 +1,210 @@
+{
+ "id": "w5-thu-ielts13",
+ "title": "Thursday Daily Practice",
+ "subtitle": "Class day warm-up for P4: words and a short dictation",
+ "theme": "Tuần 16–22/11 · khởi động trước buổi P4 Listening",
+ "source": "Daily Practice tuần 16–22/11, soạn mới cho IELTS13.",
+ "class_codes": [
+  "IELTS13"
+ ],
+ "week_number": 5,
+ "day": "thursday",
+ "date": "2026-11-19",
+ "section": "listening",
+ "minutes": 10,
+ "intro": "Hôm nay là ngày học buổi P4 (Listening). Chỉ khởi động khoảng 10 phút trước giờ học. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+ "audio": {
+  "a": {
+   "label": "Audio A · Dictation (5 sentences, each twice)",
+   "lines": [
+    {
+     "speaker": "A",
+     "text": "The trip costs fifteen pounds."
+    },
+    {
+     "speaker": "A",
+     "text": "The trip costs fifteen pounds."
+    },
+    {
+     "speaker": "B",
+     "text": "My phone number is oh nine one two, double six eight, four three five."
+    },
+    {
+     "speaker": "B",
+     "text": "My phone number is oh nine one two, double six eight, four three five."
+    },
+    {
+     "speaker": "A",
+     "text": "The meeting is on the thirteenth of December."
+    },
+    {
+     "speaker": "A",
+     "text": "The meeting is on the thirteenth of December."
+    },
+    {
+     "speaker": "B",
+     "text": "The hotel is on Carter Road. C-A-R-T-E-R."
+    },
+    {
+     "speaker": "B",
+     "text": "The hotel is on Carter Road. C-A-R-T-E-R."
+    },
+    {
+     "speaker": "A",
+     "text": "The shop opens at nine thirty. No, sorry, at ten."
+    },
+    {
+     "speaker": "A",
+     "text": "The shop opens at nine thirty. No, sorry, at ten."
+    }
+   ]
+  }
+ },
+ "send_today": "Hoàn thành các bước trên web trước giờ học.",
+ "error_type": "listening",
+ "steps": [
+  {
+   "id": "s1",
+   "title": "Step 1 · Vocab Quest: fill the gaps (3 min)",
+   "minutes": 3,
+   "kind": "fill",
+   "instructions": "Fill the gaps with the words in the box. Change the form if needed. Box: give up · confident · make progress · pick up · job satisfaction · work-life balance",
+   "items": [
+    {
+     "id": "s1_1",
+     "label": "1. Many people choose a job with good ______, not only a high salary.",
+     "fields": [
+      {
+       "answer": "work-life balance"
+      }
+     ]
+    },
+    {
+     "id": "s1_2",
+     "label": "2. Helping customers gives me a lot of ______.",
+     "fields": [
+      {
+       "answer": "job satisfaction"
+      }
+     ]
+    },
+    {
+     "id": "s1_3",
+     "label": "3. I ______ some Japanese words from anime.",
+     "fields": [
+      {
+       "answer": "picked up",
+       "accept": [
+        "pick up"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s1_4",
+     "label": "4. Don't ______! You are almost there.",
+     "fields": [
+      {
+       "answer": "give up"
+      }
+     ]
+    },
+    {
+     "id": "s1_5",
+     "label": "5. After three months, my listening ______ a lot.",
+     "fields": [
+      {
+       "answer": "made progress",
+       "accept": [
+        "has made progress",
+        "make progress"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s1_6",
+     "label": "6. She feels ______ when she speaks English now.",
+     "fields": [
+      {
+       "answer": "confident"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s2",
+   "title": "Step 2 · Dictation (5 min)",
+   "minutes": 5,
+   "kind": "fill",
+   "audio": "a",
+   "instructions": "Listen to 5 sentences. Each sentence is read twice. Write the missing information. Numbers as digits.",
+   "items": [
+    {
+     "id": "s2_1",
+     "label": "1. The trip costs £ ______",
+     "fields": [
+      {
+       "answer": "15",
+       "accept": [
+        "fifteen"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s2_2",
+     "label": "2. Phone number: ______",
+     "fields": [
+      {
+       "answer": "0912668435",
+       "accept": [
+        "0912 668 435"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s2_3",
+     "label": "3. The meeting is on ______ December.",
+     "fields": [
+      {
+       "answer": "13",
+       "accept": [
+        "13th",
+        "thirteenth"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s2_4",
+     "label": "4. The hotel is on ______ Road.",
+     "fields": [
+      {
+       "answer": "Carter",
+       "accept": [
+        "CARTER"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s2_5",
+     "label": "5. The shop opens at ______ a.m.",
+     "fields": [
+      {
+       "answer": "10",
+       "accept": [
+        "10.00",
+        "10:00",
+        "ten"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
