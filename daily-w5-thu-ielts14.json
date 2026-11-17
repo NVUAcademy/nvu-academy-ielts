@@ -1,0 +1,276 @@
+{
+  "id": "w5-thu-ielts14",
+  "title": "Thursday Daily Practice",
+  "subtitle": "News words review and Overview + Body 1 for a table about newspaper readers",
+  "theme": "Lesson 6 · Overview and body paragraphs",
+  "source": "Daily Practice Week 5 và Weekly Quiz Week 5 (print/W5/src), đáp án theo bản Key của thầy.",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 5,
+  "day": "thursday",
+  "date": "2026-11-26",
+  "section": "writing",
+  "minutes": 15,
+  "intro": "Làm lần lượt các bước, khoảng 15 phút. Từ vựng hôm nay: 5 từ mới + 10 từ ôn. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocab Quest Part A (4 min)",
+      "minutes": 4,
+      "instructions": "Fill each gap with one phrase from the box, in the correct form. Use each phrase once. Box: a combination of · press coverage · subscription · motivation · headline · surge · keep up to date with · current affairs",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. She wrote a clear ______ for the story.",
+          "fields": [
+            {
+              "answer": "headline"
+            }
+          ],
+          "explain": "headline = tiêu đề báo."
+        },
+        {
+          "id": "s1_2",
+          "label": "2. I use an app to ______ the news.",
+          "fields": [
+            {
+              "answer": "keep up to date with"
+            }
+          ],
+          "explain": "keep up to date with = cập nhật tin tức."
+        },
+        {
+          "id": "s1_3",
+          "label": "3. Politics and economics are part of ______.",
+          "fields": [
+            {
+              "answer": "current affairs"
+            }
+          ],
+          "explain": "current affairs = thời sự."
+        },
+        {
+          "id": "s1_4",
+          "label": "4. I pay a monthly ______ to read the paper online.",
+          "fields": [
+            {
+              "answer": "subscription"
+            }
+          ],
+          "explain": "subscription = đăng ký thuê bao."
+        },
+        {
+          "id": "s1_5",
+          "label": "5. The festival got a lot of ______ in local papers.",
+          "fields": [
+            {
+              "answer": "press coverage"
+            }
+          ],
+          "explain": "press coverage = độ phủ truyền thông."
+        },
+        {
+          "id": "s1_6",
+          "label": "6. Money was not her ______; she wanted to help people.",
+          "fields": [
+            {
+              "answer": "motivation"
+            }
+          ],
+          "explain": "motivation = động lực."
+        },
+        {
+          "id": "s1_7",
+          "label": "7. Online news ______ after 2010, while print news plummeted.",
+          "fields": [
+            {
+              "answer": "surged"
+            }
+          ],
+          "explain": "surge = tăng vọt."
+        },
+        {
+          "id": "s1_8",
+          "label": "8. Most readers use ______ phones and laptops.",
+          "fields": [
+            {
+              "answer": "a combination of"
+            }
+          ],
+          "explain": "a combination of = sự kết hợp của."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Vocab Quest Part B (2 min)",
+      "minutes": 2,
+      "instructions": "Choose the correct meaning (A–G) for each word or phrase.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "1. accidentally",
+          "options": {
+            "A": "importance",
+            "B": "by chance, not on purpose",
+            "C": "to fall suddenly and by a large amount",
+            "D": "to be shared very quickly by many people",
+            "E": "wrong information that spreads",
+            "F": "the quality of being trusted",
+            "G": "an increase that is slow and regular"
+          },
+          "answer": "B",
+          "explain": "accidentally = tình cờ, vô tình."
+        },
+        {
+          "id": "s2_2",
+          "q": "2. reliability",
+          "options": {
+            "A": "importance",
+            "B": "by chance, not on purpose",
+            "C": "to fall suddenly and by a large amount",
+            "D": "to be shared very quickly by many people",
+            "E": "wrong information that spreads",
+            "F": "the quality of being trusted",
+            "G": "an increase that is slow and regular"
+          },
+          "answer": "F",
+          "explain": "reliability = độ tin cậy."
+        },
+        {
+          "id": "s2_3",
+          "q": "3. significance",
+          "options": {
+            "A": "importance",
+            "B": "by chance, not on purpose",
+            "C": "to fall suddenly and by a large amount",
+            "D": "to be shared very quickly by many people",
+            "E": "wrong information that spreads",
+            "F": "the quality of being trusted",
+            "G": "an increase that is slow and regular"
+          },
+          "answer": "A",
+          "explain": "significance = tầm quan trọng."
+        },
+        {
+          "id": "s2_4",
+          "q": "4. misinformation",
+          "options": {
+            "A": "importance",
+            "B": "by chance, not on purpose",
+            "C": "to fall suddenly and by a large amount",
+            "D": "to be shared very quickly by many people",
+            "E": "wrong information that spreads",
+            "F": "the quality of being trusted",
+            "G": "an increase that is slow and regular"
+          },
+          "answer": "E",
+          "explain": "misinformation = thông tin sai lệch."
+        },
+        {
+          "id": "s2_5",
+          "q": "5. go viral",
+          "options": {
+            "A": "importance",
+            "B": "by chance, not on purpose",
+            "C": "to fall suddenly and by a large amount",
+            "D": "to be shared very quickly by many people",
+            "E": "wrong information that spreads",
+            "F": "the quality of being trusted",
+            "G": "an increase that is slow and regular"
+          },
+          "answer": "D",
+          "explain": "go viral = lan truyền chóng mặt."
+        },
+        {
+          "id": "s2_6",
+          "q": "6. plummet",
+          "options": {
+            "A": "importance",
+            "B": "by chance, not on purpose",
+            "C": "to fall suddenly and by a large amount",
+            "D": "to be shared very quickly by many people",
+            "E": "wrong information that spreads",
+            "F": "the quality of being trusted",
+            "G": "an increase that is slow and regular"
+          },
+          "answer": "C",
+          "explain": "plummet = lao dốc."
+        },
+        {
+          "id": "s2_7",
+          "q": "7. a steady climb",
+          "options": {
+            "A": "importance",
+            "B": "by chance, not on purpose",
+            "C": "to fall suddenly and by a large amount",
+            "D": "to be shared very quickly by many people",
+            "E": "wrong information that spreads",
+            "F": "the quality of being trusted",
+            "G": "an increase that is slow and regular"
+          },
+          "answer": "G",
+          "explain": "a steady climb = tăng đều đặn."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Overview + Body 1 (9 min)",
+      "minutes": 9,
+      "instructions": "Look at the table: millions of newspaper readers in Brazil, Poland and Kenya. (a) Write the Overview in 2 sentences (3 min): the main trend and one difference. No numbers. (b) Write Body 1 for Brazil and Poland (6 min). Use a topic sentence, start, change, end and one comparison. Support: Overall, the number of newspaper readers ______ in Brazil and Poland, whereas ______ was the only country to ______.",
+      "kind": "open",
+      "images": [
+        {
+          "src": "images/w5-thu-readers.png",
+          "alt": "Table: millions of newspaper readers in Brazil, Poland and Kenya in 2000, 2010 and 2020"
+        }
+      ],
+      "open": [
+        {
+          "id": "s3_1",
+          "q": "(a) Overview (2 sentences, no numbers)",
+          "model": "Overall, the number of newspaper readers fell in Brazil and Poland, whereas Kenya was the only country to see an increase. Brazil had the most readers in the first two years, but Kenya had the most in 2020.",
+          "ai": {
+            "type": "Overview cho Task 1 table",
+            "level": "Intermediate (B1 đến B2)",
+            "min_words": 20,
+            "task": "The table shows millions of newspaper readers in Brazil (12, 9, 5), Poland (6, 6, 5) and Kenya (2, 3, 6) in 2000, 2010 and 2020. Write the Overview in 2 sentences: the main trend and one difference. No numbers.",
+            "criteria": [
+              "bắt đầu bằng Overall và có xu hướng chính",
+              "có một sự khác biệt (cao nhất hoặc nước duy nhất tăng)",
+              "không có số liệu",
+              "dùng thì quá khứ đúng",
+              "ngữ pháp và chính tả đúng"
+            ]
+          }
+        },
+        {
+          "id": "s3_2",
+          "q": "(b) Body 1 for Brazil and Poland",
+          "model": "Brazil had the largest readership at 12 million in 2000, but this fell steadily to 9 million in 2010 and 5 million in 2020. Poland's figure stood at 6 million in the first two years before dipping slightly to 5 million in 2020, so it ended level with Brazil.",
+          "ai": {
+            "type": "Body 1 cho Task 1 table",
+            "level": "Intermediate (B1 đến B2)",
+            "min_words": 40,
+            "task": "The table shows millions of newspaper readers in Brazil (12, 9, 5) and Poland (6, 6, 5) in 2000, 2010 and 2020. Write Body 1 for Brazil and Poland.",
+            "criteria": [
+              "có câu chủ đề",
+              "có số liệu điểm đầu, thay đổi và điểm cuối",
+              "có một câu so sánh giữa hai nước",
+              "dùng từ chỉ xu hướng đúng (fell steadily, stood at, dipped)",
+              "dùng thì quá khứ đúng",
+              "ngữ pháp và chính tả đúng"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "send_today": "Ảnh Step 1 và Step 2 + ảnh Overview và Body 1 gửi lên Zalo, nhắn Done + tên + Thứ 5.",
+  "error_type": "writing"
+}

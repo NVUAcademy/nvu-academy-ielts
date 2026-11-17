@@ -1,0 +1,307 @@
+{
+  "id": "w5-tue-ielts14",
+  "title": "Tuesday Daily Practice",
+  "subtitle": "Class day: news words (seek out, encounter) and matching information about local newspapers",
+  "theme": "Lesson 7 · Matching information",
+  "source": "Daily Practice Week 5 và Weekly Quiz Week 5 (print/W5/src), đáp án theo bản Key của thầy.",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 5,
+  "day": "tuesday",
+  "date": "2026-11-24",
+  "section": "reading",
+  "minutes": 14,
+  "intro": "Làm lần lượt các bước, khoảng 14 phút. Hôm nay có lớp, làm trước giờ học. Từ vựng hôm nay: 10 từ mới + 6 từ ôn. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocab Quest Part A (4 min)",
+      "minutes": 4,
+      "instructions": "Fill each gap with one phrase from the box, in the correct form. Use each phrase once. Box: regardless of · a sense of duty · peak at · a combination of · encounter · seek out · disengaged · selectively",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. Sales ______ 90 million in 1999, then fell.",
+          "fields": [
+            {
+              "answer": "peaked at"
+            }
+          ],
+          "explain": "peak at = đạt đỉnh ở mức."
+        },
+        {
+          "id": "s1_2",
+          "label": "2. Many teenagers feel ______ from politics.",
+          "fields": [
+            {
+              "answer": "disengaged"
+            }
+          ],
+          "explain": "disengaged = thờ ơ, không quan tâm."
+        },
+        {
+          "id": "s1_3",
+          "label": "3. Few people ______ the news; they just see it on their phones.",
+          "fields": [
+            {
+              "answer": "seek out"
+            }
+          ],
+          "explain": "seek out = chủ động tìm."
+        },
+        {
+          "id": "s1_4",
+          "label": "4. You may ______ fake stories while you scroll.",
+          "fields": [
+            {
+              "answer": "encounter"
+            }
+          ],
+          "explain": "encounter = tình cờ gặp."
+        },
+        {
+          "id": "s1_5",
+          "label": "5. She uses the app ______, only for sport results.",
+          "fields": [
+            {
+              "answer": "selectively"
+            }
+          ],
+          "explain": "selectively = có chọn lọc."
+        },
+        {
+          "id": "s1_6",
+          "label": "6. He votes in every election out of ______.",
+          "fields": [
+            {
+              "answer": "a sense of duty"
+            }
+          ],
+          "explain": "a sense of duty = ý thức bổn phận."
+        },
+        {
+          "id": "s1_7",
+          "label": "7. Everyone should have access to news, ______ age or income.",
+          "fields": [
+            {
+              "answer": "regardless of"
+            }
+          ],
+          "explain": "regardless of = bất kể."
+        },
+        {
+          "id": "s1_8",
+          "label": "8. Most students use ______ videos, apps and websites to study.",
+          "fields": [
+            {
+              "answer": "a combination of"
+            }
+          ],
+          "explain": "a combination of = sự kết hợp của."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Vocab Quest Part B (2 min)",
+      "minutes": 2,
+      "instructions": "Choose the correct meaning (A–H) for each word or phrase.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "1. a marginal change",
+          "options": {
+            "A": "to go up and down",
+            "B": "to stop rising or falling",
+            "C": "to become higher than something that was higher",
+            "D": "a small, unimportant difference",
+            "E": "to fall suddenly and by a large amount",
+            "F": "an increase that is slow and regular",
+            "G": "to rise suddenly and by a large amount",
+            "H": "to make up a part of a total"
+          },
+          "answer": "D",
+          "explain": "a marginal change = thay đổi không đáng kể."
+        },
+        {
+          "id": "s2_2",
+          "q": "2. a steady climb",
+          "options": {
+            "A": "to go up and down",
+            "B": "to stop rising or falling",
+            "C": "to become higher than something that was higher",
+            "D": "a small, unimportant difference",
+            "E": "to fall suddenly and by a large amount",
+            "F": "an increase that is slow and regular",
+            "G": "to rise suddenly and by a large amount",
+            "H": "to make up a part of a total"
+          },
+          "answer": "F",
+          "explain": "a steady climb = tăng đều đặn."
+        },
+        {
+          "id": "s2_3",
+          "q": "3. surge",
+          "options": {
+            "A": "to go up and down",
+            "B": "to stop rising or falling",
+            "C": "to become higher than something that was higher",
+            "D": "a small, unimportant difference",
+            "E": "to fall suddenly and by a large amount",
+            "F": "an increase that is slow and regular",
+            "G": "to rise suddenly and by a large amount",
+            "H": "to make up a part of a total"
+          },
+          "answer": "G",
+          "explain": "surge = tăng vọt."
+        },
+        {
+          "id": "s2_4",
+          "q": "4. plummet",
+          "options": {
+            "A": "to go up and down",
+            "B": "to stop rising or falling",
+            "C": "to become higher than something that was higher",
+            "D": "a small, unimportant difference",
+            "E": "to fall suddenly and by a large amount",
+            "F": "an increase that is slow and regular",
+            "G": "to rise suddenly and by a large amount",
+            "H": "to make up a part of a total"
+          },
+          "answer": "E",
+          "explain": "plummet = lao dốc."
+        },
+        {
+          "id": "s2_5",
+          "q": "5. level off",
+          "options": {
+            "A": "to go up and down",
+            "B": "to stop rising or falling",
+            "C": "to become higher than something that was higher",
+            "D": "a small, unimportant difference",
+            "E": "to fall suddenly and by a large amount",
+            "F": "an increase that is slow and regular",
+            "G": "to rise suddenly and by a large amount",
+            "H": "to make up a part of a total"
+          },
+          "answer": "B",
+          "explain": "level off = chững lại."
+        },
+        {
+          "id": "s2_6",
+          "q": "6. account for",
+          "options": {
+            "A": "to go up and down",
+            "B": "to stop rising or falling",
+            "C": "to become higher than something that was higher",
+            "D": "a small, unimportant difference",
+            "E": "to fall suddenly and by a large amount",
+            "F": "an increase that is slow and regular",
+            "G": "to rise suddenly and by a large amount",
+            "H": "to make up a part of a total"
+          },
+          "answer": "H",
+          "explain": "account for = chiếm (tỉ lệ)."
+        },
+        {
+          "id": "s2_7",
+          "q": "7. fluctuate",
+          "options": {
+            "A": "to go up and down",
+            "B": "to stop rising or falling",
+            "C": "to become higher than something that was higher",
+            "D": "a small, unimportant difference",
+            "E": "to fall suddenly and by a large amount",
+            "F": "an increase that is slow and regular",
+            "G": "to rise suddenly and by a large amount",
+            "H": "to make up a part of a total"
+          },
+          "answer": "A",
+          "explain": "fluctuate = dao động lên xuống."
+        },
+        {
+          "id": "s2_8",
+          "q": "8. overtake",
+          "options": {
+            "A": "to go up and down",
+            "B": "to stop rising or falling",
+            "C": "to become higher than something that was higher",
+            "D": "a small, unimportant difference",
+            "E": "to fall suddenly and by a large amount",
+            "F": "an increase that is slow and regular",
+            "G": "to rise suddenly and by a large amount",
+            "H": "to make up a part of a total"
+          },
+          "answer": "C",
+          "explain": "overtake = vượt qua."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Reading: matching information (8 min)",
+      "minutes": 8,
+      "instructions": "Read the passage. Which paragraph, A–D, contains the following information? Write A, B, C or D. You may use any letter more than once. Underline the evidence in the paragraph.",
+      "kind": "fill",
+      "passage": "Local newspapers: a disappearing service\n\nA. Over the last twenty years, thousands of local newspapers around the world have stopped publishing. In the UK alone, more than 300 titles have closed since 2005, leaving many towns with no local paper at all.\n\nB. The main reason is simple. Readers no longer see the need to pay for news when so much of it appears free on their phones. At the same time, advertisers, who once paid newspapers for space, have moved most of their money to search engines and social media.\n\nC. The result has been a steady loss of jobs. With less income, newsrooms have cut staff, and many journalists who stayed now cover three or four stories a day instead of one. In several towns, nobody attends council meetings any more, so decisions are made without public scrutiny.\n\nD. Not every paper has failed. The Valley Echo, a small weekly in Wales, closed its print edition in 2018 and became an online-only title with a monthly subscription. Today it has 6,000 paying readers and has hired two new reporters. Its editor says other papers could survive if they offered something that readers cannot find for free.",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. a reason why people stopped buying newspapers  ______",
+          "fields": [
+            {
+              "answer": "B"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn B, Readers no longer see the need to pay for news. Bẫy: đoạn A có no local paper nhưng không nêu lý do."
+        },
+        {
+          "id": "s3_2",
+          "label": "2. an example of a newspaper that managed to survive  ______",
+          "fields": [
+            {
+              "answer": "D"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn D, The Valley Echo ... became an online-only title."
+        },
+        {
+          "id": "s3_3",
+          "label": "3. the effect of lower income on journalists  ______",
+          "fields": [
+            {
+              "answer": "C"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn C, newsrooms have cut staff ... cover three or four stories a day."
+        },
+        {
+          "id": "s3_4",
+          "label": "4. how many local newspapers have closed in the UK  ______",
+          "fields": [
+            {
+              "answer": "A"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn A, more than 300 titles have closed since 2005."
+        },
+        {
+          "id": "s3_5",
+          "label": "5. a change in the way advertisers spend money  ______",
+          "fields": [
+            {
+              "answer": "B"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn B, advertisers ... moved most of their money to search engines and social media. Bẫy: đoạn D có subscription nhưng không nói về quảng cáo."
+        }
+      ]
+    }
+  ],
+  "send_today": "Ảnh Step 1, 2 và 3 gửi lên Zalo trước giờ học, nhắn Done + tên + Thứ 3.",
+  "error_type": "reading"
+}
