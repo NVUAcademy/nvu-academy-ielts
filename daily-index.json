@@ -753,6 +753,71 @@
       "class_codes": [
         "FOUNDATION11"
       ]
+    },
+    {
+      "id": "w5-mon-ielts14",
+      "file": "daily-w5-mon-ielts14.json",
+      "title": "Monday Daily Practice",
+      "subtitle": "Trend words (surge, plummet, level off) and Body 1 for a table about apps",
+      "day": "monday",
+      "date": "2026-11-23",
+      "week_number": 5,
+      "section": "writing",
+      "class_codes": [
+        "IELTS14"
+      ]
+    },
+    {
+      "id": "w5-tue-ielts14",
+      "file": "daily-w5-tue-ielts14.json",
+      "title": "Tuesday Daily Practice",
+      "subtitle": "Class day: news words (seek out, encounter) and matching information about local newspapers",
+      "day": "tuesday",
+      "date": "2026-11-24",
+      "week_number": 5,
+      "section": "reading",
+      "class_codes": [
+        "IELTS14"
+      ]
+    },
+    {
+      "id": "w5-wed-ielts14",
+      "file": "daily-w5-wed-ielts14.json",
+      "title": "Wednesday Daily Practice",
+      "subtitle": "Media words (go viral, misinformation, reliability) and matching information about fact-checking",
+      "day": "wednesday",
+      "date": "2026-11-25",
+      "week_number": 5,
+      "section": "reading",
+      "class_codes": [
+        "IELTS14"
+      ]
+    },
+    {
+      "id": "w5-thu-ielts14",
+      "file": "daily-w5-thu-ielts14.json",
+      "title": "Thursday Daily Practice",
+      "subtitle": "News words review and Overview + Body 1 for a table about newspaper readers",
+      "day": "thursday",
+      "date": "2026-11-26",
+      "week_number": 5,
+      "section": "writing",
+      "class_codes": [
+        "IELTS14"
+      ]
+    },
+    {
+      "id": "w5-fri-ielts14",
+      "file": "daily-w5-fri-ielts14.json",
+      "title": "Friday Daily Practice",
+      "subtitle": "Weekly quiz 5 (20 marks): words, Task 1 grouping, matching information and the passive",
+      "day": "friday",
+      "date": "2026-11-27",
+      "week_number": 5,
+      "section": "writing",
+      "class_codes": [
+        "IELTS14"
+      ]
     }
   ]
 }

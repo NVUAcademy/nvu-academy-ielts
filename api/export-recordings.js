@@ -133,9 +133,12 @@ module.exports = async function handler(req, res) {
       const meow = require('../lib/meow-auto.js');
       const site = process.env.SITE_URL || 'https://nvu-academy-ielts.vercel.app';
       const { rows, summary } = await meow.computeMeow(day, site);
-      if (q.dry) return res.status(200).json({ ok: true, dry: true, day, summary, would_write: rows.length });
+      /* Ngày được gia hạn (lib/meow-auto.js DEADLINE_EXTEND) chấm vào đêm sau hạn mới, cùng lượt với ngày hôm trước */
+      const extended = q.date ? [] : meow.extendedDaysEndingOn(day).filter(d => d !== day);
+      for (const d of extended) { const r = await meow.computeMeow(d, site); rows.push(...r.rows); summary['extended ' + d] = r.summary; }
+      if (q.dry) return res.status(200).json({ ok: true, dry: true, day, extended, summary, would_write: rows.length });
       const written = await meow.writeMeow(rows);
-      return res.status(200).json({ ok: true, day, written, summary });
+      return res.status(200).json({ ok: true, day, extended, written, summary });
     }
 
     for (const k of ['GOOGLE_SA_JSON', 'DRIVE_FOLDERS', 'SUPABASE_URL', 'SUPABASE_SERVICE_KEY']) if (!process.env[k]) return res.status(500).json({ ok: false, error: 'Thiếu biến môi trường ' + k + ' trên Vercel' });

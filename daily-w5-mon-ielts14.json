@@ -1,0 +1,266 @@
+{
+  "id": "w5-mon-ielts14",
+  "title": "Monday Daily Practice",
+  "subtitle": "Trend words (surge, plummet, level off) and Body 1 for a table about apps",
+  "theme": "Lesson 6 · Grouping data and body paragraphs",
+  "source": "Daily Practice Week 5 và Weekly Quiz Week 5 (print/W5/src), đáp án theo bản Key của thầy.",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 5,
+  "day": "monday",
+  "date": "2026-11-23",
+  "section": "writing",
+  "minutes": 15,
+  "intro": "Làm lần lượt các bước, khoảng 15 phút. Từ vựng hôm nay: 10 từ mới + 5 từ ôn. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocab Quest Part A (4 min)",
+      "minutes": 4,
+      "instructions": "Fill each gap with one phrase from the box, in the correct form. Use each phrase once. Box: stand at · fluctuate · overtake · surge · account for · soar · plummet · level off",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. Online sales ______ from 5 to 30 million in two years.",
+          "fields": [
+            {
+              "answer": "surged"
+            }
+          ],
+          "explain": "surge = tăng vọt."
+        },
+        {
+          "id": "s1_2",
+          "label": "2. Print sales ______ to just 2 million after 2015.",
+          "fields": [
+            {
+              "answer": "plummeted"
+            }
+          ],
+          "explain": "plummet = lao dốc."
+        },
+        {
+          "id": "s1_3",
+          "label": "3. The figure ______ at 60 and did not rise again.",
+          "fields": [
+            {
+              "answer": "levelled off",
+              "accept": [
+                "leveled off"
+              ]
+            }
+          ],
+          "explain": "level off = chững lại."
+        },
+        {
+          "id": "s1_4",
+          "label": "4. Last year, women ______ 40% of all students.",
+          "fields": [
+            {
+              "answer": "accounted for"
+            }
+          ],
+          "explain": "account for = chiếm (tỉ lệ)."
+        },
+        {
+          "id": "s1_5",
+          "label": "5. The rate ______ 25% in 2020.",
+          "fields": [
+            {
+              "answer": "stood at"
+            }
+          ],
+          "explain": "stand at = ở mức."
+        },
+        {
+          "id": "s1_6",
+          "label": "6. Prices ______ between 20 and 30 dollars all year.",
+          "fields": [
+            {
+              "answer": "fluctuated"
+            }
+          ],
+          "explain": "fluctuate = dao động lên xuống."
+        },
+        {
+          "id": "s1_7",
+          "label": "7. House prices ______ in 2021, reaching a record high.",
+          "fields": [
+            {
+              "answer": "soared"
+            }
+          ],
+          "explain": "soar = tăng vọt lên cao."
+        },
+        {
+          "id": "s1_8",
+          "label": "8. In 2015, online news ______ television as the main source.",
+          "fields": [
+            {
+              "answer": "overtook"
+            }
+          ],
+          "explain": "overtake = vượt qua."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Vocab Quest Part B (2 min)",
+      "minutes": 2,
+      "instructions": "Choose the correct meaning (A–G) for each word or phrase.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "1. plateau",
+          "options": {
+            "A": "a person who takes part in an activity",
+            "B": "to deal with a difficult situation",
+            "C": "to fall by a small amount",
+            "D": "a long trip with a clear purpose",
+            "E": "to judge how good or bad something is",
+            "F": "a period when a number stays the same",
+            "G": "the state of being alone or apart from others"
+          },
+          "answer": "F",
+          "explain": "plateau = giai đoạn đi ngang."
+        },
+        {
+          "id": "s2_2",
+          "q": "2. dip",
+          "options": {
+            "A": "a person who takes part in an activity",
+            "B": "to deal with a difficult situation",
+            "C": "to fall by a small amount",
+            "D": "a long trip with a clear purpose",
+            "E": "to judge how good or bad something is",
+            "F": "a period when a number stays the same",
+            "G": "the state of being alone or apart from others"
+          },
+          "answer": "C",
+          "explain": "dip = giảm nhẹ."
+        },
+        {
+          "id": "s2_3",
+          "q": "3. expedition",
+          "options": {
+            "A": "a person who takes part in an activity",
+            "B": "to deal with a difficult situation",
+            "C": "to fall by a small amount",
+            "D": "a long trip with a clear purpose",
+            "E": "to judge how good or bad something is",
+            "F": "a period when a number stays the same",
+            "G": "the state of being alone or apart from others"
+          },
+          "answer": "D",
+          "explain": "expedition = chuyến thám hiểm."
+        },
+        {
+          "id": "s2_4",
+          "q": "4. isolation",
+          "options": {
+            "A": "a person who takes part in an activity",
+            "B": "to deal with a difficult situation",
+            "C": "to fall by a small amount",
+            "D": "a long trip with a clear purpose",
+            "E": "to judge how good or bad something is",
+            "F": "a period when a number stays the same",
+            "G": "the state of being alone or apart from others"
+          },
+          "answer": "G",
+          "explain": "isolation = sự cô lập."
+        },
+        {
+          "id": "s2_5",
+          "q": "5. participant",
+          "options": {
+            "A": "a person who takes part in an activity",
+            "B": "to deal with a difficult situation",
+            "C": "to fall by a small amount",
+            "D": "a long trip with a clear purpose",
+            "E": "to judge how good or bad something is",
+            "F": "a period when a number stays the same",
+            "G": "the state of being alone or apart from others"
+          },
+          "answer": "A",
+          "explain": "participant = người tham gia."
+        },
+        {
+          "id": "s2_6",
+          "q": "6. cope with",
+          "options": {
+            "A": "a person who takes part in an activity",
+            "B": "to deal with a difficult situation",
+            "C": "to fall by a small amount",
+            "D": "a long trip with a clear purpose",
+            "E": "to judge how good or bad something is",
+            "F": "a period when a number stays the same",
+            "G": "the state of being alone or apart from others"
+          },
+          "answer": "B",
+          "explain": "cope with = đối phó, xoay xở."
+        },
+        {
+          "id": "s2_7",
+          "q": "7. assess",
+          "options": {
+            "A": "a person who takes part in an activity",
+            "B": "to deal with a difficult situation",
+            "C": "to fall by a small amount",
+            "D": "a long trip with a clear purpose",
+            "E": "to judge how good or bad something is",
+            "F": "a period when a number stays the same",
+            "G": "the state of being alone or apart from others"
+          },
+          "answer": "E",
+          "explain": "assess = đánh giá."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Group the data and write Body 1 (9 min)",
+      "minutes": 9,
+      "instructions": "Look at the table: hours per week that teenagers spent on four apps. (a) Group the four apps into two groups by trend (2 min). (b) Write Body 1 for the group that rose the most (7 min). Use a topic sentence, start, change, end and one comparison. Use at least 2 phrases from Step 1. Support: Body 1: TikTok and YouTube ______. TikTok started at ______ in 2013, ______ to ______ in 2016, and ______ to ______ in 2022.",
+      "kind": "open",
+      "images": [
+        {
+          "src": "images/w5-mon-apps.png",
+          "alt": "Table: hours per week teenagers spent on Facebook, TikTok, Instagram and YouTube, 2013 to 2022"
+        }
+      ],
+      "open": [
+        {
+          "id": "s3_1",
+          "q": "(a) Two groups and the trend of each group",
+          "model": "Group 1: TikTok and YouTube (rose). Group 2: Facebook (fell) and Instagram (rose slightly, then stayed stable). Another grouping is fine if the reason is clear."
+        },
+        {
+          "id": "s3_2",
+          "q": "(b) Body 1 for the group that rose the most",
+          "model": "TikTok and YouTube were the two apps that rose. TikTok started at zero hours in 2013, rose to 1 hour in 2016, and then surged to 10 hours in 2022. YouTube showed a steadier increase, climbing from 4 hours to 9 hours over the same period, so it was overtaken by TikTok in the final year.",
+          "ai": {
+            "type": "Body 1 cho Task 1 table (nhóm số liệu)",
+            "level": "Intermediate (B1 đến B2)",
+            "min_words": 40,
+            "task": "The table shows hours per week that teenagers spent on four apps (Facebook, TikTok, Instagram, YouTube) in 2013, 2016, 2019 and 2022. Write Body 1 for the group of apps that rose the most (TikTok: 0, 1, 5, 10; YouTube: 4, 5, 7, 9).",
+            "criteria": [
+              "có câu chủ đề nêu nhóm và xu hướng",
+              "có số liệu điểm đầu, thay đổi và điểm cuối",
+              "có một câu so sánh giữa hai ứng dụng",
+              "dùng ít nhất 2 cụm từ của Step 1 (surge, overtake, soar...)",
+              "dùng thì quá khứ đúng",
+              "ngữ pháp và chính tả đúng"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "send_today": "Ảnh Step 1 và Step 2 + ảnh đoạn Body 1 gửi lên Zalo, nhắn Done + tên + Thứ 2.",
+  "error_type": "writing"
+}

@@ -1,0 +1,331 @@
+{
+  "id": "w5-wed-ielts14",
+  "title": "Wednesday Daily Practice",
+  "subtitle": "Media words (go viral, misinformation, reliability) and matching information about fact-checking",
+  "theme": "Lesson 7 · Matching information",
+  "source": "Daily Practice Week 5 và Weekly Quiz Week 5 (print/W5/src), đáp án theo bản Key của thầy.",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 5,
+  "day": "wednesday",
+  "date": "2026-11-25",
+  "section": "reading",
+  "minutes": 15,
+  "intro": "Làm lần lượt các bước, khoảng 15 phút. Từ vựng hôm nay: 10 từ mới + 6 từ ôn. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocab Quest Part A (4 min)",
+      "minutes": 4,
+      "instructions": "Fill each gap with one phrase from the box, in the correct form. Use each phrase once. Box: biased · motivation · misinformation · go viral · on a weekly basis · breaking news · accidentally · reliability",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. Two-thirds of users read the news ______.",
+          "fields": [
+            {
+              "answer": "on a weekly basis"
+            }
+          ],
+          "explain": "on a weekly basis = hằng tuần."
+        },
+        {
+          "id": "s1_2",
+          "label": "2. Many young people see news ______ when they open social media.",
+          "fields": [
+            {
+              "answer": "accidentally"
+            }
+          ],
+          "explain": "accidentally = tình cờ, vô tình."
+        },
+        {
+          "id": "s1_3",
+          "label": "3. Experts check the ______ of a source before they quote it.",
+          "fields": [
+            {
+              "answer": "reliability"
+            }
+          ],
+          "explain": "reliability = độ tin cậy."
+        },
+        {
+          "id": "s1_4",
+          "label": "4. Her main ______ for reading the news is to talk with friends.",
+          "fields": [
+            {
+              "answer": "motivation"
+            }
+          ],
+          "explain": "motivation = động lực."
+        },
+        {
+          "id": "s1_5",
+          "label": "5. I saw the ______ about the storm on my phone.",
+          "fields": [
+            {
+              "answer": "breaking news"
+            }
+          ],
+          "explain": "breaking news = tin nóng."
+        },
+        {
+          "id": "s1_6",
+          "label": "6. Some reports are clearly ______ in favour of one party.",
+          "fields": [
+            {
+              "answer": "biased"
+            }
+          ],
+          "explain": "biased = thiên vị."
+        },
+        {
+          "id": "s1_7",
+          "label": "7. The video will ______ if enough people share it.",
+          "fields": [
+            {
+              "answer": "go viral"
+            }
+          ],
+          "explain": "go viral = lan truyền chóng mặt."
+        },
+        {
+          "id": "s1_8",
+          "label": "8. ______ spreads fast when nobody checks the facts.",
+          "fields": [
+            {
+              "answer": "Misinformation"
+            }
+          ],
+          "explain": "misinformation = thông tin sai lệch."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Vocab Quest Part B (2 min)",
+      "minutes": 2,
+      "instructions": "Choose the correct meaning (A–H) for each word or phrase.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "1. significance",
+          "options": {
+            "A": "to meet or find something without planning",
+            "B": "a feeling that you must do something because it is right",
+            "C": "without being affected by something",
+            "D": "a person or place that gives facts you can trust",
+            "E": "importance",
+            "F": "not interested or involved",
+            "G": "to look for something on purpose",
+            "H": "in a careful way, choosing only some things"
+          },
+          "answer": "E",
+          "explain": "significance = tầm quan trọng."
+        },
+        {
+          "id": "s2_2",
+          "q": "2. reliable source",
+          "options": {
+            "A": "to meet or find something without planning",
+            "B": "a feeling that you must do something because it is right",
+            "C": "without being affected by something",
+            "D": "a person or place that gives facts you can trust",
+            "E": "importance",
+            "F": "not interested or involved",
+            "G": "to look for something on purpose",
+            "H": "in a careful way, choosing only some things"
+          },
+          "answer": "D",
+          "explain": "reliable source = nguồn đáng tin."
+        },
+        {
+          "id": "s2_3",
+          "q": "3. disengaged",
+          "options": {
+            "A": "to meet or find something without planning",
+            "B": "a feeling that you must do something because it is right",
+            "C": "without being affected by something",
+            "D": "a person or place that gives facts you can trust",
+            "E": "importance",
+            "F": "not interested or involved",
+            "G": "to look for something on purpose",
+            "H": "in a careful way, choosing only some things"
+          },
+          "answer": "F",
+          "explain": "disengaged = thờ ơ, không quan tâm."
+        },
+        {
+          "id": "s2_4",
+          "q": "4. seek out",
+          "options": {
+            "A": "to meet or find something without planning",
+            "B": "a feeling that you must do something because it is right",
+            "C": "without being affected by something",
+            "D": "a person or place that gives facts you can trust",
+            "E": "importance",
+            "F": "not interested or involved",
+            "G": "to look for something on purpose",
+            "H": "in a careful way, choosing only some things"
+          },
+          "answer": "G",
+          "explain": "seek out = chủ động tìm."
+        },
+        {
+          "id": "s2_5",
+          "q": "5. encounter",
+          "options": {
+            "A": "to meet or find something without planning",
+            "B": "a feeling that you must do something because it is right",
+            "C": "without being affected by something",
+            "D": "a person or place that gives facts you can trust",
+            "E": "importance",
+            "F": "not interested or involved",
+            "G": "to look for something on purpose",
+            "H": "in a careful way, choosing only some things"
+          },
+          "answer": "A",
+          "explain": "encounter = tình cờ gặp."
+        },
+        {
+          "id": "s2_6",
+          "q": "6. selectively",
+          "options": {
+            "A": "to meet or find something without planning",
+            "B": "a feeling that you must do something because it is right",
+            "C": "without being affected by something",
+            "D": "a person or place that gives facts you can trust",
+            "E": "importance",
+            "F": "not interested or involved",
+            "G": "to look for something on purpose",
+            "H": "in a careful way, choosing only some things"
+          },
+          "answer": "H",
+          "explain": "selectively = có chọn lọc."
+        },
+        {
+          "id": "s2_7",
+          "q": "7. a sense of duty",
+          "options": {
+            "A": "to meet or find something without planning",
+            "B": "a feeling that you must do something because it is right",
+            "C": "without being affected by something",
+            "D": "a person or place that gives facts you can trust",
+            "E": "importance",
+            "F": "not interested or involved",
+            "G": "to look for something on purpose",
+            "H": "in a careful way, choosing only some things"
+          },
+          "answer": "B",
+          "explain": "a sense of duty = ý thức bổn phận."
+        },
+        {
+          "id": "s2_8",
+          "q": "8. regardless of",
+          "options": {
+            "A": "to meet or find something without planning",
+            "B": "a feeling that you must do something because it is right",
+            "C": "without being affected by something",
+            "D": "a person or place that gives facts you can trust",
+            "E": "importance",
+            "F": "not interested or involved",
+            "G": "to look for something on purpose",
+            "H": "in a careful way, choosing only some things"
+          },
+          "answer": "C",
+          "explain": "regardless of = bất kể."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Reading: matching information (8 min)",
+      "minutes": 8,
+      "instructions": "Read the passage. Which paragraph, A–E, contains the following information? Write A, B, C, D or E. You may use any letter more than once. Some letters may not be used. Underline the evidence in the paragraph.",
+      "kind": "fill",
+      "passage": "Fact-checking in the age of misinformation\n\nA. Fact-checking websites have grown quickly. In 2014 there were about 40 organisations around the world that checked public claims; today there are more than 300. Well-known examples include Snopes in the United States and Full Fact in the UK.\n\nB. A typical fact-check follows three steps. First, the checker chooses a claim that has been widely shared. Second, they look for the original source of the claim and ask experts about it. Finally, they publish a rating, such as 'true', 'misleading' or 'false', with links to the evidence.\n\nC. Not everyone trusts fact-checkers. Some critics argue that checkers choose the claims they prefer to examine, so their work can be biased towards one political side. Others complain that a 'false' rating arrives too late, after the story has already been seen by millions.\n\nD. One reason false stories spread so easily is that they are surprising. A study of 126,000 stories on Twitter found that false news reached people about six times faster than true news. People often share a shocking headline without reading the article, because they want to warn their friends or feel part of the conversation.\n\nE. The idea of verifying stories is not new. In the nineteenth century, some newspaper editors employed staff whose only job was to check names, dates and quotations before printing. Today that task is shared between professionals and ordinary readers.",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. a criticism of fact-checking organisations  ______",
+          "fields": [
+            {
+              "answer": "C"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn C, Some critics argue ... biased towards one political side."
+        },
+        {
+          "id": "s3_2",
+          "label": "2. the reasons why people share false stories  ______",
+          "fields": [
+            {
+              "answer": "D"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn D, People often share a shocking headline ... because they want to warn their friends."
+        },
+        {
+          "id": "s3_3",
+          "label": "3. a statistic about how quickly false news travels  ______",
+          "fields": [
+            {
+              "answer": "D"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn D, false news reached people about six times faster than true news. Bẫy: đoạn C có millions nhưng không nói về tốc độ."
+        },
+        {
+          "id": "s3_4",
+          "label": "4. the stages a fact-checker goes through  ______",
+          "fields": [
+            {
+              "answer": "B"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn B, three steps. First ... Second ... Finally."
+        },
+        {
+          "id": "s3_5",
+          "label": "5. how many fact-checking organisations exist now  ______",
+          "fields": [
+            {
+              "answer": "A"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn A, today there are more than 300."
+        },
+        {
+          "id": "s3_6",
+          "label": "6. an example of a website that checks claims  ______",
+          "fields": [
+            {
+              "answer": "A"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn A, Snopes ... and Full Fact. Bẫy: đoạn E nói về việc kiểm tra tin ở thế kỷ 19, không phải một trang web."
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Error Log (1 min)",
+      "minutes": 1,
+      "instructions": "Write one Error Log line: which question in Step 3 you lost and why. Use: Question · My answer · Correct answer · Why.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s4_1",
+          "q": "Error Log (Question · My answer · Correct answer · Why)",
+          "model": "Q3 · C · D · Paragraph C has the word millions, but only paragraph D gives the speed: six times faster than true news."
+        }
+      ]
+    }
+  ],
+  "send_today": "Ảnh Step 1, 2 và 3 + dòng Error Log gửi lên Zalo, nhắn Done + tên + Thứ 4.",
+  "error_type": "reading"
+}

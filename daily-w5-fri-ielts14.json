@@ -1,0 +1,293 @@
+{
+  "id": "w5-fri-ielts14",
+  "title": "Friday Daily Practice",
+  "subtitle": "Weekly quiz 5 (20 marks): words, Task 1 grouping, matching information and the passive",
+  "theme": "Weekly Quiz Week 5",
+  "source": "Daily Practice Week 5 và Weekly Quiz Week 5 (print/W5/src), đáp án theo bản Key của thầy.",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 5,
+  "day": "friday",
+  "date": "2026-11-27",
+  "section": "writing",
+  "minutes": 30,
+  "intro": "Làm lần lượt các bước, khoảng 30 phút. Quiz 20 điểm, làm trong 30 phút, một mình, không xem tài liệu. Câu 11–12 (nhóm số liệu) thầy chấm, các câu còn lại web chấm tự động. Hạn nộp 00:00 đêm cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Part A: vocabulary 1–6 (6 marks, 5 min)",
+      "minutes": 5,
+      "instructions": "Fill each gap with one phrase from the box, in the correct form. Use each phrase once. Box: subscription · plummeted · accounted for · encounter · misinformation · reliable source",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. Fake stories and rumours are examples of ______.",
+          "fields": [
+            {
+              "answer": "misinformation"
+            }
+          ],
+          "explain": "misinformation = thông tin sai lệch."
+        },
+        {
+          "id": "s1_2",
+          "label": "2. Women ______ 55% of the students in the survey.",
+          "fields": [
+            {
+              "answer": "accounted for"
+            }
+          ],
+          "explain": "account for = chiếm (tỉ lệ)."
+        },
+        {
+          "id": "s1_3",
+          "label": "3. We often ______ news online by accident.",
+          "fields": [
+            {
+              "answer": "encounter"
+            }
+          ],
+          "explain": "encounter = tình cờ gặp."
+        },
+        {
+          "id": "s1_4",
+          "label": "4. A government website is a ______; a rumour is not.",
+          "fields": [
+            {
+              "answer": "reliable source"
+            }
+          ],
+          "explain": "reliable source = nguồn đáng tin."
+        },
+        {
+          "id": "s1_5",
+          "label": "5. Print sales ______ from 40 to 5 minutes a day.",
+          "fields": [
+            {
+              "answer": "plummeted"
+            }
+          ],
+          "explain": "plummet = lao dốc."
+        },
+        {
+          "id": "s1_6",
+          "label": "6. A digital ______ to the paper costs $5 a month.",
+          "fields": [
+            {
+              "answer": "subscription"
+            }
+          ],
+          "explain": "subscription = đăng ký thuê bao."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Part A: meanings 7–10 (4 marks, 3 min)",
+      "minutes": 3,
+      "instructions": "Choose the correct meaning (A–D) for each word or phrase.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "7. selectively",
+          "options": {
+            "A": "a feeling that you must do something because it is right",
+            "B": "without being affected by something",
+            "C": "in a careful way, choosing only some things",
+            "D": "a period when a number stays the same"
+          },
+          "answer": "C",
+          "explain": "selectively = có chọn lọc."
+        },
+        {
+          "id": "s2_2",
+          "q": "8. plateau",
+          "options": {
+            "A": "a feeling that you must do something because it is right",
+            "B": "without being affected by something",
+            "C": "in a careful way, choosing only some things",
+            "D": "a period when a number stays the same"
+          },
+          "answer": "D",
+          "explain": "plateau = giai đoạn đi ngang."
+        },
+        {
+          "id": "s2_3",
+          "q": "9. regardless of",
+          "options": {
+            "A": "a feeling that you must do something because it is right",
+            "B": "without being affected by something",
+            "C": "in a careful way, choosing only some things",
+            "D": "a period when a number stays the same"
+          },
+          "answer": "B",
+          "explain": "regardless of = bất kể."
+        },
+        {
+          "id": "s2_4",
+          "q": "10. a sense of duty",
+          "options": {
+            "A": "a feeling that you must do something because it is right",
+            "B": "without being affected by something",
+            "C": "in a careful way, choosing only some things",
+            "D": "a period when a number stays the same"
+          },
+          "answer": "A",
+          "explain": "a sense of duty = ý thức bổn phận."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Part B: group the data 11–12 (2 marks, 5 min)",
+      "minutes": 5,
+      "instructions": "The table shows litres of drink per person in one country. Group the four drinks into two groups by trend. Write the names and the trend of each group (1 mark each). Mr. Nam marks this part.",
+      "kind": "open",
+      "images": [
+        {
+          "src": "images/w5-fri-drinks.png",
+          "alt": "Table: litres of coffee, tea, juice and water per person in 2000, 2010 and 2020"
+        }
+      ],
+      "open": [
+        {
+          "id": "s3_1",
+          "q": "11–12. Two groups and the trend of each group",
+          "model": "Group 1: Coffee and Water rose. Group 2: Tea fell and Juice stayed stable. Another grouping is fine if the reason is correct."
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Part B: prepositions 13–14 (2 marks, 2 min)",
+      "minutes": 2,
+      "instructions": "Choose the correct words.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s4_1",
+          "q": "13. Sales rose ______ 20 million ______ 35 million.",
+          "options": {
+            "A": "by … to",
+            "B": "from … to",
+            "C": "at … by"
+          },
+          "answer": "B",
+          "explain": "from … to: từ mức này đến mức kia."
+        },
+        {
+          "id": "s4_2",
+          "q": "14. The number of visitors increased ______ 5% in 2020.",
+          "options": {
+            "A": "by",
+            "B": "of",
+            "C": "to"
+          },
+          "answer": "A",
+          "explain": "increase by + mức thay đổi."
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Part B: correct the mistake 15 (1 mark, 2 min)",
+      "minutes": 2,
+      "instructions": "Rewrite the sentence correctly.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s5_1",
+          "label": "15. The number of tourists was rise. → ______",
+          "fields": [
+            {
+              "answer": "The number of tourists rose.",
+              "accept": [
+                "The number of tourists rose",
+                "The number of tourists increased.",
+                "The number of tourists increased"
+              ]
+            }
+          ],
+          "explain": "Không dùng was + rise. Dùng động từ quá khứ: rose (hoặc increased)."
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "title": "Step 6 · Part C: reading, matching information 16–18 (3 marks, 8 min)",
+      "minutes": 8,
+      "instructions": "Read the passage. Which paragraph, A–D, contains the following information? Write A, B, C or D. You may use any letter more than once. One letter is not used.",
+      "kind": "fill",
+      "passage": "Podcasts as a news source\n\nA. Podcasts have become a popular way to follow the news. According to a recent survey, the number of adults who listen to a news podcast every week has doubled in five years, from 6 million to 12 million.\n\nB. Listeners say the main attraction is convenience. A podcast can be played on a commute, in the gym or while cooking, so people can keep up to date without sitting in front of a screen. Many also like that most episodes are free.\n\nC. However, podcasts have a weakness. Unlike newspapers, most shows have no editor who checks the facts before they are published, so mistakes and rumours can spread easily. Some hosts also give their own opinions without saying so.\n\nD. Experts expect the audience to keep growing. They predict that within three years, one in four adults will listen to a news podcast at least once a month.",
+      "items": [
+        {
+          "id": "s6_1",
+          "label": "16. a problem with podcasts  ______",
+          "fields": [
+            {
+              "answer": "C"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn C, most shows have no editor who checks the facts."
+        },
+        {
+          "id": "s6_2",
+          "label": "17. a reason why people enjoy listening while they do other things  ______",
+          "fields": [
+            {
+              "answer": "B"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn B, played on a commute, in the gym or while cooking."
+        },
+        {
+          "id": "s6_3",
+          "label": "18. the number of weekly listeners  ______",
+          "fields": [
+            {
+              "answer": "A"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn A, from 6 million to 12 million. Bẫy: đoạn D có one in four adults, nhưng đó là dự đoán, không phải số người nghe hằng tuần."
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "title": "Step 7 · Part D: passive 19–20 (2 marks, 3 min)",
+      "minutes": 3,
+      "instructions": "Choose the correct passive sentence.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s7_1",
+          "q": "19. Researchers found the story to be false.",
+          "options": {
+            "A": "The story was found to be false by researchers.",
+            "B": "The story found to be false by researchers.",
+            "C": "The story has found to be false by researchers."
+          },
+          "answer": "A",
+          "explain": "Bị động quá khứ đơn: was + found."
+        },
+        {
+          "id": "s7_2",
+          "q": "20. Many people are sharing the video.",
+          "options": {
+            "A": "The video shared by many people.",
+            "B": "The video is sharing by many people.",
+            "C": "The video is being shared by many people."
+          },
+          "answer": "C",
+          "explain": "Bị động hiện tại tiếp diễn: is being + shared."
+        }
+      ]
+    }
+  ],
+  "send_today": "Ảnh bài làm + điểm trên 20 gửi lên Zalo, nhắn Done + tên + Thứ 6. Thầy gửi đáp án lúc 23:00.",
+  "error_type": "grammar"
+}
