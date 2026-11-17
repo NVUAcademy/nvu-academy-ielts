@@ -1,0 +1,241 @@
+{
+ "id": "w5-mon-ielts13",
+ "title": "Monday Daily Practice",
+ "subtitle": "Vocab Quest review (P3 words) and Writing Task 1: line graph intro + overview",
+ "theme": "Bù tuần 16–22/11 · Writing Task 1 line graph (chuẩn bị P5)",
+ "source": "Daily Practice bù 16/11, soạn mới cho IELTS13; từ ôn lấy từ P3.",
+ "class_codes": [
+  "IELTS13"
+ ],
+ "week_number": 5,
+ "day": "monday",
+ "date": "2026-11-16",
+ "section": "writing",
+ "minutes": 16,
+ "intro": "Làm lần lượt các bước, khoảng 16 phút. Hôm nay: Vocab Quest ôn 10 từ của P3 và một kỹ năng: Writing Task 1 (line graph). Hạn nộp 23:59 ngày 17/11 (bài bù, vẫn tính chuỗi ngày và Tiền Meow): đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+ "audio": {},
+ "send_today": "Hoàn thành các bước trên web. Bài Writing ở Step 3 được thầy chấm. Voice note đọc Overview ở Step 4.",
+ "error_type": "writing",
+ "steps": [
+  {
+   "id": "s1",
+   "title": "Step 1 · Vocab Quest: choose the meaning (3 min)",
+   "minutes": 3,
+   "kind": "mcq",
+   "instructions": "Review words from P3 (10): major in = học chuyên ngành · pursue = theo đuổi · internship = đợt thực tập · hands-on = thực hành, làm trực tiếp · deadline = hạn chót · acquire = tiếp thu, đạt được (kỹ năng) · flexible = linh hoạt · passionate about = đam mê · fulfilling = mang lại cảm giác ý nghĩa, thỏa mãn · overwhelmed = quá tải, choáng ngợp. Choose the correct meaning (A, B, C or D) for each word.",
+   "items": [
+    {
+     "id": "s1_1",
+     "q": "1. pursue",
+     "options": {
+      "A": "học chuyên ngành",
+      "B": "đợt thực tập",
+      "C": "theo đuổi",
+      "D": "thực hành, làm trực tiếp"
+     },
+     "answer": "C",
+     "explain": "pursue = theo đuổi. Example: She wants to pursue a career in tourism."
+    },
+    {
+     "id": "s1_2",
+     "q": "2. deadline",
+     "options": {
+      "A": "hạn chót",
+      "B": "thực hành, làm trực tiếp",
+      "C": "tiếp thu, đạt được (kỹ năng)",
+      "D": "linh hoạt"
+     },
+     "answer": "A",
+     "explain": "deadline = hạn chót. Example: I always try to meet the deadline for my assignments."
+    },
+    {
+     "id": "s1_3",
+     "q": "3. hands-on",
+     "options": {
+      "A": "đam mê",
+      "B": "mang lại cảm giác ý nghĩa, thỏa mãn",
+      "C": "quá tải, choáng ngợp",
+      "D": "thực hành, làm trực tiếp"
+     },
+     "answer": "D",
+     "explain": "hands-on = thực hành, làm trực tiếp. Example: I prefer hands-on learning to long lectures."
+    },
+    {
+     "id": "s1_4",
+     "q": "4. major in",
+     "options": {
+      "A": "theo đuổi",
+      "B": "học chuyên ngành",
+      "C": "đợt thực tập",
+      "D": "thực hành, làm trực tiếp"
+     },
+     "answer": "B",
+     "explain": "major in = học chuyên ngành. Example: I major in Business at a university in Hanoi."
+    },
+    {
+     "id": "s1_5",
+     "q": "5. overwhelmed",
+     "options": {
+      "A": "thực hành, làm trực tiếp",
+      "B": "hạn chót",
+      "C": "tiếp thu, đạt được (kỹ năng)",
+      "D": "quá tải, choáng ngợp"
+     },
+     "answer": "D",
+     "explain": "overwhelmed = quá tải, choáng ngợp. Example: I felt overwhelmed in my first week at university."
+    },
+    {
+     "id": "s1_6",
+     "q": "6. acquire",
+     "options": {
+      "A": "tiếp thu, đạt được (kỹ năng)",
+      "B": "đam mê",
+      "C": "mang lại cảm giác ý nghĩa, thỏa mãn",
+      "D": "quá tải, choáng ngợp"
+     },
+     "answer": "A",
+     "explain": "acquire = tiếp thu, đạt được (kỹ năng). Example: Students acquire new skills through group projects."
+    },
+    {
+     "id": "s1_7",
+     "q": "7. fulfilling",
+     "options": {
+      "A": "học chuyên ngành",
+      "B": "theo đuổi",
+      "C": "mang lại cảm giác ý nghĩa, thỏa mãn",
+      "D": "đợt thực tập"
+     },
+     "answer": "C",
+     "explain": "fulfilling = mang lại cảm giác ý nghĩa, thỏa mãn. Example: Teaching children is a fulfilling job."
+    },
+    {
+     "id": "s1_8",
+     "q": "8. internship",
+     "options": {
+      "A": "hạn chót",
+      "B": "đợt thực tập",
+      "C": "tiếp thu, đạt được (kỹ năng)",
+      "D": "linh hoạt"
+     },
+     "answer": "B",
+     "explain": "internship = đợt thực tập. Example: He did a three-month internship at a bank."
+    },
+    {
+     "id": "s1_9",
+     "q": "9. flexible",
+     "options": {
+      "A": "linh hoạt",
+      "B": "đam mê",
+      "C": "mang lại cảm giác ý nghĩa, thỏa mãn",
+      "D": "quá tải, choáng ngợp"
+     },
+     "answer": "A",
+     "explain": "flexible = linh hoạt. Example: A part-time job with flexible hours suits students."
+    },
+    {
+     "id": "s1_10",
+     "q": "10. passionate about",
+     "options": {
+      "A": "học chuyên ngành",
+      "B": "theo đuổi",
+      "C": "đợt thực tập",
+      "D": "đam mê"
+     },
+     "answer": "D",
+     "explain": "passionate about = đam mê. Example: My sister is passionate about photography."
+    }
+   ]
+  },
+  {
+   "id": "s2",
+   "title": "Step 2 · Trend grammar: past simple and prepositions (3 min)",
+   "minutes": 3,
+   "kind": "fill",
+   "instructions": "Complete the sentences about a line graph. Write ONE word in each gap: the past simple of the verb in brackets, or a preposition (from, to, by, at).",
+   "items": [
+    {
+     "id": "s2_1",
+     "label": "1. In 2010, the figure for buses ______ (stand) at 40%.",
+     "fields": [
+      {
+       "answer": "stood"
+      }
+     ]
+    },
+    {
+     "id": "s2_2",
+     "label": "2. The percentage of students who cycled ______ (rise) from 15% to 35%.",
+     "fields": [
+      {
+       "answer": "rose"
+      }
+     ]
+    },
+    {
+     "id": "s2_3",
+     "label": "3. Car use ______ (fall) sharply over the period.",
+     "fields": [
+      {
+       "answer": "fell"
+      }
+     ]
+    },
+    {
+     "id": "s2_4",
+     "label": "4. The figure for buses increased ______ 40% ______ 50%. (two words)",
+     "fields": [
+      {
+       "answer": "from"
+      },
+      {
+       "answer": "to"
+      }
+     ]
+    },
+    {
+     "id": "s2_5",
+     "label": "5. Car use dropped ______ 30 percentage points in 15 years.",
+     "fields": [
+      {
+       "answer": "by"
+      }
+     ]
+    },
+    {
+     "id": "s2_6",
+     "label": "6. In 2025, the bus figure was the highest, ______ 50%.",
+     "fields": [
+      {
+       "answer": "at"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s3",
+   "title": "Step 3 · Writing: intro + overview (9 min)",
+   "minutes": 9,
+   "kind": "open",
+   "instructions": "The line graph shows the percentage of students at a university who travelled to campus by bus, bicycle and car in 2010, 2015, 2020 and 2025. Data: Bus 40, 42, 45, 50 · Bicycle 15, 20, 28, 35 · Car 45, 38, 27, 15. Write the Intro + Overview (about 60 words). Checklist: intro paraphrases what, who, where and when · overview has 2 sentences (main trends + biggest change or highest figure) · no numbers in the overview · past simple. Support: The line graph illustrates the proportion of … who … between … and … · Overall, … while … · It is also clear that … Challenge: add one Body sentence with stood at and from … to.",
+   "open": [
+    {
+     "id": "s3_1",
+     "q": "Intro + Overview (about 60 words)",
+     "model": "The line graph illustrates the proportion of university students who travelled to campus by bus, bicycle and car between 2010 and 2025. Overall, the percentages of students who took the bus or cycled increased, while car use fell considerably. It is also clear that the car was the most popular choice at the start of the period, but the bus was the most common way to travel by the end."
+    }
+   ]
+  },
+  {
+   "id": "s4",
+   "title": "Step 4 · Voice note: read your Overview (30 s)",
+   "minutes": 1,
+   "kind": "voice",
+   "instructions": "Record yourself reading your Overview aloud, about 30 seconds. Say the final sounds clearly (-ed, -s).",
+   "lines": [
+    "Read your Overview aloud."
+   ],
+   "note": "Thầy nghe âm cuối và thì quá khứ."
+  }
+ ]
+}
