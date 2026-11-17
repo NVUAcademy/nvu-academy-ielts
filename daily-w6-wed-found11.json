@@ -1,0 +1,270 @@
+{
+  "id": "w6-wed-found11",
+  "title": "Wednesday Daily Practice",
+  "subtitle": "Mixed practice B8: choose the word, -s endings, quick grammar, 5 new words",
+  "theme": "Lesson 8 · Student life",
+  "source": "Foundation 11 lesson plan, week 6 (B8 Putting it all together, B9 Hobbies and free time), 2026-11-18",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 6,
+  "day": "wednesday",
+  "date": "2026-11-18",
+  "section": "grammar",
+  "minutes": 15,
+  "intro": "Five steps, about 15 minutes. Deadline: 23:00. Step 5 is a voice note. Vocab Quest: open Foundation Vocab Quest on the website and finish today's 18 words (Week 6).",
+  "audio": {},
+  "send_today": "Five steps on the website. The voice note is sent to the teacher when you press Submit.",
+  "error_type": "grammar",
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Choose the word",
+      "minutes": 3,
+      "instructions": "Choose the correct word.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s1_1",
+          "q": "1. I don't cook. I eat lunch in the ____ every day.",
+          "options": {
+            "A": "campus",
+            "B": "scholarship",
+            "C": "cafeteria"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s1_2",
+          "q": "2. She studies very well, so she gets a ____.",
+          "options": {
+            "A": "scholarship",
+            "B": "freshman",
+            "C": "study group"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s1_3",
+          "q": "3. Our university ____ is very big and green.",
+          "options": {
+            "A": "tuition fee",
+            "B": "campus",
+            "C": "group project"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s1_4",
+          "q": "4. Lan, Minh and I study together on Fridays. We are a ____.",
+          "options": {
+            "A": "hall of residence",
+            "B": "freshman",
+            "C": "study group"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s1_5",
+          "q": "5. Students from far away live in a ____.",
+          "options": {
+            "A": "hall of residence",
+            "B": "cafeteria",
+            "C": "tuition fee"
+          },
+          "answer": "A"
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · -s endings",
+      "minutes": 3,
+      "instructions": "Say each word aloud. Is the -s ending /s/, /z/ or /ɪz/?",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "1. lives",
+          "options": {
+            "A": "/s/",
+            "B": "/z/",
+            "C": "/ɪz/"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s2_2",
+          "q": "2. washes",
+          "options": {
+            "A": "/s/",
+            "B": "/z/",
+            "C": "/ɪz/"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s2_3",
+          "q": "3. walks",
+          "options": {
+            "A": "/s/",
+            "B": "/z/",
+            "C": "/ɪz/"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s2_4",
+          "q": "4. plays",
+          "options": {
+            "A": "/s/",
+            "B": "/z/",
+            "C": "/ɪz/"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s2_5",
+          "q": "5. watches",
+          "options": {
+            "A": "/s/",
+            "B": "/z/",
+            "C": "/ɪz/"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s2_6",
+          "q": "6. starts",
+          "options": {
+            "A": "/s/",
+            "B": "/z/",
+            "C": "/ɪz/"
+          },
+          "answer": "A"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Quick choice",
+      "minutes": 3,
+      "instructions": "Choose the correct answer.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s3_1",
+          "q": "1. There ____ a cafeteria near the library.",
+          "options": {
+            "A": "are",
+            "B": "is"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s3_2",
+          "q": "2. I have English ____ eight o'clock.",
+          "options": {
+            "A": "in",
+            "B": "on",
+            "C": "at"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s3_3",
+          "q": "3. ____ your sister live on campus?",
+          "options": {
+            "A": "Does",
+            "B": "Do"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s3_4",
+          "q": "4. My classes start ____ September.",
+          "options": {
+            "A": "at",
+            "B": "in",
+            "C": "on"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s3_5",
+          "q": "5. These ____ my books.",
+          "options": {
+            "A": "is",
+            "B": "are"
+          },
+          "answer": "B"
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Quick check: new words",
+      "minutes": 4,
+      "instructions": "New words today in Vocab Quest: attend · take notes · hand in · presentation · essay. Match 4 of them with their meaning.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s4_1",
+          "q": "1. take notes",
+          "options": {
+            "A": "go to a class or a lecture",
+            "B": "write down the important points",
+            "C": "a talk you give to the class",
+            "D": "give your work to the teacher"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s4_2",
+          "q": "2. hand in",
+          "options": {
+            "A": "go to a class or a lecture",
+            "B": "write down the important points",
+            "C": "a talk you give to the class",
+            "D": "give your work to the teacher"
+          },
+          "answer": "D"
+        },
+        {
+          "id": "s4_3",
+          "q": "3. presentation",
+          "options": {
+            "A": "go to a class or a lecture",
+            "B": "write down the important points",
+            "C": "a talk you give to the class",
+            "D": "give your work to the teacher"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s4_4",
+          "q": "4. attend",
+          "options": {
+            "A": "go to a class or a lecture",
+            "B": "write down the important points",
+            "C": "a talk you give to the class",
+            "D": "give your work to the teacher"
+          },
+          "answer": "A"
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Voice note",
+      "minutes": 2,
+      "instructions": "Answer the 2 questions. Say at least 2 sentences for each answer. Record one voice note.",
+      "kind": "voice",
+      "lines": [
+        "1. Do you work or study?",
+        "2. Do you live on campus?"
+      ],
+      "note": "Teacher listens for full answers and correct do / does."
+    }
+  ]
+}

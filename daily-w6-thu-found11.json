@@ -1,0 +1,202 @@
+{
+  "id": "w6-thu-found11",
+  "title": "Thursday Daily Practice",
+  "subtitle": "Speaking B8: write the word, Is / Are / Do / Does, Speaking Part 1",
+  "theme": "Speaking · Student life",
+  "source": "Foundation 11 lesson plan, week 6 (B8 Putting it all together, B9 Hobbies and free time), 2026-11-19",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 6,
+  "day": "thursday",
+  "date": "2026-11-19",
+  "section": "speaking",
+  "minutes": 15,
+  "intro": "Four steps, about 15 minutes. Deadline: 23:00. Step 4 is a voice note. Vocab Quest: open Foundation Vocab Quest on the website and finish today's 18 words (Week 6).",
+  "audio": {},
+  "send_today": "Four steps on the website. The voice note is sent to the teacher when you press Submit.",
+  "error_type": "speaking",
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Write the word",
+      "minutes": 3,
+      "instructions": "Read the clue and write the Lesson 8 word. The first letter is given.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. Students live in this building. (h)",
+          "fields": [
+            {
+              "answer": "hall of residence",
+              "accept": [
+                "halls of residence"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. You pay this money to study. (t)",
+          "fields": [
+            {
+              "answer": "tuition fee",
+              "accept": [
+                "tuition fees",
+                "tuition"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. The school gives you money because you study well. (s)",
+          "fields": [
+            {
+              "answer": "scholarship"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. A student in the first year. (f)",
+          "fields": [
+            {
+              "answer": "freshman"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. Students meet to study together. (s g)",
+          "fields": [
+            {
+              "answer": "study group"
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "6. You eat lunch here at university. (c)",
+          "fields": [
+            {
+              "answer": "cafeteria"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Is, Are, Do or Does?",
+      "minutes": 3,
+      "instructions": "Write Is, Are, Do or Does.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. ____ there a cafeteria on your campus?",
+          "fields": [
+            {
+              "answer": "Is"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. ____ you live in a hall of residence?",
+          "fields": [
+            {
+              "answer": "Do"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. ____ your friends in a study group?",
+          "fields": [
+            {
+              "answer": "Are"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. ____ your sister have a scholarship?",
+          "fields": [
+            {
+              "answer": "Does"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Quick check: new words",
+      "minutes": 4,
+      "instructions": "New words today in Vocab Quest: graduate · major in · lecture hall · join a club · make friends. Match 4 of them with their meaning.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s3_1",
+          "q": "1. graduate",
+          "options": {
+            "A": "study one main subject at university",
+            "B": "a big room for lectures",
+            "C": "finish university and get your degree",
+            "D": "meet new people and become friends"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s3_2",
+          "q": "2. major in",
+          "options": {
+            "A": "study one main subject at university",
+            "B": "a big room for lectures",
+            "C": "finish university and get your degree",
+            "D": "meet new people and become friends"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s3_3",
+          "q": "3. lecture hall",
+          "options": {
+            "A": "study one main subject at university",
+            "B": "a big room for lectures",
+            "C": "finish university and get your degree",
+            "D": "meet new people and become friends"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s3_4",
+          "q": "4. make friends",
+          "options": {
+            "A": "study one main subject at university",
+            "B": "a big room for lectures",
+            "C": "finish university and get your degree",
+            "D": "meet new people and become friends"
+          },
+          "answer": "D"
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Speaking Part 1",
+      "minutes": 5,
+      "instructions": "Answer the 3 questions. Give 2 or 3 sentences for each answer, with a reason (because ...). Use at least 2 Lesson 8 words. Record one voice note.",
+      "kind": "voice",
+      "lines": [
+        "1. Do you work or study?",
+        "2. What do you study?",
+        "3. Do you like your school or university? Why?"
+      ],
+      "note": "No fixed answer. Teacher listens for 2 to 3 sentences, because, Lesson 8 words, correct he/she -s."
+    }
+  ]
+}

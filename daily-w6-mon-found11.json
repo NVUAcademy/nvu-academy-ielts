@@ -1,0 +1,121 @@
+{
+  "id": "w6-mon-found11",
+  "title": "Monday Daily Practice",
+  "subtitle": "Class day B8: guess the 8 student life words, say them aloud",
+  "theme": "Lesson 8 · Student life",
+  "source": "Foundation 11 lesson plan, week 6 (B8 Putting it all together, B9 Hobbies and free time), 2026-11-16",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 6,
+  "day": "monday",
+  "date": "2026-11-16",
+  "section": "vocabulary",
+  "minutes": 15,
+  "intro": "Class day. 15-minute warm-up only. Do not submit. Bring your notes to class tonight. Vocab Quest: open Foundation Vocab Quest on the website and finish today's 18 words (Week 6).",
+  "audio": {},
+  "send_today": "Warm-up only. Do not submit.",
+  "error_type": "vocabulary",
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Guess the meaning",
+      "minutes": 6,
+      "instructions": "These are tonight's 8 new words. Choose the best meaning. It is OK to guess.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s1_1",
+          "q": "1. campus",
+          "options": {
+            "A": "money you pay for your room",
+            "B": "the land and buildings of a university",
+            "C": "a subject you study"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s1_2",
+          "q": "2. scholarship",
+          "options": {
+            "A": "money you pay to study",
+            "B": "a long holiday",
+            "C": "money a school gives you to study"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s1_3",
+          "q": "3. freshman",
+          "options": {
+            "A": "a first-year student",
+            "B": "a new teacher",
+            "C": "a person who sells fresh food"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s1_4",
+          "q": "4. cafeteria",
+          "options": {
+            "A": "a room with many books",
+            "B": "a room for exams",
+            "C": "a place where students buy and eat food"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s1_5",
+          "q": "5. hall of residence",
+          "options": {
+            "A": "a big room for meetings",
+            "B": "a building where students live",
+            "C": "a sports ground"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s1_6",
+          "q": "6. study group",
+          "options": {
+            "A": "a few students who study together",
+            "B": "an extra class with a teacher",
+            "C": "a sports club"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s1_7",
+          "q": "7. tuition fee",
+          "options": {
+            "A": "money you pay when you are late",
+            "B": "money you pay to study at a school",
+            "C": "money you get for good marks"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s1_8",
+          "q": "8. group project",
+          "options": {
+            "A": "a test you do alone",
+            "B": "homework for one person",
+            "C": "work a team of students does together"
+          },
+          "answer": "C"
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Say it aloud",
+      "minutes": 3,
+      "instructions": "Say each word 3 times. Watch the stress: CAMpus, SCHOLarship, FRESHman, cafeTEria. You do not need to send it today.",
+      "kind": "voice",
+      "lines": [
+        "campus · scholarship · freshman · cafeteria · hall of residence · study group · tuition fee · group project"
+      ],
+      "note": "Teacher listens for word stress. Not scored."
+    }
+  ]
+}

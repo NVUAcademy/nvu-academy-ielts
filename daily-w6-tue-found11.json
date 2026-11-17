@@ -1,0 +1,335 @@
+{
+  "id": "w6-tue-found11",
+  "title": "Tuesday Daily Practice",
+  "subtitle": "Review B8: match, fill in, fix the mistake, 5 new words",
+  "theme": "Lesson 8 · Student life",
+  "source": "Foundation 11 lesson plan, week 6 (B8 Putting it all together, B9 Hobbies and free time), 2026-11-17",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 6,
+  "day": "tuesday",
+  "date": "2026-11-17",
+  "section": "vocabulary",
+  "minutes": 15,
+  "intro": "Five steps, about 15 minutes. Deadline: 23:00. Step 5 is a voice note. Vocab Quest: open Foundation Vocab Quest on the website and finish today's 18 words (Week 6).",
+  "audio": {},
+  "send_today": "Five steps on the website. The voice note is sent to the teacher when you press Submit.",
+  "error_type": "vocabulary",
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Match",
+      "minutes": 3,
+      "instructions": "Match each word with its meaning.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s1_1",
+          "q": "1. freshman",
+          "options": {
+            "A": "a place where students buy and eat food",
+            "B": "money a school gives you to study",
+            "C": "a first-year student",
+            "D": "work a team of students does together",
+            "E": "the land and buildings of a university",
+            "F": "a building where students live",
+            "G": "money you pay to study at a school",
+            "H": "a few students who study together"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s1_2",
+          "q": "2. study group",
+          "options": {
+            "A": "a place where students buy and eat food",
+            "B": "money a school gives you to study",
+            "C": "a first-year student",
+            "D": "work a team of students does together",
+            "E": "the land and buildings of a university",
+            "F": "a building where students live",
+            "G": "money you pay to study at a school",
+            "H": "a few students who study together"
+          },
+          "answer": "H"
+        },
+        {
+          "id": "s1_3",
+          "q": "3. campus",
+          "options": {
+            "A": "a place where students buy and eat food",
+            "B": "money a school gives you to study",
+            "C": "a first-year student",
+            "D": "work a team of students does together",
+            "E": "the land and buildings of a university",
+            "F": "a building where students live",
+            "G": "money you pay to study at a school",
+            "H": "a few students who study together"
+          },
+          "answer": "E"
+        },
+        {
+          "id": "s1_4",
+          "q": "4. tuition fee",
+          "options": {
+            "A": "a place where students buy and eat food",
+            "B": "money a school gives you to study",
+            "C": "a first-year student",
+            "D": "work a team of students does together",
+            "E": "the land and buildings of a university",
+            "F": "a building where students live",
+            "G": "money you pay to study at a school",
+            "H": "a few students who study together"
+          },
+          "answer": "G"
+        },
+        {
+          "id": "s1_5",
+          "q": "5. cafeteria",
+          "options": {
+            "A": "a place where students buy and eat food",
+            "B": "money a school gives you to study",
+            "C": "a first-year student",
+            "D": "work a team of students does together",
+            "E": "the land and buildings of a university",
+            "F": "a building where students live",
+            "G": "money you pay to study at a school",
+            "H": "a few students who study together"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s1_6",
+          "q": "6. scholarship",
+          "options": {
+            "A": "a place where students buy and eat food",
+            "B": "money a school gives you to study",
+            "C": "a first-year student",
+            "D": "work a team of students does together",
+            "E": "the land and buildings of a university",
+            "F": "a building where students live",
+            "G": "money you pay to study at a school",
+            "H": "a few students who study together"
+          },
+          "answer": "B"
+        },
+        {
+          "id": "s1_7",
+          "q": "7. hall of residence",
+          "options": {
+            "A": "a place where students buy and eat food",
+            "B": "money a school gives you to study",
+            "C": "a first-year student",
+            "D": "work a team of students does together",
+            "E": "the land and buildings of a university",
+            "F": "a building where students live",
+            "G": "money you pay to study at a school",
+            "H": "a few students who study together"
+          },
+          "answer": "F"
+        },
+        {
+          "id": "s1_8",
+          "q": "8. group project",
+          "options": {
+            "A": "a place where students buy and eat food",
+            "B": "money a school gives you to study",
+            "C": "a first-year student",
+            "D": "work a team of students does together",
+            "E": "the land and buildings of a university",
+            "F": "a building where students live",
+            "G": "money you pay to study at a school",
+            "H": "a few students who study together"
+          },
+          "answer": "D"
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Fill in",
+      "minutes": 4,
+      "instructions": "Word bank (one word is not used): cafeteria · freshman · group project · tuition fee · study group · campus",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. Our ____ has a big library and two cafés.",
+          "fields": [
+            {
+              "answer": "campus"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. I'm in a ____ with four friends. We meet on Tuesdays.",
+          "fields": [
+            {
+              "answer": "study group"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. The ____ is 12 million đồng a year.",
+          "fields": [
+            {
+              "answer": "tuition fee"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. I'm a ____. This is my first year at university.",
+          "fields": [
+            {
+              "answer": "freshman"
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. Our ____ is about pollution. Each person writes one part.",
+          "fields": [
+            {
+              "answer": "group project"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Fix the mistake",
+      "minutes": 3,
+      "instructions": "Each sentence has one mistake. Write the correct sentence.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. My brother have got a car.",
+          "fields": [
+            {
+              "answer": "My brother has got a car.",
+              "accept": [
+                "My brother's got a car.",
+                "My brother has got a car",
+                "My brother’s got a car.",
+                "My brother's got a car",
+                "My brother’s got a car"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2. There is two cafés on campus.",
+          "fields": [
+            {
+              "answer": "There are two cafés on campus.",
+              "accept": [
+                "There are two cafes on campus.",
+                "There are two cafés on campus",
+                "There are two cafes on campus"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3. I have a class in Monday.",
+          "fields": [
+            {
+              "answer": "I have a class on Monday.",
+              "accept": [
+                "I have a class on Monday"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "4. She don't live in a hall of residence.",
+          "fields": [
+            {
+              "answer": "She doesn't live in a hall of residence.",
+              "accept": [
+                "She does not live in a hall of residence.",
+                "She doesn’t live in a hall of residence.",
+                "She doesn't live in a hall of residence",
+                "She doesn’t live in a hall of residence",
+                "She does not live in a hall of residence"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Quick check: new words",
+      "minutes": 4,
+      "instructions": "New words today in Vocab Quest: lecturer · roommate · semester · part-time job · classmate. Match 4 of them with their meaning.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s4_1",
+          "q": "1. lecturer",
+          "options": {
+            "A": "half of a school year",
+            "B": "a job for a few hours a week",
+            "C": "a person who teaches at a university",
+            "D": "a person who shares your room"
+          },
+          "answer": "C"
+        },
+        {
+          "id": "s4_2",
+          "q": "2. roommate",
+          "options": {
+            "A": "half of a school year",
+            "B": "a job for a few hours a week",
+            "C": "a person who teaches at a university",
+            "D": "a person who shares your room"
+          },
+          "answer": "D"
+        },
+        {
+          "id": "s4_3",
+          "q": "3. semester",
+          "options": {
+            "A": "half of a school year",
+            "B": "a job for a few hours a week",
+            "C": "a person who teaches at a university",
+            "D": "a person who shares your room"
+          },
+          "answer": "A"
+        },
+        {
+          "id": "s4_4",
+          "q": "4. part-time job",
+          "options": {
+            "A": "half of a school year",
+            "B": "a job for a few hours a week",
+            "C": "a person who teaches at a university",
+            "D": "a person who shares your room"
+          },
+          "answer": "B"
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Voice note",
+      "minutes": 1,
+      "instructions": "Read the 3 sentences aloud. Record one voice note.",
+      "kind": "voice",
+      "lines": [
+        "Tuấn is a freshman. He lives in a hall of residence. He doesn't pay the tuition fee."
+      ],
+      "note": "Teacher listens for the -s ending in lives and the stress in FRESHman, RESidence."
+    }
+  ]
+}
