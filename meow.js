@@ -13,6 +13,17 @@
   function addDays(s, n) { var d = new Date(s + 'T00:00:00'); d.setDate(d.getDate() + n); return iso(d); }
   function weekStart(s) { var d = new Date(s + 'T00:00:00'); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return iso(d); }
 
+  /* Gia hạn riêng một ngày cho TẤT CẢ các lớp (giờ Việt Nam). Nộp trước mốc này vẫn tính Đủ như nộp đúng hạn.
+     Giữ giống DEADLINE_EXTEND trong lib/meow-auto.js. */
+  var DEADLINE_EXTEND = { '2026-11-16': '2026-11-17T23:59:59+07:00' };
+  /* Hạn nộp Daily Practice của lớp cls cho ngày s: IELTS13 23:30, IELTS14 0:00 hôm sau, lớp khác 23:00 (giờ Việt Nam) */
+  function deadline(cls, s) {
+    if (DEADLINE_EXTEND[s]) return new Date(DEADLINE_EXTEND[s]);
+    if (cls === 'IELTS13') return new Date(s + 'T23:30:00+07:00');
+    if (cls === 'IELTS14') return new Date(addDays(s, 1) + 'T00:00:00+07:00');
+    return new Date(s + 'T23:00:00+07:00');
+  }
+
   function dayMeow(status, s) {
     var b = base(s), t = type(s);
     if (status === 'du') return b;
@@ -53,5 +64,5 @@
     return { total: total, bonusTotal: bonusTotal, bonusWeeks: bonusWeeks, weeks: list, current: cur, longest: longest, redeemed: redeemed, balance: total - redeemed };
   }
 
-  g.MEOW = { ST: ST, iso: iso, dow: dow, type: type, base: base, addDays: addDays, weekStart: weekStart, dayMeow: dayMeow, calc: calc };
+  g.MEOW = { ST: ST, iso: iso, dow: dow, type: type, base: base, addDays: addDays, weekStart: weekStart, dayMeow: dayMeow, calc: calc, deadline: deadline, DEADLINE_EXTEND: DEADLINE_EXTEND };
 })(window);
