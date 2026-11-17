@@ -196,7 +196,7 @@ async function renderList(idx) {
     /* Khớp theo mã bài trước (danh sách bài có thể thiếu section), rồi mới theo section như cũ */
     (data || []).forEach(r => { done[r.practice_date + '|' + r.section] = r; if (r.practice_id) done[r.practice_date + '#' + r.practice_id] = r; });
   }
-  const today = new Date().toISOString().slice(0, 10);
+  const today = todayVN();
   $('app').innerHTML = `<div class="hero"><div class="eyebrow">Daily Practice</div><h1>Luyện tập <em>hàng ngày</em></h1><div class="theme">Thứ Hai – Thứ Năm</div></div>` +
     (mine.length ? mine.slice().sort((a, b) => b.date.localeCompare(a.date)).map(x => {
       const r = done[x.date + '#' + x.id] || done[x.date + '|' + (x.section || '')] || done[x.date + '|listening'];
@@ -208,12 +208,30 @@ async function renderList(idx) {
     }).join('') : '<div class="card"><p class="sub">Chưa có bài nào cho lớp của bạn.</p></div>');
 }
 
+/* Hôm nay theo giờ Việt Nam (bài mở lúc 0:00 giờ VN, không theo giờ của máy) */
+function todayVN() { return new Date(Date.now() + 7 * 3600 * 1000).toISOString().slice(0, 10); }
 async function openPractice(meta) {
   try { P = await (await fetch(meta.file, { cache: 'no-cache' })).json(); }
   catch (e) { $('app').innerHTML = `<div class="card"><h2>Không tải được bài</h2><p class="sub">${esc(e.message)}</p></div>`; return; }
-  { const dq = params.get('d') || ''; P.date = /^\d{4}-\d{2}-\d{2}$/.test(dq) ? dq : meta.date; P.day = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'][new Date(P.date + 'T00:00:00').getDay()]; }
+  /* Ngày mở của bài: theo lịch (bảng schedule) của lớp nếu có, không thì theo daily-index.json */
+  let openDate = meta.date;
+  if (student && !isTeacher) {
+    try {
+      const { data: srows } = await db.from('schedule').select('day').eq('class_code', student.classCode).eq('practice_id', meta.id);
+      const days = (srows || []).map(r => r.day).filter(Boolean).sort();
+      if (days.length) openDate = days[0];
+    } catch (e) {}
+  }
+  { const dq = params.get('d') || ''; P.date = /^\d{4}-\d{2}-\d{2}$/.test(dq) ? dq : openDate; P.day = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'][new Date(P.date + 'T00:00:00').getDay()]; }
   if (!isTeacher && !(P.class_codes || []).includes(student.classCode)) {
     $('app').innerHTML = `<div class="card arch"><h2>Không dành cho lớp của bạn</h2></div>`; return;
+  }
+  /* Khóa theo ngày: học sinh không mở được bài chưa tới ngày, kể cả khi sửa tham số d trên đường dẫn */
+  if (!isTeacher) {
+    const today = todayVN(), opensOn = openDate > P.date ? openDate : P.date;
+    if (opensOn > today) {
+      $('app').innerHTML = `<div class="card arch"><h2>Bài này chưa mở</h2><p class="sub">${esc(P.title || meta.title || '')} mở ngày ${esc(opensOn)}. Em quay lại vào ngày đó nhé.</p><p><a class="btn small" href="daily-practice.html">Về danh sách bài</a></p></div>`; return;
+    }
   }
   if (student) {
     const { data } = await db.from('daily_scores').select('*').eq('student_id', student.id).eq('practice_date', P.date).eq('section', P.section).maybeSingle();

@@ -9,6 +9,7 @@ const SB_HEAD = () => {
 };
 const sb = (path, opts) => fetch(SB_URL() + path, { ...opts, headers: { ...SB_HEAD(), ...(opts && opts.headers) } });
 const { cleanVoices, mergeVoices } = require('../lib/voices.js');
+const { todayVN, practiceLocked } = require('../lib/practice-open.js');
 const bad = (res, code, msg) => res.status(code).json({ ok: false, error: msg });
 const isInt = v => Number.isInteger(v) && v >= 0;
 const str = (v, max) => String(v == null ? '' : v).slice(0, max);
@@ -40,6 +41,7 @@ module.exports = async function handler(req, res) {
     if (b.voice_only === true) {
       const pd = String(b.practice_date || ''), pid = str(b.practice_id, 80), sec = str(b.section, 40), vp = str(b.voice_path, 200);
       if (!dateOk(pd) || !pid || !sec) return bad(res, 400, 'Thiếu thông tin bài tập');
+      if (pd > todayVN()) return bad(res, 403, 'Bài này chưa mở (mở ngày ' + pd + ')');
       const cv = cleanVoices(b.voices, studentId);
       if (cv.error) return bad(res, 403, cv.error);
       const hasVoices = Object.keys(cv.voices).length > 0;
@@ -62,7 +64,7 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ ok: true });
     }
 
-    const st = await (await sb('/rest/v1/students?id=eq.' + studentId + '&select=id')).json();
+    const st = await (await sb('/rest/v1/students?id=eq.' + studentId + '&select=id,class_code')).json();
     if (!Array.isArray(st)) return bad(res, 500, 'Supabase từ chối khóa dịch vụ');
     if (!st.length) return bad(res, 403, 'Không tìm thấy học sinh');
 
@@ -73,6 +75,9 @@ module.exports = async function handler(req, res) {
     const maxScore = b.max_score;
     const score = b.score;
     if (!section || !practiceId) return bad(res, 400, 'Thiếu thông tin bài tập');
+    /* Khóa theo ngày: không nộp được bài chưa tới ngày mở (giờ Việt Nam) */
+    const locked = await practiceLocked({ sb, req, studentId, classCode: st[0].class_code, practiceId, practiceDate });
+    if (locked) return bad(res, 403, locked);
     /* max_score 0: bài không có phần chấm tự động (chỉ viết và ghi âm, như bài Sunday Class day) */
     if (!isInt(maxScore) || maxScore > 60) return bad(res, 400, 'max_score không hợp lệ');
     if (!isInt(score) || score > maxScore) return bad(res, 400, 'score không hợp lệ');

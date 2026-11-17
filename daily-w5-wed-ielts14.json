@@ -108,117 +108,89 @@
       "id": "s2",
       "title": "Step 2 · Vocab Quest Part B (2 min)",
       "minutes": 2,
-      "instructions": "Choose the correct meaning (A–H) for each word or phrase.",
+      "instructions": "Choose the correct meaning (A–D) for each word or phrase.",
       "kind": "mcq",
       "items": [
         {
           "id": "s2_1",
           "q": "1. significance",
           "options": {
-            "A": "to meet or find something without planning",
-            "B": "a feeling that you must do something because it is right",
-            "C": "without being affected by something",
-            "D": "a person or place that gives facts you can trust",
-            "E": "importance",
-            "F": "not interested or involved",
-            "G": "to look for something on purpose",
-            "H": "in a careful way, choosing only some things"
+            "A": "a feeling that you must do something because it is right",
+            "B": "not interested or involved",
+            "C": "a person or place that gives facts you can trust",
+            "D": "importance"
           },
-          "answer": "E",
+          "answer": "D",
           "explain": "significance = tầm quan trọng."
         },
         {
           "id": "s2_2",
           "q": "2. reliable source",
           "options": {
-            "A": "to meet or find something without planning",
-            "B": "a feeling that you must do something because it is right",
-            "C": "without being affected by something",
-            "D": "a person or place that gives facts you can trust",
-            "E": "importance",
-            "F": "not interested or involved",
-            "G": "to look for something on purpose",
-            "H": "in a careful way, choosing only some things"
+            "A": "a feeling that you must do something because it is right",
+            "B": "a person or place that gives facts you can trust",
+            "C": "not interested or involved",
+            "D": "importance"
           },
-          "answer": "D",
+          "answer": "B",
           "explain": "reliable source = nguồn đáng tin."
         },
         {
           "id": "s2_3",
           "q": "3. disengaged",
           "options": {
-            "A": "to meet or find something without planning",
+            "A": "not interested or involved",
             "B": "a feeling that you must do something because it is right",
-            "C": "without being affected by something",
-            "D": "a person or place that gives facts you can trust",
-            "E": "importance",
-            "F": "not interested or involved",
-            "G": "to look for something on purpose",
-            "H": "in a careful way, choosing only some things"
+            "C": "a person or place that gives facts you can trust",
+            "D": "importance"
           },
-          "answer": "F",
+          "answer": "A",
           "explain": "disengaged = thờ ơ, không quan tâm."
         },
         {
           "id": "s2_4",
           "q": "4. seek out",
           "options": {
-            "A": "to meet or find something without planning",
-            "B": "a feeling that you must do something because it is right",
-            "C": "without being affected by something",
-            "D": "a person or place that gives facts you can trust",
-            "E": "importance",
-            "F": "not interested or involved",
-            "G": "to look for something on purpose",
-            "H": "in a careful way, choosing only some things"
+            "A": "without being affected by something",
+            "B": "to meet or find something without planning",
+            "C": "to look for something on purpose",
+            "D": "not interested or involved"
           },
-          "answer": "G",
+          "answer": "C",
           "explain": "seek out = chủ động tìm."
         },
         {
           "id": "s2_5",
           "q": "5. encounter",
           "options": {
-            "A": "to meet or find something without planning",
-            "B": "a feeling that you must do something because it is right",
-            "C": "without being affected by something",
-            "D": "a person or place that gives facts you can trust",
-            "E": "importance",
-            "F": "not interested or involved",
-            "G": "to look for something on purpose",
-            "H": "in a careful way, choosing only some things"
+            "A": "a feeling that you must do something because it is right",
+            "B": "to look for something on purpose",
+            "C": "in a careful way, choosing only some things",
+            "D": "to meet or find something without planning"
           },
-          "answer": "A",
+          "answer": "D",
           "explain": "encounter = tình cờ gặp."
         },
         {
           "id": "s2_6",
           "q": "6. selectively",
           "options": {
-            "A": "to meet or find something without planning",
-            "B": "a feeling that you must do something because it is right",
-            "C": "without being affected by something",
-            "D": "a person or place that gives facts you can trust",
-            "E": "importance",
-            "F": "not interested or involved",
-            "G": "to look for something on purpose",
-            "H": "in a careful way, choosing only some things"
+            "A": "in a careful way, choosing only some things",
+            "B": "to meet or find something without planning",
+            "C": "importance",
+            "D": "without being affected by something"
           },
-          "answer": "H",
+          "answer": "A",
           "explain": "selectively = có chọn lọc."
         },
         {
           "id": "s2_7",
           "q": "7. a sense of duty",
           "options": {
-            "A": "to meet or find something without planning",
+            "A": "importance",
             "B": "a feeling that you must do something because it is right",
-            "C": "without being affected by something",
-            "D": "a person or place that gives facts you can trust",
-            "E": "importance",
-            "F": "not interested or involved",
-            "G": "to look for something on purpose",
-            "H": "in a careful way, choosing only some things"
+            "C": "a person or place that gives facts you can trust",
+            "D": "not interested or involved"
           },
           "answer": "B",
           "explain": "a sense of duty = ý thức bổn phận."
@@ -227,14 +199,10 @@
           "id": "s2_8",
           "q": "8. regardless of",
           "options": {
-            "A": "to meet or find something without planning",
-            "B": "a feeling that you must do something because it is right",
+            "A": "in a careful way, choosing only some things",
+            "B": "not interested or involved",
             "C": "without being affected by something",
-            "D": "a person or place that gives facts you can trust",
-            "E": "importance",
-            "F": "not interested or involved",
-            "G": "to look for something on purpose",
-            "H": "in a careful way, choosing only some things"
+            "D": "to meet or find something without planning"
           },
           "answer": "C",
           "explain": "regardless of = bất kể."

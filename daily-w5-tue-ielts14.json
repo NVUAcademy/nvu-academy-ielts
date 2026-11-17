@@ -108,21 +108,17 @@
       "id": "s2",
       "title": "Step 2 · Vocab Quest Part B (2 min)",
       "minutes": 2,
-      "instructions": "Choose the correct meaning (A–H) for each word or phrase.",
+      "instructions": "Choose the correct meaning (A–D) for each word or phrase.",
       "kind": "mcq",
       "items": [
         {
           "id": "s2_1",
           "q": "1. a marginal change",
           "options": {
-            "A": "to go up and down",
-            "B": "to stop rising or falling",
-            "C": "to become higher than something that was higher",
-            "D": "a small, unimportant difference",
-            "E": "to fall suddenly and by a large amount",
-            "F": "an increase that is slow and regular",
-            "G": "to rise suddenly and by a large amount",
-            "H": "to make up a part of a total"
+            "A": "to make up a part of a total",
+            "B": "to go up and down",
+            "C": "an increase that is slow and regular",
+            "D": "a small, unimportant difference"
           },
           "answer": "D",
           "explain": "a marginal change = thay đổi không đáng kể."
@@ -131,112 +127,84 @@
           "id": "s2_2",
           "q": "2. a steady climb",
           "options": {
-            "A": "to go up and down",
-            "B": "to stop rising or falling",
-            "C": "to become higher than something that was higher",
-            "D": "a small, unimportant difference",
-            "E": "to fall suddenly and by a large amount",
-            "F": "an increase that is slow and regular",
-            "G": "to rise suddenly and by a large amount",
-            "H": "to make up a part of a total"
+            "A": "to become higher than something that was higher",
+            "B": "an increase that is slow and regular",
+            "C": "to make up a part of a total",
+            "D": "a small, unimportant difference"
           },
-          "answer": "F",
+          "answer": "B",
           "explain": "a steady climb = tăng đều đặn."
         },
         {
           "id": "s2_3",
           "q": "3. surge",
           "options": {
-            "A": "to go up and down",
-            "B": "to stop rising or falling",
-            "C": "to become higher than something that was higher",
-            "D": "a small, unimportant difference",
-            "E": "to fall suddenly and by a large amount",
-            "F": "an increase that is slow and regular",
-            "G": "to rise suddenly and by a large amount",
-            "H": "to make up a part of a total"
+            "A": "to make up a part of a total",
+            "B": "to go up and down",
+            "C": "to fall suddenly and by a large amount",
+            "D": "to rise suddenly and by a large amount"
           },
-          "answer": "G",
+          "answer": "D",
           "explain": "surge = tăng vọt."
         },
         {
           "id": "s2_4",
           "q": "4. plummet",
           "options": {
-            "A": "to go up and down",
+            "A": "to fall suddenly and by a large amount",
             "B": "to stop rising or falling",
-            "C": "to become higher than something that was higher",
-            "D": "a small, unimportant difference",
-            "E": "to fall suddenly and by a large amount",
-            "F": "an increase that is slow and regular",
-            "G": "to rise suddenly and by a large amount",
-            "H": "to make up a part of a total"
+            "C": "to rise suddenly and by a large amount",
+            "D": "to become higher than something that was higher"
           },
-          "answer": "E",
+          "answer": "A",
           "explain": "plummet = lao dốc."
         },
         {
           "id": "s2_5",
           "q": "5. level off",
           "options": {
-            "A": "to go up and down",
-            "B": "to stop rising or falling",
-            "C": "to become higher than something that was higher",
-            "D": "a small, unimportant difference",
-            "E": "to fall suddenly and by a large amount",
-            "F": "an increase that is slow and regular",
-            "G": "to rise suddenly and by a large amount",
-            "H": "to make up a part of a total"
+            "A": "to make up a part of a total",
+            "B": "to become higher than something that was higher",
+            "C": "to stop rising or falling",
+            "D": "to go up and down"
           },
-          "answer": "B",
+          "answer": "C",
           "explain": "level off = chững lại."
         },
         {
           "id": "s2_6",
           "q": "6. account for",
           "options": {
-            "A": "to go up and down",
-            "B": "to stop rising or falling",
-            "C": "to become higher than something that was higher",
-            "D": "a small, unimportant difference",
-            "E": "to fall suddenly and by a large amount",
-            "F": "an increase that is slow and regular",
-            "G": "to rise suddenly and by a large amount",
-            "H": "to make up a part of a total"
+            "A": "to make up a part of a total",
+            "B": "to rise suddenly and by a large amount",
+            "C": "to fall suddenly and by a large amount",
+            "D": "to stop rising or falling"
           },
-          "answer": "H",
+          "answer": "A",
           "explain": "account for = chiếm (tỉ lệ)."
         },
         {
           "id": "s2_7",
           "q": "7. fluctuate",
           "options": {
-            "A": "to go up and down",
+            "A": "to make up a part of a total",
             "B": "to stop rising or falling",
-            "C": "to become higher than something that was higher",
-            "D": "a small, unimportant difference",
-            "E": "to fall suddenly and by a large amount",
-            "F": "an increase that is slow and regular",
-            "G": "to rise suddenly and by a large amount",
-            "H": "to make up a part of a total"
+            "C": "to go up and down",
+            "D": "to become higher than something that was higher"
           },
-          "answer": "A",
+          "answer": "C",
           "explain": "fluctuate = dao động lên xuống."
         },
         {
           "id": "s2_8",
           "q": "8. overtake",
           "options": {
-            "A": "to go up and down",
-            "B": "to stop rising or falling",
-            "C": "to become higher than something that was higher",
-            "D": "a small, unimportant difference",
-            "E": "to fall suddenly and by a large amount",
-            "F": "an increase that is slow and regular",
-            "G": "to rise suddenly and by a large amount",
-            "H": "to make up a part of a total"
+            "A": "to fall suddenly and by a large amount",
+            "B": "to become higher than something that was higher",
+            "C": "to go up and down",
+            "D": "to stop rising or falling"
           },
-          "answer": "C",
+          "answer": "B",
           "explain": "overtake = vượt qua."
         }
       ]
