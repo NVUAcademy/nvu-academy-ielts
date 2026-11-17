@@ -46,6 +46,7 @@ module.exports = async function handler(req, res) {
     const practiceDate = String(b.practice_date || '');
     if (!practiceId) return bad(res, 400, 'Thiếu practice_id');
     if (!dateOk(practiceDate)) return bad(res, 400, 'Ngày bài tập không hợp lệ');
+    if (req.method !== 'DELETE' && practiceDate > new Date(Date.now() + 7 * 3600 * 1000).toISOString().slice(0, 10)) return bad(res, 403, 'Bài này chưa mở');
 
     const key = `student_id=eq.${studentId}&practice_id=eq.${encodeURIComponent(practiceId)}&practice_date=eq.${practiceDate}`;
 

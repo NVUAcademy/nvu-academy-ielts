@@ -10,6 +10,13 @@ const MCQ = require('../mcq-multi.js');
 
 const errors = [];
 const err = (file, where, msg) => errors.push(file + ' · ' + where + ': ' + msg);
+const warns = [];
+
+/* Quy tắc của thầy (17/11/2026): câu mcq một đáp án đúng có tối đa 4 lựa chọn (A–D).
+   Bài có ngày từ MCQ4_FROM trở đi thì báo lỗi; bài cũ hơn chỉ cảnh báo. */
+const MCQ4_FROM = '2026-11-17';
+const IDX_DATE = {};
+try { for (const x of JSON.parse(fs.readFileSync(path.join(ROOT, 'daily-index.json'), 'utf8')).practices || []) if (x.file) IDX_DATE[x.file] = x.date || ''; } catch (e) {}
 
 /* Đoạn văn có thể nằm ở trường passage, context, hoặc sau "Text:" / "Đoạn văn:" trong instructions (trang daily-practice hiện được cả ba) */
 const passageOf = st => st.passage || st.passage_source || (Array.isArray(st.context) ? st.context.join(' ') : st.context) ||
@@ -26,6 +33,11 @@ function checkMcq(f, where, it) {
     if (n && ans.length !== n) err(f, where, '"multi": ' + n + ' nhưng answer có ' + ans.length + ' đáp án (' + it.id + ')');
     if (!n && ans.length > 1) err(f, where, 'answer có ' + ans.length + ' đáp án nhưng thiếu "multi": ' + ans.length + ' (' + it.id + ')');
     if (n && n >= Object.keys(it.options).length) err(f, where, '"multi": ' + n + ' không nhỏ hơn số lựa chọn (' + it.id + ')');
+    const no = Object.keys(it.options).length;
+    if (!n && no > 4) {
+      const msg = 'câu một đáp án có ' + no + ' lựa chọn, tối đa 4 (A–D) (' + it.id + ')';
+      if (!IDX_DATE[f] || IDX_DATE[f] >= MCQ4_FROM) err(f, where, msg); else warns.push(f + ' · ' + where + ': ' + msg);
+    }
 }
 
 const files = fs.readdirSync(ROOT).filter(f => /^daily-.*\.json$/.test(f) && f !== 'daily-index.json');
@@ -67,5 +79,6 @@ try {
 } catch (e) { err('daily-index.json', 'file', 'JSON lỗi: ' + e.message); }
 
 console.log('Đã kiểm tra ' + files.length + ' file daily và ' + quizFiles.length + ' file quiz tuần.');
+if (warns.length) console.log('Cảnh báo (bài cũ, trước quy tắc 4 lựa chọn): ' + warns.length + ' câu.');
 if (errors.length) { console.log('Có ' + errors.length + ' lỗi:\n- ' + errors.join('\n- ')); process.exit(1); }
 console.log('Không có lỗi.');

@@ -21,96 +21,72 @@
       "id": "s1",
       "title": "Step 1 · Match",
       "minutes": 3,
-      "instructions": "Match each word with its meaning.",
+      "instructions": "Choose the correct meaning (A–D) for each word.",
       "kind": "mcq",
       "items": [
         {
           "id": "s1_1",
           "q": "1. freshman",
           "options": {
-            "A": "a place where students buy and eat food",
-            "B": "money a school gives you to study",
-            "C": "a first-year student",
-            "D": "work a team of students does together",
-            "E": "the land and buildings of a university",
-            "F": "a building where students live",
-            "G": "money you pay to study at a school",
-            "H": "a few students who study together"
+            "A": "the land and buildings of a university",
+            "B": "a first-year student",
+            "C": "money you pay to study at a school",
+            "D": "money a school gives you to study"
           },
-          "answer": "C"
+          "answer": "B"
         },
         {
           "id": "s1_2",
           "q": "2. study group",
           "options": {
             "A": "a place where students buy and eat food",
-            "B": "money a school gives you to study",
-            "C": "a first-year student",
-            "D": "work a team of students does together",
-            "E": "the land and buildings of a university",
-            "F": "a building where students live",
-            "G": "money you pay to study at a school",
-            "H": "a few students who study together"
+            "B": "a building where students live",
+            "C": "work a team of students does together",
+            "D": "a few students who study together"
           },
-          "answer": "H"
+          "answer": "D"
         },
         {
           "id": "s1_3",
           "q": "3. campus",
           "options": {
-            "A": "a place where students buy and eat food",
+            "A": "the land and buildings of a university",
             "B": "money a school gives you to study",
-            "C": "a first-year student",
-            "D": "work a team of students does together",
-            "E": "the land and buildings of a university",
-            "F": "a building where students live",
-            "G": "money you pay to study at a school",
-            "H": "a few students who study together"
+            "C": "work a team of students does together",
+            "D": "a first-year student"
           },
-          "answer": "E"
+          "answer": "A"
         },
         {
           "id": "s1_4",
           "q": "4. tuition fee",
           "options": {
-            "A": "a place where students buy and eat food",
-            "B": "money a school gives you to study",
-            "C": "a first-year student",
-            "D": "work a team of students does together",
-            "E": "the land and buildings of a university",
-            "F": "a building where students live",
-            "G": "money you pay to study at a school",
-            "H": "a few students who study together"
+            "A": "a first-year student",
+            "B": "a place where students buy and eat food",
+            "C": "money you pay to study at a school",
+            "D": "work a team of students does together"
           },
-          "answer": "G"
+          "answer": "C"
         },
         {
           "id": "s1_5",
           "q": "5. cafeteria",
           "options": {
-            "A": "a place where students buy and eat food",
-            "B": "money a school gives you to study",
+            "A": "money you pay to study at a school",
+            "B": "a building where students live",
             "C": "a first-year student",
-            "D": "work a team of students does together",
-            "E": "the land and buildings of a university",
-            "F": "a building where students live",
-            "G": "money you pay to study at a school",
-            "H": "a few students who study together"
+            "D": "a place where students buy and eat food"
           },
-          "answer": "A"
+          "answer": "D"
         },
         {
           "id": "s1_6",
           "q": "6. scholarship",
           "options": {
-            "A": "a place where students buy and eat food",
+            "A": "a building where students live",
             "B": "money a school gives you to study",
             "C": "a first-year student",
-            "D": "work a team of students does together",
-            "E": "the land and buildings of a university",
-            "F": "a building where students live",
-            "G": "money you pay to study at a school",
-            "H": "a few students who study together"
+            "D": "money you pay to study at a school"
           },
           "answer": "B"
         },
@@ -118,31 +94,23 @@
           "id": "s1_7",
           "q": "7. hall of residence",
           "options": {
-            "A": "a place where students buy and eat food",
-            "B": "money a school gives you to study",
-            "C": "a first-year student",
-            "D": "work a team of students does together",
-            "E": "the land and buildings of a university",
-            "F": "a building where students live",
-            "G": "money you pay to study at a school",
-            "H": "a few students who study together"
+            "A": "money a school gives you to study",
+            "B": "money you pay to study at a school",
+            "C": "a building where students live",
+            "D": "a place where students buy and eat food"
           },
-          "answer": "F"
+          "answer": "C"
         },
         {
           "id": "s1_8",
           "q": "8. group project",
           "options": {
-            "A": "a place where students buy and eat food",
-            "B": "money a school gives you to study",
-            "C": "a first-year student",
-            "D": "work a team of students does together",
-            "E": "the land and buildings of a university",
-            "F": "a building where students live",
-            "G": "money you pay to study at a school",
-            "H": "a few students who study together"
+            "A": "work a team of students does together",
+            "B": "the land and buildings of a university",
+            "C": "a building where students live",
+            "D": "money you pay to study at a school"
           },
-          "answer": "D"
+          "answer": "A"
         }
       ]
     },

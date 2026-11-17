@@ -108,22 +108,19 @@
       "id": "s2",
       "title": "Step 2 · Vocab Quest Part B (2 min)",
       "minutes": 2,
-      "instructions": "Choose the correct meaning (A–G) for each word or phrase.",
+      "instructions": "Choose the correct meaning (A–D) for each word or phrase.",
       "kind": "mcq",
       "items": [
         {
           "id": "s2_1",
           "q": "1. accidentally",
           "options": {
-            "A": "importance",
-            "B": "by chance, not on purpose",
-            "C": "to fall suddenly and by a large amount",
-            "D": "to be shared very quickly by many people",
-            "E": "wrong information that spreads",
-            "F": "the quality of being trusted",
-            "G": "an increase that is slow and regular"
+            "A": "to be shared very quickly by many people",
+            "B": "an increase that is slow and regular",
+            "C": "wrong information that spreads",
+            "D": "by chance, not on purpose"
           },
-          "answer": "B",
+          "answer": "D",
           "explain": "accidentally = tình cờ, vô tình."
         },
         {
@@ -131,14 +128,11 @@
           "q": "2. reliability",
           "options": {
             "A": "importance",
-            "B": "by chance, not on purpose",
-            "C": "to fall suddenly and by a large amount",
-            "D": "to be shared very quickly by many people",
-            "E": "wrong information that spreads",
-            "F": "the quality of being trusted",
-            "G": "an increase that is slow and regular"
+            "B": "the quality of being trusted",
+            "C": "wrong information that spreads",
+            "D": "an increase that is slow and regular"
           },
-          "answer": "F",
+          "answer": "B",
           "explain": "reliability = độ tin cậy."
         },
         {
@@ -146,12 +140,9 @@
           "q": "3. significance",
           "options": {
             "A": "importance",
-            "B": "by chance, not on purpose",
-            "C": "to fall suddenly and by a large amount",
-            "D": "to be shared very quickly by many people",
-            "E": "wrong information that spreads",
-            "F": "the quality of being trusted",
-            "G": "an increase that is slow and regular"
+            "B": "an increase that is slow and regular",
+            "C": "the quality of being trusted",
+            "D": "wrong information that spreads"
           },
           "answer": "A",
           "explain": "significance = tầm quan trọng."
@@ -160,43 +151,34 @@
           "id": "s2_4",
           "q": "4. misinformation",
           "options": {
-            "A": "importance",
-            "B": "by chance, not on purpose",
-            "C": "to fall suddenly and by a large amount",
-            "D": "to be shared very quickly by many people",
-            "E": "wrong information that spreads",
-            "F": "the quality of being trusted",
-            "G": "an increase that is slow and regular"
+            "A": "the quality of being trusted",
+            "B": "importance",
+            "C": "wrong information that spreads",
+            "D": "an increase that is slow and regular"
           },
-          "answer": "E",
+          "answer": "C",
           "explain": "misinformation = thông tin sai lệch."
         },
         {
           "id": "s2_5",
           "q": "5. go viral",
           "options": {
-            "A": "importance",
-            "B": "by chance, not on purpose",
+            "A": "to be shared very quickly by many people",
+            "B": "wrong information that spreads",
             "C": "to fall suddenly and by a large amount",
-            "D": "to be shared very quickly by many people",
-            "E": "wrong information that spreads",
-            "F": "the quality of being trusted",
-            "G": "an increase that is slow and regular"
+            "D": "an increase that is slow and regular"
           },
-          "answer": "D",
+          "answer": "A",
           "explain": "go viral = lan truyền chóng mặt."
         },
         {
           "id": "s2_6",
           "q": "6. plummet",
           "options": {
-            "A": "importance",
-            "B": "by chance, not on purpose",
+            "A": "to be shared very quickly by many people",
+            "B": "an increase that is slow and regular",
             "C": "to fall suddenly and by a large amount",
-            "D": "to be shared very quickly by many people",
-            "E": "wrong information that spreads",
-            "F": "the quality of being trusted",
-            "G": "an increase that is slow and regular"
+            "D": "the quality of being trusted"
           },
           "answer": "C",
           "explain": "plummet = lao dốc."
@@ -205,15 +187,12 @@
           "id": "s2_7",
           "q": "7. a steady climb",
           "options": {
-            "A": "importance",
-            "B": "by chance, not on purpose",
-            "C": "to fall suddenly and by a large amount",
-            "D": "to be shared very quickly by many people",
-            "E": "wrong information that spreads",
-            "F": "the quality of being trusted",
-            "G": "an increase that is slow and regular"
+            "A": "wrong information that spreads",
+            "B": "an increase that is slow and regular",
+            "C": "the quality of being trusted",
+            "D": "importance"
           },
-          "answer": "G",
+          "answer": "B",
           "explain": "a steady climb = tăng đều đặn."
         }
       ]

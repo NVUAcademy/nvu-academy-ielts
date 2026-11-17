@@ -111,52 +111,43 @@
       "id": "s2",
       "title": "Step 2 · Vocab Quest Part B (2 min)",
       "minutes": 2,
-      "instructions": "Choose the correct meaning (A–G) for each word or phrase.",
+      "instructions": "Choose the correct meaning (A–D) for each word or phrase.",
       "kind": "mcq",
       "items": [
         {
           "id": "s2_1",
           "q": "1. plateau",
           "options": {
-            "A": "a person who takes part in an activity",
-            "B": "to deal with a difficult situation",
-            "C": "to fall by a small amount",
-            "D": "a long trip with a clear purpose",
-            "E": "to judge how good or bad something is",
-            "F": "a period when a number stays the same",
-            "G": "the state of being alone or apart from others"
+            "A": "a period when a number stays the same",
+            "B": "a person who takes part in an activity",
+            "C": "a long trip with a clear purpose",
+            "D": "the state of being alone or apart from others"
           },
-          "answer": "F",
+          "answer": "A",
           "explain": "plateau = giai đoạn đi ngang."
         },
         {
           "id": "s2_2",
           "q": "2. dip",
           "options": {
-            "A": "a person who takes part in an activity",
+            "A": "to judge how good or bad something is",
             "B": "to deal with a difficult situation",
-            "C": "to fall by a small amount",
-            "D": "a long trip with a clear purpose",
-            "E": "to judge how good or bad something is",
-            "F": "a period when a number stays the same",
-            "G": "the state of being alone or apart from others"
+            "C": "a period when a number stays the same",
+            "D": "to fall by a small amount"
           },
-          "answer": "C",
+          "answer": "D",
           "explain": "dip = giảm nhẹ."
         },
         {
           "id": "s2_3",
           "q": "3. expedition",
           "options": {
-            "A": "a person who takes part in an activity",
-            "B": "to deal with a difficult situation",
-            "C": "to fall by a small amount",
-            "D": "a long trip with a clear purpose",
-            "E": "to judge how good or bad something is",
-            "F": "a period when a number stays the same",
-            "G": "the state of being alone or apart from others"
+            "A": "a long trip with a clear purpose",
+            "B": "the state of being alone or apart from others",
+            "C": "a period when a number stays the same",
+            "D": "a person who takes part in an activity"
           },
-          "answer": "D",
+          "answer": "A",
           "explain": "expedition = chuyến thám hiểm."
         },
         {
@@ -164,59 +155,47 @@
           "q": "4. isolation",
           "options": {
             "A": "a person who takes part in an activity",
-            "B": "to deal with a difficult situation",
-            "C": "to fall by a small amount",
-            "D": "a long trip with a clear purpose",
-            "E": "to judge how good or bad something is",
-            "F": "a period when a number stays the same",
-            "G": "the state of being alone or apart from others"
+            "B": "a period when a number stays the same",
+            "C": "the state of being alone or apart from others",
+            "D": "a long trip with a clear purpose"
           },
-          "answer": "G",
+          "answer": "C",
           "explain": "isolation = sự cô lập."
         },
         {
           "id": "s2_5",
           "q": "5. participant",
           "options": {
-            "A": "a person who takes part in an activity",
-            "B": "to deal with a difficult situation",
-            "C": "to fall by a small amount",
-            "D": "a long trip with a clear purpose",
-            "E": "to judge how good or bad something is",
-            "F": "a period when a number stays the same",
-            "G": "the state of being alone or apart from others"
+            "A": "a period when a number stays the same",
+            "B": "a person who takes part in an activity",
+            "C": "the state of being alone or apart from others",
+            "D": "a long trip with a clear purpose"
           },
-          "answer": "A",
+          "answer": "B",
           "explain": "participant = người tham gia."
         },
         {
           "id": "s2_6",
           "q": "6. cope with",
           "options": {
-            "A": "a person who takes part in an activity",
-            "B": "to deal with a difficult situation",
-            "C": "to fall by a small amount",
-            "D": "a long trip with a clear purpose",
-            "E": "to judge how good or bad something is",
-            "F": "a period when a number stays the same",
-            "G": "the state of being alone or apart from others"
+            "A": "to judge how good or bad something is",
+            "B": "to fall by a small amount",
+            "C": "to deal with a difficult situation",
+            "D": "a long trip with a clear purpose"
           },
-          "answer": "B",
+          "answer": "C",
           "explain": "cope with = đối phó, xoay xở."
         },
         {
           "id": "s2_7",
           "q": "7. assess",
           "options": {
-            "A": "a person who takes part in an activity",
-            "B": "to deal with a difficult situation",
-            "C": "to fall by a small amount",
-            "D": "a long trip with a clear purpose",
-            "E": "to judge how good or bad something is",
-            "F": "a period when a number stays the same",
-            "G": "the state of being alone or apart from others"
+            "A": "to fall by a small amount",
+            "B": "to judge how good or bad something is",
+            "C": "a person who takes part in an activity",
+            "D": "to deal with a difficult situation"
           },
-          "answer": "E",
+          "answer": "B",
           "explain": "assess = đánh giá."
         }
       ]
