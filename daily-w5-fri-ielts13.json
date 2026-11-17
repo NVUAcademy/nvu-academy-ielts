@@ -1,0 +1,307 @@
+{
+ "id": "w5-fri-ielts13",
+ "title": "Friday Daily Practice",
+ "subtitle": "Listening review of P4: a full form, traps and shadowing",
+ "theme": "Tuần 16–22/11 · ôn buổi P4 Listening",
+ "source": "Daily Practice tuần 16–22/11, soạn mới cho IELTS13.",
+ "class_codes": [
+  "IELTS13"
+ ],
+ "week_number": 5,
+ "day": "friday",
+ "date": "2026-11-20",
+ "section": "listening",
+ "minutes": 16,
+ "intro": "Làm lần lượt các bước, khoảng 16 phút. Hôm nay ôn buổi P4: Vocab Quest và một kỹ năng: Listening Section 1. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+ "audio": {
+  "a": {
+   "label": "Audio A · Green Park Cooking School (play once)",
+   "lines": [
+    {
+     "speaker": "A",
+     "text": "Hello, Green Park Cooking School."
+    },
+    {
+     "speaker": "B",
+     "text": "Hi. I'm calling about the weekend cooking course for beginners."
+    },
+    {
+     "speaker": "A",
+     "text": "Yes, we have a course on Italian food and one on Thai food."
+    },
+    {
+     "speaker": "B",
+     "text": "I'd like the Thai one, please."
+    },
+    {
+     "speaker": "A",
+     "text": "Lovely. It runs on Saturday mornings, from nine until twelve."
+    },
+    {
+     "speaker": "B",
+     "text": "How many weeks is it?"
+    },
+    {
+     "speaker": "A",
+     "text": "It used to be four weeks, but now it is six."
+    },
+    {
+     "speaker": "B",
+     "text": "And the price?"
+    },
+    {
+     "speaker": "A",
+     "text": "It is ninety pounds. That includes all the food."
+    },
+    {
+     "speaker": "B",
+     "text": "Do I need to bring anything?"
+    },
+    {
+     "speaker": "A",
+     "text": "Just an apron. And please arrive ten minutes early on the first day."
+    },
+    {
+     "speaker": "B",
+     "text": "What is the address?"
+    },
+    {
+     "speaker": "A",
+     "text": "We are at 14 Mill Lane, next to the post office."
+    },
+    {
+     "speaker": "B",
+     "text": "Sorry, did you say 40?"
+    },
+    {
+     "speaker": "A",
+     "text": "No, fourteen. One four."
+    }
+   ]
+  }
+ },
+ "send_today": "Hoàn thành các bước trên web. Voice note ở Step 4 được gửi khi bấm Nộp bài.",
+ "error_type": "listening",
+ "steps": [
+  {
+   "id": "s1",
+   "title": "Step 1 · Vocab Quest: choose the meaning (3 min)",
+   "minutes": 3,
+   "kind": "mcq",
+   "instructions": "Review words (8): pick up · make progress · give up · confident · career · job satisfaction · demanding · work-life balance. Choose the correct meaning (A, B, C or D).",
+   "items": [
+    {
+     "id": "s1_1",
+     "q": "1. make progress",
+     "options": {
+      "A": "lương (tháng, năm)",
+      "B": "sự nghiệp",
+      "C": "khối lượng công việc",
+      "D": "tiến bộ"
+     },
+     "answer": "D",
+     "explain": "make progress = tiến bộ. Example: She made great progress in her speaking."
+    },
+    {
+     "id": "s1_2",
+     "q": "2. career",
+     "options": {
+      "A": "cân bằng công việc và cuộc sống",
+      "B": "sự nghiệp",
+      "C": "đáng làm, mang lại giá trị",
+      "D": "đòi hỏi cao, vất vả"
+     },
+     "answer": "B",
+     "explain": "career = sự nghiệp. Example: He wants a career in banking."
+    },
+    {
+     "id": "s1_3",
+     "q": "3. give up",
+     "options": {
+      "A": "từ bỏ",
+      "B": "đòi hỏi cao, vất vả",
+      "C": "học được (một cách tự nhiên)",
+      "D": "thành thạo"
+     },
+     "answer": "A",
+     "explain": "give up = từ bỏ. Example: Never give up when a task is difficult."
+    },
+    {
+     "id": "s1_4",
+     "q": "4. demanding",
+     "options": {
+      "A": "bắt đầu quen, biết cách làm",
+      "B": "từ bỏ",
+      "C": "đòi hỏi cao, vất vả",
+      "D": "quyết tâm"
+     },
+     "answer": "C",
+     "explain": "demanding = đòi hỏi cao, vất vả. Example: Being a doctor is a demanding job."
+    },
+    {
+     "id": "s1_5",
+     "q": "5. pick up",
+     "options": {
+      "A": "tự tin",
+      "B": "học được (một cách tự nhiên)",
+      "C": "từ đầu, từ con số 0",
+      "D": "đồng nghiệp"
+     },
+     "answer": "B",
+     "explain": "pick up = học được (một cách tự nhiên). Example: I picked up some Korean from TV shows."
+    },
+    {
+     "id": "s1_6",
+     "q": "6. work-life balance",
+     "options": {
+      "A": "lương (tháng, năm)",
+      "B": "sự nghiệp",
+      "C": "khối lượng công việc",
+      "D": "cân bằng công việc và cuộc sống"
+     },
+     "answer": "D",
+     "explain": "work-life balance = cân bằng công việc và cuộc sống. Example: A four-day week gives workers a better work-life balance."
+    },
+    {
+     "id": "s1_7",
+     "q": "7. confident",
+     "options": {
+      "A": "sự hài lòng với công việc",
+      "B": "cân bằng công việc và cuộc sống",
+      "C": "tự tin",
+      "D": "đáng làm, mang lại giá trị"
+     },
+     "answer": "C",
+     "explain": "confident = tự tin. Example: I feel more confident when I prepare well."
+    },
+    {
+     "id": "s1_8",
+     "q": "8. job satisfaction",
+     "options": {
+      "A": "sự hài lòng với công việc",
+      "B": "học được (một cách tự nhiên)",
+      "C": "thành thạo",
+      "D": "tiến bộ"
+     },
+     "answer": "A",
+     "explain": "job satisfaction = sự hài lòng với công việc. Example: Good teamwork leads to high job satisfaction."
+    }
+   ]
+  },
+  {
+   "id": "s2",
+   "title": "Step 2 · Listening: cooking course form (8 min)",
+   "minutes": 8,
+   "kind": "fill",
+   "audio": "a",
+   "instructions": "Use the 3 steps from P4: read and predict the type of word, write numbers as digits, and wait for the final information when a speaker corrects. Play the audio ONCE. Write NO MORE THAN TWO WORDS AND/OR A NUMBER. GREEN PARK COOKING SCHOOL · Weekend course booking.",
+   "items": [
+    {
+     "id": "s2_1",
+     "label": "1. Course: ______ food",
+     "fields": [
+      {
+       "answer": "Thai"
+      }
+     ]
+    },
+    {
+     "id": "s2_2",
+     "label": "2. Day: ______ morning",
+     "fields": [
+      {
+       "answer": "Saturday"
+      }
+     ]
+    },
+    {
+     "id": "s2_3",
+     "label": "3. Finishes at: ______",
+     "fields": [
+      {
+       "answer": "12",
+       "accept": [
+        "12.00",
+        "12:00",
+        "twelve",
+        "noon"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s2_4",
+     "label": "4. Length: ______ weeks",
+     "fields": [
+      {
+       "answer": "6",
+       "accept": [
+        "six"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s2_5",
+     "label": "5. Price: £ ______",
+     "fields": [
+      {
+       "answer": "90",
+       "accept": [
+        "ninety"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "s2_6",
+     "label": "6. Bring: an ______",
+     "fields": [
+      {
+       "answer": "apron"
+      }
+     ]
+    },
+    {
+     "id": "s2_7",
+     "label": "7. Address: ______ Mill Lane",
+     "fields": [
+      {
+       "answer": "14",
+       "accept": [
+        "fourteen"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s3",
+   "title": "Step 3 · Trap check (3 min, not marked)",
+   "minutes": 3,
+   "kind": "open",
+   "instructions": "Look at your answers in Step 2. Which questions had a trap (a correction or a wrong number first)? Write the question number and the trap.",
+   "open": [
+    {
+     "id": "s3_1",
+     "q": "Questions with a trap and what the trap was",
+     "model": "Q1: Italian was mentioned first, but he chose Thai. Q4: four weeks before, now six. Q7: 40 or 14, the answer is 14."
+    }
+   ]
+  },
+  {
+   "id": "s4",
+   "title": "Step 4 · Voice note: shadowing (1 min)",
+   "minutes": 1,
+   "kind": "voice",
+   "instructions": "Read these lines aloud like the speaker. Stress the numbers clearly.",
+   "lines": [
+    "It used to be four weeks, but now it is six.",
+    "We are at 14 Mill Lane, next to the post office.",
+    "No, fourteen. One four."
+   ],
+   "note": "Thầy nghe trọng âm four-TEEN và âm cuối /s/."
+  }
+ ]
+}

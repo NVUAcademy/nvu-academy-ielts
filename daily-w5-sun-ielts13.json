@@ -1,0 +1,89 @@
+{
+ "id": "w5-sun-ielts13",
+ "title": "Sunday Daily Practice",
+ "subtitle": "Class day warm-up for P5: trend words and one overview sentence",
+ "theme": "Tuần 16–22/11 · khởi động trước buổi P5 Writing",
+ "source": "Daily Practice tuần 16–22/11, soạn mới cho IELTS13.",
+ "class_codes": [
+  "IELTS13"
+ ],
+ "week_number": 5,
+ "day": "sunday",
+ "date": "2026-11-22",
+ "section": "writing",
+ "minutes": 10,
+ "intro": "Hôm nay là ngày học buổi P5 (Writing). Chỉ khởi động khoảng 10 phút trước giờ học. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+ "audio": {},
+ "send_today": "Hoàn thành các bước trên web trước giờ học.",
+ "error_type": "writing",
+ "steps": [
+  {
+   "id": "s1",
+   "title": "Step 1 · Vocab Quest: fill the gaps (3 min)",
+   "minutes": 3,
+   "kind": "fill",
+   "instructions": "Fill the gaps with the words in the box. Box: plateaued · recovered · rocketed · bottomed out · plunged",
+   "items": [
+    {
+     "id": "s1_1",
+     "label": "1. Cinema tickets ______ in 2020 because cinemas closed.",
+     "fields": [
+      {
+       "answer": "plunged"
+      }
+     ]
+    },
+    {
+     "id": "s1_2",
+     "label": "2. After the new bridge opened, car numbers ______ from 2,000 to 9,000.",
+     "fields": [
+      {
+       "answer": "rocketed"
+      }
+     ]
+    },
+    {
+     "id": "s1_3",
+     "label": "3. Sales fell for five years, then ______ at 200 units.",
+     "fields": [
+      {
+       "answer": "bottomed out"
+      }
+     ]
+    },
+    {
+     "id": "s1_4",
+     "label": "4. Tourist numbers ______ in 2022 and reached the old level.",
+     "fields": [
+      {
+       "answer": "recovered"
+      }
+     ]
+    },
+    {
+     "id": "s1_5",
+     "label": "5. The figure rose until 2018 and then ______ at about 60%.",
+     "fields": [
+      {
+       "answer": "plateaued"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s2",
+   "title": "Step 2 · One overview sentence (5 min)",
+   "minutes": 5,
+   "kind": "open",
+   "instructions": "Data: the number of visitors (thousands) to two museums, 2015 to 2025. Science Museum 20 → 45 · History Museum 35 → 30. Write ONE overview sentence (no numbers) with Overall, … while … You will use it in class.",
+   "open": [
+    {
+     "id": "s2_1",
+     "q": "One overview sentence",
+     "model": "Overall, the number of visitors to the Science Museum rose considerably, while the History Museum saw a slight fall."
+    }
+   ]
+  }
+ ]
+}

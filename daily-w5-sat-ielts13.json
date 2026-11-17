@@ -1,0 +1,217 @@
+{
+ "id": "w5-sat-ielts13",
+ "title": "Saturday Daily Practice",
+ "subtitle": "Vocab Quest review (trend words) and Writing: line graph intro, overview and one body sentence",
+ "theme": "Tuần 16–22/11 · Writing Task 1 line graph (chuẩn bị P5)",
+ "source": "Daily Practice tuần 16–22/11, soạn mới cho IELTS13; từ ôn lấy từ Daily 9/11.",
+ "class_codes": [
+  "IELTS13"
+ ],
+ "week_number": 5,
+ "day": "saturday",
+ "date": "2026-11-21",
+ "section": "writing",
+ "minutes": 17,
+ "intro": "Làm lần lượt các bước, khoảng 17 phút. Hôm nay: Vocab Quest ôn 8 từ xu hướng và một kỹ năng: Writing Task 1 (line graph). Đây là bài chuẩn bị cho buổi P5 Chủ nhật. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+ "audio": {},
+ "send_today": "Hoàn thành các bước trên web. Bài Writing ở Step 3 được thầy chấm. Voice note đọc Overview ở Step 4.",
+ "error_type": "writing",
+ "steps": [
+  {
+   "id": "s1",
+   "title": "Step 1 · Vocab Quest: choose the meaning (3 min)",
+   "minutes": 3,
+   "kind": "mcq",
+   "instructions": "Review trend words (8): rocket · bottom out · marginal change · surge · recover · steep decline · plateau · plunge. Choose the correct meaning (A, B, C or D).",
+   "items": [
+    {
+     "id": "s1_1",
+     "q": "1. rocket",
+     "options": {
+      "A": "lao dốc, giảm mạnh",
+      "B": "phục hồi",
+      "C": "tăng vọt rất nhanh",
+      "D": "đi ngang sau khi tăng"
+     },
+     "answer": "C",
+     "explain": "rocket = tăng vọt rất nhanh. Example: House prices rocketed in the city centre."
+    },
+    {
+     "id": "s1_2",
+     "q": "2. bottom out",
+     "options": {
+      "A": "chạm đáy rồi ngừng giảm",
+      "B": "đi ngang sau khi tăng",
+      "C": "sự sụt giảm mạnh",
+      "D": "thay đổi rất nhỏ"
+     },
+     "answer": "A",
+     "explain": "bottom out = chạm đáy rồi ngừng giảm. Example: Unemployment bottomed out at 3% in 2019."
+    },
+    {
+     "id": "s1_3",
+     "q": "3. marginal change",
+     "options": {
+      "A": "tăng vọt đột ngột",
+      "B": "thay đổi rất nhỏ",
+      "C": "lao dốc, giảm mạnh",
+      "D": "phục hồi"
+     },
+     "answer": "B",
+     "explain": "marginal change = thay đổi rất nhỏ. Example: There was only a marginal change in bus use."
+    },
+    {
+     "id": "s1_4",
+     "q": "4. surge",
+     "options": {
+      "A": "đi ngang sau khi tăng",
+      "B": "chạm đáy rồi ngừng giảm",
+      "C": "sự sụt giảm mạnh",
+      "D": "tăng vọt đột ngột"
+     },
+     "answer": "D",
+     "explain": "surge = tăng vọt đột ngột. Example: Online sales surged in 2020."
+    },
+    {
+     "id": "s1_5",
+     "q": "5. recover",
+     "options": {
+      "A": "thay đổi rất nhỏ",
+      "B": "phục hồi",
+      "C": "tăng vọt đột ngột",
+      "D": "lao dốc, giảm mạnh"
+     },
+     "answer": "B",
+     "explain": "recover = phục hồi. Example: Tourist numbers recovered after 2021."
+    },
+    {
+     "id": "s1_6",
+     "q": "6. steep decline",
+     "options": {
+      "A": "phục hồi",
+      "B": "tăng vọt rất nhanh",
+      "C": "đi ngang sau khi tăng",
+      "D": "sự sụt giảm mạnh"
+     },
+     "answer": "D",
+     "explain": "steep decline = sự sụt giảm mạnh. Example: There was a steep decline in letter writing."
+    },
+    {
+     "id": "s1_7",
+     "q": "7. plateau",
+     "options": {
+      "A": "đi ngang sau khi tăng",
+      "B": "sự sụt giảm mạnh",
+      "C": "thay đổi rất nhỏ",
+      "D": "tăng vọt đột ngột"
+     },
+     "answer": "A",
+     "explain": "plateau = đi ngang sau khi tăng. Example: The figure plateaued at around 60%."
+    },
+    {
+     "id": "s1_8",
+     "q": "8. plunge",
+     "options": {
+      "A": "phục hồi",
+      "B": "tăng vọt rất nhanh",
+      "C": "lao dốc, giảm mạnh",
+      "D": "đi ngang sau khi tăng"
+     },
+     "answer": "C",
+     "explain": "plunge = lao dốc, giảm mạnh. Example: Ticket sales plunged during the storm."
+    }
+   ]
+  },
+  {
+   "id": "s2",
+   "title": "Step 2 · Trend sentences (3 min)",
+   "minutes": 3,
+   "kind": "fill",
+   "instructions": "Complete each sentence with ONE word: the past simple of the verb in brackets, or a preposition (from, to, by, at).",
+   "items": [
+    {
+     "id": "s2_1",
+     "label": "1. Hours spent on online study ______ (rise) steadily over the period.",
+     "fields": [
+      {
+       "answer": "rose"
+      }
+     ]
+    },
+    {
+     "id": "s2_2",
+     "label": "2. In 2016, part-time work stood ______ 6 hours a week.",
+     "fields": [
+      {
+       "answer": "at"
+      }
+     ]
+    },
+    {
+     "id": "s2_3",
+     "label": "3. The figure for sport ______ (fall) slightly to 3 hours.",
+     "fields": [
+      {
+       "answer": "fell"
+      }
+     ]
+    },
+    {
+     "id": "s2_4",
+     "label": "4. Online study increased ______ 2 hours ______ 12 hours. (two words)",
+     "fields": [
+      {
+       "answer": "from"
+      },
+      {
+       "answer": "to"
+      }
+     ]
+    },
+    {
+     "id": "s2_5",
+     "label": "5. Part-time work went up ______ 9 hours in total.",
+     "fields": [
+      {
+       "answer": "by"
+      }
+     ]
+    },
+    {
+     "id": "s2_6",
+     "label": "6. Time spent on sport ______ (remain) stable between 2022 and 2024.",
+     "fields": [
+      {
+       "answer": "remained"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s3",
+   "title": "Step 3 · Writing: intro + overview + 1 body sentence (10 min)",
+   "minutes": 10,
+   "kind": "open",
+   "instructions": "The line graph shows the average number of hours per week that students at a college spent on three activities from 2016 to 2024. Data: Part-time work 6, 8, 11, 14, 15 · Sport 5, 5, 4, 3, 3 · Online study 2, 4, 7, 10, 12 (2016, 2018, 2020, 2022, 2024). Write the Intro + Overview + 1 Body sentence (about 80 words). Checklist: intro paraphrases what, who, where, when · overview has 2 sentences, no numbers · body sentence uses stood at and from … to · past simple. Support: The line graph illustrates … · Overall, … while … · It is also clear that … · In 2016, … stood at …, compared with … Challenge: add a second body sentence with surge or marginal change.",
+   "open": [
+    {
+     "id": "s3_1",
+     "q": "Intro + Overview + 1 Body sentence (about 80 words)",
+     "model": "The line graph illustrates how many hours per week college students spent on part-time work, sport and online study between 2016 and 2024. Overall, the time spent on part-time work and online study increased, while the figure for sport fell slightly. It is also clear that part-time work took up the most time throughout the period. In 2016, students spent 6 hours a week on part-time work, compared with 5 hours on sport and only 2 hours on online study, which then rose from 2 to 12 hours by 2024."
+    }
+   ]
+  },
+  {
+   "id": "s4",
+   "title": "Step 4 · Voice note: read your Overview (30 s)",
+   "minutes": 1,
+   "kind": "voice",
+   "instructions": "Record yourself reading your Overview aloud, about 30 seconds. Say the final sounds clearly (-ed, -s).",
+   "lines": [
+    "Read your Overview aloud."
+   ],
+   "note": "Thầy nghe âm cuối và thì quá khứ."
+  }
+ ]
+}

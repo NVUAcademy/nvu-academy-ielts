@@ -872,6 +872,71 @@
       ]
     },
     {
+      "id": "w5-wed-ielts13",
+      "file": "daily-w5-wed-ielts13.json",
+      "title": "Wednesday Daily Practice",
+      "subtitle": "Vocab Quest review (work and learning words) and Listening: predict the answer type",
+      "day": "wednesday",
+      "date": "2026-11-18",
+      "week_number": 5,
+      "section": "listening",
+      "class_codes": [
+        "IELTS13"
+      ]
+    },
+    {
+      "id": "w5-thu-ielts13",
+      "file": "daily-w5-thu-ielts13.json",
+      "title": "Thursday Daily Practice",
+      "subtitle": "Class day warm-up for P4: words and a short dictation",
+      "day": "thursday",
+      "date": "2026-11-19",
+      "week_number": 5,
+      "section": "listening",
+      "class_codes": [
+        "IELTS13"
+      ]
+    },
+    {
+      "id": "w5-fri-ielts13",
+      "file": "daily-w5-fri-ielts13.json",
+      "title": "Friday Daily Practice",
+      "subtitle": "Listening review of P4: a full form, traps and shadowing",
+      "day": "friday",
+      "date": "2026-11-20",
+      "week_number": 5,
+      "section": "listening",
+      "class_codes": [
+        "IELTS13"
+      ]
+    },
+    {
+      "id": "w5-sat-ielts13",
+      "file": "daily-w5-sat-ielts13.json",
+      "title": "Saturday Daily Practice",
+      "subtitle": "Vocab Quest review (trend words) and Writing: line graph intro, overview and one body sentence",
+      "day": "saturday",
+      "date": "2026-11-21",
+      "week_number": 5,
+      "section": "writing",
+      "class_codes": [
+        "IELTS13"
+      ]
+    },
+    {
+      "id": "w5-sun-ielts13",
+      "file": "daily-w5-sun-ielts13.json",
+      "title": "Sunday Daily Practice",
+      "subtitle": "Class day warm-up for P5: trend words and one overview sentence",
+      "day": "sunday",
+      "date": "2026-11-22",
+      "week_number": 5,
+      "section": "writing",
+      "class_codes": [
+        "IELTS13"
+      ]
+    },
+    {
       "id": "w6-mon-ielts13",
       "file": "daily-w6-mon-ielts13.json",
       "title": "Monday Daily Practice",
