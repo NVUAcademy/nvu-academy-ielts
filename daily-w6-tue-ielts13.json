@@ -1,0 +1,436 @@
+{
+  "id": "w6-tue-ielts13",
+  "title": "Tuesday Daily Practice",
+  "subtitle": "Vocab Quest (scholarship, closing date, deposit) and Listening Section 1: audio C",
+  "theme": "P4 · Education: enrolment and study",
+  "source": "Daily Practice P4–P5 (pre-ielts/p4p5), đáp án theo bản Teacher của thầy.",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 6,
+  "day": "tuesday",
+  "date": "2026-11-24",
+  "section": "listening",
+  "minutes": 16,
+  "intro": "Làm lần lượt các bước, khoảng 16 phút. Hôm nay: Vocab Quest 16 từ (10 từ mới + 6 từ ôn) và một kỹ năng: Listening Section 1. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {
+    "c": {
+      "label": "Audio C · Study Support Centre (play once)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "Good morning, Study Support Centre. How can I help?"
+        },
+        {
+          "speaker": "B",
+          "text": "Hello. I'd like to book a place on the scholarship workshop, please."
+        },
+        {
+          "speaker": "A",
+          "text": "Certainly. Can I have your surname?"
+        },
+        {
+          "speaker": "B",
+          "text": "Yes, it's Haywood. That's H-A-Y-W-O-O-D."
+        },
+        {
+          "speaker": "A",
+          "text": "Thank you, Mr Haywood. And what are you studying?"
+        },
+        {
+          "speaker": "B",
+          "text": "Business Management. I'm in my second year."
+        },
+        {
+          "speaker": "A",
+          "text": "Good. The workshop is on Monday afternoon… oh, sorry, I mean Tuesday. Tuesday the eighth of December."
+        },
+        {
+          "speaker": "B",
+          "text": "What time does it start?"
+        },
+        {
+          "speaker": "A",
+          "text": "It starts at one thirty and finishes at three."
+        },
+        {
+          "speaker": "B",
+          "text": "Great. And when is the closing date for the scholarship application?"
+        },
+        {
+          "speaker": "A",
+          "text": "It's the thirteenth of January… no, sorry, the thirtieth. It's quite late this year."
+        },
+        {
+          "speaker": "B",
+          "text": "Thank you. Do I need to bring a laptop?"
+        },
+        {
+          "speaker": "A",
+          "text": "No, we have computers. Just bring your student card."
+        }
+      ]
+    }
+  },
+  "send_today": "Hoàn thành các bước trên web. Voice note ở Step 4 được gửi khi bấm Nộp bài.",
+  "error_type": "listening",
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocab Quest 1: match the new words (3 min)",
+      "minutes": 3,
+      "instructions": "New words today (10): scholarship /ˈskɒləʃɪp/ (n) · closing date /ˈkləʊzɪŋ deɪt/ (n) · application form /ˌæplɪˈkeɪʃn fɔːm/ (n) · registration /ˌredʒɪˈstreɪʃn/ (n) · semester /sɪˈmestə/ (n) · lecturer /ˈlektʃərə/ (n) · tutor /ˈtjuːtə/ (n) · attendance /əˈtendəns/ (n) · deposit /dɪˈpɒzɪt/ (n) · curriculum /kəˈrɪkjələm/ (n). Review words (6): enrol = đăng ký học · vacancy = vị trí đang tuyển · shift = ca làm · trainee = người học việc · soar = tăng vọt · remain constant = giữ nguyên, không đổi. Choose the correct meaning (A–J) for each new word.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s1_1",
+          "q": "1. scholarship",
+          "options": {
+            "A": "gia sư, giáo viên hướng dẫn",
+            "B": "giảng viên",
+            "C": "sự đăng ký",
+            "D": "ngày hết hạn đăng ký",
+            "E": "đơn đăng ký",
+            "F": "chương trình học",
+            "G": "tiền đặt cọc",
+            "H": "sự có mặt, đi học",
+            "I": "học bổng",
+            "J": "học kỳ"
+          },
+          "answer": "I",
+          "explain": "scholarship = học bổng. Collocation: win / apply for a scholarship. Example: She won a scholarship to study in Australia."
+        },
+        {
+          "id": "s1_2",
+          "q": "2. closing date",
+          "options": {
+            "A": "gia sư, giáo viên hướng dẫn",
+            "B": "giảng viên",
+            "C": "sự đăng ký",
+            "D": "ngày hết hạn đăng ký",
+            "E": "đơn đăng ký",
+            "F": "chương trình học",
+            "G": "tiền đặt cọc",
+            "H": "sự có mặt, đi học",
+            "I": "học bổng",
+            "J": "học kỳ"
+          },
+          "answer": "D",
+          "explain": "closing date = ngày hết hạn đăng ký. Collocation: the closing date for applications. Example: The closing date for applications is 30 November."
+        },
+        {
+          "id": "s1_3",
+          "q": "3. application form",
+          "options": {
+            "A": "gia sư, giáo viên hướng dẫn",
+            "B": "giảng viên",
+            "C": "sự đăng ký",
+            "D": "ngày hết hạn đăng ký",
+            "E": "đơn đăng ký",
+            "F": "chương trình học",
+            "G": "tiền đặt cọc",
+            "H": "sự có mặt, đi học",
+            "I": "học bổng",
+            "J": "học kỳ"
+          },
+          "answer": "E",
+          "explain": "application form = đơn đăng ký. Collocation: fill in an application form. Example: Please fill in the application form in capital letters."
+        },
+        {
+          "id": "s1_4",
+          "q": "4. registration",
+          "options": {
+            "A": "gia sư, giáo viên hướng dẫn",
+            "B": "giảng viên",
+            "C": "sự đăng ký",
+            "D": "ngày hết hạn đăng ký",
+            "E": "đơn đăng ký",
+            "F": "chương trình học",
+            "G": "tiền đặt cọc",
+            "H": "sự có mặt, đi học",
+            "I": "học bổng",
+            "J": "học kỳ"
+          },
+          "answer": "C",
+          "explain": "registration = sự đăng ký. Collocation: registration is open. Example: Registration for the course opens in January."
+        },
+        {
+          "id": "s1_5",
+          "q": "5. semester",
+          "options": {
+            "A": "gia sư, giáo viên hướng dẫn",
+            "B": "giảng viên",
+            "C": "sự đăng ký",
+            "D": "ngày hết hạn đăng ký",
+            "E": "đơn đăng ký",
+            "F": "chương trình học",
+            "G": "tiền đặt cọc",
+            "H": "sự có mặt, đi học",
+            "I": "học bổng",
+            "J": "học kỳ"
+          },
+          "answer": "J",
+          "explain": "semester = học kỳ. Collocation: the first semester. Example: The first semester starts in September."
+        },
+        {
+          "id": "s1_6",
+          "q": "6. lecturer",
+          "options": {
+            "A": "gia sư, giáo viên hướng dẫn",
+            "B": "giảng viên",
+            "C": "sự đăng ký",
+            "D": "ngày hết hạn đăng ký",
+            "E": "đơn đăng ký",
+            "F": "chương trình học",
+            "G": "tiền đặt cọc",
+            "H": "sự có mặt, đi học",
+            "I": "học bổng",
+            "J": "học kỳ"
+          },
+          "answer": "B",
+          "explain": "lecturer = giảng viên. Collocation: a university lecturer. Example: My lecturer gives us a quiz every Friday."
+        },
+        {
+          "id": "s1_7",
+          "q": "7. tutor",
+          "options": {
+            "A": "gia sư, giáo viên hướng dẫn",
+            "B": "giảng viên",
+            "C": "sự đăng ký",
+            "D": "ngày hết hạn đăng ký",
+            "E": "đơn đăng ký",
+            "F": "chương trình học",
+            "G": "tiền đặt cọc",
+            "H": "sự có mặt, đi học",
+            "I": "học bổng",
+            "J": "học kỳ"
+          },
+          "answer": "A",
+          "explain": "tutor = gia sư, giáo viên hướng dẫn. Collocation: a private tutor. Example: I have a tutor to help me with my writing."
+        },
+        {
+          "id": "s1_8",
+          "q": "8. attendance",
+          "options": {
+            "A": "gia sư, giáo viên hướng dẫn",
+            "B": "giảng viên",
+            "C": "sự đăng ký",
+            "D": "ngày hết hạn đăng ký",
+            "E": "đơn đăng ký",
+            "F": "chương trình học",
+            "G": "tiền đặt cọc",
+            "H": "sự có mặt, đi học",
+            "I": "học bổng",
+            "J": "học kỳ"
+          },
+          "answer": "H",
+          "explain": "attendance = sự có mặt, đi học. Collocation: good attendance. Example: Attendance at the workshop is compulsory."
+        },
+        {
+          "id": "s1_9",
+          "q": "9. deposit",
+          "options": {
+            "A": "gia sư, giáo viên hướng dẫn",
+            "B": "giảng viên",
+            "C": "sự đăng ký",
+            "D": "ngày hết hạn đăng ký",
+            "E": "đơn đăng ký",
+            "F": "chương trình học",
+            "G": "tiền đặt cọc",
+            "H": "sự có mặt, đi học",
+            "I": "học bổng",
+            "J": "học kỳ"
+          },
+          "answer": "G",
+          "explain": "deposit = tiền đặt cọc. Collocation: pay a deposit. Example: You must pay a deposit of £50 to book a place."
+        },
+        {
+          "id": "s1_10",
+          "q": "10. curriculum",
+          "options": {
+            "A": "gia sư, giáo viên hướng dẫn",
+            "B": "giảng viên",
+            "C": "sự đăng ký",
+            "D": "ngày hết hạn đăng ký",
+            "E": "đơn đăng ký",
+            "F": "chương trình học",
+            "G": "tiền đặt cọc",
+            "H": "sự có mặt, đi học",
+            "I": "học bổng",
+            "J": "học kỳ"
+          },
+          "answer": "F",
+          "explain": "curriculum = chương trình học. Collocation: a school curriculum. Example: The curriculum includes maths, science and English."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Vocab Quest 2: fill the gaps (3 min)",
+      "minutes": 3,
+      "instructions": "Fill the gaps with the words in the box. Change the form if needed. Box: application form · deposit · lecturer · scholarship · closing date · vacancy · shift · enrol",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. You must pay a ______ of £50 to book a place.",
+          "fields": [
+            {
+              "answer": "deposit"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. She won a ______ to study in Australia.",
+          "fields": [
+            {
+              "answer": "scholarship"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. The ______ for applications is 30 November.",
+          "fields": [
+            {
+              "answer": "closing date"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. I want to ______ on the evening course.",
+          "fields": [
+            {
+              "answer": "enrol"
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. The café has a ______ for a trainee.",
+          "fields": [
+            {
+              "answer": "vacancy"
+            }
+          ]
+        },
+        {
+          "id": "s2_6",
+          "label": "6. Please fill in the ______ in capital letters.",
+          "fields": [
+            {
+              "answer": "application form"
+            }
+          ]
+        },
+        {
+          "id": "s2_7",
+          "label": "7. My ______ gives us a quiz every Friday.",
+          "fields": [
+            {
+              "answer": "lecturer"
+            }
+          ]
+        },
+        {
+          "id": "s2_8",
+          "label": "8. She works the night ______ at the hotel.",
+          "fields": [
+            {
+              "answer": "shift"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Listening: Study Support Centre booking (10 min)",
+      "minutes": 10,
+      "kind": "fill",
+      "audio": "c",
+      "instructions": "Before you listen: read the questions for 30 seconds and decide the type of word (number / day / name / time / subject). Play the audio ONCE. Write NO MORE THAN TWO WORDS AND/OR A NUMBER. STUDY SUPPORT CENTRE · Scholarship workshop booking.",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. Surname: Mr ______",
+          "fields": [
+            {
+              "answer": "Haywood"
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2. Course: ______",
+          "fields": [
+            {
+              "answer": "Business Management"
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3. Workshop day: ______",
+          "fields": [
+            {
+              "answer": "Tuesday"
+            }
+          ],
+          "explain": "Bẫy: Monday → sửa lại Tuesday."
+        },
+        {
+          "id": "s3_4",
+          "label": "4. Starts at: ______ p.m.",
+          "fields": [
+            {
+              "answer": "1.30",
+              "accept": [
+                "1:30",
+                "one thirty"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_5",
+          "label": "5. Closing date for applications: ______ January",
+          "fields": [
+            {
+              "answer": "30",
+              "accept": [
+                "30th",
+                "thirtieth"
+              ]
+            }
+          ],
+          "explain": "Bẫy: thirteenth → sửa lại thirtieth (30)."
+        },
+        {
+          "id": "s3_6",
+          "label": "6. Participants should bring their ______",
+          "fields": [
+            {
+              "answer": "student card"
+            }
+          ],
+          "explain": "Bẫy: laptop không cần, chỉ mang student card."
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Voice note: spelling and numbers (30 s)",
+      "minutes": 1,
+      "kind": "voice",
+      "instructions": "Spell your surname aloud, letter by letter. Then read this phone number: 0792 558 136.",
+      "lines": [
+        "Spell your surname letter by letter.",
+        "Read: 0792 558 136"
+      ],
+      "note": "Thầy nghe cách đọc chữ cái và số (double five)."
+    }
+  ]
+}

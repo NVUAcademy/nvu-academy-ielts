@@ -1,0 +1,488 @@
+{
+  "id": "w6-thu-ielts13",
+  "title": "Thursday Daily Practice",
+  "subtitle": "Class day warm-up: Vocab Quest (contract, wage, overtime) and dictation: audio D",
+  "theme": "P4 · Employment: jobs and contracts",
+  "source": "Daily Practice P4–P5 (pre-ielts/p4p5), đáp án theo bản Teacher của thầy.",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 6,
+  "day": "thursday",
+  "date": "2026-11-26",
+  "section": "listening",
+  "minutes": 18,
+  "intro": "Hôm nay có buổi học P6. Làm lần lượt các bước, khoảng 18 phút: Vocab Quest 16 từ (10 từ mới + 6 từ ôn), dictation và shadowing. Bài khởi động, làm trước giờ học. Đừng xem đáp án trước khi làm xong.",
+  "audio": {
+    "d": {
+      "label": "Audio D · Dictation (8 sentences, each twice; pause the audio to write)",
+      "lines": [
+        {
+          "speaker": "A",
+          "text": "Her surname is Bellamy, B-E-double L-A-M-Y."
+        },
+        {
+          "speaker": "A",
+          "text": "Her surname is Bellamy, B-E-double L-A-M-Y."
+        },
+        {
+          "speaker": "B",
+          "text": "The work placement starts on the thirteenth of September."
+        },
+        {
+          "speaker": "B",
+          "text": "The work placement starts on the thirteenth of September."
+        },
+        {
+          "speaker": "A",
+          "text": "The curriculum includes forty hours of English."
+        },
+        {
+          "speaker": "A",
+          "text": "The curriculum includes forty hours of English."
+        },
+        {
+          "speaker": "B",
+          "text": "Call the office on zero seven nine two, double five, eight one three six."
+        },
+        {
+          "speaker": "B",
+          "text": "Call the office on zero seven nine two, double five, eight one three six."
+        },
+        {
+          "speaker": "A",
+          "text": "The night shift finishes at half past six."
+        },
+        {
+          "speaker": "A",
+          "text": "The night shift finishes at half past six."
+        },
+        {
+          "speaker": "B",
+          "text": "The meeting is on Friday… no, sorry, Saturday at eleven."
+        },
+        {
+          "speaker": "B",
+          "text": "The meeting is on Friday… no, sorry, Saturday at eleven."
+        },
+        {
+          "speaker": "A",
+          "text": "The scholarship is worth fifteen hundred pounds a year."
+        },
+        {
+          "speaker": "A",
+          "text": "The scholarship is worth fifteen hundred pounds a year."
+        },
+        {
+          "speaker": "B",
+          "text": "Send your email to adam dot reid at northcollege dot ac dot uk."
+        },
+        {
+          "speaker": "B",
+          "text": "Send your email to adam dot reid at northcollege dot ac dot uk."
+        }
+      ]
+    }
+  },
+  "send_today": "Bài khởi động ngày học, không cần gửi Zalo. Tối nay thầy gửi đáp án lúc 21:45.",
+  "error_type": "listening",
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocab Quest 1: match the new words (3 min)",
+      "minutes": 3,
+      "instructions": "New words today (10): work placement /wɜːk ˈpleɪsmənt/ (n) · employer /ɪmˈplɔɪə/ (n) · employee /ɪmˈplɔɪiː/ (n) · applicant /ˈæplɪkənt/ (n) · contract /ˈkɒntrækt/ (n) · wage /weɪdʒ/ (n) · overtime /ˈəʊvətaɪm/ (n) · working hours /ˈwɜːkɪŋ ˈaʊəz/ (n) · part-time /ˌpɑːt ˈtaɪm/ (adj) · full-time /ˌfʊl ˈtaɪm/ (adj). Review words (6): timetable = thời khóa biểu · certificate = chứng chỉ · supervisor = người giám sát · participant = người tham gia · stabilise = ổn định lại · rank = xếp hạng, đứng thứ. Choose the correct meaning (A–J) for each new word.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s1_1",
+          "q": "1. work placement",
+          "options": {
+            "A": "hợp đồng",
+            "B": "nhà tuyển dụng",
+            "C": "ứng viên",
+            "D": "nhân viên",
+            "E": "giờ làm thêm",
+            "F": "toàn thời gian",
+            "G": "giờ làm việc",
+            "H": "tiền công",
+            "I": "bán thời gian",
+            "J": "kỳ thực tập"
+          },
+          "answer": "J",
+          "explain": "work placement = kỳ thực tập. Collocation: do a work placement. Example: He did a three-month work placement at a travel agency."
+        },
+        {
+          "id": "s1_2",
+          "q": "2. employer",
+          "options": {
+            "A": "hợp đồng",
+            "B": "nhà tuyển dụng",
+            "C": "ứng viên",
+            "D": "nhân viên",
+            "E": "giờ làm thêm",
+            "F": "toàn thời gian",
+            "G": "giờ làm việc",
+            "H": "tiền công",
+            "I": "bán thời gian",
+            "J": "kỳ thực tập"
+          },
+          "answer": "B",
+          "explain": "employer = nhà tuyển dụng. Collocation: a good employer. Example: My employer lets me choose my shifts."
+        },
+        {
+          "id": "s1_3",
+          "q": "3. employee",
+          "options": {
+            "A": "hợp đồng",
+            "B": "nhà tuyển dụng",
+            "C": "ứng viên",
+            "D": "nhân viên",
+            "E": "giờ làm thêm",
+            "F": "toàn thời gian",
+            "G": "giờ làm việc",
+            "H": "tiền công",
+            "I": "bán thời gian",
+            "J": "kỳ thực tập"
+          },
+          "answer": "D",
+          "explain": "employee = nhân viên. Collocation: a full-time employee. Example: The company has 200 employees."
+        },
+        {
+          "id": "s1_4",
+          "q": "4. applicant",
+          "options": {
+            "A": "hợp đồng",
+            "B": "nhà tuyển dụng",
+            "C": "ứng viên",
+            "D": "nhân viên",
+            "E": "giờ làm thêm",
+            "F": "toàn thời gian",
+            "G": "giờ làm việc",
+            "H": "tiền công",
+            "I": "bán thời gian",
+            "J": "kỳ thực tập"
+          },
+          "answer": "C",
+          "explain": "applicant = ứng viên. Collocation: a successful applicant. Example: Each applicant must send a reference."
+        },
+        {
+          "id": "s1_5",
+          "q": "5. contract",
+          "options": {
+            "A": "hợp đồng",
+            "B": "nhà tuyển dụng",
+            "C": "ứng viên",
+            "D": "nhân viên",
+            "E": "giờ làm thêm",
+            "F": "toàn thời gian",
+            "G": "giờ làm việc",
+            "H": "tiền công",
+            "I": "bán thời gian",
+            "J": "kỳ thực tập"
+          },
+          "answer": "A",
+          "explain": "contract = hợp đồng. Collocation: sign a contract. Example: She signed a one-year contract."
+        },
+        {
+          "id": "s1_6",
+          "q": "6. wage",
+          "options": {
+            "A": "hợp đồng",
+            "B": "nhà tuyển dụng",
+            "C": "ứng viên",
+            "D": "nhân viên",
+            "E": "giờ làm thêm",
+            "F": "toàn thời gian",
+            "G": "giờ làm việc",
+            "H": "tiền công",
+            "I": "bán thời gian",
+            "J": "kỳ thực tập"
+          },
+          "answer": "H",
+          "explain": "wage = tiền công. Collocation: a low wage. Example: The wage is nine pounds an hour."
+        },
+        {
+          "id": "s1_7",
+          "q": "7. overtime",
+          "options": {
+            "A": "hợp đồng",
+            "B": "nhà tuyển dụng",
+            "C": "ứng viên",
+            "D": "nhân viên",
+            "E": "giờ làm thêm",
+            "F": "toàn thời gian",
+            "G": "giờ làm việc",
+            "H": "tiền công",
+            "I": "bán thời gian",
+            "J": "kỳ thực tập"
+          },
+          "answer": "E",
+          "explain": "overtime = giờ làm thêm. Collocation: work overtime. Example: Staff get extra pay for overtime."
+        },
+        {
+          "id": "s1_8",
+          "q": "8. working hours",
+          "options": {
+            "A": "hợp đồng",
+            "B": "nhà tuyển dụng",
+            "C": "ứng viên",
+            "D": "nhân viên",
+            "E": "giờ làm thêm",
+            "F": "toàn thời gian",
+            "G": "giờ làm việc",
+            "H": "tiền công",
+            "I": "bán thời gian",
+            "J": "kỳ thực tập"
+          },
+          "answer": "G",
+          "explain": "working hours = giờ làm việc. Collocation: flexible working hours. Example: The working hours are from nine to five."
+        },
+        {
+          "id": "s1_9",
+          "q": "9. part-time",
+          "options": {
+            "A": "hợp đồng",
+            "B": "nhà tuyển dụng",
+            "C": "ứng viên",
+            "D": "nhân viên",
+            "E": "giờ làm thêm",
+            "F": "toàn thời gian",
+            "G": "giờ làm việc",
+            "H": "tiền công",
+            "I": "bán thời gian",
+            "J": "kỳ thực tập"
+          },
+          "answer": "I",
+          "explain": "part-time = bán thời gian. Collocation: a part-time job. Example: He has a part-time job at a bookshop."
+        },
+        {
+          "id": "s1_10",
+          "q": "10. full-time",
+          "options": {
+            "A": "hợp đồng",
+            "B": "nhà tuyển dụng",
+            "C": "ứng viên",
+            "D": "nhân viên",
+            "E": "giờ làm thêm",
+            "F": "toàn thời gian",
+            "G": "giờ làm việc",
+            "H": "tiền công",
+            "I": "bán thời gian",
+            "J": "kỳ thực tập"
+          },
+          "answer": "F",
+          "explain": "full-time = toàn thời gian. Collocation: a full-time job. Example: She works full-time as a nurse."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Vocab Quest 2: fill the gaps (3 min)",
+      "minutes": 3,
+      "instructions": "Fill the gaps with the words in the box. Change the form if needed. Box: applicant · contract · wage · supervisor · part-time · certificate · overtime · timetable",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. The ______ is nine pounds an hour.",
+          "fields": [
+            {
+              "answer": "wage"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. She signed a one-year ______.",
+          "fields": [
+            {
+              "answer": "contract"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. Staff get extra pay for ______.",
+          "fields": [
+            {
+              "answer": "overtime"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. He has a ______ job at a bookshop.",
+          "fields": [
+            {
+              "answer": "part-time",
+              "accept": [
+                "part time"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. My ______ checks our work every day.",
+          "fields": [
+            {
+              "answer": "supervisor"
+            }
+          ]
+        },
+        {
+          "id": "s2_6",
+          "label": "6. You get a ______ after ten sessions.",
+          "fields": [
+            {
+              "answer": "certificate"
+            }
+          ]
+        },
+        {
+          "id": "s2_7",
+          "label": "7. My ______ is full on Mondays.",
+          "fields": [
+            {
+              "answer": "timetable"
+            }
+          ]
+        },
+        {
+          "id": "s2_8",
+          "label": "8. Each ______ must send a reference.",
+          "fields": [
+            {
+              "answer": "applicant"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Dictation (8 min)",
+      "minutes": 8,
+      "kind": "fill",
+      "audio": "d",
+      "instructions": "Listen to 8 sentences. Each sentence is read twice. Write the missing information. Numbers as digits.",
+      "items": [
+        {
+          "id": "s3_1",
+          "label": "1. Surname: ______",
+          "fields": [
+            {
+              "answer": "Bellamy",
+              "accept": [
+                "BELLAMY"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_2",
+          "label": "2. The work placement starts on ______ September.",
+          "fields": [
+            {
+              "answer": "13",
+              "accept": [
+                "13th",
+                "thirteenth"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_3",
+          "label": "3. Hours of English: ______",
+          "fields": [
+            {
+              "answer": "40",
+              "accept": [
+                "forty"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_4",
+          "label": "4. Phone: ______",
+          "fields": [
+            {
+              "answer": "0792558136",
+              "accept": [
+                "0792 558 136",
+                "07925 58136"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_5",
+          "label": "5. The night shift finishes at ______",
+          "fields": [
+            {
+              "answer": "6.30",
+              "accept": [
+                "6:30",
+                "half past six"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_6",
+          "label": "6. Meeting day and time: ______",
+          "fields": [
+            {
+              "answer": "Saturday, 11",
+              "accept": [
+                "Saturday 11",
+                "Saturday at 11",
+                "Saturday, 11.00",
+                "Saturday 11:00"
+              ]
+            }
+          ],
+          "explain": "Bẫy: Friday → sửa lại Saturday."
+        },
+        {
+          "id": "s3_7",
+          "label": "7. Scholarship: £ ______ a year",
+          "fields": [
+            {
+              "answer": "1,500",
+              "accept": [
+                "1500"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s3_8",
+          "label": "8. Email: ______",
+          "fields": [
+            {
+              "answer": "adam.reid@northcollege.ac.uk"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Shadowing (4 min, not marked)",
+      "minutes": 4,
+      "kind": "open",
+      "instructions": "Replay audio B from P4. Choose 5 lines said by the receptionist and read each line after the speaker. Copy the stress on numbers.",
+      "open": [
+        {
+          "id": "s4_1",
+          "q": "Write the 5 lines you shadowed (or the numbers in them).",
+          "model": "Any 5 receptionist lines from audio B."
+        }
+      ]
+    }
+  ]
+}

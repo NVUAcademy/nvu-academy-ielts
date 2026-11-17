@@ -1,0 +1,361 @@
+{
+  "id": "w6-wed-ielts13",
+  "title": "Wednesday Daily Practice",
+  "subtitle": "Vocab Quest (roughly, just over, the majority of) and Writing: fix-it + rewrite Body 1",
+  "theme": "P5 · Line graph: numbers and comparison",
+  "source": "Daily Practice P4–P5 (pre-ielts/p4p5), đáp án theo bản Teacher của thầy.",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 6,
+  "day": "wednesday",
+  "date": "2026-11-25",
+  "section": "writing",
+  "minutes": 17,
+  "intro": "Làm lần lượt các bước, khoảng 17 phút. Hôm nay: Vocab Quest 16 từ (10 từ mới + 6 từ ôn) và một kỹ năng: Writing Task 1 (fix and rewrite). Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "send_today": "Hoàn thành các bước trên web. Bài viết lại ở Step 4 được thầy chấm.",
+  "error_type": "writing",
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocab Quest 1: match the new words (3 min)",
+      "minutes": 3,
+      "instructions": "New words today (10): downward trend /ˈdaʊnwəd trend/ (n) · stabilise /ˈsteɪbəlaɪz/ (v) · roughly /ˈrʌfli/ (adv) · just over /dʒʌst ˈəʊvə/ (phr) · just under /dʒʌst ˈʌndə/ (phr) · the majority of /ðə məˈdʒɒrəti əv/ (phr) · a minority of /ə maɪˈnɒrəti əv/ (phr) · twice as many as /twaɪs əz ˈmeni əz/ (phr) · a third of /ə θɜːd əv/ (phr) · rank /ræŋk/ (v). Review words (6): stand at = ở mức · gradual = dần dần · sharp = mạnh, đột ngột · approximately = khoảng · scholarship = học bổng · semester = học kỳ. Choose the correct meaning (A–J) for each new word.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s1_1",
+          "q": "1. downward trend",
+          "options": {
+            "A": "nhiều gấp đôi",
+            "B": "xu hướng giảm",
+            "C": "kém một chút",
+            "D": "khoảng, xấp xỉ",
+            "E": "xếp hạng, đứng thứ",
+            "F": "thiểu số",
+            "G": "một phần ba",
+            "H": "đa số",
+            "I": "ổn định lại",
+            "J": "hơn một chút"
+          },
+          "answer": "B",
+          "explain": "downward trend = xu hướng giảm. Collocation: a downward trend in …. Example: There is a downward trend in the number of printed books sold."
+        },
+        {
+          "id": "s1_2",
+          "q": "2. stabilise",
+          "options": {
+            "A": "nhiều gấp đôi",
+            "B": "xu hướng giảm",
+            "C": "kém một chút",
+            "D": "khoảng, xấp xỉ",
+            "E": "xếp hạng, đứng thứ",
+            "F": "thiểu số",
+            "G": "một phần ba",
+            "H": "đa số",
+            "I": "ổn định lại",
+            "J": "hơn một chút"
+          },
+          "answer": "I",
+          "explain": "stabilise = ổn định lại. Collocation: stabilise at 300. Example: The number of applicants stabilised at about 300 a year."
+        },
+        {
+          "id": "s1_3",
+          "q": "3. roughly",
+          "options": {
+            "A": "nhiều gấp đôi",
+            "B": "xu hướng giảm",
+            "C": "kém một chút",
+            "D": "khoảng, xấp xỉ",
+            "E": "xếp hạng, đứng thứ",
+            "F": "thiểu số",
+            "G": "một phần ba",
+            "H": "đa số",
+            "I": "ổn định lại",
+            "J": "hơn một chút"
+          },
+          "answer": "D",
+          "explain": "roughly = khoảng, xấp xỉ. Collocation: roughly 50%. Example: Roughly 50% of the students came from the city."
+        },
+        {
+          "id": "s1_4",
+          "q": "4. just over",
+          "options": {
+            "A": "nhiều gấp đôi",
+            "B": "xu hướng giảm",
+            "C": "kém một chút",
+            "D": "khoảng, xấp xỉ",
+            "E": "xếp hạng, đứng thứ",
+            "F": "thiểu số",
+            "G": "một phần ba",
+            "H": "đa số",
+            "I": "ổn định lại",
+            "J": "hơn một chút"
+          },
+          "answer": "J",
+          "explain": "just over = hơn một chút. Collocation: just over 30%. Example: Just over 30% of adults took an evening course."
+        },
+        {
+          "id": "s1_5",
+          "q": "5. just under",
+          "options": {
+            "A": "nhiều gấp đôi",
+            "B": "xu hướng giảm",
+            "C": "kém một chút",
+            "D": "khoảng, xấp xỉ",
+            "E": "xếp hạng, đứng thứ",
+            "F": "thiểu số",
+            "G": "một phần ba",
+            "H": "đa số",
+            "I": "ổn định lại",
+            "J": "hơn một chút"
+          },
+          "answer": "C",
+          "explain": "just under = kém một chút. Collocation: just under 20%. Example: Just under 20% of workers were unhappy."
+        },
+        {
+          "id": "s1_6",
+          "q": "6. the majority of",
+          "options": {
+            "A": "nhiều gấp đôi",
+            "B": "xu hướng giảm",
+            "C": "kém một chút",
+            "D": "khoảng, xấp xỉ",
+            "E": "xếp hạng, đứng thứ",
+            "F": "thiểu số",
+            "G": "một phần ba",
+            "H": "đa số",
+            "I": "ổn định lại",
+            "J": "hơn một chút"
+          },
+          "answer": "H",
+          "explain": "the majority of = đa số. Collocation: the majority of students. Example: The majority of students walked to class."
+        },
+        {
+          "id": "s1_7",
+          "q": "7. a minority of",
+          "options": {
+            "A": "nhiều gấp đôi",
+            "B": "xu hướng giảm",
+            "C": "kém một chút",
+            "D": "khoảng, xấp xỉ",
+            "E": "xếp hạng, đứng thứ",
+            "F": "thiểu số",
+            "G": "một phần ba",
+            "H": "đa số",
+            "I": "ổn định lại",
+            "J": "hơn một chút"
+          },
+          "answer": "F",
+          "explain": "a minority of = thiểu số. Collocation: a minority of workers. Example: Only a minority of workers had a long contract."
+        },
+        {
+          "id": "s1_8",
+          "q": "8. twice as many as",
+          "options": {
+            "A": "nhiều gấp đôi",
+            "B": "xu hướng giảm",
+            "C": "kém một chút",
+            "D": "khoảng, xấp xỉ",
+            "E": "xếp hạng, đứng thứ",
+            "F": "thiểu số",
+            "G": "một phần ba",
+            "H": "đa số",
+            "I": "ổn định lại",
+            "J": "hơn một chút"
+          },
+          "answer": "A",
+          "explain": "twice as many as = nhiều gấp đôi. Collocation: twice as many … as. Example: Twice as many women as men enrolled on the course."
+        },
+        {
+          "id": "s1_9",
+          "q": "9. a third of",
+          "options": {
+            "A": "nhiều gấp đôi",
+            "B": "xu hướng giảm",
+            "C": "kém một chút",
+            "D": "khoảng, xấp xỉ",
+            "E": "xếp hạng, đứng thứ",
+            "F": "thiểu số",
+            "G": "một phần ba",
+            "H": "đa số",
+            "I": "ổn định lại",
+            "J": "hơn một chút"
+          },
+          "answer": "G",
+          "explain": "a third of = một phần ba. Collocation: a third of the class. Example: A third of the class chose online lessons."
+        },
+        {
+          "id": "s1_10",
+          "q": "10. rank",
+          "options": {
+            "A": "nhiều gấp đôi",
+            "B": "xu hướng giảm",
+            "C": "kém một chút",
+            "D": "khoảng, xấp xỉ",
+            "E": "xếp hạng, đứng thứ",
+            "F": "thiểu số",
+            "G": "một phần ba",
+            "H": "đa số",
+            "I": "ổn định lại",
+            "J": "hơn một chút"
+          },
+          "answer": "E",
+          "explain": "rank = xếp hạng, đứng thứ. Collocation: rank first / second. Example: Retail ranked first for working hours in 2020."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Vocab Quest 2: fill the gaps (3 min)",
+      "minutes": 3,
+      "instructions": "Fill the gaps with the words in the box. Change the form if needed. Box: stood at · roughly · a third of · the majority of · gradual · stabilised · just over · ranked",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. ______ 30% of adults took an evening course.",
+          "fields": [
+            {
+              "answer": "just over"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. ______ students walked to class.",
+          "fields": [
+            {
+              "answer": "the majority of",
+              "accept": [
+                "The majority of"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. The figure ______ 60% in 2010.",
+          "fields": [
+            {
+              "answer": "stood at"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. There was a ______ decline in Languages.",
+          "fields": [
+            {
+              "answer": "gradual"
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. Retail ______ first for working hours in 2020.",
+          "fields": [
+            {
+              "answer": "ranked"
+            }
+          ]
+        },
+        {
+          "id": "s2_6",
+          "label": "6. The number of applicants ______ at about 300 a year.",
+          "fields": [
+            {
+              "answer": "stabilised",
+              "accept": [
+                "stabilized"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_7",
+          "label": "7. ______ 50% of the students came from the city.",
+          "fields": [
+            {
+              "answer": "roughly"
+            }
+          ]
+        },
+        {
+          "id": "s2_8",
+          "label": "8. ______ the class chose online lessons.",
+          "fields": [
+            {
+              "answer": "a third of"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Fix-it: one mistake in each sentence (6 min)",
+      "minutes": 6,
+      "kind": "open",
+      "instructions": "Each sentence has one mistake. Write the correct sentence.",
+      "open": [
+        {
+          "id": "s3_1",
+          "q": "1. The number of students was increased sharply from 200 to 500 in 2015.",
+          "model": "The number of students rose sharply from 200 to 500 in 2015. (Không dùng bị động với increase/rise.)"
+        },
+        {
+          "id": "s3_2",
+          "q": "2. Sales climbed from 20% until 60% during the period.",
+          "model": "Sales climbed from 20% to 60% during the period. (from … to, không dùng until.)"
+        },
+        {
+          "id": "s3_3",
+          "q": "3. There was a sharply rise in the percentage of women in work.",
+          "model": "There was a sharp rise in the percentage of women in work. (Trước danh từ dùng tính từ sharp.)"
+        },
+        {
+          "id": "s3_4",
+          "q": "4. The figure for part-time jobs have fallen gradually to 12%.",
+          "model": "The figure for part-time jobs has fallen gradually to 12%. (Chủ ngữ The figure số ít → has.)"
+        },
+        {
+          "id": "s3_5",
+          "q": "5. In 2020, the number of graduates peaked 450 and then dropped slowly.",
+          "model": "In 2020, the number of graduates peaked at 450 and then dropped slowly. (peak at + số.)"
+        },
+        {
+          "id": "s3_6",
+          "q": "6. The figure for Languages declined because jobs are difficult to find.",
+          "model": "The figure for Languages declined. (Task 1 không viết lý do.)"
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Rewrite Body 1 (6 min)",
+      "minutes": 6,
+      "kind": "open",
+      "instructions": "Use your teacher's feedback (sent Tuesday) to rewrite only the sentences with mistakes in your Graph 2 Body 1 (Monday). If you have no feedback yet, use the 5-box checklist from Monday.",
+      "open": [
+        {
+          "id": "s4_1",
+          "q": "Your corrected sentences (Graph 2, Body 1)",
+          "model": "In 2014, Evening classes stood at 40 thousand, compared with 20 thousand for Workshops and only 10 thousand for Online courses. After that, the figure for Online courses climbed sharply to 50 thousand in 2022."
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "title": "Step 5 · Voice note (30 s)",
+      "minutes": 1,
+      "kind": "voice",
+      "instructions": "Read aloud the sentence your teacher praised and one sentence you corrected.",
+      "lines": [
+        "Read the sentence your teacher praised and one corrected sentence."
+      ],
+      "note": "Thầy nghe âm cuối và trọng âm số liệu."
+    }
+  ]
+}

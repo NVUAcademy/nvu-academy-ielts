@@ -1,0 +1,325 @@
+{
+  "id": "w6-mon-ielts13",
+  "title": "Monday Daily Practice",
+  "subtitle": "Vocab Quest (soar, slump, rebound) and Writing Task 1: Graph 2, intro + overview + Body 1",
+  "theme": "P5 · Line graph: movement and degree",
+  "source": "Daily Practice P4–P5 (pre-ielts/p4p5), đáp án theo bản Teacher của thầy.",
+  "class_codes": [
+    "IELTS13"
+  ],
+  "week_number": 6,
+  "day": "monday",
+  "date": "2026-11-23",
+  "section": "writing",
+  "minutes": 17,
+  "intro": "Làm lần lượt các bước, khoảng 17 phút. Hôm nay: Vocab Quest 16 từ (10 từ mới + 6 từ ôn) và một kỹ năng: Writing Task 1. Hạn nộp 23:30 cùng ngày: đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "send_today": "Hoàn thành các bước trên web. Bài Writing ở Step 3 được thầy chấm. Voice note đọc Overview ở Step 4.",
+  "error_type": "writing",
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Vocab Quest 1: match the new words (3 min)",
+      "minutes": 3,
+      "instructions": "New words today (10): figure /ˈfɪɡə/ (n) · upward trend /ˈʌpwəd trend/ (n) · soar /sɔː/ (v) · slump /slʌmp/ (v) · rebound /rɪˈbaʊnd/ (v) · remain constant /rɪˌmeɪn ˈkɒnstənt/ (phr) · rapid /ˈræpɪd/ (adj) · considerable /kənˈsɪdərəbl/ (adj) · noticeable /ˈnəʊtɪsəbl/ (adj) · reach a low /riːtʃ ə ləʊ/ (phr). Review words (6): climb = tăng dần · overtake = vượt qua · level off = đi ngang, chững lại · peak at = đạt đỉnh · double = tăng gấp đôi · halve = giảm một nửa. Choose the correct meaning (A–J) for each new word.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s1_1",
+          "q": "1. figure",
+          "options": {
+            "A": "nhanh",
+            "B": "giữ nguyên, không đổi",
+            "C": "tăng vọt",
+            "D": "hồi phục trở lại",
+            "E": "con số, số liệu",
+            "F": "sụt giảm mạnh",
+            "G": "dễ nhận thấy",
+            "H": "xu hướng tăng",
+            "I": "chạm mức thấp",
+            "J": "đáng kể"
+          },
+          "answer": "E",
+          "explain": "figure = con số, số liệu. Collocation: the figure for X. Example: The figure for female students was higher than for male students."
+        },
+        {
+          "id": "s1_2",
+          "q": "2. upward trend",
+          "options": {
+            "A": "nhanh",
+            "B": "giữ nguyên, không đổi",
+            "C": "tăng vọt",
+            "D": "hồi phục trở lại",
+            "E": "con số, số liệu",
+            "F": "sụt giảm mạnh",
+            "G": "dễ nhận thấy",
+            "H": "xu hướng tăng",
+            "I": "chạm mức thấp",
+            "J": "đáng kể"
+          },
+          "answer": "H",
+          "explain": "upward trend = xu hướng tăng. Collocation: an upward trend in …. Example: There has been an upward trend in students studying abroad."
+        },
+        {
+          "id": "s1_3",
+          "q": "3. soar",
+          "options": {
+            "A": "nhanh",
+            "B": "giữ nguyên, không đổi",
+            "C": "tăng vọt",
+            "D": "hồi phục trở lại",
+            "E": "con số, số liệu",
+            "F": "sụt giảm mạnh",
+            "G": "dễ nhận thấy",
+            "H": "xu hướng tăng",
+            "I": "chạm mức thấp",
+            "J": "đáng kể"
+          },
+          "answer": "C",
+          "explain": "soar = tăng vọt. Collocation: soar to 90%. Example: Online sales soared to 90% in 2021."
+        },
+        {
+          "id": "s1_4",
+          "q": "4. slump",
+          "options": {
+            "A": "nhanh",
+            "B": "giữ nguyên, không đổi",
+            "C": "tăng vọt",
+            "D": "hồi phục trở lại",
+            "E": "con số, số liệu",
+            "F": "sụt giảm mạnh",
+            "G": "dễ nhận thấy",
+            "H": "xu hướng tăng",
+            "I": "chạm mức thấp",
+            "J": "đáng kể"
+          },
+          "answer": "F",
+          "explain": "slump = sụt giảm mạnh. Collocation: slump to 10%. Example: Sales slumped to 10% after the shop closed."
+        },
+        {
+          "id": "s1_5",
+          "q": "5. rebound",
+          "options": {
+            "A": "nhanh",
+            "B": "giữ nguyên, không đổi",
+            "C": "tăng vọt",
+            "D": "hồi phục trở lại",
+            "E": "con số, số liệu",
+            "F": "sụt giảm mạnh",
+            "G": "dễ nhận thấy",
+            "H": "xu hướng tăng",
+            "I": "chạm mức thấp",
+            "J": "đáng kể"
+          },
+          "answer": "D",
+          "explain": "rebound = hồi phục trở lại. Collocation: rebound to 40%. Example: The figure rebounded to 40% in 2022."
+        },
+        {
+          "id": "s1_6",
+          "q": "6. remain constant",
+          "options": {
+            "A": "nhanh",
+            "B": "giữ nguyên, không đổi",
+            "C": "tăng vọt",
+            "D": "hồi phục trở lại",
+            "E": "con số, số liệu",
+            "F": "sụt giảm mạnh",
+            "G": "dễ nhận thấy",
+            "H": "xu hướng tăng",
+            "I": "chạm mức thấp",
+            "J": "đáng kể"
+          },
+          "answer": "B",
+          "explain": "remain constant = giữ nguyên, không đổi. Collocation: remain constant at 30%. Example: The number of staff remained constant at 30."
+        },
+        {
+          "id": "s1_7",
+          "q": "7. rapid",
+          "options": {
+            "A": "nhanh",
+            "B": "giữ nguyên, không đổi",
+            "C": "tăng vọt",
+            "D": "hồi phục trở lại",
+            "E": "con số, số liệu",
+            "F": "sụt giảm mạnh",
+            "G": "dễ nhận thấy",
+            "H": "xu hướng tăng",
+            "I": "chạm mức thấp",
+            "J": "đáng kể"
+          },
+          "answer": "A",
+          "explain": "rapid = nhanh. Collocation: a rapid rise. Example: There was a rapid rise in the number of online learners."
+        },
+        {
+          "id": "s1_8",
+          "q": "8. considerable",
+          "options": {
+            "A": "nhanh",
+            "B": "giữ nguyên, không đổi",
+            "C": "tăng vọt",
+            "D": "hồi phục trở lại",
+            "E": "con số, số liệu",
+            "F": "sụt giảm mạnh",
+            "G": "dễ nhận thấy",
+            "H": "xu hướng tăng",
+            "I": "chạm mức thấp",
+            "J": "đáng kể"
+          },
+          "answer": "J",
+          "explain": "considerable = đáng kể. Collocation: a considerable increase. Example: There was a considerable increase in the figure for 2020."
+        },
+        {
+          "id": "s1_9",
+          "q": "9. noticeable",
+          "options": {
+            "A": "nhanh",
+            "B": "giữ nguyên, không đổi",
+            "C": "tăng vọt",
+            "D": "hồi phục trở lại",
+            "E": "con số, số liệu",
+            "F": "sụt giảm mạnh",
+            "G": "dễ nhận thấy",
+            "H": "xu hướng tăng",
+            "I": "chạm mức thấp",
+            "J": "đáng kể"
+          },
+          "answer": "G",
+          "explain": "noticeable = dễ nhận thấy. Collocation: a noticeable change. Example: There was a noticeable change after 2018."
+        },
+        {
+          "id": "s1_10",
+          "q": "10. reach a low",
+          "options": {
+            "A": "nhanh",
+            "B": "giữ nguyên, không đổi",
+            "C": "tăng vọt",
+            "D": "hồi phục trở lại",
+            "E": "con số, số liệu",
+            "F": "sụt giảm mạnh",
+            "G": "dễ nhận thấy",
+            "H": "xu hướng tăng",
+            "I": "chạm mức thấp",
+            "J": "đáng kể"
+          },
+          "answer": "I",
+          "explain": "reach a low = chạm mức thấp. Collocation: reach a low of 12%. Example: The figure reached a low of 12% in 2015."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Vocab Quest 2: fill the gaps (3 min)",
+      "minutes": 3,
+      "instructions": "Fill the gaps with the words in the box. Change the form if needed. Box: slumped · levelled off · rapid · noticeable · halved · climbed · overtook · soared",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. Online sales ______ to 90% in 2021.",
+          "fields": [
+            {
+              "answer": "soared"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. Sales ______ to 10% after the shop closed.",
+          "fields": [
+            {
+              "answer": "slumped"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. The number ______ at 80% from 2022.",
+          "fields": [
+            {
+              "answer": "levelled off",
+              "accept": [
+                "leveled off"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. There was a ______ rise in the number of online learners.",
+          "fields": [
+            {
+              "answer": "rapid"
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. Business ______ Languages in 2016.",
+          "fields": [
+            {
+              "answer": "overtook"
+            }
+          ]
+        },
+        {
+          "id": "s2_6",
+          "label": "6. The price ______ from £40 to £20.",
+          "fields": [
+            {
+              "answer": "halved"
+            }
+          ]
+        },
+        {
+          "id": "s2_7",
+          "label": "7. The figure slowly ______ to 70%.",
+          "fields": [
+            {
+              "answer": "climbed"
+            }
+          ]
+        },
+        {
+          "id": "s2_8",
+          "label": "8. There was a ______ change after 2018.",
+          "fields": [
+            {
+              "answer": "noticeable"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Writing: Graph 2 (11 min)",
+      "minutes": 11,
+      "kind": "open",
+      "instructions": "The line graph shows the number of people (in thousands) in three types of learning at a city training centre from 2014 to 2024. Data: Online 10, 14, 26, 38, 50, 46 · Evening classes 40, 38, 33, 28, 24, 24 · Workshops 20, 22, 24, 28, 30, 32 (2014, 2016, 2018, 2020, 2022, 2024). Write the Intro + Overview + Body 1 (about 100 words). Body 1 = the first year + the Online line. Checklist: intro paraphrases all 5 parts · overview has 2 sentences (trend + comparison) · Pattern A or B · data prepositions (from…to, at, by) · past simple. Support: The given line graph illustrates … over a … -year period, commencing from … · Overall, there was an increase in …, while a … decline was seen in … · In 2014, … stood at … compared with … Challenge: add Body 2 (Evening classes + Workshops) with overtake and 2 data prepositions.",
+      "images": [
+        {
+          "src": "images/w6-mon-graph2-ielts13.png",
+          "alt": "Line graph: Online, Evening classes and Workshops learners (thousands), 2014 to 2024"
+        }
+      ],
+      "open": [
+        {
+          "id": "s3_1",
+          "q": "Intro + Overview + Body 1 (about 100 words)",
+          "model": "The given line graph illustrates the number of people, in thousands, taking part in three types of learning at a city training centre over a 10-year period, commencing from 2014. Overall, there was an increase in the number of learners in Online courses and Workshops, while a steady decline was seen in Evening classes, with the most dramatic rise being seen in Online courses. It is also clear that Evening classes had the highest figure at the start, but it was surpassed by both other types. In 2014, Evening classes stood at 40 thousand, compared with 20 thousand for Workshops and only 10 thousand for Online courses. After that, the figure for Online courses climbed sharply to 50 thousand in 2022 before dipping slightly to 46 thousand in 2024, while Workshops rose gradually to 32 thousand."
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Voice note: read your Overview (30 s)",
+      "minutes": 1,
+      "kind": "voice",
+      "instructions": "Record yourself reading your Overview aloud, about 30 seconds. Say the final sounds clearly (-ed, -s).",
+      "lines": [
+        "Read your Overview aloud."
+      ],
+      "note": "Thầy nghe âm cuối và thì quá khứ."
+    }
+  ]
+}
