@@ -89,189 +89,129 @@
   "steps": [
     {
       "id": "s1",
-      "title": "Step 1 · Vocab Quest 1: match the new words (3 min)",
+      "title": "Step 1 · Vocab Quest 1: choose the meaning (3 min)",
       "minutes": 3,
-      "instructions": "New words today (10): work placement /wɜːk ˈpleɪsmənt/ (n) · employer /ɪmˈplɔɪə/ (n) · employee /ɪmˈplɔɪiː/ (n) · applicant /ˈæplɪkənt/ (n) · contract /ˈkɒntrækt/ (n) · wage /weɪdʒ/ (n) · overtime /ˈəʊvətaɪm/ (n) · working hours /ˈwɜːkɪŋ ˈaʊəz/ (n) · part-time /ˌpɑːt ˈtaɪm/ (adj) · full-time /ˌfʊl ˈtaɪm/ (adj). Review words (6): timetable = thời khóa biểu · certificate = chứng chỉ · supervisor = người giám sát · participant = người tham gia · stabilise = ổn định lại · rank = xếp hạng, đứng thứ. Choose the correct meaning (A–J) for each new word.",
+      "instructions": "New words today (10): work placement /wɜːk ˈpleɪsmənt/ (n) · employer /ɪmˈplɔɪə/ (n) · employee /ɪmˈplɔɪiː/ (n) · applicant /ˈæplɪkənt/ (n) · contract /ˈkɒntrækt/ (n) · wage /weɪdʒ/ (n) · overtime /ˈəʊvətaɪm/ (n) · working hours /ˈwɜːkɪŋ ˈaʊəz/ (n) · part-time /ˌpɑːt ˈtaɪm/ (adj) · full-time /ˌfʊl ˈtaɪm/ (adj). Review words (6): timetable = thời khóa biểu · certificate = chứng chỉ · supervisor = người giám sát · participant = người tham gia · stabilise = ổn định lại · rank = xếp hạng, đứng thứ. Choose the correct meaning (A, B, C or D) for each new word.",
       "kind": "mcq",
       "items": [
         {
           "id": "s1_1",
           "q": "1. work placement",
           "options": {
-            "A": "hợp đồng",
-            "B": "nhà tuyển dụng",
+            "A": "giờ làm việc",
+            "B": "kỳ thực tập",
             "C": "ứng viên",
-            "D": "nhân viên",
-            "E": "giờ làm thêm",
-            "F": "toàn thời gian",
-            "G": "giờ làm việc",
-            "H": "tiền công",
-            "I": "bán thời gian",
-            "J": "kỳ thực tập"
+            "D": "nhà tuyển dụng"
           },
-          "answer": "J",
+          "answer": "B",
           "explain": "work placement = kỳ thực tập. Collocation: do a work placement. Example: He did a three-month work placement at a travel agency."
         },
         {
           "id": "s1_2",
           "q": "2. employer",
           "options": {
-            "A": "hợp đồng",
-            "B": "nhà tuyển dụng",
-            "C": "ứng viên",
-            "D": "nhân viên",
-            "E": "giờ làm thêm",
-            "F": "toàn thời gian",
-            "G": "giờ làm việc",
-            "H": "tiền công",
-            "I": "bán thời gian",
-            "J": "kỳ thực tập"
+            "A": "kỳ thực tập",
+            "B": "hợp đồng",
+            "C": "toàn thời gian",
+            "D": "nhà tuyển dụng"
           },
-          "answer": "B",
+          "answer": "D",
           "explain": "employer = nhà tuyển dụng. Collocation: a good employer. Example: My employer lets me choose my shifts."
         },
         {
           "id": "s1_3",
           "q": "3. employee",
           "options": {
-            "A": "hợp đồng",
-            "B": "nhà tuyển dụng",
-            "C": "ứng viên",
-            "D": "nhân viên",
-            "E": "giờ làm thêm",
-            "F": "toàn thời gian",
-            "G": "giờ làm việc",
-            "H": "tiền công",
-            "I": "bán thời gian",
-            "J": "kỳ thực tập"
+            "A": "nhân viên",
+            "B": "hợp đồng",
+            "C": "giờ làm việc",
+            "D": "tiền công"
           },
-          "answer": "D",
+          "answer": "A",
           "explain": "employee = nhân viên. Collocation: a full-time employee. Example: The company has 200 employees."
         },
         {
           "id": "s1_4",
           "q": "4. applicant",
           "options": {
-            "A": "hợp đồng",
-            "B": "nhà tuyển dụng",
-            "C": "ứng viên",
-            "D": "nhân viên",
-            "E": "giờ làm thêm",
-            "F": "toàn thời gian",
-            "G": "giờ làm việc",
-            "H": "tiền công",
-            "I": "bán thời gian",
-            "J": "kỳ thực tập"
+            "A": "kỳ thực tập",
+            "B": "toàn thời gian",
+            "C": "nhân viên",
+            "D": "ứng viên"
           },
-          "answer": "C",
+          "answer": "D",
           "explain": "applicant = ứng viên. Collocation: a successful applicant. Example: Each applicant must send a reference."
         },
         {
           "id": "s1_5",
           "q": "5. contract",
           "options": {
-            "A": "hợp đồng",
-            "B": "nhà tuyển dụng",
-            "C": "ứng viên",
-            "D": "nhân viên",
-            "E": "giờ làm thêm",
-            "F": "toàn thời gian",
-            "G": "giờ làm việc",
-            "H": "tiền công",
-            "I": "bán thời gian",
-            "J": "kỳ thực tập"
+            "A": "ứng viên",
+            "B": "hợp đồng",
+            "C": "toàn thời gian",
+            "D": "giờ làm thêm"
           },
-          "answer": "A",
+          "answer": "B",
           "explain": "contract = hợp đồng. Collocation: sign a contract. Example: She signed a one-year contract."
         },
         {
           "id": "s1_6",
           "q": "6. wage",
           "options": {
-            "A": "hợp đồng",
-            "B": "nhà tuyển dụng",
+            "A": "toàn thời gian",
+            "B": "bán thời gian",
             "C": "ứng viên",
-            "D": "nhân viên",
-            "E": "giờ làm thêm",
-            "F": "toàn thời gian",
-            "G": "giờ làm việc",
-            "H": "tiền công",
-            "I": "bán thời gian",
-            "J": "kỳ thực tập"
+            "D": "tiền công"
           },
-          "answer": "H",
+          "answer": "D",
           "explain": "wage = tiền công. Collocation: a low wage. Example: The wage is nine pounds an hour."
         },
         {
           "id": "s1_7",
           "q": "7. overtime",
           "options": {
-            "A": "hợp đồng",
-            "B": "nhà tuyển dụng",
-            "C": "ứng viên",
-            "D": "nhân viên",
-            "E": "giờ làm thêm",
-            "F": "toàn thời gian",
-            "G": "giờ làm việc",
-            "H": "tiền công",
-            "I": "bán thời gian",
-            "J": "kỳ thực tập"
+            "A": "giờ làm thêm",
+            "B": "hợp đồng",
+            "C": "toàn thời gian",
+            "D": "bán thời gian"
           },
-          "answer": "E",
+          "answer": "A",
           "explain": "overtime = giờ làm thêm. Collocation: work overtime. Example: Staff get extra pay for overtime."
         },
         {
           "id": "s1_8",
           "q": "8. working hours",
           "options": {
-            "A": "hợp đồng",
-            "B": "nhà tuyển dụng",
-            "C": "ứng viên",
-            "D": "nhân viên",
-            "E": "giờ làm thêm",
-            "F": "toàn thời gian",
-            "G": "giờ làm việc",
-            "H": "tiền công",
-            "I": "bán thời gian",
-            "J": "kỳ thực tập"
+            "A": "giờ làm thêm",
+            "B": "tiền công",
+            "C": "giờ làm việc",
+            "D": "kỳ thực tập"
           },
-          "answer": "G",
+          "answer": "C",
           "explain": "working hours = giờ làm việc. Collocation: flexible working hours. Example: The working hours are from nine to five."
         },
         {
           "id": "s1_9",
           "q": "9. part-time",
           "options": {
-            "A": "hợp đồng",
+            "A": "bán thời gian",
             "B": "nhà tuyển dụng",
-            "C": "ứng viên",
-            "D": "nhân viên",
-            "E": "giờ làm thêm",
-            "F": "toàn thời gian",
-            "G": "giờ làm việc",
-            "H": "tiền công",
-            "I": "bán thời gian",
-            "J": "kỳ thực tập"
+            "C": "hợp đồng",
+            "D": "ứng viên"
           },
-          "answer": "I",
+          "answer": "A",
           "explain": "part-time = bán thời gian. Collocation: a part-time job. Example: He has a part-time job at a bookshop."
         },
         {
           "id": "s1_10",
           "q": "10. full-time",
           "options": {
-            "A": "hợp đồng",
-            "B": "nhà tuyển dụng",
-            "C": "ứng viên",
-            "D": "nhân viên",
-            "E": "giờ làm thêm",
-            "F": "toàn thời gian",
-            "G": "giờ làm việc",
-            "H": "tiền công",
-            "I": "bán thời gian",
-            "J": "kỳ thực tập"
+            "A": "giờ làm việc",
+            "B": "hợp đồng",
+            "C": "toàn thời gian",
+            "D": "nhân viên"
           },
-          "answer": "F",
+          "answer": "C",
           "explain": "full-time = toàn thời gian. Collocation: a full-time job. Example: She works full-time as a nurse."
         }
       ]

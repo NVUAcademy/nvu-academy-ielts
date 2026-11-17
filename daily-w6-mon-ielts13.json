@@ -19,189 +19,129 @@
   "steps": [
     {
       "id": "s1",
-      "title": "Step 1 · Vocab Quest 1: match the new words (3 min)",
+      "title": "Step 1 · Vocab Quest 1: choose the meaning (3 min)",
       "minutes": 3,
-      "instructions": "New words today (10): figure /ˈfɪɡə/ (n) · upward trend /ˈʌpwəd trend/ (n) · soar /sɔː/ (v) · slump /slʌmp/ (v) · rebound /rɪˈbaʊnd/ (v) · remain constant /rɪˌmeɪn ˈkɒnstənt/ (phr) · rapid /ˈræpɪd/ (adj) · considerable /kənˈsɪdərəbl/ (adj) · noticeable /ˈnəʊtɪsəbl/ (adj) · reach a low /riːtʃ ə ləʊ/ (phr). Review words (6): climb = tăng dần · overtake = vượt qua · level off = đi ngang, chững lại · peak at = đạt đỉnh · double = tăng gấp đôi · halve = giảm một nửa. Choose the correct meaning (A–J) for each new word.",
+      "instructions": "New words today (10): figure /ˈfɪɡə/ (n) · upward trend /ˈʌpwəd trend/ (n) · soar /sɔː/ (v) · slump /slʌmp/ (v) · rebound /rɪˈbaʊnd/ (v) · remain constant /rɪˌmeɪn ˈkɒnstənt/ (phr) · rapid /ˈræpɪd/ (adj) · considerable /kənˈsɪdərəbl/ (adj) · noticeable /ˈnəʊtɪsəbl/ (adj) · reach a low /riːtʃ ə ləʊ/ (phr). Review words (6): climb = tăng dần · overtake = vượt qua · level off = đi ngang, chững lại · peak at = đạt đỉnh · double = tăng gấp đôi · halve = giảm một nửa. Choose the correct meaning (A, B, C or D) for each new word.",
       "kind": "mcq",
       "items": [
         {
           "id": "s1_1",
           "q": "1. figure",
           "options": {
-            "A": "nhanh",
-            "B": "giữ nguyên, không đổi",
-            "C": "tăng vọt",
-            "D": "hồi phục trở lại",
-            "E": "con số, số liệu",
-            "F": "sụt giảm mạnh",
-            "G": "dễ nhận thấy",
-            "H": "xu hướng tăng",
-            "I": "chạm mức thấp",
-            "J": "đáng kể"
+            "A": "sụt giảm mạnh",
+            "B": "xu hướng tăng",
+            "C": "con số, số liệu",
+            "D": "giữ nguyên, không đổi"
           },
-          "answer": "E",
+          "answer": "C",
           "explain": "figure = con số, số liệu. Collocation: the figure for X. Example: The figure for female students was higher than for male students."
         },
         {
           "id": "s1_2",
           "q": "2. upward trend",
           "options": {
-            "A": "nhanh",
-            "B": "giữ nguyên, không đổi",
-            "C": "tăng vọt",
-            "D": "hồi phục trở lại",
-            "E": "con số, số liệu",
-            "F": "sụt giảm mạnh",
-            "G": "dễ nhận thấy",
-            "H": "xu hướng tăng",
-            "I": "chạm mức thấp",
-            "J": "đáng kể"
+            "A": "xu hướng tăng",
+            "B": "sụt giảm mạnh",
+            "C": "giữ nguyên, không đổi",
+            "D": "con số, số liệu"
           },
-          "answer": "H",
+          "answer": "A",
           "explain": "upward trend = xu hướng tăng. Collocation: an upward trend in …. Example: There has been an upward trend in students studying abroad."
         },
         {
           "id": "s1_3",
           "q": "3. soar",
           "options": {
-            "A": "nhanh",
-            "B": "giữ nguyên, không đổi",
-            "C": "tăng vọt",
-            "D": "hồi phục trở lại",
-            "E": "con số, số liệu",
-            "F": "sụt giảm mạnh",
-            "G": "dễ nhận thấy",
-            "H": "xu hướng tăng",
-            "I": "chạm mức thấp",
-            "J": "đáng kể"
+            "A": "con số, số liệu",
+            "B": "tăng vọt",
+            "C": "chạm mức thấp",
+            "D": "xu hướng tăng"
           },
-          "answer": "C",
+          "answer": "B",
           "explain": "soar = tăng vọt. Collocation: soar to 90%. Example: Online sales soared to 90% in 2021."
         },
         {
           "id": "s1_4",
           "q": "4. slump",
           "options": {
-            "A": "nhanh",
-            "B": "giữ nguyên, không đổi",
+            "A": "sụt giảm mạnh",
+            "B": "nhanh",
             "C": "tăng vọt",
-            "D": "hồi phục trở lại",
-            "E": "con số, số liệu",
-            "F": "sụt giảm mạnh",
-            "G": "dễ nhận thấy",
-            "H": "xu hướng tăng",
-            "I": "chạm mức thấp",
-            "J": "đáng kể"
+            "D": "con số, số liệu"
           },
-          "answer": "F",
+          "answer": "A",
           "explain": "slump = sụt giảm mạnh. Collocation: slump to 10%. Example: Sales slumped to 10% after the shop closed."
         },
         {
           "id": "s1_5",
           "q": "5. rebound",
           "options": {
-            "A": "nhanh",
-            "B": "giữ nguyên, không đổi",
-            "C": "tăng vọt",
-            "D": "hồi phục trở lại",
-            "E": "con số, số liệu",
-            "F": "sụt giảm mạnh",
-            "G": "dễ nhận thấy",
-            "H": "xu hướng tăng",
-            "I": "chạm mức thấp",
-            "J": "đáng kể"
+            "A": "hồi phục trở lại",
+            "B": "chạm mức thấp",
+            "C": "con số, số liệu",
+            "D": "nhanh"
           },
-          "answer": "D",
+          "answer": "A",
           "explain": "rebound = hồi phục trở lại. Collocation: rebound to 40%. Example: The figure rebounded to 40% in 2022."
         },
         {
           "id": "s1_6",
           "q": "6. remain constant",
           "options": {
-            "A": "nhanh",
-            "B": "giữ nguyên, không đổi",
-            "C": "tăng vọt",
-            "D": "hồi phục trở lại",
-            "E": "con số, số liệu",
-            "F": "sụt giảm mạnh",
-            "G": "dễ nhận thấy",
-            "H": "xu hướng tăng",
-            "I": "chạm mức thấp",
-            "J": "đáng kể"
+            "A": "hồi phục trở lại",
+            "B": "dễ nhận thấy",
+            "C": "nhanh",
+            "D": "giữ nguyên, không đổi"
           },
-          "answer": "B",
+          "answer": "D",
           "explain": "remain constant = giữ nguyên, không đổi. Collocation: remain constant at 30%. Example: The number of staff remained constant at 30."
         },
         {
           "id": "s1_7",
           "q": "7. rapid",
           "options": {
-            "A": "nhanh",
-            "B": "giữ nguyên, không đổi",
-            "C": "tăng vọt",
-            "D": "hồi phục trở lại",
-            "E": "con số, số liệu",
-            "F": "sụt giảm mạnh",
-            "G": "dễ nhận thấy",
-            "H": "xu hướng tăng",
-            "I": "chạm mức thấp",
-            "J": "đáng kể"
+            "A": "chạm mức thấp",
+            "B": "dễ nhận thấy",
+            "C": "đáng kể",
+            "D": "nhanh"
           },
-          "answer": "A",
+          "answer": "D",
           "explain": "rapid = nhanh. Collocation: a rapid rise. Example: There was a rapid rise in the number of online learners."
         },
         {
           "id": "s1_8",
           "q": "8. considerable",
           "options": {
-            "A": "nhanh",
-            "B": "giữ nguyên, không đổi",
-            "C": "tăng vọt",
-            "D": "hồi phục trở lại",
-            "E": "con số, số liệu",
-            "F": "sụt giảm mạnh",
-            "G": "dễ nhận thấy",
-            "H": "xu hướng tăng",
-            "I": "chạm mức thấp",
-            "J": "đáng kể"
+            "A": "xu hướng tăng",
+            "B": "đáng kể",
+            "C": "hồi phục trở lại",
+            "D": "giữ nguyên, không đổi"
           },
-          "answer": "J",
+          "answer": "B",
           "explain": "considerable = đáng kể. Collocation: a considerable increase. Example: There was a considerable increase in the figure for 2020."
         },
         {
           "id": "s1_9",
           "q": "9. noticeable",
           "options": {
-            "A": "nhanh",
-            "B": "giữ nguyên, không đổi",
-            "C": "tăng vọt",
-            "D": "hồi phục trở lại",
-            "E": "con số, số liệu",
-            "F": "sụt giảm mạnh",
-            "G": "dễ nhận thấy",
-            "H": "xu hướng tăng",
-            "I": "chạm mức thấp",
-            "J": "đáng kể"
+            "A": "dễ nhận thấy",
+            "B": "xu hướng tăng",
+            "C": "đáng kể",
+            "D": "nhanh"
           },
-          "answer": "G",
+          "answer": "A",
           "explain": "noticeable = dễ nhận thấy. Collocation: a noticeable change. Example: There was a noticeable change after 2018."
         },
         {
           "id": "s1_10",
           "q": "10. reach a low",
           "options": {
-            "A": "nhanh",
-            "B": "giữ nguyên, không đổi",
-            "C": "tăng vọt",
-            "D": "hồi phục trở lại",
-            "E": "con số, số liệu",
-            "F": "sụt giảm mạnh",
-            "G": "dễ nhận thấy",
-            "H": "xu hướng tăng",
-            "I": "chạm mức thấp",
-            "J": "đáng kể"
+            "A": "con số, số liệu",
+            "B": "nhanh",
+            "C": "chạm mức thấp",
+            "D": "giữ nguyên, không đổi"
           },
-          "answer": "I",
+          "answer": "C",
           "explain": "reach a low = chạm mức thấp. Collocation: reach a low of 12%. Example: The figure reached a low of 12% in 2015."
         }
       ]
