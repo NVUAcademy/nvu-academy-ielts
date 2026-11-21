@@ -1,0 +1,186 @@
+{
+  "id": "w4-fri-ielts14",
+  "title": "Friday Daily Practice",
+  "subtitle": "Trend verbs, by / from ... to and Body 2 for a table about museum visitors",
+  "theme": "Lesson 6 · Grouping data and body paragraphs",
+  "source": "Bài soạn bù tuần 4 (16–22/11), bám Lesson 6 (I6, Thứ 3 17/11): nhóm số liệu theo xu hướng và viết body cho biểu đồ thay đổi theo thời gian. Số liệu do thầy tự soạn, không trùng handout I6 và bài Thứ 2 23/11.",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 4,
+  "day": "friday",
+  "date": "2026-11-20",
+  "section": "writing",
+  "minutes": 15,
+  "intro": "Bài bù tuần 4. Làm lần lượt 3 bước, khoảng 15 phút. Hạn nộp 23:59 cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Trend verbs (4 min)",
+      "minutes": 4,
+      "instructions": "Fill each gap with one verb from the box, in the correct form (past tense). Use each verb once. Box: double · hit a low of · climb · remain stable · peak at · decline",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. The number of bus passengers ______ 2 million in 2015, the highest figure of the period.",
+          "fields": [
+            {
+              "answer": "peaked at"
+            }
+          ],
+          "explain": "peak at = đạt đỉnh ở mức. Sau peak at là con số."
+        },
+        {
+          "id": "s1_2",
+          "label": "2. Coffee prices ______ at around 3 dollars from 2010 to 2014.",
+          "fields": [
+            {
+              "answer": "remained stable",
+              "accept": [
+                "stayed stable"
+              ]
+            }
+          ],
+          "explain": "remain stable = giữ ổn định, không thay đổi."
+        },
+        {
+          "id": "s1_3",
+          "label": "3. Car sales ______ steadily from 400 to 250 units a month.",
+          "fields": [
+            {
+              "answer": "declined"
+            }
+          ],
+          "explain": "decline = giảm. Từ 400 xuống 250 là giảm."
+        },
+        {
+          "id": "s1_4",
+          "label": "4. Unemployment ______ 4% in 2019, the lowest point in ten years.",
+          "fields": [
+            {
+              "answer": "hit a low of"
+            }
+          ],
+          "explain": "hit a low of = chạm mức thấp nhất. Có the lowest point là dấu hiệu."
+        },
+        {
+          "id": "s1_5",
+          "label": "5. After a slow start, cinema visits ______ gradually to 80,000.",
+          "fields": [
+            {
+              "answer": "climbed",
+              "accept": [
+                "rose"
+              ]
+            }
+          ],
+          "explain": "climb = tăng dần (giống rise)."
+        },
+        {
+          "id": "s1_6",
+          "label": "6. The number of club members ______ from 30 to 60 in just five years.",
+          "fields": [
+            {
+              "answer": "doubled"
+            }
+          ],
+          "explain": "double = tăng gấp đôi: 30 lên 60."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Grammar for the body (3 min)",
+      "minutes": 3,
+      "instructions": "Choose the correct answer, A, B, C or D.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "1. The price of petrol rose ______ 10%, from 1.50 to 1.65 dollars.",
+          "options": {
+            "A": "to",
+            "B": "of",
+            "C": "by",
+            "D": "at"
+          },
+          "answer": "C",
+          "explain": "by = mức thay đổi (tăng thêm 10%). from ... to ... = điểm đầu và điểm cuối."
+        },
+        {
+          "id": "s2_2",
+          "q": "2. There was ______ in the number of tourists in 2018.",
+          "options": {
+            "A": "a sharp rise",
+            "B": "a sharply rise",
+            "C": "a rise sharply",
+            "D": "a sharp rose"
+          },
+          "answer": "A",
+          "explain": "Pattern B: There was + a + tính từ + danh từ (a sharp rise)."
+        },
+        {
+          "id": "s2_3",
+          "q": "3. Which sentence is correct?",
+          "options": {
+            "A": "The number of cars was increase in 2010.",
+            "B": "Number of cars increased in 2010.",
+            "C": "The number of car increased in 2010.",
+            "D": "The number of cars increased in 2010."
+          },
+          "answer": "D",
+          "explain": "Cần the number of + danh từ số nhiều, và không dùng was + động từ nguyên mẫu."
+        },
+        {
+          "id": "s2_4",
+          "q": "4. Choose the Pattern B version of: Ticket sales fell slightly in 2019.",
+          "options": {
+            "A": "Ticket sales were a slight fall in 2019.",
+            "B": "There was a slight fall in ticket sales in 2019.",
+            "C": "There was a slightly fall in ticket sales in 2019.",
+            "D": "There was slight falls of ticket sales in 2019."
+          },
+          "answer": "B",
+          "explain": "Pattern B: There was a slight fall in + chủ thể + năm."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Group the data and write Body 2 (8 min)",
+      "minutes": 8,
+      "instructions": "The table shows the number of visitors (in thousands) to four museums in one city. Science Museum: 40 (2005), 55 (2010), 70 (2015), 85 (2020). Art Gallery: 35, 50, 62, 78. History Museum: 60, 48, 40, 30. Toy Museum: 20, 21, 19, 20. (a) Group the four museums into two groups by trend (2 min). (b) Write Body 2 for the group that did NOT rise (6 min): topic sentence (no numbers), start, change, end, and one comparison. Use at least 2 verbs from Step 1. Support: By contrast, the History Museum and the Toy Museum ______. The History Museum started at ______ in 2005 but ______ to ______ in 2020. The Toy Museum, meanwhile, ______.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s3_1",
+          "q": "(a) Two groups and the trend of each group",
+          "model": "Group 1: the Science Museum and the Art Gallery (both rose steadily). Group 2: the History Museum (fell) and the Toy Museum (stayed stable)."
+        },
+        {
+          "id": "s3_2",
+          "q": "(b) Body 2 for the group that did not rise",
+          "model": "By contrast, the History Museum and the Toy Museum did not see any growth. The History Museum was the most visited museum in 2005, with 60,000 visitors, but this figure declined steadily to only 30,000 in 2020. The Toy Museum, meanwhile, remained stable at around 20,000 throughout the period, so it was the least popular of the four in every year.",
+          "ai": {
+            "type": "Body 2 cho Task 1 table (nhóm số liệu không tăng)",
+            "level": "Intermediate (B1 đến B2)",
+            "min_words": 45,
+            "task": "The table shows the number of visitors (thousands) to four museums in one city in 2005, 2010, 2015 and 2020: Science Museum 40, 55, 70, 85; Art Gallery 35, 50, 62, 78; History Museum 60, 48, 40, 30; Toy Museum 20, 21, 19, 20. Write Body 2 about the group that did not rise (History Museum and Toy Museum).",
+            "criteria": [
+              "câu chủ đề nêu nhóm và xu hướng, không có số liệu",
+              "có số liệu điểm đầu, thay đổi và điểm cuối kèm năm",
+              "có một câu so sánh (while, whereas, by contrast, meanwhile)",
+              "dùng ít nhất 2 động từ của Step 1 (decline, remain stable, peak at...)",
+              "dùng thì quá khứ đúng và the number of",
+              "mạo từ, số ít số nhiều và chính tả đúng"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "send_today": "Ảnh Step 1, Step 2 và ảnh phần (a) + đoạn Body 2 ở Step 3 gửi lên Zalo, nhắn Done + tên + Thứ 6.",
+  "error_type": "writing"
+}

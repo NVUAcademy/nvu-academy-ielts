@@ -1,0 +1,152 @@
+{
+  "id": "w4-sun-ielts14",
+  "title": "Sunday Daily Practice",
+  "subtitle": "Class day: paraphrase warm-up and matching information about public libraries",
+  "theme": "Lesson 7 · Matching information",
+  "source": "Bài soạn bù tuần 4, ngày học I7 (Chủ nhật 22/11, Reading: matching information). Bài đọc do thầy tự soạn, không trùng bài Thứ 3 và Thứ 4 tuần sau (báo địa phương, kiểm chứng tin) và quiz Thứ 6 (podcast).",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 4,
+  "day": "sunday",
+  "date": "2026-11-22",
+  "section": "reading",
+  "minutes": 12,
+  "intro": "Hôm nay có lớp lúc 7:15. Bài nhẹ, làm sau giờ học, khoảng 12 phút, 3 bước. Hạn nộp 23:59 cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Paraphrase warm-up (3 min)",
+      "minutes": 3,
+      "instructions": "Matching information questions use different words from the text. Choose the phrase, A, B, C or D, that has the same meaning.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s1_1",
+          "q": "1. a sharp decline in readers",
+          "options": {
+            "A": "a slight rise in readers",
+            "B": "far fewer people reading",
+            "C": "readers stayed the same",
+            "D": "more people reading"
+          },
+          "answer": "B",
+          "explain": "sharp decline = giảm mạnh, nên far fewer people reading."
+        },
+        {
+          "id": "s1_2",
+          "q": "2. elderly people",
+          "options": {
+            "A": "young adults",
+            "B": "students",
+            "C": "local councils",
+            "D": "older people"
+          },
+          "answer": "D",
+          "explain": "elderly = cao tuổi, đồng nghĩa older people."
+        },
+        {
+          "id": "s1_3",
+          "q": "3. free of charge",
+          "options": {
+            "A": "without paying",
+            "B": "for a short time",
+            "C": "at any time",
+            "D": "in a fast way"
+          },
+          "answer": "A",
+          "explain": "free of charge = miễn phí, không phải trả tiền."
+        },
+        {
+          "id": "s1_4",
+          "q": "4. funding",
+          "options": {
+            "A": "a group of people who help",
+            "B": "a room for studying",
+            "C": "money given to pay for something",
+            "D": "a plan for the future"
+          },
+          "answer": "C",
+          "explain": "funding = nguồn tiền, kinh phí."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Reading: matching information (7 min)",
+      "minutes": 7,
+      "instructions": "Read the passage. Which paragraph, A–D, contains the following information? Write A, B, C or D. You may use any letter more than once. Underline the evidence in the paragraph.",
+      "kind": "fill",
+      "passage": "Public libraries in the digital age\n\nA. Twenty years ago, many people predicted that public libraries would disappear once books and information became available online. In some countries this seemed to be true at first: between 2005 and 2015, visits to libraries in England fell by almost a third.\n\nB. However, libraries have changed what they offer. Many now lend e-books and audiobooks through free apps, so members can borrow a title at midnight without leaving home. Others have added study rooms with fast Wi-Fi, which are especially popular with students during exam periods.\n\nC. Libraries also play a role that the internet cannot easily replace. For elderly people who live alone, a weekly reading group may be one of the few chances to talk to others. Librarians also help visitors who lack digital skills to fill in online forms, such as job applications.\n\nD. The biggest challenge is money. Because libraries are paid for by local councils, they are often among the first services to lose funding when budgets are cut. Some towns now rely on volunteers to keep their library open, although critics say volunteers cannot offer the same expert help as trained staff.",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. a service that people can use at any time of day  ______",
+          "fields": [
+            {
+              "answer": "B"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn B, members can borrow a title at midnight without leaving home. at midnight = at any time of day."
+        },
+        {
+          "id": "s2_2",
+          "label": "2. a reason why some libraries are run by unpaid helpers  ______",
+          "fields": [
+            {
+              "answer": "D"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn D, lose funding when budgets are cut ... rely on volunteers. unpaid helpers = volunteers. Bẫy: đoạn C có librarians help nhưng đó là nhân viên."
+        },
+        {
+          "id": "s2_3",
+          "label": "3. a way that libraries support people who feel lonely  ______",
+          "fields": [
+            {
+              "answer": "C"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn C, elderly people who live alone ... chances to talk to others."
+        },
+        {
+          "id": "s2_4",
+          "label": "4. a fall in the number of library users  ______",
+          "fields": [
+            {
+              "answer": "A"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn A, visits to libraries in England fell by almost a third. Bẫy: đoạn D nói về giảm tiền (funding), không phải giảm người dùng."
+        },
+        {
+          "id": "s2_5",
+          "label": "5. a facility aimed at people preparing for tests  ______",
+          "fields": [
+            {
+              "answer": "B"
+            }
+          ],
+          "explain": "Bằng chứng: đoạn B, study rooms ... popular with students during exam periods. tests = exam."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Error Log (2 min)",
+      "minutes": 2,
+      "instructions": "Write one Error Log line: which question in Step 2 you lost, or found the most difficult, and why. Use: Question · My answer · Correct answer · Why.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s3_1",
+          "q": "Error Log (Question · My answer · Correct answer · Why)",
+          "model": "Q4 · D · A · Paragraph D talks about losing money, but only paragraph A gives a fall in visits (fell by almost a third)."
+        }
+      ]
+    }
+  ],
+  "send_today": "Ảnh Step 1, 2 và 3 gửi lên Zalo, nhắn Done + tên + Chủ nhật.",
+  "error_type": "reading"
+}

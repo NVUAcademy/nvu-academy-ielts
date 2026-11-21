@@ -716,6 +716,45 @@
       ]
     },
     {
+      "id": "w4-fri-ielts14",
+      "file": "daily-w4-fri-ielts14.json",
+      "title": "Friday Daily Practice",
+      "subtitle": "Trend verbs, by / from ... to and Body 2 for a table about museum visitors",
+      "day": "friday",
+      "date": "2026-11-20",
+      "section": "writing",
+      "week_number": 4,
+      "class_codes": [
+        "IELTS14"
+      ]
+    },
+    {
+      "id": "w4-sat-ielts14",
+      "file": "daily-w4-sat-ielts14.json",
+      "title": "Saturday Daily Practice",
+      "subtitle": "Fix five body-paragraph mistakes, upgrade to band 7 and write two bodies for a table about languages",
+      "day": "saturday",
+      "date": "2026-11-21",
+      "section": "writing",
+      "week_number": 4,
+      "class_codes": [
+        "IELTS14"
+      ]
+    },
+    {
+      "id": "w4-sun-ielts14",
+      "file": "daily-w4-sun-ielts14.json",
+      "title": "Sunday Daily Practice",
+      "subtitle": "Class day: paraphrase warm-up and matching information about public libraries",
+      "day": "sunday",
+      "date": "2026-11-22",
+      "section": "reading",
+      "week_number": 4,
+      "class_codes": [
+        "IELTS14"
+      ]
+    },
+    {
       "id": "w6-mon-found11",
       "file": "daily-w6-mon-found11.json",
       "title": "Monday Daily Practice",
