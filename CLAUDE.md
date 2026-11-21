@@ -5,7 +5,7 @@ Web học IELTS của thầy Nam (Lê Viết Hoài Nam). Triển khai trên Verc
 ## Quy tắc làm việc (bắt buộc)
 
 - Trả lời bằng tiếng Việt, ngắn gọn. Chữ hiển thị trong web giữ tiếng Việt; hướng dẫn trong bài tập (exercise instructions) viết tiếng Anh.
-- Đọc file trước khi sửa. Sửa xong thì tóm tắt thay đổi và chờ thầy gõ "commit". Chỉ commit và push khi thầy gõ "commit". Hook nhắc commit thì từ chối cho đến khi thầy gõ.
+- Đọc file trước khi sửa. Sửa xong thì tóm tắt thay đổi, rồi tự commit và push lên nhánh làm việc (thầy duyệt ngày 21/11/2026). Chỉ hỏi thầy khi commit hoặc push bị lỗi. Tạo PR và merge vào `main` thì vẫn chờ thầy bảo.
 - Không chạy SQL ghi, sửa hoặc xóa dữ liệu khi chưa được thầy đồng ý. Đọc dữ liệu (SELECT) thì được. Không đổi cấu trúc bảng đang có; chỉ được thêm bảng mới khi thầy đồng ý.
 - Không hiện và không hỏi API key trong chat. Khóa nằm ở biến môi trường trên Vercel.
 - Kiểm tra bằng tài khoản Tester (Tester 1, 2, 3), không dùng học sinh thật.
