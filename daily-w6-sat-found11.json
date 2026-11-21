@@ -1,0 +1,232 @@
+{
+  "id": "w6-sat-found11",
+  "title": "Saturday Daily Practice: class day warm-up",
+  "subtitle": "Class day B9: warm-up with /k/ and /g/, like / enjoy + V-ing and free time words",
+  "theme": "Lesson 9 · Hobbies and free time",
+  "source": "Foundation 11 lesson plan, week 6 (B8 Putting it all together, B9 Hobbies and free time), 2026-11-21",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 6,
+  "day": "saturday",
+  "date": "2026-11-21",
+  "section": "vocabulary",
+  "minutes": 15,
+  "intro": "Class day. This is a 15-minute warm-up for tonight's Lesson 9. You do not need to submit it. Four steps. Step 4 is a short voice practice.",
+  "audio": {},
+  "send_today": "Warm-up only. Do not submit.",
+  "error_type": "vocabulary",
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · /k/ or /g/?",
+      "minutes": 3,
+      "instructions": "Say each word aloud. Is the first sound /k/ or /g/? Write k or g. /k/ has no voice and a small puff of air. /g/ has voice: your throat moves.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. coat",
+          "fields": [
+            {
+              "answer": "k",
+              "accept": [
+                "K",
+                "/k/"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. goat",
+          "fields": [
+            {
+              "answer": "g",
+              "accept": [
+                "G",
+                "/g/"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. card",
+          "fields": [
+            {
+              "answer": "k",
+              "accept": [
+                "K",
+                "/k/"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. guard",
+          "fields": [
+            {
+              "answer": "g",
+              "accept": [
+                "G",
+                "/g/"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. camping",
+          "fields": [
+            {
+              "answer": "k",
+              "accept": [
+                "K",
+                "/k/"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "6. gaming",
+          "fields": [
+            {
+              "answer": "g",
+              "accept": [
+                "G",
+                "/g/"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · like, love, enjoy, hate + V-ing",
+      "minutes": 4,
+      "instructions": "After like, love, enjoy, hate and don't mind, we use verb + -ing. Example: I enjoy dancing. Be careful: make → making, sit → sitting. Write the -ing form of the verb in brackets.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. My mum loves ____ (cook) for the family.",
+          "fields": [
+            {
+              "answer": "cooking"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. I don't like ____ (run) in the rain.",
+          "fields": [
+            {
+              "answer": "running"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. Do you enjoy ____ (ride) your bike at weekends?",
+          "fields": [
+            {
+              "answer": "riding"
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. My brother hates ____ (shop) for clothes.",
+          "fields": [
+            {
+              "answer": "shopping"
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. We love ____ (hike) in the mountains.",
+          "fields": [
+            {
+              "answer": "hiking"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Free time words",
+      "minutes": 4,
+      "instructions": "These 4 words are from tonight's lesson. Choose the best meaning. It is OK to guess.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s3_1",
+          "q": "1. pastime (Reading is my favourite pastime.)",
+          "options": {
+            "A": "something you do for fun in your free time",
+            "B": "the time before a class",
+            "C": "a long holiday",
+            "D": "a job you do at night"
+          },
+          "answer": "A",
+          "explain": "pastime = something you enjoy doing in your free time, like reading or cycling."
+        },
+        {
+          "id": "s3_2",
+          "q": "2. unwind (After exams, I listen to music to unwind.)",
+          "options": {
+            "A": "study very hard",
+            "B": "feel tired and angry",
+            "C": "relax after a busy or stressful time",
+            "D": "wake up early"
+          },
+          "answer": "C",
+          "explain": "unwind = relax after a busy or stressful time."
+        },
+        {
+          "id": "s3_3",
+          "q": "3. outdoor (Camping is an outdoor activity.)",
+          "options": {
+            "A": "inside a house",
+            "B": "outside, not in a building",
+            "C": "very expensive",
+            "D": "only for children"
+          },
+          "answer": "B",
+          "explain": "outdoor = outside, not in a building. The opposite is indoor."
+        },
+        {
+          "id": "s3_4",
+          "q": "4. team sport (Football is a team sport.)",
+          "options": {
+            "A": "a sport you watch on TV",
+            "B": "a sport you do alone, like swimming",
+            "C": "a sport for old people",
+            "D": "a sport you play with other people in a group"
+          },
+          "answer": "D",
+          "explain": "team sport = a sport you play with other people in a group, like football or volleyball."
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Speaking warm-up",
+      "minutes": 4,
+      "instructions": "Answer the 3 questions. Give 2 or 3 sentences for each answer, with a reason (because ...). Try to use like / love / enjoy + V-ing. Record yourself once and listen. You do not need to send it today.",
+      "kind": "voice",
+      "lines": [
+        "1. What do you do in your free time?",
+        "2. Do you prefer indoor or outdoor activities? Why?",
+        "3. Is there a new hobby you want to try?"
+      ],
+      "note": "Warm-up for tonight's Speaking Part 1. Teacher listens in class for answer + reason and verb + -ing."
+    }
+  ]
+}
