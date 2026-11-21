@@ -1,0 +1,184 @@
+{
+  "id": "w4-sat-ielts14",
+  "title": "Saturday Daily Practice",
+  "subtitle": "Fix five body-paragraph mistakes, upgrade to band 7 and write two bodies for a table about languages",
+  "theme": "Lesson 6 · Grouping data and body paragraphs",
+  "source": "Bài soạn bù tuần 4 (16–22/11), bám Lesson 6 (I6, Thứ 3 17/11): nhóm số liệu theo xu hướng và viết body cho biểu đồ thay đổi theo thời gian. Số liệu do thầy tự soạn, không trùng handout I6 và bài Thứ 2 23/11.",
+  "class_codes": [
+    "IELTS14"
+  ],
+  "week_number": 4,
+  "day": "saturday",
+  "date": "2026-11-21",
+  "section": "writing",
+  "minutes": 15,
+  "intro": "Bài bù tuần 4. Làm lần lượt 3 bước, khoảng 15 phút. Hạn nộp 23:59 cùng ngày. Đủ và đúng hạn được 20 Meow, muộn hoặc làm một nửa được 10 Meow. Đừng xem đáp án trước khi làm xong.",
+  "audio": {},
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Error fix (4 min)",
+      "minutes": 4,
+      "instructions": "Read the paragraph. Each numbered part (1–5) has one mistake. Write the correct version of each numbered part.",
+      "kind": "fill",
+      "passage": "Gym members in two cities (practice paragraph)\n\n(1) Number of gym members in City A grew steadily over the period. In 2010, the figure (2) stand at 3,000, and by 2020 it had reached 7,500. City B (3) has a similar trend, but its figures were always (4) more lower. (5) In 2015 was 2,800, about half of the figure for City A.",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. Number of gym members → ______",
+          "fields": [
+            {
+              "answer": "The number of gym members",
+              "accept": [
+                "The number of members",
+                "the number of gym members"
+              ]
+            }
+          ],
+          "explain": "Thiếu mạo từ the: The number of + danh từ số nhiều."
+        },
+        {
+          "id": "s1_2",
+          "label": "2. stand at → ______",
+          "fields": [
+            {
+              "answer": "stood at",
+              "accept": [
+                "was"
+              ]
+            }
+          ],
+          "explain": "Năm 2010 là quá khứ, dùng stood at."
+        },
+        {
+          "id": "s1_3",
+          "label": "3. has → ______",
+          "fields": [
+            {
+              "answer": "had",
+              "accept": [
+                "showed",
+                "followed"
+              ]
+            }
+          ],
+          "explain": "Mô tả quá khứ: had a similar trend (hoặc showed)."
+        },
+        {
+          "id": "s1_4",
+          "label": "4. more lower → ______",
+          "fields": [
+            {
+              "answer": "lower",
+              "accept": [
+                "much lower",
+                "considerably lower",
+                "slightly lower"
+              ]
+            }
+          ],
+          "explain": "lower đã là so sánh hơn, không thêm more."
+        },
+        {
+          "id": "s1_5",
+          "label": "5. In 2015 was 2,800 → ______",
+          "fields": [
+            {
+              "answer": "In 2015 it was 2,800",
+              "accept": [
+                "In 2015, it was 2,800",
+                "In 2015 the figure was 2,800",
+                "In 2015, the figure was 2,800",
+                "In 2015 it stood at 2,800",
+                "In 2015, it stood at 2,800",
+                "In 2015, the figure stood at 2,800",
+                "In 2015 the figure stood at 2,800"
+              ]
+            }
+          ],
+          "explain": "Câu thiếu chủ ngữ. Thêm it hoặc the figure."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · Band 5.5 → band 7 (2 min)",
+      "minutes": 2,
+      "instructions": "Choose the band 7 version of each band 5.5 sentence, A, B, C or D.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s2_1",
+          "q": "1. Bus users were 50,000. Then bus users were 35,000.",
+          "options": {
+            "A": "Bus users was fall to 35,000.",
+            "B": "The bus users decreased by 50,000 to 35,000.",
+            "C": "Bus users is 35,000 after 50,000.",
+            "D": "The number of bus users fell from 50,000 to 35,000."
+          },
+          "answer": "D",
+          "explain": "Gộp hai câu thành một: the number of + fell from ... to ..."
+        },
+        {
+          "id": "s2_2",
+          "q": "2. Rice is not change.",
+          "options": {
+            "A": "Rice is not changing.",
+            "B": "Rice production remained stable throughout the period.",
+            "C": "Rice production was stable change.",
+            "D": "The rice was not change at all."
+          },
+          "answer": "B",
+          "explain": "remain stable throughout the period thay cho is not change."
+        },
+        {
+          "id": "s2_3",
+          "q": "3. Phones go up very fast after 2015.",
+          "options": {
+            "A": "Phone sales surged after 2015.",
+            "B": "Phones sales go up quickly after 2015.",
+            "C": "Phone sales was surge after 2015.",
+            "D": "There was a surge phone sales after 2015."
+          },
+          "answer": "A",
+          "explain": "surge (quá khứ surged) = tăng vọt. Đáp án D thiếu in: a surge in phone sales."
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · Write Body 1 and Body 2 (9 min)",
+      "minutes": 9,
+      "instructions": "The table shows the number of university students (in thousands) learning four foreign languages in one country. English: 120 (2000), 150 (2010), 190 (2020). Chinese: 10, 35, 65. French: 40, 32, 25. German: 35, 28, 24. Group the languages into two groups by trend, then write Body 1 and Body 2 (2–3 sentences each). Each body: topic sentence (no numbers), start → change → end, one comparison. Challenge: add one sentence with overtook.",
+      "kind": "open",
+      "open": [
+        {
+          "id": "s3_1",
+          "q": "Body 1 (the group that rose)",
+          "model": "English and Chinese both became more popular over the twenty years. English was by far the most studied language, climbing from 120,000 students in 2000 to 190,000 in 2020. Chinese started much lower at only 10,000, but it rose rapidly to 65,000, overtaking French in 2010."
+        },
+        {
+          "id": "s3_2",
+          "q": "Body 2 (the group that fell)",
+          "model": "By contrast, French and German both declined. French fell steadily from 40,000 students to 25,000, while German dropped from 35,000 to 24,000, so the two languages had almost the same number of students by 2020.",
+          "ai": {
+            "type": "Body 1 và Body 2 cho Task 1 table",
+            "level": "Intermediate (B1 đến B2)",
+            "min_words": 70,
+            "task": "The table shows the number of university students (thousands) learning four foreign languages in one country in 2000, 2010 and 2020: English 120, 150, 190; Chinese 10, 35, 65; French 40, 32, 25; German 35, 28, 24. Write Body 1 (English and Chinese) and Body 2 (French and German).",
+            "criteria": [
+              "chia đúng 2 nhóm theo xu hướng, mỗi nhóm một đoạn",
+              "mỗi đoạn có câu chủ đề không có số liệu",
+              "có số liệu điểm đầu và điểm cuối kèm năm",
+              "mỗi đoạn có một câu so sánh",
+              "dùng giới từ from ... to và by đúng",
+              "thì quá khứ, mạo từ và số ít số nhiều đúng"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "send_today": "Ảnh Step 1, Step 2 và ảnh Body 1 + Body 2 ở Step 3 gửi lên Zalo, nhắn Done + tên + Thứ 7.",
+  "error_type": "writing"
+}
