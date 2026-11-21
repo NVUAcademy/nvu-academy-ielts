@@ -1,0 +1,221 @@
+{
+  "id": "w6-fri-found11",
+  "title": "Friday Daily Practice",
+  "subtitle": "Review B8 (student life words, he/she -s, does / doesn't) and get ready for B9",
+  "theme": "Review · Student life, getting ready for Hobbies",
+  "source": "Foundation 11 lesson plan, week 6 (B8 Putting it all together, B9 Hobbies and free time), 2026-11-20",
+  "class_codes": [
+    "FOUNDATION11"
+  ],
+  "week_number": 6,
+  "day": "friday",
+  "date": "2026-11-20",
+  "section": "vocabulary",
+  "minutes": 15,
+  "intro": "Four steps, about 15 minutes. Deadline: 23:00. Steps 1 and 2 review Lesson 8. Step 3 shows 4 words for Saturday's lesson: it is OK to guess. Step 4 is a voice note.",
+  "audio": {},
+  "send_today": "Four steps on the website. The voice note is sent to the teacher when you press Submit.",
+  "error_type": "vocabulary",
+  "steps": [
+    {
+      "id": "s1",
+      "title": "Step 1 · Student life words",
+      "minutes": 4,
+      "instructions": "Write the missing word from this week. The first letter is given.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s1_1",
+          "label": "1. I share my room with my r____. She is from Huế.",
+          "fields": [
+            {
+              "answer": "roommate",
+              "accept": [
+                "room mate",
+                "room-mate"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s1_2",
+          "label": "2. The new s____ starts in September and finishes in January.",
+          "fields": [
+            {
+              "answer": "semester"
+            }
+          ]
+        },
+        {
+          "id": "s1_3",
+          "label": "3. I work in a café on Saturdays. It's my part-time j____.",
+          "fields": [
+            {
+              "answer": "job"
+            }
+          ]
+        },
+        {
+          "id": "s1_4",
+          "label": "4. Our l____ speaks slowly, so I can take notes.",
+          "fields": [
+            {
+              "answer": "lecturer"
+            }
+          ]
+        },
+        {
+          "id": "s1_5",
+          "label": "5. Please h____ in your essay before Friday.",
+          "fields": [
+            {
+              "answer": "hand"
+            }
+          ]
+        },
+        {
+          "id": "s1_6",
+          "label": "6. My brother wants to m____ in business at university.",
+          "fields": [
+            {
+              "answer": "major"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "title": "Step 2 · he / she + -s, does / doesn't",
+      "minutes": 4,
+      "instructions": "Write the correct form of the verb in brackets. Use one or two words.",
+      "kind": "fill",
+      "items": [
+        {
+          "id": "s2_1",
+          "label": "1. My roommate ____ (get) up at six every day.",
+          "fields": [
+            {
+              "answer": "gets"
+            }
+          ]
+        },
+        {
+          "id": "s2_2",
+          "label": "2. Our lecturer ____ (teach) three classes on Monday.",
+          "fields": [
+            {
+              "answer": "teaches"
+            }
+          ]
+        },
+        {
+          "id": "s2_3",
+          "label": "3. She ____ (not / have) a part-time job.",
+          "fields": [
+            {
+              "answer": "doesn't have",
+              "accept": [
+                "does not have"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_4",
+          "label": "4. ____ your classmate live in a hall of residence? (Do / Does)",
+          "fields": [
+            {
+              "answer": "Does",
+              "accept": [
+                "does"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "s2_5",
+          "label": "5. He ____ (not / eat) in the cafeteria. He cooks at home.",
+          "fields": [
+            {
+              "answer": "doesn't eat",
+              "accept": [
+                "does not eat"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "title": "Step 3 · New words for Saturday",
+      "minutes": 3,
+      "instructions": "These 4 words are from Saturday's lesson (Hobbies and free time). Choose the best meaning. It is OK to guess.",
+      "kind": "mcq",
+      "items": [
+        {
+          "id": "s3_1",
+          "q": "1. be into (I'm really into K-pop.)",
+          "options": {
+            "A": "be inside a room",
+            "B": "like something very much",
+            "C": "be good at a subject",
+            "D": "listen to music in class"
+          },
+          "answer": "B",
+          "explain": "be into = like something very much. I'm really into K-pop = I like K-pop very much."
+        },
+        {
+          "id": "s3_2",
+          "q": "2. binge-watch (I binge-watched a whole series last weekend.)",
+          "options": {
+            "A": "watch a film at the cinema",
+            "B": "watch TV for ten minutes",
+            "C": "watch many episodes of a show one after another",
+            "D": "watch a football match outdoors"
+          },
+          "answer": "C",
+          "explain": "binge-watch = watch many episodes of a show, one after another, often in one night."
+        },
+        {
+          "id": "s3_3",
+          "q": "3. go hiking (We often go hiking in Ba Vì.)",
+          "options": {
+            "A": "go for a long walk in the mountains or the countryside",
+            "B": "go to a party with friends",
+            "C": "go shopping in a big city",
+            "D": "go swimming in the sea"
+          },
+          "answer": "A",
+          "explain": "go hiking = go for a long walk in the mountains or the countryside, often with a backpack."
+        },
+        {
+          "id": "s3_4",
+          "q": "4. kill time (I play games on my phone to kill time.)",
+          "options": {
+            "A": "finish your work very fast",
+            "B": "forget the time",
+            "C": "get up very early",
+            "D": "do something while you wait"
+          },
+          "answer": "D",
+          "explain": "kill time = do something easy while you wait, for example when the bus is late."
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "title": "Step 4 · Speaking Part 1",
+      "minutes": 4,
+      "instructions": "Answer the 3 questions. Give 2 or 3 sentences for each answer, with a reason (because ...). Use at least 2 words from this week. Record one voice note.",
+      "kind": "voice",
+      "lines": [
+        "1. Do you have a roommate?",
+        "2. Do you have a part-time job? Why or why not?",
+        "3. What do you do after class?"
+      ],
+      "note": "No fixed answer. Teacher listens for 2 to 3 sentences, because, words from this week, correct he/she -s and doesn't."
+    }
+  ]
+}

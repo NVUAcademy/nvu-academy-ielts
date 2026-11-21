@@ -768,6 +768,32 @@
       ]
     },
     {
+      "id": "w6-fri-found11",
+      "file": "daily-w6-fri-found11.json",
+      "title": "Friday Daily Practice",
+      "subtitle": "Review B8 (student life words, he/she -s, does / doesn't) and get ready for B9",
+      "day": "friday",
+      "date": "2026-11-20",
+      "week_number": 6,
+      "section": "vocabulary",
+      "class_codes": [
+        "FOUNDATION11"
+      ]
+    },
+    {
+      "id": "w6-sat-found11",
+      "file": "daily-w6-sat-found11.json",
+      "title": "Saturday Daily Practice: class day warm-up",
+      "subtitle": "Class day B9: warm-up with /k/ and /g/, like / enjoy + V-ing and free time words",
+      "day": "saturday",
+      "date": "2026-11-21",
+      "week_number": 6,
+      "section": "vocabulary",
+      "class_codes": [
+        "FOUNDATION11"
+      ]
+    },
+    {
       "id": "w6-sun-found11",
       "file": "daily-w6-sun-found11.json",
       "title": "Weekly Test Week 6 /20",
